@@ -37,10 +37,12 @@
     </div>
     <div class="sidebar__buttons">
       <a class="btn btn--light" href="#">CV</a>
-      <a class="btn btn--light" href="#">Linkedin</a>
+      <a class="btn btn--light" href="#">LinkedIn</a>
       <a class="btn btn--light" href="#">Email</a>
     </div>
   </aside>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   <main class="content">
     <section class="profile-section">
@@ -52,14 +54,14 @@
       <a class="btn btn--dark profile-section__telegram" href="#">Telegram</a>
       <div class="mobile-topbar">
         <a class="mobile-topbar__link" href="#">CV</a>
-        <a class="mobile-topbar__link" href="#" data-menu-open>Меню</a>
+        <a class="mobile-topbar__link" href="#" data-menu-open>Menu</a>
       </div>
       <div class="intro">
         <div class="intro__header">
           <span class="intro__avatar">
             <img src="assets/profile.jpg" alt="">
           </span>
-          <p class="intro__greeting">Hello there!</p>
+          <p class="intro__greeting" data-greeting>Hello there!</p>
         </div>
         <h2 class="intro__title">I design complex digital products and scalable systems</h2>
       </div>
@@ -67,18 +69,28 @@
 
     <section class="projects" id="works">
       <article class="project-card project-card--hooh">
+        <a class="project-card__link" href="hooh.html" aria-label="Read the Hooh case study"></a>
         <div class="project-card__inner">
           <header class="project-card__header">
             <h3 class="project-card__title">Hooh MVP App Design</h3>
             <p class="project-card__subtitle">How we designed the MVP of the application from scratch</p>
-            <a class="arrow-btn" href="#" aria-label="Open Hooh MVP App Design">
+            <a class="arrow-btn" href="hooh.html" aria-label="Open Hooh MVP App Design">
               <img src="assets/arrow.svg" alt="">
             </a>
           </header>
           <div class="project-card__phones">
-            <img class="project-card__phone" src="assets/hooh-3.png" alt="Hooh — chat with assistant">
-            <img class="project-card__phone" src="assets/hooh-1.png" alt="Hooh — upload document">
-            <img class="project-card__phone" src="assets/hooh-2.png" alt="Hooh — blood test results">
+            <picture>
+              <source srcset="assets/hooh-3.webp" type="image/webp">
+              <img class="project-card__phone" src="assets/hooh-3.png" alt="Hooh — chat with assistant" loading="lazy">
+            </picture>
+            <picture>
+              <source srcset="assets/hooh-1.webp" type="image/webp">
+              <img class="project-card__phone" src="assets/hooh-1.png" alt="Hooh — upload document" loading="lazy">
+            </picture>
+            <picture>
+              <source srcset="assets/hooh-2.webp" type="image/webp">
+              <img class="project-card__phone" src="assets/hooh-2.png" alt="Hooh — blood test results" loading="lazy">
+            </picture>
           </div>
         </div>
       </article>
@@ -93,8 +105,14 @@
             </a>
           </header>
           <div class="project-card__itab-group">
-            <img class="project-card__itab-main" src="assets/itab-main.png" alt="iTAB product card — desktop view">
-            <img class="project-card__itab-side" src="assets/itab-side.png" alt="iTAB product card — mobile view">
+            <picture>
+              <source srcset="assets/itab-main.webp" type="image/webp">
+              <img class="project-card__itab-main" src="assets/itab-main.png" alt="iTAB product card — desktop view" loading="lazy">
+            </picture>
+            <picture>
+              <source srcset="assets/itab-side.webp" type="image/webp">
+              <img class="project-card__itab-side" src="assets/itab-side.png" alt="iTAB product card — mobile view" loading="lazy">
+            </picture>
           </div>
         </div>
       </article>
@@ -215,7 +233,7 @@
 
     <footer class="footer">
       <div class="footer__row">
-        <p class="footer__copyright">© 2026</p>
+        <p class="footer__copyright">© <span data-year>2026</span></p>
         <p class="footer__credit">Made with <span class="footer__heart">♥</span> by Victoria</p>
       </div>
     </footer>
@@ -400,6 +418,48 @@
       ['scroll', 'mousemove', 'keydown', 'touchstart'].forEach((ev) => {
         document.addEventListener(ev, onActivity, { passive: true });
       });
+    })();
+
+    // Auto-update footer year + time-aware hero greeting
+    (() => {
+      document.querySelectorAll('[data-year]').forEach((el) => {
+        el.textContent = new Date().getFullYear();
+      });
+
+      const greetingEl = document.querySelector('[data-greeting]');
+      if (greetingEl) {
+        const h = new Date().getHours();
+        let g = 'Hello there!';
+        if (h >= 5  && h < 12) g = 'Good morning!';
+        else if (h >= 12 && h < 18) g = 'Good afternoon!';
+        else if (h >= 18 && h < 23) g = 'Good evening!';
+        else g = 'Hey, night owl 🌙';
+        greetingEl.textContent = g;
+      }
+    })();
+
+    // Top scroll-progress bar (magenta, page reading indicator)
+    (() => {
+      const bar = document.querySelector('.scroll-progress');
+      if (!bar) return;
+      const update = () => {
+        const h = document.documentElement;
+        const scrolled = h.scrollTop;
+        const max = h.scrollHeight - h.clientHeight;
+        const pct = max > 0 ? (scrolled / max) * 100 : 0;
+        bar.style.transform = `scaleX(${pct / 100})`;
+      };
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+    })();
+
+    // Avatar discovery pulse — gentle magenta halo for the first 3s
+    (() => {
+      const avatar = document.querySelector('.intro__avatar');
+      if (!avatar) return;
+      avatar.classList.add('is-pulsing');
+      setTimeout(() => avatar.classList.remove('is-pulsing'), 3200);
     })();
 
     // Decorative magenta cursor in the hero (mouse devices only)

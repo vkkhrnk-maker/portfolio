@@ -386,6 +386,292 @@ img {
   outline-offset: 4px;
 }
 
+/* ===== Case study page ===== */
+
+.content--case {
+  padding-top: 24px;
+}
+
+.case {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  padding: 0 var(--page-x);
+}
+
+.case__hero {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.case__meta {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+}
+
+.case__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.case__meta dt {
+  color: var(--text-secondary);
+}
+
+.case__meta dd {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.case__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+  grid-column: 2;
+}
+
+.case__hero-image {
+  display: block;
+  grid-column: 1 / -1;
+}
+
+.case__hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.case__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px 80px;
+}
+
+.case__block-title {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
+.case__block-body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  max-width: 540px;
+}
+
+.case__section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.case__section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+  max-width: 900px;
+}
+
+.case__section-body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  max-width: 780px;
+}
+
+.case__list {
+  margin: 0;
+  padding-left: 22px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 780px;
+}
+
+.case__list b {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.case__figure {
+  margin: 24px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.case__figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.case__figure figcaption {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  max-width: 780px;
+}
+
+.case__outcome-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 780px;
+}
+
+.case__outcome-body p {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+.case__pager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.case__pager-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border-radius: 999px;
+  padding: 20px 40px;
+  min-width: 280px;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.case__pager-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.12);
+}
+
+.case__pager-btn--prev { justify-self: start; }
+.case__pager-btn--next { justify-self: end; }
+
+/* Case page — mobile overrides */
+@media (max-width: 1280px) {
+  .case {
+    gap: 60px;
+  }
+
+  .case__hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .case__title {
+    grid-column: 1;
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+  }
+
+  .case__meta {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .case__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .case__pager {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .case__pager-btn {
+    min-width: 0;
+    width: 100%;
+    padding: 18px 24px;
+  }
+}
+
+/* ===== Scroll progress bar ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--text-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  z-index: 1000;
+  pointer-events: none;
+  box-shadow: 0 0 12px rgba(217, 70, 239, 0.45);
+}
+
+/* ===== Avatar discovery pulse (first 3s after load) ===== */
+@keyframes avatar-discovery-pulse {
+  0%   { box-shadow: 0 0 0 0    rgba(217, 70, 239, 0.55); }
+  70%  { box-shadow: 0 0 0 22px rgba(217, 70, 239, 0); }
+  100% { box-shadow: 0 0 0 0    rgba(217, 70, 239, 0); }
+}
+
+.intro__avatar.is-pulsing {
+  animation: avatar-discovery-pulse 1.6s ease-out 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro__avatar.is-pulsing {
+    animation: none;
+  }
+}
+
 /* ===== Decorative magenta cursor (hero only, mouse devices only) ===== */
 .custom-cursor {
   position: fixed;
@@ -545,6 +831,20 @@ img {
   width: 100%;
   overflow: hidden;
   background-color: var(--grey-200);
+  position: relative;
+}
+
+/* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
+.project-card__link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.project-card__header,
+.project-card__phones,
+.project-card__itab-group {
+  z-index: 2;
 }
 
 /* Hover effect (desktop, mouse only): zoom the screenshots inside while
@@ -1391,6 +1691,16 @@ img {
 
   .profile-section__telegram {
     right: 20px;
+  }
+
+  /* Bump avatar from 72→96 on mobile for better presence + update bubble anchor */
+  .intro__avatar {
+    width: 96px;
+    height: 96px;
+  }
+
+  .intro__avatar__bubble {
+    left: 48px; /* center on the larger avatar (96/2) */
   }
 
   /* About card title — mobile H4 (32/32) — same as Experience role for consistency */

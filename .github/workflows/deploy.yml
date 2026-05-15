@@ -23,9 +23,13 @@ jobs:
       - name: Cache-bust styles.css with commit SHA
         run: |
           SHA=$(git rev-parse --short HEAD)
-          sed -i "s|href=\"styles.css\"|href=\"styles.css?v=$SHA\"|g" index.html
-          echo "Injected ?v=$SHA into index.html"
-          grep -o "styles\.css[^\"]*" index.html | head -3
+          for f in index.html hooh.html; do
+            if [ -f "$f" ]; then
+              sed -i "s|href=\"styles.css\"|href=\"styles.css?v=$SHA\"|g" "$f"
+              echo "Injected ?v=$SHA into $f"
+            fi
+          done
+          grep -h -o "styles\.css[^\"]*" index.html hooh.html | head -5
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
