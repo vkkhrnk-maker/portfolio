@@ -277,31 +277,69 @@
       window.addEventListener('resize', updateActive);
     })();
 
-    // Avatar pop-spin on click (just for fun)
+    // Avatar greeting bubble on click (just for fun)
     (() => {
       const avatar = document.querySelector('.intro__avatar');
-      if (!avatar) return;
+      const header = document.querySelector('.intro__header');
+      if (!avatar || !header) return;
 
       avatar.setAttribute('role', 'button');
       avatar.setAttribute('tabindex', '0');
-      avatar.setAttribute('aria-label', 'Profile photo — click to spin');
+      avatar.setAttribute('aria-label', 'Profile photo — tap for a greeting');
 
-      const spin = () => {
-        avatar.classList.remove('is-spinning');
-        // force reflow so the animation restarts on rapid clicks
-        void avatar.offsetWidth;
-        avatar.classList.add('is-spinning');
+      const greetings = [
+        'hi! 👋',
+        'hey 👀',
+        'привет!',
+        'ciao!',
+        'aloha 🌺',
+        'howdy',
+        'bonjour',
+        '👋',
+        'こんにちは',
+        'merhaba',
+        'salut',
+        '안녕',
+        'выходи на связь ✨',
+        'tap me again',
+        'thanks for stopping by',
+        'have a good one 💫',
+      ];
+
+      let lastGreeting = '';
+      let hideTimer = null;
+      let bubble = null;
+
+      const pickGreeting = () => {
+        let g;
+        do {
+          g = greetings[Math.floor(Math.random() * greetings.length)];
+        } while (g === lastGreeting && greetings.length > 1);
+        lastGreeting = g;
+        return g;
       };
 
-      avatar.addEventListener('click', spin);
+      const showBubble = () => {
+        if (!bubble) {
+          bubble = document.createElement('span');
+          bubble.className = 'intro__avatar__bubble';
+          header.appendChild(bubble);
+        }
+        bubble.textContent = pickGreeting();
+        bubble.classList.add('is-visible');
+
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          bubble.classList.remove('is-visible');
+        }, 1800);
+      };
+
+      avatar.addEventListener('click', showBubble);
       avatar.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          spin();
+          showBubble();
         }
-      });
-      avatar.addEventListener('animationend', () => {
-        avatar.classList.remove('is-spinning');
       });
     })();
   </script>

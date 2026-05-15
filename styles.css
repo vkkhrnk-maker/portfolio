@@ -381,22 +381,53 @@ img {
   transform: rotate(-3.71deg) scale(0.94);
 }
 
-@keyframes avatar-pop-spin {
-  0%   { transform: rotate(-3.71deg) scale(1); }
-  12%  { transform: rotate(-12deg)   scale(0.88); }
-  35%  { transform: rotate(140deg)   scale(1.14); }
-  65%  { transform: rotate(290deg)   scale(1.18); }
-  88%  { transform: rotate(372deg)   scale(1.04); }
-  100% { transform: rotate(356.29deg) scale(1); }
-}
-
-.intro__avatar.is-spinning {
-  animation: avatar-pop-spin 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
 .intro__avatar:focus-visible {
   outline: 2px solid var(--text-accent);
   outline-offset: 4px;
+}
+
+/* Speech bubble above the avatar on click */
+.intro__header {
+  position: relative;
+}
+
+.intro__avatar__bubble {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 36px; /* center on avatar (72/2) */
+  background: var(--white);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.2;
+  padding: 10px 16px;
+  border-radius: 16px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  z-index: 5;
+  transform: translateX(-50%) translateY(6px) scale(0.6);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.22s ease,
+    transform 0.34s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.intro__avatar__bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -7px;
+  border: 7px solid transparent;
+  border-top-color: var(--white);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.06));
+}
+
+.intro__avatar__bubble.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -405,8 +436,8 @@ img {
     transition: none;
     transform: rotate(-3.71deg);
   }
-  .intro__avatar.is-spinning {
-    animation: none;
+  .intro__avatar__bubble {
+    transition: opacity 0.15s linear;
   }
 }
 
