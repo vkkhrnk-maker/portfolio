@@ -66,7 +66,7 @@
 
   /* ===== Semantic spacing (mobile overrides below) ===== */
   --page-x: 40px;          /* Spacing/Page X — horizontal page padding */
-  --section-y: 120px;      /* Spacing/Section Y — vertical gap between sections */
+  --section-y: 160px;      /* Spacing/Section Y — vertical gap between sections */
   --group-gap: 40px;       /* Spacing/Group Gap — gap inside section (title ↔ content) */
   --items-gap: 28px;       /* gap between list items (experience) */
   --inline-gap: 12px;      /* Spacing/Inline Gap — between inline items */
@@ -774,11 +774,11 @@ img {
     white-space: normal;
   }
 
-  /* Arrow spans both rows, vertically centered against title + subtitle */
+  /* Arrow spans both rows, aligned to the top edge of the title */
   .project-card__header .arrow-btn {
     grid-column: 2;
     grid-row: 1 / span 2;
-    align-self: center;
+    align-self: start;
   }
 
   /* Arrow button styles inherit from base (.arrow-btn) — no mobile override needed */
