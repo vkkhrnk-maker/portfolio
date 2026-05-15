@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victoria Kukharenko — Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar__top">
+      <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      <nav class="menu">
+        <a class="menu__item is-active" href="#works">Works</a>
+        <a class="menu__item" href="#about">About</a>
+        <a class="menu__item" href="#experience">Experience</a>
+      </nav>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="#">CV</a>
+      <a class="btn btn--light" href="#">Linkedin</a>
+      <a class="btn btn--light" href="#">Email</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section class="profile-section">
+      <button class="menu-toggle" type="button" data-menu-open aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+      </button>
+      <a class="btn btn--dark profile-section__telegram" href="#">Telegram</a>
+      <div class="mobile-topbar">
+        <a class="mobile-topbar__link" href="#">CV</a>
+        <a class="mobile-topbar__link" href="#" data-menu-open>Меню</a>
+      </div>
+      <div class="intro">
+        <div class="intro__header">
+          <span class="intro__avatar">
+            <img src="assets/profile.jpg" alt="">
+          </span>
+          <p class="intro__greeting">Hello there!</p>
+        </div>
+        <h2 class="intro__title">I design complex digital products and scalable systems</h2>
+      </div>
+    </section>
+
+    <section class="projects" id="works">
+      <article class="project-card project-card--hooh">
+        <div class="project-card__inner">
+          <header class="project-card__header">
+            <h3 class="project-card__title">Hooh MVP App Design</h3>
+            <p class="project-card__subtitle">How we designed the MVP of the application from scratch</p>
+            <a class="arrow-btn" href="#" aria-label="Open Hooh MVP App Design">
+              <img src="assets/arrow.svg" alt="">
+            </a>
+          </header>
+          <div class="project-card__phones">
+            <img class="project-card__phone" src="assets/hooh-3.png" alt="Hooh — chat with assistant">
+            <img class="project-card__phone" src="assets/hooh-1.png" alt="Hooh — upload document">
+            <img class="project-card__phone" src="assets/hooh-2.png" alt="Hooh — blood test results">
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card project-card--itab">
+        <div class="project-card__inner project-card__inner--itab">
+          <header class="project-card__header project-card__header--itab">
+            <h3 class="project-card__title">iTAB product card Redesign</h3>
+            <p class="project-card__subtitle">Designing the MVP of the application from scratch</p>
+            <a class="arrow-btn" href="#" aria-label="Open iTAB product card Redesign">
+              <img src="assets/arrow.svg" alt="">
+            </a>
+          </header>
+          <div class="project-card__itab-group">
+            <img class="project-card__itab-main" src="assets/itab-main.png" alt="iTAB product card — desktop view">
+            <img class="project-card__itab-side" src="assets/itab-side.png" alt="iTAB product card — mobile view">
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="about" id="about">
+      <h2 class="about__title">A few things behind my work</h2>
+      <div class="about__cards">
+        <div class="about-card about-card--1">
+          <div class="about-card__inner">
+            <div class="about-card__face about-card__face--front">
+              <span class="about-card__number" aria-hidden="true">01</span>
+              <p class="about-card__title">I design for real product constraints</p>
+              <p class="about-card__description">I work with real-world limits — time, code, devices — and turn them into focused, shippable design decisions</p>
+            </div>
+            <div class="about-card__face about-card__face--back">
+              <span class="about-card__number" aria-hidden="true">01</span>
+              <p class="about-card__back-text">I work with real-world limits — time, code, devices — and turn them into focused, shippable design decisions</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-card about-card--2">
+          <div class="about-card__inner">
+            <div class="about-card__face about-card__face--front">
+              <span class="about-card__number" aria-hidden="true">02</span>
+              <p class="about-card__title">I untangle complex UX</p>
+              <p class="about-card__description">I take dense data, multi-step flows, and ambiguous problems, then transform them into clear, navigable user experiences</p>
+            </div>
+            <div class="about-card__face about-card__face--back">
+              <span class="about-card__number" aria-hidden="true">02</span>
+              <p class="about-card__back-text">I take dense data, multi-step flows, and ambiguous problems, then transform them into clear, navigable user experiences</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-card about-card--3">
+          <div class="about-card__inner">
+            <div class="about-card__face about-card__face--front">
+              <span class="about-card__number" aria-hidden="true">03</span>
+              <p class="about-card__title">I balance aesthetics and logic</p>
+              <p class="about-card__description">I turn messy product logic into clear flows, intuitive interfaces, and team-ready decisions</p>
+            </div>
+            <div class="about-card__face about-card__face--back">
+              <span class="about-card__number" aria-hidden="true">03</span>
+              <p class="about-card__back-text">I turn messy product logic into clear flows, intuitive interfaces, and team-ready decisions</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-card about-card--4">
+          <div class="about-card__inner">
+            <div class="about-card__face about-card__face--front">
+              <span class="about-card__number" aria-hidden="true">04</span>
+              <p class="about-card__title">I mentor and grow with others</p>
+              <p class="about-card__description">I mentor designers through feedback, portfolio reviews, and honest guidance</p>
+            </div>
+            <div class="about-card__face about-card__face--back">
+              <span class="about-card__number" aria-hidden="true">04</span>
+              <p class="about-card__back-text">I mentor designers through feedback, portfolio reviews, and honest guidance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <h2 class="experience__title">Working Experience</h2>
+      <ul class="experience__list">
+        <li class="experience-item">
+          <div class="experience-item__row">
+            <p class="experience-item__role">Product designer</p>
+            <span class="experience-item__date">2025-Present</span>
+            <p class="experience-item__company">Hooh. Mobile App (IOS), Web</p>
+          </div>
+        </li>
+        <li class="experience-item">
+          <div class="experience-item__row">
+            <p class="experience-item__role">Product designer</p>
+            <span class="experience-item__date">2024-Present</span>
+            <p class="experience-item__company">iTAB. Mobile App (Crossplatform), Web</p>
+          </div>
+        </li>
+        <li class="experience-item">
+          <div class="experience-item__row">
+            <p class="experience-item__role">Ui/ux designer</p>
+            <span class="experience-item__date">2023-2024</span>
+            <p class="experience-item__company">Infomedia. Communication, UX/UI design</p>
+          </div>
+        </li>
+        <li class="experience-item">
+          <div class="experience-item__row">
+            <p class="experience-item__role">Ui/ux designer, mentor</p>
+            <span class="experience-item__date">2023-2024</span>
+            <p class="experience-item__company">Abramova School. UX/UI designer, mentor</p>
+          </div>
+        </li>
+        <li class="experience-item">
+          <div class="experience-item__row">
+            <p class="experience-item__role">Ui/ux designer</p>
+            <span class="experience-item__date">2023-2024</span>
+            <p class="experience-item__company">Cryptomi</p>
+          </div>
+        </li>
+        <li class="experience-item">
+          <div class="experience-item__row">
+            <p class="experience-item__role">Web designer</p>
+            <span class="experience-item__date">2022-2023</span>
+            <p class="experience-item__company">Студия</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section class="contact">
+      <a class="contact__btn" href="#">
+        <span class="contact__text">Drop me a message</span>
+        <img class="contact__arrow" src="assets/arrow-cta.svg" alt="">
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© 2026</p>
+        <p class="footer__credit">Made with <span class="footer__heart">♥</span> by Victoria</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="#works">Works</a>
+      <a class="menu-drawer__item" href="#about">About</a>
+      <a class="menu-drawer__item" href="#experience">Experience</a>
+    </nav>
+  </div>
+
+  <script>
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('.menu-drawer__item');
+
+      const open = (e) => {
+        if (e) e.preventDefault();
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+
+      const close = () => {
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+
+      openBtns.forEach((btn) => btn.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach((item) => item.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    // Scroll-spy: highlight active sidebar/drawer menu item based on visible section
+    (() => {
+      const navLinks = document.querySelectorAll('.menu__item, .menu-drawer__item');
+      const sectionIds = ['works', 'about', 'experience'];
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+      if (!sections.length) return;
+
+      const setActive = (id) => {
+        navLinks.forEach((link) => {
+          link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+        });
+      };
+
+      const updateActive = () => {
+        const viewportTop = window.scrollY;
+        const triggerPoint = viewportTop + window.innerHeight * 0.35;
+        let active = sections[0].id;
+        for (const s of sections) {
+          if (s.offsetTop <= triggerPoint) active = s.id;
+          else break;
+        }
+        setActive(active);
+      };
+
+      setActive('works');
+      updateActive();
+
+      window.addEventListener('scroll', updateActive, { passive: true });
+      window.addEventListener('resize', updateActive);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1282 @@
+@font-face {
+  font-family: 'PP Editorial New';
+  src: url('fonts/PPEditorialNew-Regular.woff2') format('woff2'),
+       url('fonts/PPEditorialNew-Regular.woff') format('woff'),
+       url('fonts/PPEditorialNew-Regular.ttf') format('truetype'),
+       url('fonts/PPEditorialNew-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ===== Colors (Figma design system) ===== */
+  --bg-primary: #f0f0f0;                 /* Bg/Primary */
+  --bg-card: #e2e4e7;                    /* Bg/Card — project cards */
+  --text-primary: #2d3036;               /* Text/Primary, Grey 1000 */
+  --text-secondary: rgba(0, 0, 0, 0.4);  /* Text/Secondary (was 0.6, now 0.4) */
+  --text-tertiary: #b1b0b0;              /* Text/Tertiary — inactive menu items */
+  --text-accent: #d946ef;                /* Text/Primary_Accent (now magenta, was blue) */
+  --button-primary: #d946ef;             /* Button/Surface/Primary */
+  --button-secondary: #ffffff;           /* Button/Surface/Secondary */
+  --brand-pink-500: #fcc9ff;             /* Brand/Pink 500 (now light pink, was light blue) */
+  --stroke-primary: #d4d2d2;             /* Stroke/Primary — dividers */
+  --stroke-subtle: #b1b0b0;              /* Stroke/Subtle */
+  --white: #ffffff;
+
+  /* Backwards-compat aliases */
+  --bg: var(--bg-primary);
+  --grey-100: var(--bg-primary);
+  --grey-200: var(--bg-card);
+  --border-image: var(--bg-card);
+
+  /* ===== Fonts ===== */
+  --font-display: 'PP Editorial New', Georgia, serif;
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* ===== Type scale (Desktop values; mobile overrides below) ===== */
+  --fs-h1: 106px;          --lh-h1: 108px;     /* cover headline */
+  --fs-h2: 80px;           --lh-h2: 88px;      /* section titles (About/Experience/Testimonials) */
+  --fs-h3: 40px;           --lh-h3: 40px;      /* project/experience role, intro greeting */
+  --fs-h4: 32px;           --lh-h4: 32px;      /* about-card title (mobile experience role) */
+  --fs-h5: 28px;           --lh-h5: 36px;      /* sidebar name */
+  --fs-h6: 24px;           --lh-h6: 24px;      /* sidebar menu items */
+  --fs-body: 17px;         --lh-body: 24px;    /* body text, buttons, subtitles */
+  --fs-body-tight: 22px;   --lh-body-tight: 22px; /* desktop date pill */
+
+  /* Letter spacing */
+  --ls-heading-lg: -2.2px;
+  --ls-heading-sm: -1.2px;
+  --ls-heading-body: -1px;
+
+  /* ===== Spacing scale (raw values) ===== */
+  --space-0: 0;
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-60: 60px;
+  --space-100: 100px;
+  --space-120: 120px;
+
+  /* ===== Semantic spacing (mobile overrides below) ===== */
+  --page-x: 40px;          /* Spacing/Page X — horizontal page padding */
+  --section-y: 120px;      /* Spacing/Section Y — vertical gap between sections */
+  --group-gap: 40px;       /* Spacing/Group Gap — gap inside section (title ↔ content) */
+  --items-gap: 28px;       /* gap between list items (experience) */
+  --inline-gap: 12px;      /* Spacing/Inline Gap — between inline items */
+  --card-x: 32px;          /* Spacing/Card X — card horizontal padding */
+  --card-y: 32px;          /* Spacing/Card Y — card vertical padding */
+  --card-gap: 24px;        /* Spacing/Card Gap — gap inside card */
+
+  /* ===== Misc ===== */
+  --radius-button: 100px;
+}
+
+/* ===== Mobile/tablet token overrides (≤1280px) ===== */
+@media (max-width: 1280px) {
+  :root {
+    --fs-h1: 62px;          --lh-h1: 64px;
+    --fs-h2: 60px;          --lh-h2: 60px;
+    --fs-h3: 44px;          --lh-h3: 48px;
+    /* H4–H6 unchanged */
+    --fs-body-tight: 17px;  --lh-body-tight: 20px; /* mobile date pill: 17/20 */
+    --lh-body: 25.5px;      /* mobile body 17/25.5 */
+
+    /* Semantic spacing (mobile values per Figma 527:28139) */
+    --page-x: 24px;
+    --section-y: 60px;
+    --group-gap: 32px;
+    --card-x: 24px;
+    --card-y: 24px;
+  }
+}
+
+/* Optional: bump all type +6px on extra-large screens */
+@media (min-width: 1920px) {
+  :root {
+    --fs-h1: 112px;
+    --fs-h2: 86px;
+    --fs-h3: 46px;
+    --fs-h4: 38px;
+    --fs-h5: 34px;
+    --fs-h6: 30px;
+    --fs-body: 23px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 24px;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  display: flex;
+  align-items: flex-start;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ===== Sidebar ===== */
+
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  padding: 24px 20px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.sidebar__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-60);
+}
+
+.sidebar__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h5);
+  line-height: var(--lh-h5);
+  letter-spacing: var(--ls-heading-body);
+  color: var(--text-primary);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  font-family: var(--font-display);
+  font-size: var(--fs-h6);
+  line-height: var(--lh-h6);
+  letter-spacing: var(--ls-heading-sm);
+}
+
+.menu__item {
+  color: var(--text-tertiary);
+  transition: color 0.2s ease;
+}
+
+.menu__item.is-active {
+  color: var(--text-accent);
+}
+
+.menu__item:hover {
+  color: var(--text-primary);
+}
+
+.menu__item.is-active:hover {
+  color: var(--text-accent);
+}
+
+.sidebar__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  align-items: stretch;
+  width: max-content;
+}
+
+.sidebar__buttons .btn {
+  width: 100%;
+}
+
+/* ===== Buttons ===== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: var(--radius-button);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* ===== Focus styles (keyboard accessibility) ===== */
+
+.btn:focus-visible,
+.arrow-btn:focus-visible,
+.contact__btn:focus-visible,
+.menu__item:focus-visible,
+.menu-drawer__item:focus-visible,
+.menu-toggle:focus-visible,
+.menu-drawer__close:focus-visible,
+.mobile-topbar__link:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 3px;
+}
+
+/* CTA button — magenta with inner shadow (Telegram, contact CTA) */
+.btn--dark {
+  background-color: var(--button-primary);
+  color: var(--white);
+  padding: 4px 24px;
+  border-radius: 40px;
+  gap: 8px;
+  box-shadow:
+    inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+    inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn--light {
+  background-color: var(--button-secondary);
+  color: var(--text-primary);
+}
+
+/* ===== Main content column ===== */
+
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-y);
+}
+
+/* Cap content width so project cards stay ≤ 1112px tall on wide viewports;
+   extra horizontal space goes between sidebar and content (margin-left: auto).
+   Card aspect 1040/800: at 1446 wide → 1112 tall (max). 1446 + 80 (section padding) = 1526. */
+@media (min-width: 1281px) {
+  .content {
+    max-width: 1526px;
+    margin-left: auto;
+  }
+}
+
+/* ===== Cover (Profile Section) ===== */
+
+.profile-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 24px var(--page-x);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.profile-section__telegram {
+  align-self: flex-end;
+}
+
+/* Mobile topbar (CV / Меню) — visible only on mobile */
+.mobile-topbar {
+  display: none;
+}
+
+/* Menu toggle — visible only on adaptive (when sidebar is hidden) */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 24px;
+  left: 40px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  color: var(--white);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.menu-toggle:hover {
+  opacity: 0.85;
+}
+
+.menu-toggle svg {
+  display: block;
+}
+
+.intro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.intro__header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.intro__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--border-image);
+  overflow: hidden;
+  transform: rotate(-3.71deg);
+}
+
+.intro__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intro__greeting {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
+.intro__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: -2.2px;
+  color: var(--text-primary);
+}
+
+/* ===== Projects ===== */
+
+.projects {
+  padding: 0 var(--page-x);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-card {
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--grey-200);
+}
+
+.project-card__inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1040 / 800;
+  overflow: hidden;
+}
+
+.project-card__inner--itab {
+  aspect-ratio: 1040 / 800;
+}
+
+.project-card__header {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  right: 28px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 24px;
+  row-gap: 12px;
+  z-index: 2;
+}
+
+.project-card__header--itab {
+  right: auto;
+  top: 28.51px;
+}
+
+.project-card__title {
+  grid-column: 1;
+  grid-row: 1;
+  max-width: 389px;
+}
+
+.project-card__subtitle {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 389px;
+}
+
+.project-card__header .arrow-btn {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+}
+
+.project-card__header--itab .project-card__title,
+.project-card__header--itab .project-card__subtitle {
+  max-width: 399px;
+}
+
+.project-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.project-card__subtitle {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* Hooh card — phones row */
+
+.project-card__phones {
+  position: absolute;
+  top: 20.83%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90.9%;
+  display: flex;
+  align-items: flex-start;
+  gap: 3.08%;
+}
+
+.project-card__phone {
+  display: block;
+  height: auto;
+  flex: 0 0 auto;
+  object-fit: cover;
+}
+
+.project-card__phone:nth-child(1) {
+  width: 31.35%;
+  aspect-ratio: 285 / 619.627;
+}
+
+.project-card__phone:nth-child(2),
+.project-card__phone:nth-child(3) {
+  width: 31.24%;
+  aspect-ratio: 284 / 618;
+}
+
+/* iTAB card — two screenshots, centered as a 944px group */
+
+.project-card__itab-group {
+  position: absolute;
+  top: 18.82%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 94.4%;
+  height: 81.18%;
+}
+
+.project-card__itab-main {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 66.95%;
+  aspect-ratio: 632 / 2139;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-card__itab-side {
+  position: absolute;
+  left: 69.92%;
+  top: 0.74%;
+  width: 30.08%;
+  aspect-ratio: 284 / 637;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Arrow button (Hooh card) */
+
+.arrow-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--button-primary);
+  border-radius: 40px;
+  padding: 4px 24px;
+  height: 40px;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+  box-shadow:
+    inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+    inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
+}
+
+.arrow-btn:hover {
+  opacity: 0.85;
+}
+
+.arrow-btn img {
+  display: block;
+  width: 20px;
+  height: 16px;
+}
+
+/* ===== About section ===== */
+
+.about {
+  padding: 0 var(--page-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--group-gap);
+}
+
+.about__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: -2.2px;
+  color: var(--text-primary);
+  max-width: 628px;
+}
+
+.about__cards {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.about-card {
+  flex: 1;
+  min-width: 0;
+  aspect-ratio: 235 / 380;
+  perspective: 1200px;
+  cursor: pointer;
+}
+
+.about-card--1 { transform: rotate(-2.44deg); }
+.about-card--2 { transform: rotate(3deg); }
+.about-card--3 { transform: rotate(0); }
+.about-card--4 { transform: rotate(3deg); }
+
+.about-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+
+.about-card:hover .about-card__inner {
+  transform: rotateY(180deg);
+}
+
+.about-card__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--card-x);
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.about-card__face--front {
+  background-color: var(--bg-card);
+}
+
+.about-card--2 .about-card__face--front,
+.about-card--4 .about-card__face--front {
+  background-color: var(--brand-pink-500);
+}
+
+.about-card__face--back {
+  background-color: var(--button-primary);
+  transform: rotateY(180deg);
+  justify-content: space-between;
+}
+
+.about-card__face--back .about-card__number {
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-card__inner {
+    transition: none;
+  }
+}
+
+.about-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
+.about-card__back-text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--white);
+}
+
+.about-card__description {
+  display: none;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+/* Number shown on all viewports (replaces the icon from previous design) */
+.about-card__number {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
+/* ===== Responsive: hide sidebar below 1280px ===== */
+
+@media (max-width: 1280px) {
+  .sidebar {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    position: fixed;
+    top: 24px;
+    left: var(--page-x);
+    z-index: 100;
+  }
+
+  .profile-section__telegram {
+    position: fixed;
+    top: 24px;
+    right: var(--page-x);
+    z-index: 100;
+  }
+}
+
+/* ===== Mobile (≤1024px): 20px side paddings + sizes from Figma ===== */
+
+/* ===== Project cards — mobile/tablet layout below 1280px ===== */
+
+@media (max-width: 1280px) {
+  /* Mobile project card — natural flow with --card padding tokens */
+  .project-card__inner,
+  .project-card__inner--itab {
+    aspect-ratio: auto;
+    height: auto;
+    padding: var(--card-y) var(--card-x);
+    display: flex;
+    flex-direction: column;
+    gap: var(--items-gap);
+    overflow: hidden;
+  }
+
+  /* Header: column flex with gap 16, title-row + subtitle */
+  .project-card__header,
+  .project-card__header--itab {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 24px;
+    row-gap: 16px;
+  }
+
+  /* Title H6 (24/24), spans col 1 row 1 */
+  .project-card__title {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: var(--fs-h6);
+    line-height: var(--lh-h6);
+    max-width: none;
+    white-space: normal;
+  }
+
+  /* Subtitle spans full width on row 2 */
+  .project-card__subtitle {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    max-width: none;
+    white-space: normal;
+  }
+
+  /* Arrow on row 1 col 2 */
+  .project-card__header .arrow-btn {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  /* Arrow button styles inherit from base (.arrow-btn) — no mobile override needed */
+
+  /* Hooh phones — show only 2 (hide 3rd), each 129×282 centered with gap 20 */
+  .project-card__phones {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    max-height: 620px;
+  }
+
+  .project-card__phones .project-card__phone:nth-child(3) {
+    display: none;
+  }
+
+  .project-card__phone:nth-child(1),
+  .project-card__phone:nth-child(2) {
+    width: 129px;
+    height: 282px;
+    aspect-ratio: auto;
+    object-fit: cover;
+  }
+
+  /* iTAB — show only side phone (hide main) */
+  .project-card__itab-group {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 620px;
+  }
+
+  .project-card__itab-main {
+    display: none;
+  }
+
+  .project-card__itab-side {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 129px;
+    height: 282px;
+    aspect-ratio: auto;
+    object-fit: cover;
+  }
+}
+
+/* ===== About cards — mobile/tablet (≤1280px): static cards with numbers (per Figma 527:28167) ===== */
+
+@media (max-width: 1280px) {
+  .about__cards {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    gap: 20px;
+  }
+
+  .about-card {
+    flex: none;
+    width: 100%;
+    aspect-ratio: auto;
+    height: 400px;
+    min-height: 400px;
+    position: sticky;
+    top: 24px;
+    transform: none;
+    perspective: none;
+    cursor: default;
+  }
+
+  .about-card--1,
+  .about-card--2,
+  .about-card--3,
+  .about-card--4 {
+    transform: none;
+  }
+
+  /* No flip on mobile */
+  .about-card:hover .about-card__inner {
+    transform: none;
+  }
+
+  .about-card__inner {
+    height: 400px;
+    transform: none;
+    transition: none;
+  }
+
+  /* Hide back face entirely on mobile */
+  .about-card__face--back {
+    display: none;
+  }
+
+  /* Front face: number top, title + description bottom — fills inner */
+  .about-card__face--front {
+    background-color: var(--bg-card);
+    padding: var(--card-x);
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  /* Every second card — pink, alternating with bg-card */
+  .about-card--2 .about-card__face--front,
+  .about-card--4 .about-card__face--front {
+    background-color: var(--brand-pink-500);
+  }
+
+  /* Title pushed to bottom via margin-top: auto, description follows naturally */
+  .about-card__title {
+    margin-top: auto;
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+  }
+
+  .about-card__description {
+    display: block;
+    margin-top: 12px;
+    color: var(--text-secondary);
+  }
+}
+
+/* ===== Experience section ===== */
+
+.experience {
+  padding: 0 var(--page-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--group-gap);
+}
+
+.experience__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: -2.2px;
+  color: var(--text-primary);
+}
+
+.experience__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.experience-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  padding-bottom: var(--space-32);
+  border-bottom: 1.5px solid var(--stroke-primary);
+}
+
+.experience-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.experience-item__row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--inline-gap);
+}
+
+.experience-item__role {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
+.experience-item__date {
+  flex-shrink: 0;
+  background-color: var(--brand-pink-500);
+  padding: var(--space-8);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--fs-body-tight);
+  line-height: var(--lh-body-tight);
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.experience-item__company {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+/* ===== Contact CTA — Drop me a message ===== */
+
+.contact {
+  padding: 0 var(--page-x);
+  display: flex;
+  justify-content: center;
+}
+
+.contact__btn {
+  background-color: var(--button-primary);
+  color: var(--white);
+  border-radius: 999px;
+  padding: 60px 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  box-shadow:
+    inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+    inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
+}
+
+.contact__btn:hover {
+  opacity: 0.9;
+}
+
+.contact__text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 5vw, 62px);
+  line-height: 1;
+  letter-spacing: var(--ls-heading-lg);
+  white-space: nowrap;
+}
+
+.contact__arrow {
+  display: block;
+  width: 70px;
+  height: 51px;
+  transform: rotate(135deg);
+}
+
+/* ===== Footer ===== */
+
+.footer {
+  padding: 60px var(--page-x);
+  display: flex;
+  flex-direction: column;
+}
+
+.footer::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: rgba(178, 178, 178, 0.4);
+  margin-bottom: 40px;
+}
+
+.footer__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.footer__copyright,
+.footer__credit {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.footer__copyright {
+  color: var(--text-primary);
+}
+
+.footer__credit {
+  color: var(--text-secondary);
+}
+
+.footer__heart {
+  color: #eb454f;
+  font-size: 20px;
+}
+
+/* ===== Menu Drawer (mobile/tablet) ===== */
+
+.menu-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: var(--text-accent);
+  padding: 24px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-drawer.is-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.menu-drawer__header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.menu-drawer__close {
+  background: none;
+  border: none;
+  color: var(--white);
+  padding: 8px;
+  margin: -8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-drawer__close svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.menu-drawer__nav {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.menu-drawer__item {
+  font-family: var(--font-display);
+  font-size: 62px;
+  line-height: 64px;
+  letter-spacing: -2.2px;
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 600px) and (max-width: 1280px) {
+  .menu-drawer {
+    padding: 24px 32px 60px;
+  }
+}
+
+/* ===== Mobile/tablet overrides — must come after base rules ===== */
+
+@media (max-width: 1280px) {
+  /* Profile section: per Figma 527:28140 — column with topbar + 120 gap + intro,
+     vertically centered, items span full width */
+  .profile-section {
+    justify-content: space-between;
+    align-items: stretch;
+    gap: var(--space-120);
+  }
+
+  .intro {
+    width: 100%;
+  }
+
+  /* On mobile — hide menu icon + Telegram (desktop topbar), show CV/Меню text instead */
+  .menu-toggle,
+  .profile-section__telegram {
+    display: none;
+  }
+
+  .mobile-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .mobile-topbar__link {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--ls-heading-body);
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  /* Section padding-left handled by ≤1280px override (when sidebar is hidden) */
+
+  /* Mobile CTA — full-width magenta pill with inner shadow */
+  .contact__btn {
+    width: 100%;
+    height: 84px;
+    padding: 0 20px;
+    gap: 16px;
+    border-radius: 999px;
+    background-color: var(--button-primary);
+    color: var(--white);
+    box-shadow:
+      inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+      inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .contact__text {
+    font-size: var(--fs-h5);
+    line-height: var(--lh-h5);
+    white-space: nowrap;
+    color: var(--white);
+  }
+
+  .contact__arrow {
+    width: 28px;
+    height: 20px;
+  }
+
+  .menu-toggle {
+    left: 20px;
+  }
+
+  .profile-section__telegram {
+    right: 20px;
+  }
+
+  /* About card title — mobile H4 (32/32) — same as Experience role for consistency */
+  .about-card__title {
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+  }
+
+  /* Experience — mobile structure per Figma 527:28193:
+     role + company stacked in left column, date pill on right */
+  .experience-item {
+    gap: 32px;
+  }
+
+  .experience-item__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 12px;
+    align-items: start;
+  }
+
+  /* Mobile experience role uses H4 (32/32) — different from desktop H3 (40/40) */
+  .experience-item__role {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+  }
+
+  .experience-item__date {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 8px;
+  }
+
+  .experience-item__company {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 17px;
+    text-align: left;
+  }
+}
+
+
+/* ===== Final overrides: section padding-left when sidebar is hidden (≤1280) ===== */
+@media (max-width: 1280px) {
+  .profile-section,
+  .projects,
+  .about,
+  .experience,
+  .contact,
+  .footer {
+    padding-left: var(--page-x);
+  }
+}
