@@ -740,7 +740,7 @@ img {
     overflow: hidden;
   }
 
-  /* Header: column flex with gap 16, title-row + subtitle */
+  /* Header: title + subtitle stacked in col 1, arrow centered in col 2 */
   .project-card__header,
   .project-card__header--itab {
     position: static;
@@ -750,22 +750,23 @@ img {
     display: grid;
     grid-template-columns: 1fr auto;
     column-gap: 24px;
-    row-gap: 16px;
+    row-gap: 8px;
+    align-items: center;
   }
 
-  /* Title H6 (24/24), spans col 1 row 1 */
+  /* Title H4 (32/32) — same size as about-card title on mobile */
   .project-card__title {
     grid-column: 1;
     grid-row: 1;
-    font-size: var(--fs-h6);
-    line-height: var(--lh-h6);
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
     max-width: none;
     white-space: normal;
   }
 
-  /* Subtitle spans full width on row 2 */
+  /* Subtitle stays in col 1, row 2 (does not span under arrow) */
   .project-card__subtitle {
-    grid-column: 1 / -1;
+    grid-column: 1;
     grid-row: 2;
     font-size: var(--fs-body);
     line-height: var(--lh-body);
@@ -773,11 +774,11 @@ img {
     white-space: normal;
   }
 
-  /* Arrow on row 1 col 2 */
+  /* Arrow spans both rows, vertically centered against title + subtitle */
   .project-card__header .arrow-btn {
     grid-column: 2;
-    grid-row: 1;
-    align-self: start;
+    grid-row: 1 / span 2;
+    align-self: center;
   }
 
   /* Arrow button styles inherit from base (.arrow-btn) — no mobile override needed */
