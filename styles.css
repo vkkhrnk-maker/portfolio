@@ -90,7 +90,7 @@
 
     /* Semantic spacing (mobile values per Figma 527:28139) */
     --page-x: 24px;
-    --section-y: 60px;
+    --section-y: 100px;
     --group-gap: 32px;
     --card-x: 24px;
     --card-y: 24px;
