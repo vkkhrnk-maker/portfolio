@@ -382,6 +382,63 @@
         document.addEventListener(ev, onActivity, { passive: true });
       });
     })();
+
+    // Decorative magenta cursor in the hero (mouse devices only)
+    (() => {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      const hero = document.querySelector('.profile-section');
+      if (!hero) return;
+
+      const cursor = document.createElement('div');
+      cursor.className = 'custom-cursor';
+      cursor.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(cursor);
+
+      let targetX = 0, targetY = 0;
+      let currentX = 0, currentY = 0;
+      let initialized = false;
+
+      const tick = () => {
+        if (initialized) {
+          const lerp = 0.22;
+          currentX += (targetX - currentX) * lerp;
+          currentY += (targetY - currentY) * lerp;
+          cursor.style.transform =
+            `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+        }
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+
+      hero.addEventListener('mouseenter', (e) => {
+        if (!initialized) {
+          currentX = e.clientX;
+          currentY = e.clientY;
+          targetX = e.clientX;
+          targetY = e.clientY;
+          initialized = true;
+        }
+        cursor.classList.add('is-active');
+      });
+
+      hero.addEventListener('mouseleave', () => {
+        cursor.classList.remove('is-active', 'is-hover');
+      });
+
+      hero.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+      });
+
+      // Grow into a ring when hovering interactive hero elements
+      const interactives = hero.querySelectorAll(
+        'a, button, .intro__avatar, [role="button"], [data-menu-open]'
+      );
+      interactives.forEach((el) => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
+      });
+    })();
   </script>
 </body>
 </html>
