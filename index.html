@@ -341,6 +341,46 @@
           showBubble();
         }
       });
+
+      // Auto-show on idle: if the user hasn't interacted for IDLE_DELAY
+      // and the avatar is on screen, pop a random greeting.
+      // Any activity (scroll, mousemove, key, touch, click) resets the timer.
+      const IDLE_DELAY = 8000;
+      const RESCHEDULE_DELAY = 10000;
+      let idleTimer = null;
+      let avatarInView = false;
+
+      const scheduleIdle = (delay = IDLE_DELAY) => {
+        clearTimeout(idleTimer);
+        if (!avatarInView) return;
+        idleTimer = setTimeout(() => {
+          if (!avatarInView) return;
+          showBubble();
+          scheduleIdle(RESCHEDULE_DELAY);
+        }, delay);
+      };
+
+      const io = new IntersectionObserver((entries) => {
+        avatarInView = entries[0].isIntersecting;
+        if (avatarInView) scheduleIdle();
+        else clearTimeout(idleTimer);
+      }, { threshold: 0.4 });
+      io.observe(avatar);
+
+      const onActivity = (() => {
+        let lastReset = 0;
+        return () => {
+          const now = Date.now();
+          if (now - lastReset > 400) {
+            lastReset = now;
+            if (avatarInView) scheduleIdle();
+          }
+        };
+      })();
+
+      ['scroll', 'mousemove', 'keydown', 'touchstart'].forEach((ev) => {
+        document.addEventListener(ev, onActivity, { passive: true });
+      });
     })();
   </script>
 </body>
