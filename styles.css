@@ -545,13 +545,33 @@ img {
   width: 100%;
   overflow: hidden;
   background-color: var(--grey-200);
-  transition: transform 0.32s ease, box-shadow 0.32s ease;
 }
 
+/* Hover effect (desktop, mouse only): zoom the screenshots inside while
+   the card frame stays put. The arrow button also gets a magenta glow. */
 @media (hover: hover) and (min-width: 1281px) {
-  .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.18);
+  .project-card__phones,
+  .project-card__itab-group {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card:hover .project-card__phones {
+    transform: translateX(-50%) scale(1.04);
+  }
+
+  .project-card:hover .project-card__itab-group {
+    transform: translateX(-50%) scale(1.04);
+  }
+
+  .project-card .arrow-btn {
+    transition: opacity 0.2s ease, box-shadow 0.32s ease;
+  }
+
+  .project-card:hover .arrow-btn {
+    box-shadow:
+      inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+      inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5),
+      0 0 28px rgba(217, 70, 239, 0.45);
   }
 }
 
