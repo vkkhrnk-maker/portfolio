@@ -369,9 +369,16 @@ img {
   -webkit-tap-highlight-color: transparent;
 }
 
-.intro__avatar:hover {
-  transform: rotate(-3.71deg) scale(1.06);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+@media (hover: hover) {
+  .intro__avatar:hover {
+    transform: rotate(-3.71deg) scale(1.06);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+}
+
+/* Quick squish on touch press for tactile feedback */
+.intro__avatar:active {
+  transform: rotate(-3.71deg) scale(0.94);
 }
 
 @keyframes avatar-pop-spin {
