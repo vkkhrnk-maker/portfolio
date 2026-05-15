@@ -276,6 +276,34 @@
       window.addEventListener('scroll', updateActive, { passive: true });
       window.addEventListener('resize', updateActive);
     })();
+
+    // Avatar pop-spin on click (just for fun)
+    (() => {
+      const avatar = document.querySelector('.intro__avatar');
+      if (!avatar) return;
+
+      avatar.setAttribute('role', 'button');
+      avatar.setAttribute('tabindex', '0');
+      avatar.setAttribute('aria-label', 'Profile photo — click to spin');
+
+      const spin = () => {
+        avatar.classList.remove('is-spinning');
+        // force reflow so the animation restarts on rapid clicks
+        void avatar.offsetWidth;
+        avatar.classList.add('is-spinning');
+      };
+
+      avatar.addEventListener('click', spin);
+      avatar.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          spin();
+        }
+      });
+      avatar.addEventListener('animationend', () => {
+        avatar.classList.remove('is-spinning');
+      });
+    })();
   </script>
 </body>
 </html>
