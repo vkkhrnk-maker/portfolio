@@ -1160,8 +1160,8 @@ img {
   display: block;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h1);
-  line-height: var(--lh-h1);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
@@ -1362,6 +1362,12 @@ img {
   .about-card--2 .about-card__face--front,
   .about-card--4 .about-card__face--front {
     background-color: var(--brand-pink-500);
+  }
+
+  /* Number stays large but proportionate on mobile (smaller than desktop H2) */
+  .about-card__number {
+    font-size: 48px;
+    line-height: 48px;
   }
 
   /* Title pushed to bottom via margin-top: auto, description follows naturally */
