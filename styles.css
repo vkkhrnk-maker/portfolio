@@ -603,12 +603,10 @@ img {
 .case__pager-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 80px;
   background: var(--white);
   border-radius: 999px;
-  padding: 20px 40px;
-  min-width: 280px;
-  justify-content: center;
+  padding: 28px 48px;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: 1;
@@ -617,13 +615,19 @@ img {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.case__pager-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
 .case__pager-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.12);
 }
 
-.case__pager-btn--prev { justify-self: start; }
-.case__pager-btn--next { justify-self: end; }
+.case__pager-btn--prev:hover { transform: translateX(-3px); }
+.case__pager-btn--next:hover { transform: translateX(3px); }
 
 /* Case page — mobile overrides */
 @media (max-width: 1280px) {
