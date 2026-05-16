@@ -392,6 +392,55 @@ img {
   padding-top: 24px;
 }
 
+/* Case sidebar — replaces menu with project meta (Team / Role / Year) */
+.sidebar--case .case-meta {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -0.5px;
+}
+
+.sidebar--case .case-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar--case .case-meta dt {
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+.sidebar--case .case-meta dd {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+/* Circular "back to home" button at top of case content */
+.case__back {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin: 0 var(--page-x) 24px;
+  align-self: flex-start;
+}
+
+.case__back:hover {
+  transform: translateX(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
 .case {
   display: flex;
   flex-direction: column;
@@ -400,36 +449,14 @@ img {
 }
 
 .case__hero {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 60px;
-  align-items: start;
 }
 
-.case__meta {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: -1px;
-}
-
-.case__meta-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.case__meta dt {
-  color: var(--text-secondary);
-}
-
-.case__meta dd {
-  margin: 0;
-  color: var(--text-primary);
+/* Mobile-only meta strip in main content (sidebar copy is hidden on mobile) */
+.case-meta--mobile {
+  display: none;
 }
 
 .case__title {
@@ -440,12 +467,10 @@ img {
   line-height: var(--lh-h2);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
-  grid-column: 2;
 }
 
 .case__hero-image {
   display: block;
-  grid-column: 1 / -1;
 }
 
 .case__hero-image img {
@@ -607,19 +632,12 @@ img {
   }
 
   .case__hero {
-    grid-template-columns: 1fr;
     gap: 32px;
   }
 
   .case__title {
-    grid-column: 1;
     font-size: var(--fs-h2);
     line-height: var(--lh-h2);
-  }
-
-  .case__meta {
-    flex-direction: row;
-    gap: 24px;
   }
 
   .case__grid {
@@ -637,6 +655,38 @@ img {
     min-width: 0;
     width: 100%;
     padding: 18px 24px;
+  }
+
+  /* On mobile the back button is hidden (we use the ← Home link in mobile-topbar) */
+  .case__back {
+    display: none;
+  }
+
+  /* Show mobile meta strip (sidebar copy hidden along with sidebar) */
+  .case-meta--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: -0.5px;
+    margin: 0;
+  }
+
+  .case-meta--mobile .case-meta__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .case-meta--mobile dt {
+    color: var(--text-primary);
+  }
+
+  .case-meta--mobile dd {
+    margin: 0;
+    color: var(--text-secondary);
   }
 }
 

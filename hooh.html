@@ -23,16 +23,25 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <aside class="sidebar">
+  <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
         <h1 class="sidebar__name">Victoria Kukharenko</h1>
       </a>
-      <nav class="menu">
-        <a class="menu__item" href="index.html#works">Works</a>
-        <a class="menu__item" href="index.html#about">About</a>
-        <a class="menu__item" href="index.html#experience">Experience</a>
-      </nav>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd>PM, Design Lead / Art Director, iOS and Web Developer</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. Responsible for UX analytics, UX/UI design, prototyping, and creating the MVP design system</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Year</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
     </div>
     <div class="sidebar__buttons">
       <a class="btn btn--light" href="#">CV</a>
@@ -49,21 +58,29 @@
       <a class="mobile-topbar__link" href="#" data-menu-open>Menu</a>
     </div>
 
+    <a class="case__back" href="index.html#works" aria-label="Back to home">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+      </svg>
+    </a>
+
     <article class="case">
       <header class="case__hero">
-        <div class="case__hero-meta">
-          <dl class="case__meta">
-            <div class="case__meta-item">
-              <dt>My role</dt>
-              <dd>Product Designer<br>(UX/UI, Web, iOS)</dd>
-            </div>
-            <div class="case__meta-item">
-              <dt>Year</dt>
-              <dd>2025</dd>
-            </div>
-          </dl>
-        </div>
         <h2 class="case__title">Hooh. An AI assistant translating complex bureaucracy into human language</h2>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Team</dt>
+            <dd>PM, Design Lead / Art Director, iOS and Web Developer</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>My Role</dt>
+            <dd>Product designer. Responsible for UX analytics, UX/UI design, prototyping, and creating the MVP design system</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Year</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
         <picture class="case__hero-image">
           <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager">
         </picture>
