@@ -488,9 +488,9 @@ img {
   color: var(--text-primary);
 }
 
-/* Hero: 3-stop gradient backdrop (Figma 756:4498) with the hand+phone
-   photo centered on top. The photo is the parallax layer that moves
-   on scroll while the gradient stays put. */
+/* Hero: 3-stop gradient backdrop (Figma 756:4498) with scattered cloud
+   layers + hand+phone photo. Photo and clouds parallax at different
+   rates on scroll for a layered depth effect. */
 .case__hero-image {
   position: relative;
   aspect-ratio: 1088 / 684;
@@ -503,6 +503,36 @@ img {
   border-radius: 4px;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* Cloud layers — same source PNG, positioned/scaled differently for
+   back (drifting wide behind the phone) and front (smaller, slightly
+   more visible). */
+.case__hero-clouds {
+  position: absolute;
+  pointer-events: none;
+  --parallax-y: 0px;
+  will-change: transform;
+}
+
+.case__hero-clouds--back {
+  top: 3%;
+  left: -5%;
+  width: 38%;
+  height: auto;
+  opacity: 1;
+  filter: blur(2px);
+  transform: translate3d(0, var(--parallax-y), 0);
+}
+
+.case__hero-clouds--front {
+  top: 53%;
+  right: -3%;
+  width: 40%;
+  height: auto;
+  opacity: 1;
+  filter: blur(2px);
+  transform: translate3d(0, var(--parallax-y), 0);
 }
 
 .case__hero-photo {
@@ -530,6 +560,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .case__hero-clouds,
   .case__hero-photo {
     --parallax-y: 0px !important;
   }
@@ -631,31 +662,38 @@ img {
   max-width: 780px;
 }
 
-/* Outcome — 2-column card (Figma node 756:4804): title on the left,
-   paragraphs on the right, 32/32 padding, white-ish card background. */
+/* Outcome — 2-column card (Figma node 1414:105260): light blue-grey
+   fill with a soft inset glow from the bottom, padding 80/24,
+   bigger body type (24/30). */
 .case__outcome {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  position: relative;
+  display: flex;
   gap: 24px;
-  align-items: start;
-  padding: 32px;
-  background: var(--white);
+  align-items: flex-start;
+  padding: 80px 24px;
+  background: #d0d9e5;
+  box-shadow: inset 0 -38px 101.2px 0 #d1d7ff;
   border-radius: 4px;
-  max-width: 1040px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .case__outcome-title {
   margin: 0;
+  flex: 1 1 0;
+  min-width: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  /* Figma h3 token at 40/40 in this section (smaller than 44/48 elsewhere) */
-  font-size: 40px;
-  line-height: 40px;
+  font-size: 44px;
+  line-height: 48px;
   letter-spacing: var(--ls-heading-lg);
-  color: var(--text-primary);
+  color: #0e0f10;
+  max-width: 840px;
 }
 
 .case__outcome-body {
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -665,10 +703,10 @@ img {
 .case__outcome-body p {
   margin: 0;
   font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
+  font-size: 24px;
+  line-height: 30px;
   letter-spacing: -1px;
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .case__pager {
@@ -726,6 +764,11 @@ img {
   .case__grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+
+  .case__outcome {
+    flex-direction: column;
+    padding: 48px 20px;
   }
 
   .case__pager {

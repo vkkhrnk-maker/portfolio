@@ -18,9 +18,9 @@
   <meta name="twitter:description" content="An AI assistant translating complex bureaucracy into human language.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-hero.webp">
 
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -85,9 +85,11 @@
           </div>
         </dl>
         <div class="case__hero-image" data-parallax-root>
+          <img class="case__hero-clouds case__hero-clouds--back" src="assets/case-clouds.webp?v=2" alt="" aria-hidden="true" data-parallax-layer="clouds-back">
           <picture class="case__hero-photo" data-parallax-layer="photo">
             <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager">
           </picture>
+          <img class="case__hero-clouds case__hero-clouds--front" src="assets/case-clouds.webp?v=2" alt="" aria-hidden="true" data-parallax-layer="clouds-front">
         </div>
       </header>
 
@@ -125,7 +127,7 @@
         </div>
 
         <figure class="case__figure">
-          <picture><img src="assets/case-uxA.webp" alt="Upload screen on iOS next to an auto-categorization panel" loading="lazy"></picture>
+          <picture><img src="assets/case-uxA.webp?v=2" alt="Upload screen on iOS next to an auto-categorization panel" loading="lazy"></picture>
           <figcaption>Users start by uploading a document, while the system helps organize it through automatic categorization</figcaption>
         </figure>
 
@@ -247,29 +249,35 @@
       }
     })();
 
-    // Hero parallax — photo translates slower than the page on scroll,
-    // so the gradient backdrop appears to sit "behind" the phone.
+    // Hero parallax — multiple layers translate at different rates on
+    // scroll for a layered depth effect (clouds drift slower than the
+    // phone photo).
     (() => {
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const root = document.querySelector('[data-parallax-root]');
-      const photo = document.querySelector('[data-parallax-layer="photo"]');
-      if (!root || !photo) return;
+      if (!root) return;
 
-      const STRENGTH = 0.18; // 0 = no parallax, 1 = layer pinned
+      // [selector, strength] — higher strength = lags more behind scroll
+      const layers = [
+        ['[data-parallax-layer="clouds-back"]', 0.32],
+        ['[data-parallax-layer="clouds-front"]', 0.10],
+        ['[data-parallax-layer="photo"]', 0.18],
+      ].map(([sel, s]) => [document.querySelector(sel), s])
+        .filter(([el]) => !!el);
+
+      if (!layers.length) return;
 
       let ticking = false;
       const update = () => {
         const rect = root.getBoundingClientRect();
-        // Out of view — pin photo at its base position so it doesn't drift
         if (rect.bottom < 0 || rect.top > window.innerHeight) {
           ticking = false;
           return;
         }
-        // 0 when hero top is at/below viewport top (hero fully in view),
-        // grows positive as the hero scrolls upward past viewport top.
         const scrolledPast = Math.max(0, -rect.top);
-        const y = scrolledPast * STRENGTH;
-        photo.style.setProperty('--parallax-y', `${y}px`);
+        for (const [el, strength] of layers) {
+          el.style.setProperty('--parallax-y', `${scrolledPast * strength}px`);
+        }
         ticking = false;
       };
 
