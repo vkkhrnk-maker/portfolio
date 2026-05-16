@@ -81,9 +81,11 @@
             <dd>2026</dd>
           </div>
         </dl>
-        <picture class="case__hero-image">
-          <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager">
-        </picture>
+        <div class="case__hero-image" data-parallax-root>
+          <picture class="case__hero-photo" data-parallax-layer="photo">
+            <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager">
+          </picture>
+        </div>
       </header>
 
       <section class="case__grid">
@@ -113,11 +115,11 @@
       <section class="case__section">
         <h3 class="case__section-title">Key UX decision: Progressive Disclosure</h3>
         <p class="case__section-body">To reduce overwhelm, we designed document reading in 3 layers:</p>
-        <ol class="case__list">
+        <ul class="case__list">
           <li><b>Snapshot</b> — the essence of the document in 1–2 sentences</li>
           <li><b>Detailed summary</b> — a deeper structured explanation for users who need more context</li>
           <li><b>Contextual Q&amp;A</b> — follow-up questions based on the uploaded file, without requiring users to search manually</li>
-        </ol>
+        </ul>
 
         <figure class="case__figure">
           <picture><img src="assets/case-uxA.webp" alt="Upload screen on iOS next to an auto-categorization panel" loading="lazy"></picture>
@@ -240,6 +242,44 @@
         window.addEventListener('scroll', update, { passive: true });
         window.addEventListener('resize', update);
       }
+    })();
+
+    // Hero parallax — photo translates slower than the page on scroll,
+    // so the gradient backdrop appears to sit "behind" the phone.
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const root = document.querySelector('[data-parallax-root]');
+      const photo = document.querySelector('[data-parallax-layer="photo"]');
+      if (!root || !photo) return;
+
+      const STRENGTH = 0.18; // 0 = no parallax, 1 = layer pinned
+
+      let ticking = false;
+      const update = () => {
+        const rect = root.getBoundingClientRect();
+        // Out of view — pin photo at its base position so it doesn't drift
+        if (rect.bottom < 0 || rect.top > window.innerHeight) {
+          ticking = false;
+          return;
+        }
+        // 0 when hero top is at/below viewport top (hero fully in view),
+        // grows positive as the hero scrolls upward past viewport top.
+        const scrolledPast = Math.max(0, -rect.top);
+        const y = scrolledPast * STRENGTH;
+        photo.style.setProperty('--parallax-y', `${y}px`);
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      };
+
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
     })();
   </script>
 </body>
