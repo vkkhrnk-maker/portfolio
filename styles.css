@@ -1205,14 +1205,14 @@ img {
   color: var(--text-primary);
 }
 
-/* Number shown on all viewports (replaces the icon from previous design) */
+/* Small label-style number in the top corner — no longer a display number */
 .about-card__number {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 400;
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
-  letter-spacing: var(--ls-heading-lg);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -0.3px;
   color: var(--text-primary);
 }
 
@@ -1412,12 +1412,6 @@ img {
   .about-card--2 .about-card__face--front,
   .about-card--4 .about-card__face--front {
     background-color: var(--brand-pink-500);
-  }
-
-  /* Number stays large but proportionate on mobile (smaller than desktop H2) */
-  .about-card__number {
-    font-size: 48px;
-    line-height: 48px;
   }
 
   /* Title pushed to bottom via margin-top: auto, description follows naturally */
