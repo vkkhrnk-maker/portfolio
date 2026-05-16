@@ -463,8 +463,9 @@ img {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
+  /* Figma H1: 62/64, ls -2.2px */
+  font-size: 62px;
+  line-height: 64px;
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
@@ -490,8 +491,9 @@ img {
   margin: 0 0 16px;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
+  /* Figma H3: 44/48 */
+  font-size: 44px;
+  line-height: 48px;
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
@@ -516,8 +518,9 @@ img {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
+  /* Figma H3: 44/48 — same level as block titles */
+  font-size: 44px;
+  line-height: 48px;
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
   max-width: 900px;
@@ -640,8 +643,8 @@ img {
   }
 
   .case__title {
-    font-size: var(--fs-h2);
-    line-height: var(--lh-h2);
+    font-size: 48px;
+    line-height: 50px;
   }
 
   .case__grid {
