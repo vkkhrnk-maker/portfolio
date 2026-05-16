@@ -463,9 +463,8 @@ img {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  /* Figma H1: 62/64, ls -2.2px */
-  font-size: 62px;
-  line-height: 64px;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
@@ -636,10 +635,10 @@ img {
 .case__pager-btn {
   display: inline-flex;
   align-items: center;
-  gap: 80px;
+  gap: 12px;
   background: var(--white);
   border-radius: 999px;
-  padding: 28px 48px;
+  padding: 22px 40px;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: 1;
@@ -673,8 +672,8 @@ img {
   }
 
   .case__title {
-    font-size: 48px;
-    line-height: 50px;
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
   }
 
   .case__grid {
