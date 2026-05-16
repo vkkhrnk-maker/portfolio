@@ -420,8 +420,22 @@ img {
   color: var(--text-secondary);
 }
 
-/* Circular "back to home" button at top of case content */
+/* Back-to-home — circle button + "Back" label (Figma node 756:4496) */
 .case__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-primary);
+  margin: 0 var(--page-x) 24px;
+  align-self: flex-start;
+  transition: transform 0.25s ease;
+}
+
+.case__back:hover {
+  transform: translateX(-3px);
+}
+
+.case__back-icon {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -429,16 +443,21 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  margin: 0 var(--page-x) 24px;
-  align-self: flex-start;
+  transition: box-shadow 0.25s ease;
+  flex-shrink: 0;
 }
 
-.case__back:hover {
-  transform: translateX(-3px);
+.case__back:hover .case__back-icon {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+}
+
+.case__back-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
 }
 
 .case {
@@ -571,24 +590,21 @@ img {
   max-width: 780px;
 }
 
+/* Key UX 3-layer list — flat stack of body paragraphs, no bullets, no bold */
 .case__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 840px;
+}
+
+.case__list p {
   margin: 0;
-  padding: 0;
-  list-style: none;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: -1px;
   color: var(--text-secondary);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 780px;
-}
-
-.case__list b {
-  font-weight: 700;
-  color: var(--text-primary);
 }
 
 .case__figure {
@@ -615,11 +631,35 @@ img {
   max-width: 780px;
 }
 
+/* Outcome — 2-column card (Figma node 756:4804): title on the left,
+   paragraphs on the right, 32/32 padding, white-ish card background. */
+.case__outcome {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  padding: 32px;
+  background: var(--white);
+  border-radius: 4px;
+  max-width: 1040px;
+}
+
+.case__outcome-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  /* Figma h3 token at 40/40 in this section (smaller than 44/48 elsewhere) */
+  font-size: 40px;
+  line-height: 40px;
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
 .case__outcome-body {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 780px;
+  gap: 16px;
+  max-width: 840px;
 }
 
 .case__outcome-body p {
@@ -628,7 +668,7 @@ img {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: -1px;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .case__pager {

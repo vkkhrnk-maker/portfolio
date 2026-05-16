@@ -58,10 +58,13 @@
       <a class="mobile-topbar__link" href="#" data-menu-open>Menu</a>
     </div>
 
-    <a class="case__back" href="index.html#works" aria-label="Back to home">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-        <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
-      </svg>
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Back</span>
     </a>
 
     <article class="case">
@@ -115,11 +118,11 @@
       <section class="case__section">
         <h3 class="case__section-title">Key UX decision: Progressive Disclosure</h3>
         <p class="case__section-body">To reduce overwhelm, we designed document reading in 3 layers:</p>
-        <ul class="case__list">
-          <li><b>Snapshot</b> — the essence of the document in 1–2 sentences</li>
-          <li><b>Detailed summary</b> — a deeper structured explanation for users who need more context</li>
-          <li><b>Contextual Q&amp;A</b> — follow-up questions based on the uploaded file, without requiring users to search manually</li>
-        </ul>
+        <div class="case__list">
+          <p>Snapshot. The essence of the document in 1–2 sentences</p>
+          <p>Detailed summary. A deeper structured explanation for users who need more context</p>
+          <p>Contextual Q&amp;A. Follow-up questions based on the uploaded file, without requiring users to search manually</p>
+        </div>
 
         <figure class="case__figure">
           <picture><img src="assets/case-uxA.webp" alt="Upload screen on iOS next to an auto-categorization panel" loading="lazy"></picture>
@@ -154,8 +157,8 @@
         </figure>
       </section>
 
-      <section class="case__section">
-        <h3 class="case__section-title">Outcome</h3>
+      <section class="case__outcome">
+        <h3 class="case__outcome-title">Outcome</h3>
         <div class="case__outcome-body">
           <p>This work resulted in a launched MVP across web and iOS, turning the core product idea into a real user experience built around layered reading, conversational exploration, and guided document understanding</p>
           <p>Alongside the release, we established the initial design system and product structure needed to support future iterations and product growth</p>
