@@ -532,7 +532,8 @@ img {
   height: auto;
   opacity: 1;
   filter: blur(2px);
-  transform: translate3d(0, var(--parallax-y), 0);
+  /* Mirror horizontally so the two layers don't look identical */
+  transform: translate3d(0, var(--parallax-y), 0) scaleX(-1);
 }
 
 .case__hero-photo {
