@@ -817,13 +817,11 @@ body.case-page--itab .case__outcome-body p {
 }
 
 .case__split-pane--web {
-  background-color: #F4F2F7;
-  background-image: url('assets/case-uxB.webp');
-  background-size: auto 110%;
-  background-position: right center;
-  background-repeat: no-repeat;
-  padding: 0;
-  overflow: hidden;
+  background: #F4F2F7;
+}
+
+.case__split-pane--web img {
+  max-width: 100%;
 }
 
 @media (max-width: 768px) {
