@@ -571,7 +571,7 @@ img {
 .case__hero-image--itab {
   position: relative;
   background: none;
-  border-radius: 4px;
+  border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1032 / 600;
 }
@@ -616,19 +616,21 @@ body.case-page--itab .case__outcome-body p {
 }
 
 /* 3-card gap grid — used in iTAB Research section to show the three research
-   gaps discovered in audit + competitor scan. White rectangles on the page's
-   light-gray bg; subtle shadow gives them depth so they read as cards (the
-   raw #fff-on-#f0f0f0 contrast alone is too weak in browser). */
+   gaps discovered in audit + competitor scan. Sharp-cornered white rectangles
+   on the page's light-gray bg; subtle shadow gives them depth so they read as
+   cards (the raw #fff-on-#f0f0f0 contrast alone is too weak in browser).
+   Gap between cards matches sidebar button gap (--space-8) for consistency
+   with the rest of the page's spacing system. */
 .case__gap-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: var(--space-8);
 }
 
 .case__gap-card {
   background: #fff;
   padding: 28px 24px;
-  border-radius: 6px;
+  border-radius: 0;
   min-height: 214px;
   display: flex;
   flex-direction: column;
@@ -661,7 +663,6 @@ body.case-page--itab .case__outcome-body p {
 @media (max-width: 1280px) {
   .case__gap-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
   }
   .case__gap-card {
     min-height: 180px;
