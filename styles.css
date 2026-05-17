@@ -765,6 +765,79 @@ body.case-page--itab .case__outcome-body p {
   border-radius: 4px;
 }
 
+.case__split {
+  display: flex;
+  gap: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.case__split-pane {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  height: 480px;
+  border-radius: 4px;
+}
+
+.case__split-pane img {
+  width: auto;
+  max-height: 100%;
+  border-radius: 0;
+}
+
+.case__split-pane--phone {
+  background: #EFEFEF;
+}
+
+.case__split-pane--phone img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+}
+
+.case__split-pane--categories {
+  background: linear-gradient(135deg, #BCE3F5 0%, #B7E7C1 50%, #F6EDA0 100%);
+}
+
+.case__split-pane--categories img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+}
+
+.case__split-pane--cards {
+  background: #EFEFEF;
+}
+
+.case__split-pane--cards img {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+}
+
+.case__split-pane--web {
+  background-color: #F4F2F7;
+  background-image: url('assets/case-uxB.webp');
+  background-size: auto 110%;
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .case__split {
+    flex-direction: column;
+  }
+  .case__split-pane {
+    min-height: 360px;
+  }
+}
+
 .case__figure figcaption {
   margin: 0;
   font-family: var(--font-body);
