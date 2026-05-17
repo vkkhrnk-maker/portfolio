@@ -567,6 +567,117 @@ img {
   }
 }
 
+/* iTAB hero — flat side-by-side mockup (no parallax, no gradient backdrop) */
+.case__hero-image--itab {
+  position: relative;
+  background: none;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 1032 / 600;
+}
+
+.case__hero-image--itab img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Hero intro paragraph — used on case pages that need a sub-headline under
+   the title (e.g. iTAB). Body-text style, slightly tighter max-width. */
+.case__intro {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  color: var(--text-secondary);
+  max-width: 780px;
+}
+
+/* iTAB case theme — green accent instead of magenta. Scoped to body class so
+   only the iTAB page gets it; Hooh and index stay magenta. */
+body.case-page--itab {
+  --text-accent: #59ad3b;
+}
+
+body.case-page--itab .scroll-progress {
+  box-shadow: 0 0 12px rgba(89, 173, 59, 0.45);
+}
+
+/* iTAB: Result body uses the same body-text style as section bodies for
+   in-page consistency (rest of the case talks in body 16/24 secondary;
+   Result should too instead of Hooh's larger primary outcome style). */
+body.case-page--itab .case__outcome-body p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-secondary);
+}
+
+/* 3-card gap grid — used in iTAB Research section to show the three research
+   gaps discovered in audit + competitor scan. White rectangles on the page's
+   light-gray bg; subtle shadow gives them depth so they read as cards (the
+   raw #fff-on-#f0f0f0 contrast alone is too weak in browser). */
+.case__gap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.case__gap-card {
+  background: #fff;
+  padding: 28px 24px;
+  border-radius: 6px;
+  min-height: 214px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  box-shadow:
+    0 1px 2px rgba(20, 24, 38, 0.04),
+    0 4px 14px rgba(20, 24, 38, 0.06);
+}
+
+.case__gap-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 32px;
+  letter-spacing: var(--ls-heading-lg);
+  color: var(--text-primary);
+}
+
+.case__gap-card__desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1280px) {
+  .case__gap-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .case__gap-card {
+    min-height: 180px;
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .case__gap-grid {
+    grid-template-columns: 1fr;
+  }
+  .case__gap-card {
+    min-height: 0;
+  }
+}
+
 .case__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
