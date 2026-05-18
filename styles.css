@@ -767,20 +767,30 @@ body.case-page--itab .case__outcome-body p {
 
 .case__split {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   border-radius: 4px;
-  overflow: hidden;
   align-items: stretch;
 }
 
 .case__split-pane {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 32px;
-  height: 480px;
+  height: 680px;
   border-radius: 4px;
+}
+
+/* Wide column (uxA phone, uxB web) */
+.case__split-pane--phone,
+.case__split-pane--web {
+  flex: 5;
+}
+
+/* Narrow column (uxA categories, uxB cards) */
+.case__split-pane--categories,
+.case__split-pane--cards {
+  flex: 3;
 }
 
 .case__split-pane img {
@@ -805,7 +815,7 @@ body.case-page--itab .case__outcome-body p {
 }
 
 .case__split-pane--categories img {
-  max-width: 220px;
+  max-width: 150px;
 }
 
 .case__split-pane--cards {
@@ -813,7 +823,7 @@ body.case-page--itab .case__outcome-body p {
 }
 
 .case__split-pane--cards img {
-  max-width: 280px;
+  max-width: 360px;
 }
 
 .case__split-pane--web {
@@ -829,6 +839,7 @@ body.case-page--itab .case__outcome-body p {
     flex-direction: column;
   }
   .case__split-pane {
+    height: auto;
     min-height: 360px;
   }
 }
