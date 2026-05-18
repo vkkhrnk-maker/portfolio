@@ -901,16 +901,13 @@ body.case-page--itab .case__outcome-body p {
   color: #1A1A1A;
 }
 
-.loading-state__mark {
+.case__split-pane--loading img.loading-state__mark {
   width: 44px;
   height: 44px;
-  color: #1A1A1A;
-  animation: hooh-spin 2.6s linear infinite;
-  transform-origin: center;
-}
-
-@keyframes hooh-spin {
-  to { transform: rotate(360deg); }
+  max-width: none;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .loading-state__text {
