@@ -855,6 +855,16 @@ body.case-page--itab .case__outcome-body p {
 
 .case__split--uxC .case__split-pane--web {
   flex: 1 1 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.case__split--uxC .case__split-pane--web img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .case__split--uxC .case__split-pane--summary-phone {
