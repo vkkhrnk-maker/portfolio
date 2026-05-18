@@ -771,6 +771,7 @@ body.case-page--itab .case__outcome-body p {
   border-radius: 4px;
 }
 
+/* chatB still uses split-panes; uxA/uxB/uxC now use flat Figma exports */
 .case__split {
   display: flex;
   gap: 24px;
@@ -785,112 +786,6 @@ body.case-page--itab .case__outcome-body p {
   padding: 32px;
   height: 600px;
   border-radius: 4px;
-}
-
-/* Wide column (uxA phone, uxB web) */
-.case__split-pane--phone,
-.case__split-pane--web {
-  flex: 5;
-}
-
-/* Narrow column (uxA categories, uxB cards, uxC phone) */
-.case__split-pane--categories,
-.case__split-pane--cards,
-.case__split-pane--summary-phone {
-  flex: 3;
-}
-
-.case__split-pane img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 0;
-}
-
-.case__split-pane--phone {
-  background: #E2E4E7;
-}
-
-.case__split-pane--phone img {
-  max-width: 330px;
-}
-
-.case__split-pane--categories {
-  background: linear-gradient(135deg, #BCE3F5 0%, #B7E7C1 50%, #F6EDA0 100%);
-  padding: 32px;
-}
-
-.case__split-pane--categories img {
-  max-width: 248px;
-  height: auto;
-}
-
-.case__split-pane--cards {
-  background: #E2E4E7;
-  padding: 0;
-  overflow: hidden;
-}
-
-.case__split-pane--cards img {
-  max-width: none;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-}
-
-.case__split-pane--web {
-  background: #E2E4E7;
-  padding: 32px 0 32px 32px;
-}
-
-.case__split-pane--web img {
-  max-width: 100%;
-  object-position: right center;
-}
-
-.case__split-pane--summary-phone {
-  background: #E2E4E7;
-}
-
-.case__split-pane--summary-phone img {
-  max-width: 330px;
-}
-
-/* uxC: wide desktop + narrow phone that matches the phone's aspect */
-.case__split--uxC .case__split-pane {
-  height: 540px;
-}
-
-.case__split--uxC .case__split-pane--web {
-  flex: 1 1 0;
-  padding: 0;
-  overflow: hidden;
-  background: #E2E4E7;
-}
-
-.case__split--uxC .case__split-pane--web img {
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
-}
-
-.case__split--uxC .case__split-pane--summary-phone {
-  flex: 0 0 285px;
-  padding: 0;
-  overflow: hidden;
-}
-
-.case__split--uxC .case__split-pane--summary-phone img {
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center;
 }
 
 /* chatB: gathering info + suggestion pills */
