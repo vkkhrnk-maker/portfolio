@@ -807,7 +807,7 @@ body.case-page--itab .case__outcome-body p {
 }
 
 .case__split-pane--phone img {
-  max-width: 280px;
+  max-width: 330px;
 }
 
 .case__split-pane--categories {
@@ -821,10 +821,12 @@ body.case-page--itab .case__outcome-body p {
 .case__split-pane--cards {
   background: #E2E4E7;
   padding: 0;
+  overflow: hidden;
 }
 
 .case__split-pane--cards img {
-  max-width: 100%;
+  max-width: none;
+  object-fit: cover;
 }
 
 .case__split-pane--web {
