@@ -20,7 +20,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=11">
+  <link rel="stylesheet" href="styles.css?v=12">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -151,7 +151,14 @@
         </figure>
 
         <figure class="case__figure">
-          <picture><img src="assets/case-uxC.webp" alt="Blood test summary screen on iOS and an auto policy declarations document on web" loading="lazy"></picture>
+          <div class="case__split">
+            <div class="case__split-pane case__split-pane--web">
+              <img src="assets/case-uxC-web.png" alt="Desktop view of a Complete Blood Count Report with summary callout and contextual Q&amp;A panel" loading="lazy">
+            </div>
+            <div class="case__split-pane case__split-pane--summary-phone">
+              <img src="assets/case-uxC-phone.png" alt="iOS Complete Blood Count Report screen with summary callout and bullet findings" loading="lazy">
+            </div>
+          </div>
           <figcaption>Users can move from a quick snapshot to a detailed summary and contextual Q&amp;A without reading the full file line by line</figcaption>
         </figure>
       </section>

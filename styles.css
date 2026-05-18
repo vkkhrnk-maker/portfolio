@@ -787,9 +787,10 @@ body.case-page--itab .case__outcome-body p {
   flex: 5;
 }
 
-/* Narrow column (uxA categories, uxB cards) */
+/* Narrow column (uxA categories, uxB cards, uxC phone) */
 .case__split-pane--categories,
-.case__split-pane--cards {
+.case__split-pane--cards,
+.case__split-pane--summary-phone {
   flex: 3;
 }
 
@@ -837,6 +838,14 @@ body.case-page--itab .case__outcome-body p {
 .case__split-pane--web img {
   max-width: 100%;
   object-position: right center;
+}
+
+.case__split-pane--summary-phone {
+  background: #E2E4E7;
+}
+
+.case__split-pane--summary-phone img {
+  max-width: 330px;
 }
 
 @media (max-width: 768px) {
