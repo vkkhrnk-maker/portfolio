@@ -793,7 +793,7 @@ body.case-page--itab .case__outcome-body p {
   background: #E2E4E7;
   flex: 1;
   padding: 32px 48px;
-  justify-content: flex-start;
+  /* keep default justify-content: center from .case__split-pane */
 }
 
 .case__split-pane--suggestions {
@@ -863,7 +863,7 @@ body.case-page--itab .case__outcome-body p {
 .chat-suggestions {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 16px;
   width: 100%;
@@ -1391,22 +1391,28 @@ body.case-page--itab .case__outcome-body p {
   gap: 3.08%;
 }
 
-.project-card__phone {
+/* The flex item is <picture>, not <img> — width must be set on the wrapper. */
+.project-card__phones > picture {
   display: block;
-  height: auto;
   flex: 0 0 auto;
-  object-fit: cover;
 }
 
-.project-card__phone:nth-child(1) {
+.project-card__phones > picture:nth-child(1) {
   width: 31.35%;
   aspect-ratio: 285 / 619.627;
 }
 
-.project-card__phone:nth-child(2),
-.project-card__phone:nth-child(3) {
+.project-card__phones > picture:nth-child(2),
+.project-card__phones > picture:nth-child(3) {
   width: 31.24%;
   aspect-ratio: 284 / 618;
+}
+
+.project-card__phone {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* iTAB card — two screenshots, centered as a 944px group */
