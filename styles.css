@@ -1019,6 +1019,16 @@ body.case-page--itab .case__outcome-body p {
   }
 }
 
+/* On 1920+ bump block / section titles to keep visual hierarchy with
+   the larger body text (23/32). 44/48 → 56/64. */
+@media (min-width: 1920px) {
+  .case__block-title,
+  .case__section-title {
+    font-size: 56px;
+    line-height: 64px;
+  }
+}
+
 /* Case page — mobile overrides */
 @media (max-width: 1280px) {
   .case {
