@@ -292,6 +292,15 @@ img {
   }
 }
 
+/* On extra-wide screens (1920+) the sidebar stays fixed while the
+   content column scales with the viewport — drop the cap so figures
+   and text grow together instead of leaving a gap next to the sidebar. */
+@media (min-width: 1920px) {
+  .content {
+    max-width: none;
+  }
+}
+
 /* ===== Cover (Profile Section) ===== */
 
 .profile-section {
