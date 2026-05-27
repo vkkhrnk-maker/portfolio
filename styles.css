@@ -2129,6 +2129,7 @@ body.case-page--itab .case__outcome-body p {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0 var(--page-x);
   }
 
   .mobile-topbar__link {
