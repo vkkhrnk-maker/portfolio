@@ -998,18 +998,18 @@ body.case-page--itab .case__outcome-body p {
 .case__pager-btn--prev:hover { transform: translateX(-3px); }
 .case__pager-btn--next:hover { transform: translateX(3px); }
 
-/* On wide screens (1920+) let case figures stretch edge-to-edge inside
-   the content column (matches the prosvirkin.site adaptation pattern):
-   article keeps no horizontal padding; reading rows (title, body,
-   list, captions, hero, outcome, back) get a 40px left margin so the
-   text column stays inset without shrinking. */
+/* On wide screens (1920+) let visual blocks (hero image + figures)
+   stretch edge-to-edge inside the content column (prosvirkin.site
+   pattern). Article has no horizontal padding; reading rows (H1,
+   back, section titles, body, list, captions, outcome) get a 40px
+   margin so the text column stays inset without shrinking. */
 @media (min-width: 1920px) {
   .case {
     padding-left: 0;
     padding-right: 0;
   }
-  .case__hero,
   .case__back,
+  .case__title,
   .case__section-title,
   .case__section-body,
   .case__list,
