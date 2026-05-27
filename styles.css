@@ -701,6 +701,25 @@ body.case-page--itab .case__outcome-body p {
   border-top: 1px solid #0000000d;
 }
 
+/* Collapse to 1-column only when even narrow 2-column reads worse than
+   a stacked flow (≤900px the inner sidebar is already hidden, so the
+   collapse just lets each block use the full width comfortably). */
+@media (max-width: 900px) {
+  .case__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  /* In single-column flow: divider above every block from the 2nd */
+  .case__grid > .case__block:nth-child(n+2) {
+    padding-top: 24px;
+    border-top: 1px solid #0000000d;
+  }
+  /* No longer need the every-other-row divider from the 2-col layout */
+  .case__grid > .case__block:nth-child(n+3) {
+    border-top: 1px solid #0000000d;
+  }
+}
+
 .case__block-title {
   margin: 0 0 16px;
   font-family: var(--font-display);
@@ -1044,16 +1063,7 @@ body.case-page--itab .case__outcome-body p {
     line-height: var(--lh-h1);
   }
 
-  .case__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  /* Single-column flow: line above every block from the second onward */
-  .case__grid > .case__block:nth-child(n+2) {
-    padding-top: 24px;
-    border-top: 1px solid #0000000d;
-  }
+  /* (case__grid stays 2-column down to 900px — see rule below) */
 
   .case__outcome {
     flex-direction: column;
