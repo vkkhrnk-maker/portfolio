@@ -720,6 +720,10 @@ body.case-page--itab .case__outcome-body p {
   .case__grid > .case__block:nth-child(n+3) {
     border-top: 1px solid #0000000d;
   }
+  /* Case meta strip: stack Team / Role / Year on phone */
+  .case-meta--mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .case__block-title {
@@ -1048,6 +1052,20 @@ body.case-page--itab .case__outcome-body p {
     font-size: 56px;
     line-height: 64px;
   }
+  /* Buttons + nav links bump by ~+4px on big screens — they pick up
+     --fs-body which jumps from 17→23, but that's too big for compact
+     UI elements. Hold them at 21/28 instead. */
+  .btn,
+  .case__back-label,
+  .mobile-topbar__link,
+  .case__pager-btn {
+    font-size: 21px;
+    line-height: 28px;
+  }
+  .btn {
+    height: 48px;
+    padding: 10px 20px;
+  }
 }
 
 /* Case page — mobile overrides */
@@ -1089,11 +1107,13 @@ body.case-page--itab .case__outcome-body p {
     display: none;
   }
 
-  /* Show mobile meta strip (sidebar copy hidden along with sidebar) */
+  /* Show mobile meta strip (sidebar copy hidden along with sidebar).
+     On tablet/narrow desktop arrange Team / Role / Year in three
+     equal columns; the @media below 640px stacks it back to one. */
   .case-meta--mobile {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 24px;
     font-family: var(--font-body);
     font-size: var(--fs-body);
     line-height: var(--lh-body);
