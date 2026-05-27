@@ -817,7 +817,8 @@ body.case-page--itab .case__outcome-body p {
 
 .case__split--chatB .case__split-pane {
   height: var(--pane-h);
-  flex: 0 0 50%;
+  width: calc((100% - 24px) / 2);
+  flex: 0 0 auto;
   min-width: 0;
 }
 
