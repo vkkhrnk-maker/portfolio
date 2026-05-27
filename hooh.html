@@ -20,7 +20,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=24">
+  <link rel="stylesheet" href="styles.css?v=25">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -155,7 +155,7 @@
             <div class="case__split-pane case__split-pane--loading">
               <div class="loading-state" role="status" aria-label="Gathering information">
                 <img class="loading-state__mark" src="assets/hooh-loader.gif" alt="" aria-hidden="true">
-                <span class="loading-state__text"><span class="loading-state__phrase" data-cycle="Gathering information|Reading your documents|Analyzing key findings">Gathering information</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span>
+                <span class="loading-state__text"><span class="loading-state__cycle" data-cycle="Gathering information|Reading your documents|Analyzing key findings"><span class="loading-state__phrase">Gathering information</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span></span>
               </div>
             </div>
             <div class="case__split-pane case__split-pane--suggestions">
@@ -304,30 +304,30 @@
     })();
 
     (() => {
-      const phrase = document.querySelector('.loading-state__phrase');
-      if (!phrase || !phrase.dataset.cycle) return;
-      const items = phrase.dataset.cycle.split('|');
+      const cycle = document.querySelector('.loading-state__cycle');
+      if (!cycle || !cycle.dataset.cycle) return;
+      const phrase = cycle.querySelector('.loading-state__phrase');
+      const items = cycle.dataset.cycle.split('|');
 
-      // Lock width to the longest phrase so layout never shifts
-      const probe = phrase.cloneNode(true);
-      probe.style.visibility = 'hidden';
-      probe.style.position = 'absolute';
-      probe.classList.remove('is-fading');
-      phrase.parentNode.appendChild(probe);
+      // Lock cycle width to the widest phrase so the dots travel with the
+      // text without ever causing the surrounding layout to jump.
       let maxW = 0;
-      for (const t of items) { probe.textContent = t; maxW = Math.max(maxW, probe.getBoundingClientRect().width); }
-      probe.remove();
-      phrase.style.minWidth = Math.ceil(maxW) + 'px';
+      for (const t of items) {
+        phrase.textContent = t;
+        maxW = Math.max(maxW, cycle.getBoundingClientRect().width);
+      }
+      phrase.textContent = items[0];
+      cycle.style.minWidth = Math.ceil(maxW) + 'px';
 
       let i = 0;
       setInterval(() => {
-        phrase.classList.add('is-fading');
+        cycle.classList.add('is-fading');
         setTimeout(() => {
           i = (i + 1) % items.length;
           phrase.textContent = items[i];
-          phrase.classList.remove('is-fading');
-        }, 350);
-      }, 2800);
+          cycle.classList.remove('is-fading');
+        }, 550);
+      }, 3200);
     })();
   </script>
 </body>

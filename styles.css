@@ -827,15 +827,18 @@ body.case-page--itab .case__outcome-body p {
   color: #1A1A1A;
 }
 
-.loading-state__phrase {
-  display: inline-block;
+.loading-state__cycle {
+  display: inline-flex;
+  align-items: baseline;
   text-align: left;
   white-space: nowrap;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
 }
 
-.loading-state__phrase.is-fading {
+.loading-state__cycle.is-fading {
   opacity: 0;
+  transform: translateY(-3px);
 }
 
 .case__split-pane--loading img.loading-state__mark {
