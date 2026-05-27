@@ -797,10 +797,17 @@ body.case-page--itab .case__outcome-body p {
 }
 
 .case__split-pane--suggestions {
-  background: linear-gradient(135deg, #BCE3F5 0%, #B7E7C1 50%, #F6EDA0 100%);
   flex: 1;
   align-items: stretch;
-  padding: 32px 48px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.case__split-pane-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .case__split--chatB {
@@ -809,6 +816,8 @@ body.case-page--itab .case__outcome-body p {
 
 .case__split--chatB .case__split-pane {
   height: var(--pane-h);
+  flex: 0 0 50%;
+  min-width: 0;
 }
 
 .loading-state {
@@ -872,28 +881,6 @@ body.case-page--itab .case__outcome-body p {
   30% { opacity: 1; transform: translateY(-2px); }
 }
 
-.chat-suggestions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  width: 100%;
-  height: 100%;
-}
-
-.chat-suggestions__pill {
-  background: #FFFFFF;
-  color: #1A1A1A;
-  padding: 12px 22px;
-  border-radius: 999px;
-  font-family: var(--font-body);
-  font-size: 18px;
-  letter-spacing: -0.3px;
-  box-shadow: 0 4px 18px rgba(20, 30, 50, 0.08);
-  white-space: nowrap;
-}
-
 @media (max-width: 768px) {
   .case__split {
     flex-direction: column;
@@ -908,9 +895,6 @@ body.case-page--itab .case__outcome-body p {
   }
   .loading-state__text {
     font-size: 20px;
-  }
-  .chat-suggestions__pill {
-    font-size: 16px;
   }
 }
 
