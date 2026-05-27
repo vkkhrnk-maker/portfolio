@@ -20,7 +20,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=18">
+  <link rel="stylesheet" href="styles.css?v=19">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -132,12 +132,12 @@
         </figure>
 
         <figure class="case__figure">
-          <picture><img src="assets/case-uxB.webp" alt="iOS document summary cards highlighting one that requires attention, next to a web documents folder view with categorized document cards" loading="lazy"></picture>
+          <picture><img src="assets/case-uxB.webp?v=6" alt="iOS document summary cards highlighting one that requires attention, next to a web documents folder view with categorized document cards" loading="lazy"></picture>
           <figcaption>Semantic risk cues help users quickly scan document status and spot where more attention may be needed</figcaption>
         </figure>
 
         <figure class="case__figure">
-          <picture><img src="assets/case-uxC.webp" alt="Desktop view of a Complete Blood Count Report with summary callout and contextual Q&amp;A panel, next to an iOS version of the same report" loading="lazy"></picture>
+          <picture><img src="assets/case-uxC.webp?v=6" alt="Desktop view of a Complete Blood Count Report with summary callout and contextual Q&amp;A panel, next to an iOS version of the same report" loading="lazy"></picture>
           <figcaption>Users can move from a quick snapshot to a detailed summary and contextual Q&amp;A without reading the full file line by line</figcaption>
         </figure>
       </section>
@@ -155,7 +155,7 @@
             <div class="case__split-pane case__split-pane--loading">
               <div class="loading-state" role="status" aria-label="Gathering information">
                 <img class="loading-state__mark" src="assets/hooh-loader.gif" alt="" aria-hidden="true">
-                <span class="loading-state__text">Gathering information<span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span>
+                <span class="loading-state__text"><span class="loading-state__phrase" data-cycle="Gathering information|Reading your documents|Analyzing key findings">Gathering information</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span>
               </div>
             </div>
             <div class="case__split-pane case__split-pane--suggestions">
@@ -305,6 +305,21 @@
       update();
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll);
+    })();
+
+    (() => {
+      const phrase = document.querySelector('.loading-state__phrase');
+      if (!phrase || !phrase.dataset.cycle) return;
+      const items = phrase.dataset.cycle.split('|');
+      let i = 0;
+      setInterval(() => {
+        phrase.classList.add('is-fading');
+        setTimeout(() => {
+          i = (i + 1) % items.length;
+          phrase.textContent = items[i];
+          phrase.classList.remove('is-fading');
+        }, 350);
+      }, 2800);
     })();
   </script>
 </body>

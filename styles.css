@@ -814,8 +814,16 @@ body.case-page--itab .case__outcome-body p {
 .loading-state {
   display: inline-flex;
   align-items: center;
-  gap: 18px;
+  gap: 12px;
   color: #1A1A1A;
+}
+
+.loading-state__phrase {
+  transition: opacity 0.35s ease;
+}
+
+.loading-state__phrase.is-fading {
+  opacity: 0;
 }
 
 .case__split-pane--loading img.loading-state__mark {
@@ -839,6 +847,7 @@ body.case-page--itab .case__outcome-body p {
 .loading-state__dots {
   display: inline-flex;
   margin-left: 2px;
+  transform: translateY(5px);
 }
 
 .loading-state__dots span {
