@@ -1007,9 +1007,9 @@ body.case-page--itab .case__outcome-body p {
 .case__pager-btn--prev:hover { transform: translateX(-3px); }
 .case__pager-btn--next:hover { transform: translateX(3px); }
 
-/* On 1920+ remove the 780px readability cap so body copy and lists
-   stretch with the column instead of leaving a huge gap to their right. */
-@media (min-width: 1920px) {
+/* On desktop (1281+) remove the 780px readability cap so body copy
+   and lists stretch with the column instead of leaving a huge gap. */
+@media (min-width: 1281px) {
   .case__intro,
   .case__section-body,
   .case__list,
