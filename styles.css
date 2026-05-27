@@ -100,13 +100,14 @@
 /* Optional: bump all type +6px on extra-large screens */
 @media (min-width: 1920px) {
   :root {
-    --fs-h1: 112px;
-    --fs-h2: 86px;
-    --fs-h3: 46px;
-    --fs-h4: 38px;
-    --fs-h5: 34px;
-    --fs-h6: 30px;
-    --fs-body: 23px;
+    --fs-h1: 112px;        --lh-h1: 114px;
+    --fs-h2: 86px;         --lh-h2: 94px;
+    --fs-h3: 46px;         --lh-h3: 56px;
+    --fs-h4: 38px;         --lh-h4: 44px;
+    --fs-h5: 34px;         --lh-h5: 42px;
+    --fs-h6: 30px;         --lh-h6: 36px;
+    --fs-body: 23px;       --lh-body: 32px;        /* 23/32, ratio 1.39 */
+    --fs-body-tight: 28px; --lh-body-tight: 28px;
   }
 }
 
@@ -768,14 +769,14 @@ body.case-page--itab .case__outcome-body p {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* chatB still uses split-panes; uxA/uxB/uxC now use flat Figma exports */
 .case__split {
   display: flex;
   gap: 24px;
-  border-radius: 4px;
+  border-radius: 0;
   align-items: stretch;
 }
 
@@ -785,7 +786,7 @@ body.case-page--itab .case__outcome-body p {
   justify-content: center;
   padding: 32px;
   height: 600px;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* chatB: gathering info + suggestion pills */
