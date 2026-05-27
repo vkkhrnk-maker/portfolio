@@ -704,10 +704,9 @@ body.case-page--itab .case__outcome-body p {
   border-top: 1px solid #0000000d;
 }
 
-/* Collapse to 1-column only when even narrow 2-column reads worse than
-   a stacked flow (≤900px the inner sidebar is already hidden, so the
-   collapse just lets each block use the full width comfortably). */
-@media (max-width: 900px) {
+/* Collapse to 1-column only on true mobile widths where two columns
+   become uncomfortably narrow (~290px each at 640px viewport). */
+@media (max-width: 640px) {
   .case__grid {
     grid-template-columns: 1fr;
     gap: 40px;
