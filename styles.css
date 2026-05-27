@@ -819,6 +819,9 @@ body.case-page--itab .case__outcome-body p {
 }
 
 .loading-state__phrase {
+  display: inline-block;
+  text-align: left;
+  white-space: nowrap;
   transition: opacity 0.35s ease;
 }
 
@@ -847,7 +850,7 @@ body.case-page--itab .case__outcome-body p {
 .loading-state__dots {
   display: inline-flex;
   margin-left: 2px;
-  transform: translateY(5px);
+  transform: translateY(2px);
 }
 
 .loading-state__dots span {
