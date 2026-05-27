@@ -720,10 +720,6 @@ body.case-page--itab .case__outcome-body p {
   .case__grid > .case__block:nth-child(n+3) {
     border-top: 1px solid #0000000d;
   }
-  /* Case meta strip: stack Team / Role / Year on phone */
-  .case-meta--mobile {
-    grid-template-columns: 1fr;
-  }
 }
 
 .case__block-title {
@@ -1045,6 +1041,27 @@ body.case-page--itab .case__outcome-body p {
   .case__outcome-body p {
     max-width: none;
   }
+
+  /* Two-column section layout: title in left column, body / list in
+     right column, figures span the full width below. Applies to
+     plain prose sections (Design process, Progressive Disclosure,
+     Conversational experience, Document expression). */
+  .case__section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 24px;
+    row-gap: 24px;
+  }
+  .case__section-title {
+    grid-column: 1;
+  }
+  .case__section-body,
+  .case__list {
+    grid-column: 2;
+  }
+  .case__figure {
+    grid-column: 1 / -1;
+  }
 }
 
 /* On 1920+ bump block / section titles to keep visual hierarchy with
@@ -1137,6 +1154,14 @@ body.case-page--itab .case__outcome-body p {
   .case-meta--mobile dd {
     margin: 0;
     color: var(--text-secondary);
+  }
+}
+
+/* Meta strip stacks on phone (≤768px); from tablet up it stays in 3
+   columns (the 1280px max-width block above provides that default). */
+@media (max-width: 768px) {
+  .case-meta--mobile {
+    grid-template-columns: 1fr;
   }
 }
 
