@@ -1411,8 +1411,17 @@ body.case-page--itab .case__outcome-body p {
 .project-card__inner {
   position: relative;
   width: 100%;
-  aspect-ratio: 1040 / 700;
+  /* Default 1040/700; the Hooh card needs +150px height so the 3
+     phone shots don't get clipped at the bottom (3-phone row needs
+     ≥812px to fit at the existing 20.83% top offset). */
+  aspect-ratio: 1040 / 850;
   overflow: hidden;
+}
+
+.project-card--itab .project-card__inner {
+  /* iTAB card has a different visual; keep the original shorter
+     aspect since its phone group isn't a full 3-up row. */
+  aspect-ratio: 1040 / 700;
 }
 
 .project-card__inner--itab {
