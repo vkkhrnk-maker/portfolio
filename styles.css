@@ -1147,6 +1147,14 @@ body.case-page--itab .case__outcome-body p {
     gap: 4px;
   }
 
+  /* In the 3-column tablet layout the Year column is much shorter
+     than Team / My Role, leaving an empty hole on the right. Pull
+     Year to the leftmost column so the short item anchors the row
+     and the longer copy fills the right side. */
+  .case-meta--mobile .case-meta__item:nth-child(3) {
+    order: -1;
+  }
+
   .case-meta--mobile dt {
     color: var(--text-primary);
   }
