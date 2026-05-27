@@ -292,10 +292,13 @@ img {
   }
 }
 
-/* On extra-wide screens (1920+) the sidebar stays fixed while the
-   content column scales with the viewport — drop the cap so figures
-   and text grow together instead of leaving a gap next to the sidebar. */
+/* On extra-wide screens (1920+) the sidebar gains 40px of breathing
+   room (320 → 360) and the content column drops its 1526px cap so
+   figures and text grow with the viewport. */
 @media (min-width: 1920px) {
+  .sidebar {
+    width: 360px;
+  }
   .content {
     max-width: none;
   }
