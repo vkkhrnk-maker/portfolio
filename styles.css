@@ -895,6 +895,7 @@ body.case-page--itab .case__outcome-body p {
     min-height: 360px;
   }
   .case__split--chatB .case__split-pane {
+    width: 100%;
     height: auto;
     min-height: 200px;
   }
