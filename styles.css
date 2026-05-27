@@ -749,6 +749,14 @@ body.case-page--itab .case__outcome-body p {
   gap: 24px;
 }
 
+/* Thin divider between consecutive prose sections so Design Process,
+   Key UX decision, Conversational experience etc. read as separate
+   blocks. Same hairline treatment as the .case__grid dividers. */
+.case__section + .case__section {
+  padding-top: 40px;
+  border-top: 1px solid #0000000d;
+}
+
 .case__section-title {
   margin: 0;
   font-family: var(--font-display);
