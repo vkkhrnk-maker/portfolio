@@ -20,7 +20,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=46">
+  <link rel="stylesheet" href="styles.css?v=47">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -114,17 +114,12 @@
 
       <section class="case__section">
         <h3 class="case__section-title">Design process</h3>
-        <p class="case__section-body">Work on the MVP began with developing the key scenario, analyzing related solutions, and creating initial prototypes. This helped to build a clearer model for interacting with the document: instead of receiving the full text right away, the user first gets a snapshot, then a summary, and only after that the opportunity to ask clarifying questions</p>
+        <p class="case__section-body">Started with competitor analysis — Genei, Notion AI, Microsoft Copilot for docs all gave full summary upfront, which removed user agency: you couldn't choose how deep to go. Early prototypes tried single-step summary, but internal testing showed users either felt over-summarised or wanted to dig further. This pushed us to layered reading.</p>
       </section>
 
       <section class="case__section">
         <h3 class="case__section-title">Key UX decision: Progressive Disclosure</h3>
-        <p class="case__section-body">To reduce overwhelm, we designed document reading in 3 layers:</p>
-        <div class="case__list">
-          <p>Snapshot. The essence of the document in 1–2 sentences</p>
-          <p>Detailed summary. A deeper structured explanation for users who need more context</p>
-          <p>Contextual Q&amp;A. Follow-up questions based on the uploaded file, without requiring users to search manually</p>
-        </div>
+        <p class="case__section-body">Single-step summary risks oversimplification; full document keeps overwhelm. Three layers let users self-calibrate depth: skim with snapshot, dive deeper if signal is meaningful, ask targeted questions if specific concern surfaces. Each layer is a commitment threshold — users don't pay attention cost until they've decided the document is worth it.</p>
 
         <figure class="case__figure">
           <picture><img src="assets/case-uxA.webp" alt="iOS start screen with Upload your first document prompt, next to an auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></picture>
@@ -133,7 +128,7 @@
 
         <figure class="case__figure">
           <picture><img src="assets/case-uxB.webp?v=7" alt="iOS document summary cards highlighting one that requires attention, next to a web documents folder view with categorized document cards" loading="lazy"></picture>
-          <figcaption>Semantic risk cues help users quickly scan document status and spot where more attention may be needed</figcaption>
+          <figcaption>Color cues pinned to risk only, not document type. Users don't need to map "yellow = medical, red = legal" — they need "yellow = needs your attention". Type info lives in the card title, not the cue.</figcaption>
         </figure>
 
         <figure class="case__figure">
@@ -172,8 +167,7 @@
       <section class="case__outcome">
         <h3 class="case__outcome-title">Outcome</h3>
         <div class="case__outcome-body">
-          <p>This work resulted in a launched MVP across web and iOS, turning the core product idea into a real user experience built around layered reading, conversational exploration, and guided document understanding</p>
-          <p>Alongside the release, we established the initial design system and product structure needed to support future iterations and product growth</p>
+          <p>MVP shipped on web and iOS. Progressive Disclosure adopted as the core pattern across all document-handling features. Internal validation with the target cohort (non-legal users) confirmed the pattern reduces document anxiety — but post-release metrics weren't captured: the startup wound down shortly after launch.</p>
         </div>
       </section>
 

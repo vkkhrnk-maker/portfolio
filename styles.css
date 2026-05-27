@@ -923,6 +923,9 @@ body.case-page--itab .case__outcome-body p {
 @media (max-width: 768px) {
   .case__split {
     flex-direction: column;
+    /* Match the 48px rhythm between figures (section gap 24 + figure
+       margin-top 24) so stacked panes don't read as a tighter break. */
+    gap: 48px;
   }
   .case__split-pane {
     height: auto;
