@@ -1007,13 +1007,11 @@ body.case-page--itab .case__outcome-body p {
 .case__pager-btn--prev:hover { transform: translateX(-3px); }
 .case__pager-btn--next:hover { transform: translateX(3px); }
 
-/* On desktop (1281+) remove the 780px readability cap so body copy
-   and lists stretch with the column instead of leaving a huge gap. */
+/* On desktop (1281+) drop the 780px cap inside 2-column grids
+   (Problem/Task/Users/What we launched + outcome) so each column's
+   body fills its grid cell. Single-column sections (Design process,
+   Progressive Disclosure intro, etc.) keep the 780 readability cap. */
 @media (min-width: 1281px) {
-  .case__intro,
-  .case__section-body,
-  .case__list,
-  .case__list p,
   .case__block-body,
   .case__outcome-body,
   .case__outcome-body p {
