@@ -692,7 +692,7 @@ body.case-page--itab .case__outcome-body p {
 .case__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px 80px;
+  gap: 60px 24px;
 }
 
 /* Figma: divider line above the second row only (Users / What we launched) */
@@ -1006,6 +1006,20 @@ body.case-page--itab .case__outcome-body p {
 
 .case__pager-btn--prev:hover { transform: translateX(-3px); }
 .case__pager-btn--next:hover { transform: translateX(3px); }
+
+/* On 1920+ remove the 780px readability cap so body copy and lists
+   stretch with the column instead of leaving a huge gap to their right. */
+@media (min-width: 1920px) {
+  .case__intro,
+  .case__section-body,
+  .case__list,
+  .case__list p,
+  .case__block-body,
+  .case__outcome-body,
+  .case__outcome-body p {
+    max-width: none;
+  }
+}
 
 /* Case page — mobile overrides */
 @media (max-width: 1280px) {
