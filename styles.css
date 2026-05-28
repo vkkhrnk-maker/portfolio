@@ -843,6 +843,35 @@ body.case-page--itab .case__outcome-body p {
   border-radius: 0;
 }
 
+/* Mobile slider: desktop shows the flat composite, phones get a
+   horizontal swipe carousel of the individual screens (one prominent,
+   next peeking). Hidden by default; enabled at ≤640px. */
+.case__slider { display: none; }
+
+@media (max-width: 640px) {
+  .case__figure-desktop { display: none; }
+  .case__slider {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* full-bleed so slides can sit edge-to-edge while still padded */
+    margin: 0 calc(-1 * var(--page-x));
+    padding: 0 var(--page-x);
+  }
+  .case__slider::-webkit-scrollbar { display: none; }
+  .case__slider .case__slide {
+    flex: 0 0 85%;
+    width: 85%;
+    height: auto;
+    scroll-snap-align: center;
+    border-radius: 8px;
+  }
+}
+
 /* chatB still uses split-panes; uxA/uxB/uxC now use flat Figma exports */
 .case__split {
   display: flex;
