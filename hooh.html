@@ -20,7 +20,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=51">
+  <link rel="stylesheet" href="styles.css?v=52">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -65,16 +65,6 @@
         </svg>
       </span>
       <span class="case__back-label">Back</span>
-    </a>
-
-    <!-- Floating Back, appears when scrolling up after passing the inline one -->
-    <a class="case__back-floating" href="index.html#works" aria-label="Back to projects">
-      <span class="case__back-floating__icon" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
-        </svg>
-      </span>
-      <span>Back</span>
     </a>
 
     <article class="case">
@@ -334,33 +324,6 @@
       }, 3200);
     })();
 
-    // Floating Back pill: visible when user scrolls UP past the inline back.
-    (() => {
-      const floating = document.querySelector('.case__back-floating');
-      const inline = document.querySelector('.case__back');
-      if (!floating || !inline) return;
-      let lastY = window.scrollY;
-      let ticking = false;
-      const update = () => {
-        const y = window.scrollY;
-        const inlineBottom = inline.getBoundingClientRect().bottom + y;
-        const pastInline = y > inlineBottom + 40;
-        const goingUp = y < lastY - 2; // small dead zone
-        if (pastInline && goingUp) {
-          floating.classList.add('is-visible');
-        } else if (!pastInline || y > lastY + 2) {
-          floating.classList.remove('is-visible');
-        }
-        lastY = y;
-        ticking = false;
-      };
-      window.addEventListener('scroll', () => {
-        if (!ticking) {
-          requestAnimationFrame(update);
-          ticking = true;
-        }
-      }, { passive: true });
-    })();
   </script>
 </body>
 </html>

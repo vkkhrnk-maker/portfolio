@@ -294,13 +294,16 @@ img {
 
 /* On extra-wide screens (1920+) the sidebar gains 40px of breathing
    room (320 → 360) and the content column drops its 1526px cap so
-   figures and text grow with the viewport. */
+   figures and text grow with the viewport — but a wider gutter sits
+   between the sidebar and the content so the right column doesn't read
+   as one oversized slab. */
 @media (min-width: 1920px) {
   .sidebar {
     width: 360px;
   }
   .content {
     max-width: none;
+    margin-left: 120px;
   }
 }
 
@@ -442,63 +445,6 @@ img {
   margin: 0 var(--page-x) 24px;
   align-self: flex-start;
   transition: transform 0.25s ease;
-}
-
-/* Floating Back pill — appears when the user scrolls UP past the
-   inline back button, so they can leave the case without scrolling
-   all the way to the top again. JS toggles .is-visible. */
-.case__back-floating {
-  position: fixed;
-  top: 16px;
-  left: var(--page-x);
-  z-index: 60;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 16px 8px 8px;
-  background: var(--white);
-  color: var(--text-primary);
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1;
-  letter-spacing: -0.4px;
-  text-decoration: none;
-  opacity: 0;
-  transform: translateY(-120%);
-  transition: transform 0.25s ease, opacity 0.25s ease;
-  pointer-events: none;
-}
-
-.case__back-floating.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.case__back-floating__icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--bg-card, #e2e4e7);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-@media (min-width: 1281px) {
-  /* Past the sidebar so it doesn't sit on top of "Victoria Kukharenko" */
-  .case__back-floating {
-    left: calc(320px + var(--page-x));
-  }
-}
-
-@media (min-width: 1920px) {
-  .case__back-floating {
-    left: calc(360px + var(--page-x));
-  }
 }
 
 .case__back:hover {
