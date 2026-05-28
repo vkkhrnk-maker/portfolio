@@ -708,15 +708,21 @@ body.case-page--itab .case__outcome-body p {
   border-top: 1px solid #0000000d;
 }
 
-/* Mobile keeps 2 columns with a tighter gap so the blocks still breathe */
+/* Phones: stack the intro blocks in a single column */
 @media (max-width: 640px) {
   .case__grid {
-    gap: 32px 16px;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  /* In single-column flow a hairline sits above every block from the 2nd */
+  .case__grid > .case__block:nth-child(n+2) {
+    padding-top: 24px;
+    border-top: 1px solid #0000000d;
   }
 }
 
-/* On phones tighten the page edge padding to 8px so the 2-column grid
-   and figures get more usable width. */
+/* On phones tighten the page edge padding to 8px so figures and the
+   single-column copy use more of the screen width. */
 @media (max-width: 640px) {
   :root {
     --page-x: 8px;
@@ -788,6 +794,13 @@ body.case-page--itab .case__outcome-body p {
   .case__intro {
     font-size: 16px;
     line-height: 24px;
+  }
+  /* Section / block titles step down 44 → 32 so they don't crowd the
+     62px H1 and read better at phone width */
+  .case__block-title,
+  .case__section-title {
+    font-size: 32px;
+    line-height: 36px;
   }
   /* Tighter title→body gap in the intro blocks (16 → 12) */
   .case__block-title {
