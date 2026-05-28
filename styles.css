@@ -780,6 +780,17 @@ body.case-page--itab .case__outcome-body p {
   max-width: 780px;
 }
 
+/* Phones: body copy steps down to 16/24. Placed after the base body
+   rules so it wins the cascade at ≤640px. */
+@media (max-width: 640px) {
+  .case__block-body,
+  .case__section-body,
+  .case__intro {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
 /* Key UX 3-layer list — flat stack of body paragraphs, no bullets, no bold */
 .case__list {
   display: flex;
