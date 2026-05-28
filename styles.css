@@ -695,33 +695,48 @@ body.case-page--itab .case__outcome-body p {
   }
 }
 
+/* Intro grid. Base (tablet + mobile) is a simple 2-column grid; the
+   1281+ rule below switches to a 6-track grid so Problem/Task/Users
+   sit 3-up and What we launched / Design process sit 2-up. */
 .case__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px 24px;
 }
 
-/* Figma: divider line above the second row only (Users / What we launched) */
+/* 2-column divider: hairline above every block from the 3rd onward */
 .case__grid > .case__block:nth-child(n+3) {
   padding-top: 24px;
   border-top: 1px solid #0000000d;
 }
 
-/* Collapse to 1-column only on true mobile widths where two columns
-   become uncomfortably narrow (~290px each at 640px viewport). */
-@media (max-width: 640px) {
+/* Big screens: Problem / Task / Users in 3 columns, What we launched +
+   Design process in 2 columns. 6 tracks: 2+2+2 then 3+3. */
+@media (min-width: 1281px) {
   .case__grid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+    grid-template-columns: repeat(6, 1fr);
   }
-  /* In single-column flow: divider above every block from the 2nd */
-  .case__grid > .case__block:nth-child(n+2) {
+  .case__grid > .case__block {
+    grid-column: span 2;
+  }
+  .case__grid > .case__block--half {
+    grid-column: span 3;
+  }
+  /* Reset the 2-col dividers; only the --half row gets a hairline */
+  .case__grid > .case__block:nth-child(n+3) {
+    padding-top: 0;
+    border-top: none;
+  }
+  .case__grid > .case__block--half {
     padding-top: 24px;
     border-top: 1px solid #0000000d;
   }
-  /* No longer need the every-other-row divider from the 2-col layout */
-  .case__grid > .case__block:nth-child(n+3) {
-    border-top: 1px solid #0000000d;
+}
+
+/* Tighten the gap on narrow phones so 2 columns still breathe */
+@media (max-width: 640px) {
+  .case__grid {
+    gap: 32px 16px;
   }
 }
 
