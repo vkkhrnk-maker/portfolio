@@ -870,6 +870,7 @@ body.case-page--itab .case__outcome-body p {
   .case__slider .case__slide {
     flex: 0 0 auto;
     width: auto;
+    max-width: none;       /* override global img max-width:100% so aspect is kept */
     height: 58vh;
     max-height: 540px;
     scroll-snap-align: center;
