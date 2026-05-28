@@ -791,7 +791,8 @@ body.case-page--itab .case__outcome-body p {
 @media (max-width: 640px) {
   .case__block-body,
   .case__section-body,
-  .case__intro {
+  .case__intro,
+  .case__outcome-body p {
     font-size: 16px;
     line-height: 24px;
   }
@@ -1058,10 +1059,11 @@ body.case-page--itab .case__outcome-body p {
 .case__outcome-body p {
   margin: 0;
   font-family: var(--font-body);
-  font-size: 24px;
-  line-height: 30px;
+  /* Same Body style as section copy (was 24/30 primary) */
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   letter-spacing: -1px;
-  color: var(--text-primary);
+  color: var(--text-secondary);
 }
 
 .case__pager {
@@ -1254,6 +1256,12 @@ body.case-page--itab .case__outcome-body p {
   .case__title {
     font-size: 52px;
     line-height: 56px;
+  }
+  /* Outcome body matches section body 16/24 on phones (placed after the
+     base .case__outcome-body p rule so it wins). */
+  .case__outcome-body p {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
