@@ -865,14 +865,14 @@ body.case-page--itab .case__outcome-body p {
     padding: 0 var(--page-x);
   }
   .case__slider::-webkit-scrollbar { display: none; }
-  /* Equal-height cards: fix the height, let width follow the aspect so
-     the row never jumps height as you swipe. */
+  /* Each slide is 85% of the viewport so it sits centered (scroll-snap)
+     with the next one peeking. Height follows the aspect — no stretch. */
   .case__slider .case__slide {
-    flex: 0 0 auto;
-    width: auto;
-    max-width: none;       /* override global img max-width:100% so aspect is kept */
-    height: 58vh;
-    max-height: 540px;
+    flex: 0 0 85%;
+    width: 85%;
+    max-width: 85%;
+    height: auto;
+    align-self: center;
     scroll-snap-align: center;
     border-radius: 8px;
   }
