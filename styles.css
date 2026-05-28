@@ -796,7 +796,7 @@ body.case-page--itab .case__outcome-body p {
     line-height: 24px;
   }
   /* Section / block titles step down 44 → 32 so they don't crowd the
-     62px H1 and read better at phone width */
+     H1 and read better at phone width */
   .case__block-title,
   .case__section-title {
     font-size: 32px;
@@ -805,6 +805,10 @@ body.case-page--itab .case__outcome-body p {
   /* Tighter title→body gap in the intro blocks (16 → 12) */
   .case__block-title {
     margin-bottom: 12px;
+  }
+  /* Compromise top gutter on phones (24 → 16) */
+  .content--case {
+    padding-top: 16px;
   }
 }
 
@@ -1212,6 +1216,15 @@ body.case-page--itab .case__outcome-body p {
      (the order:-1 above only makes sense for the 3-column row). */
   .case-meta--mobile .case-meta__item:nth-child(3) {
     order: 0;
+  }
+}
+
+/* Phones: ease the case H1 down a touch (62 → 52). Placed after the
+   ≤1280 .case__title rule so it wins the cascade at phone widths. */
+@media (max-width: 640px) {
+  .case__title {
+    font-size: 52px;
+    line-height: 56px;
   }
 }
 
