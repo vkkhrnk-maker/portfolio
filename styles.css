@@ -848,6 +848,7 @@ body.case-page--itab .case__outcome-body p {
    horizontal swipe carousel of the individual screens (one prominent,
    next peeking). Hidden by default; enabled at ≤640px. */
 .case__slider { display: none; }
+.case__slider-dots { display: none; }
 
 @media (max-width: 640px) {
   .case__figure-desktop { display: none; }
@@ -864,12 +865,34 @@ body.case-page--itab .case__outcome-body p {
     padding: 0 var(--page-x);
   }
   .case__slider::-webkit-scrollbar { display: none; }
+  /* Equal-height cards: fix the height, let width follow the aspect so
+     the row never jumps height as you swipe. */
   .case__slider .case__slide {
-    flex: 0 0 85%;
-    width: 85%;
-    height: auto;
+    flex: 0 0 auto;
+    width: auto;
+    height: 58vh;
+    max-height: 540px;
     scroll-snap-align: center;
     border-radius: 8px;
+  }
+
+  /* Pagination dots (built by JS) */
+  .case__slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .case__slider-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.18);
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+  .case__slider-dot.is-active {
+    width: 18px;
+    background: rgba(0, 0, 0, 0.55);
   }
 }
 

@@ -20,7 +20,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=60">
+  <link rel="stylesheet" href="styles.css?v=61">
 </head>
 <body>
   <aside class="sidebar sidebar--case">
@@ -344,6 +344,40 @@
           cycle.classList.remove('is-fading');
         }, 550);
       }, 3200);
+    })();
+
+    // Mobile slider pagination dots — one set per .case__slider
+    (() => {
+      document.querySelectorAll('.case__slider').forEach((slider) => {
+        const slides = [...slider.querySelectorAll('.case__slide')];
+        if (slides.length < 2) return;
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'case__slider-dots';
+        dotsWrap.setAttribute('aria-hidden', 'true');
+        slides.forEach((_, i) => {
+          const dot = document.createElement('span');
+          dot.className = 'case__slider-dot' + (i === 0 ? ' is-active' : '');
+          dotsWrap.appendChild(dot);
+        });
+        slider.after(dotsWrap);
+        const dots = [...dotsWrap.children];
+        let ticking = false;
+        const update = () => {
+          const sr = slider.getBoundingClientRect();
+          const center = sr.left + sr.width / 2;
+          let best = 0, bestDist = Infinity;
+          slides.forEach((s, i) => {
+            const r = s.getBoundingClientRect();
+            const d = Math.abs((r.left + r.width / 2) - center);
+            if (d < bestDist) { bestDist = d; best = i; }
+          });
+          dots.forEach((dot, i) => dot.classList.toggle('is-active', i === best));
+          ticking = false;
+        };
+        slider.addEventListener('scroll', () => {
+          if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+      });
     })();
 
   </script>
