@@ -789,6 +789,10 @@ body.case-page--itab .case__outcome-body p {
     font-size: 16px;
     line-height: 24px;
   }
+  /* Tighter title→body gap in the intro blocks (16 → 12) */
+  .case__block-title {
+    margin-bottom: 12px;
+  }
 }
 
 /* Key UX 3-layer list — flat stack of body paragraphs, no bullets, no bold */
@@ -1190,6 +1194,11 @@ body.case-page--itab .case__outcome-body p {
 @media (max-width: 768px) {
   .case-meta--mobile {
     grid-template-columns: 1fr;
+  }
+  /* In the stacked layout restore natural order so Year is last
+     (the order:-1 above only makes sense for the 3-column row). */
+  .case-meta--mobile .case-meta__item:nth-child(3) {
+    order: 0;
   }
 }
 
