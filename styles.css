@@ -865,12 +865,12 @@ body.case-page--itab .case__outcome-body p {
     padding: 0 var(--page-x);
   }
   .case__slider::-webkit-scrollbar { display: none; }
-  /* Each slide is 85% of the viewport so it sits centered (scroll-snap)
-     with the next one peeking. Height follows the aspect — no stretch. */
+  /* One full-width slide per view (no peek strip — the dots signal that
+     there's more). Height follows the aspect, so no stretch. */
   .case__slider .case__slide {
-    flex: 0 0 85%;
-    width: 85%;
-    max-width: 85%;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
     height: auto;
     align-self: center;
     scroll-snap-align: center;
