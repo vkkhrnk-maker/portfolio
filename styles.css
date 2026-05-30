@@ -926,22 +926,31 @@ body.case-page--fill .case__outcome-body p {
     padding: 0 var(--page-x);
   }
   .case__slider::-webkit-scrollbar { display: none; }
-  /* Every slide is the SAME box (same width AND height). Each screen is
-     centered inside via object-fit: contain — narrow phones get bigger
-     grey side margins, wide desktops fill the width. The grey background
-     matches the screens' own backdrop so the padding is seamless. */
+  /* One uniform frame for every slide (same width AND height). Inside it,
+     all phone screens render at one height and all desktop screens at
+     another, always centered with a margin so nothing touches the edge.
+     The grey frame matches the screens' own backdrop so it's seamless. */
   .case__slider .case__slide {
-    flex: 0 0 88%;
-    width: 88%;
-    max-width: 88%;
-    aspect-ratio: 0.95;
-    height: auto;
-    object-fit: contain;
+    flex: 0 0 84%;
+    width: 84%;
+    max-width: 84%;
+    aspect-ratio: 1;
     background: rgb(227, 229, 230);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     align-self: center;
     scroll-snap-align: center;
+    overflow: hidden;
+  }
+  .case__slider .case__shot {
+    display: block;
+    width: auto;
+    max-width: 90%;
     border-radius: 0;
   }
+  .case__slider .case__shot--phone   { height: 88%; }
+  .case__slider .case__shot--desktop { height: 62%; }
 
   /* Pagination dots (built by JS) */
   .case__slider-dots {
