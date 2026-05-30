@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hooh Smart Fill &amp; Sign — Case Study · Victoria Kukharenko</title>
+  <meta name="description" content="Hooh Smart Fill &amp; Sign — extending Hooh from understanding documents to acting on them. A case study by Victoria Kukharenko: auto-filling forms with data Hooh already knows, signing in one tap, and managing versions without fear of overwriting.">
+  <meta name="theme-color" content="#d97706">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hooh Smart Fill &amp; Sign — Case Study · Victoria Kukharenko">
+  <meta property="og:description" content="Extending Hooh from reading documents to filling and signing them, using data the app already knows.">
+  <meta property="og:url" content="https://vkkhrnk-maker.github.io/portfolio/hooh-fill.html">
+  <meta property="og:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-fill-hero.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hooh Smart Fill &amp; Sign — Case Study · Victoria Kukharenko">
+  <meta name="twitter:description" content="Extending Hooh from reading documents to filling and signing them, using data the app already knows.">
+  <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-fill-hero.webp">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="apple-touch-icon" href="assets/profile.jpg">
+  <link rel="stylesheet" href="styles.css?v=72">
+</head>
+<body class="case-page--fill">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd>PM, Art Director, iOS and Web Developer</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. Responsible for UX, UI, prototyping, and design decisions for Smart Fill, signature, version management and supporting document actions</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Year</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="#">CV</a>
+      <a class="btn btn--light" href="#">LinkedIn</a>
+      <a class="btn btn--light" href="#">Email</a>
+    </div>
+  </aside>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <a class="mobile-topbar__link" href="#">CV</a>
+      <a class="mobile-topbar__link" href="#" data-menu-open>Menu</a>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Back</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h2 class="case__title">Hooh Smart Fill &amp; Sign — from understanding a document to acting on it</h2>
+        <p class="case__intro">After Hooh shipped the reading experience, the next gap was action. People understood their documents but still retyped the same data — name, ID, address, IBAN — into every new form. Smart Fill closes that gap: Hooh recognizes form fields and fills them with data already stored in the user's documents, then lets them sign and save without leaving the app.</p>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Team</dt>
+            <dd>PM, Art Director, iOS and Web Developer</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>My Role</dt>
+            <dd>Product designer. Responsible for UX, UI, prototyping, and design decisions for Smart Fill, signature, version management and supporting document actions</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Year</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image case__hero-image--fill">
+          <picture>
+            <source srcset="assets/case-fill-hero.webp" type="image/webp">
+            <img src="assets/case-fill-hero.png" alt="Three Hooh iOS screens — a form opening into Smart Fill mode, a field showing its source document, and a signed document ready to save" loading="eager">
+          </picture>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h3 class="case__block-title">Problem</h3>
+          <p class="case__block-body">Even when a document is clear, action still costs time. People retype the same personal data — name, ID, address, banking details — into every new form, search for where to sign, then convert the result to share or store. Reading was solved by the first release; everything that comes after was still manual</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Task</h3>
+          <p class="case__block-body">Extend Hooh from a reading tool into a complete document workflow. Let users fill and sign any form on iOS using data already available in their previously uploaded documents — without losing control over what gets submitted</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Users</h3>
+          <p class="case__block-body">The same audience as the first Hooh release — expats, digital nomads, and people without a legal background. Most of them process a handful of new forms every month: visa applications, lease agreements, school paperwork, banking contracts</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Scope</h3>
+          <p class="case__block-body">Smart Fill mode with manual fallback, a signature flow that supports both drawing and camera capture, an explicit save and version model, and a set of supporting actions for managing pages and formats inside a document</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">Design process</h3>
+        <p class="case__section-body">The first Hooh release answered "what does this document say?" — sessions with the same cohort surfaced the next friction. People understood the document but still asked for help with the boring part: filling the fields, signing, sending back. The pattern across forms was the same — the data the user needed was almost always sitting in another document they had already uploaded. Smart Fill grew out of that observation: instead of asking the user to retype, recognize the fields and reuse what Hooh already knows.</p>
+        <p class="case__section-body">The constraint shaping every decision below was trust. Auto-fill is only useful if the user can see what was filled, override it, and turn it off entirely. The whole flow was designed around that veto.</p>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">1. Smart Fill — automation with a veto</h3>
+        <p class="case__section-body">Hooh recognizes form fields and fills them from the user's stored documents. Nothing is submitted silently: a toggle disables Smart Fill for the whole form, every filled field can be tapped to see which source document it came from, and any value can be overridden in place. The flow defaults to "on" because the time saved is the point — but the user is always one tap away from manual mode</p>
+
+        <figure class="case__figure">
+          <picture>
+            <source srcset="assets/case-fill-uxA.webp" type="image/webp">
+            <img src="assets/case-fill-uxA.png" alt="Two iOS screens side by side — a form before Smart Fill with empty fields, and the same form after Smart Fill with values populated from previous documents" loading="lazy">
+          </picture>
+          <figcaption>Smart Fill on by default. Toggle in the header lets the user fall back to manual entry at any point in the flow.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <picture>
+            <source srcset="assets/case-fill-uxA-zoom.webp" type="image/webp">
+            <img src="assets/case-fill-uxA-zoom.png" alt="Zoomed view of a single filled field showing its source — the previous document Hooh used to populate the value" loading="lazy">
+          </picture>
+          <figcaption>Tap any filled field to see its source. The user always knows where a value came from before submitting it.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">2. Fields Hooh doesn't know</h3>
+        <p class="case__section-body">When the source documents don't cover a field, the field stays highlighted instead of blocking the flow. The user can save a draft, come back later, or finish manually right then. The form never holds the user hostage to one missing answer, and an unfinished form is treated as a first-class state — not an error</p>
+
+        <figure class="case__figure">
+          <picture>
+            <source srcset="assets/case-fill-uxB.webp" type="image/webp">
+            <img src="assets/case-fill-uxB.png" alt="Form with some fields auto-filled and others marked as needing input, plus the save-with-unfilled-fields confirmation" loading="lazy">
+          </picture>
+          <figcaption>Missing fields are surfaced, not punished. Saving an incomplete form is a normal path, not an error state.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">3. Signature — draw once, reuse forever</h3>
+        <p class="case__section-body">Two entry points to a single signature object: draw it on the canvas or capture an existing one with the camera. Once captured, the signature becomes a reusable asset — Hooh places it in any future document with one tap, so the user only ever has to make the signature itself once</p>
+
+        <figure class="case__figure">
+          <picture>
+            <source srcset="assets/case-fill-uxC.webp" type="image/webp">
+            <img src="assets/case-fill-uxC.png" alt="Signature flow across three iOS screens — choosing between camera and canvas, capturing the signature, and the document with the signature placed" loading="lazy">
+          </picture>
+          <figcaption>Same outcome, two routes — camera for an existing signature, canvas for a fresh one. The result is stored once and reused everywhere.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">4. Saving without fear of overwriting</h3>
+        <p class="case__section-body">Three explicit paths instead of one ambiguous Save: update the current version, save a copy, or save as a new document. The original file is never touched without consent. Versions live inside the document, switchable from the nav bar, with rename available in place — so a user iterating on the same form keeps every state without cluttering the document list</p>
+
+        <figure class="case__figure">
+          <picture>
+            <source srcset="assets/case-fill-uxD.webp" type="image/webp">
+            <img src="assets/case-fill-uxD.png" alt="Three iOS screens — the save sheet with three options, the version switcher inside a document, and the in-place rename flow for a copy" loading="lazy">
+          </picture>
+          <figcaption>Versions are treated as a property of the document, not separate files. The save sheet makes the consequence of each option explicit.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">Beyond the core flow</h3>
+        <p class="case__section-body">Supporting actions that round out the document workflow without taking the spotlight in the narrative. Each one was designed in scope, in the same visual language, and reachable from the same document screen.</p>
+        <div class="case__gap-grid case__gap-grid--four">
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Reorder pages</h4>
+            <p class="case__gap-card__desc">Drag pages into the right order without leaving the document</p>
+          </div>
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Rotate</h4>
+            <p class="case__gap-card__desc">Quick page rotation for scans that came in sideways</p>
+          </div>
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Add a page</h4>
+            <p class="case__gap-card__desc">Insert a new page from the camera or from another file in Hooh</p>
+          </div>
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Convert format</h4>
+            <p class="case__gap-card__desc">Change format from the document screen, including after edits</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__outcome">
+        <h3 class="case__outcome-title">Outcome</h3>
+        <div class="case__outcome-body">
+          <p>The flow was designed end-to-end and handed off to engineering. The patterns held up in internal sessions with the same cohort as the first Hooh release — Smart Fill with a veto, a reusable signature, and explicit version saves all reinforced the same direction: the app removes the repetitive work while the user keeps the final word.</p>
+          <p>This scope didn't reach a public release as part of this engagement, but the design system, components and flows are documented and ready to ship when the product picks the work back up.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="itab.html">
+          <span>Next case</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="#">
+        <span class="contact__text">Drop me a message</span>
+        <img class="contact__arrow" src="assets/arrow-cta.svg" alt="">
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Made with <span class="footer__heart">♥</span> by Victoria</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Works</a>
+      <a class="menu-drawer__item" href="index.html#about">About</a>
+      <a class="menu-drawer__item" href="index.html#experience">Experience</a>
+    </nav>
+  </div>
+
+  <script>
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('.menu-drawer__item');
+      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+      openBtns.forEach(b => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach(i => i.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+      const bar = document.querySelector('.scroll-progress');
+      if (bar) {
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+          bar.style.transform = `scaleX(${pct/100})`;
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -483,6 +483,14 @@ img {
   padding: 0 var(--page-x);
 }
 
+/* ============================================================
+   CASE STUDY — DESIGN CONVENTION
+   NO ROUNDED CORNERS on plates / cards / frames. Every backing
+   surface (hero cover, figure frames, slider frames, outcome
+   panel, split panes, image plates) uses border-radius: 0.
+   Pills/buttons keep their own radius; this rule is about plates.
+   Keep border-radius: 0 on any new plate you add here.
+   ============================================================ */
 .case__hero {
   display: flex;
   flex-direction: column;
@@ -868,6 +876,10 @@ body.case-page--fill .case__outcome-body p {
   .case__block-title {
     margin-bottom: 12px;
   }
+  /* Heading → body gap inside prose sections: 12px on phones */
+  .case__section {
+    gap: 12px;
+  }
   /* Compromise top gutter on phones (24 → 16) */
   .content--case {
     padding-top: 16px;
@@ -933,23 +945,31 @@ body.case-page--fill .case__outcome-body p {
     flex: 0 0 84%;
     width: 84%;
     max-width: 84%;
-    aspect-ratio: 1;
+    aspect-ratio: 0.92;
     background: rgb(227, 229, 230);
-    padding: 4%;
-    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     align-self: center;
     scroll-snap-align: center;
     overflow: hidden;
   }
-  /* Screen fills the framed area (minus the uniform padding margin):
-     wide desktops reach the left & right inner edges, tall phones reach
-     top & bottom — nothing is pressed to the very edge, nothing floats. */
+  /* Inside the uniform frame: phones sized by HEIGHT so they keep a clear
+     top & bottom margin; desktops sized by WIDTH so they reach the left &
+     right inner edges. Both centred — nothing touches the very edge. */
   .case__slider .case__shot {
     display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
     border-radius: 0;
+  }
+  .case__slider .case__shot--phone {
+    height: 82%;
+    width: auto;
+    max-width: 88%;
+  }
+  .case__slider .case__shot--desktop {
+    width: 92%;
+    height: auto;
+    max-height: 84%;
   }
 }
 
@@ -1112,7 +1132,7 @@ body.case-page--fill .case__outcome-body p {
   padding: 80px 24px;
   background: #d0d9e5;
   box-shadow: inset 0 -38px 101.2px 0 #d1d7ff;
-  border-radius: 4px;
+  border-radius: 0;
   width: 100%;
   overflow: hidden;
 }
@@ -1262,19 +1282,18 @@ body.case-page--fill .case__outcome-body p {
 
   .case__outcome {
     flex-direction: column;
+    gap: 12px;
     padding: 48px 20px;
   }
 
+  /* Prev / Next on one line — prev hugs the left, next the right */
   .case__pager {
-    flex-direction: column;
     gap: 12px;
-    align-items: stretch;
   }
 
   .case__pager-btn {
     min-width: 0;
-    width: 100%;
-    padding: 18px 24px;
+    padding: 16px 22px;
   }
 
   /* On mobile the back button is hidden (we use the ← Home link in mobile-topbar) */
