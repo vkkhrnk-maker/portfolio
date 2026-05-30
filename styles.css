@@ -874,7 +874,7 @@ body.case-page--itab .case__outcome-body p {
     height: auto;
     align-self: center;
     scroll-snap-align: center;
-    border-radius: 8px;
+    border-radius: 0;
   }
 
   /* Pagination dots (built by JS) */
