@@ -962,9 +962,9 @@ body.case-page--fill .case__outcome-body p {
     border-radius: 0;
   }
   .case__slider .case__shot--phone {
-    height: 82%;
+    height: 100%;
     width: auto;
-    max-width: 88%;
+    max-width: 100%;
   }
   .case__slider .case__shot--desktop {
     width: 92%;
