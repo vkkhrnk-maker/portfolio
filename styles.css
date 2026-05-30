@@ -942,11 +942,14 @@ body.case-page--fill .case__outcome-body p {
      another, always centered with a margin so nothing touches the edge.
      The grey frame matches the screens' own backdrop so it's seamless. */
   .case__slider .case__slide {
+    position: relative;
     flex: 0 0 84%;
     width: 84%;
     max-width: 84%;
     aspect-ratio: 0.92;
     background: rgb(227, 229, 230);
+    padding: 24px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -954,31 +957,29 @@ body.case-page--fill .case__outcome-body p {
     scroll-snap-align: center;
     overflow: hidden;
   }
-  /* RULE: a DEVICE (phone mockup) must ALWAYS keep a top & bottom margin
-     inside its frame — never flush to the edge. Phones are sized by
-     height (< 100%) and centred so that margin is consistent. Full-bleed
-     PLATES (gradient panels, screen feeds) use --fill and fill the frame.
-     Desktops are sized by width and reach the left & right inner edges. */
+  /* RULE: every card insets its content by the SAME margin on ALL sides —
+     the screen/device/gradient is centred and NEVER touches the frame
+     edge. One single exception: --fill (the 3-card feed) bleeds to the
+     edge on purpose. Phones, desktops and gradient panels all share this
+     uniform inset via max-width/max-height. */
   .case__slider .case__shot {
     display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
     border-radius: 0;
   }
-  .case__slider .case__shot--phone {
-    height: 84%;
-    width: auto;
-    max-width: 92%;
-  }
-  .case__slider .case__shot--desktop {
-    width: 92%;
-    height: auto;
-    max-height: 84%;
-  }
-  /* A tall full-bleed screen: fill the whole frame edge-to-edge (no
-     margin), keep the sides intact, crop the excess height from the
-     bottom (shows the top of the screen). */
+  /* The only full-bleed card: a tall screen feed that ignores the inset
+     and reaches the edges on purpose (sides intact, excess height cropped
+     from the bottom). */
   .case__slider .case__shot--fill {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    max-width: none;
+    max-height: none;
     object-fit: cover;
     object-position: top;
   }
