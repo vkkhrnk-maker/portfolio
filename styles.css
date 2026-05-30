@@ -954,17 +954,19 @@ body.case-page--fill .case__outcome-body p {
     scroll-snap-align: center;
     overflow: hidden;
   }
-  /* Inside the uniform frame: phones sized by HEIGHT so they keep a clear
-     top & bottom margin; desktops sized by WIDTH so they reach the left &
-     right inner edges. Both centred — nothing touches the very edge. */
+  /* RULE: a DEVICE (phone mockup) must ALWAYS keep a top & bottom margin
+     inside its frame — never flush to the edge. Phones are sized by
+     height (< 100%) and centred so that margin is consistent. Full-bleed
+     PLATES (gradient panels, screen feeds) use --fill and fill the frame.
+     Desktops are sized by width and reach the left & right inner edges. */
   .case__slider .case__shot {
     display: block;
     border-radius: 0;
   }
   .case__slider .case__shot--phone {
-    height: 100%;
+    height: 84%;
     width: auto;
-    max-width: 100%;
+    max-width: 92%;
   }
   .case__slider .case__shot--desktop {
     width: 92%;
