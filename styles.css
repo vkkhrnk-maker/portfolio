@@ -971,6 +971,15 @@ body.case-page--fill .case__outcome-body p {
     height: auto;
     max-height: 84%;
   }
+  /* A tall full-bleed screen: fill the whole frame edge-to-edge (no
+     margin), keep the sides intact, crop the excess height from the
+     bottom (shows the top of the screen). */
+  .case__slider .case__shot--fill {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
 }
 
 /* chatB still uses split-panes; uxA/uxB/uxC now use flat Figma exports */
