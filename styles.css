@@ -681,6 +681,10 @@ body.case-page--fill .case__outcome-body p {
    on the Hooh Smart Fill case. Smaller items, denser grid. */
 .case__gap-grid--four {
   grid-template-columns: repeat(4, 1fr);
+  /* On ≥1281px the parent .case__section becomes a 2-col grid (title | body).
+     Span the full row so the 4-card mini-grid uses the full content width
+     instead of being squeezed into the body column. */
+  grid-column: 1 / -1;
 }
 
 .case__gap-grid--four .case__gap-card {
@@ -922,14 +926,18 @@ body.case-page--fill .case__outcome-body p {
     padding: 0 var(--page-x);
   }
   .case__slider::-webkit-scrollbar { display: none; }
-  /* All slides share ONE height; width follows each screen's natural
-     aspect (phones narrow, desktops wide) — a height-aligned filmstrip
-     like danial.si. No padding, no stretch. */
+  /* Every slide is the SAME box (same width AND height). Each screen is
+     centered inside via object-fit: contain — narrow phones get bigger
+     grey side margins, wide desktops fill the width. The grey background
+     matches the screens' own backdrop so the padding is seamless. */
   .case__slider .case__slide {
-    flex: 0 0 auto;
-    height: clamp(340px, 50vh, 430px);
-    width: auto;
-    max-width: none;
+    flex: 0 0 88%;
+    width: 88%;
+    max-width: 88%;
+    aspect-ratio: 0.95;
+    height: auto;
+    object-fit: contain;
+    background: rgb(227, 229, 230);
     align-self: center;
     scroll-snap-align: center;
     border-radius: 0;
