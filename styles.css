@@ -946,10 +946,11 @@ body.case-page--fill .case__outcome-body p {
     flex: 0 0 84%;
     width: 84%;
     max-width: 84%;
-    /* Explicit (definite) square height — NOT aspect-ratio — so child
-       sizing resolves on WebKit too. Slider spans the viewport minus the
-       8px page gutters, so 84% of (100vw - 16px). */
-    height: calc((100vw - 16px) * 0.84);
+    /* Definite landscape height (NOT aspect-ratio, so WebKit resolves
+       child sizing). Content box AR ~= 1.5 = the desktop screens, so
+       desktops fill the card and every screen — phone or desktop —
+       lands at the SAME height, giving identical top/bottom margins. */
+    height: 56vw;
     background: rgb(227, 229, 230);
     /* Uniform 12px inset on every card — content sits as large as
        possible, never closer than 12px to the edge. */
