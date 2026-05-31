@@ -533,10 +533,9 @@ img {
    back (drifting wide behind the phone) and front (smaller, slightly
    more visible). */
 .case__hero-clouds {
-  position: absolute;
-  pointer-events: none;
-  --parallax-y: 0px;
-  will-change: transform;
+  /* Clouds are already baked into case-hero.webp — hide the duplicate
+     parallax cloud layers to avoid doubling. */
+  display: none;
 }
 
 .case__hero-clouds--back {
@@ -563,16 +562,17 @@ img {
 .case__hero-photo {
   position: absolute;
   display: block;
-  /* Match Figma: photo node 685×786 inside 1088×684 container,
-     positioned top:9, centered. The node is portrait, but the source
-     raster is landscape — fill the node via object-fit: cover so the
-     phone+hand crop fills the portrait box, no transparent edges. */
-  width: 63%;            /* 685/1088 */
-  aspect-ratio: 685 / 786;
-  top: 1.3%;             /* 9/684 */
-  left: 50%;
+  /* case-hero.webp is the COMPLETE cover (hand + phone + gradient +
+     clouds, AR 1.59 = container AR), so it fills the whole frame. No
+     separate gradient/cloud layers on top — that caused "gradient on
+     gradient". Slightly oversized so the parallax drift never reveals
+     an edge (and the matching CSS gradient sits behind as a fallback). */
+  top: -4%;
+  left: 0;
+  width: 100%;
+  height: 108%;
   --parallax-y: 0px;
-  transform: translate3d(-50%, var(--parallax-y), 0);
+  transform: translate3d(0, var(--parallax-y), 0);
   will-change: transform;
 }
 
