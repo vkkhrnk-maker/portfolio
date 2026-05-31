@@ -2425,6 +2425,17 @@ body.case-page--fill .case__outcome-body p {
     letter-spacing: var(--ls-heading-body);
     color: var(--text-primary);
     text-decoration: none;
+    white-space: nowrap;
+  }
+  /* Keep the name on one line; let it shrink before it ever wraps and
+     pushes the Menu link out of place. */
+  .mobile-topbar__name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mobile-topbar {
+    gap: 16px;
   }
 
   /* Section padding-left handled by ≤1280px override (when sidebar is hidden) */
