@@ -946,7 +946,10 @@ body.case-page--fill .case__outcome-body p {
     flex: 0 0 84%;
     width: 84%;
     max-width: 84%;
-    aspect-ratio: 1;
+    /* Explicit (definite) square height — NOT aspect-ratio — so that the
+       shot's percentage max-height resolves in Safari too. Slider spans
+       the viewport minus the 8px page gutters, so 84% of (100vw - 16px). */
+    height: calc((100vw - 16px) * 0.84);
     background: rgb(227, 229, 230);
     display: flex;
     align-items: center;
