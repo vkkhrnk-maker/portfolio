@@ -963,6 +963,12 @@ body.case-page--fill .case__outcome-body p {
     scroll-snap-align: center;
     overflow: hidden;
   }
+  /* The vertical feed card bleeds top & bottom (no top/bottom margin) so
+     the cards run off the edges like a scroll; side margins stay. */
+  .case__slider .case__slide--feed {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   /* RULE: every card insets its content by the SAME margin on ALL sides —
      the screen/device/gradient is centred and NEVER touches the frame
      edge. One single exception: --fill (the 3-card feed) bleeds to the
