@@ -946,11 +946,15 @@ body.case-page--fill .case__outcome-body p {
     flex: 0 0 84%;
     width: 84%;
     max-width: 84%;
-    /* Explicit (definite) square height — NOT aspect-ratio — so that the
-       shot's percentage max-height resolves in Safari too. Slider spans
-       the viewport minus the 8px page gutters, so 84% of (100vw - 16px). */
+    /* Explicit (definite) square height — NOT aspect-ratio — so child
+       sizing resolves on WebKit too. Slider spans the viewport minus the
+       8px page gutters, so 84% of (100vw - 16px). */
     height: calc((100vw - 16px) * 0.84);
     background: rgb(227, 229, 230);
+    /* Uniform 12px inset on every card — content sits as large as
+       possible, never closer than 12px to the edge. */
+    padding: 12px;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -965,10 +969,9 @@ body.case-page--fill .case__outcome-body p {
      uniform inset via max-width/max-height. */
   .case__slider .case__shot {
     display: block;
-    width: auto;
-    height: auto;
-    max-width: 74%;
-    max-height: 74%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     border-radius: 0;
   }
   /* The only full-bleed card: a tall screen feed that ignores the inset
