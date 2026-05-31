@@ -946,10 +946,8 @@ body.case-page--fill .case__outcome-body p {
     flex: 0 0 84%;
     width: 84%;
     max-width: 84%;
-    aspect-ratio: 0.92;
+    aspect-ratio: 1;
     background: rgb(227, 229, 230);
-    padding: 24px;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -966,8 +964,8 @@ body.case-page--fill .case__outcome-body p {
     display: block;
     width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 74%;
+    max-height: 74%;
     border-radius: 0;
   }
   /* The only full-bleed card: a tall screen feed that ignores the inset
