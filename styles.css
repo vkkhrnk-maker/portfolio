@@ -998,6 +998,17 @@ body.case-page--fill .case__outcome-body p {
     object-position: top;
   }
 
+  /* PHONE SLIDER (3+ vertical phone screens): a TALL portrait frame so the
+     phone shows large — same ~70vh height as the stacked cards, so a slider
+     plate is never shorter than the others. Cards are a touch narrower so the
+     neighbouring phones peek on both sides (it reads as a carousel). */
+  .case__slider--phones .case__slide {
+    flex-basis: 82%;
+    width: 82%;
+    max-width: 82%;
+    height: 70vh;
+  }
+
   /* STACK MODE: 2 screens shown full-width, one above the other (no swipe).
      Each card is the full content width; the screen scales to that width but
      its height is capped so a tall/narrow screen (e.g. a column of badges)
