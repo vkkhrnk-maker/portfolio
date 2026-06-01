@@ -921,6 +921,9 @@ body.case-page--fill .case__outcome-body p {
    horizontal swipe carousel of the individual screens (one prominent,
    next peeking). Hidden by default; enabled at ≤640px. */
 .case__slider { display: none; }
+/* Stack mode (for a figure with exactly 2 screens): show them full-width,
+   one under the other, instead of a slider. Hidden by default. */
+.case__stack { display: none; }
 
 @media (max-width: 640px) {
   .case__figure-desktop { display: none; }
@@ -993,6 +996,38 @@ body.case-page--fill .case__outcome-body p {
     max-height: none;
     object-fit: cover;
     object-position: top;
+  }
+
+  /* STACK MODE: 2 screens shown full-width, one above the other (no swipe).
+     Each card is the full content width; the screen scales to that width but
+     its height is capped so a tall/narrow screen (e.g. a column of badges)
+     can't blow up. Tall screens letterbox into the grey card (seamless);
+     wide desktop screens fill the width and come out short. */
+  .case__stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .case__stack .case__slide {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    background: rgb(227, 229, 230);
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0;
+  }
+  .case__stack .case__shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 0;
   }
 }
 
