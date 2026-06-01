@@ -97,28 +97,52 @@
     });
   })();
 
-  /* ---- Feed loop distance ---------------------------------------------- */
-  // A percentage translate doesn't resolve against the feed track's auto
-  // height, so the CSS loop never moved. Set the shift (= one feed image's
-  // height) in px as a CSS variable; the CSS animation handles the motion.
+  /* ---- Feed: flick-and-settle scroll ----------------------------------- */
+  // Drives the feed like a real gesture: a quick inertial flick that settles
+  // on the next card, a beat to read, then the next flick — looping. Two
+  // identical copies in the track make the wrap seamless. JS (not CSS) so the
+  // px distances resolve correctly on the auto-height track.
   (() => {
     const track = document.querySelector('.case__feed-track');
     if (!track) return;
     const img = track.querySelector('.case__feed-img');
     if (!img) return;
-    const setShift = () => {
-      const h = img.getBoundingClientRect().height;
-      if (!h) return;
-      track.style.setProperty('--feed-shift', Math.round(h) + 'px');
-      // Restart the animation so the keyframe re-reads the px value (it started
-      // before the var was set, with the unresolved 50% fallback).
-      track.style.animation = 'none';
-      void track.offsetWidth;
-      track.style.animation = '';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const CARDS = 3;          // cards per copy
+    const FLICK = 650;        // ms of inertial glide
+    const PAUSE = 2000;       // ms to read before the next flick
+    const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'; // strong ease-out = momentum
+    let one = 0, step = 0, timer = null;
+
+    const measure = () => { one = img.getBoundingClientRect().height; };
+
+    const flick = () => {
+      step += 1;
+      track.style.transition = 'transform ' + FLICK + 'ms ' + EASE;
+      track.style.transform = 'translateY(' + (-(one * step) / CARDS) + 'px)';
+      if (step >= CARDS) {
+        // landed on the duplicate's first card — snap back to the real first
+        // card with no transition (seamless), ready for the next flick.
+        window.setTimeout(() => {
+          track.style.transition = 'none';
+          track.style.transform = 'translateY(0)';
+          step = 0;
+        }, FLICK + 30);
+      }
     };
-    if (img.complete) setShift(); else img.addEventListener('load', setShift);
-    window.addEventListener('resize', setShift);
-    window.addEventListener('load', setShift);
+
+    const start = () => {
+      measure();
+      if (!one) return;
+      step = 0;
+      track.style.transform = 'translateY(0)';
+      if (timer) clearInterval(timer);
+      timer = window.setInterval(flick, FLICK + PAUSE);
+    };
+
+    if (img.complete) start(); else img.addEventListener('load', start);
+    window.addEventListener('resize', measure);
   })();
 
   /* ---- Tap-to-zoom lightbox -------------------------------------------- */
