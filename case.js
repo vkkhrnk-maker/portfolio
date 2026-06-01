@@ -109,24 +109,62 @@
     if (!img) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const CARDS = 3;          // cards per copy
     const FLICK = 650;        // ms of inertial glide
     const PAUSE = 2000;       // ms to read before the next flick
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'; // strong ease-out = momentum
-    let one = 0, step = 0, timer = null;
+    let one = 0, winH = 0, step = 0, timer = null;
+    let fracs = null;         // each card's centre as a fraction of one copy
 
-    const measure = () => { one = img.getBoundingClientRect().height; };
+    // Find each card's vertical centre by scanning the image's opaque rows
+    // (cards are opaque, gaps are transparent). Robust if the feed is re-exported.
+    const detectCenters = () => {
+      try {
+        const W = 40, scale = W / img.naturalWidth, H = Math.round(img.naturalHeight * scale);
+        const c = document.createElement('canvas');
+        c.width = W; c.height = H;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, W, H);
+        const d = ctx.getImageData(0, 0, W, H).data;
+        const bands = []; let s = -1;
+        for (let y = 0; y < H; y++) {
+          let op = 0;
+          for (let x = 0; x < W; x++) if (d[(y * W + x) * 4 + 3] > 40) op++;
+          const card = op / W > 0.15;
+          if (card && s < 0) s = y;
+          if (!card && s >= 0) { bands.push((s + y - 1) / 2 / H); s = -1; }
+        }
+        if (s >= 0) bands.push((s + H - 1) / 2 / H);
+        return bands.length ? bands : null;
+      } catch (e) { return null; }
+    };
+
+    const measure = () => {
+      one = img.getBoundingClientRect().height;
+      const slide = track.closest('.case__slide');
+      winH = slide ? slide.clientHeight : 0;
+      if (!fracs) fracs = detectCenters();
+    };
+
+    // Position that puts card `s` centred in the window.
+    const pos = (s) => {
+      const n = fracs ? fracs.length : 3;
+      const frac = fracs
+        ? (s < n ? fracs[s] : fracs[0] + 1)              // wrap to next copy's 1st card
+        : (s < n ? (s + 0.5) / n : (0.5) / n + 1);        // even-thirds fallback
+      return winH / 2 - frac * one;
+    };
+    const cards = () => (fracs ? fracs.length : 3);
 
     const flick = () => {
       step += 1;
       track.style.transition = 'transform ' + FLICK + 'ms ' + EASE;
-      track.style.transform = 'translateY(' + (-(one * step) / CARDS) + 'px)';
-      if (step >= CARDS) {
+      track.style.transform = 'translateY(' + pos(step) + 'px)';
+      if (step >= cards()) {
         // landed on the duplicate's first card — snap back to the real first
         // card with no transition (seamless), ready for the next flick.
         window.setTimeout(() => {
           track.style.transition = 'none';
-          track.style.transform = 'translateY(0)';
+          track.style.transform = 'translateY(' + pos(0) + 'px)';
           step = 0;
         }, FLICK + 30);
       }
@@ -134,9 +172,10 @@
 
     const start = () => {
       measure();
-      if (!one) return;
+      if (!one || !winH) return;
       step = 0;
-      track.style.transform = 'translateY(0)';
+      track.style.transition = 'none';
+      track.style.transform = 'translateY(' + pos(0) + 'px)';
       if (timer) clearInterval(timer);
       timer = window.setInterval(flick, FLICK + PAUSE);
     };
