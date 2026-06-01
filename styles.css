@@ -1012,12 +1012,17 @@ body.case-page--fill .case__outcome-body p {
   .case__feed-track {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    /* Side margins so cards aren't flush to the edges; narrower than the
+       plate means each card is shorter than the window, so the next card
+       always peeks at the bottom (the scroll is never a surprise and content
+       never blanks out between cards). */
+    left: 20px;
+    right: 20px;
+    width: auto;
     display: block;
-    /* "Flick" scroll: snappy momentum glide to each card, then a short pause
-       to read — reads like an active feed scroll, not a slow conveyor. */
-    animation: feedScroll 9s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    /* Smooth continuous scroll, brisk — reads as an active feed, not a slow
+       conveyor and not a strange stepping. */
+    animation: feedScroll 10s linear infinite;
   }
   .case__feed-img {
     display: block;
@@ -2793,14 +2798,8 @@ body.case-page--fill .case__outcome-body p {
 /* Auto-scrolling feed loop — keyframes at top level (Safari doesn't reliably
    register @keyframes defined inside a media query). */
 @keyframes feedScroll {
-  0%   { transform: translateY(0); }
-  25%  { transform: translateY(0); }            /* hold on card 1 */
-  33%  { transform: translateY(-16.667%); }     /* flick to card 2 */
-  58%  { transform: translateY(-16.667%); }     /* hold */
-  66%  { transform: translateY(-33.333%); }     /* flick to card 3 */
-  91%  { transform: translateY(-33.333%); }     /* hold */
-  99%  { transform: translateY(-50%); }         /* flick to the loop point */
-  100% { transform: translateY(-50%); }
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .case__feed-track { animation: none; }
