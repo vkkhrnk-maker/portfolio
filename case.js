@@ -99,69 +99,36 @@
 
   /* ---- Feed: flick-and-settle scroll ----------------------------------- */
   // Drives the feed like a real gesture: a quick inertial flick that settles
-  // on the next card, a beat to read, then the next flick — looping. Two
-  // identical copies in the track make the wrap seamless. JS (not CSS) so the
-  // px distances resolve correctly on the auto-height track.
+  // each card centred in the window, a beat to read, then the next flick.
+  // Cards are separate elements; the last is a duplicate of the first so the
+  // wrap is seamless. Centres are read straight from the DOM (pixel-precise).
   (() => {
     const track = document.querySelector('.case__feed-track');
     if (!track) return;
-    const img = track.querySelector('.case__feed-img');
-    if (!img) return;
+    const cards = Array.from(track.querySelectorAll('.case__feed-card'));
+    if (cards.length < 2) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const FLICK = 650;        // ms of inertial glide
     const PAUSE = 2000;       // ms to read before the next flick
     const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'; // strong ease-out = momentum
-    let one = 0, winH = 0, step = 0, timer = null;
-    let fracs = null;         // each card's centre as a fraction of one copy
-
-    // Find each card's vertical centre by scanning the image's opaque rows
-    // (cards are opaque, gaps are transparent). Robust if the feed is re-exported.
-    const detectCenters = () => {
-      try {
-        const W = 40, scale = W / img.naturalWidth, H = Math.round(img.naturalHeight * scale);
-        const c = document.createElement('canvas');
-        c.width = W; c.height = H;
-        const ctx = c.getContext('2d');
-        ctx.drawImage(img, 0, 0, W, H);
-        const d = ctx.getImageData(0, 0, W, H).data;
-        const bands = []; let s = -1;
-        for (let y = 0; y < H; y++) {
-          let op = 0;
-          for (let x = 0; x < W; x++) if (d[(y * W + x) * 4 + 3] > 40) op++;
-          const card = op / W > 0.15;
-          if (card && s < 0) s = y;
-          if (!card && s >= 0) { bands.push((s + y - 1) / 2 / H); s = -1; }
-        }
-        if (s >= 0) bands.push((s + H - 1) / 2 / H);
-        return bands.length ? bands : null;
-      } catch (e) { return null; }
-    };
+    const LAST = cards.length - 1; // the duplicate first card
+    let winH = 0, centers = [], step = 0, timer = null;
 
     const measure = () => {
-      one = img.getBoundingClientRect().height;
       const slide = track.closest('.case__slide');
       winH = slide ? slide.clientHeight : 0;
-      if (!fracs) fracs = detectCenters();
+      centers = cards.map((c) => c.offsetTop + c.offsetHeight / 2);
     };
 
-    // Position that puts card `s` centred in the window.
-    const pos = (s) => {
-      const n = fracs ? fracs.length : 3;
-      const frac = fracs
-        ? (s < n ? fracs[s] : fracs[0] + 1)              // wrap to next copy's 1st card
-        : (s < n ? (s + 0.5) / n : (0.5) / n + 1);        // even-thirds fallback
-      return winH / 2 - frac * one;
-    };
-    const cards = () => (fracs ? fracs.length : 3);
+    const pos = (i) => winH / 2 - centers[i]; // card i centred in the window
 
     const flick = () => {
       step += 1;
       track.style.transition = 'transform ' + FLICK + 'ms ' + EASE;
       track.style.transform = 'translateY(' + pos(step) + 'px)';
-      if (step >= cards()) {
-        // landed on the duplicate's first card — snap back to the real first
-        // card with no transition (seamless), ready for the next flick.
+      if (step >= LAST) {
+        // landed on the duplicate first card — snap back to the real one.
         window.setTimeout(() => {
           track.style.transition = 'none';
           track.style.transform = 'translateY(' + pos(0) + 'px)';
@@ -172,7 +139,7 @@
 
     const start = () => {
       measure();
-      if (!one || !winH) return;
+      if (!winH || !centers.length) return;
       step = 0;
       track.style.transition = 'none';
       track.style.transform = 'translateY(' + pos(0) + 'px)';
@@ -180,7 +147,10 @@
       timer = window.setInterval(flick, FLICK + PAUSE);
     };
 
-    if (img.complete) start(); else img.addEventListener('load', start);
+    // Cards need layout (offsetTop/Height) — wait for all images to load.
+    Promise.all(cards.map((c) => c.complete ? Promise.resolve()
+      : new Promise((r) => c.addEventListener('load', r, { once: true }))
+    )).then(start);
     window.addEventListener('resize', measure);
   })();
 

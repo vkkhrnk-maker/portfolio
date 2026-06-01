@@ -1002,9 +1002,9 @@ body.case-page--fill .case__outcome-body p {
     scroll-snap-align: center;
     overflow: hidden;
   }
-  /* The vertical feed card auto-scrolls upward like a live feed: two
-     identical copies stacked, translated -50% on a loop = seamless. Bleeds
-     top & bottom (no inset) so cards run off the edges. */
+  /* The feed: separate cards stacked with an even gap, auto-scrolled by
+     case.js as a flick-and-settle gesture (it sets transform/transition).
+     Side margins (left/right) keep cards off the edges; bleeds top & bottom. */
   .case__slider .case__slide--feed {
     padding: 0;
     overflow: hidden;
@@ -1012,18 +1012,14 @@ body.case-page--fill .case__outcome-body p {
   .case__feed-track {
     position: absolute;
     top: 0;
-    /* Side margins so cards aren't flush to the edges; narrower than the
-       plate means each card is shorter than the window, so the next card
-       always peeks at the bottom (the scroll is never a surprise and content
-       never blanks out between cards). */
     left: 20px;
     right: 20px;
     width: auto;
-    display: block;
-    /* The scroll is driven by case.js (a flick-and-settle gesture); it sets
-       the transform/transition. No CSS animation here. */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
-  .case__feed-img {
+  .case__feed-card {
     display: block;
     width: 100%;
     height: auto;
