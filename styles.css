@@ -1023,13 +1023,6 @@ body.case-page--fill .case__outcome-body p {
     height: auto;
     border-radius: 0;
   }
-  @keyframes feedScroll {
-    from { transform: translateY(0); }
-    to { transform: translateY(-50%); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .case__feed-track { animation: none; }
-  }
   /* Gradient category slide: the exported gradient fills the whole plate as a
      full-bleed background, and the (transparent) tags sit on top, contained
      with the normal 12px inset — gradient edge-to-edge, tags never cropped. */
@@ -2793,4 +2786,14 @@ body.case-page--fill .case__outcome-body p {
 @media (prefers-reduced-motion: reduce) {
   .lightbox,
   .lightbox__img { transition: none; }
+}
+
+/* Auto-scrolling feed loop — keyframes at top level (Safari doesn't reliably
+   register @keyframes defined inside a media query). */
+@keyframes feedScroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .case__feed-track { animation: none; }
 }
