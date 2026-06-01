@@ -98,22 +98,25 @@
   })();
 
   /* ---- Feed: flick-and-settle scroll ----------------------------------- */
-  // Drives the feed like a real gesture: a quick inertial flick that settles
-  // each card centred in the window, a beat to read, then the next flick.
-  // Cards are separate elements; the last is a duplicate of the first so the
-  // wrap is seamless. Centres are read straight from the DOM (pixel-precise).
+  // A real-feeling gesture: a soft inertial flick that settles each card
+  // centred in the window, a beat to read, then the next flick.
+  // The track is [c3, c1, c2, c3, c1, c2] — a clone before and two after — so
+  // every shown card (indices 1..3) always has matching neighbours peeking,
+  // and the wrap (index 4 -> 1, both = c1) is perfectly seamless (no jump).
   (() => {
     const track = document.querySelector('.case__feed-track');
     if (!track) return;
     const cards = Array.from(track.querySelectorAll('.case__feed-card'));
-    if (cards.length < 2) return;
+    if (cards.length < 4) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const FLICK = 650;        // ms of inertial glide
-    const PAUSE = 2000;       // ms to read before the next flick
-    const EASE = 'cubic-bezier(0.16, 1, 0.3, 1)'; // strong ease-out = momentum
-    const LAST = cards.length - 1; // the duplicate first card
-    let winH = 0, centers = [], step = 0, timer = null;
+    const FLICK = 800;        // ms of glide
+    const PAUSE = 1700;       // ms to read before the next flick
+    const EASE = 'cubic-bezier(0.33, 1, 0.68, 1)'; // easeOutCubic — smooth, no lurch
+    const REAL = cards.length - 3; // real cards (clones: 1 before, 2 after)
+    const START = 1;               // first real card index
+    const WRAP = START + REAL;      // clone of the first card — seamless wrap point
+    let winH = 0, centers = [], step = START, timer = null;
 
     const measure = () => {
       const slide = track.closest('.case__slide');
@@ -127,22 +130,23 @@
       step += 1;
       track.style.transition = 'transform ' + FLICK + 'ms ' + EASE;
       track.style.transform = 'translateY(' + pos(step) + 'px)';
-      if (step >= LAST) {
-        // landed on the duplicate first card — snap back to the real one.
+      if (step >= WRAP) {
+        // landed on the first card's clone — snap to the real first card
+        // (identical surroundings, so the jump is invisible).
         window.setTimeout(() => {
           track.style.transition = 'none';
-          track.style.transform = 'translateY(' + pos(0) + 'px)';
-          step = 0;
-        }, FLICK + 30);
+          track.style.transform = 'translateY(' + pos(START) + 'px)';
+          step = START;
+        }, FLICK + 40);
       }
     };
 
     const start = () => {
       measure();
       if (!winH || !centers.length) return;
-      step = 0;
+      step = START;
       track.style.transition = 'none';
-      track.style.transform = 'translateY(' + pos(0) + 'px)';
+      track.style.transform = 'translateY(' + pos(START) + 'px)';
       if (timer) clearInterval(timer);
       timer = window.setInterval(flick, FLICK + PAUSE);
     };
