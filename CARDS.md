@@ -11,17 +11,20 @@ as it fits inside. Phones fill the height; wide desktop screens fill the width.
 The plate height never changes from block to block, so nothing ever looks like
 a "runt" next to its neighbours.
 
-There are three display modes:
+Display is the **same big uniform slider everywhere** — every multi-screen
+block is a horizontal swipe of identical plates, so no block ever looks a
+different size from its neighbours.
 
-| Screens in a block | Mode | Why |
-|---|---|---|
-| **1** | just the screen on a plate | nothing to swipe |
-| **2+ (default)** | **slider** — horizontal swipe, one plate per screen, neighbours peek | one big uniform plate each; works for phones and desktops alike |
-| a tight **flow** (steps of one sequence) | **slider too** | shown big and swiped in order (do NOT squeeze the steps into one tiny composite — each phone comes out as a "runt") |
-| **2 screens where one must be full-width** (e.g. a tall narrow column of badges that would be tiny on a slider plate) | **stack** — full-width cards, one under the other | the croppable element gets the whole width |
+| Screens in a block | How |
+|---|---|
+| **1** | just the screen on one plate |
+| **2+** | **slider** — horizontal swipe, one plate per screen, neighbours peek |
+| a tight **flow** (steps of one sequence) | **slider too** — swiped in order (do NOT squeeze the steps into one tiny composite — each phone comes out a "runt") |
 
-When in doubt → **slider**. The stack is the exception, only when a screen
-genuinely needs the full page width.
+There is no "stack" / full-width mode: keeping a single uniform plate
+everywhere is more important than giving a tall/narrow screen extra width. A
+narrow column (e.g. badges) simply shows whole on the plate with grey on the
+sides, exactly like a phone.
 
 ## Structure
 
@@ -79,23 +82,6 @@ Every `.case__slide` in a slider is one uniform **plate**:
 | `--fill`   | a full-bleed background plate (e.g. the gradient category panel) | `object-fit: cover`, absolutely positioned `inset:0` — the image **is** the whole plate background, bleeds all edges |
 | `--phone` + slide `--feed` | a vertical scroll feed | top/bottom padding removed so the feed cards bleed off the top & bottom like a continuous scroll; side margin stays. Add `case__slide--feed` to the slide `<div>` |
 
-## Stack mode (the full-width exception)
-
-When a block has 2 screens and one must be full-width (a tall narrow element
-that would be tiny on a slider plate, e.g. the badge column), use a stack
-instead of a slider:
-
-```html
-<div class="case__stack">
-  <div class="case__slide"><img class="case__shot case__shot--phone" src="…s1.webp"></div>
-  <div class="case__slide"><img class="case__shot case__shot--phone" src="…s2.webp"></div>
-</div>
-```
-
-- Cards are **full content width**, one under the other.
-- Height follows the content, capped at `70vh` so a tall/narrow screen can't
-  blow up. 12px inset, no rounded corners.
-
 ## Merging (one section → one slider)
 
 If a single section has several figures of the same topic, merge their mobile
@@ -113,7 +99,8 @@ the product card.
    never a single squeezed composite on mobile.
 3. **`contain`, never crop** the actual screens — the two full-bleed exceptions
    are `--fill` (cover) and `--feed` (bleeds top/bottom) on purpose.
-4. **Slider by default; stack only when a screen needs full width.**
+4. **Always the same uniform slider** — never a full-width / stacked plate, even
+   for a narrow screen. One plate size across the whole case.
 5. **No rounded corners on any plate / card / frame.** Every backing surface
    uses `border-radius: 0`. Pills/buttons keep their own radius — this rule is
    about plates.
