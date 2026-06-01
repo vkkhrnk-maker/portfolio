@@ -1444,12 +1444,13 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* Phones: ease the case H1 down a touch (62 → 52). Placed after the
-   ≤1280 .case__title rule so it wins the cascade at phone widths. */
+/* Phones: ease the case H1 down (62 → 42) so the cover doesn't eat the whole
+   first screen before the case content. Placed after the ≤1280 .case__title
+   rule so it wins the cascade at phone widths. */
 @media (max-width: 640px) {
   .case__title {
-    font-size: 52px;
-    line-height: 56px;
+    font-size: 42px;
+    line-height: 46px;
   }
   /* Outcome body matches section body 16/24 on phones (placed after the
      base .case__outcome-body p rule so it wins). */
@@ -2649,6 +2650,15 @@ body.case-page--fill .case__outcome-body p {
   .has-js .case__gap-card:nth-child(3) { transition-delay: 0.16s; }
   .has-js .case__block:nth-child(4) { transition-delay: 0.24s; }
 
+  /* Hero gets a more deliberate, staggered entrance on load:
+     title → intro → meta → cover, with the cover rising a little further. */
+  .has-js .case__intro { transition-delay: 0.1s; }
+  .has-js .case-meta--mobile { transition-delay: 0.2s; }
+  .has-js .case__hero-image {
+    transition-delay: 0.3s;
+    transform: translateY(42px);
+  }
+
   .has-js .case__title.is-visible,
   .has-js .case__intro.is-visible,
   .has-js .case-meta--mobile.is-visible,
@@ -2674,7 +2684,10 @@ body.case-page--fill .case__outcome-body p {
     justify-content: center;
     align-items: center;
     gap: 0;
-    margin-top: 6px;
+    /* The figure is a flex column with an 18px gap. Pull the dots up to sit
+       ~12px under the slider (matching the in-slider card gap) and push them
+       away from the caption below, so they clearly belong to the slider. */
+    margin: -6px 0 6px;
   }
   .case__dot {
     width: 7px;
@@ -2694,4 +2707,64 @@ body.case-page--fill .case__outcome-body p {
     background: rgba(0, 0, 0, 0.62);
     transform: scale(1.3);
   }
+}
+
+/* ===== Tap-to-zoom lightbox ===== */
+.case__shot,
+.case__hero-plate img {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(18, 20, 24, 0.92);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+  cursor: zoom-out;
+}
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+.lightbox__img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transform: scale(0.98);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lightbox.is-open .lightbox__img {
+  transform: scale(1);
+}
+.lightbox__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox__img { transition: none; }
 }
