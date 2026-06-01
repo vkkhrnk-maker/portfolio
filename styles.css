@@ -608,6 +608,41 @@ img {
   object-position: center;
 }
 
+/* iTAB hero on mobile: instead of the cramped side-by-side composite, show
+   the desktop screen and the mobile screen as two stacked plates — the same
+   big 56vh plate used everywhere else in the case. */
+.case__hero-split { display: none; }
+
+@media (max-width: 640px) {
+  .case__hero-image--itab {
+    aspect-ratio: auto;
+    overflow: visible;
+  }
+  .case__hero-image--itab .case__hero-figma { display: none; }
+  .case__hero-split {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .case__hero-split .case__hero-plate {
+    background: rgb(227, 229, 230);
+    height: 56vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .case__hero-split .case__hero-plate img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 0;
+  }
+}
+
 /* Hero intro paragraph — used on case pages that need a sub-headline under
    the title (e.g. iTAB). Body-text style, slightly tighter max-width. */
 .case__intro {
