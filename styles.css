@@ -981,9 +981,11 @@ body.case-page--fill .case__outcome-body p {
      across the case is the same — and big. */
   .case__slider .case__slide {
     position: relative;
-    flex: 0 0 94%;
-    width: 94%;
-    max-width: 94%;
+    /* Full-width plates (one per view) — the pagination dots now signal there
+       are more, so no peeking sliver is needed. */
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
     /* Definite portrait height (NOT aspect-ratio — WebKit needs a real
        height to resolve the child's %/object-fit sizing). Tall so phones
        come out large; desktops fill the width on the same tall plate. */
@@ -1000,11 +1002,33 @@ body.case-page--fill .case__outcome-body p {
     scroll-snap-align: center;
     overflow: hidden;
   }
-  /* The vertical feed card bleeds top & bottom (no top/bottom margin) so
-     the cards run off the edges like a scroll; side margins stay. */
+  /* The vertical feed card auto-scrolls upward like a live feed: two
+     identical copies stacked, translated -50% on a loop = seamless. Bleeds
+     top & bottom (no inset) so cards run off the edges. */
   .case__slider .case__slide--feed {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .case__feed-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    animation: feedScroll 22s linear infinite;
+  }
+  .case__feed-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+  @keyframes feedScroll {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case__feed-track { animation: none; }
   }
   /* Gradient category slide: the exported gradient fills the whole plate as a
      full-bleed background, and the (transparent) tags sit on top, contained
