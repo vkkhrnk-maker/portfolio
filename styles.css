@@ -1006,6 +1006,12 @@ body.case-page--fill .case__outcome-body p {
     padding-top: 0;
     padding-bottom: 0;
   }
+  /* Gradient category slide: the exported gradient fills the whole plate as a
+     full-bleed background, and the (transparent) tags sit on top, contained
+     with the normal 12px inset — gradient edge-to-edge, tags never cropped. */
+  .case__slider .case__slide--gradient {
+    background: url('assets/case-uxA-bg.webp?v=1') center / cover no-repeat;
+  }
   /* RULE: every card insets its content by the SAME margin on ALL sides —
      the screen/device/gradient is centred and NEVER touches the frame
      edge. One single exception: --fill (the 3-card feed) bleeds to the
@@ -2683,7 +2689,7 @@ body.case-page--fill .case__outcome-body p {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0;
+    gap: 8px;
     /* The figure is a flex column with an 18px gap. Pull the dots up to sit
        ~12px under the slider (matching the in-slider card gap) and push them
        away from the caption below, so they clearly belong to the slider. */
@@ -2693,13 +2699,9 @@ body.case-page--fill .case__outcome-body p {
     width: 7px;
     height: 7px;
     padding: 0;
-    /* 7px visible dot, but a transparent 10px border gives a ~27px tap
-       target (the visible dot stays small via background-clip). */
-    border: 10px solid transparent;
-    box-sizing: content-box;
-    background: rgba(0, 0, 0, 0.2);
-    background-clip: padding-box;
+    border: 0;
     border-radius: 999px;
+    background: rgba(0, 0, 0, 0.22);
     cursor: pointer;
     transition: background 0.25s ease, transform 0.25s ease;
   }
