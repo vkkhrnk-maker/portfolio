@@ -97,6 +97,30 @@
     });
   })();
 
+  /* ---- Feed loop distance ---------------------------------------------- */
+  // A percentage translate doesn't resolve against the feed track's auto
+  // height, so the CSS loop never moved. Set the shift (= one feed image's
+  // height) in px as a CSS variable; the CSS animation handles the motion.
+  (() => {
+    const track = document.querySelector('.case__feed-track');
+    if (!track) return;
+    const img = track.querySelector('.case__feed-img');
+    if (!img) return;
+    const setShift = () => {
+      const h = img.getBoundingClientRect().height;
+      if (!h) return;
+      track.style.setProperty('--feed-shift', Math.round(h) + 'px');
+      // Restart the animation so the keyframe re-reads the px value (it started
+      // before the var was set, with the unresolved 50% fallback).
+      track.style.animation = 'none';
+      void track.offsetWidth;
+      track.style.animation = '';
+    };
+    if (img.complete) setShift(); else img.addEventListener('load', setShift);
+    window.addEventListener('resize', setShift);
+    window.addEventListener('load', setShift);
+  })();
+
   /* ---- Tap-to-zoom lightbox -------------------------------------------- */
   (() => {
     const zoomables = document.querySelectorAll('.case__shot, .case__hero-plate img');

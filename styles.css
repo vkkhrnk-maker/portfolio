@@ -2799,7 +2799,10 @@ body.case-page--fill .case__outcome-body p {
    register @keyframes defined inside a media query). */
 @keyframes feedScroll {
   from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
+  /* Shift by exactly one feed image (set in px by case.js). A percentage
+     translate doesn't resolve against the track's auto height, so it never
+     moved — px does. Falls back to 50% if JS hasn't run yet. */
+  to   { transform: translateY(calc(-1 * var(--feed-shift, 50%))); }
 }
 @media (prefers-reduced-motion: reduce) {
   .case__feed-track { animation: none; }
