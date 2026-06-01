@@ -940,20 +940,22 @@ body.case-page--fill .case__outcome-body p {
     padding: 0 var(--page-x);
   }
   .case__slider::-webkit-scrollbar { display: none; }
-  /* One uniform frame for every slide (same width AND height). Inside it,
-     all phone screens render at one height and all desktop screens at
-     another, always centered with a margin so nothing touches the edge.
-     The grey frame matches the screens' own backdrop so it's seamless. */
+  /* ONE uniform frame for every slide — SAME big size everywhere, phone
+     sliders and desktop sliders alike. The frame is a tall portrait plate;
+     each screen is shown as large as it can be inside it (object-fit
+     contain) with a 12px inset. A vertical phone fills the height (12px top
+     & bottom, grey on the sides); a wide desktop screen fills the width
+     (grey top & bottom). The plate height never changes, so every plate
+     across the case is the same — and big. */
   .case__slider .case__slide {
     position: relative;
     flex: 0 0 94%;
     width: 94%;
     max-width: 94%;
-    /* Definite landscape height (NOT aspect-ratio, so WebKit resolves
-       child sizing). Content box AR ~= 1.5 = the desktop screens, so
-       desktops fill the card and every screen — phone or desktop —
-       lands at the SAME height, giving identical top/bottom margins. */
-    height: 63vw;
+    /* Definite portrait height (NOT aspect-ratio — WebKit needs a real
+       height to resolve the child's %/object-fit sizing). Tall so phones
+       come out large; desktops fill the width on the same tall plate. */
+    height: 56vh;
     background: rgb(227, 229, 230);
     /* Uniform 12px inset on every card — content sits as large as
        possible, never closer than 12px to the edge. */
@@ -996,17 +998,6 @@ body.case-page--fill .case__outcome-body p {
     max-height: none;
     object-fit: cover;
     object-position: top;
-  }
-
-  /* PHONE SLIDER (3+ vertical phone screens): a TALL portrait frame so the
-     phone shows large — same ~70vh height as the stacked cards, so a slider
-     plate is never shorter than the others. Cards are a touch narrower so the
-     neighbouring phones peek on both sides (it reads as a carousel). */
-  .case__slider--phones .case__slide {
-    flex-basis: 82%;
-    width: 82%;
-    max-width: 82%;
-    height: 70vh;
   }
 
   /* STACK MODE: 2 screens shown full-width, one above the other (no swipe).
