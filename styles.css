@@ -14,7 +14,7 @@
   --bg-primary: #f0f0f0;                 /* Bg/Primary */
   --bg-card: #e2e4e7;                    /* Bg/Card — project cards */
   --text-primary: #2d3036;               /* Text/Primary, Grey 1000 */
-  --text-secondary: rgba(0, 0, 0, 0.55); /* Text/Secondary — WCAG AA contrast on bg-card */
+  --text-secondary: rgba(0, 0, 0, 0.62); /* Text/Secondary — WCAG AA contrast on bg-primary/card */
   --text-tertiary: #b1b0b0;              /* Text/Tertiary — inactive menu items */
   --text-accent: #d946ef;                /* Text/Primary_Accent (now magenta, was blue) */
   --button-primary: #d946ef;             /* Button/Surface/Primary */
@@ -2484,7 +2484,15 @@ body.case-page--fill .case__outcome-body p {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 var(--page-x);
+    padding: 6px var(--page-x);
+    /* Stay reachable on long case pages: pin to the top with a soft blur
+       so Home (the name) and Menu are always one tap away. */
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: rgba(240, 240, 240, 0.82);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
   }
 
   .mobile-topbar__link {
@@ -2495,6 +2503,8 @@ body.case-page--fill .case__outcome-body p {
     color: var(--text-primary);
     text-decoration: none;
     white-space: nowrap;
+    /* Bigger hit area (≥44px tall) without shifting the visual baseline. */
+    padding: 10px 4px;
   }
   /* Keep the name on one line; let it shrink before it ever wraps and
      pushes the Menu link out of place. */
@@ -2605,5 +2615,79 @@ body.case-page--fill .case__outcome-body p {
   .contact,
   .footer {
     padding-left: var(--page-x);
+  }
+}
+
+/* ===== Scroll-reveal animations =====
+   Content rises + fades in as it scrolls into view. Gated on `.has-js`
+   (set synchronously in <head>) so without JS nothing is ever hidden, and
+   on prefers-reduced-motion so it's fully off for users who opt out.
+   case.js adds `.is-visible` via IntersectionObserver. */
+@media (prefers-reduced-motion: no-preference) {
+  .has-js .case__title,
+  .has-js .case__intro,
+  .has-js .case-meta--mobile,
+  .has-js .case__hero-image,
+  .has-js .case__block,
+  .has-js .case__section-title,
+  .has-js .case__section-body,
+  .has-js .case__gap-card,
+  .has-js .case__figure,
+  .has-js .case__outcome,
+  .has-js .case__pager {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+  /* slight stagger for items that enter as a group */
+  .has-js .case__block:nth-child(2),
+  .has-js .case__gap-card:nth-child(2) { transition-delay: 0.08s; }
+  .has-js .case__block:nth-child(3),
+  .has-js .case__gap-card:nth-child(3) { transition-delay: 0.16s; }
+  .has-js .case__block:nth-child(4) { transition-delay: 0.24s; }
+
+  .has-js .case__title.is-visible,
+  .has-js .case__intro.is-visible,
+  .has-js .case-meta--mobile.is-visible,
+  .has-js .case__hero-image.is-visible,
+  .has-js .case__block.is-visible,
+  .has-js .case__section-title.is-visible,
+  .has-js .case__section-body.is-visible,
+  .has-js .case__gap-card.is-visible,
+  .has-js .case__figure.is-visible,
+  .has-js .case__outcome.is-visible,
+  .has-js .case__pager.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ===== Swipe indicator (dots) under each mobile slider ===== */
+.case__dots { display: none; }
+
+@media (max-width: 640px) {
+  .case__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
+  }
+  .case__dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .case__dot.is-active {
+    background: rgba(0, 0, 0, 0.62);
+    transform: scale(1.3);
   }
 }
