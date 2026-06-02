@@ -2678,14 +2678,12 @@ body.case-page--fill .case__outcome-body p {
   .has-js .case__gap-card:nth-child(3) { transition-delay: 0.16s; }
   .has-js .case__block:nth-child(4) { transition-delay: 0.24s; }
 
-  /* Hero gets a more deliberate, staggered entrance on load:
-     title → intro → meta → cover, with the cover rising a little further. */
+  /* Gentle top→bottom cascade for the hero group on load. The cover uses the
+     SAME rise as everything else (no special bigger/longer move) so it reads
+     consistently and doesn't lurch. */
   .has-js .case__intro { transition-delay: 0.1s; }
-  .has-js .case-meta--mobile { transition-delay: 0.2s; }
-  .has-js .case__hero-image {
-    transition-delay: 0.3s;
-    transform: translateY(42px);
-  }
+  .has-js .case-meta--mobile { transition-delay: 0.15s; }
+  .has-js .case__hero-image { transition-delay: 0.2s; }
 
   .has-js .case__title.is-visible,
   .has-js .case__intro.is-visible,
