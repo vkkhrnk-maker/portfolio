@@ -1054,6 +1054,13 @@ body.case-page--fill .case__outcome-body p {
     object-fit: contain;
     border-radius: 0;
   }
+  /* A standalone card / component (not a full device screen). Because it's
+     wide-ish it would otherwise fill the plate width and look oversized — cap
+     it so it reads as a card floating on the plate, in line with the phones. */
+  .case__slider .case__shot--card {
+    max-width: 68%;
+    margin-inline: auto;
+  }
   /* The only full-bleed card: a tall screen feed that ignores the inset
      and reaches the edges on purpose (sides intact, excess height cropped
      from the bottom). */

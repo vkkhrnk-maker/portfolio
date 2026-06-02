@@ -79,6 +79,7 @@ Every `.case__slide` in a slider is one uniform **plate**:
 |------------|---------|------------------------------|
 | `--phone`  | a vertical phone mockup | fills the height (12px top/bottom), grey on the sides — expected |
 | `--desktop`| a horizontal desktop / web screen | fills the width (12px sides), grey top/bottom — expected |
+| `--card`   | a standalone card / component, NOT a full device screen (e.g. the pricing card) | capped to ~68% width and centred, so it reads as a card on the plate instead of blowing up to full width and looking gigantic |
 | `--fill`   | a full-bleed background plate (e.g. the gradient category panel) | `object-fit: cover`, absolutely positioned `inset:0` — the image **is** the whole plate background, bleeds all edges |
 | `--phone` + slide `--feed` | a vertical scroll feed | top/bottom padding removed so the feed cards bleed off the top & bottom like a continuous scroll; side margin stays. Add `case__slide--feed` to the slide `<div>` |
 
@@ -97,6 +98,10 @@ the product card.
    desktop fills the width; both sit on the identical plate.
 2. **Show screens big, never as runts.** A flow of phones is a swiped slider,
    never a single squeezed composite on mobile.
+2a. **But not gigantic.** Only full device screens fill the plate (phone →
+   height, desktop → width). A standalone card / component (near-square, not a
+   whole screen) must be capped (`--card`, ~68% width) so it doesn't blow up to
+   full width and dwarf the phones next to it.
 3. **`contain`, never crop** the actual screens — the two full-bleed exceptions
    are `--fill` (cover) and `--feed` (bleeds top/bottom) on purpose.
 4. **Always the same uniform slider** — never a full-width / stacked plate, even
