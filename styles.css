@@ -373,6 +373,7 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  position: relative; /* anchors the greeting bubble to the avatar itself */
   width: 72px;
   height: 72px;
   flex-shrink: 0;
@@ -1581,7 +1582,7 @@ body.case-page--fill .case__outcome-body p {
 .intro__avatar__bubble {
   position: absolute;
   bottom: calc(100% + 12px);
-  left: 36px; /* center on avatar (72/2) */
+  left: 50%; /* centered on the avatar (bubble is appended to the avatar) */
   /* Liquid glass: translucent body + backdrop blur + soft magenta glow */
   background: rgba(255, 255, 255, 0.55);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -2588,7 +2589,7 @@ body.case-page--fill .case__outcome-body p {
   }
 
   .intro__avatar__bubble {
-    left: 48px; /* center on the larger avatar (96/2) */
+    left: 50%;
   }
 
   /* About card title — mobile H4 (32/32) — same as Experience role for consistency */
@@ -2803,4 +2804,18 @@ body.case-page--fill .case__outcome-body p {
 }
 @media (prefers-reduced-motion: reduce) {
   .case__feed-track { animation: none; }
+}
+
+/* ===== Home cover: float the profile photo to the upper-right (desktop) =====
+   Counterweight to the bottom-left text; fills the empty top-right of the
+   cover. Below 1025px the photo stays inline with the greeting. */
+@media (min-width: 1025px) {
+  .intro__header { position: static; }
+  .intro__avatar {
+    position: absolute;
+    top: 120px;
+    right: var(--page-x);
+    width: 240px;
+    height: 240px;
+  }
 }
