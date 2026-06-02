@@ -2430,8 +2430,8 @@ body.case-page--fill .case__outcome-body p {
 }
 
 .footer__heart {
-  color: #eb454f;
-  font-size: 20px;
+  color: var(--text-primary);
+  font-size: inherit;
 }
 
 /* ===== Menu Drawer (mobile/tablet) ===== */
