@@ -2832,3 +2832,17 @@ body.case-page--fill .case__outcome-body p {
     height: 240px;
   }
 }
+
+/* ===== Footer area on mobile: tighter (system) spacing + bolder CTA ===== */
+@media (max-width: 640px) {
+  /* The ~100px section gap is too much around the footer. Pull the CTA and the
+     footer up to a 40px (system token) gap — without touching the top spacing
+     (which shares the same flex gap). */
+  .contact { margin-top: calc(var(--space-40) - var(--section-y)); }
+  .footer {
+    margin-top: calc(var(--space-40) - var(--section-y));
+    padding: var(--space-40) var(--page-x);
+  }
+  /* Drop-me-a-message: bolder, ~2x taller than before. */
+  .contact__btn { height: 160px; }
+}
