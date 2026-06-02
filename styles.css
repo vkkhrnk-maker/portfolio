@@ -530,6 +530,14 @@ img {
   isolation: isolate;
 }
 
+/* Mobile: the default landscape ratio is a bit short on phones — give the
+   cover some more height. Scoped away from iTAB's split cover. */
+@media (max-width: 640px) {
+  .case__hero-image:not(.case__hero-image--itab) {
+    aspect-ratio: 1.2;
+  }
+}
+
 /* Cloud layers — same source PNG, positioned/scaled differently for
    back (drifting wide behind the phone) and front (smaller, slightly
    more visible). */
