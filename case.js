@@ -110,8 +110,8 @@
     if (cards.length < 4) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const FLICK = 800;        // ms of glide
-    const PAUSE = 1700;       // ms to read before the next flick
+    const FLICK = 700;        // ms of glide
+    const PAUSE = 1200;       // ms to read before the next flick
     const EASE = 'cubic-bezier(0.33, 1, 0.68, 1)'; // easeOutCubic — smooth, no lurch
     const REAL = cards.length - 3; // real cards (clones: 1 before, 2 after)
     const START = 1;               // first real card index
