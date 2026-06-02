@@ -1012,8 +1012,10 @@ body.case-page--fill .case__outcome-body p {
   .case__feed-track {
     position: absolute;
     top: 0;
-    left: 20px;
-    right: 20px;
+    /* Wider side margins => narrower, ~1.2x smaller cards, so even the tallest
+       card fits the window with breathing room and the neighbours peek. */
+    left: 44px;
+    right: 44px;
     width: auto;
     display: flex;
     flex-direction: column;
