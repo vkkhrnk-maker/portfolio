@@ -1695,6 +1695,17 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
   background-color: var(--grey-200);
   position: relative;
+  transition: background-color 0.25s ease, transform 0.18s ease;
+}
+
+/* Feedback for the whole (clickable) card: a subtle background darken on
+   hover, and a darker + slight press-in on tap/click — works on touch too. */
+@media (hover: hover) {
+  .project-card:hover { background-color: #d6d9dd; }
+}
+.project-card:active {
+  background-color: #ced2d7;
+  transform: scale(0.99);
 }
 
 /* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
@@ -1855,6 +1866,31 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Hooh card — single centered phone with the looping app video */
+.project-card__phones--single {
+  justify-content: center;
+}
+
+/* Looping app video inside a slim phone body (so it reads as a real phone,
+   not a bare cropped screen). */
+.project-card__phone-video {
+  flex: 0 0 auto;
+  width: 26%;
+  aspect-ratio: 285 / 619.627;
+  background: #1b1b1d;                 /* phone body / bezel */
+  border-radius: 32px;
+  padding: 4px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.20);
+}
+
+.project-card__phone-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 28px;                 /* inner screen corner */
 }
 
 /* iTAB card — two screenshots, centered as a 944px group */

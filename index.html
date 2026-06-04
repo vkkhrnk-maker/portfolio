@@ -23,7 +23,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=110">
+  <link rel="stylesheet" href="styles.css?v=113">
 </head>
 <body>
   <aside class="sidebar">
@@ -78,19 +78,12 @@
               <img src="assets/arrow.svg" alt="">
             </a>
           </header>
-          <div class="project-card__phones">
-            <picture>
-              <source srcset="assets/hooh-3.webp" type="image/webp">
-              <img class="project-card__phone" src="assets/hooh-3.png" alt="Hooh — chat with assistant" loading="lazy">
-            </picture>
-            <picture>
-              <source srcset="assets/hooh-1.webp" type="image/webp">
-              <img class="project-card__phone" src="assets/hooh-1.png" alt="Hooh — upload document" loading="lazy">
-            </picture>
-            <picture>
-              <source srcset="assets/hooh-2.webp" type="image/webp">
-              <img class="project-card__phone" src="assets/hooh-2.png" alt="Hooh — blood test results" loading="lazy">
-            </picture>
+          <div class="project-card__phones project-card__phones--single">
+            <div class="project-card__phone-video">
+              <video src="assets/hooh-cover.mp4" poster="assets/hooh-cover-poster.jpg"
+                     autoplay loop muted playsinline preload="metadata"
+                     aria-label="Hooh app walkthrough — upload, AI summary and assistant chat"></video>
+            </div>
           </div>
         </div>
       </article>
