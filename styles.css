@@ -2886,3 +2886,85 @@ body.case-page--fill .case__outcome-body p {
   /* Drop-me-a-message: bolder, ~2x taller than before. */
   .contact__btn { height: 160px; }
 }
+
+/* ===== Home project cards as two-panel splits (desktop ≥1025): the project
+   visual on the left, the title + description + CTA on the right (Solflare-
+   style). Below 1025px the existing tile/stacked layouts stay. ===== */
+@media (min-width: 1025px) {
+  .project-card__inner,
+  .project-card--itab .project-card__inner {
+    aspect-ratio: auto;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+    gap: 56px;
+    padding: 48px 56px;
+    box-sizing: border-box;
+  }
+
+  /* Text -> right panel */
+  .project-card__header,
+  .project-card__header--itab {
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    order: 2;
+    flex: 0 1 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    grid-template-columns: none;
+  }
+  .project-card__title,
+  .project-card__subtitle {
+    grid-column: auto;
+    grid-row: auto;
+    max-width: none;
+    white-space: normal;
+  }
+  .project-card__header .arrow-btn {
+    grid-column: auto;
+    grid-row: auto;
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  /* Visual -> left panel */
+  .project-card__phones,
+  .project-card__itab-group {
+    position: static;
+    top: auto;
+    left: auto;
+    transform: none;
+    order: 1;
+    flex: 1 1 60%;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .project-card__phone-video {
+    width: auto;
+    height: 420px;
+  }
+  /* iTAB: show the phone mockup (the main composite is a long vertical strip
+     that doesn't suit a side panel); hide that strip. */
+  .project-card__itab-group {
+    aspect-ratio: auto;
+    height: auto;
+  }
+  .project-card__itab-main { display: none; }
+  .project-card__itab-side {
+    position: static;
+    top: auto;
+    left: auto;
+    display: block;
+    width: auto;
+    height: 420px;
+    aspect-ratio: 284 / 637;
+    object-fit: cover;
+  }
+}
