@@ -1868,21 +1868,25 @@ body.case-page--fill .case__outcome-body p {
   object-fit: cover;
 }
 
-/* Hooh card — single centered phone with the looping app video */
+/* Hooh card — single centered phone with the looping app video.
+   container-type lets the phone's corner radius scale with its own width
+   (cqw), so it always reads like a real iPhone corner at any screen size. */
 .project-card__phones--single {
   justify-content: center;
+  container-type: inline-size;
 }
 
-/* Looping app video inside a slim phone body (so it reads as a real phone,
-   not a bare cropped screen). */
+/* Clean app mock — the bare looping screen, no device body (matches the sibling
+   cards, drops the bezel/seam fuss). Soft corners + shadow + hairline so the
+   white screens lift cleanly off the grey card. */
 .project-card__phone-video {
   flex: 0 0 auto;
-  width: 26%;
-  aspect-ratio: 285 / 619.627;
-  background: #1b1b1d;                 /* phone body / bezel */
-  border-radius: 32px;
-  padding: 4px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.20);
+  width: 31%;                          /* match the sibling cards' phones */
+  aspect-ratio: 588 / 1280;            /* the screen itself (the recording's own ratio) */
+  border-radius: 2cqw;                 /* soft iOS-screen corners, scales with width */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);   /* lighter — just enough lift off the card */
+  border: 0.5px solid rgba(0, 0, 0, 0.06);
+  overflow: hidden;                    /* clip the video to the rounded corners */
 }
 
 .project-card__phone-video video {
@@ -1890,7 +1894,7 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 28px;                 /* inner screen corner */
+  border-radius: inherit;
 }
 
 /* iTAB card — two screenshots, centered as a 944px group */
