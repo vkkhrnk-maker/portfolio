@@ -1905,10 +1905,13 @@ body.case-page--fill .case__outcome-body p {
   container-type: inline-size;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
   /* Chrome height is clamped so it reads as a real browser bar; the
-     page header img scales with width (cqw) so it stays in proportion
-     to the screenshot. Body sits below both. */
+     page header img and the body's own redundant top nav scale with
+     width (cqw) so they stay in proportion to the screenshot. */
   --chrome-h: clamp(36px, 4cqw, 44px);
-  --header-h: 9.17cqw;  /* = 110/1200 of container width (image natural aspect) */
+  --header-h: 9.17cqw;  /* page-nav img: 110/1200 of container width */
+  --body-trim-top: 15cqw; /* hides the redundant green nav at the top
+                             of the body export so initial view is the
+                             product hero, not yet another nav bar */
 }
 
 /* Browser chrome bar — fixed at the very top, on top of everything.
@@ -1966,13 +1969,13 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
 }
 
-/* Body screenshot — sits below chrome + page nav (so the breadcrumb
-   is visible at rest, not hidden behind the nav). As body scrolls up,
-   its top slides under the page nav, then under the chrome — exactly
-   how real fixed headers behave. */
+/* Body screenshot — sits below chrome + page nav, then offset UP by
+   var(--body-trim-top) so the redundant green app-bar at the top of
+   the body export is hidden behind the sticky page nav. At rest the
+   first visible content is the product hero (bottle photo + price). */
 .project-card__itab-main__body {
   position: absolute;
-  top: calc(var(--chrome-h) + var(--header-h));
+  top: calc(var(--chrome-h) + var(--header-h) - var(--body-trim-top));
   left: 0;
   width: 100%;
   height: auto;
@@ -2012,11 +2015,11 @@ body.case-page--fill .case__outcome-body p {
 
 @keyframes itab-scroll {
   from { transform: translateY(0); }
-  /* -71% aligns the bottom of the body with the bottom of the card's
-     visible viewport at the 1040/693 card aspect ratio (the card's
-     own overflow:hidden clips at 81% of its height; chrome + page
-     header eat ~85px from the top). */
-  to   { transform: translateY(-71%); }
+  /* Small parallax — body shifts ~25% so the visible area stays inside
+     the visually rich top of the page (product hero → description →
+     into the start of characteristics). Goes no further so we never
+     land on the body's natural between-section whitespace gaps. */
+  to   { transform: translateY(-25%); }
 }
 
 /* Users who opt out of motion get the static top-of-page view. */
