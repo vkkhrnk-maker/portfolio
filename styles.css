@@ -1907,11 +1907,9 @@ body.case-page--fill .case__outcome-body p {
   border-radius: 1.2cqw 1.2cqw 0 0;
   container-type: inline-size;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
-  /* Chrome height is clamped so it reads as a real browser bar; the
-     page header img scales with width (cqw) so it stays in proportion
-     to the screenshot. */
+  /* Chrome height is clamped so it reads as a real browser bar
+     regardless of card width — like a real Chrome/Safari toolbar. */
   --chrome-h: clamp(36px, 4cqw, 44px);
-  --header-h: 9.17cqw;  /* page-nav img: 110/1200 of container width */
 }
 
 /* Browser chrome bar — fixed at the very top, on top of everything.
@@ -1969,31 +1967,38 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
 }
 
-/* Body screenshot — sits below chrome + page nav. Auto-scrolls down
-   then back up in a single seamless cycle (per Local Creative's
-   scrolling-mockup tutorial — down-and-back-up loops avoid the jarring
-   reset of a one-way loop). Range is kept tight (0 → -15%) so the
-   visible viewport stays inside the product hero / description area
-   and never lands on the body's natural between-section whitespace. */
+/* Body screenshot — sits directly below the browser chrome (no extra
+   sticky page-nav layer — the page's own nav is at the top of the
+   body image and scrolls with it, like real Safari without a forced
+   sticky bar).
+
+   Animation pattern: hold → scroll one screen → hold → scroll back.
+   Mimics how a real user reads a page: lands → reads (long hold) →
+   page-down (quick) → reads (medium hold) → returns to top. Feels
+   intentional instead of an always-moving ticker. */
 .project-card__itab-main__body {
   position: absolute;
-  top: calc(var(--chrome-h) + var(--header-h));
+  top: var(--chrome-h);
   left: 0;
   width: 100%;
   height: auto;
   display: block;
   z-index: 1;
   will-change: transform;
-  animation: itab-scroll-loop 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation: itab-scroll-loop 13s ease-in-out infinite;
 }
 
 @keyframes itab-scroll-loop {
-  /* Hold at top briefly so a fresh arrival sees the product hero, scroll
-     down, hold at the bottom of the range, scroll back. Holds at the two
-     ends remove the "always moving, never settles" feeling. */
-  0%, 8%   { transform: translateY(0); }
-  50%, 58% { transform: translateY(-15%); }
-  100%     { transform: translateY(0); }
+  /* 0 → 32%: hold at the top of the page (≈4.2s read product hero) */
+  0%, 32%   { transform: translateY(0); }
+  /* 32 → 42%: quick page-down (≈1.3s — feels like a real scroll gesture) */
+  42%       { transform: translateY(-27%); }
+  /* 42 → 68%: hold on second screen (≈3.4s read description / tabs) */
+  68%       { transform: translateY(-27%); }
+  /* 68 → 78%: scroll back to the top (≈1.3s) */
+  78%       { transform: translateY(0); }
+  /* 78 → 100%: brief settle at the top (≈2.9s) before looping */
+  100%      { transform: translateY(0); }
 }
 
 /* Pause the loop on hover so the viewer can actually look at what they
@@ -2002,18 +2007,6 @@ body.case-page--fill .case__outcome-body p {
   .project-card:hover .project-card__itab-main__body {
     animation-play-state: paused;
   }
-}
-
-/* Page nav (white iTAB header) — fixed just below the browser chrome,
-   above the body screenshot. */
-.project-card__itab-main__header {
-  position: absolute;
-  top: var(--chrome-h);
-  left: 0;
-  width: 100%;
-  height: auto;
-  display: block;
-  z-index: 2;
 }
 
 /* Users who opt out of motion get the static top-of-page view. */
