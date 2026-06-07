@@ -1752,23 +1752,12 @@ body.case-page--fill .case__outcome-body p {
 .project-card__inner {
   position: relative;
   width: 100%;
-  /* Default 1040/700; the Hooh card needs +150px height so the 3
-     phone shots don't get clipped at the bottom (3-phone row needs
-     ≥812px to fit at the existing 20.83% top offset). */
-  aspect-ratio: 1040 / 850;
+  /* 1040/740: ~13% shorter than the prior 1040/850. Inner phones and
+     iTAB group are scaled down via their container widths so the
+     bottom clip ratio stays roughly the same. Both Hooh and iTAB
+     cover tiles share this ratio. */
+  aspect-ratio: 1040 / 740;
   overflow: hidden;
-}
-
-.project-card--itab .project-card__inner {
-  /* Match the Hooh card so both cover tiles share the same height in
-     the 2-column grid on the home page. The long iTAB screenshot
-     already uses object-fit: cover from top, so the extra height
-     simply reveals a bit more of it. */
-  aspect-ratio: 1040 / 850;
-}
-
-.project-card__inner--itab {
-  aspect-ratio: 1040 / 700;
 }
 
 .project-card__header {
@@ -1838,7 +1827,7 @@ body.case-page--fill .case__outcome-body p {
   top: 20.83%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90.9%;
+  width: 79.13%;
   display: flex;
   align-items: flex-start;
   gap: 3.08%;
@@ -1901,12 +1890,12 @@ body.case-page--fill .case__outcome-body p {
 
 .project-card__itab-group {
   position: absolute;
-  /* Match the Hooh card's edge padding to the screenshots:
-     top 20.83% and width 90.9% (was 18.82% / 94.4%). */
+  /* Width scaled down (from 90.9%) to match the new narrower phones row
+     on the Hooh card; height fills from top:20.83% to the card bottom. */
   top: 20.83%;
   left: 50%;
   transform: translateX(-50%);
-  width: 90.9%;
+  width: 79.13%;
   height: 79.17%;
 }
 
