@@ -1989,24 +1989,33 @@ body.case-page--fill .case__outcome-body p {
 }
 
 @keyframes itab-scroll-loop {
-  /* Asymmetric loop — slow steady scroll down (mimics a reader going
-     page-by-page), bouncy rubber-band at the bottom, then a snappy
-     snap-back to the top (≈2× faster than the down phase), followed
-     by a longer breath at the top before the next loop. The fast
-     return feels intentional/bold rather than just rewinding at the
-     same pace.
+  /* Asymmetric loop, with two refinements over the previous version:
+
+     1) Rest-position is translateY(-5%) instead of 0. The very top
+        of the body export is the white promo toolbar above the
+        product hero — sitting on it for the long top-hold read as
+        a blank-white screen. -5% drops the toolbar behind the chrome
+        and centers the product card (bottle + price + green CTA),
+        which is far more visually present.
+
+     2) The bottom bounce now recoils INWARD (to -67%) rather than
+        overshooting past -70%. The visible viewport is exactly the
+        body's full height at translateY(-70.6%); anything past that
+        exposes the white card background BELOW the body and flashes
+        as a white strip at the bottom. Recoiling up to -67% keeps
+        the rubber-band feel without ever crossing that safe edge.
 
      Sequence:
-     - 0-4%:   brief hold at top (page loaded)
-     - 4-48%:  linear scroll down to footer (≈4s, the 'reading' phase)
-     - 48-52%: rubber-band overshoot at the bottom
-     - 52-72%: snap back to the top, ~2× faster (≈1.8s)
-     - 72-100%: hold at top (≈2.5s breath before relooping) */
-  0%, 4%    { transform: translateY(0); }
+     - 0-4%:   hold at the product hero (-5%)
+     - 4-48%:  linear scroll down to footer (-70%)
+     - 48-52%: rubber-band recoil up to -67% then settle to -70%
+     - 52-72%: snap back to product hero, ≈2× faster than the scroll-down
+     - 72-100%: hold (2.5s breath before relooping) */
+  0%, 4%    { transform: translateY(-5%); }
   48%       { transform: translateY(-70%); }
-  50%       { transform: translateY(-72%); }
+  50%       { transform: translateY(-67%); }
   52%       { transform: translateY(-70%); }
-  72%, 100% { transform: translateY(0); }
+  72%, 100% { transform: translateY(-5%); }
 }
 
 /* Pause the loop on hover so the viewer can actually look at what they
