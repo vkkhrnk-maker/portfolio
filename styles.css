@@ -1752,11 +1752,10 @@ body.case-page--fill .case__outcome-body p {
 .project-card__inner {
   position: relative;
   width: 100%;
-  /* 1040/740: ~13% shorter than the prior 1040/850. Inner phones and
-     iTAB group are scaled down via their container widths so the
-     bottom clip ratio stays roughly the same. Both Hooh and iTAB
-     cover tiles share this ratio. */
-  aspect-ratio: 1040 / 740;
+  /* 1040/693 — classic 3:2 landscape. Inner phones and iTAB group are
+     scaled down via their container widths so the bottom clip ratio
+     stays roughly the same. Both Hooh and iTAB tiles share this ratio. */
+  aspect-ratio: 1040 / 693;
   overflow: hidden;
 }
 
@@ -1827,7 +1826,7 @@ body.case-page--fill .case__outcome-body p {
   top: 20.83%;
   left: 50%;
   transform: translateX(-50%);
-  width: 79.13%;
+  width: 74.10%;
   display: flex;
   align-items: flex-start;
   gap: 3.08%;
@@ -1890,12 +1889,12 @@ body.case-page--fill .case__outcome-body p {
 
 .project-card__itab-group {
   position: absolute;
-  /* Width scaled down (from 90.9%) to match the new narrower phones row
-     on the Hooh card; height fills from top:20.83% to the card bottom. */
+  /* Width scaled to match the narrower phones row on the Hooh card;
+     height fills from top:20.83% to the card bottom. */
   top: 20.83%;
   left: 50%;
   transform: translateX(-50%);
-  width: 79.13%;
+  width: 74.10%;
   height: 79.17%;
 }
 
