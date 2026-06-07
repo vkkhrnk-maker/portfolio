@@ -2018,10 +2018,12 @@ body.case-page--fill .case__outcome-body p {
   72%, 100% { transform: translateY(-5%); }
 }
 
-/* Pause the loop on hover so the viewer can actually look at what they
-   stopped on (matches the existing hover-zoom on the itab-group). */
+/* Pause the loop on hover so the viewer can look at what they stopped
+   on — but only when the cursor is over the browser frame itself, not
+   the whole card. Hovering the title, arrow, or the side phone keeps
+   the loop running (less twitchy when the cursor just passes by). */
 @media (hover: hover) {
-  .project-card:hover .project-card__itab-main__body {
+  .project-card__itab-main:hover .project-card__itab-main__body {
     animation-play-state: paused;
   }
 }
