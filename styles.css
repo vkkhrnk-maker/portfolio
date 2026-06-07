@@ -97,14 +97,13 @@
   }
 }
 
-/* Phone-only (≤640px): shrink the H1 so the cover headline 'I design
-   complex digital products and scalable systems' fits in 3-4 lines
-   without overflowing on shorter phones. Same 42/46 the case study
-   pages were already using — so the cover H1 and the case H1 now
-   read at the same size on phone instead of differing by ±2px. */
+/* Phone-only (≤640px): H1 lands at 50/54 — golden middle between the
+   shouty 62/64 (which overflowed past the viewport bottom) and the
+   too-quiet 42/46. Same value drives both the cover hero and the
+   case headlines so they read at one size on phone. */
 @media (max-width: 640px) {
   :root {
-    --fs-h1: 42px;          --lh-h1: 46px;
+    --fs-h1: 50px;          --lh-h1: 54px;
   }
 }
 
@@ -2649,17 +2648,17 @@ body.case-page--fill .case__outcome-body p {
 /* ===== Mobile/tablet overrides — must come after base rules ===== */
 
 @media (max-width: 1199px) {
-  /* Profile section: per Figma 527:28140 — column with topbar + 120 gap + intro,
-     items span full width. justify-content:center pairs with the explicit
-     gap so the group sits centered as one block instead of stretching
-     the gap to fill the viewport with empty space. Horizontal padding
-     dropped — the topbar inset is handled by its own padding, and the
-     intro gets its own --page-x inset below. */
+  /* Profile section: topbar pinned to top, intro pinned to bottom,
+     auto gap between. Vertical padding stays small (12px) so the
+     topbar sits close to the screen edge. Horizontal padding dropped
+     — the topbar inset is handled by its own padding, and the intro
+     gets its own --page-x inset below. */
   .profile-section {
+    padding-block: 12px;
     padding-inline: 0;
-    justify-content: center;
+    justify-content: space-between;
     align-items: stretch;
-    gap: var(--space-120);
+    gap: 0;
   }
 
   .intro {
