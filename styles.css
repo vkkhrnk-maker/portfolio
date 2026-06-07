@@ -1904,19 +1904,26 @@ body.case-page--fill .case__outcome-body p {
   border-radius: 1.2cqw 1.2cqw 0 0;
   container-type: inline-size;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
+  /* Chrome height is clamped so it reads as a real browser bar; the
+     page header img scales with width (cqw) so it stays in proportion
+     to the screenshot. Body sits below both. */
+  --chrome-h: clamp(36px, 4cqw, 44px);
+  --header-h: 9.17cqw;  /* = 110/1200 of container width (image natural aspect) */
 }
 
-/* Browser chrome bar — fixed at the very top, on top of everything */
+/* Browser chrome bar — fixed at the very top, on top of everything.
+   Uses clamp() so it reads as a real browser chrome (38-44px tall) at
+   every card size, instead of scaling with width like CSS content. */
 .project-card__itab-main__chrome {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 7.5cqw;
+  height: var(--chrome-h);
   display: flex;
   align-items: center;
-  padding: 0 2cqw;
-  gap: 1.5cqw;
+  padding: 0 clamp(12px, 1.5cqw, 18px);
+  gap: clamp(10px, 1cqw, 14px);
   background: #ECECEC;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   z-index: 3;
@@ -1924,13 +1931,13 @@ body.case-page--fill .case__outcome-body p {
 
 .project-card__itab-main__dots {
   display: flex;
-  gap: 1cqw;
+  gap: clamp(5px, 0.5cqw, 7px);
   flex: 0 0 auto;
 }
 
 .project-card__itab-main__dots > span {
-  width: 2.3cqw;
-  height: 2.3cqw;
+  width: clamp(10px, 1.1cqw, 13px);
+  height: clamp(10px, 1.1cqw, 13px);
   border-radius: 50%;
   display: block;
 }
@@ -1940,15 +1947,16 @@ body.case-page--fill .case__outcome-body p {
 .project-card__itab-main__dots > span:nth-child(3) { background: #28C840; }
 
 .project-card__itab-main__url {
-  flex: 1;
+  flex: 0 1 auto;
   margin-inline: auto;
-  max-width: 55%;
+  min-width: clamp(140px, 18cqw, 240px);
+  max-width: clamp(180px, 30cqw, 320px);
   background: #fff;
   border-radius: 99px;
-  padding: 1.1cqw 2.4cqw;
+  padding: clamp(4px, 0.5cqw, 6px) clamp(10px, 1.4cqw, 16px);
   font-family: var(--font-body);
-  font-size: 2.4cqw;
-  line-height: 1.2;
+  font-size: clamp(11px, 1.2cqw, 13px);
+  line-height: 1.3;
   color: #6B6B6B;
   letter-spacing: 0;
   border: 1px solid rgba(0, 0, 0, 0.06);
@@ -1958,16 +1966,13 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
 }
 
-/* Body screenshot — sits below the chrome AND the page nav (so the
-   breadcrumb is visible at rest, not hidden behind the nav). As the
-   body scrolls up, its top slides under the page nav, then under the
-   chrome bar — exactly how real fixed headers behave.
-
-   16.67cqw = chrome 7.5cqw + header display height 9.17cqw
-   (header is 1200×110, displayed at 100cqw wide → 9.17cqw tall). */
+/* Body screenshot — sits below chrome + page nav (so the breadcrumb
+   is visible at rest, not hidden behind the nav). As body scrolls up,
+   its top slides under the page nav, then under the chrome — exactly
+   how real fixed headers behave. */
 .project-card__itab-main__body {
   position: absolute;
-  top: 16.67cqw;
+  top: calc(var(--chrome-h) + var(--header-h));
   left: 0;
   width: 100%;
   height: auto;
@@ -1997,7 +2002,7 @@ body.case-page--fill .case__outcome-body p {
    above the scrolling body but below the chrome bar. */
 .project-card__itab-main__header {
   position: absolute;
-  top: 7.5cqw;
+  top: var(--chrome-h);
   left: 0;
   width: 100%;
   height: auto;
