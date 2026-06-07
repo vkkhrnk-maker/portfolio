@@ -1989,23 +1989,24 @@ body.case-page--fill .case__outcome-body p {
 }
 
 @keyframes itab-scroll-loop {
-  /* Linear motion — feels like steady human scroll rather than the
-     "snail at the ends" softness of ease-in-out, which made the top
-     of the page (mostly white product-card hero) sit for too long
-     and read as a blank screen.
+  /* Asymmetric loop — slow steady scroll down (mimics a reader going
+     page-by-page), bouncy rubber-band at the bottom, then a snappy
+     snap-back to the top (≈2× faster than the down phase), followed
+     by a longer breath at the top before the next loop. The fast
+     return feels intentional/bold rather than just rewinding at the
+     same pace.
 
      Sequence:
-     - brief hold at the top (0-4%) — reads as 'page loaded'
-     - smooth scroll down to footer (4-48%)
-     - quick overshoot bounce at the bottom (48-52%) — the rubber-band
-       feel that real touch scrolls have
-     - smooth scroll back to the top (52-96%)
-     - brief hold at top (96-100%) before the next loop */
+     - 0-4%:   brief hold at top (page loaded)
+     - 4-48%:  linear scroll down to footer (≈4s, the 'reading' phase)
+     - 48-52%: rubber-band overshoot at the bottom
+     - 52-72%: snap back to the top, ~2× faster (≈1.8s)
+     - 72-100%: hold at top (≈2.5s breath before relooping) */
   0%, 4%    { transform: translateY(0); }
   48%       { transform: translateY(-70%); }
   50%       { transform: translateY(-72%); }
   52%       { transform: translateY(-70%); }
-  96%, 100% { transform: translateY(0); }
+  72%, 100% { transform: translateY(0); }
 }
 
 /* Pause the loop on hover so the viewer can actually look at what they
