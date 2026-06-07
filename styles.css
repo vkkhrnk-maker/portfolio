@@ -1897,7 +1897,9 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* Body screenshot — slides up under the fixed header in a slow loop so
-   the card reads as 'someone scrolling the page'. */
+   the card reads as 'someone scrolling the page'.
+   will-change + translateZ(0) promote the layer to the GPU so the
+   long-distance translate stays smooth on a large image. */
 .project-card__itab-main__body {
   position: absolute;
   top: 0;
@@ -1905,7 +1907,9 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
   height: auto;
   display: block;
-  animation: itab-scroll 24s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: itab-scroll 14s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
 }
 
 /* Sticky page header — pinned at the top of the viewport, stays put while
