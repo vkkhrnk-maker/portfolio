@@ -1985,18 +1985,27 @@ body.case-page--fill .case__outcome-body p {
   display: block;
   z-index: 1;
   will-change: transform;
-  animation: itab-scroll-loop 6s ease-in-out infinite alternate;
+  animation: itab-scroll-loop 9s linear infinite;
 }
 
 @keyframes itab-scroll-loop {
-  /* Continuous scroll from the top of the page (product hero) all the
-     way down to the footer area. `alternate` plays this forward then
-     reverses on the next cycle, so the body smoothly goes top → bottom
-     → top → bottom indefinitely with no jarring reset. -70% leaves
-     the body bottom roughly aligned with the bottom of the visible
-     viewport — covers the whole page top to footer. */
-  from { transform: translateY(0); }
-  to   { transform: translateY(-70%); }
+  /* Linear motion — feels like steady human scroll rather than the
+     "snail at the ends" softness of ease-in-out, which made the top
+     of the page (mostly white product-card hero) sit for too long
+     and read as a blank screen.
+
+     Sequence:
+     - brief hold at the top (0-4%) — reads as 'page loaded'
+     - smooth scroll down to footer (4-48%)
+     - quick overshoot bounce at the bottom (48-52%) — the rubber-band
+       feel that real touch scrolls have
+     - smooth scroll back to the top (52-96%)
+     - brief hold at top (96-100%) before the next loop */
+  0%, 4%    { transform: translateY(0); }
+  48%       { transform: translateY(-70%); }
+  50%       { transform: translateY(-72%); }
+  52%       { transform: translateY(-70%); }
+  96%, 100% { transform: translateY(0); }
 }
 
 /* Pause the loop on hover so the viewer can actually look at what they
