@@ -2717,10 +2717,34 @@ body.case-page--fill .case__outcome-body p {
     gap: 8px;
   }
 
-  /* Menu link in the top-right corner — sits at the same vertical
-     baseline as the first pill so the eye lands on both at once. */
-  .mobile-topbar__menu {
-    padding-top: 10px;
+  /* Menu icon button in the top-right corner — a circular 40×40 chip
+     with the Material 'menu' three-bar icon. Matches the height of
+     the CV/LinkedIn/Email pills so the top of the cover reads as one
+     consistent button strip across both sides. */
+  .mobile-topbar__menu-btn {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: var(--button-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  .mobile-topbar__menu-btn:hover { opacity: 0.85; }
+  .mobile-topbar__menu-btn:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 3px;
+  }
+  .mobile-topbar__menu-btn svg {
+    display: block;
+    width: 20px;
+    height: 20px;
   }
 
   .mobile-topbar__link {

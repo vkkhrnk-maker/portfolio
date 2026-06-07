@@ -23,7 +23,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=153">
+  <link rel="stylesheet" href="styles.css?v=154">
 </head>
 <body>
   <aside class="sidebar">
@@ -58,7 +58,11 @@
           <a class="btn btn--light" href="#">LinkedIn</a>
           <a class="btn btn--light" href="#">Email</a>
         </div>
-        <a class="mobile-topbar__link mobile-topbar__menu" href="#" data-menu-open>Menu</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
       </div>
       <div class="intro">
         <div class="intro__header">
