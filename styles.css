@@ -1341,36 +1341,16 @@ body.case-page--fill .case__outcome-body p {
 .case__pager-btn--prev:hover { transform: translateX(-3px); }
 .case__pager-btn--next:hover { transform: translateX(3px); }
 
-/* On desktop (1200+) drop the 780px cap inside 2-column grids
+/* On desktop (1200+) drop the 780px cap inside 2-column block grids
    (Problem/Task/Users/What we launched + outcome) so each column's
-   body fills its grid cell. Single-column sections (Design process,
-   Progressive Disclosure intro, etc.) keep the 780 readability cap. */
+   body fills its grid cell. Prose sections (.case__section — Design
+   process, Progressive Disclosure, etc.) stay single-column at every
+   width: title on top, body below, the 780px readability cap stands. */
 @media (min-width: 1200px) {
   .case__block-body,
   .case__outcome-body,
   .case__outcome-body p {
     max-width: none;
-  }
-
-  /* Two-column section layout: title in left column, body / list in
-     right column, figures span the full width below. Applies to
-     plain prose sections (Design process, Progressive Disclosure,
-     Conversational experience, Document expression). */
-  .case__section {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: 24px;
-    row-gap: 24px;
-  }
-  .case__section-title {
-    grid-column: 1;
-  }
-  .case__section-body,
-  .case__list {
-    grid-column: 2;
-  }
-  .case__figure {
-    grid-column: 1 / -1;
   }
 }
 
