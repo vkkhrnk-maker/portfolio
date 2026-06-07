@@ -547,6 +547,51 @@
       });
     })();
 
+    /* Hooh phone-video: belt-and-braces autoplay. The video has muted +
+       playsinline + autoplay attrs, which should be enough, but some
+       browsers (Safari in low-power mode, mobile browsers when the tab
+       wasn't focused at first paint) silently skip autoplay. Manually
+       call play() when the card enters the viewport, when the tab
+       becomes visible, and on the first user gesture. play() returns a
+       promise — swallow the rejection so we don't pollute the console. */
+    (() => {
+      const video = document.querySelector('.project-card__phone-video video');
+      if (!video) return;
+
+      const tryPlay = () => {
+        const p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      };
+
+      // Start as soon as the card scrolls into view (uses Intersection
+      // Observer so we don't burn CPU on every scroll event).
+      const card = video.closest('.project-card');
+      if (card && 'IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting && video.paused) tryPlay();
+          }
+        }, { threshold: 0.1 }).observe(card);
+      } else {
+        tryPlay();
+      }
+
+      // Resume when the tab regains focus (some browsers pause on hide).
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible' && video.paused) tryPlay();
+      });
+
+      // Last resort: try again on the first user gesture anywhere.
+      const onFirstGesture = () => {
+        if (video.paused) tryPlay();
+        ['pointerdown', 'touchstart', 'keydown'].forEach((evt) =>
+          window.removeEventListener(evt, onFirstGesture)
+        );
+      };
+      ['pointerdown', 'touchstart', 'keydown'].forEach((evt) =>
+        window.addEventListener(evt, onFirstGesture, { passive: true, once: true })
+      );
+    })();
   </script>
 </body>
 </html>
