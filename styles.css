@@ -1892,10 +1892,54 @@ body.case-page--fill .case__outcome-body p {
   left: 0;
   top: 0;
   width: 66.95%;
-  aspect-ratio: 632 / 2139;
+  aspect-ratio: 2880 / 9264;   /* matches the body screenshot */
+  overflow: hidden;
+}
+
+/* Body screenshot — slides up under the fixed header in a slow loop so
+   the card reads as 'someone scrolling the page'. */
+.project-card__itab-main__body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: auto;
-  object-fit: cover;
-  object-position: top center;
+  display: block;
+  animation: itab-scroll 24s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+/* Sticky page header — pinned at the top of the viewport, stays put while
+   body scrolls under it. */
+.project-card__itab-main__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 2;
+}
+
+@keyframes itab-scroll {
+  from { transform: translateY(0); }
+  /* -66% leaves the bottom of the body roughly aligned with the bottom
+     of the visible viewport at the 1040/693 card aspect ratio. */
+  to   { transform: translateY(-66%); }
+}
+
+/* Pause the scroll on hover so a user can actually look at where the
+   screenshot stopped (companion to the existing hover-zoom transform). */
+@media (hover: hover) {
+  .project-card:hover .project-card__itab-main__body {
+    animation-play-state: paused;
+  }
+}
+
+/* Respect users who opt out of motion — no scroll, body sits at the top. */
+@media (prefers-reduced-motion: reduce) {
+  .project-card__itab-main__body {
+    animation: none;
+  }
 }
 
 .project-card__itab-side {
