@@ -845,11 +845,13 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* On phones tighten the page edge padding to 8px so figures and the
-   single-column copy use more of the screen width. */
+/* On phones edge padding is 12px — 8px felt too tight against the
+   screen edge; 24px (the tablet value) felt cramped on the content;
+   12px lets the cards / figures use almost the full width while
+   keeping the content visually 'breathing' a hair off the edge. */
 @media (max-width: 640px) {
   :root {
-    --page-x: 8px;
+    --page-x: 12px;
   }
 }
 
