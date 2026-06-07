@@ -2858,9 +2858,13 @@ body.case-page--fill .case__outcome-body p {
 }
 
 
-/* ===== Final overrides: section padding-left when sidebar is hidden (≤1199) ===== */
+/* ===== Final overrides: section padding-left when sidebar is hidden (≤1199) =====
+   .profile-section is intentionally excluded — it sets its own
+   horizontal padding (padding-inline: 0 in the ≤1199 block above) so
+   the mobile-topbar can manage its own left/right insets. Re-adding
+   padding-left here would create asymmetric padding-left vs padding-right
+   on the cover. */
 @media (max-width: 1199px) {
-  .profile-section,
   .projects,
   .about,
   .experience,
