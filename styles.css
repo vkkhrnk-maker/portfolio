@@ -1897,20 +1897,21 @@ body.case-page--fill .case__outcome-body p {
   left: 0;
   top: 0;
   width: 66.95%;
-  aspect-ratio: 2880 / 9264;
+  /* Height matches the bottom edge of .project-card__itab-side so the
+     browser window and the side phone bottom-align as a paired group.
+     The body screenshot extends past the bottom of the frame and is
+     clipped by overflow:hidden. */
+  height: 95.5%;
   overflow: hidden;
   background: #fff;
   border-radius: 1.2cqw 1.2cqw 0 0;
   container-type: inline-size;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
   /* Chrome height is clamped so it reads as a real browser bar; the
-     page header img and the body's own redundant top nav scale with
-     width (cqw) so they stay in proportion to the screenshot. */
+     page header img scales with width (cqw) so it stays in proportion
+     to the screenshot. */
   --chrome-h: clamp(36px, 4cqw, 44px);
   --header-h: 9.17cqw;  /* page-nav img: 110/1200 of container width */
-  --body-trim-top: 15cqw; /* hides the redundant green nav at the top
-                             of the body export so initial view is the
-                             product hero, not yet another nav bar */
 }
 
 /* Browser chrome bar — fixed at the very top, on top of everything.
@@ -1968,22 +1969,39 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
 }
 
-/* Body screenshot — sits below chrome + page nav, offset UP by
-   var(--body-trim-top) so the redundant green app-bar at the top of
-   the body export is hidden behind the sticky page nav. The visible
-   content at progress 0 is the product hero (bottle photo + price).
-   Translate is driven by JS (case.js — scroll-linked, works in every
-   browser without depending on scroll-driven CSS support). */
+/* Body screenshot — sits below chrome + page nav. Auto-scrolls down
+   then back up in a single seamless cycle (per Local Creative's
+   scrolling-mockup tutorial — down-and-back-up loops avoid the jarring
+   reset of a one-way loop). Range is kept tight (0 → -15%) so the
+   visible viewport stays inside the product hero / description area
+   and never lands on the body's natural between-section whitespace. */
 .project-card__itab-main__body {
   position: absolute;
-  top: calc(var(--chrome-h) + var(--header-h) - var(--body-trim-top));
+  top: calc(var(--chrome-h) + var(--header-h));
   left: 0;
   width: 100%;
   height: auto;
   display: block;
   z-index: 1;
   will-change: transform;
-  transform: translate3d(0, 0, 0);
+  animation: itab-scroll-loop 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes itab-scroll-loop {
+  /* Hold at top briefly so a fresh arrival sees the product hero, scroll
+     down, hold at the bottom of the range, scroll back. Holds at the two
+     ends remove the "always moving, never settles" feeling. */
+  0%, 8%   { transform: translateY(0); }
+  50%, 58% { transform: translateY(-15%); }
+  100%     { transform: translateY(0); }
+}
+
+/* Pause the loop on hover so the viewer can actually look at what they
+   stopped on (matches the existing hover-zoom on the itab-group). */
+@media (hover: hover) {
+  .project-card:hover .project-card__itab-main__body {
+    animation-play-state: paused;
+  }
 }
 
 /* Page nav (white iTAB header) — fixed just below the browser chrome,
@@ -1998,11 +2016,10 @@ body.case-page--fill .case__outcome-body p {
   z-index: 2;
 }
 
-/* Users who opt out of motion get the static top-of-page view —
-   case.js checks this and skips the scroll wiring. */
+/* Users who opt out of motion get the static top-of-page view. */
 @media (prefers-reduced-motion: reduce) {
   .project-card__itab-main__body {
-    transform: none !important;
+    animation: none;
   }
 }
 
