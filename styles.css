@@ -321,7 +321,11 @@ img {
 
 .profile-section {
   position: relative;
-  min-height: 100vh;
+  /* 100dvh (dynamic viewport height) instead of 100vh — on iOS Safari
+     the URL bar steals 80-110px of space from the bottom of 100vh,
+     which was clipping the bottom of the cover headline. dvh tracks
+     the actual visible area, so nothing gets cut off. */
+  min-height: 100dvh;
   padding: 24px var(--page-x);
   display: flex;
   flex-direction: column;
@@ -2678,14 +2682,39 @@ body.case-page--fill .case__outcome-body p {
     align-items: center;
     width: 100%;
     padding: 6px var(--page-x);
-    /* Stay reachable on long case pages: pin to the top with a soft blur
-       so Home (the name) and Menu are always one tap away. */
+  }
+
+  /* Case-page topbar: sticky bar with a soft blur so 'Home' (the name)
+     and 'Menu' are always one tap away on long case pages. */
+  .mobile-topbar--case {
     position: sticky;
     top: 0;
     z-index: 60;
     background: rgba(240, 240, 240, 0.82);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+  }
+
+  /* Cover-page topbar: vertical stack of CV/LinkedIn/Email pills on
+     the left + 'Menu' text link on the right, both anchored to the
+     top of the cover (per Figma 2:28733). Not sticky — it's part of
+     the cover hero, not a persistent toolbar. */
+  .mobile-topbar--cover {
+    align-items: flex-start;
+    padding-inline: var(--page-x);
+  }
+
+  .mobile-topbar__buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  /* Menu link in the top-right corner — sits at the same vertical
+     baseline as the first pill so the eye lands on both at once. */
+  .mobile-topbar__menu {
+    padding-top: 10px;
   }
 
   .mobile-topbar__link {
