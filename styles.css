@@ -1967,15 +1967,17 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
 }
 
-/* Body screenshot — sits directly below the browser chrome (no extra
-   sticky page-nav layer — the page's own nav is at the top of the
-   body image and scrolls with it, like real Safari without a forced
-   sticky bar).
+/* Body screenshot — sits directly below the browser chrome, statically
+   offset by translateY(-5%) so the visible window opens on the product
+   hero (bottle photo + price + green CTA) rather than the white promo
+   toolbar at the very top of the export.
 
-   Animation pattern: hold → scroll one screen → hold → scroll back.
-   Mimics how a real user reads a page: lands → reads (long hold) →
-   page-down (quick) → reads (medium hold) → returns to top. Feels
-   intentional instead of an always-moving ticker. */
+   Decision: iTAB is a webpage, not an app. Auto-scrolling a still
+   screenshot never read right — pages are looked at as compositions,
+   apps are watched in motion. Hooh's phone-video covers the 'living'
+   role on the home page; iTAB sits next to it as the 'designed-frame'
+   counterpart. If a real screen-recording of the iTAB site is added
+   later, drop it in like the Hooh video. */
 .project-card__itab-main__body {
   position: absolute;
   top: var(--chrome-h);
@@ -1984,48 +1986,7 @@ body.case-page--fill .case__outcome-body p {
   height: auto;
   display: block;
   z-index: 1;
-  will-change: transform;
-  animation: itab-scroll-loop 10s linear infinite;
-}
-
-@keyframes itab-scroll-loop {
-  /* Scroll only the body's dense content zone (-5% to -40%). After
-     -40% the iTAB page hits its reviews section, which has a narrow
-     left column (4.5★ widget) and lots of empty space — that read
-     as 'white screen' on the live site. The dense zone packs:
-     product hero → tabs → description → characteristics table →
-     composition → studies cards → 'Also recommended' carousel.
-     That's a complete tour of the visually rich half of the page.
-
-     Sequence:
-     - 0-8%:   hold at product hero (-5%)
-     - 8-48%:  linear scroll down through dense content (to -40%,
-               showing the carousel by the end)
-     - 48-52%: rubber-band recoil up to -37%, settle to -40%
-     - 52-72%: snap back to hero, ≈2× faster
-     - 72-100%: hold at hero (breath before relooping) */
-  0%, 8%    { transform: translateY(-5%); }
-  48%       { transform: translateY(-40%); }
-  50%       { transform: translateY(-37%); }
-  52%       { transform: translateY(-40%); }
-  72%, 100% { transform: translateY(-5%); }
-}
-
-/* Pause the loop on hover so the viewer can look at what they stopped
-   on — but only when the cursor is over the browser frame itself, not
-   the whole card. Hovering the title, arrow, or the side phone keeps
-   the loop running (less twitchy when the cursor just passes by). */
-@media (hover: hover) {
-  .project-card__itab-main:hover .project-card__itab-main__body {
-    animation-play-state: paused;
-  }
-}
-
-/* Users who opt out of motion get the static top-of-page view. */
-@media (prefers-reduced-motion: reduce) {
-  .project-card__itab-main__body {
-    animation: none;
-  }
+  transform: translateY(-5%);
 }
 
 .project-card__itab-side {
