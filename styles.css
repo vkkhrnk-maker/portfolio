@@ -1889,10 +1889,9 @@ body.case-page--fill .case__outcome-body p {
 
 /* iTAB main = a faux browser window. macOS-style chrome bar at the top
    (traffic-light dots + URL pill), then the page header (fixed below the
-   chrome) and the body screenshot scrolling underneath. The scroll is
-   scroll-driven (animation-timeline: view()) — the body translates in
-   sync with the card moving through the viewport, so motion feels
-   intentional, not the random looping ticker we had before. */
+   chrome) and the body screenshot. The body parallaxes as the card
+   moves through the viewport — driven by a small JS block in index.html
+   (works in every browser, no scroll-timeline support needed). */
 .project-card__itab-main {
   position: absolute;
   left: 0;
@@ -1969,10 +1968,12 @@ body.case-page--fill .case__outcome-body p {
   overflow: hidden;
 }
 
-/* Body screenshot — sits below chrome + page nav, then offset UP by
+/* Body screenshot — sits below chrome + page nav, offset UP by
    var(--body-trim-top) so the redundant green app-bar at the top of
-   the body export is hidden behind the sticky page nav. At rest the
-   first visible content is the product hero (bottle photo + price). */
+   the body export is hidden behind the sticky page nav. The visible
+   content at progress 0 is the product hero (bottle photo + price).
+   Translate is driven by JS (case.js — scroll-linked, works in every
+   browser without depending on scroll-driven CSS support). */
 .project-card__itab-main__body {
   position: absolute;
   top: calc(var(--chrome-h) + var(--header-h) - var(--body-trim-top));
@@ -1980,29 +1981,13 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
   height: auto;
   display: block;
-  will-change: transform;
   z-index: 1;
-}
-
-/* Name the iTAB card as the scroll-driven timeline source. The body
-   image animates based on the CARD's progress through the viewport
-   (not its own bbox, which gets thrown off by overflow:hidden +
-   absolute positioning). */
-@supports (animation-timeline: view()) {
-  .project-card--itab {
-    view-timeline-name: --itab-card;
-    view-timeline-axis: block;
-  }
-
-  .project-card__itab-main__body {
-    animation: itab-scroll linear both;
-    animation-timeline: --itab-card;
-    animation-range: cover 0% cover 100%;
-  }
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 /* Page nav (white iTAB header) — fixed just below the browser chrome,
-   above the scrolling body but below the chrome bar. */
+   above the body screenshot. */
 .project-card__itab-main__header {
   position: absolute;
   top: var(--chrome-h);
@@ -2013,19 +1998,11 @@ body.case-page--fill .case__outcome-body p {
   z-index: 2;
 }
 
-@keyframes itab-scroll {
-  from { transform: translateY(0); }
-  /* Small parallax — body shifts ~25% so the visible area stays inside
-     the visually rich top of the page (product hero → description →
-     into the start of characteristics). Goes no further so we never
-     land on the body's natural between-section whitespace gaps. */
-  to   { transform: translateY(-25%); }
-}
-
-/* Users who opt out of motion get the static top-of-page view. */
+/* Users who opt out of motion get the static top-of-page view —
+   case.js checks this and skips the scroll wiring. */
 @media (prefers-reduced-motion: reduce) {
   .project-card__itab-main__body {
-    animation: none;
+    transform: none !important;
   }
 }
 
