@@ -1985,37 +1985,34 @@ body.case-page--fill .case__outcome-body p {
   display: block;
   z-index: 1;
   will-change: transform;
-  animation: itab-scroll-loop 9s linear infinite;
+  animation: itab-scroll-loop 10s linear infinite;
 }
 
 @keyframes itab-scroll-loop {
-  /* Asymmetric loop, with two refinements over the previous version:
+  /* Snapshot-navigation loop. The iTAB product page export has a lot
+     of natural between-section whitespace (the two-column layout has
+     short labels on the left + content on the right, so each row has
+     an empty left half). A slow continuous scroll through all of it
+     reads as 'periodic white screens'.
 
-     1) Rest-position is translateY(-5%) instead of 0. The very top
-        of the body export is the white promo toolbar above the
-        product hero — sitting on it for the long top-hold read as
-        a blank-white screen. -5% drops the toolbar behind the chrome
-        and centers the product card (bottle + price + green CTA),
-        which is far more visually present.
+     Instead of slow continuous scroll, jump between the two visually
+     dense zones:
+       - Top: product hero with bottle + price + green CTA
+       - Bottom: 'Also recommended' carousel with bottle thumbnails
+                 and the 4.5★ reviews block
 
-     2) The bottom bounce now recoils INWARD (to -67%) rather than
-        overshooting past -70%. The visible viewport is exactly the
-        body's full height at translateY(-70.6%); anything past that
-        exposes the white card background BELOW the body and flashes
-        as a white strip at the bottom. Recoiling up to -67% keeps
-        the rubber-band feel without ever crossing that safe edge.
+     Whitespace zones (characteristics / composition / studies tables)
+     pass by in ~1s so the eye barely registers them.
 
      Sequence:
-     - 0-4%:   hold at the product hero (-5%)
-     - 4-48%:  linear scroll down to footer (-70%)
-     - 48-52%: rubber-band recoil up to -67% then settle to -70%
-     - 52-72%: snap back to product hero, ≈2× faster than the scroll-down
-     - 72-100%: hold (2.5s breath before relooping) */
-  0%, 4%    { transform: translateY(-5%); }
-  48%       { transform: translateY(-70%); }
-  50%       { transform: translateY(-67%); }
-  52%       { transform: translateY(-70%); }
-  72%, 100% { transform: translateY(-5%); }
+     - 0-30%:  hold at product hero (≈3s read)
+     - 30-40%: rapid scroll through the empty middle (≈1s)
+     - 40-70%: hold at carousel / reviews zone (≈3s read)
+     - 70-80%: rapid snap back to top (≈1s)
+     - 80-100%: hold at hero (≈2s breath before relooping) */
+  0%, 30%   { transform: translateY(-5%); }
+  40%, 70%  { transform: translateY(-65%); }
+  80%, 100% { transform: translateY(-5%); }
 }
 
 /* Pause the loop on hover so the viewer can look at what they stopped
