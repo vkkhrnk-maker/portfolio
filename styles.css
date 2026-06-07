@@ -78,8 +78,8 @@
   --radius-button: 100px;
 }
 
-/* ===== Mobile/tablet token overrides (≤1280px) ===== */
-@media (max-width: 1280px) {
+/* ===== Mobile/tablet token overrides (≤1199px) ===== */
+@media (max-width: 1199px) {
   :root {
     --fs-h1: 62px;          --lh-h1: 64px;
     --fs-h2: 60px;          --lh-h2: 60px;
@@ -285,7 +285,7 @@ img {
 /* Cap content width so project cards don't get absurdly tall on huge viewports;
    extra horizontal space goes between sidebar and content (margin-left: auto).
    Card aspect 1040/700: at 1446 wide → ~973 tall (max). 1446 + 80 (section padding) = 1526. */
-@media (min-width: 1281px) {
+@media (min-width: 1200px) {
   .content {
     max-width: 1526px;
     margin-left: auto;
@@ -733,7 +733,7 @@ body.case-page--fill .case__outcome-body p {
    on the Hooh Smart Fill case. Smaller items, denser grid. */
 .case__gap-grid--four {
   grid-template-columns: repeat(4, 1fr);
-  /* On ≥1281px the parent .case__section becomes a 2-col grid (title | body).
+  /* On ≥1200px the parent .case__section becomes a 2-col grid (title | body).
      Span the full row so the 4-card mini-grid uses the full content width
      instead of being squeezed into the body column. */
   grid-column: 1 / -1;
@@ -780,7 +780,7 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-secondary);
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1199px) {
   .case__gap-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1341,11 +1341,11 @@ body.case-page--fill .case__outcome-body p {
 .case__pager-btn--prev:hover { transform: translateX(-3px); }
 .case__pager-btn--next:hover { transform: translateX(3px); }
 
-/* On desktop (1281+) drop the 780px cap inside 2-column grids
+/* On desktop (1200+) drop the 780px cap inside 2-column grids
    (Problem/Task/Users/What we launched + outcome) so each column's
    body fills its grid cell. Single-column sections (Design process,
    Progressive Disclosure intro, etc.) keep the 780 readability cap. */
-@media (min-width: 1281px) {
+@media (min-width: 1200px) {
   .case__block-body,
   .case__outcome-body,
   .case__outcome-body p {
@@ -1399,7 +1399,7 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* Case page — mobile overrides */
-@media (max-width: 1280px) {
+@media (max-width: 1199px) {
   .case {
     gap: 60px;
   }
@@ -1475,7 +1475,7 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* Meta strip stacks on phone (≤768px); from tablet up it stays in 3
-   columns (the 1280px max-width block above provides that default). */
+   columns (the 1199px max-width block above provides that default). */
 @media (max-width: 768px) {
   .case-meta--mobile {
     grid-template-columns: 1fr;
@@ -1488,7 +1488,7 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* Phones: ease the case H1 down (62 → 42) so the cover doesn't eat the whole
-   first screen before the case content. Placed after the ≤1280 .case__title
+   first screen before the case content. Placed after the ≤1199 .case__title
    rule so it wins the cascade at phone widths. */
 @media (max-width: 640px) {
   .case__title {
@@ -1715,15 +1715,24 @@ body.case-page--fill .case__outcome-body p {
   z-index: 1;
 }
 
+/* Inner visuals sit above the full-card link so the hover-zoom transform
+   reads correctly, but they pass clicks through to the underlying link so
+   the entire card is a tap target. The arrow button re-enables pointer
+   events on itself — it has its own href and stays independently clickable. */
 .project-card__header,
 .project-card__phones,
 .project-card__itab-group {
   z-index: 2;
+  pointer-events: none;
+}
+
+.project-card__header .arrow-btn {
+  pointer-events: auto;
 }
 
 /* Hover effect (desktop, mouse only): zoom the screenshots inside while
    the card frame stays put. The arrow button also gets a magenta glow. */
-@media (hover: hover) and (min-width: 1281px) {
+@media (hover: hover) and (min-width: 1200px) {
   .project-card__phones,
   .project-card__itab-group {
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -2076,9 +2085,9 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-primary);
 }
 
-/* ===== Responsive: hide sidebar below 1280px ===== */
+/* ===== Responsive: hide sidebar below 1200px ===== */
 
-@media (max-width: 1280px) {
+@media (max-width: 1199px) {
   .sidebar {
     display: none;
   }
@@ -2101,9 +2110,9 @@ body.case-page--fill .case__outcome-body p {
 
 /* ===== Mobile (≤1024px): 20px side paddings + sizes from Figma ===== */
 
-/* ===== Project cards — mobile/tablet layout below 1280px ===== */
+/* ===== Project cards — mobile/tablet layout below 1200px ===== */
 
-@media (max-width: 1280px) {
+@media (max-width: 1199px) {
   /* Mobile project card — natural flow with --card padding tokens */
   .project-card__inner,
   .project-card__inner--itab {
@@ -2214,9 +2223,9 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* ===== About cards — mobile/tablet (≤1280px): static cards with numbers (per Figma 527:28167) ===== */
+/* ===== About cards — mobile/tablet (≤1199px): static cards with numbers (per Figma 527:28167) ===== */
 
-@media (max-width: 1280px) {
+@media (max-width: 1199px) {
   .about__cards {
     flex-direction: column;
     align-items: stretch;
@@ -2524,7 +2533,7 @@ body.case-page--fill .case__outcome-body p {
   white-space: nowrap;
 }
 
-@media (min-width: 600px) and (max-width: 1280px) {
+@media (min-width: 600px) and (max-width: 1199px) {
   .menu-drawer {
     padding: 24px 32px 60px;
   }
@@ -2532,7 +2541,7 @@ body.case-page--fill .case__outcome-body p {
 
 /* ===== Mobile/tablet overrides — must come after base rules ===== */
 
-@media (max-width: 1280px) {
+@media (max-width: 1199px) {
   /* Profile section: per Figma 527:28140 — column with topbar + 120 gap + intro,
      vertically centered, items span full width */
   .profile-section {
@@ -2589,7 +2598,7 @@ body.case-page--fill .case__outcome-body p {
     gap: 16px;
   }
 
-  /* Section padding-left handled by ≤1280px override (when sidebar is hidden) */
+  /* Section padding-left handled by ≤1199px override (when sidebar is hidden) */
 
   /* Mobile CTA — full-width magenta pill with inner shadow */
   .contact__btn {
@@ -2678,8 +2687,8 @@ body.case-page--fill .case__outcome-body p {
 }
 
 
-/* ===== Final overrides: section padding-left when sidebar is hidden (≤1280) ===== */
-@media (max-width: 1280px) {
+/* ===== Final overrides: section padding-left when sidebar is hidden (≤1199) ===== */
+@media (max-width: 1199px) {
   .profile-section,
   .projects,
   .about,
