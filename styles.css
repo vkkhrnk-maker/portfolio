@@ -97,6 +97,17 @@
   }
 }
 
+/* Phone-only (≤640px): shrink the H1 so the cover headline 'I design
+   complex digital products and scalable systems' fits in 3-4 lines
+   without overflowing on shorter phones. Same 42/46 the case study
+   pages were already using — so the cover H1 and the case H1 now
+   read at the same size on phone instead of differing by ±2px. */
+@media (max-width: 640px) {
+  :root {
+    --fs-h1: 42px;          --lh-h1: 46px;
+  }
+}
+
 /* Optional: bump all type +6px on extra-large screens */
 @media (min-width: 1920px) {
   :root {
@@ -1467,14 +1478,10 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* Phones: ease the case H1 down (62 → 42) so the cover doesn't eat the whole
-   first screen before the case content. Placed after the ≤1199 .case__title
-   rule so it wins the cascade at phone widths. */
+/* Phones: case H1 inherits from --fs-h1 via the base .case__title rule;
+   the ≤640 :root override sets --fs-h1 to 42/46, matching the cover
+   H1 size. (No explicit case-only override needed.) */
 @media (max-width: 640px) {
-  .case__title {
-    font-size: 42px;
-    line-height: 46px;
-  }
   /* Outcome body matches section body 16/24 on phones (placed after the
      base .case__outcome-body p rule so it wins). */
   .case__outcome-body p {
@@ -1496,6 +1503,15 @@ body.case-page--fill .case__outcome-body p {
   z-index: 1000;
   pointer-events: none;
   box-shadow: 0 0 12px rgba(217, 70, 239, 0.45);
+}
+
+/* Hide the magenta scroll-progress bar on phones — at small widths it
+   reads as a misplaced pink toolbar above the mobile-topbar rather
+   than a subtle progress indicator. */
+@media (max-width: 640px) {
+  .scroll-progress {
+    display: none;
+  }
 }
 
 /* ===== Avatar discovery pulse (first 3s after load) ===== */
@@ -2321,11 +2337,21 @@ body.case-page--fill .case__outcome-body p {
     height: 400px;
     min-height: 400px;
     position: sticky;
-    top: 24px;
     transform: none;
     perspective: none;
     cursor: default;
   }
+
+  /* Deck-of-cards stacking: each card sticks 20px lower than the one
+     above it, so as the viewer scrolls past, every previous card's top
+     20-px strip stays visible above the current top-most card —
+     reading as a shuffled deck rather than each new card simply hiding
+     the previous one. The alternating bg-card / pink background already
+     makes adjacent peeks visually distinct. */
+  .about-card--1 { top: 24px; }
+  .about-card--2 { top: 44px; }
+  .about-card--3 { top: 64px; }
+  .about-card--4 { top: 84px; }
 
   .about-card--1,
   .about-card--2,
@@ -2624,15 +2650,21 @@ body.case-page--fill .case__outcome-body p {
 
 @media (max-width: 1199px) {
   /* Profile section: per Figma 527:28140 — column with topbar + 120 gap + intro,
-     vertically centered, items span full width */
+     items span full width. justify-content:center pairs with the explicit
+     gap so the group sits centered as one block instead of stretching
+     the gap to fill the viewport with empty space. Horizontal padding
+     dropped — the topbar inset is handled by its own padding, and the
+     intro gets its own --page-x inset below. */
   .profile-section {
-    justify-content: space-between;
+    padding-inline: 0;
+    justify-content: center;
     align-items: stretch;
     gap: var(--space-120);
   }
 
   .intro {
     width: 100%;
+    padding-inline: var(--page-x);
   }
 
   /* On mobile — hide menu icon + Telegram (desktop topbar), show CV/Меню text instead */
@@ -2960,6 +2992,14 @@ body.case-page--fill .case__outcome-body p {
   .footer {
     margin-top: calc(var(--space-40) - var(--section-y));
     padding: var(--space-40) var(--page-x);
+  }
+  /* Stack copyright + credit on phones — at 375 wide they crowd into
+     each other on a single space-between row and the eye reads them
+     as one run-on string. */
+  .footer__row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
   }
   /* Drop-me-a-message: bolder, ~2x taller than before. */
   .contact__btn { height: 160px; }
