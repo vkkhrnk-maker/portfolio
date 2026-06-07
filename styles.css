@@ -1812,7 +1812,7 @@ body.case-page--fill .case__outcome-body p {
 
 .project-card__phones {
   position: absolute;
-  top: 20.83%;
+  top: 19%;
   left: 50%;
   transform: translateX(-50%);
   width: 74.10%;
@@ -1880,7 +1880,7 @@ body.case-page--fill .case__outcome-body p {
   position: absolute;
   /* Width scaled to match the narrower phones row on the Hooh card;
      height fills from top:20.83% to the card bottom. */
-  top: 20.83%;
+  top: 19%;
   left: 50%;
   transform: translateX(-50%);
   width: 74.10%;
