@@ -1881,7 +1881,7 @@ body.case-page--fill .case__outcome-body p {
   width: 31%;                          /* match the sibling cards' phones */
   aspect-ratio: 588 / 1280;            /* the screen itself (the recording's own ratio) */
   border-radius: 2cqw;                 /* soft iOS-screen corners, scales with width */
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);   /* lighter — just enough lift off the card */
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);    /* airy lift — just a hint of depth */
   border: 0.5px solid rgba(0, 0, 0, 0.06);
   overflow: hidden;                    /* clip the video to the rounded corners */
 }
