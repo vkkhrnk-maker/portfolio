@@ -1940,17 +1940,22 @@ body.case-page--fill .case__outcome-body p {
 .project-card__itab-main__dots > span:nth-child(3) { background: #28C840; }
 
 .project-card__itab-main__url {
+  flex: 1;
   margin-inline: auto;
+  max-width: 55%;
   background: #fff;
   border-radius: 99px;
-  padding: 0.6cqw 2.4cqw;
+  padding: 1.1cqw 2.4cqw;
   font-family: var(--font-body);
-  font-size: 2.3cqw;
+  font-size: 2.4cqw;
   line-height: 1.2;
   color: #6B6B6B;
   letter-spacing: 0;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 /* Body screenshot — sits below the chrome AND the page nav (so the
@@ -1971,10 +1976,19 @@ body.case-page--fill .case__outcome-body p {
   z-index: 1;
 }
 
+/* Name the iTAB card as the scroll-driven timeline source. The body
+   image animates based on the CARD's progress through the viewport
+   (not its own bbox, which gets thrown off by overflow:hidden +
+   absolute positioning). */
 @supports (animation-timeline: view()) {
+  .project-card--itab {
+    view-timeline-name: --itab-card;
+    view-timeline-axis: block;
+  }
+
   .project-card__itab-main__body {
     animation: itab-scroll linear both;
-    animation-timeline: view();
+    animation-timeline: --itab-card;
     animation-range: cover 0% cover 100%;
   }
 }
