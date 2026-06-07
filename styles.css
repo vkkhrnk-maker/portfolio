@@ -2707,7 +2707,13 @@ body.case-page--fill .case__outcome-body p {
   .mobile-topbar__buttons {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    /* width: max-content makes the column take exactly the width of
+       its widest child (LinkedIn pill); align-items: stretch then
+       sizes every child to that same width — so CV / LinkedIn / Email
+       all read as one uniform pill stack instead of three different
+       widths shrinking to their text. */
+    align-items: stretch;
+    width: max-content;
     gap: 8px;
   }
 
