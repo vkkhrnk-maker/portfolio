@@ -1985,20 +1985,18 @@ body.case-page--fill .case__outcome-body p {
   display: block;
   z-index: 1;
   will-change: transform;
-  animation: itab-scroll-loop 13s ease-in-out infinite;
+  animation: itab-scroll-loop 6s ease-in-out infinite alternate;
 }
 
 @keyframes itab-scroll-loop {
-  /* 0 → 32%: hold at the top of the page (≈4.2s read product hero) */
-  0%, 32%   { transform: translateY(0); }
-  /* 32 → 42%: quick page-down (≈1.3s — feels like a real scroll gesture) */
-  42%       { transform: translateY(-27%); }
-  /* 42 → 68%: hold on second screen (≈3.4s read description / tabs) */
-  68%       { transform: translateY(-27%); }
-  /* 68 → 78%: scroll back to the top (≈1.3s) */
-  78%       { transform: translateY(0); }
-  /* 78 → 100%: brief settle at the top (≈2.9s) before looping */
-  100%      { transform: translateY(0); }
+  /* Continuous scroll from the top of the page (product hero) all the
+     way down to the footer area. `alternate` plays this forward then
+     reverses on the next cycle, so the body smoothly goes top → bottom
+     → top → bottom indefinitely with no jarring reset. -70% leaves
+     the body bottom roughly aligned with the bottom of the visible
+     viewport — covers the whole page top to footer. */
+  from { transform: translateY(0); }
+  to   { transform: translateY(-70%); }
 }
 
 /* Pause the loop on hover so the viewer can actually look at what they
@@ -2318,6 +2316,16 @@ body.case-page--fill .case__outcome-body p {
     height: 282px;
     aspect-ratio: auto;
     object-fit: cover;
+  }
+}
+
+/* Mobile + tablet (≤1199px): lock the Hooh single phone-video to the
+   same 129px fixed size as the iTAB side phone, so the two project
+   covers read at a consistent scale on any non-desktop viewport. */
+@media (max-width: 1199px) {
+  .project-card__phone-video {
+    width: 129px;
+    aspect-ratio: 588 / 1280;
   }
 }
 
