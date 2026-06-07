@@ -1887,36 +1887,103 @@ body.case-page--fill .case__outcome-body p {
   height: 79.17%;
 }
 
+/* iTAB main = a faux browser window. macOS-style chrome bar at the top
+   (traffic-light dots + URL pill), then the page header (fixed below the
+   chrome) and the body screenshot scrolling underneath. The scroll is
+   scroll-driven (animation-timeline: view()) — the body translates in
+   sync with the card moving through the viewport, so motion feels
+   intentional, not the random looping ticker we had before. */
 .project-card__itab-main {
   position: absolute;
   left: 0;
   top: 0;
   width: 66.95%;
-  aspect-ratio: 2880 / 9264;   /* matches the body screenshot */
+  aspect-ratio: 2880 / 9264;
   overflow: hidden;
+  background: #fff;
+  border-radius: 1.2cqw 1.2cqw 0 0;
+  container-type: inline-size;
+  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
 }
 
-/* Body screenshot — slides up under the fixed header in a slow loop so
-   the card reads as 'someone scrolling the page'.
-   will-change + translateZ(0) promote the layer to the GPU so the
-   long-distance translate stays smooth on a large image. */
-.project-card__itab-main__body {
+/* Browser chrome bar — fixed at the very top, on top of everything */
+.project-card__itab-main__chrome {
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
+  height: 7.5cqw;
+  display: flex;
+  align-items: center;
+  padding: 0 2cqw;
+  gap: 1.5cqw;
+  background: #ECECEC;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 3;
+}
+
+.project-card__itab-main__dots {
+  display: flex;
+  gap: 1cqw;
+  flex: 0 0 auto;
+}
+
+.project-card__itab-main__dots > span {
+  width: 2.3cqw;
+  height: 2.3cqw;
+  border-radius: 50%;
+  display: block;
+}
+
+.project-card__itab-main__dots > span:nth-child(1) { background: #FF5F57; }
+.project-card__itab-main__dots > span:nth-child(2) { background: #FEBC2E; }
+.project-card__itab-main__dots > span:nth-child(3) { background: #28C840; }
+
+.project-card__itab-main__url {
+  margin-inline: auto;
+  background: #fff;
+  border-radius: 99px;
+  padding: 0.6cqw 2.4cqw;
+  font-family: var(--font-body);
+  font-size: 2.3cqw;
+  line-height: 1.2;
+  color: #6B6B6B;
+  letter-spacing: 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  white-space: nowrap;
+}
+
+/* Body screenshot — sits below the chrome AND the page nav (so the
+   breadcrumb is visible at rest, not hidden behind the nav). As the
+   body scrolls up, its top slides under the page nav, then under the
+   chrome bar — exactly how real fixed headers behave.
+
+   16.67cqw = chrome 7.5cqw + header display height 9.17cqw
+   (header is 1200×110, displayed at 100cqw wide → 9.17cqw tall). */
+.project-card__itab-main__body {
+  position: absolute;
+  top: 16.67cqw;
   left: 0;
   width: 100%;
   height: auto;
   display: block;
   will-change: transform;
-  transform: translateZ(0);
-  animation: itab-scroll 14s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  z-index: 1;
 }
 
-/* Sticky page header — pinned at the top of the viewport, stays put while
-   body scrolls under it. */
+@supports (animation-timeline: view()) {
+  .project-card__itab-main__body {
+    animation: itab-scroll linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+
+/* Page nav (white iTAB header) — fixed just below the browser chrome,
+   above the scrolling body but below the chrome bar. */
 .project-card__itab-main__header {
   position: absolute;
-  top: 0;
+  top: 7.5cqw;
   left: 0;
   width: 100%;
   height: auto;
@@ -1926,20 +1993,14 @@ body.case-page--fill .case__outcome-body p {
 
 @keyframes itab-scroll {
   from { transform: translateY(0); }
-  /* -66% leaves the bottom of the body roughly aligned with the bottom
-     of the visible viewport at the 1040/693 card aspect ratio. */
-  to   { transform: translateY(-66%); }
+  /* -71% aligns the bottom of the body with the bottom of the card's
+     visible viewport at the 1040/693 card aspect ratio (the card's
+     own overflow:hidden clips at 81% of its height; chrome + page
+     header eat ~85px from the top). */
+  to   { transform: translateY(-71%); }
 }
 
-/* Pause the scroll on hover so a user can actually look at where the
-   screenshot stopped (companion to the existing hover-zoom transform). */
-@media (hover: hover) {
-  .project-card:hover .project-card__itab-main__body {
-    animation-play-state: paused;
-  }
-}
-
-/* Respect users who opt out of motion — no scroll, body sits at the top. */
+/* Users who opt out of motion get the static top-of-page view. */
 @media (prefers-reduced-motion: reduce) {
   .project-card__itab-main__body {
     animation: none;
