@@ -3068,3 +3068,169 @@ body.case-page--fill .case__outcome-body p {
   /* Drop-me-a-message: bolder, ~2x taller than before. */
   .contact__btn { height: 160px; }
 }
+
+/* ============================================================
+   WIP SKELETON PLACEHOLDERS — Smart Fill case v2
+   Temporary stand-ins until the translated 3x exports are dropped in.
+   Each .skel-phone names the exact Figma frame that will replace it.
+   At swap time: regenerate the figures and replace .skel-figure markup
+   with <picture>, then delete this whole block.
+   ============================================================ */
+.skel-figure {
+  background: #E2E4E7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(16px, 3vw, 48px);
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+}
+.skel-figure--center { align-items: center; }
+
+.skel-phone {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(140px, 17vw, 212px);
+  aspect-ratio: 285 / 619;
+  border-radius: 26px;
+  background: #eef0f2;
+  border: 1.5px dashed #aab0b8;
+  overflow: hidden;
+  box-shadow: 0 20px 44px -26px rgba(20, 22, 28, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skel-phone--tall { aspect-ratio: 285 / 720; }
+.skel-phone--wide {
+  width: clamp(240px, 32vw, 440px);
+  aspect-ratio: 619 / 285;
+  border-radius: 22px;
+}
+.skel-phone__label {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -.2px;
+  color: #656b74;
+  text-align: center;
+  padding: 0 14px;
+}
+.skel-phone__label b { display: block; font-weight: 600; color: #3f444b; margin-bottom: 3px; }
+
+.skel-phone::after,
+.skel-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 28%, rgba(255, 255, 255, .5) 50%, transparent 72%);
+  transform: translateX(-100%);
+  animation: skel-shimmer 1.9s ease-in-out infinite;
+}
+@keyframes skel-shimmer { to { transform: translateX(100%); } }
+
+/* Hero variant: let height grow with the phones instead of the cover crop. */
+.case__hero-image--skel {
+  aspect-ratio: auto;
+  background: #E2E4E7;
+  overflow: hidden;
+}
+
+/* Skeleton thumbs inside the Beyond-the-core-flow cards. */
+.case__gap-card--skel { justify-content: flex-start; gap: 16px; }
+.skel-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 10px;
+  background: #eef0f2;
+  border: 1.5px dashed #aab0b8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skel-phone::after, .skel-thumb::after { animation: none; }
+}
+@media (max-width: 640px) {
+  .skel-phone { width: clamp(150px, 42vw, 220px); }
+  .skel-phone--wide { width: min(86vw, 420px); }
+}
+
+/* ============================================================
+   Smart Fill case — real screen figures (replace skeletons).
+   Phones sit on the #E2E4E7 figure band. Uniform phone frames via
+   fixed aspect-ratio + object-fit so mixed-height screens line up.
+   ============================================================ */
+.shots {
+  background: #E2E4E7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(16px, 3vw, 48px);
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+}
+.shots--center { align-items: center; }
+
+.shot {
+  flex: 0 0 auto;
+  width: clamp(150px, 17vw, 212px);
+  aspect-ratio: 1206 / 2610;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 24px 50px -28px rgba(20, 22, 28, .55);
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.shot--bottom img { object-position: bottom center; }
+.shot--center-y img { object-position: center; }
+
+.shot--wide {
+  width: clamp(260px, 34vw, 460px);
+  aspect-ratio: 2622 / 1206;
+  border-radius: 20px;
+}
+.shot--wide img { object-position: center; }
+
+/* Hero wrapper holding a .shots row (grow with the phones, not the cover crop). */
+.case__hero-image--shots {
+  aspect-ratio: auto;
+  background: #E2E4E7;
+  overflow: hidden;
+}
+
+/* Beyond-the-core-flow card thumbs: small phone previews. */
+.case__gap-card--shot { justify-content: flex-start; gap: 16px; }
+.shot-thumb {
+  width: 100%;
+  aspect-ratio: 1206 / 1280;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #0000000f;
+}
+.shot-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.shot-thumb--bottom img { object-position: bottom center; }
+.shot-thumb--center img { object-position: center; }
+
+@media (max-width: 640px) {
+  .shot { width: clamp(150px, 42vw, 220px); }
+  .shot--wide { width: min(86vw, 440px); }
+}
