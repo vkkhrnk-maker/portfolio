@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="robots" content="noindex">
+  <title>Hooh — Документные инструменты — Кейс (RU, черновик на проверку) · Victoria Kukharenko</title>
+  <meta name="description" content="Черновик-скелет на русском: большой кейс про документный тулбокс Hooh — превращение ридера в редактор (заполнение, подпись, аннотации, редактирование, конвертация), не теряя контроль над оригиналом.">
+  <meta name="theme-color" content="#d97706">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="apple-touch-icon" href="assets/profile.jpg">
+  <link rel="stylesheet" href="styles.css?v=158">
+  <style>
+    /* draft-only: 6-up breadth strip + a tiny work-in-progress note */
+    .case__gap-grid--six { grid-template-columns: repeat(3, 1fr); grid-column: 1 / -1; }
+    @media (max-width:1199px){ .case__gap-grid--six { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:760px){ .case__gap-grid--six { grid-template-columns: 1fr; } }
+    .draft-note {
+      margin: 0 0 18px; padding: 8px 14px; display: inline-block;
+      border: 1px dashed #c2a36a; border-radius: 999px;
+      font-family: var(--font-body); font-size: 12.5px; letter-spacing: -.2px; color: #9a7b3e;
+      background: #fbf6ec;
+    }
+  </style>
+</head>
+<body class="case-page--fill">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Команда</dt>
+          <dd>PM, арт-директор, iOS- и веб-разработчик</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Моя роль</dt>
+          <dd>Продуктовый дизайнер. UX, UI, прототипирование и дизайн-решения по всему документному тулбоксу — Smart Fill, подпись, аннотации, редактирование, версии и конвертация</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Год</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="#">CV</a>
+      <a class="btn btn--light" href="#">LinkedIn</a>
+      <a class="btn btn--light" href="#">Email</a>
+    </div>
+  </aside>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <a class="mobile-topbar__link" href="#" data-menu-open>Меню</a>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Назад</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <p class="draft-note">Черновик-скелет · большой кейс «документный тулбокс» · сплошные рамки = реальные экраны, пунктир = на экспорт</p>
+        <h2 class="case__title">Hooh — от понимания документа к действию с ним</h2>
+        <p class="case__intro">Hooh вышел как ридер — он умел объяснить, что написано в документе. Следующий релиз превратил его в инструмент, которым с документом действуют: заполнить и подписать форму, разметить, переставить и отредактировать страницы, конвертировать и перевести — полноценный документный тулбокс на iOS. Сложность была не в каком-то одном инструменте, а в том, чтобы добавить реальную мощь в приложение для людей без юридического бэкграунда — не превратив его в «комбайн для профи» и ни разу не поставив под угрозу их оригинал.</p>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Команда</dt>
+            <dd>PM, арт-директор, iOS- и веб-разработчик</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Моя роль</dt>
+            <dd>Продуктовый дизайнер. UX, UI, прототипирование и дизайн-решения по всему документному тулбоксу — Smart Fill, подпись, аннотации, редактирование, версии и конвертация</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Год</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image case__hero-image--skel">
+          <div class="skel-figure">
+            <div class="skel-phone"><span class="skel-phone__label"><b>Хаб документа</b>Каждый инструмент в один тап · 3.x</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Заполнить и подписать</b>Действие с документом · 5.x</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Аннотации и правка</b>Разметить его · 12.x</span></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h3 class="case__block-title">Проблема</h3>
+          <p class="case__block-body">Hooh умел прочитать документ, но не действовать с ним. Всё, что после чтения — заполнить форму, подписать, разметить, выровнять кривой скан, конвертировать для отправки — означало экспорт в другое приложение. Для нетехнической аудитории именно на этой передаче утекала ценность и случались ошибки: потерянный оригинал, перезаписанный файл</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Задача</h3>
+          <p class="case__block-body">Превратить ридер в полноценное рабочее пространство для документов на iOS — заполнение, подпись, аннотации, редактирование, конвертация — сохранив простоту, благодаря которой Hooh не пугал, и гарантировав, что пользователь никогда не теряет контроль над оригиналом и не разрушает его</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Пользователи</h3>
+          <p class="case__block-body">Та же аудитория, что и у первого релиза Hooh — экспаты, цифровые кочевники и люди без юридического бэкграунда. У них постоянный ручеёк документов — формы, договоры, сканы, бумаги — и они хотят, чтобы с ними разобрались, а не чтобы пришлось осваивать тулбокс</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Скоуп</h3>
+          <p class="case__block-body">Набор инструментов действия с документом по одному правилу — автоматизировать там, где это экономит время; каждый шаг обратим; оригинал не трогаем. Smart Fill с ручным режимом, переиспользуемая подпись, система разметки и аннотаций, инструменты страниц и редактирования, конвертация форматов и явная модель версий</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">Процесс</h3>
+        <p class="case__section-body">Сессии с аудиторией первого релиза вскрыли паттерн: люди понимали свои документы, но застревали в момент, когда нужно было что-то с ними сделать — а инструменты для этого жили в пяти разных приложениях. Возможность была в том, чтобы свести действие с документом в то же место, где и его понимание.</p>
+        <p class="case__section-body">Каждый инструмент ниже формировало одно ограничение: контроль. Для этой аудитории мощь безопасна, только если она обратима и никогда не разрушает. По всему набору правила одни и те же — автоматизируй на виду, дай переопределить или отменить, оставь оригинал нетронутым. Каждая фича — вариация одного этого обещания.</p>
+      </section>
+
+      <!-- ===== ГЛУБОКАЯ СЕКЦИЯ 1 — РЕАЛЬНЫЕ ЭКРАНЫ ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">1. Smart Fill — автоматизация с правом вето</h3>
+        <p class="case__section-body">Hooh распознаёт поля формы и заполняет их из сохранённых документов пользователя — и ничего не отправляется молча. Когда у Smart Fill есть совпадение, документы-источники остаются закреплены вверху, и пользователь видит, откуда взяты данные; любое значение можно переопределить на месте; а один тумблер возвращает всю форму к ручному вводу. По умолчанию включён, потому что смысл именно в сэкономленном времени, но пользователь всегда в одном тапе от того, чтобы сделать вручную. Когда совпадения нет, форма подсвечивает поле и идёт дальше — незаполненная форма это нормальное состояние, а не ошибка.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="assets/fill-off.webp" type="image/webp"><img src="assets/fill-off.png" alt="Smart Fill выключен — та же форма, оставленная пустой для ручного ввода" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-smartfill.webp" type="image/webp"><img src="assets/fill-smartfill.png" alt="Smart Fill включён — поля заполнены из ранее загруженных документов" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-guidance.webp" type="image/webp"><img src="assets/fill-guidance.png" alt="Тап по полю открывает простое пояснение, что в нём ожидается" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Выкл, вкл и поле, которое по тапу само себя объясняет. Автоматизация, которую всегда можно отклонить.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="assets/fill-missing1.webp" type="image/webp"><img src="assets/fill-missing1.png" alt="Поле без данных-источника, подсвечено, но не блокирует форму" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-missing2.webp" type="image/webp"><img src="assets/fill-missing2.png" alt="Пропущенное поле, к которому можно вернуться и дозаполнить позже" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Поля, которые Hooh не смог заполнить, помечены на месте — пользователь сохраняет сейчас, а дозаполняет позже.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== ГЛУБОКАЯ СЕКЦИЯ 2 — РЕАЛЬНЫЕ ЭКРАНЫ ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">2. Подпись — создал один раз, используешь везде</h3>
+        <p class="case__section-body">Одна подпись, созданная один раз. Нарисуй её на холсте или сними существующую камерой — в любом случае она становится переиспользуемым ассетом, сохраняется в библиотеку и готова лечь в следующий документ. Саму подпись пользователь создаёт лишь однажды.</p>
+
+        <figure class="case__figure">
+          <div class="shots shots--center">
+            <div class="shot"><picture><source srcset="assets/fill-draw.webp" type="image/webp"><img src="assets/fill-draw.png" alt="Рисование подписи на холсте" loading="lazy"></picture></div>
+            <div class="shot shot--wide"><picture><source srcset="assets/fill-camera.webp" type="image/webp"><img src="assets/fill-camera.png" alt="Съёмка существующей подписи камерой" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-siglib.webp" type="image/webp"><img src="assets/fill-siglib.png" alt="Библиотека сохранённых подписей, переиспользуемых в любом документе" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Один результат, два пути — камера для существующей подписи, холст для новой.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== ГЛУБОКАЯ СЕКЦИЯ 3 — НОВОЕ, СКЕЛЕТ (текст черновой, по именам фреймов) ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">3. Аннотации и редактирование — мощь без кривой обучения</h3>
+        <p class="case__section-body">Разметка документа — обычно то место, где редактор превращается в «комбайн». Hooh держит один выбор инструмента внизу и одну цветовую систему на все инструменты — маркер, текст, фигуры, рисование от руки — так что контролы не разрастаются. Инструменты ставятся туда, куда тапнул пользователь, параметры открываются в одной шторке, и всё лежит недеструктивным слоем поверх оригинала: отмени любую пометку или сними всю разметку целиком — и источник ровно такой, каким был. <em>(Черновой текст — выверить по реальным экранам 12.x.)</em></p>
+
+        <figure class="case__figure">
+          <div class="skel-figure">
+            <div class="skel-phone"><span class="skel-phone__label"><b>Панель разметки + выбор инструмента</b>Одна панель на все инструменты · 12.4 / 12.7</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Единая цветовая система</b>Пипетка и палитра · 12.3 / 12.6</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Текст и фигуры</b>Одна шторка параметров · 12.10 / 12.14 / 12.22</span></div>
+          </div>
+          <figcaption>Один выбор инструмента, одна цветовая система, каждая пометка — снимаемый слой: разметка, которая не перегружает и не перезаписывает.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="skel-figure skel-figure--center">
+            <div class="skel-phone"><span class="skel-phone__label"><b>Режим маркера</b>Поверх многостраничного вида · 12.1 / 12.2</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Подсказка размещения</b>Тап — поставить, тащи — поправить · 12.8</span></div>
+          </div>
+          <figcaption>Пометки ложатся туда, куда тапнул пользователь; страница-оригинал под ними не меняется.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== ГЛУБОКАЯ СЕКЦИЯ 4 — РЕАЛЬНЫЕ ЭКРАНЫ ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">4. Сохранение и версии — оригинал всегда в безопасности</h3>
+        <p class="case__section-body">Сохранение никогда не перезаписывает случайно. Оригинал остаётся нетронутым — пользователь может сохранить новую копию или ответвить совсем новый документ, и каждая версия живёт внутри самого документа: переключается из навбара и переименовывается на месте. Итерации над одной формой хранят все состояния, не захламляя список документов. Это и есть опора всего обещания набора: ничто из действий пользователя не разрушает.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="assets/fill-versions.webp" type="image/webp"><img src="assets/fill-versions.png" alt="Версии хранятся внутри документа, переключаются из навбара" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-newcopy.webp" type="image/webp"><img src="assets/fill-newcopy.png" alt="Сохранение новой копией, оригинал не тронут" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-rename.webp" type="image/webp"><img src="assets/fill-rename.png" alt="Переименование копии на месте" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Версии — это свойство документа, а не отдельные файлы: переключай, копируй или переименовывай, ни разу не трогая оригинал.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== ПОЛОСА ШИРОТЫ — остальной тулбокс (скелет-тумбы) ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">Остальной тулбокс</h3>
+        <p class="case__section-body">Ещё шесть инструментов дополняют рабочее пространство — каждый на том же правиле и доступен с того же экрана документа. Показаны кратко; каждый — спроектированный, рабочий флоу.</p>
+        <div class="case__gap-grid case__gap-grid--six">
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">8.x · Конвертация</span></div>
+            <h4 class="case__gap-card__title">Конвертация</h4>
+            <p class="case__gap-card__desc">PDF в Word, Excel, PowerPoint и другие</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">10.x · Перевод</span></div>
+            <h4 class="case__gap-card__title">Перевод</h4>
+            <p class="case__gap-card__desc">Перевести документ, не выходя из него</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">9.x · Объединение</span></div>
+            <h4 class="case__gap-card__title">Объединение PDF</h4>
+            <p class="case__gap-card__desc">Собрать несколько файлов в один документ</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">7.x · Сжатие</span></div>
+            <h4 class="case__gap-card__title">Сжатие</h4>
+            <p class="case__gap-card__desc">Уменьшить файл, не выходя из приложения</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">11.x · Текст из скана</span></div>
+            <h4 class="case__gap-card__title">Извлечение текста</h4>
+            <p class="case__gap-card__desc">Вытащить выделяемый текст из скана</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">6.x · Страницы</span></div>
+            <h4 class="case__gap-card__title">Управление страницами</h4>
+            <p class="case__gap-card__desc">Переставить, повернуть, добавить и удалить страницы</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__outcome">
+        <h3 class="case__outcome-title">Итог</h3>
+        <div class="case__outcome-body">
+          <p>Набор спроектирован от начала до конца и передан в разработку. По отдельности фичи — это заполнялка форм, подписывалка, разметка, конвертер; вместе они — один аргумент: Hooh умеет с документом куда больше, чем просто читать его, и при этом ни разу не отбирает контроль у того, в чьих он руках.</p>
+          <p>В рамках этой работы скоуп не дошёл до публичного релиза, но система, компоненты и флоу задокументированы и готовы к выпуску, когда продукт вернётся к этой работе.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Главная</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="hooh-editor.html">
+          <span>Версия EN</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="#">
+        <span class="contact__text">Напишите мне</span>
+        <img class="contact__arrow" src="assets/arrow-cta.svg" alt="">
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Дизайн и разработка — Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Работы</a>
+      <a class="menu-drawer__item" href="index.html#about">Обо мне</a>
+      <a class="menu-drawer__item" href="index.html#experience">Опыт</a>
+    </nav>
+  </div>
+
+  <script>
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('.menu-drawer__item');
+      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+      openBtns.forEach(b => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach(i => i.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+      const bar = document.querySelector('.scroll-progress');
+      if (bar) {
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+          bar.style.transform = `scaleX(${pct/100})`;
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+      }
+    })();
+  </script>
+</body>
+</html>
