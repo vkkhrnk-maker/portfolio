@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="robots" content="noindex">
+  <title>Hooh — Document Tools — Case (draft skeleton) · Victoria Kukharenko</title>
+  <meta name="description" content="Draft skeleton — the big Hooh document-toolbox case: turning a reader into an editor (fill, sign, annotate, edit, convert) without losing control of the original.">
+  <meta name="theme-color" content="#d97706">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="apple-touch-icon" href="assets/profile.jpg">
+  <link rel="stylesheet" href="styles.css?v=158">
+  <style>
+    /* draft-only: 6-up breadth strip + a tiny work-in-progress note */
+    .case__gap-grid--six { grid-template-columns: repeat(3, 1fr); grid-column: 1 / -1; }
+    @media (max-width:1199px){ .case__gap-grid--six { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width:760px){ .case__gap-grid--six { grid-template-columns: 1fr; } }
+    .draft-note {
+      margin: 0 0 18px; padding: 8px 14px; display: inline-block;
+      border: 1px dashed #c2a36a; border-radius: 999px;
+      font-family: var(--font-body); font-size: 12.5px; letter-spacing: -.2px; color: #9a7b3e;
+      background: #fbf6ec;
+    }
+  </style>
+</head>
+<body class="case-page--fill">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd>PM, Art Director, iOS and Web Developer</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. UX, UI, prototyping, and design decisions across the document-action toolset — Smart Fill, signature, annotation, editing, versions, and conversion</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Year</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="#">CV</a>
+      <a class="btn btn--light" href="#">LinkedIn</a>
+      <a class="btn btn--light" href="#">Email</a>
+    </div>
+  </aside>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <a class="mobile-topbar__link" href="#" data-menu-open>Menu</a>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Back</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <p class="draft-note">Draft skeleton · big “document toolbox” case · solid frames = real screens, dashed = to export</p>
+        <h2 class="case__title">Hooh — from understanding a document to acting on it</h2>
+        <p class="case__intro">Hooh shipped as a reader — it could tell you what a document said. The next release turned it into a tool you act with: fill and sign forms, mark them up, reorganize and edit pages, convert and translate — a full document toolbox on iOS. The hard part wasn't any single tool. It was adding real power to an app used by people without a legal background, without ever making it feel like a power tool — and without putting their original at risk.</p>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Team</dt>
+            <dd>PM, Art Director, iOS and Web Developer</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>My Role</dt>
+            <dd>Product designer. UX, UI, prototyping, and design decisions across the document-action toolset — Smart Fill, signature, annotation, editing, versions, and conversion</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Year</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image case__hero-image--skel">
+          <div class="skel-figure">
+            <div class="skel-phone"><span class="skel-phone__label"><b>Document hub</b>Every tool one tap away · 3.x</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Fill &amp; sign</b>Act on the document · 5.x</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Annotate &amp; edit</b>Mark it up · 12.x</span></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h3 class="case__block-title">Problem</h3>
+          <p class="case__block-body">Hooh could read a document, but not act on it. Everything after reading — filling a form, signing it, marking it up, straightening a crooked scan, converting it to send — meant exporting to another app. For a non-technical audience, that handoff is exactly where the value leaked, and where mistakes happened: a lost original, an overwritten file</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Task</h3>
+          <p class="case__block-body">Turn the reader into a complete document workspace on iOS — fill, sign, annotate, edit, convert — while keeping the simplicity that made Hooh approachable, and guaranteeing the user never loses control of, or destroys, their original</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Users</h3>
+          <p class="case__block-body">The same audience as the first Hooh release — expats, digital nomads, and people without a legal background. They handle a steady trickle of documents — forms, contracts, scans, paperwork — and want them dealt with, not a toolbox to learn</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Scope</h3>
+          <p class="case__block-body">A document-action toolset on one rule — automate where it saves time, keep every step reversible, never touch the original. Smart Fill with a manual fallback, a reusable signature, a markup and annotation system, page and edit tools, format conversion, and an explicit version model</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">Design process</h3>
+        <p class="case__section-body">Sessions with the first-release cohort surfaced the pattern: people understood their documents but stalled the moment they had to do something with them — and the tools that could help lived in five different apps. The opportunity was to bring acting on a document into the same place as understanding it.</p>
+        <p class="case__section-body">One constraint shaped every tool below: control. Power is only safe for this audience if it's reversible and never destructive. Across the whole toolset the rules are the same — automate visibly, let the user override or undo, and keep the original untouched. Every feature is a variation on that one promise.</p>
+      </section>
+
+      <!-- ===== DEEP SECTION 1 — REAL SCREENS ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">1. Smart Fill — automation with a veto</h3>
+        <p class="case__section-body">Hooh recognizes form fields and fills them from the user's stored documents — and nothing is submitted silently. When Smart Fill has a match, the documents it drew from stay pinned at the top, so the user sees its sources; any value can be overridden in place; and a single toggle hands the whole form back to manual entry. It defaults to on because the time saved is the point, but the user is never more than one tap from doing it by hand. When a field has no match, the form highlights it and keeps moving — an unfinished form is a first-class state, not an error.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="assets/fill-off.webp" type="image/webp"><img src="assets/fill-off.png" alt="Smart Fill turned off — the same form left empty for manual entry" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-smartfill.webp" type="image/webp"><img src="assets/fill-smartfill.png" alt="Smart Fill on — fields populated from previously uploaded documents" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-guidance.webp" type="image/webp"><img src="assets/fill-guidance.png" alt="Tapping a field opens a plain-language note on what it expects" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Off, on, and a field that explains itself on tap. Automation you can always veto.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="assets/fill-missing1.webp" type="image/webp"><img src="assets/fill-missing1.png" alt="A field with no source data, highlighted but not blocking the form" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-missing2.webp" type="image/webp"><img src="assets/fill-missing2.png" alt="A skipped field the user can come back and finish later" loading="lazy"></picture></div>
+          </div>
+          <figcaption>The fields Hooh couldn't fill are flagged in place — the user saves now and finishes them later.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== DEEP SECTION 2 — REAL SCREENS ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">2. Signature — captured once, reused everywhere</h3>
+        <p class="case__section-body">One signature, made once. Draw it on the canvas or capture an existing one with the camera — either way it becomes a reusable asset, saved to a library and ready to drop into the next document. The user makes the signature itself only once.</p>
+
+        <figure class="case__figure">
+          <div class="shots shots--center">
+            <div class="shot"><picture><source srcset="assets/fill-draw.webp" type="image/webp"><img src="assets/fill-draw.png" alt="Drawing a signature on the canvas" loading="lazy"></picture></div>
+            <div class="shot shot--wide"><picture><source srcset="assets/fill-camera.webp" type="image/webp"><img src="assets/fill-camera.png" alt="Capturing an existing signature with the camera" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-siglib.webp" type="image/webp"><img src="assets/fill-siglib.png" alt="The saved signatures library, reusable in any document" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Same outcome, two routes — camera for an existing signature, canvas for a fresh one.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== DEEP SECTION 3 — NEW, SKELETON (copy is provisional, from frame names) ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">3. Annotate &amp; edit — power without a learning curve</h3>
+        <p class="case__section-body">Marking up a document is where an editor usually turns into a power tool. Hooh keeps one tool picker at the bottom and one color system across every tool — highlight, text, shapes, freehand markup — so the controls never multiply. Tools place where the user taps, parameters open in a single sheet, and everything sits as a non-destructive layer over the original: undo any mark, or peel the whole markup off, and the source is exactly as it was. <em>(Draft copy — verify against the real 12.x screens.)</em></p>
+
+        <figure class="case__figure">
+          <div class="skel-figure">
+            <div class="skel-phone"><span class="skel-phone__label"><b>Markup toolbar + tool picker</b>One bar for every tool · 12.4 / 12.7</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>One color system</b>Picker &amp; palette · 12.3 / 12.6</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Text &amp; shape tools</b>One parameter sheet · 12.10 / 12.14 / 12.22</span></div>
+          </div>
+          <figcaption>One tool picker, one color system, every mark a removable layer — markup that never overwhelms or overwrites.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="skel-figure skel-figure--center">
+            <div class="skel-phone"><span class="skel-phone__label"><b>Highlight mode</b>Over a multi-page view · 12.1 / 12.2</span></div>
+            <div class="skel-phone"><span class="skel-phone__label"><b>Placement hint</b>Tap to place, drag to adjust · 12.8</span></div>
+          </div>
+          <figcaption>Marks land where the user taps; the original page underneath is never altered.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== DEEP SECTION 4 — REAL SCREENS ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">4. Saving &amp; versions — the original is never at risk</h3>
+        <p class="case__section-body">Saving never overwrites by accident. The original file stays untouched — the user can save a new copy or branch off a brand-new document, and every version lives inside the document itself: switchable from the nav bar and renamable in place. Iterating on the same form keeps every state without cluttering the document list. This is the backbone of the whole toolset's promise: nothing the user does is destructive.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="assets/fill-versions.webp" type="image/webp"><img src="assets/fill-versions.png" alt="Versions stored inside the document, switchable from the nav bar" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-newcopy.webp" type="image/webp"><img src="assets/fill-newcopy.png" alt="Saving as a new copy, leaving the original untouched" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-rename.webp" type="image/webp"><img src="assets/fill-rename.png" alt="Renaming a copy in place" loading="lazy"></picture></div>
+          </div>
+          <figcaption>Versions are a property of the document, not separate files — switch, copy, or rename without ever touching the original.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ===== BREADTH STRIP — the rest of the toolbox (skeleton thumbs) ===== -->
+      <section class="case__section">
+        <h3 class="case__section-title">The rest of the toolbox</h3>
+        <p class="case__section-body">Six more tools round out the workspace — each built on the same rule and reachable from the same document screen. Shown in brief; each is a designed, working flow.</p>
+        <div class="case__gap-grid case__gap-grid--six">
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">8.x · Convert</span></div>
+            <h4 class="case__gap-card__title">Convert</h4>
+            <p class="case__gap-card__desc">PDF to Word, Excel, PowerPoint, and more</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">10.x · Translate</span></div>
+            <h4 class="case__gap-card__title">Translate</h4>
+            <p class="case__gap-card__desc">Translate a document without leaving it</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">9.x · Merge</span></div>
+            <h4 class="case__gap-card__title">Merge PDF</h4>
+            <p class="case__gap-card__desc">Combine several files into one document</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">7.x · Compress</span></div>
+            <h4 class="case__gap-card__title">Compress</h4>
+            <p class="case__gap-card__desc">Shrink a file without leaving the app</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">11.x · Extract text</span></div>
+            <h4 class="case__gap-card__title">Extract text</h4>
+            <p class="case__gap-card__desc">Pull selectable text out of a scan</p>
+          </div>
+          <div class="case__gap-card case__gap-card--skel">
+            <div class="skel-thumb"><span class="skel-phone__label">6.x · Manage pages</span></div>
+            <h4 class="case__gap-card__title">Manage pages</h4>
+            <p class="case__gap-card__desc">Reorder, rotate, add, and delete pages</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__outcome">
+        <h3 class="case__outcome-title">Outcome</h3>
+        <div class="case__outcome-body">
+          <p>The toolset was designed end-to-end and handed off to engineering. Read separately, the features are a form-filler, a signer, a markup tool, a converter; read together, they're one argument — Hooh can do far more to a document than read it, and still never takes control away from the person holding it.</p>
+          <p>This scope didn't reach a public release as part of this engagement, but the system, components, and flows are documented and ready to ship when the product picks the work back up.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="hooh-fill.html">
+          <span>Smart Fill case</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="#">
+        <span class="contact__text">Drop me a message</span>
+        <img class="contact__arrow" src="assets/arrow-cta.svg" alt="">
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Works</a>
+      <a class="menu-drawer__item" href="index.html#about">About</a>
+      <a class="menu-drawer__item" href="index.html#experience">Experience</a>
+    </nav>
+  </div>
+
+  <script>
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('.menu-drawer__item');
+      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+      openBtns.forEach(b => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach(i => i.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+      const bar = document.querySelector('.scroll-progress');
+      if (bar) {
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+          bar.style.transform = `scaleX(${pct/100})`;
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+      }
+    })();
+  </script>
+</body>
+</html>
