@@ -24,6 +24,14 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
   <link rel="stylesheet" href="styles.css?v=156">
+  <style>
+    /* Loading-state polish (kept inline so styles.css WIP stays untouched):
+       phrases cross-fade in one direction — out goes up, in rises from below —
+       instead of the old both-from-above swap that read as a jerk. */
+    .loading-state__cycle { transition: opacity .45s ease, transform .45s ease; }
+    .loading-state__cycle.is-fading { opacity: 0; transform: translateY(-6px); }
+    .loading-state__cycle.is-pre { transition: none; opacity: 0; transform: translateY(6px); }
+  </style>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body>
@@ -179,7 +187,7 @@
           <div class="case__split case__split--chatB">
             <div class="case__split-pane case__split-pane--loading">
               <div class="loading-state" role="status" aria-label="Gathering information">
-                <img class="loading-state__mark" src="assets/hooh-loader.gif" alt="" aria-hidden="true">
+                <img class="loading-state__mark" src="assets/hooh-loader.gif?v=2" alt="" aria-hidden="true">
                 <span class="loading-state__text"><span class="loading-state__cycle" data-cycle="Gathering information|Reading your documents|Analyzing key findings"><span class="loading-state__phrase">Gathering information</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span></span>
               </div>
             </div>
@@ -349,12 +357,18 @@
 
       let i = 0;
       setInterval(() => {
-        cycle.classList.add('is-fading');
+        // Skip swaps while the tab is hidden — throttled timers otherwise pile
+        // up and the text visibly jumps when the user returns.
+        if (document.hidden) return;
+        cycle.classList.add('is-fading');           // old phrase: fade up & out
         setTimeout(() => {
           i = (i + 1) % items.length;
           phrase.textContent = items[i];
+          cycle.classList.add('is-pre');             // park new phrase below, invisible
           cycle.classList.remove('is-fading');
-        }, 550);
+          void cycle.offsetWidth;                    // commit the parked position
+          cycle.classList.remove('is-pre');          // new phrase: rise in from below
+        }, 460);
       }, 3200);
     })();
 
