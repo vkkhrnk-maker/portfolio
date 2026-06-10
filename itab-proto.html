@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>iTAB — Product page (prototype)</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --page-bg: #f5f6f7;
+      --surface: #ffffff;
+      --ink: #1c1c1c;
+      --ink-2: #4a5159;
+      --ink-3: #8b9099;
+      --ink-4: #c4c8cd;
+      --line: #ececec;
+      --line-2: #e6e8eb;
+      --brand: #5cbf3d;
+      --brand-ink: #4aa830;
+      --brand-soft: #eaf5e1;
+      --info-soft: #e5eefc;
+      --info-ink: #4a8df0;
+      --info-icon-bg: #c7d8f4;
+      --pink-badge: #fde2e7;
+      --pink-ink: #b03a72;
+      --red: #ee4646;
+      --chip: #f4f5f7;
+      --chip-2: #f4f5f7;
+      --radius-card: 24px;
+      --radius-inner: 16px;
+      --radius-tile: 12px;
+      --radius-pill: 999px;
+      --shadow-card: 0 1px 2px rgba(20,20,20,.03);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--page-bg);
+      color: var(--ink);
+      font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+    svg { display: block; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- Header ---------- */
+    .header-img {
+      width: 1440px;
+      height: 132px;
+      display: block;
+      background: var(--surface);
+    }
+
+    /* ---------- Layout ---------- */
+    .page {
+      width: 1440px;
+      margin: 0 auto;
+      padding: 32px 40px 80px;
+      background: var(--page-bg);
+    }
+
+    /* ---------- Breadcrumb ---------- */
+    .breadcrumb {
+      display: flex; align-items: center; justify-content: space-between;
+      color: var(--ink-3);
+      font-size: 14px;
+      line-height: 24px;
+      padding-bottom: 20px;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb__actions { display: flex; gap: 16px; color: var(--ink); }
+    .breadcrumb__actions button {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 14px;
+    }
+
+    /* ---------- Product card ---------- */
+    .product {
+      display: grid;
+      grid-template-columns: 901px 443px;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .card-surface {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .product__main {
+      display: grid;
+      grid-template-columns: 415px 414px;
+      gap: 24px;
+    }
+
+    /* Gallery: 40px thumbs + 12px gap + 363px stage */
+    .gallery {
+      display: grid;
+      grid-template-columns: 40px 363px;
+      gap: 12px;
+      width: 415px;
+    }
+    .thumbs-img {
+      width: 40px; height: 92px;
+      display: block;
+    }
+    .stage {
+      width: 363px;
+      height: 484px;
+      border-radius: var(--radius-inner);
+      background: var(--chip);
+      position: relative;
+      overflow: hidden;
+    }
+    .stage__product {
+      position: absolute;
+      left: 0; top: 0;
+      width: 363px;
+      height: 484px;
+      object-fit: cover;
+      border-radius: var(--radius-inner);
+    }
+    .stage__badge {
+      position: absolute;
+      top: 17px; right: 17px;
+      z-index: 2;
+      background: var(--pink-badge);
+      color: #c25172;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* Right info column — fixed 414px wide */
+    .info { width: 414px; display: block; }
+    .info > * + * { margin-top: 0; }
+    .product__title {
+      width: 414px;
+      font-size: 20px; line-height: 28px;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .serving-block {
+      width: 313px;
+      margin-top: 28px;
+    }
+    .serving {
+      color: var(--ink-3);
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .pack-row {
+      width: 313px;
+      height: 80px;
+      margin-top: 8px;
+      display: flex;
+      gap: 8px;
+      position: relative;
+    }
+    .pack {
+      border: 1px solid var(--line-2);
+      border-radius: 14px;
+      padding: 14px 12px;
+      display: flex; flex-direction: column; gap: 4px;
+      cursor: pointer;
+      background: var(--surface);
+      min-width: 0;
+      white-space: nowrap;
+    }
+    .pack--w93  { flex: 0 0 93px; }
+    .pack--w102 { flex: 0 0 102px; }
+    .pack--active {
+      border: 2px solid var(--brand);
+      padding: 13px 11px;
+    }
+    .pack--muted .pack__count { color: var(--ink-3); }
+    .pack--muted .pack__price { color: var(--ink-4); }
+    .pack__count { font-weight: 600; font-size: 14px; color: var(--ink); line-height: 18px; }
+    .pack__price { color: var(--ink-3); font-size: 13px; line-height: 18px; }
+
+    .pack__bell {
+      position: absolute;
+      top: -6px;
+      right: 45px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #2b2b2b;
+      color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    /* Verified card: 414×73.48, 19px padding, 16px radius */
+    .verified-card {
+      width: 414px;
+      margin-top: 28px;
+      background: var(--info-soft);
+      border-radius: 16px;
+      padding: 19px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .verified-card__icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--info-icon-bg);
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .verified-card__text {
+      flex: 1;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .verified-card__info {
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      color: var(--info-ink);
+    }
+
+    /* Reviews row */
+    .reviews-row {
+      width: 414px;
+      margin-top: 28px;
+      height: 24px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 14px;
+    }
+    .reviews-row__score {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .reviews-row__star { width: 16px; height: 16px; color: #f4a838; }
+    .reviews-row__count {
+      color: var(--ink-3);
+      margin-left: 8px;
+    }
+    .reviews-row__arrow { color: var(--ink-3); margin-left: 4px; }
+
+    /* AI summary card: 414×172, 16px padding, 12px radius */
+    .ai-card {
+      width: 414px;
+      margin-top: 8px;
+      background: var(--chip);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .ai-card__head {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px;
+    }
+    .ai-card__sparkles { width: 20px; height: 20px; color: var(--brand); flex-shrink: 0; }
+    .ai-card__title { font-size: 14px; color: var(--ink-2); flex: 1; }
+    .ai-card__info {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      color: var(--brand);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 600;
+    }
+    .ai-card__text {
+      margin: 0;
+      font-size: 15px;
+      line-height: 22px;
+      color: var(--ink);
+    }
+
+    /* ---------- Sidebar (443×573.48) ---------- */
+    .product__side {
+      width: 443px;
+      padding: 24px;
+    }
+    .side__price-block { width: 395px; }
+    .price-row {
+      display: flex; align-items: baseline; gap: 8px;
+      flex-wrap: wrap;
+      height: 28px;
+    }
+    .price-now {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+      line-height: 28px;
+    }
+    .price-old {
+      color: var(--ink-3);
+      text-decoration: line-through;
+      font-size: 16px;
+    }
+    .price-discount {
+      color: var(--red);
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .promo {
+      color: var(--brand);
+      font-size: 14px;
+      margin-top: 8px;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .q-pill {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--chip);
+      color: var(--ink-3);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 500;
+    }
+
+    .buttons-block {
+      width: 395px;
+      margin-top: 24px;
+    }
+    .cta-row {
+      display: grid;
+      grid-template-columns: 267px 56px 56px;
+      gap: 8px;
+      height: 56px;
+    }
+    .btn-buy {
+      background: var(--brand);
+      color: #fff;
+      border-radius: var(--radius-pill);
+      padding: 0 24px;
+      height: 56px;
+      font-weight: 600; font-size: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px;
+    }
+    .btn-buy:hover { background: var(--brand-ink); }
+    .btn-square {
+      background: var(--chip);
+      border-radius: 16px;
+      height: 56px; width: 56px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--ink);
+    }
+    .btn-square:hover { background: #eaecef; }
+
+    .dolyami {
+      width: 395px;
+      margin-top: 16px;
+      height: 56px;
+      background: var(--chip);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px;
+    }
+    .dolyami__logo {
+      font-weight: 700; font-size: 13px;
+      color: #fff; background: #1c1c1c;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: -0.01em;
+    }
+    .dolyami__arrow { margin-left: auto; color: var(--ink-3); }
+
+    .side-divider {
+      width: 395px;
+      height: 1px;
+      background: var(--line);
+      margin: 24px 0;
+    }
+
+    .delivery {
+      width: 395px;
+      display: flex; flex-direction: column;
+      gap: 12px;
+    }
+    .pickup {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .pickup__l { flex: 1; min-width: 0; }
+    .pickup__label {
+      color: var(--ink-3);
+      font-size: 13px;
+      line-height: 18px;
+    }
+    .pickup__value {
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 20px;
+    }
+    .pickup__r {
+      display: flex; align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .pickup__logos { display: flex; gap: 4px; }
+    .courier {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      color: #fff;
+    }
+    .courier--yandex { background: #ff3300; }
+    .courier--cdek    { background: #1ab64f; font-size: 9px; }
+    .courier--boxberry{ background: #a40036; color: #ffd400; font-size: 11px; }
+    .pickup__more { color: var(--ink-3); font-size: 13px; margin: 0 4px; }
+    .pickup__arrow { color: var(--ink-3); font-size: 18px; }
+
+    .pickup__leaf {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: var(--brand-soft);
+      color: var(--brand);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    .rewards { width: 395px; }
+    .rewards__title {
+      font-size: 14px;
+      color: var(--ink-2);
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 8px;
+      line-height: 18px;
+    }
+    .reward-row {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 15px; color: var(--ink);
+      height: 25px;
+      margin-top: 4px;
+    }
+    .reward-row__value {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-weight: 600;
+    }
+    .reward-row__icon {
+      width: 16px; height: 16px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .reward-row__icon--leaf { color: var(--brand); }
+    .reward-row__icon--bolt { color: #f4a838; }
+
+    /* ---------- Brand + categories strip ---------- */
+    .strip {
+      margin-top: 16px;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 212px 1fr;
+      gap: 0;
+      box-shadow: var(--shadow-card);
+    }
+    .brand-block {
+      padding-right: 24px;
+      width: 188px;
+    }
+    .brand-block__head {
+      display: flex; align-items: center;
+      gap: 8px;
+      height: 48px;
+    }
+    .brand-block__logo {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .brand-block__label {
+      color: var(--ink-3);
+      font-size: 13px;
+      line-height: 18px;
+    }
+    .brand-block__name {
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 24px;
+      color: var(--ink);
+    }
+    .brand-block__btn {
+      margin-top: 16px;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0 16px;
+      height: 44px;
+      border-radius: var(--radius-pill);
+      background: #1c1c1c;
+      color: #fff;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    .brand-block__btn-icon { color: #5cbf3d; }
+
+    .cats {
+      padding-left: 0;
+    }
+    .cats__title {
+      color: var(--ink-3);
+      font-size: 13px;
+      margin-bottom: 12px;
+      line-height: 18px;
+    }
+    .cats__list {
+      display: flex; gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .cats__list::-webkit-scrollbar { display: none; }
+    .cat {
+      flex-shrink: 0;
+      display: flex; align-items: center;
+      gap: 12px;
+      height: 78px;
+      padding: 0 16px 0 20px;
+      border-radius: 18px;
+      background: var(--chip);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .cat--w164 { width: 164px; }
+    .cat--w180 { width: 180px; }
+    .cat--w218 { width: 218px; }
+    .cat--w213 { width: 213px; }
+    .cat--w156 { width: 156px; }
+    .cat--w200 { width: 200px; }
+    .cat--w121 { width: 121px; }
+    .cat__icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-left: auto;
+      background: #ececef;
+    }
+    .cat__icon--bag    { background: #e1f3d8; color: #5cbf3d; }
+    .cat__icon--lemon  { background: #fff3cd; }
+    .cat__icon--sale   { background: #e1f3d8; color: #5cbf3d; }
+    .cat__icon--gift   { background: #e1f3d8; color: #5cbf3d; }
+    .cat__icon--mineral{ background: #f5f3ee; }
+    .cat__icon--iron   { background: #fff3cd; color: #b08a3a; font-weight: 700; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <img class="header-img" src="assets/itab-proto-header.png" alt="iTAB header — Moscow, Catalog, search, Favorites/Orders/Cart/Log In">
+
+  <main class="page">
+
+    <!-- Breadcrumb row -->
+    <div class="breadcrumb">
+      <div>
+        <a href="#">Catalog</a> — <a href="#">Vitamins and Supplements</a> — <a href="#">Lipomins</a>
+      </div>
+      <div class="breadcrumb__actions">
+        <button>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 7h12M3 12h9M3 17h9"/><path d="M17 11v6M14 14h6"/></svg>
+          Add to list
+        </button>
+        <button>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+
+    <!-- Product card -->
+    <section class="product">
+      <div class="product__main card-surface">
+        <div class="gallery">
+          <img class="thumbs-img" src="assets/itab-proto-thumbs.png" alt="Product thumbnails">
+          <div class="stage">
+            <span class="stage__badge">New arrival</span>
+            <img class="stage__product" src="assets/itab-proto-product.png" alt="Fe Коферрин — bottle and box">
+          </div>
+        </div>
+
+        <div class="info">
+          <h1 class="product__title">LipoAllergy Liposomal Complex for allergies, plant-based capsules, 60 count.</h1>
+
+          <div class="serving-block">
+            <div class="serving">200 count / 6.75 ₽ per serving</div>
+            <div class="pack-row">
+              <div class="pack pack--w93">
+                <span class="pack__count">60 count</span>
+                <span class="pack__price">2,000 ₽</span>
+              </div>
+              <div class="pack pack--w102 pack--active">
+                <span class="pack__count">200 count</span>
+                <span class="pack__price">3,000 ₽</span>
+              </div>
+              <div class="pack pack--w102 pack--muted">
+                <span class="pack__count">300 count</span>
+                <span class="pack__price">4,000 ₽</span>
+              </div>
+              <span class="pack__bell" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="verified-card">
+            <span class="verified-card__icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4l3 6a3 3 0 0 1-3 4H9a3 3 0 0 1-3-4l3-6V3z"/><path d="M9 3h6"/></svg>
+            </span>
+            <span class="verified-card__text">Composition verified by independent lab iTAB</span>
+            <span class="verified-card__info">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><rect x="11" y="11" width="2" height="6" fill="#fff" rx="1"/><circle cx="12" cy="8" r="1.2" fill="#fff"/></svg>
+            </span>
+          </div>
+
+          <div class="reviews-row">
+            <span class="reviews-row__score">
+              <svg class="reviews-row__star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1z"/></svg>
+              4.9
+            </span>
+            <span class="reviews-row__count">15 reviews</span>
+            <span class="reviews-row__arrow">›</span>
+          </div>
+
+          <div class="ai-card">
+            <div class="ai-card__head">
+              <svg class="ai-card__sparkles" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2 16 6l4 2-4 2-2 4-2-4-4-2 4-2zM6 13l1.4 2.6L10 17l-2.6 1.4L6 21l-1.4-2.6L2 17l2.6-1.4z"/></svg>
+              <span class="ai-card__title">AI-generated summary of customer reviews</span>
+              <span class="ai-card__info">?</span>
+            </div>
+            <p class="ai-card__text">Product effectiveness varies: some users see no results even at high doses, while others report better sleep, reduced anxiety, and improved overall wellness; however, drowsiness may be a side effect.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="product__side card-surface">
+        <div class="side__price-block">
+          <div class="price-row">
+            <span class="price-now">3,679 ₽</span>
+            <span class="price-old">4,639 ₽</span>
+            <span class="price-discount">- 31% discount</span>
+          </div>
+          <div class="promo">3,476 ₽ with promo code <span class="q-pill">?</span></div>
+        </div>
+
+        <div class="buttons-block">
+          <div class="cta-row">
+            <button class="btn-buy">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2 12h11l2-8H7"/><circle cx="9" cy="20" r="1.6" fill="currentColor"/><circle cx="17" cy="20" r="1.6" fill="currentColor"/></svg>
+              Add to cart
+            </button>
+            <button class="btn-square" aria-label="Compare">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="m6 8-3 8h6Z"/><path d="m18 8-3 8h6Z"/><path d="M5 3h14"/></svg>
+            </button>
+            <button class="btn-square" aria-label="Favorite">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+          </div>
+
+          <div class="dolyami">
+            <span class="dolyami__logo">долями</span>
+            <span>4 payments of <b>972 ₽</b></span>
+            <span class="dolyami__arrow">›</span>
+          </div>
+        </div>
+
+        <div class="side-divider"></div>
+
+        <div class="delivery">
+          <div class="pickup">
+            <div class="pickup__l">
+              <div class="pickup__label">Pickup locations</div>
+              <div class="pickup__value">available from May 29</div>
+            </div>
+            <div class="pickup__r">
+              <div class="pickup__logos">
+                <span class="courier courier--yandex">Я</span>
+                <span class="courier courier--cdek">СДЭК</span>
+                <span class="courier courier--boxberry">b</span>
+              </div>
+              <span class="pickup__more">+2</span>
+              <span class="pickup__arrow">›</span>
+            </div>
+          </div>
+
+          <div class="pickup">
+            <div class="pickup__l">
+              <div class="pickup__label">Self-pickup option</div>
+              <div class="pickup__value">Today</div>
+            </div>
+            <div class="pickup__r">
+              <span class="pickup__leaf">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3c-6 0-12 5-12 12 0 3 1 5 1 5s8-1 12-5 4-9 4-12c-2 0-3 0-5 0z"/></svg>
+              </span>
+              <span class="pickup__arrow">›</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-divider"></div>
+
+        <div class="rewards">
+          <div class="rewards__title">
+            Earn rewards for your order <span class="q-pill">?</span>
+          </div>
+          <div class="reward-row">
+            <span>iTAB Plus Points</span>
+            <span class="reward-row__value">
+              <span class="reward-row__icon reward-row__icon--leaf">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3c-6 0-12 5-12 12 0 3 1 5 1 5s8-1 12-5 4-9 4-12c-2 0-3 0-5 0z"/></svg>
+              </span>
+              20
+            </span>
+          </div>
+          <div class="reward-row">
+            <span>Supermins Points</span>
+            <span class="reward-row__value">
+              <span class="reward-row__icon reward-row__icon--bolt">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="m13 2-9 12h6l-2 8 9-12h-6z"/></svg>
+              </span>
+              1923
+            </span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Brand + categories -->
+    <section class="strip">
+      <div class="brand-block">
+        <div class="brand-block__head">
+          <img class="brand-block__logo" src="assets/itab-proto-brand.png" alt="Supermins brand logo">
+          <div>
+            <div class="brand-block__label">Brand</div>
+            <div class="brand-block__name">Supermins</div>
+          </div>
+        </div>
+        <a href="#" class="brand-block__btn">
+          <svg class="brand-block__btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h12l1 4-2 14H7L5 6z"/></svg>
+          Black Friday
+        </a>
+      </div>
+
+      <div class="cats">
+        <div class="cats__title">Searching in categories</div>
+        <div class="cats__list">
+          <div class="cat cat--w180">
+            <span>Black Friday</span>
+            <span class="cat__icon cat__icon--bag">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 7h12l1 13H5z"/><path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </span>
+          </div>
+          <div class="cat cat--w164">
+            <span>Vitamin C</span>
+            <span class="cat__icon cat__icon--lemon">🍋</span>
+          </div>
+          <div class="cat cat--w218">
+            <span>Weekly discounts</span>
+            <span class="cat__icon cat__icon--sale">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="m6 18 12-12M8 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM16 20a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </span>
+          </div>
+          <div class="cat cat--w213">
+            <span>Gift for a woman</span>
+            <span class="cat__icon cat__icon--gift">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+          </div>
+          <div class="cat cat--w156">
+            <span>Minerals</span>
+            <span class="cat__icon cat__icon--mineral">💊</span>
+          </div>
+          <div class="cat cat--w200">
+            <span>Iron-containing</span>
+            <span class="cat__icon cat__icon--iron">Fe</span>
+          </div>
+          <div class="cat cat--w121">
+            <span>Iron</span>
+            <span class="cat__icon cat__icon--iron">Fe</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
