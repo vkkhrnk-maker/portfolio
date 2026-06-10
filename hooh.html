@@ -25,12 +25,26 @@
   <link rel="apple-touch-icon" href="assets/profile.jpg">
   <link rel="stylesheet" href="styles.css?v=156">
   <style>
-    /* Loading-state polish (kept inline so styles.css WIP stays untouched):
-       phrases cross-fade in one direction — out goes up, in rises from below —
-       instead of the old both-from-above swap that read as a jerk. */
-    .loading-state__cycle { transition: opacity .45s ease, transform .45s ease; }
-    .loading-state__cycle.is-fading { opacity: 0; transform: translateY(-6px); }
-    .loading-state__cycle.is-pre { transition: none; opacity: 0; transform: translateY(6px); }
+    /* Loading-state, ChatGPT-style (kept inline so styles.css WIP stays untouched):
+       the phrase sits still and a light shimmer sweeps across it; phrase changes
+       are an in-place fade — no vertical travel. Shimmer replaces the typing dots. */
+    .loading-state__dots { display: none; }
+    .loading-state__cycle { transition: opacity .35s ease; transform: none; }
+    .loading-state__cycle.is-fading { opacity: 0; transform: none; }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .loading-state__phrase {
+        background-image: linear-gradient(90deg, #9a9a9a 40%, #e3e3e3 50%, #9a9a9a 60%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: hooh-shimmer 2.4s linear infinite;
+      }
+    }
+    @keyframes hooh-shimmer {
+      0%   { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
   </style>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
@@ -360,15 +374,12 @@
         // Skip swaps while the tab is hidden — throttled timers otherwise pile
         // up and the text visibly jumps when the user returns.
         if (document.hidden) return;
-        cycle.classList.add('is-fading');           // old phrase: fade up & out
+        cycle.classList.add('is-fading');            // old phrase: fade out in place
         setTimeout(() => {
           i = (i + 1) % items.length;
           phrase.textContent = items[i];
-          cycle.classList.add('is-pre');             // park new phrase below, invisible
-          cycle.classList.remove('is-fading');
-          void cycle.offsetWidth;                    // commit the parked position
-          cycle.classList.remove('is-pre');          // new phrase: rise in from below
-        }, 460);
+          cycle.classList.remove('is-fading');       // new phrase: fade in, no travel
+        }, 360);
       }, 3200);
     })();
 
