@@ -1709,18 +1709,19 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
-/* Hooh card — warm orange→cream gradient backdrop (per Figma). The
-   phone mockup floats on it instead of on the grey plate. Overrides
-   the grey hover/active background changes; the press-in scale stays. */
+/* Hooh card — vertical sunset→sky gradient backdrop, exact stops from
+   Figma (Component 18): orange → yellow → pale lime → soft blue, top to
+   bottom. The phone mockup floats on it instead of the grey plate.
+   Overrides the grey hover/active background; the press-in scale stays. */
 .project-card--hooh,
 .project-card--hooh:active {
-  background: radial-gradient(125% 95% at 50% 118%,
-    #ff7a2f 0%, #ff9a4d 26%, #ffc187 52%, #ffe0c4 75%, #fbeede 100%);
+  background: linear-gradient(180deg,
+    #FFAC53 0%, #F9D95D 25.4%, #F1F8CD 65.4%, #B0E3FB 100%);
 }
 @media (hover: hover) {
   .project-card--hooh:hover {
-    background: radial-gradient(125% 95% at 50% 118%,
-      #ff7a2f 0%, #ff9a4d 26%, #ffc187 52%, #ffe0c4 75%, #fbeede 100%);
+    background: linear-gradient(180deg,
+      #FFAC53 0%, #F9D95D 25.4%, #F1F8CD 65.4%, #B0E3FB 100%);
   }
 }
 
