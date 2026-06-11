@@ -1733,12 +1733,12 @@ body.case-page--fill .case__outcome-body p {
 .project-card--itab,
 .project-card--itab:active {
   background: linear-gradient(180deg,
-    #E4EFE6 0%, #AEDAB9 50%, #74B182 100%);
+    #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
 }
 @media (hover: hover) {
   .project-card--itab:hover {
     background: linear-gradient(180deg,
-      #E4EFE6 0%, #AEDAB9 50%, #74B182 100%);
+      #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
   }
 }
 
