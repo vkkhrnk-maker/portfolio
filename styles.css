@@ -89,7 +89,7 @@
     --lh-body: 25.5px;      /* mobile body 17/25.5 */
 
     /* Semantic spacing (mobile values per Figma 527:28139) */
-    --page-x: 24px;
+    --page-x: 32px;
     --section-y: 100px;
     --group-gap: 32px;
     --card-x: 24px;
@@ -1709,6 +1709,21 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
+/* Hooh card — warm orange→cream gradient backdrop (per Figma). The
+   phone mockup floats on it instead of on the grey plate. Overrides
+   the grey hover/active background changes; the press-in scale stays. */
+.project-card--hooh,
+.project-card--hooh:active {
+  background: radial-gradient(125% 95% at 50% 118%,
+    #ff7a2f 0%, #ff9a4d 26%, #ffc187 52%, #ffe0c4 75%, #fbeede 100%);
+}
+@media (hover: hover) {
+  .project-card--hooh:hover {
+    background: radial-gradient(125% 95% at 50% 118%,
+      #ff7a2f 0%, #ff9a4d 26%, #ffc187 52%, #ffe0c4 75%, #fbeede 100%);
+  }
+}
+
 /* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
 .project-card__link {
   position: absolute;
@@ -1874,25 +1889,59 @@ body.case-page--fill .case__outcome-body p {
   container-type: inline-size;
 }
 
-/* Clean app mock — the bare looping screen, no device body (matches the sibling
-   cards, drops the bezel/seam fuss). Soft corners + shadow + hairline so the
-   white screens lift cleanly off the grey card. */
+/* Realistic iPhone mockup. The phone-video element is the screen; a
+   ::before pseudo draws the titanium device body wrapping it, and an
+   ::after pseudo is the Dynamic Island. Everything is sized in cqw
+   relative to the phone's own width (container-type below), so the
+   bezel, corner radius and island scale perfectly at any card size. */
 .project-card__phone-video {
   flex: 0 0 auto;
-  width: 31%;                          /* match the sibling cards' phones */
-  aspect-ratio: 588 / 1280;            /* the screen itself (the recording's own ratio) */
-  border-radius: 2cqw;                 /* soft iOS-screen corners, scales with width */
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.06);    /* airy lift — just a hint of depth */
-  border: 0.5px solid rgba(0, 0, 0, 0.06);
-  overflow: hidden;                    /* clip the video to the rounded corners */
+  width: 31%;                          /* leaves room for the body's drop shadow */
+  aspect-ratio: 588 / 1280;            /* the screen's own recording ratio */
+  position: relative;
+  container-type: inline-size;
 }
 
+/* Titanium device body — sits behind the screen, sticking out by the
+   bezel thickness on every side. A diagonal gradient fakes the brushed
+   metal edge (lighter highlight top-left, darker bottom-right). */
+.project-card__phone-video::before {
+  content: "";
+  position: absolute;
+  inset: -2cqw;                        /* bezel thickness ≈2% of phone width */
+  z-index: 0;
+  border-radius: 16cqw;                /* device corner — screen radius + bezel */
+  background:
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+  box-shadow:
+    0 2cqw 6cqw rgba(0, 0, 0, 0.18),
+    0 14cqw 34cqw -6cqw rgba(0, 0, 0, 0.38);   /* soft grounded drop shadow */
+}
+
+/* The screen itself — the looping recording, clipped to iPhone corners */
 .project-card__phone-video video {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
+  border-radius: 13cqw;                /* screen corner ≈ body radius − bezel */
+  background: #000;                    /* black behind any letterbox */
+}
+
+/* Dynamic Island — black pill floating just below the top of the screen */
+.project-card__phone-video::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 3.2cqw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30cqw;
+  height: 8.4cqw;
+  border-radius: 99px;
+  background: #000;
 }
 
 /* iTAB card — two screenshots, centered as a 944px group */
@@ -1925,7 +1974,7 @@ body.case-page--fill .case__outcome-body p {
   height: 95.5%;
   overflow: hidden;
   background: #fff;
-  border-radius: 1.2cqw 1.2cqw 0 0;
+  border-radius: 1.2cqw;
   container-type: inline-size;
   box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
   /* Chrome height is clamped so it reads as a real browser bar
@@ -1937,6 +1986,7 @@ body.case-page--fill .case__outcome-body p {
    Uses clamp() so it reads as a real browser chrome (38-44px tall) at
    every card size, instead of scaling with width like CSS content. */
 .project-card__itab-main__chrome {
+  display: none; /* removed per request — desktop mockup без браузерной панели */
   position: absolute;
   top: 0;
   left: 0;
@@ -2001,7 +2051,7 @@ body.case-page--fill .case__outcome-body p {
    later, drop it in like the Hooh video. */
 .project-card__itab-main__body {
   position: absolute;
-  top: var(--chrome-h);
+  top: 0;
   left: 0;
   width: 100%;
   height: auto;
@@ -2013,7 +2063,7 @@ body.case-page--fill .case__outcome-body p {
 .project-card__itab-side {
   position: absolute;
   left: 69.92%;
-  top: 0.74%;
+  top: 0;
   width: 30.08%;
   aspect-ratio: 284 / 637;
   height: auto;
@@ -2045,6 +2095,14 @@ body.case-page--fill .case__outcome-body p {
   display: block;
   width: 20px;
   height: 16px;
+}
+
+/* Hooh card — dark arrow chip instead of the magenta one. On the warm
+   gradient a near-black pill with the white arrow reads cleaner than
+   the magenta-with-inner-glow treatment. */
+.project-card--hooh .arrow-btn {
+  background-color: #1a1a1c;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
 }
 
 /* ===== About section ===== */
