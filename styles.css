@@ -2103,7 +2103,10 @@ body.case-page--fill .case__outcome-body p {
    filled white (#fff), so invert(1) flips it to black for this card. */
 .project-card--hooh .arrow-btn {
   background-color: var(--button-secondary);   /* #fff */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  /* Barely-there at rest (matches the site's airy ~0.05 shadows), then
+     a clear lift on hover so the rest→hover change is the noticeable bit. */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.2s ease, box-shadow 0.25s ease;
 }
 .project-card--hooh .arrow-btn img {
   filter: invert(1);
@@ -2111,7 +2114,7 @@ body.case-page--fill .case__outcome-body p {
 @media (hover: hover) {
   .project-card--hooh .arrow-btn:hover {
     opacity: 1;                                 /* override the base 0.85 fade */
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
   }
 }
 
