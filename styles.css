@@ -2098,12 +2098,21 @@ body.case-page--fill .case__outcome-body p {
   height: 16px;
 }
 
-/* Hooh card — dark arrow chip instead of the magenta one. On the warm
-   gradient a near-black pill with the white arrow reads cleaner than
-   the magenta-with-inner-glow treatment. */
+/* Hooh card — white arrow chip (same surface as the .btn--light pills),
+   black arrow, soft shadow that lifts on hover. The shared arrow.svg is
+   filled white (#fff), so invert(1) flips it to black for this card. */
 .project-card--hooh .arrow-btn {
-  background-color: #1a1a1c;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  background-color: var(--button-secondary);   /* #fff */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.project-card--hooh .arrow-btn img {
+  filter: invert(1);
+}
+@media (hover: hover) {
+  .project-card--hooh .arrow-btn:hover {
+    opacity: 1;                                 /* override the base 0.85 fade */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  }
 }
 
 /* ===== About section ===== */
