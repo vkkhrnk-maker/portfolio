@@ -644,7 +644,6 @@ img {
   object-fit: cover;
   object-position: top center;
   border-radius: 1.2cqw;
-  box-shadow: 0 0.5cqw 2cqw rgba(0, 0, 0, 0.10);
 }
 
 .case__itab-cover-mobile {
@@ -657,7 +656,6 @@ img {
   object-fit: cover;
   object-position: top center;
   border-radius: 1.8cqw;
-  box-shadow: 0 0.5cqw 2cqw rgba(0, 0, 0, 0.10);
 }
 
 /* iTAB hero on mobile: instead of the cramped side-by-side composite, show
@@ -2019,7 +2017,6 @@ body.case-page--fill .case__outcome-body p {
   object-fit: cover;
   object-position: top center;
   border-radius: 1.4cqw;
-  box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
 }
 
 /* Mobile product card — right, 25.84% of the group (Figma 251.6/973.6),
@@ -2034,7 +2031,6 @@ body.case-page--fill .case__outcome-body p {
   object-fit: cover;
   object-position: top center;
   border-radius: 2.2cqw;
-  box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
 }
 
 /* ===== Syno card (coming soon) ===== */
@@ -2063,7 +2059,6 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
   height: auto;
   border-radius: 0.8cqw;
-  box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
 }
 
 /* Diagonal 'Coming soon' ribbon across the top-right corner. The card
