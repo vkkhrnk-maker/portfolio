@@ -2535,20 +2535,23 @@ body.case-page--fill .case__outcome-body p {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 0;
 }
 
 .experience-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-32);
-  padding-bottom: var(--space-32);
-  border-bottom: 1.5px solid var(--stroke-primary);
+  gap: 0;
+  /* Symmetric top + bottom padding so the magenta fill has equal
+     breathing room above the role and below the description. The
+     divider is a TOP border (belongs to each row) so it can vanish
+     when that row is hovered. */
+  padding-block: 20px;
+  border-top: 1.5px solid var(--stroke-primary);
 }
 
-.experience-item:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
+.experience-item:first-child {
+  border-top: none;
 }
 
 .experience-item__row {
@@ -2632,12 +2635,23 @@ body.case-page--fill .case__outcome-body p {
    rules so one selector can never drop the others): mouse hover,
    keyboard focus, and tap (.is-open, toggled by JS on touch). ---- */
 
-/* Fill */
+/* Fill — and hide this row's own top divider so the magenta block has
+   a clean top edge. */
 @media (hover: hover) {
-  .experience-item:hover { background-color: var(--button-primary); }
+  .experience-item:hover {
+    background-color: var(--button-primary);
+    border-top-color: transparent;
+  }
 }
-.experience-item:focus-visible { background-color: var(--button-primary); outline: none; }
-.experience-item.is-open { background-color: var(--button-primary); }
+.experience-item:focus-visible {
+  background-color: var(--button-primary);
+  border-top-color: transparent;
+  outline: none;
+}
+.experience-item.is-open {
+  background-color: var(--button-primary);
+  border-top-color: transparent;
+}
 
 /* Reveal the description */
 @media (hover: hover) {
