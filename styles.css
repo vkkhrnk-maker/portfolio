@@ -2634,7 +2634,10 @@ body.case-page--fill .case__outcome-body p {
 /* ===== Footer ===== */
 
 .footer {
-  padding: 60px var(--page-x);
+  /* Bottom padding 24px (not 60) so the footer text bottom-aligns with
+     the sidebar's CV/LinkedIn/Email buttons, which sit 24px off the
+     viewport bottom — at full scroll the two sit on the same line. */
+  padding: 60px var(--page-x) 24px;
   display: flex;
   flex-direction: column;
 }
