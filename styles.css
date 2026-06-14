@@ -2037,6 +2037,57 @@ body.case-page--fill .case__outcome-body p {
   box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
 }
 
+/* ===== Syno card (coming soon) ===== */
+/* Light-blue brand backdrop (Figma #c7e0f2). Single desktop screenshot
+   of the Syno Art Map, centred below the header; not clickable yet — a
+   diagonal 'Coming soon' ribbon sits in the top-right corner. */
+.project-card--syno,
+.project-card--syno:active {
+  background: #c7e0f2;
+  transform: none;            /* not clickable — no press-in */
+}
+@media (hover: hover) {
+  .project-card--syno:hover { background: #c7e0f2; }
+}
+
+.project-card__syno-shot {
+  position: absolute;
+  top: 16%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  z-index: 2;
+}
+.project-card__syno-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.8cqw;
+  box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
+}
+
+/* Diagonal 'Coming soon' ribbon across the top-right corner. The card
+   already clips overflow, so the ends of the rotated strip are hidden. */
+.project-card__ribbon {
+  position: absolute;
+  top: 30px;
+  right: -56px;
+  z-index: 4;
+  width: 210px;
+  transform: rotate(45deg);
+  background: var(--button-primary);
+  color: var(--white);
+  text-align: center;
+  padding: 9px 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
 /* Arrow button (Hooh card) */
 
 .arrow-btn {
@@ -2354,6 +2405,13 @@ body.case-page--fill .case__outcome-body p {
     height: auto;
     aspect-ratio: 504 / 1088;
     border-radius: 14px;
+  }
+
+  /* Syno screenshot flows in the natural mobile card column */
+  .project-card__syno-shot {
+    position: static;
+    transform: none;
+    width: 100%;
   }
 }
 
