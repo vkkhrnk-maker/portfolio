@@ -1813,11 +1813,13 @@ body.case-page--fill .case__outcome-body p {
     transition: opacity 0.2s ease, box-shadow 0.32s ease;
   }
 
-  .project-card:hover .arrow-btn {
-    box-shadow:
-      inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
-      inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5),
-      0 0 28px rgba(217, 70, 239, 0.45);
+  /* On the colourful Hooh/iTAB cards the arrow is a white chip — hovering
+     anywhere on the card lifts that chip with a soft shadow (same as the
+     direct arrow hover), instead of the old magenta glow that belonged to
+     the grey-plate cards. */
+  .project-card--hooh:hover .arrow-btn,
+  .project-card--itab:hover .arrow-btn {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
   }
 }
 
