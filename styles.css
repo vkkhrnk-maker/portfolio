@@ -617,18 +617,47 @@ img {
 /* iTAB hero — flat side-by-side mockup (no parallax, no gradient backdrop) */
 .case__hero-image--itab {
   position: relative;
-  background: none;
+  /* Green brand gradient — same as the iTAB home card, so the green card
+     on the home page leads into a matching green case cover. */
+  background: linear-gradient(180deg, #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
   border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1032 / 600;
 }
 
-.case__hero-image--itab img {
-  display: block;
-  width: 100%;
-  height: 100%;
+/* iTAB case cover — desktop + mobile screenshots composed on the green
+   gradient, exact spacing from Figma (node 1496:61214). Mirrors the home
+   card composition. */
+.case__itab-cover {
+  position: absolute;
+  inset: 0;
+  container-type: inline-size;
+}
+
+.case__itab-cover-desktop {
+  position: absolute;
+  left: 2.81%;            /* Figma 29/1032 */
+  top: 4.67%;             /* Figma 28/600 */
+  width: 66.38%;          /* Figma 685/1032 */
+  height: auto;
+  aspect-ratio: 1370 / 1144;
   object-fit: cover;
-  object-position: center;
+  object-position: top center;
+  border-radius: 1.2cqw;
+  box-shadow: 0 0.5cqw 2cqw rgba(0, 0, 0, 0.10);
+}
+
+.case__itab-cover-mobile {
+  position: absolute;
+  left: 72.77%;           /* Figma 751/1032 */
+  top: 4.67%;
+  width: 24.38%;          /* Figma 251.6/1032 */
+  height: auto;
+  aspect-ratio: 504 / 1088;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 1.8cqw;
+  box-shadow: 0 0.5cqw 2cqw rgba(0, 0, 0, 0.10);
 }
 
 /* iTAB hero on mobile: instead of the cramped side-by-side composite, show
@@ -648,21 +677,21 @@ img {
     gap: 12px;
   }
   .case__hero-split .case__hero-plate {
-    background: rgb(227, 229, 230);
+    background: linear-gradient(180deg, #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
     height: 56vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 24px;
     box-sizing: border-box;
     overflow: hidden;
   }
   .case__hero-split .case__hero-plate img {
     display: block;
-    width: 100%;
+    width: auto;
     height: 100%;
     object-fit: contain;
-    border-radius: 0;
+    border-radius: 14px;
   }
 }
 
@@ -1962,130 +1991,48 @@ body.case-page--fill .case__outcome-body p {
   background: #000;
 }
 
-/* iTAB card — two screenshots, centered as a 944px group */
-
+/* iTAB card — desktop screenshot (left) + mobile screenshot (right),
+   composition + spacing straight from Figma (node 1496:61214). Clean
+   rounded screenshots floating on the green gradient — no browser
+   chrome. Group is a container so the corner radii scale with width. */
 .project-card__itab-group {
   position: absolute;
-  /* Width scaled to match the narrower phones row on the Hooh card;
-     height fills from top:20.83% to the card bottom. */
-  top: 19%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 74.10%;
-  height: 79.17%;
-}
-
-/* iTAB main = a faux browser window. macOS-style chrome bar at the top
-   (traffic-light dots + URL pill), then the page header (fixed below the
-   chrome) and the body screenshot. The body parallaxes as the card
-   moves through the viewport — driven by a small JS block in index.html
-   (works in every browser, no scroll-timeline support needed). */
-.project-card__itab-main {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 66.95%;
-  /* Height matches the bottom edge of .project-card__itab-side so the
-     browser window and the side phone bottom-align as a paired group.
-     The body screenshot extends past the bottom of the frame and is
-     clipped by overflow:hidden. */
-  height: 95.5%;
-  overflow: hidden;
-  background: #fff;
-  border-radius: 1.2cqw;
+  width: 94.3%;            /* Figma image span: 973.6 / 1032 */
+  height: 83%;
   container-type: inline-size;
-  box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.06);
-  /* Chrome height is clamped so it reads as a real browser bar
-     regardless of card width — like a real Chrome/Safari toolbar. */
-  --chrome-h: clamp(36px, 4cqw, 44px);
 }
 
-/* Browser chrome bar — fixed at the very top, on top of everything.
-   Uses clamp() so it reads as a real browser chrome (38-44px tall) at
-   every card size, instead of scaling with width like CSS content. */
-.project-card__itab-main__chrome {
-  display: none; /* removed per request — desktop mockup без браузерной панели */
+/* Desktop product page — left, 70.36% of the group (Figma 685/973.6).
+   The export is pre-cropped to the hero, so it shows at its own ratio. */
+.project-card__itab-desktop {
   position: absolute;
-  top: 0;
   left: 0;
-  right: 0;
-  height: var(--chrome-h);
-  display: flex;
-  align-items: center;
-  padding: 0 clamp(12px, 1.5cqw, 18px);
-  gap: clamp(10px, 1cqw, 14px);
-  background: #ECECEC;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  z-index: 3;
-}
-
-.project-card__itab-main__dots {
-  display: flex;
-  gap: clamp(5px, 0.5cqw, 7px);
-  flex: 0 0 auto;
-}
-
-.project-card__itab-main__dots > span {
-  width: clamp(10px, 1.1cqw, 13px);
-  height: clamp(10px, 1.1cqw, 13px);
-  border-radius: 50%;
-  display: block;
-}
-
-.project-card__itab-main__dots > span:nth-child(1) { background: #FF5F57; }
-.project-card__itab-main__dots > span:nth-child(2) { background: #FEBC2E; }
-.project-card__itab-main__dots > span:nth-child(3) { background: #28C840; }
-
-.project-card__itab-main__url {
-  flex: 0 1 auto;
-  margin-inline: auto;
-  min-width: clamp(140px, 18cqw, 240px);
-  max-width: clamp(180px, 30cqw, 320px);
-  background: #fff;
-  border-radius: 99px;
-  padding: clamp(4px, 0.5cqw, 6px) clamp(10px, 1.4cqw, 16px);
-  font-family: var(--font-body);
-  font-size: clamp(11px, 1.2cqw, 13px);
-  line-height: 1.3;
-  color: #6B6B6B;
-  letter-spacing: 0;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  white-space: nowrap;
-  text-align: center;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-/* Body screenshot — sits directly below the browser chrome, statically
-   offset by translateY(-5%) so the visible window opens on the product
-   hero (bottle photo + price + green CTA) rather than the white promo
-   toolbar at the very top of the export.
-
-   Decision: iTAB is a webpage, not an app. Auto-scrolling a still
-   screenshot never read right — pages are looked at as compositions,
-   apps are watched in motion. Hooh's phone-video covers the 'living'
-   role on the home page; iTAB sits next to it as the 'designed-frame'
-   counterpart. If a real screen-recording of the iTAB site is added
-   later, drop it in like the Hooh video. */
-.project-card__itab-main__body {
-  position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  width: 70.36%;
   height: auto;
-  display: block;
-  z-index: 1;
-  transform: translateY(-5%);
-}
-
-.project-card__itab-side {
-  position: absolute;
-  left: 69.92%;
-  top: 0;
-  width: 30.08%;
-  aspect-ratio: 284 / 637;
-  height: auto;
+  aspect-ratio: 1370 / 1144;
   object-fit: cover;
+  object-position: top center;
+  border-radius: 1.4cqw;
+  box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
+}
+
+/* Mobile product card — right, 25.84% of the group (Figma 251.6/973.6),
+   top-aligned with the desktop, ~3.8% gap between them. */
+.project-card__itab-mobile {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25.84%;
+  height: auto;
+  aspect-ratio: 504 / 1088;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 2.2cqw;
+  box-shadow: 0 0.6cqw 2.4cqw rgba(0, 0, 0, 0.10);
 }
 
 /* Arrow button (Hooh card) */
@@ -2379,7 +2326,7 @@ body.case-page--fill .case__outcome-body p {
     object-fit: cover;
   }
 
-  /* iTAB — show only side phone (hide main) */
+  /* iTAB — show only the mobile screenshot (hide the desktop one) */
   .project-card__itab-group {
     position: static;
     top: auto;
@@ -2393,18 +2340,18 @@ body.case-page--fill .case__outcome-body p {
     max-height: 620px;
   }
 
-  .project-card__itab-main {
+  .project-card__itab-desktop {
     display: none;
   }
 
-  .project-card__itab-side {
+  .project-card__itab-mobile {
     position: static;
+    right: auto;
     top: auto;
-    left: auto;
     width: 129px;
-    height: 282px;
-    aspect-ratio: auto;
-    object-fit: cover;
+    height: auto;
+    aspect-ratio: 504 / 1088;
+    border-radius: 14px;
   }
 }
 
