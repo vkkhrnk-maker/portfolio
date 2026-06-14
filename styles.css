@@ -1900,7 +1900,10 @@ body.case-page--fill .case__outcome-body p {
 
 .project-card__phones {
   position: absolute;
-  top: 19%;
+  /* max(120px, %) so the visual always clears the fixed-height header
+     (subtitle bottom ≈104px) even when the card is short on narrow
+     desktops, where a bare 19% would land on top of the subtitle. */
+  top: max(120px, 19%);
   left: 50%;
   transform: translateX(-50%);
   width: 74.10%;
@@ -2002,7 +2005,7 @@ body.case-page--fill .case__outcome-body p {
    chrome. Group is a container so the corner radii scale with width. */
 .project-card__itab-group {
   position: absolute;
-  top: 15%;
+  top: max(120px, 15%);   /* clear the fixed-height header on narrow desktops */
   left: 50%;
   transform: translateX(-50%);
   width: 94.3%;            /* Figma image span: 973.6 / 1032 */
@@ -2059,7 +2062,7 @@ body.case-page--fill .case__outcome-body p {
 
 .project-card__syno-shot {
   position: absolute;
-  top: 15%;
+  top: max(120px, 15%);     /* clear the fixed-height header on narrow desktops */
   left: 50%;
   transform: translateX(-50%);
   width: 94.3%;              /* matches the iTAB composition side margins */
@@ -2090,7 +2093,6 @@ body.case-page--fill .case__outcome-body p {
   line-height: 1;
   letter-spacing: 1px;
   text-transform: uppercase;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
   pointer-events: none;
 }
 
