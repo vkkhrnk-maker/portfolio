@@ -149,6 +149,11 @@ body {
   display: flex;
   align-items: flex-start;
   overflow-x: hidden;
+  /* Don't let scroll-anchoring jump the viewport when an Experience row
+     expands on hover (the page below it grows) — that read as a
+     'bounce up'. The page has no above-viewport dynamic content that
+     anchoring needs to compensate for, so disabling it is safe. */
+  overflow-anchor: none;
 }
 
 a {
@@ -2656,14 +2661,14 @@ body.case-page--fill .case__outcome-body p {
 /* Reveal the description */
 @media (hover: hover) {
   .experience-item:hover .experience-item__detail {
-    max-height: 8em; opacity: 1; margin-top: 16px;
+    max-height: 5em; opacity: 1; margin-top: 14px;
   }
 }
 .experience-item:focus-visible .experience-item__detail {
-  max-height: 8em; opacity: 1; margin-top: 16px;
+  max-height: 5em; opacity: 1; margin-top: 14px;
 }
 .experience-item.is-open .experience-item__detail {
-  max-height: 8em; opacity: 1; margin-top: 16px;
+  max-height: 5em; opacity: 1; margin-top: 14px;
 }
 
 /* Flip text to white on the fill */
