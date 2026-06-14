@@ -23,7 +23,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=170">
+  <link rel="stylesheet" href="styles.css?v=173">
 </head>
 <body>
   <aside class="sidebar">
@@ -204,47 +204,53 @@
     <section class="experience" id="experience">
       <h2 class="experience__title">Working Experience</h2>
       <ul class="experience__list">
-        <li class="experience-item">
+        <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Product designer</p>
             <span class="experience-item__date">2025-Present</span>
             <p class="experience-item__company">Hooh. Mobile App (IOS), Web</p>
           </div>
+          <div class="experience-item__detail"><p>Designed the MVP end to end — document uploads, AI summaries and an assistant chat — across iOS and web. Owned the flows, UI and the component system the team ships from.</p></div>
         </li>
-        <li class="experience-item">
+        <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Product designer</p>
             <span class="experience-item__date">2024-Present</span>
             <p class="experience-item__company">iTAB. Mobile App (Crossplatform), Web</p>
           </div>
+          <div class="experience-item__detail"><p>Redesigned the supplement product card across web and mobile to make value, trust signals and purchase actions clearer — cutting drop-off in a high-trust category.</p></div>
         </li>
-        <li class="experience-item">
+        <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Ui/ux designer</p>
             <span class="experience-item__date">2023-2024</span>
             <p class="experience-item__company">Infomedia. Communication, UX/UI design</p>
           </div>
+          <div class="experience-item__detail"><p>Designed communication products and interfaces — turning complex requirements into clear, usable UX/UI across the product.</p></div>
         </li>
-        <li class="experience-item">
+        <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Ui/ux designer, mentor</p>
             <span class="experience-item__date">2023-2024</span>
             <p class="experience-item__company">Abramova School. UX/UI designer, mentor</p>
           </div>
+          <div class="experience-item__detail"><p>Designed UX/UI while mentoring junior designers — reviewing work, running critiques and helping them level up their craft.</p></div>
         </li>
-        <li class="experience-item">
+        <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Ui/ux designer</p>
             <span class="experience-item__date">2023-2024</span>
             <p class="experience-item__company">Cryptomi</p>
           </div>
+          <div class="experience-item__detail"><p>Designed interfaces for a crypto product — making dense, data-heavy flows approachable and clear.</p></div>
         </li>
-        <li class="experience-item">
+        <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Web designer</p>
             <span class="experience-item__date">2022-2023</span>
             <p class="experience-item__company">Prokachka studio</p>
           </div>
+          <div class="experience-item__detail"><p>Designed marketing sites and landing pages — visual design, layout and responsive behaviour from concept through to developer handoff.</p></div>
         </li>
       </ul>
     </section>
@@ -588,6 +594,22 @@
       ['pointerdown', 'touchstart', 'keydown'].forEach((evt) =>
         window.addEventListener(evt, onFirstGesture, { passive: true, once: true })
       );
+    })();
+
+    /* Experience rows: on touch devices (no hover) a tap toggles the
+       magenta fill + description. Only one row open at a time. On mouse
+       devices the CSS :hover handles it and this stays out of the way. */
+    (() => {
+      const canHover = window.matchMedia('(hover: hover)').matches;
+      if (canHover) return;
+      const items = document.querySelectorAll('.experience-item');
+      items.forEach((item) => {
+        item.addEventListener('click', () => {
+          const wasOpen = item.classList.contains('is-open');
+          items.forEach((i) => i.classList.remove('is-open'));
+          if (!wasOpen) item.classList.add('is-open');
+        });
+      });
     })();
   </script>
 </body>

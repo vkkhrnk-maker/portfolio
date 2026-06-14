@@ -2535,6 +2535,81 @@ body.case-page--fill .case__outcome-body p {
   text-align: right;
 }
 
+/* ===== Experience hover/expand =====
+   On hover (mouse), focus (keyboard) or tap (.is-open, set by JS for
+   touch), the row fills with the magenta accent, its text flips to
+   white, and a one-line description expands smoothly below it. */
+.experience-item {
+  /* Pad inside + pull back out so the fill bleeds a little past the text
+     while the text stays aligned to the section edges at rest. */
+  padding-inline: 16px;
+  margin-inline: -16px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* The description: collapsed with max-height (reliable inside the flex
+   column — the grid 0fr→1fr trick collapses here). The <p> clips while
+   the height grows. 8em is comfortably more than the 2-line text. */
+.experience-item__detail {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.42s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 0.3s ease, margin-top 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.experience-item__detail > p {
+  margin: 0;
+  max-width: 720px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -0.5px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ---- Expanded state. Three independent triggers (kept as separate
+   rules so one selector can never drop the others): mouse hover,
+   keyboard focus, and tap (.is-open, toggled by JS on touch). ---- */
+
+/* Fill */
+@media (hover: hover) {
+  .experience-item:hover { background-color: var(--button-primary); }
+}
+.experience-item:focus-visible { background-color: var(--button-primary); outline: none; }
+.experience-item.is-open { background-color: var(--button-primary); }
+
+/* Reveal the description */
+@media (hover: hover) {
+  .experience-item:hover .experience-item__detail {
+    max-height: 8em; opacity: 1; margin-top: 16px;
+  }
+}
+.experience-item:focus-visible .experience-item__detail {
+  max-height: 8em; opacity: 1; margin-top: 16px;
+}
+.experience-item.is-open .experience-item__detail {
+  max-height: 8em; opacity: 1; margin-top: 16px;
+}
+
+/* Flip text to white on the fill */
+@media (hover: hover) {
+  .experience-item:hover .experience-item__role,
+  .experience-item:hover .experience-item__company { color: var(--white); }
+  .experience-item:hover .experience-item__date {
+    background-color: rgba(255, 255, 255, 0.22); color: var(--white);
+  }
+}
+.experience-item:focus-visible .experience-item__role,
+.experience-item:focus-visible .experience-item__company,
+.experience-item.is-open .experience-item__role,
+.experience-item.is-open .experience-item__company { color: var(--white); }
+.experience-item:focus-visible .experience-item__date,
+.experience-item.is-open .experience-item__date {
+  background-color: rgba(255, 255, 255, 0.22); color: var(--white);
+}
+
 /* ===== Contact CTA — Drop me a message ===== */
 
 .contact {
