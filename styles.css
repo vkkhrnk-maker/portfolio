@@ -2046,12 +2046,18 @@ body.case-page--fill .case__outcome-body p {
   .project-card--syno:hover { background: #c7e0f2; }
 }
 
+/* Taller than the 1040/693 tile so the wide screenshot fits at the same
+   side margins iTAB uses (≈2.85% each side) without clipping. */
+.project-card--syno .project-card__inner {
+  aspect-ratio: 1040 / 760;
+}
+
 .project-card__syno-shot {
   position: absolute;
-  top: 16%;
+  top: 15%;
   left: 50%;
   transform: translateX(-50%);
-  width: 85%;
+  width: 94.3%;              /* matches the iTAB composition side margins */
   z-index: 2;
 }
 .project-card__syno-shot img {
