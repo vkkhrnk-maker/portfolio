@@ -1741,38 +1741,10 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
-/* Hooh card — vertical sunset→sky gradient backdrop, exact stops from
-   Figma (Component 18): orange → yellow → pale lime → soft blue, top to
-   bottom. The phone mockup floats on it instead of the grey plate.
-   Overrides the grey hover/active background; the press-in scale stays. */
-.project-card--hooh,
-.project-card--hooh:active {
-  background: linear-gradient(180deg,
-    #FFAC53 0%, #F9D95D 25.4%, #F1F8CD 65.4%, #B0E3FB 100%);
-}
-@media (hover: hover) {
-  .project-card--hooh:hover {
-    background: linear-gradient(180deg,
-      #FFAC53 0%, #F9D95D 25.4%, #F1F8CD 65.4%, #B0E3FB 100%);
-  }
-}
-
-/* iTAB card — vertical green brand gradient, exact stops from Figma
-   (node 27:35613): pale mint at the top deepening to brand green at the
-   bottom. Ties the colour to iTAB's own brand (their green nav/CTA), so
-   the works section reads as one system: warm Hooh app card + green iTAB
-   web card, each framed for its product type. */
-.project-card--itab,
-.project-card--itab:active {
-  background: linear-gradient(180deg,
-    #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
-}
-@media (hover: hover) {
-  .project-card--itab:hover {
-    background: linear-gradient(180deg,
-      #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
-  }
-}
+/* Hooh and iTAB cards sit on the shared neutral grey plate (base
+   .project-card) — the product visuals carry the colour, the magenta
+   arrow chip is the accent. Grey hover/active feedback comes from the
+   base rules. */
 
 /* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
 .project-card__link {
@@ -1816,13 +1788,13 @@ body.case-page--fill .case__outcome-body p {
     transition: opacity 0.2s ease, box-shadow 0.32s ease;
   }
 
-  /* On the colourful Hooh/iTAB cards the arrow is a white chip — hovering
-     anywhere on the card lifts that chip with a soft shadow (same as the
-     direct arrow hover), instead of the old magenta glow that belonged to
-     the grey-plate cards. */
-  .project-card--hooh:hover .arrow-btn,
-  .project-card--itab:hover .arrow-btn {
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+  /* Hovering anywhere on the card makes the magenta arrow chip glow —
+     keeps its inner-shadow look and adds a soft magenta halo. */
+  .project-card:hover .arrow-btn {
+    box-shadow:
+      inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+      inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5),
+      0 0 28px rgba(217, 70, 239, 0.45);
   }
 }
 
@@ -2042,16 +2014,16 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* ===== Syno card (coming soon) ===== */
-/* Light-blue brand backdrop (Figma #c7e0f2). Single desktop screenshot
+/* Same neutral grey plate as the other cards. Single desktop screenshot
    of the Syno Art Map, centred below the header; not clickable yet — a
    diagonal 'Coming soon' ribbon sits in the top-right corner. */
 .project-card--syno,
 .project-card--syno:active {
-  background: #c7e0f2;
+  background: var(--grey-200);
   transform: none;            /* not clickable — no press-in */
 }
 @media (hover: hover) {
-  .project-card--syno:hover { background: #c7e0f2; }
+  .project-card--syno:hover { background: var(--grey-200); }
 }
 
 /* Taller than the 1040/693 tile so the wide screenshot fits at the same
@@ -2121,31 +2093,6 @@ body.case-page--fill .case__outcome-body p {
   display: block;
   width: 20px;
   height: 16px;
-}
-
-/* Hooh + iTAB cards — white arrow chip (same surface as the .btn--light
-   pills), black arrow, soft shadow that lifts on hover. One shared chip
-   treatment across both gradient cards so the works section reads as one
-   system. The shared arrow.svg is filled white (#fff), so invert(1)
-   flips it to black on the white chip. */
-.project-card--hooh .arrow-btn,
-.project-card--itab .arrow-btn {
-  background-color: var(--button-secondary);   /* #fff */
-  /* Barely-there at rest (matches the site's airy ~0.05 shadows), then
-     a clear lift on hover so the rest→hover change is the noticeable bit. */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: opacity 0.2s ease, box-shadow 0.25s ease;
-}
-.project-card--hooh .arrow-btn img,
-.project-card--itab .arrow-btn img {
-  filter: invert(1);
-}
-@media (hover: hover) {
-  .project-card--hooh .arrow-btn:hover,
-  .project-card--itab .arrow-btn:hover {
-    opacity: 1;                                 /* override the base 0.85 fade */
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
-  }
 }
 
 /* ===== About section ===== */
@@ -2673,12 +2620,13 @@ body.case-page--fill .case__outcome-body p {
   max-height: 5em; opacity: 1; margin-top: 14px;
 }
 
-/* Flip text to white on the fill */
+/* Flip text to white on the fill. The date chip goes solid white with
+   dark text — white-on-translucent-white over magenta was ~2.4:1. */
 @media (hover: hover) {
   .experience-item:hover .experience-item__role,
   .experience-item:hover .experience-item__company { color: var(--white); }
   .experience-item:hover .experience-item__date {
-    background-color: rgba(255, 255, 255, 0.22); color: var(--white);
+    background-color: var(--white); color: var(--text-primary);
   }
 }
 .experience-item:focus-visible .experience-item__role,
@@ -2687,7 +2635,7 @@ body.case-page--fill .case__outcome-body p {
 .experience-item.is-open .experience-item__company { color: var(--white); }
 .experience-item:focus-visible .experience-item__date,
 .experience-item.is-open .experience-item__date {
-  background-color: rgba(255, 255, 255, 0.22); color: var(--white);
+  background-color: var(--white); color: var(--text-primary);
 }
 
 /* ===== Contact CTA — Drop me a message ===== */
@@ -3162,7 +3110,8 @@ body.case-page--fill .case__outcome-body p {
 
 /* ===== Tap-to-zoom lightbox ===== */
 .case__shot,
-.case__hero-plate img {
+.case__hero-plate img,
+.case__figure-desktop img {
   cursor: zoom-in;
 }
 

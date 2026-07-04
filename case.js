@@ -61,7 +61,6 @@
 
       const dotsWrap = document.createElement('div');
       dotsWrap.className = 'case__dots';
-      dotsWrap.setAttribute('aria-hidden', 'true');
 
       const dots = slides.map((slide, i) => {
         const dot = document.createElement('button');
@@ -160,10 +159,12 @@
 
   /* ---- Tap-to-zoom lightbox -------------------------------------------- */
   (() => {
-    const zoomables = document.querySelectorAll('.case__shot, .case__hero-plate img');
+    const zoomables = document.querySelectorAll(
+      '.case__shot, .case__hero-plate img, .case__figure-desktop img'
+    );
     if (!zoomables.length) return;
 
-    let box, imgEl;
+    let box, imgEl, closeBtn, lastFocused;
 
     const build = () => {
       box = document.createElement('div');
@@ -176,14 +177,14 @@
       imgEl.className = 'lightbox__img';
       imgEl.alt = '';
 
-      const close = document.createElement('button');
-      close.type = 'button';
-      close.className = 'lightbox__close';
-      close.setAttribute('aria-label', 'Close');
-      close.innerHTML = '&times;';
+      closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.className = 'lightbox__close';
+      closeBtn.setAttribute('aria-label', 'Close');
+      closeBtn.innerHTML = '&times;';
 
       box.appendChild(imgEl);
-      box.appendChild(close);
+      box.appendChild(closeBtn);
       document.body.appendChild(box);
 
       box.addEventListener('click', (e) => { if (e.target !== imgEl) hide(); });
@@ -191,23 +192,36 @@
 
     const show = (src, alt) => {
       if (!box) build();
+      lastFocused = document.activeElement;
       imgEl.src = src;
       imgEl.alt = alt || '';
       document.body.style.overflow = 'hidden';
       void box.offsetWidth; // reflow so the open transition runs from the hidden state
       box.classList.add('is-open');
+      // Focus after styles apply — while visibility is still 'hidden',
+      // focus() silently fails.
+      requestAnimationFrame(() => closeBtn.focus());
     };
 
     const hide = () => {
-      if (!box) return;
+      if (!box || !box.classList.contains('is-open')) return;
       box.classList.remove('is-open');
       document.body.style.overflow = '';
+      if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
     };
 
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
 
     zoomables.forEach((img) => {
-      img.addEventListener('click', () => show(img.currentSrc || img.src, img.alt));
+      const open = () => show(img.currentSrc || img.src, img.alt);
+      img.addEventListener('click', open);
+      // Keyboard access: images aren't natively focusable/activatable.
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', 'Enlarge: ' + (img.alt || 'screen'));
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
     });
   })();
 })();
