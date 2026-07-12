@@ -370,6 +370,46 @@
         window.addEventListener('resize', update);
       }
     })();
+
+    /* Play each loop only while it's on screen (the HTML keeps `autoplay`, so
+       with JS off every video still animates). Cuts decode load from 11
+       simultaneous streams to the one or two in view, honours reduced-motion,
+       and starts each loop from the top the first time it's reached.
+       A plain rAF-throttled scroll handler (not IntersectionObserver) — the
+       same reliable pattern as the reveal code in case.js; IO's initial
+       callback doesn't fire in every renderer, which left loops stuck paused. */
+    (() => {
+      const vids = Array.from(document.querySelectorAll('.shots video'));
+      if (!vids.length) return;
+
+      vids.forEach((v) => v.pause());   // only what enters the viewport will play
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; // leave them on their posters
+
+      const seen = new WeakSet();
+      const sync = () => {
+        const h = window.innerHeight;
+        vids.forEach((v) => {
+          const r = v.getBoundingClientRect();
+          const visible = Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0)) / (r.height || 1);
+          if (visible >= 0.35) {
+            if (!seen.has(v)) { seen.add(v); v.currentTime = 0; }   // first view: story from the start
+            if (v.paused) v.play().catch(() => {});
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      };
+
+      let ticking = false;
+      const onScroll = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; sync(); }); }
+      };
+      sync();  // play whatever's already in view
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      window.addEventListener('load', onScroll);   // re-check once fonts/images settle the layout
+    })();
   </script>
 </body>
 </html>
