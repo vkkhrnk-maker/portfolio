@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Hooh — Единая система цвета (прототип) · Victoria Kukharenko</title>
+  <meta name="theme-color" content="#d97706">
+  <style>
+    /* ============================================================
+       Hooh — единая система цвета (пипетка + палитра)
+       Standalone interactive prototype. One color system serving
+       every annotation tool: marker, pen, text, shape.
+       ============================================================ */
+    :root{
+      --brand:#E8920A;          /* warm amber — confirm, accents */
+      --brand-strong:#d97706;
+      --ink:#1C1C1E;            /* primary text / active tool */
+      --ink-2:#8E8E93;          /* iOS secondary label */
+      --ink-3:#C5C5C9;
+      --chip:#EFEFF1;           /* iOS fill / pill bg */
+      --chip-2:#E4E4E8;
+      --hair:#E2E2E6;           /* separators */
+      --page:#F6F7FB;           /* document canvas tint */
+      --sheet:#FFFFFF;
+      --stage:#fafafa;          /* matches site bg */
+      --radius-sheet:26px;
+      --shadow-sheet:0 -1px 0 rgba(0,0,0,.04), 0 -18px 40px rgba(20,22,40,.12);
+      --shadow-pop:0 10px 30px rgba(20,22,40,.16);
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html,body{ margin:0; }
+    body{
+      font-family:var(--font);
+      background:var(--stage);
+      color:var(--ink);
+      min-height:100vh;
+      display:flex; flex-direction:column; align-items:center;
+      padding:40px 16px 64px;
+      gap:22px;
+    }
+
+    /* ---------- prototype framing (page chrome, not part of the app) ---------- */
+    .proto-head{ text-align:center; max-width:520px; }
+    .proto-head h1{
+      font-size:15px; font-weight:600; letter-spacing:-.2px; margin:0 0 6px;
+      color:var(--ink);
+    }
+    .proto-head p{
+      font-size:13px; line-height:1.5; color:var(--ink-2); margin:0;
+    }
+    .proto-head code{
+      font:600 12px var(--font); background:var(--chip); padding:2px 7px;
+      border-radius:6px; color:#6b6b70;
+    }
+
+    /* ---------- iPhone frame ---------- */
+    .phone{
+      position:relative;
+      width:393px; height:852px;
+      background:#000;
+      border-radius:54px;
+      padding:11px;
+      box-shadow:
+        0 0 0 2px #1c1c1e,
+        0 30px 70px rgba(20,22,40,.22),
+        0 8px 20px rgba(20,22,40,.12);
+      flex:none;
+    }
+    .screen{
+      position:relative;
+      width:100%; height:100%;
+      background:var(--page);
+      border-radius:43px;
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      isolation:isolate;
+    }
+
+    /* ---------- status bar ---------- */
+    .statusbar{
+      position:relative; z-index:5;
+      height:54px; flex:none;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 34px 0 38px;
+      font-weight:600; font-size:16px; letter-spacing:.3px;
+      color:var(--ink);
+    }
+    .island{
+      position:absolute; top:11px; left:50%; transform:translateX(-50%);
+      width:124px; height:36px; background:#000; border-radius:20px;
+    }
+    .sb-right{ display:flex; align-items:center; gap:7px; }
+    .sb-right svg{ display:block; }
+
+    /* ---------- top bar ---------- */
+    .topbar{
+      position:relative; z-index:5; flex:none;
+      height:56px;
+      display:grid; grid-template-columns:44px 1fr 44px; align-items:center;
+      padding:0 16px;
+      gap:8px;
+    }
+    .navbtn{
+      width:44px; height:44px; border-radius:50%;
+      display:grid; place-items:center; border:none; cursor:pointer;
+      background:var(--chip); color:var(--ink);
+      transition:transform .12s ease, background .15s ease;
+    }
+    .navbtn:active{ transform:scale(.92); }
+    .navbtn--go{ background:var(--brand); color:#fff; }
+    /* tap-pop: a deliberate press acknowledgement on ✕ / ✓ */
+    @keyframes tap-pop{ 0%{transform:scale(.9);} 55%{transform:scale(1.05);} 100%{transform:scale(1);} }
+    .navbtn.is-tapped{ animation:tap-pop .28s ease; }
+    /* transient "saved" toast shown when Готово (✓) is tapped */
+    .toast{
+      position:absolute; z-index:9; top:76px; left:50%;
+      transform:translate(-50%,-8px);
+      display:flex; align-items:center; gap:7px; white-space:nowrap;
+      background:rgba(28,28,30,.92); color:#fff;
+      -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+      font-size:13px; font-weight:600; padding:9px 15px; border-radius:999px;
+      box-shadow:0 8px 24px rgba(0,0,0,.22);
+      opacity:0; pointer-events:none;
+      transition:opacity .22s ease, transform .22s ease;
+    }
+    .toast.is-show{ opacity:1; transform:translate(-50%,0); }
+    .toast svg{ width:16px; height:16px; color:#34C759; }
+    .topbar__title{
+      text-align:center; font-size:17px; font-weight:600; letter-spacing:-.3px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .topbar__title small{ display:block; font-size:11px; font-weight:500; color:var(--ink-2); margin-top:1px; letter-spacing:0; }
+
+    /* ---------- document / drawing canvas ---------- */
+    .docwrap{ position:relative; flex:1 1 auto; min-height:0; }
+    #doc{
+      position:absolute; inset:0; width:100%; height:100%;
+      touch-action:none;
+    }
+    .docwrap.is-pick{ cursor:crosshair; }
+    /* eyedropper loupe */
+    .loupe{
+      position:absolute; z-index:8; pointer-events:none;
+      width:74px; height:74px; border-radius:50%;
+      transform:translate(-50%,-118%);
+      border:4px solid #fff;
+      box-shadow:0 6px 18px rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.06) inset;
+      display:none;
+    }
+    .loupe::after{
+      content:""; position:absolute; left:50%; top:50%;
+      width:14px; height:14px; transform:translate(-50%,-50%);
+      border:2px solid rgba(255,255,255,.9); border-radius:3px;
+      box-shadow:0 0 0 1px rgba(0,0,0,.25);
+    }
+    .pick-hint{
+      position:absolute; z-index:7; left:50%; top:14px; transform:translateX(-50%);
+      background:rgba(28,28,30,.9); color:#fff; backdrop-filter:blur(6px);
+      font-size:13px; font-weight:500; padding:8px 14px; border-radius:999px;
+      display:none; white-space:nowrap;
+      box-shadow:0 6px 16px rgba(0,0,0,.2);
+    }
+    .docwrap.is-pick .pick-hint{ display:block; }
+
+    /* ---------- bottom sheet (шторка) ---------- */
+    .sheet{
+      position:relative; z-index:6; flex:none;
+      background:var(--sheet);
+      border-radius:var(--radius-sheet) var(--radius-sheet) 0 0;
+      box-shadow:var(--shadow-sheet);
+      padding:8px 18px 30px;
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .sheet__grab{
+      width:38px; height:5px; border-radius:3px; background:var(--chip-2);
+      margin:2px auto 2px; flex:none;
+    }
+
+    /* tool switcher — one switcher for every tool */
+    .tools{
+      display:flex; align-items:center; gap:10px; justify-content:space-between;
+    }
+    .tools__group{
+      display:flex; align-items:center; gap:6px;
+      background:var(--chip); border-radius:999px; padding:5px;
+    }
+    .tool{
+      width:46px; height:46px; border-radius:50%; border:none; cursor:pointer;
+      background:transparent; color:var(--ink);
+      display:grid; place-items:center;
+      transition:background .15s ease, transform .12s ease, color .15s ease;
+      position:relative;
+    }
+    .tool:active{ transform:scale(.9); }
+    .tool.is-active{ background:var(--ink); color:#fff; }
+    .tool svg{ width:23px; height:23px; }
+    /* current-color dot on active tool — proves color follows the tool */
+    .tool__dot{
+      position:absolute; right:5px; bottom:5px;
+      width:11px; height:11px; border-radius:50%;
+      background:var(--cur,#000); border:1.5px solid #fff;
+      box-shadow:0 0 0 .5px rgba(0,0,0,.15);
+      display:none;
+    }
+    .tool.is-active .tool__dot{ display:block; }
+
+    .tools__clear{
+      border:none; background:none; cursor:pointer; color:var(--ink-2);
+      font:500 13px var(--font); padding:8px 6px;
+      display:flex; align-items:center; gap:5px;
+    }
+    .tools__clear:active{ opacity:.5; }
+    .tools__clear svg{ width:16px; height:16px; }
+
+    /* color row (collapsed picker) */
+    .colorbar{
+      display:flex; align-items:center; gap:10px;
+    }
+    .swatches{
+      display:flex; align-items:center; gap:9px;
+      overflow-x:auto; flex:1 1 auto; padding:3px 2px;
+      scrollbar-width:none;
+    }
+    .swatches::-webkit-scrollbar{ display:none; }
+    .swatch{
+      flex:none; width:32px; height:32px; border-radius:50%; cursor:pointer;
+      border:2px solid #fff;
+      box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.08);
+      transition:transform .12s ease;
+      position:relative;
+    }
+    .swatch:active{ transform:scale(.88); }
+    .swatch.is-active{ box-shadow:0 0 0 2px #fff, 0 0 0 4px var(--brand); }
+    .swatch.is-active::after{
+      content:""; position:absolute; inset:0; margin:auto;
+      width:10px; height:6px; border-left:2px solid #fff; border-bottom:2px solid #fff;
+      transform:rotate(-45deg) translate(0,-1px);
+      filter:drop-shadow(0 0 1px rgba(0,0,0,.3));
+    }
+    .swatch.is-active[data-light="1"]::after{
+      border-color:var(--ink); filter:none;
+    }
+
+    .iconbtn{
+      flex:none; width:46px; height:46px; border-radius:50%; cursor:pointer;
+      border:none; background:var(--chip); color:var(--ink);
+      display:grid; place-items:center;
+      transition:transform .12s ease, background .15s ease;
+    }
+    .iconbtn:active{ transform:scale(.9); }
+    .iconbtn.is-active{ background:var(--ink); color:#fff; }
+    .iconbtn svg{ width:22px; height:22px; }
+
+    .curcolor{
+      flex:none; width:46px; height:46px; border-radius:14px; cursor:pointer;
+      border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.1), var(--shadow-pop);
+      position:relative; overflow:hidden;
+      background:
+        linear-gradient(45deg,#ddd 25%,transparent 25%,transparent 75%,#ddd 75%) 0 0/14px 14px,
+        linear-gradient(45deg,#ddd 25%,#fff 25%,#fff 75%,#ddd 75%) 7px 7px/14px 14px;
+    }
+    .curcolor__fill{ position:absolute; inset:0; }
+    .curcolor__chev{
+      position:absolute; right:3px; bottom:2px; width:14px; height:14px;
+      color:#fff; filter:drop-shadow(0 0 1px rgba(0,0,0,.5));
+    }
+
+    /* expanded picker */
+    .picker{
+      display:none; flex-direction:column; gap:16px;
+      animation:fade .2s ease;
+    }
+    .sheet.is-expanded .picker{ display:flex; }
+    @keyframes fade{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none; } }
+
+    .sv{
+      position:relative; width:100%; height:172px; border-radius:16px; cursor:crosshair;
+      box-shadow:0 0 0 1px rgba(0,0,0,.06) inset;
+      touch-action:none;
+    }
+    .sv__thumb, .slider__thumb{
+      position:absolute; width:24px; height:24px; border-radius:50%;
+      border:3px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,.25), 0 2px 5px rgba(0,0,0,.25);
+      transform:translate(-50%,-50%); pointer-events:none;
+      background:var(--cur);
+    }
+
+    .slider{
+      position:relative; height:26px; border-radius:13px; cursor:pointer;
+      box-shadow:0 0 0 1px rgba(0,0,0,.06) inset;
+      touch-action:none;
+    }
+    .slider--hue{
+      background:linear-gradient(to right,#f00,#ff0,#0f0,#0ff,#00f,#f0f,#f00);
+    }
+    .slider--alpha{
+      background:
+        linear-gradient(45deg,#ccc 25%,transparent 25%,transparent 75%,#ccc 75%) 0 0/12px 12px,
+        linear-gradient(45deg,#ccc 25%,#fff 25%,#fff 75%,#ccc 75%) 6px 6px/12px 12px;
+    }
+    .slider--alpha .slider__fill{
+      position:absolute; inset:0; border-radius:13px;
+    }
+    .slider__thumb{ top:50%; }
+
+    /* hex / values row */
+    .values{
+      display:flex; align-items:center; gap:10px;
+    }
+    .hexfield{
+      display:flex; align-items:center; gap:6px; flex:1 1 auto;
+      background:var(--chip); border-radius:12px; padding:0 14px; height:46px;
+    }
+    .hexfield span{ color:var(--ink-2); font-weight:600; font-size:16px; }
+    .hexfield input{
+      border:none; background:none; outline:none; width:100%;
+      font:600 16px var(--font); letter-spacing:.5px; color:var(--ink);
+      text-transform:uppercase;
+    }
+    .alphaval{
+      flex:none; width:78px; height:46px; border-radius:12px; background:var(--chip);
+      display:flex; align-items:center; justify-content:center; gap:1px;
+      font:600 16px var(--font); color:var(--ink);
+    }
+    .alphaval small{ color:var(--ink-2); font-weight:600; }
+
+    .label{ font-size:12px; font-weight:600; color:var(--ink-2); margin:-4px 0 -8px 3px; letter-spacing:.2px; }
+  </style>
+</head>
+<body>
+
+  <div class="proto-head">
+    <h1>Hooh · Единая система цвета</h1>
+    <p>Одна шторка цвета на все инструменты — маркер, перо, текст, фигуры. Палитра, спектр, прозрачность и <b>пипетка</b>. Рисуйте по документу, меняйте цвет, берите цвет пипеткой прямо со страницы. <code>экраны 12.3 / 12.6</code></p>
+  </div>
+
+  <div class="phone">
+    <div class="screen">
+
+      <!-- status bar -->
+      <div class="statusbar">
+        <div class="island"></div>
+        <div class="sb-time">9:41</div>
+        <div class="sb-right">
+          <!-- cellular -->
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+          <!-- wifi -->
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor"><path d="M8.5 2.2c2.7 0 5.2 1 7 2.8l-1.5 1.6A7.6 7.6 0 0 0 8.5 4.4 7.6 7.6 0 0 0 3 6.6L1.5 5A9.8 9.8 0 0 1 8.5 2.2Zm0 3.7c1.7 0 3.3.7 4.5 1.8l-1.6 1.7A4.1 4.1 0 0 0 8.5 8a4.1 4.1 0 0 0-2.9 1.4L4 7.7a6.4 6.4 0 0 1 4.5-1.8Zm0 3.6c.8 0 1.5.3 2 .9l-2 2.1-2-2.1c.5-.6 1.2-.9 2-.9Z"/></svg>
+          <!-- battery -->
+          <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x="1" y="1" width="22" height="11" rx="3" stroke="currentColor" stroke-opacity=".4" stroke-width="1"/><rect x="2.5" y="2.5" width="19" height="8" rx="1.8" fill="currentColor"/><rect x="24.5" y="4.5" width="1.6" height="4" rx=".8" fill="currentColor" fill-opacity=".5"/></svg>
+        </div>
+      </div>
+
+      <!-- top bar -->
+      <div class="topbar">
+        <button class="navbtn" aria-label="Закрыть" title="Закрыть">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+        <div class="topbar__title">Разметка<small>Договор аренды · стр. 2</small></div>
+        <button class="navbtn navbtn--go" aria-label="Готово" title="Готово">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </button>
+      </div>
+
+      <!-- transient confirmation toast -->
+      <div class="toast" id="toast" role="status" aria-live="polite">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19 7"/></svg>
+        Разметка сохранена
+      </div>
+
+      <!-- document + drawing surface -->
+      <div class="docwrap" id="docwrap">
+        <canvas id="doc"></canvas>
+        <div class="loupe" id="loupe"></div>
+        <div class="pick-hint">Коснитесь страницы, чтобы взять цвет</div>
+      </div>
+
+      <!-- color sheet -->
+      <div class="sheet" id="sheet">
+        <div class="sheet__grab" id="grab"></div>
+
+        <!-- one tool switcher for every annotation tool -->
+        <div class="tools">
+          <div class="tools__group" id="tools">
+            <button class="tool is-active" data-tool="marker" title="Маркер">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 4.5 19.5 8.5 9.5 18.5 4.5 19.5 5.5 14.5z"/><path d="M3.5 21.5h7"/></svg>
+              <span class="tool__dot"></span>
+            </button>
+            <button class="tool" data-tool="pen" title="Перо">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c2-1 3.5-3 5-7 1.5-4 3-7 6-9 2 2 1 5-2 8s-6 6-9 8z"/><path d="M4 20l-.5 1.5L5 21"/></svg>
+              <span class="tool__dot"></span>
+            </button>
+            <button class="tool" data-tool="text" title="Текст">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6V4.5h14V6"/><path d="M12 4.5V20"/><path d="M9 20h6"/></svg>
+              <span class="tool__dot"></span>
+            </button>
+            <button class="tool" data-tool="shape" title="Фигура">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/></svg>
+              <span class="tool__dot"></span>
+            </button>
+          </div>
+          <button class="tools__clear" id="clear" title="Снять всю разметку">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 14h10l1-14"/></svg>
+            Очистить
+          </button>
+        </div>
+
+        <!-- collapsed palette row -->
+        <div class="colorbar">
+          <div class="swatches" id="swatches"></div>
+          <button class="iconbtn" id="eyedropper" title="Пипетка — взять цвет со страницы">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 3.5a2.1 2.1 0 0 1 3 3l-2 2-3-3 2-2z"/><path d="M15.5 5.5 6 15v3h3l9.5-9.5"/><path d="M5 19l1.5-1.5"/></svg>
+          </button>
+          <button class="curcolor" id="curBtn" title="Открыть палитру">
+            <span class="curcolor__fill" id="curFill"></span>
+            <svg class="curcolor__chev" id="curChev" viewBox="0 0 24 24" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg>
+          </button>
+        </div>
+
+        <!-- expanded full picker -->
+        <div class="picker">
+          <div class="sv" id="sv"><div class="sv__thumb" id="svThumb"></div></div>
+          <div class="label">Оттенок</div>
+          <div class="slider slider--hue" id="hue"><div class="slider__thumb" id="hueThumb"></div></div>
+          <div class="label">Прозрачность</div>
+          <div class="slider slider--alpha" id="alpha"><div class="slider__fill" id="alphaFill"></div><div class="slider__thumb" id="alphaThumb"></div></div>
+          <div class="values">
+            <div class="hexfield"><span>#</span><input id="hex" maxlength="6" spellcheck="false" autocomplete="off" value="FFE14D"></div>
+            <div class="alphaval"><span id="alphaNum">100</span><small>%</small></div>
+          </div>
+        </div>
+
+      </div><!-- /sheet -->
+    </div><!-- /screen -->
+  </div><!-- /phone -->
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ---------------- color math ---------------- */
+    const clamp = (n,a,b)=>Math.min(b,Math.max(a,n));
+    function hsv2rgb(h,s,v){
+      h/=360; let r,g,b;
+      const i=Math.floor(h*6), f=h*6-i, p=v*(1-s), q=v*(1-f*s), t=v*(1-(1-f)*s);
+      switch(i%6){
+        case 0: r=v;g=t;b=p;break; case 1: r=q;g=v;b=p;break;
+        case 2: r=p;g=v;b=t;break; case 3: r=p;g=q;b=v;break;
+        case 4: r=t;g=p;b=v;break; default: r=v;g=p;b=q;
+      }
+      return [Math.round(r*255),Math.round(g*255),Math.round(b*255)];
+    }
+    function rgb2hsv(r,g,b){
+      r/=255;g/=255;b/=255;
+      const mx=Math.max(r,g,b), mn=Math.min(r,g,b), d=mx-mn;
+      let h=0; const s=mx?d/mx:0, v=mx;
+      if(d){
+        if(mx===r) h=((g-b)/d)%6;
+        else if(mx===g) h=(b-r)/d+2;
+        else h=(r-g)/d+4;
+        h*=60; if(h<0) h+=360;
+      }
+      return [h,s,v];
+    }
+    const hex2rgb = hex => { hex=hex.replace('#',''); if(hex.length===3) hex=hex.split('').map(c=>c+c).join(''); const n=parseInt(hex,16); return [(n>>16)&255,(n>>8)&255,n&255]; };
+    const rgb2hex = (r,g,b)=> '#'+[r,g,b].map(x=>clamp(Math.round(x),0,255).toString(16).padStart(2,'0')).join('');
+    const luminance = (r,g,b)=> (0.299*r+0.587*g+0.114*b)/255;
+
+    /* ---------------- state ---------------- */
+    const state = { h:51, s:.70, v:1, a:.38, tool:'marker' }; // marker (default tool) opens as a translucent highlighter
+    const PALETTE = ['#FFE14D','#FF9500','#FF3B30','#34C759','#0A84FF','#1C1C1E'];
+
+    /* ---------------- elements ---------------- */
+    const $ = s=>document.querySelector(s);
+    const sheet=$('#sheet'), sv=$('#sv'), svThumb=$('#svThumb'),
+          hue=$('#hue'), hueThumb=$('#hueThumb'),
+          alpha=$('#alpha'), alphaFill=$('#alphaFill'), alphaThumb=$('#alphaThumb'),
+          hex=$('#hex'), alphaNum=$('#alphaNum'),
+          curFill=$('#curFill'), curBtn=$('#curBtn'), curChev=$('#curChev'),
+          swWrap=$('#swatches'), eyeBtn=$('#eyedropper'),
+          docwrap=$('#docwrap'), loupe=$('#loupe');
+
+    /* build palette swatches */
+    const swatchEls=[];
+    PALETTE.forEach(c=>{
+      const b=document.createElement('button');
+      b.className='swatch'; b.style.background=c; b.dataset.color=c;
+      const [r,g,bl]=hex2rgb(c);
+      if(luminance(r,g,bl)>.7) b.dataset.light='1';
+      b.addEventListener('click',()=>{ const [hh,ss,vv]=rgb2hsv(r,g,bl); state.h=hh;state.s=ss;state.v=vv; render(); });
+      swWrap.appendChild(b); swatchEls.push(b);
+    });
+
+    /* ---------------- render ---------------- */
+    function curRGB(){ return hsv2rgb(state.h,state.s,state.v); }
+    function render(){
+      const [r,g,b]=curRGB();
+      const hexv=rgb2hex(r,g,b);
+      const rgba=`rgba(${r},${g},${b},${state.a})`;
+      const root=document.documentElement.style;
+      root.setProperty('--cur', rgba);
+
+      // SV box bg = pure hue
+      sv.style.background = `linear-gradient(to top, #000, rgba(0,0,0,0)), linear-gradient(to right, #fff, hsl(${state.h} 100% 50%))`;
+      svThumb.style.left = (state.s*100)+'%';
+      svThumb.style.top  = ((1-state.v)*100)+'%';
+      hueThumb.style.left = (state.h/360*100)+'%';
+      hueThumb.style.background = `hsl(${state.h} 100% 50%)`;
+      // alpha track tint
+      alphaFill.style.background = `linear-gradient(to right, rgba(${r},${g},${b},0), rgb(${r},${g},${b}))`;
+      alphaThumb.style.left = (state.a*100)+'%';
+      alphaThumb.style.background = rgba;
+
+      curFill.style.background = rgba;
+      curChev.style.color = luminance(r,g,b)>.62 && state.a>.5 ? 'var(--ink)' : '#fff';
+      hex.value = hexv.replace('#','').toUpperCase();
+      alphaNum.textContent = Math.round(state.a*100);
+
+      // active swatch
+      swatchEls.forEach(el=>{
+        const a = el.dataset.color.toLowerCase()===hexv.toLowerCase() && state.a===1;
+        el.classList.toggle('is-active',a);
+      });
+    }
+
+    /* ---------------- expand / collapse ---------------- */
+    function setExpanded(on){
+      sheet.classList.toggle('is-expanded',on);
+      curChev.style.transform = on?'rotate(180deg)':'none';
+    }
+    curBtn.addEventListener('click',()=> setExpanded(!sheet.classList.contains('is-expanded')));
+    $('#grab').addEventListener('click',()=> setExpanded(!sheet.classList.contains('is-expanded')));
+
+    /* ---------------- drag helper for SV / sliders ---------------- */
+    function drag(el, onMove){
+      const handler = e=>{
+        const r=el.getBoundingClientRect();
+        const cx = (e.touches?e.touches[0].clientX:e.clientX);
+        const cy = (e.touches?e.touches[0].clientY:e.clientY);
+        onMove(clamp((cx-r.left)/r.width,0,1), clamp((cy-r.top)/r.height,0,1));
+      };
+      el.addEventListener('pointerdown',e=>{
+        el.setPointerCapture(e.pointerId); handler(e);
+        const mv=ev=>handler(ev);
+        const up=ev=>{ el.releasePointerCapture(e.pointerId); el.removeEventListener('pointermove',mv); el.removeEventListener('pointerup',up); };
+        el.addEventListener('pointermove',mv); el.addEventListener('pointerup',up);
+      });
+    }
+    drag(sv,(x,y)=>{ state.s=x; state.v=1-y; render(); });
+    drag(hue,(x)=>{ state.h=x*360; render(); });
+    drag(alpha,(x)=>{ state.a=x; render(); });
+
+    /* hex input */
+    hex.addEventListener('input',()=>{
+      const v=hex.value.trim();
+      if(/^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(v)){
+        const [r,g,b]=hex2rgb(v); const [hh,ss,vv]=rgb2hsv(r,g,b);
+        state.h=hh;state.s=ss;state.v=vv;
+        const [nr,ng,nb]=curRGB(); // re-render w/o clobbering input caret
+        document.documentElement.style.setProperty('--cur',`rgba(${nr},${ng},${nb},${state.a})`);
+        curFill.style.background=`rgba(${nr},${ng},${nb},${state.a})`;
+        sv.style.background=`linear-gradient(to top,#000,rgba(0,0,0,0)),linear-gradient(to right,#fff,hsl(${state.h} 100% 50%))`;
+        svThumb.style.left=(state.s*100)+'%'; svThumb.style.top=((1-state.v)*100)+'%';
+        hueThumb.style.left=(state.h/360*100)+'%'; hueThumb.style.background=`hsl(${state.h} 100% 50%)`;
+        alphaFill.style.background=`linear-gradient(to right,rgba(${nr},${ng},${nb},0),rgb(${nr},${ng},${nb}))`;
+        alphaThumb.style.background=`rgba(${nr},${ng},${nb},${state.a})`;
+      }
+    });
+
+    /* ---------------- tool switcher ---------------- */
+    const toolEls=[...document.querySelectorAll('.tool')];
+    // each tool remembers its own opacity — marker opens translucent (highlighter), the rest opaque
+    const toolAlpha={ marker:.38, pen:1, text:1, shape:1 };
+    toolEls.forEach(t=>t.addEventListener('click',()=>{
+      toolAlpha[state.tool]=state.a;                 // save the current tool's opacity
+      toolEls.forEach(x=>x.classList.remove('is-active'));
+      t.classList.add('is-active'); state.tool=t.dataset.tool;
+      state.a=toolAlpha[state.tool];                 // restore the new tool's opacity
+      render(); setPick(false);
+    }));
+
+    /* ============================================================
+       DOCUMENT CANVAS — draw the page, draw marks, eyedropper
+       ============================================================ */
+    const canvas=$('#doc'), ctx=canvas.getContext('2d');
+    let DPR=1, W=0, H=0;
+    const marks=[]; // committed strokes/shapes/text for redraw
+
+    function fitCanvas(){
+      const r=docwrap.getBoundingClientRect();
+      DPR=Math.min(window.devicePixelRatio||1,2);
+      W=r.width; H=r.height;
+      canvas.width=W*DPR; canvas.height=H*DPR;
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+      redraw();
+    }
+
+    function drawPage(){
+      // page tint
+      ctx.fillStyle='#F6F7FB'; ctx.fillRect(0,0,W,H);
+      // paper sheet
+      const m=18, pw=W-m*2, ph=H-m*1.2, px=m, py=10;
+      ctx.save();
+      ctx.shadowColor='rgba(20,22,40,.10)'; ctx.shadowBlur=18; ctx.shadowOffsetY=6;
+      ctx.fillStyle='#fff';
+      roundRect(px,py,pw,ph,14); ctx.fill();
+      ctx.restore();
+      // faint form content
+      ctx.fillStyle='#E9EBF1';
+      // title
+      rr(px+24,py+30,pw*0.52,16,5);
+      // a colored "stamp" so the eyedropper has something to grab
+      ctx.fillStyle='#0A84FF'; rr(px+pw-86,py+26,60,60,12);
+      ctx.fillStyle='#fff'; ctx.font='600 12px '+getFont(); ctx.textAlign='center';
+      ctx.fillText('ОПЛАЧЕНО',px+pw-56,py+60);
+      ctx.textAlign='left';
+      // paragraph lines
+      ctx.fillStyle='#EDEFF4';
+      let yy=py+78;
+      for(let i=0;i<7;i++){ rr(px+24,yy,pw-48-(i%3===2?90:0),9,4); yy+=22; }
+      yy+=10;
+      // two field boxes
+      ctx.strokeStyle='#E2E2E6'; ctx.lineWidth=1.5;
+      for(let i=0;i<2;i++){ roundRect(px+24,yy,pw-48,40,10); ctx.stroke(); ctx.fillStyle='#EDEFF4'; rr(px+38,yy+15,120,9,4); yy+=56; }
+      // more lines
+      ctx.fillStyle='#EDEFF4';
+      yy+=6;
+      for(let i=0;i<5;i++){ rr(px+24,yy,pw-48-(i%2?70:0),9,4); yy+=22; }
+    }
+    function getFont(){ return getComputedStyle(document.body).fontFamily; }
+    function rr(x,y,w,h,r){ roundRect(x,y,w,h,r); ctx.fill(); }
+    function roundRect(x,y,w,h,r){
+      r=Math.min(r,w/2,h/2);
+      ctx.beginPath();
+      ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+      ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+    }
+
+    function strokeStyleFor(tool, rgba){
+      // returns {width, color, comp, cap}
+      if(tool==='marker') return {width:20, color:rgba, comp:'multiply', cap:'round'}; // honours the opacity slider (marker defaults to ~38%)
+      if(tool==='pen')    return {width:3.2, color:rgba, comp:'source-over', cap:'round'};
+      return {width:3, color:rgba, comp:'source-over', cap:'round'};
+    }
+
+    function redraw(){
+      drawPage();
+      marks.forEach(drawMark);
+      if(active) drawMark(active);
+    }
+    function drawMark(mk){
+      ctx.save();
+      if(mk.type==='stroke'){
+        const st=strokeStyleFor(mk.tool, mk.rgba);
+        ctx.globalCompositeOperation=st.comp; ctx.strokeStyle=st.color;
+        ctx.lineWidth=st.width; ctx.lineCap=st.cap; ctx.lineJoin='round';
+        ctx.beginPath();
+        mk.pts.forEach((p,i)=> i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));
+        if(mk.pts.length===1){ ctx.lineTo(mk.pts[0].x+.1,mk.pts[0].y+.1); }
+        ctx.stroke();
+      } else if(mk.type==='shape'){
+        ctx.strokeStyle=mk.rgba; ctx.lineWidth=3.2;
+        roundRect(Math.min(mk.x0,mk.x1),Math.min(mk.y0,mk.y1),Math.abs(mk.x1-mk.x0),Math.abs(mk.y1-mk.y0),10);
+        ctx.stroke();
+      } else if(mk.type==='text'){
+        ctx.fillStyle=mk.rgba; ctx.font='600 22px '+getFont(); ctx.textBaseline='middle';
+        ctx.fillText(mk.text, mk.x, mk.y);
+      }
+      ctx.restore();
+    }
+
+    /* ---- pointer interaction on canvas: draw OR eyedropper ---- */
+    let active=null, picking=false;
+    function setPick(on){
+      picking=on; docwrap.classList.toggle('is-pick',on);
+      eyeBtn.classList.toggle('is-active',on);
+      loupe.style.display='none';
+      if(on) setExpanded(false);
+    }
+    eyeBtn.addEventListener('click',()=> setPick(!picking));
+
+    function ptFromEvent(e){
+      const r=canvas.getBoundingClientRect();
+      const cx=(e.touches?e.touches[0].clientX:e.clientX);
+      const cy=(e.touches?e.touches[0].clientY:e.clientY);
+      return { x:clamp(cx-r.left,0,W), y:clamp(cy-r.top,0,H) };
+    }
+    function sampleAt(p){
+      const d=ctx.getImageData(Math.round(p.x*DPR),Math.round(p.y*DPR),1,1).data;
+      return [d[0],d[1],d[2]];
+    }
+
+    canvas.addEventListener('pointerdown',e=>{
+      canvas.setPointerCapture(e.pointerId);
+      const p=ptFromEvent(e);
+      if(picking){ moveLoupe(p); return; }
+      const rgba=`rgba(${curRGB().join(',')},${state.a})`;
+      if(state.tool==='text'){
+        marks.push({type:'text', x:p.x, y:p.y, text:'Важно', rgba}); redraw(); return;
+      }
+      if(state.tool==='shape'){ active={type:'shape', x0:p.x,y0:p.y,x1:p.x,y1:p.y, rgba}; return; }
+      active={type:'stroke', tool:state.tool, pts:[p], rgba};
+    });
+    canvas.addEventListener('pointermove',e=>{
+      const p=ptFromEvent(e);
+      if(picking){ moveLoupe(p); return; }
+      if(!active) return;
+      if(active.type==='shape'){ active.x1=p.x; active.y1=p.y; }
+      else active.pts.push(p);
+      redraw();
+    });
+    function endStroke(e){
+      if(picking){
+        if(e && e.type==='pointerup'){ const p=ptFromEvent(e); const [r,g,b]=sampleAt(p); const [hh,ss,vv]=rgb2hsv(r,g,b); state.h=hh;state.s=ss;state.v=vv; render(); setPick(false); } // keep the active tool's opacity
+        return;
+      }
+      if(active){ marks.push(active); active=null; redraw(); }
+    }
+    canvas.addEventListener('pointerup',endStroke);
+    canvas.addEventListener('pointercancel',()=>{ if(active){marks.push(active);active=null;redraw();} });
+
+    function moveLoupe(p){
+      loupe.style.display='block';
+      loupe.style.left=p.x+'px'; loupe.style.top=p.y+'px';
+      const [r,g,b]=sampleAt(p);
+      loupe.style.background=`rgb(${r},${g},${b})`;
+    }
+
+    $('#clear').addEventListener('click',()=>{ marks.length=0; active=null; redraw(); });
+
+    /* ---- top-bar buttons: press-pop + "saved" confirmation on Готово ---- */
+    const toast=$('#toast'); let toastTimer=null;
+    function flashSaved(){ toast.classList.add('is-show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>toast.classList.remove('is-show'),1500); }
+    document.querySelectorAll('.navbtn').forEach(b=>{
+      b.addEventListener('click',()=>{
+        b.classList.remove('is-tapped'); void b.offsetWidth; b.classList.add('is-tapped');
+        if(b.classList.contains('navbtn--go')) flashSaved();
+      });
+    });
+
+    /* ---------------- boot ---------------- */
+    // start exactly on the first palette colour so it reads as selected
+    (() => { const [r,g,b]=hex2rgb(PALETTE[0]); const [h,s,v]=rgb2hsv(r,g,b); state.h=h; state.s=s; state.v=v; })();
+    render();
+    // size canvas after layout settles
+    requestAnimationFrame(fitCanvas);
+    window.addEventListener('resize',fitCanvas);
+  })();
+  </script>
+</body>
+</html>

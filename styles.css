@@ -304,6 +304,9 @@ img {
   .content {
     max-width: 1526px;
     margin-left: auto;
+    /* Guaranteed gutter between the sidebar and the content column — without it
+       the right column starts right where the sidebar ends and reads too wide. */
+    padding-left: 56px;
   }
 }
 
@@ -318,7 +321,7 @@ img {
   }
   .content {
     max-width: none;
-    margin-left: 120px;
+    margin-left: 64px; /* + the 56px gutter above = the same 120px total as before */
   }
 }
 
@@ -1004,6 +1007,49 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
   height: auto;
   border-radius: 0;
+}
+
+/* Full-flow video figure — a single iPhone mockup (titanium body + Dynamic
+   Island, same as the home cover) wrapping the looping Smart Fill recording,
+   centred on the standard grey figure panel. Sized in cqw so the bezel,
+   corner radius and island scale with the phone's own width. */
+.case__phone-frame {
+  flex: 0 0 auto;
+  width: clamp(240px, 30vw, 340px);
+  aspect-ratio: 588 / 1280;
+  position: relative;
+  container-type: inline-size;
+}
+.case__phone-frame::before {
+  content: "";
+  position: absolute;
+  inset: -2cqw;
+  z-index: 0;
+  border-radius: 16cqw;
+  background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+  box-shadow: 0 2cqw 6cqw rgba(0, 0, 0, 0.18), 0 14cqw 34cqw -6cqw rgba(0, 0, 0, 0.38);
+}
+.case__phone-frame video {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 13cqw;
+  background: #000;
+}
+.case__phone-frame::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 3.2cqw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30cqw;
+  height: 8.4cqw;
+  border-radius: 99px;
+  background: #000;
 }
 
 /* Mobile slider: desktop shows the flat composite, phones get a
@@ -3320,7 +3366,7 @@ body.case-page--fill .case__outcome-body p {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: clamp(16px, 3vw, 48px);
+  gap: clamp(24px, 4vw, 60px);
   padding: clamp(28px, 4vw, 56px) clamp(20px, 3vw, 44px);
   flex-wrap: wrap;
 }
@@ -3328,7 +3374,8 @@ body.case-page--fill .case__outcome-body p {
 
 .shot {
   flex: 0 0 auto;
-  width: clamp(150px, 17vw, 212px);
+  /* sized so three phones + the airy gap always fit one line of the panel */
+  width: clamp(170px, 18vw, 272px);
   aspect-ratio: 1206 / 2610;
   border-radius: 26px;
   overflow: hidden;
@@ -3336,6 +3383,14 @@ body.case-page--fill .case__outcome-body p {
   box-shadow: 0 24px 50px -28px rgba(20, 22, 28, .55);
 }
 .shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+/* A live screen sitting inside a row of statics — same bare rounded treatment as .shot img. */
+.shot video {
   display: block;
   width: 100%;
   height: 100%;
@@ -3351,6 +3406,54 @@ body.case-page--fill .case__outcome-body p {
   border-radius: 20px;
 }
 .shot--wide img { object-position: center; }
+
+/* ── Fill case: every phone wears the titanium device frame, all at one size ──
+   The bezel is drawn *inside* the card via padding, so a looping video and a
+   static screenshot render as identical phones. The screen keeps the captures'
+   native 760:1652 ratio (nothing gets cropped), and every capture already
+   carries its own status bar and Dynamic Island — the frame adds no fake
+   island. Scoped to this page so the hooh-editor case, which shares .shot,
+   is untouched. */
+.case-page--fill .shot {
+  aspect-ratio: auto; /* height comes from the fixed-ratio screen inside */
+  padding: 5px;
+  background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+  /* device-proportional corners (~55pt on the real phone) — anything smaller
+     argues with the native sheet radii inside the screenshots */
+  border-radius: 39px;
+}
+.case-page--fill .shot img,
+.case-page--fill .shot video {
+  height: auto;
+  aspect-ratio: 760 / 1652;
+  border-radius: 34px;
+}
+/* tighter panel: the phones carry the size now, the plate is just a backdrop */
+.case-page--fill .shots {
+  padding: 20px;
+}
+
+/* ── Other tools as a two-column feature grid ──
+   One flow video per cell with its own caption right under it; multi-card
+   features (.tools-grid__wide) span both columns. Collapses to one column
+   when the cells would squeeze the phones. */
+.case-page--fill .tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  row-gap: 48px; /* the zeroed figure margins killed the vertical rhythm — restore it here */
+}
+.case-page--fill .tools-grid .case__figure {
+  margin: 0;
+}
+.case-page--fill .tools-grid__wide {
+  grid-column: 1 / -1;
+}
+@media (max-width: 900px) {
+  .case-page--fill .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* Hero wrapper holding a .shots row (grow with the phones, not the cover crop). */
 .case__hero-image--shots {
