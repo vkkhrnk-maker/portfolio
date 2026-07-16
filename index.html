@@ -23,7 +23,8 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=202">
+  <link rel="stylesheet" href="styles.css?v=216">
+  <script src="typographer.js?v=3" defer></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -53,16 +54,18 @@
       </button>
       <a class="btn btn--dark profile-section__telegram" href="#">Telegram</a>
       <div class="mobile-topbar mobile-topbar--cover">
-        <div class="mobile-topbar__buttons">
-          <a class="btn btn--light" href="#">CV</a>
-          <a class="btn btn--light" href="#">LinkedIn</a>
-          <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">Email</a>
-        </div>
+        <a class="mobile-topbar__link mobile-topbar__name" href="#">Victoria Kukharenko</a>
         <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
           </svg>
         </button>
+        <div class="mobile-topbar__buttons">
+          <a class="btn btn--light" href="#">CV</a>
+          <a class="btn btn--light" href="#">LinkedIn</a>
+          <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">Email</a>
+          <a class="btn btn--dark" href="#">Telegram</a>
+        </div>
       </div>
       <div class="intro">
         <div class="intro__header">
@@ -120,9 +123,9 @@
         <a class="project-card__link" href="itab.html" aria-label="Read the iTAB case study"></a>
         <div class="project-card__inner project-card__inner--itab">
           <header class="project-card__header project-card__header--itab">
-            <h3 class="project-card__title">iTAB product card Redesign</h3>
+            <h3 class="project-card__title">iTAB Product Card Redesign</h3>
             <p class="project-card__subtitle">Making a dense marketplace page easy to buy from</p>
-            <a class="arrow-btn" href="itab.html" aria-label="Open iTAB product card Redesign">
+            <a class="arrow-btn" href="itab.html" aria-label="Open iTAB Product Card Redesign">
               <img src="assets/arrow.svg" alt="">
             </a>
           </header>
@@ -138,7 +141,7 @@
         <div class="project-card__inner">
           <header class="project-card__header">
             <h3 class="project-card__title">Syno</h3>
-            <p class="project-card__subtitle">How we designed the MVP of the application from scratch</p>
+            <p class="project-card__subtitle">An art map connecting artists, spaces and open calls</p>
           </header>
           <div class="project-card__syno-shot">
             <img src="assets/syno-desktop.webp?v=4" alt="Syno Art Map — desktop product view" loading="lazy">
@@ -211,7 +214,7 @@
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Product designer</p>
-            <span class="experience-item__date">2025-Present</span>
+            <span class="experience-item__date">2025–Present</span>
             <p class="experience-item__company">Hooh. Mobile App (iOS), Web</p>
           </div>
           <div class="experience-item__detail"><p>Designed the MVP end to end — document uploads, AI summaries and an assistant chat — across iOS and web. Owned the flows, UI and the component system the team ships from.</p></div>
@@ -219,7 +222,7 @@
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Product designer</p>
-            <span class="experience-item__date">2024-Present</span>
+            <span class="experience-item__date">2024–Present</span>
             <p class="experience-item__company">iTAB. Mobile App (Crossplatform), Web</p>
           </div>
           <div class="experience-item__detail"><p>Redesigned the supplement product card across web and mobile to make value, trust signals and purchase actions clearer — cutting drop-off in a high-trust category.</p></div>
@@ -227,7 +230,7 @@
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">UI/UX designer</p>
-            <span class="experience-item__date">2023-2024</span>
+            <span class="experience-item__date">2023–2024</span>
             <p class="experience-item__company">Infomedia. Communication, UX/UI design</p>
           </div>
           <div class="experience-item__detail"><p>Designed communication products and interfaces — turning complex requirements into clear, usable UX/UI across the product.</p></div>
@@ -235,7 +238,7 @@
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">UI/UX designer, mentor</p>
-            <span class="experience-item__date">2023-2024</span>
+            <span class="experience-item__date">2023–2024</span>
             <p class="experience-item__company">Abramova School. UX/UI designer, mentor</p>
           </div>
           <div class="experience-item__detail"><p>Designed UX/UI while mentoring junior designers — reviewing work, running critiques and helping them level up their craft.</p></div>
@@ -243,7 +246,7 @@
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">UI/UX designer</p>
-            <span class="experience-item__date">2023-2024</span>
+            <span class="experience-item__date">2023–2024</span>
             <p class="experience-item__company">Cryptomi</p>
           </div>
           <div class="experience-item__detail"><p>Designed interfaces for a crypto product — making dense, data-heavy flows approachable and clear.</p></div>
@@ -251,7 +254,7 @@
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Web designer</p>
-            <span class="experience-item__date">2022-2023</span>
+            <span class="experience-item__date">2022–2023</span>
             <p class="experience-item__company">Prokachka studio</p>
           </div>
           <div class="experience-item__detail"><p>Designed marketing sites and landing pages — visual design, layout and responsive behaviour from concept through to developer handoff.</p></div>
@@ -269,7 +272,7 @@
     <footer class="footer">
       <div class="footer__row">
         <p class="footer__copyright">© <span data-year>2026</span></p>
-        <p class="footer__credit">Designed &amp; built with care</p>
+        <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
       </div>
     </footer>
   </main>
@@ -554,43 +557,47 @@
       });
     })();
 
-    /* Hooh phone-video: belt-and-braces autoplay. The video has muted +
-       playsinline + autoplay attrs, which should be enough, but some
-       browsers (Safari in low-power mode, mobile browsers when the tab
-       wasn't focused at first paint) silently skip autoplay. Manually
-       call play() when the card enters the viewport, when the tab
-       becomes visible, and on the first user gesture. play() returns a
-       promise — swallow the rejection so we don't pollute the console. */
+    /* Card phone-videos: belt-and-braces autoplay for EVERY video card
+       (Hooh + Workspace). The videos have muted + playsinline + autoplay
+       attrs, which should be enough, but some browsers (Safari in
+       low-power mode, mobile browsers when the tab wasn't focused at
+       first paint) silently skip autoplay. Manually call play() when a
+       card enters the viewport, when the tab becomes visible, and on the
+       first user gesture. play() returns a promise — swallow the
+       rejection so we don't pollute the console. */
     (() => {
-      const video = document.querySelector('.project-card__phone-video video');
-      if (!video) return;
+      const videos = Array.from(document.querySelectorAll('.project-card__phone-video video'));
+      if (!videos.length) return;
 
-      const tryPlay = () => {
+      const tryPlay = (video) => {
         const p = video.play();
         if (p && typeof p.catch === 'function') p.catch(() => {});
       };
+      const tryPlayPaused = () => videos.forEach((v) => { if (v.paused) tryPlay(v); });
 
-      // Start as soon as the card scrolls into view (uses Intersection
+      // Start as soon as a card scrolls into view (uses Intersection
       // Observer so we don't burn CPU on every scroll event).
-      const card = video.closest('.project-card');
-      if (card && 'IntersectionObserver' in window) {
-        new IntersectionObserver((entries) => {
-          for (const e of entries) {
-            if (e.isIntersecting && video.paused) tryPlay();
-          }
-        }, { threshold: 0.1 }).observe(card);
-      } else {
-        tryPlay();
-      }
+      videos.forEach((video) => {
+        const card = video.closest('.project-card');
+        if (card && 'IntersectionObserver' in window) {
+          new IntersectionObserver((entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting && video.paused) tryPlay(video);
+            }
+          }, { threshold: 0.1 }).observe(card);
+        } else {
+          tryPlay(video);
+        }
+      });
 
       // Resume when the tab regains focus (some browsers pause on hide).
       document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible' && video.paused) tryPlay();
+        if (document.visibilityState === 'visible') tryPlayPaused();
       });
 
       // Last resort: try again on the first user gesture anywhere.
       const onFirstGesture = () => {
-        if (video.paused) tryPlay();
+        tryPlayPaused();
         ['pointerdown', 'touchstart', 'keydown'].forEach((evt) =>
           window.removeEventListener(evt, onFirstGesture)
         );

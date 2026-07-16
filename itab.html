@@ -23,7 +23,8 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=202">
+  <link rel="stylesheet" href="styles.css?v=216">
+  <script src="typographer.js?v=3" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body class="case-page--itab">
@@ -147,20 +148,22 @@
         <p class="case__section-body">I defined purchase states for available and unavailable products. For available items, the CTA changes into quantity control after adding and gives immediate feedback. For unavailable items, the card provides a restock path and keeps users connected to alternatives instead of ending the journey.</p>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop">
-            <source srcset="assets/case-itab-uxA1.webp?v=4" type="image/webp">
-            <img src="assets/case-itab-uxA1.png?v=4" alt="Pricing card on its own plate next to two mobile product cards showing the available-state CTA transitioning into quantity control after add-to-cart" loading="lazy">
-          </picture>
-          <picture class="case__figure-desktop">
-            <source srcset="assets/case-itab-uxA2.webp?v=2" type="image/webp">
-            <img src="assets/case-itab-uxA2.png?v=2" alt="The unavailable-state flow — Notify about arrival, the subscribed confirmation, and the basket showing a currently-unavailable item with restock details" loading="lazy">
-          </picture>
+          <div class="case__figure-desktop case__itab-board case__itab-board--available" aria-label="Pricing card next to two mobile product cards showing the available-state CTA transitioning into quantity control after add-to-cart">
+            <img class="case__itab-board-card" src="assets/case-itab-uxA1-s1.webp?v=3" alt="Pricing card with add-to-cart, instalments, pickup points and earned points" loading="lazy">
+            <img class="case__itab-board-phone case__itab-board-phone--left" src="assets/case-itab-uxA1-s2.webp?v=1" alt="Product card with the available-state Add to cart button" loading="lazy">
+            <img class="case__itab-board-phone case__itab-board-phone--right" src="assets/case-itab-uxA1-s3.webp?v=1" alt="Product card after adding — the CTA becomes a quantity control" loading="lazy">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--unavailable" aria-label="The unavailable-state flow — Notify about arrival, the subscribed confirmation, and the basket showing a currently-unavailable item with restock details">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-uxA2-s1.webp?v=1" alt="Notify me about arrival on an unavailable product" loading="lazy">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-uxA2-s3.webp?v=1" alt="Basket showing the currently-unavailable item with restock details" loading="lazy">
+          </div>
           <div class="case__slider" role="group" aria-label="Swipe through the purchase states — the product card, add to cart, pricing, and the unavailable-state flow">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA1-s2.webp?v=1" alt="Product card with the available-state Add to cart button" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA1-s3.webp?v=1" alt="Product card after adding — the CTA becomes a quantity control" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxA1-s1.webp?v=3" alt="Pricing card with add-to-cart, instalments, pickup points and earned points" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s1.webp?v=1" alt="Notify me about arrival on an unavailable product" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s3.webp?v=1" alt="Basket showing the currently-unavailable item with restock details" loading="lazy"></div>
           </div>
         </figure>
@@ -172,10 +175,10 @@
         <p class="case__section-body">I kept evidence as a supporting layer, so the card could strengthen trust without turning into a long medical article.</p>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop">
-            <source srcset="assets/case-itab-uxB.webp" type="image/webp">
-            <img src="assets/case-itab-uxB.png" alt="Product card detail showing reviews, AI summary and research cards as supporting trust layers" loading="lazy">
-          </picture>
+          <div class="case__figure-desktop case__itab-board case__itab-board--evidence" aria-label="Research evidence on desktop next to the mobile reviews screen">
+            <img class="case__itab-board-desktop" src="assets/case-itab-uxB-s1.webp?v=2" alt="Web view of research evidence cards supporting the product" loading="lazy">
+            <img class="case__itab-board-phone case__itab-board-phone--evidence" src="assets/case-itab-uxB-s2.webp?v=1" alt="Product reviews with an AI summary of recurring customer feedback" loading="lazy">
+          </div>
           <div class="case__slider" role="group" aria-label="Swipe through the research evidence and the reviews screen">
             <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-uxB-s1.webp?v=2" alt="Web view of research evidence cards supporting the product" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxB-s2.webp?v=1" alt="Product reviews with an AI summary of recurring customer feedback" loading="lazy"></div>
@@ -188,13 +191,31 @@
         <p class="case__section-body">I organized badges, lab confirmation, category markers, and promotional labels into a clearer visual system. For trust markers, I added an interaction layer so users could access extra context on demand without overloading the main card.</p>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop">
-            <source srcset="assets/case-itab-uxC.webp" type="image/webp">
-            <img src="assets/case-itab-uxC.png" alt="Web product page showing badges, lab confirmation, category markers and promotional labels organized into a clearer system" loading="lazy">
-          </picture>
+          <div class="case__figure-desktop case__signals-slides" aria-label="Three separate slides for labels, the lab-confirmation interface, and its inline marker">
+            <div class="case__signals-slide case__signals-slide--labels">
+              <img src="assets/case-itab-uxC-s1.webp?v=2" alt="System of promotional and status labels" loading="lazy">
+            </div>
+            <div class="case__signals-slide case__signals-slide--phone">
+              <div class="case__signals-phone">
+                <div class="case__signals-phone-viewport">
+                  <img src="assets/case-itab-uxC-s2.webp?v=3" alt="Lower half of the independent-lab composition-verified interface" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="case__signals-slide case__signals-slide--marker">
+              <img src="assets/case-itab-uxC-s3.webp?v=1" alt="Inline composition-verified marker" loading="lazy">
+            </div>
+          </div>
           <div class="case__slider" role="group" aria-label="Swipe through the label system and the lab-confirmation detail">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxC-s2.webp?v=3" alt="Independent-lab composition-verified detail sheet" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxC-s1.webp?v=2" alt="System of promotional and status labels — Pre-order, Black Friday, Expert's Choice and more" loading="lazy"></div>
+            <div class="case__slide">
+              <div class="case__signals-phone">
+                <div class="case__signals-phone-viewport">
+                  <img src="assets/case-itab-uxC-s2.webp?v=3" alt="Lower half of the independent-lab composition-verified interface" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxC-s3.webp?v=1" alt="Inline composition-verified marker" loading="lazy"></div>
           </div>
         </figure>
       </section>
@@ -290,6 +311,6 @@
     })();
 
   </script>
-  <script src="case.js?v=13" defer></script>
+  <script src="case.js?v=14" defer></script>
 </body>
 </html>

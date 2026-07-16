@@ -133,8 +133,11 @@ body {
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Smooth anchor scrolling only for users who haven't opted out of motion */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 section[id] {
@@ -638,20 +641,17 @@ img {
   }
 }
 
-/* iTAB hero — flat side-by-side mockup (no parallax, no gradient backdrop) */
+/* iTAB hero — temporary water/olive photographic cover test. */
 .case__hero-image--itab {
   position: relative;
-  /* Green brand gradient — same as the iTAB home card, so the green card
-     on the home page leads into a matching green case cover. */
-  background: linear-gradient(180deg, #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
+  background: #c9cdbd url('assets/itab-hero-water.jpg?v=1') center / cover no-repeat;
   border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1032 / 600;
 }
 
-/* iTAB case cover — desktop + mobile screenshots composed on the green
-   gradient, exact spacing from Figma (node 1496:61214). Mirrors the home
-   card composition. */
+/* iTAB case cover — desktop + mobile screenshots composed on the temporary
+   water/olive background, retaining the Figma spacing (node 1496:61214). */
 .case__itab-cover {
   position: absolute;
   inset: 0;
@@ -668,10 +668,15 @@ img {
   object-fit: cover;
   object-position: top center;
   border-radius: 1.2cqw;
+  box-shadow:
+    0 24px 60px rgba(18, 27, 20, 0.20),
+    0 4px 12px rgba(18, 27, 20, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.10);
 }
 
 .case__itab-cover-mobile {
   position: absolute;
+  box-sizing: content-box;
   left: 72.77%;           /* Figma 751/1032 */
   top: 4.67%;
   width: 24.38%;          /* Figma 251.6/1032 */
@@ -679,7 +684,16 @@ img {
   aspect-ratio: 504 / 1088;
   object-fit: cover;
   object-position: top center;
-  border-radius: 1.8cqw;
+  padding: 5px;
+  --itab-screen-corner-fill: #fff;
+  background:
+    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: 39px;
+  box-shadow:
+    0 28px 70px rgba(18, 27, 20, 0.22),
+    0 6px 16px rgba(18, 27, 20, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.10);
 }
 
 /* iTAB hero on mobile: instead of the cramped side-by-side composite, show
@@ -699,7 +713,7 @@ img {
     gap: 12px;
   }
   .case__hero-split .case__hero-plate {
-    background: linear-gradient(180deg, #EDF5EF 0%, #D2E9D8 58%, #A8D7B5 100%);
+    background: #c9cdbd url('assets/itab-hero-water.jpg?v=1') center / cover no-repeat;
     height: 56vh;
     display: flex;
     align-items: center;
@@ -715,12 +729,19 @@ img {
     box-sizing: content-box;
     width: auto;
     height: calc(100% - 10px);
-    aspect-ratio: 760 / 1652;
-    object-fit: cover;
+    aspect-ratio: 504 / 1088;
+    object-fit: contain;
     object-position: top center;
     padding: 5px;
-    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+    --itab-screen-corner-fill: #fff;
+    background:
+      linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+      linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
     border-radius: 39px;
+    box-shadow:
+      0 24px 56px rgba(18, 27, 20, 0.22),
+      0 5px 14px rgba(18, 27, 20, 0.18),
+      0 0 0 1px rgba(0, 0, 0, 0.10);
   }
 }
 
@@ -1035,6 +1056,155 @@ body.case-page--fill .case__outcome-body p {
   border-radius: 0;
 }
 
+/* iTAB purchase-state boards are assembled from the clean source screens
+   instead of the old flattened exports. This removes the baked black canvas
+   and gives every real phone the same 5px titanium bezel used elsewhere. */
+.case__itab-board {
+  position: relative;
+  width: 100%;
+  background: #E2E4E7;
+  overflow: hidden;
+}
+
+.case__itab-board--available {
+  aspect-ratio: 2136 / 1200;
+}
+
+.case__itab-board--unavailable {
+  aspect-ratio: 2064 / 1200;
+}
+
+.case__itab-board--evidence {
+  aspect-ratio: 2064 / 1200;
+}
+
+.case__itab-board .case__itab-board-phone {
+  position: absolute;
+  box-sizing: content-box;
+  top: 5%;
+  width: auto;
+  height: calc(90% - 10px);
+  object-fit: contain;
+  padding: 5px;
+  --itab-screen-corner-fill: #fff;
+  background:
+    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: 39px;
+}
+
+.case__itab-board .case__itab-board-card {
+  position: absolute;
+  left: 8%;
+  top: 24%;
+  width: 25.4%;
+  height: 52%;
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.case__itab-board--available .case__itab-board-phone--left {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.case__itab-board--available .case__itab-board-phone--right {
+  right: 8%;
+}
+
+.case__itab-board--unavailable .case__itab-board-phone--first {
+  left: 8%;
+}
+
+.case__itab-board--unavailable .case__itab-board-phone--second {
+  --itab-screen-corner-fill: #7d7d7d;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.case__itab-board--unavailable .case__itab-board-phone--third {
+  right: 8%;
+}
+
+.case__itab-board .case__itab-board-desktop {
+  position: absolute;
+  left: 0;
+  top: 8%;
+  width: 66%;
+  height: 84%;
+  object-fit: contain;
+}
+
+.case__itab-board--evidence .case__itab-board-phone--evidence {
+  right: 6%;
+}
+
+/* Final iTAB section: three independent slides in one equal-width row. The
+   middle slide clips the phone at its midpoint, so only the lower half
+   remains visible; the 5px titanium shell is the only added treatment. */
+.case__signals-slides {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.case__signals-slide {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.82 / 1;
+  overflow: hidden;
+  background: #E2E4E7;
+}
+
+.case__signals-slide--labels img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: 78%;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+
+.case__signals-phone {
+  position: absolute;
+  box-sizing: border-box;
+  top: -68%;
+  left: 50%;
+  height: 136%;
+  aspect-ratio: 743 / 1625;
+  padding: 5px;
+  transform: translateX(-50%);
+  border-radius: 31px;
+  background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+}
+
+.case__signals-phone-viewport {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 26px;
+  background: #808080;
+}
+
+.case__signals-phone-viewport img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 26px;
+}
+
+.case__signals-slide--marker img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 82%;
+  height: auto;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+
 /* Full-flow video figure — a single iPhone mockup (titanium body + Dynamic
    Island, same as the home cover) wrapping the looping Smart Fill recording,
    centred on the standard grey figure panel. Sized in cqw so the bezel,
@@ -1207,8 +1377,15 @@ body.case-page--fill .case__outcome-body p {
     object-fit: cover;
     object-position: top center;
     padding: 5px;
-    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+    --itab-screen-corner-fill: #fff;
+    background:
+      linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+      linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
     border-radius: 39px;
+  }
+
+  .case-page--itab .case__slider .case__shot--phone.case__shot--dim {
+    --itab-screen-corner-fill: #7d7d7d;
   }
 
   /* STACK MODE: 2 screens shown full-width, one above the other (no swipe).
@@ -1829,12 +2006,18 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
-/* iTAB gets its own quiet brand stage. The gradient is intentionally soft:
-   it separates the pale product UI from the card without competing with it. */
+/* Keep iTAB on the same neutral grey plate at every breakpoint. Declaring it
+   explicitly prevents an older green cover style from leaking into mobile. */
 .project-card--itab {
-  background-color: #d2e9d8;
-  background-image: linear-gradient(145deg, #edf5ef 0%, #d8ecdd 52%, #add9b9 100%);
+  background-color: var(--grey-200);
+  background-image: none;
 }
+
+/* The Sign cover needs a clean white stage; iTAB stays on the shared grey
+   plate so the project grid keeps one consistent material language. */
+/* The Workspace card sits on the same grey plate as every other card
+   (it used to be white, which broke the row and washed out the mostly
+   white signature screen — the base .project-card grey + hover apply). */
 
 /* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
 .project-card__link {
@@ -2061,16 +2244,17 @@ body.case-page--fill .case__outcome-body p {
   background: #000;
 }
 
-/* iTAB card — desktop is the broad stage, while the larger mobile screen
-   overlaps it as the focal object. Both intentionally bleed below the card
-   instead of ending on an almost-accidental crop. */
+/* iTAB card — desktop is the broad stage and the framed phone sits in front.
+   The group's top starts 24px after the subtitle; the phone keeps the same
+   24px clear space at the bottom of the card. */
 .project-card__itab-group {
   position: absolute;
-  top: max(142px, 20%);
+  top: max(128px, 18.5%);
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 92.5%;
-  height: 80%;
+  height: auto;
   container-type: inline-size;
 }
 
@@ -2088,29 +2272,27 @@ body.case-page--fill .case__outcome-body p {
   border-radius: 1.6cqw;
   outline: 1px solid rgba(0, 0, 0, 0.1);
   outline-offset: -1px;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.05),
-    0 20px 48px rgba(32, 74, 45, 0.12);
 }
 
-/* Mobile product card — enlarged, lifted and overlapping the desktop so the
-   cover has a single foreground subject instead of two equal screenshots. */
+/* The same 5px titanium bezel used by the case sliders. Height, rather than
+   width, controls the phone so its top and bottom clear space stays equal. */
 .project-card__itab-mobile {
   position: absolute;
   z-index: 2;
   right: 1%;
-  top: -1.2cqw;
-  width: 29.5%;
-  height: auto;
+  top: 0;
+  box-sizing: content-box;
+  width: auto;
+  height: calc(100% - 34px);
   aspect-ratio: 504 / 1088;
   object-fit: cover;
   object-position: top center;
-  border-radius: 2.8cqw;
-  outline: 1px solid rgba(0, 0, 0, 0.1);
-  outline-offset: -1px;
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.08),
-    0 28px 64px rgba(25, 61, 36, 0.2);
+  padding: 5px;
+  --itab-screen-corner-fill: #fff;
+  background:
+    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: 39px;
 }
 
 /* ===== Syno card (coming soon) ===== */
@@ -2440,6 +2622,7 @@ body.case-page--fill .case__outcome-body p {
   .project-card--itab .project-card__itab-group {
     position: relative;
     top: auto;
+    bottom: auto;
     left: auto;
     transform: none;
     width: calc(100% + (2 * var(--card-x)));
@@ -2463,11 +2646,11 @@ body.case-page--fill .case__outcome-body p {
   .project-card--itab .project-card__itab-mobile {
     position: absolute;
     right: 7%;
-    top: 4%;
-    width: clamp(136px, 36%, 220px);
-    height: auto;
+    top: 12px;
+    width: auto;
+    height: calc(100% - 34px);
     aspect-ratio: 504 / 1088;
-    border-radius: clamp(20px, 4.8cqw, 32px);
+    border-radius: 39px;
   }
 
   /* Syno screenshot flows in the natural mobile card column */
@@ -2671,9 +2854,22 @@ body.case-page--fill .case__outcome-body p {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+/* On phones the page inset (12px) is smaller than the 16px bleed, which
+   pushed the rows 4px past the viewport and made the page wobble
+   sideways. Cap the bleed to the page inset — the magenta fill reaches
+   exactly the screen edge and the text stays on the content grid. */
+@media (max-width: 640px) {
+  .experience-item {
+    padding-inline: var(--page-x);
+    margin-inline: calc(-1 * var(--page-x));
+  }
+}
+
 /* The description: collapsed with max-height (reliable inside the flex
-   column — the grid 0fr→1fr trick collapses here). The <p> clips while
-   the height grows. 8em is comfortably more than the 2-line text. */
+   column — the grid 0fr→1fr trick collapses here). The open cap must
+   clear the TALLEST description at the NARROWEST width — on a 390px
+   phone these wrap to ~6.5em, so 12em keeps a safety margin (5em used
+   to cut the last line mid-sentence on touch). */
 .experience-item__detail {
   overflow: hidden;
   max-height: 0;
@@ -2718,14 +2914,14 @@ body.case-page--fill .case__outcome-body p {
 /* Reveal the description */
 @media (hover: hover) {
   .experience-item:hover .experience-item__detail {
-    max-height: 5em; opacity: 1; margin-top: 14px;
+    max-height: 12em; opacity: 1; margin-top: 14px;
   }
 }
 .experience-item:focus-visible .experience-item__detail {
-  max-height: 5em; opacity: 1; margin-top: 14px;
+  max-height: 12em; opacity: 1; margin-top: 14px;
 }
 .experience-item.is-open .experience-item__detail {
-  max-height: 5em; opacity: 1; margin-top: 14px;
+  max-height: 12em; opacity: 1; margin-top: 14px;
 }
 
 /* Flip text to white on the fill. The date chip goes solid white with
@@ -2916,11 +3112,17 @@ body.case-page--fill .case__outcome-body p {
      — the topbar inset is handled by its own padding, and the intro
      gets its own --page-x inset below. */
   .profile-section {
-    padding-block: 12px;
+    /* Natural height instead of the full-viewport cover: 100dvh with the
+       intro pinned to the bottom left ~40% of the first phone screen
+       empty (and even more on tablets). Now the header, greeting and
+       title stack with a fixed gap, and the first project card peeks
+       above the fold as a scroll cue. */
+    min-height: 0;
+    padding-block: 12px 44px;
     padding-inline: 0;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: stretch;
-    gap: 0;
+    gap: 48px;
   }
 
   .intro {
@@ -2953,25 +3155,27 @@ body.case-page--fill .case__outcome-body p {
     backdrop-filter: blur(12px);
   }
 
-  /* Cover-page topbar: vertical stack of CV/LinkedIn/Email pills on
-     the left + 'Menu' text link on the right, both anchored to the
-     top of the cover (per Figma 2:28733). Not sticky — it's part of
-     the cover hero, not a persistent toolbar. */
+  /* Cover-page topbar: row 1 is the name + menu burger (the same
+     pattern as the case-page topbars, so the visitor always sees whose
+     portfolio this is), row 2 is the CV/LinkedIn/Email/Telegram pills.
+     Replaces the earlier vertical pill stack (Figma 2:28733), which
+     read as a sidebar fragment and pushed the intro far down. Not
+     sticky — it's part of the cover hero, not a persistent toolbar. */
   .mobile-topbar--cover {
-    align-items: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 10px;
     padding-inline: var(--page-x);
   }
 
   .mobile-topbar__buttons {
     display: flex;
-    flex-direction: column;
-    /* width: max-content makes the column take exactly the width of
-       its widest child (LinkedIn pill); align-items: stretch then
-       sizes every child to that same width — so CV / LinkedIn / Email
-       all read as one uniform pill stack instead of three different
-       widths shrinking to their text. */
-    align-items: stretch;
-    width: max-content;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    /* full width forces the pill row onto its own line under the
+       name + burger row */
+    width: 100%;
     gap: 8px;
   }
 
@@ -3194,25 +3398,39 @@ body.case-page--fill .case__outcome-body p {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    /* The figure is a flex column with an 18px gap. Pull the dots up to sit
-       ~12px under the slider (matching the in-slider card gap) and push them
-       away from the caption below, so they clearly belong to the slider. */
-    margin: -6px 0 6px;
+    /* Buttons are 24px tap targets with a 7px visual dot inside, so no
+       extra gap is needed. The figure is a flex column with an 18px gap —
+       the negative margins keep the VISUAL dots ~12px under the slider
+       (as before) even though the buttons are taller than the dots. */
+    gap: 0;
+    margin: -14px 0 -2px;
   }
   .case__dot {
-    width: 7px;
-    height: 7px;
+    /* 24×24 hit area (WCAG 2.2 minimum) — the dot itself is drawn 7px
+       by the ::after so the pagination keeps its light look. */
+    position: relative;
+    width: 24px;
+    height: 24px;
     padding: 0;
     border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .case__dot::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
     border-radius: 999px;
     background: rgba(0, 0, 0, 0.22);
-    cursor: pointer;
+    transform: translate(-50%, -50%);
     transition: background 0.25s ease, transform 0.25s ease;
   }
-  .case__dot.is-active {
+  .case__dot.is-active::after {
     background: rgba(0, 0, 0, 0.62);
-    transform: scale(1.3);
+    transform: translate(-50%, -50%) scale(1.3);
   }
 }
 

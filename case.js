@@ -1,7 +1,10 @@
-/* Shared case-study interactions: scroll-reveal + slider swipe dots.
-   Loaded with `defer` on hooh.html / itab.html. The `.has-js` class is set
-   synchronously in <head> so the reveal hidden-state is applied before paint
-   (no flash) and never applies when JS is off. */
+/* Shared case-study interactions: scroll-reveal + slider swipe dots +
+   tap-to-zoom lightbox. Loaded with `defer` on hooh.html / itab.html and
+   the fill pages (which use it for the lightbox only — they have no
+   .case__slider and no `.has-js`, so the other blocks are no-ops there).
+   The `.has-js` class is set synchronously in <head> so the reveal
+   hidden-state is applied before paint (no flash) and never applies when
+   JS is off. */
 (() => {
   'use strict';
 
@@ -140,14 +143,47 @@
       }
     };
 
+    /* Run the loop only while the feed is actually on screen — the
+       interval used to keep flicking (and forcing repaints) for the whole
+       page life, even with the feed scrolled far away or swiped to
+       another slide. Watches the page scroll AND the horizontal slider
+       scroll, with the same rAF-throttled pattern as the reveal code. */
+    let ready = false;
+    const setRunning = (run) => {
+      if (run && !timer && ready) {
+        timer = window.setInterval(flick, FLICK + PAUSE);
+      } else if (!run && timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+    const sync = () => {
+      const host = track.closest('.case__slide');
+      if (!host) return;
+      const r = host.getBoundingClientRect();
+      const vh = window.innerHeight, vw = window.innerWidth;
+      const vert = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / (r.height || 1);
+      const horiz = Math.max(0, Math.min(r.right, vw) - Math.max(r.left, 0)) / (r.width || 1);
+      setRunning(vert >= 0.2 && horiz >= 0.2);
+    };
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; sync(); }); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    const hostSlider = track.closest('.case__slider');
+    if (hostSlider) hostSlider.addEventListener('scroll', onScroll, { passive: true });
+
     const start = () => {
       measure();
       if (!winH || !centers.length) return;
       step = START;
       track.style.transition = 'none';
       track.style.transform = 'translateY(' + pos(START) + 'px)';
-      if (timer) clearInterval(timer);
-      timer = window.setInterval(flick, FLICK + PAUSE);
+      if (timer) { clearInterval(timer); timer = null; }
+      ready = true;
+      sync(); // begin only if the feed is in view right now
     };
 
     // Cards need layout (offsetTop/Height) — wait for all images to load.
@@ -159,8 +195,10 @@
 
   /* ---- Tap-to-zoom lightbox -------------------------------------------- */
   (() => {
+    /* `.shot img` covers the fill pages' screens (their videos stay
+       plain — a lightbox can't show a running loop). */
     const zoomables = document.querySelectorAll(
-      '.case__shot, .case__hero-plate img, .case__figure-desktop img'
+      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .shot img'
     );
     if (!zoomables.length) return;
 
