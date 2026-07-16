@@ -650,24 +650,29 @@ img {
   aspect-ratio: 1032 / 600;
 }
 
-/* iTAB case cover — desktop + mobile screenshots composed on the temporary
-   water/olive background, retaining the Figma spacing (node 1496:61214). */
+/* iTAB case cover — the exact desktop/mobile relationship used by the home
+   project card, placed on the temporary water/olive background. */
 .case__itab-cover {
   position: absolute;
-  inset: 0;
+  top: 4.67%;
+  bottom: 0;
+  left: 50%;
+  width: 92.5%;
+  transform: translateX(-50%);
   container-type: inline-size;
 }
 
 .case__itab-cover-desktop {
   position: absolute;
-  left: 2.81%;            /* Figma 29/1032 */
-  top: 4.67%;             /* Figma 28/600 */
-  width: 66.38%;          /* Figma 685/1032 */
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 75%;
   height: auto;
   aspect-ratio: 1370 / 1144;
   object-fit: cover;
   object-position: top center;
-  border-radius: 1.2cqw;
+  border-radius: 1.6cqw;
   box-shadow:
     0 24px 60px rgba(18, 27, 20, 0.20),
     0 4px 12px rgba(18, 27, 20, 0.16),
@@ -676,11 +681,12 @@ img {
 
 .case__itab-cover-mobile {
   position: absolute;
+  z-index: 2;
   box-sizing: content-box;
-  left: 72.77%;           /* Figma 751/1032 */
-  top: 4.67%;
-  width: 24.38%;          /* Figma 251.6/1032 */
-  height: auto;
+  right: 1%;
+  top: 0;
+  width: auto;
+  height: calc(100% - 34px);
   aspect-ratio: 504 / 1088;
   object-fit: cover;
   object-position: top center;
@@ -696,52 +702,38 @@ img {
     0 0 0 1px rgba(0, 0, 0, 0.10);
 }
 
-/* iTAB hero on mobile: instead of the cramped side-by-side composite, show
-   the desktop screen and the mobile screen as two stacked plates — the same
-   big 56vh plate used everywhere else in the case. */
+/* Legacy single-screen mobile fallback remains in the markup but is hidden;
+   the live hero now mirrors the home-card composition at every breakpoint. */
 .case__hero-split { display: none; }
 
-@media (max-width: 640px) {
+@media (max-width: 1199px) {
   .case__hero-image--itab {
     aspect-ratio: auto;
-    overflow: visible;
-  }
-  .case__hero-image--itab .case__hero-figma { display: none; }
-  .case__hero-split {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .case__hero-split .case__hero-plate {
-    background: #c9cdbd url('assets/itab-hero-water.jpg?v=1') center / cover no-repeat;
-    height: 56vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px; /* same inset as the slider plates, so the phone matches them */
-    box-sizing: border-box;
+    height: clamp(300px, 58vw, 520px);
     overflow: hidden;
   }
-  /* The hero phone wears the same titanium bezel as every phone screen in
-     the case sliders — identical treatment, identical size. */
-  .case__hero-split .case__hero-plate img {
-    display: block;
-    box-sizing: content-box;
+  .case__hero-image--itab .case__hero-figma { display: block; }
+  .case__itab-cover {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+  }
+  .case__itab-cover-desktop {
+    left: -4%;
+    top: 16%;
+    width: 78%;
+    border-radius: clamp(12px, 2.6cqw, 20px);
+  }
+  .case__itab-cover-mobile {
+    left: auto;
+    right: 7%;
+    top: 12px;
     width: auto;
-    height: calc(100% - 10px);
-    aspect-ratio: 504 / 1088;
-    object-fit: contain;
-    object-position: top center;
-    padding: 5px;
-    --itab-screen-corner-fill: #fff;
-    background:
-      linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
-      linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+    height: calc(100% - 34px);
     border-radius: 39px;
-    box-shadow:
-      0 24px 56px rgba(18, 27, 20, 0.22),
-      0 5px 14px rgba(18, 27, 20, 0.18),
-      0 0 0 1px rgba(0, 0, 0, 0.10);
   }
 }
 
@@ -761,6 +753,13 @@ img {
    only the iTAB page gets it; Hooh and index stay magenta. */
 body.case-page--itab {
   --text-accent: #59ad3b;
+  --bg-primary: #d9dbda;
+}
+
+/* The existing section spacing is enough separation for iTAB; the shared
+   prose-section hairline is redundant on this case page. */
+body.case-page--itab .case__section + .case__section {
+  border-top: 0;
 }
 
 body.case-page--itab .scroll-progress {
@@ -863,7 +862,7 @@ body.case-page--fill .case__outcome-body p {
   font-weight: 400;
   font-size: 26px;
   line-height: 32px;
-  letter-spacing: var(--ls-heading-lg);
+  letter-spacing: 0;
   color: var(--text-primary);
 }
 
