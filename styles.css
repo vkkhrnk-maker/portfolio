@@ -199,6 +199,18 @@ img {
   color: var(--text-primary);
 }
 
+.sidebar__name-link {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+}
+
+.sidebar__name-link::before {
+  content: '';
+  position: absolute;
+  inset: -8px 0;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
@@ -268,6 +280,7 @@ img {
 .menu-drawer__item:focus-visible,
 .menu-toggle:focus-visible,
 .menu-drawer__close:focus-visible,
+.sidebar__name-link:focus-visible,
 .mobile-topbar__link:focus-visible {
   outline: 2px solid var(--text-accent);
   outline-offset: 3px;
@@ -344,7 +357,7 @@ img {
   align-items: flex-end;
 }
 
-.profile-section__telegram {
+.profile-section__cta {
   align-self: flex-end;
 }
 
@@ -654,7 +667,7 @@ img {
    project card, placed on the temporary water/olive background. */
 .case__itab-cover {
   position: absolute;
-  top: 4.67%;
+  top: 0;
   bottom: 0;
   left: 50%;
   width: 84%;
@@ -666,13 +679,14 @@ img {
   position: absolute;
   z-index: 1;
   left: 0;
-  top: 3%;
-  width: auto;
-  height: 94%;
+  top: 50%;
+  width: 73%;
+  height: auto;
   aspect-ratio: 1370 / 1144;
+  transform: translateY(-50%);
   object-fit: cover;
   object-position: top center;
-  border-radius: 0;
+  border-radius: clamp(16px, 1.6cqw, 28px);
   box-shadow: none;
   outline: none;
 }
@@ -682,9 +696,9 @@ img {
   z-index: 2;
   box-sizing: border-box;
   right: 0;
-  top: 3%;
+  top: 8%;
   width: auto;
-  height: 94%;
+  height: 84%;
   aspect-ratio: 504 / 1088;
   object-fit: cover;
   object-position: top center;
@@ -704,7 +718,7 @@ img {
 @media (max-width: 1199px) {
   .case__hero-image--itab {
     aspect-ratio: auto;
-    height: clamp(300px, 58vw, 520px);
+    height: clamp(300px, 58vw, 700px);
     overflow: hidden;
   }
   .case__hero-image--itab .case__hero-figma { display: block; }
@@ -718,23 +732,27 @@ img {
   }
   .case__itab-cover-desktop {
     left: 0;
-    top: 16%;
-    width: 78%;
+    top: 50%;
+    width: 73%;
     height: auto;
-    border-radius: 0;
+    transform: translateY(-50%);
+    border-radius: clamp(16px, 1.6cqw, 28px);
   }
   .case__itab-cover-mobile {
     left: auto;
     right: 0;
-    top: 3%;
+    top: 8%;
     width: auto;
-    height: 94%;
+    height: 84%;
     border-radius: 39px;
   }
 }
 
-/* Hero intro paragraph — used on case pages that need a sub-headline under
-   the title (e.g. iTAB). Body-text style, slightly tighter max-width. */
+/* Hero intro — used on case pages that need a sub-headline under the
+   title. Either a single <p class="case__intro"> or a .case__intro <div>
+   holding several short paragraphs (long intros read faster split up). */
+.case__intro p { margin: 0; }
+.case__intro p + p { margin-top: 14px; }
 .case__intro {
   margin: 0;
   font-family: var(--font-body);
@@ -1134,6 +1152,96 @@ body.case-page--fill .case__outcome-body p {
   right: 6%;
 }
 
+/* Hooh MVP case: the ux/chat desktop boards are assembled from the clean
+   source screens instead of the old flattened exports — the same move as
+   the iTAB boards above. This removes the baked black canvas between
+   panels (gaps now show the page background, as the uxA export always
+   did) and swaps the white mockups for the same 5px titanium bezel used
+   across the site. Plates keep the exports' #E3E5E6 grey. */
+.case__hooh-board {
+  display: grid;
+  gap: 2.2%;
+  aspect-ratio: 3264 / 1800;
+}
+
+.case__hooh-plate {
+  position: relative;
+  background: #E3E5E6;
+  overflow: hidden;
+}
+
+/* Onboarding: grey phone plate + the gradient categorization panel,
+   at the exports' 1992:1200 split. */
+.case__hooh-board--onboard {
+  grid-template-columns: 1992fr 1200fr;
+}
+
+.case__hooh-plate--gradient {
+  background: url('assets/case-uxA-bg.webp?v=1') center / cover no-repeat;
+}
+
+/* The tag pills sit where the flat export placed them (transparent webp).
+   Compound selectors here and below outweigh the generic `.case__figure img`
+   (0,1,1) sizing rule. */
+.case__hooh-board .case__hooh-tags {
+  position: absolute;
+  left: 41%;
+  top: 11%;
+  height: 80%;
+  width: auto;
+}
+
+/* Assistant: three equal grey plates, one phone each. */
+.case__hooh-board--chat {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Report: a single full-width plate — the desktop window bleeds off the
+   left edge exactly as in the old export, the phone stands at the right. */
+.case__hooh-board--report {
+  display: block;
+  position: relative;
+  background: #E3E5E6;
+  overflow: hidden;
+}
+
+.case__hooh-board .case__hooh-board-window {
+  position: absolute;
+  left: -8.8%;
+  top: 5%;
+  height: 90%;
+  width: auto;
+  aspect-ratio: 1600 / 1062;
+}
+
+/* Phones are absolutely positioned so their %-height resolves against the
+   aspect-ratio board instead of stretching it (same trick as the iTAB
+   boards: out-of-flow children can't inflate the plate). */
+.case__hooh-board .case__hooh-board-phone {
+  position: absolute;
+  top: 5%;
+  box-sizing: content-box;
+  height: calc(90% - 10px);
+  width: auto;
+  aspect-ratio: 760 / 1652;
+  object-fit: cover;
+  object-position: top center;
+  padding: 5px;
+  background:
+    linear-gradient(#fff, #fff) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: 39px;
+}
+
+.case__hooh-plate .case__hooh-board-phone {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.case__hooh-board--report .case__hooh-board-phone {
+  right: 2.2%;
+}
+
 /* Final iTAB section: three independent slides in one equal-width row. The
    middle slide clips the phone at its midpoint, so only the lower half
    remains visible; the 5px titanium shell is the only added treatment. */
@@ -1359,12 +1467,14 @@ body.case-page--fill .case__outcome-body p {
     object-fit: cover;
     object-position: top;
   }
-  /* iTAB: real phone screens in the sliders wear the same titanium bezel
-     as the fill case's phones — content-box + padding draws the frame on
-     the screen itself, and the pinned 760:1652 ratio makes every framed
-     phone come out the exact same size across the cases. The pricing
-     card, the label sheet and the desktop screens stay bare. */
-  .case-page--itab .case__slider .case__shot--phone {
+  /* iTAB + Hooh MVP: real phone screens in the sliders wear the same
+     titanium bezel as the fill case's phones — content-box + padding draws
+     the frame on the screen itself, and the pinned 760:1652 ratio makes
+     every framed phone come out the exact same size across the cases. The
+     pricing card, the label sheet, the categorization tags and the desktop
+     screens stay bare. */
+  .case-page--itab .case__slider .case__shot--phone,
+  .case-page--hooh .case__slider .case__shot--phone {
     box-sizing: content-box;
     width: auto;
     height: calc(100% - 10px);
@@ -1570,6 +1680,7 @@ body.case-page--fill .case__outcome-body p {
 .case__outcome {
   position: relative;
   display: flex;
+  flex-wrap: wrap; /* the facts row drops below the title/body pair */
   gap: 24px;
   align-items: flex-start;
   padding: 80px 24px;
@@ -1609,6 +1720,37 @@ body.case-page--fill .case__outcome-body p {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: -1px;
+  color: var(--text-secondary);
+}
+
+/* Evidence chips inside the outcome plate — the measurable claims pulled
+   out of the prose so the result scans in seconds. White cards on the
+   blue plate; auto-fit handles 3 or 4 chips and phone widths alike. */
+.case__outcome-facts {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.case__outcome-fact {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+.case__outcome-fact__title {
+  margin: 0 0 6px;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -0.5px;
+  color: #0e0f10;
+}
+.case__outcome-fact__desc {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
   color: var(--text-secondary);
 }
 
@@ -2001,15 +2143,15 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
-/* Keep iTAB on the same neutral grey plate at every breakpoint. Declaring it
-   explicitly prevents an older green cover style from leaking into mobile. */
+/* iTAB uses a clean white stage at every breakpoint. Keep the surface white
+   through hover/press as well, so the card never flashes back to grey. */
+.project-card--itab:hover,
+.project-card--itab:active,
 .project-card--itab {
-  background-color: var(--grey-200);
+  background-color: var(--white);
   background-image: none;
 }
 
-/* The Sign cover needs a clean white stage; iTAB stays on the shared grey
-   plate so the project grid keeps one consistent material language. */
 /* The Workspace card sits on the same grey plate as every other card
    (it used to be white, which broke the row and washed out the mostly
    white signature screen — the base .project-card grey + hover apply). */
@@ -2265,8 +2407,6 @@ body.case-page--fill .case__outcome-body p {
   object-fit: cover;
   object-position: top center;
   border-radius: 1.6cqw;
-  outline: 1px solid rgba(0, 0, 0, 0.1);
-  outline-offset: -1px;
 }
 
 /* The same 5px titanium bezel used by the case sliders. Height, rather than
@@ -2291,16 +2431,15 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* ===== Syno card (coming soon) ===== */
-/* Same neutral grey plate as the other cards. Single desktop screenshot
-   of the Syno Art Map, centred below the header; not clickable yet — a
-   diagonal 'Coming soon' ribbon sits in the top-right corner. */
+/* A clean white stage for the dark Syno Art Map screenshot; the card is not
+   clickable yet, so its surface stays stable on hover and press. */
 .project-card--syno,
 .project-card--syno:active {
-  background: var(--grey-200);
+  background: var(--white);
   transform: none;            /* not clickable — no press-in */
 }
 @media (hover: hover) {
-  .project-card--syno:hover { background: var(--grey-200); }
+  .project-card--syno:hover { background: var(--white); }
 }
 
 /* Taller than the 1040/693 tile so the wide screenshot fits at the same
@@ -2333,15 +2472,15 @@ body.case-page--fill .case__outcome-body p {
   z-index: 4;
   width: 210px;
   transform: rotate(45deg);
-  background: var(--button-primary);
-  color: var(--white);
+  background: var(--white);
+  color: var(--text-primary);
   text-align: center;
   padding: 9px 0;
-  font-family: var(--font-body);
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-size: 17px;
   line-height: 1;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  text-transform: none;
   pointer-events: none;
 }
 
@@ -2517,7 +2656,7 @@ body.case-page--fill .case__outcome-body p {
     z-index: 100;
   }
 
-  .profile-section__telegram {
+  .profile-section__cta {
     position: fixed;
     top: 24px;
     right: var(--page-x);
@@ -3125,9 +3264,9 @@ body.case-page--fill .case__outcome-body p {
     padding-inline: var(--page-x);
   }
 
-  /* On mobile — hide menu icon + Telegram (desktop topbar), show CV/Меню text instead */
+  /* On mobile — hide menu icon + the Book-a-call CTA (desktop topbar), show CV/Меню text instead */
   .menu-toggle,
-  .profile-section__telegram {
+  .profile-section__cta {
     display: none;
   }
 
@@ -3258,7 +3397,7 @@ body.case-page--fill .case__outcome-body p {
     left: 20px;
   }
 
-  .profile-section__telegram {
+  .profile-section__cta {
     right: 20px;
   }
 

@@ -23,7 +23,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=217">
+  <link rel="stylesheet" href="styles.css?v=225">
   <script src="typographer.js?v=3" defer></script>
   <style>
     /* Loading-state, ChatGPT-style (kept inline so styles.css WIP stays untouched):
@@ -49,7 +49,7 @@
   </style>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
-<body>
+<body class="case-page--hooh">
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
@@ -73,7 +73,7 @@
     <div class="sidebar__buttons">
       <a class="btn btn--light" href="#">CV</a>
       <a class="btn btn--light" href="#">LinkedIn</a>
-      <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">Email</a>
+      <a class="btn btn--light" href="#">Telegram</a>
     </div>
   </aside>
 
@@ -164,10 +164,13 @@
         </div>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop"><img src="assets/case-uxA.webp" alt="iOS start screen with Upload your first document prompt, next to an auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></picture>
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--onboard" role="group" aria-label="iOS start screen next to the auto-categorization panel">
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy"></div>
+            <div class="case__hooh-plate case__hooh-plate--gradient"><img class="case__hooh-tags" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></div>
+          </div>
           <div class="case__slider" role="group" aria-label="Swipe through the upload and categorization screens">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy"></div>
-            <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--phone" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></div>
+            <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--card" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></div>
           </div>
           <figcaption>Users start by uploading a document, while the system helps organize it through automatic categorization.</figcaption>
         </figure>
@@ -191,7 +194,10 @@
         </figure>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop"><img src="assets/case-uxC.webp?v=12" alt="Desktop view of a Complete Blood Count Report with a Mostly good summary callout, a contextual Q&amp;A chat panel with the Hooh assistant, and an iOS Summary screen showing the same report" loading="lazy"></picture>
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--report" role="group" aria-label="Desktop view of the Complete Blood Count Report next to the iOS Summary screen">
+            <img class="case__hooh-board-window" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel with the Hooh assistant" loading="lazy">
+            <img class="case__hooh-board-phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy">
+          </div>
           <div class="case__slider" role="group" aria-label="Swipe through the desktop report and the iOS summary">
             <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy"></div>
@@ -205,7 +211,11 @@
         <p class="case__section-body">The assistant uses uploaded documents as context, allowing users to ask follow-up questions, explore categories, and retrieve relevant information without manually scanning long text.</p>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop"><img src="assets/case-chatA.webp?v=7" alt="Three iOS Hooh Assistant screens — intro with suggested prompts, a My hemoglobin chat with inline source citations and a Health summary explanation, and a My hemoglobin chat with a Blood analysis document card" loading="lazy"></picture>
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--chat" role="group" aria-label="Three iOS Hooh Assistant screens side by side">
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary explanation" loading="lazy"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy"></div>
+          </div>
           <div class="case__slider" role="group" aria-label="Swipe through the three Hooh Assistant screens">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary" loading="lazy"></div>
@@ -259,7 +269,21 @@
       <section class="case__outcome">
         <h3 class="case__outcome-title">Outcome</h3>
         <div class="case__outcome-body">
-          <p>MVP shipped on web and iOS. Progressive Disclosure became the core pattern across every document-handling feature in the product. Internal validation with the target cohort (non-legal users) confirmed the direction — the pattern reduced document anxiety in qualitative sessions, and quick-snapshot proved to be the most-used entry point into a file. Public release metrics weren't part of this scope.</p>
+          <p>MVP shipped on web and iOS, and the direction survived contact with real users. Public-release analytics weren't part of this engagement — the evidence below is what we validated before launch.</p>
+        </div>
+        <div class="case__outcome-facts">
+          <div class="case__outcome-fact">
+            <p class="case__outcome-fact__title">Shipped on two platforms</p>
+            <p class="case__outcome-fact__desc">The MVP went live on web and iOS — upload, layered reading, assistant chat and file organization.</p>
+          </div>
+          <div class="case__outcome-fact">
+            <p class="case__outcome-fact__title">Validated with the target cohort</p>
+            <p class="case__outcome-fact__desc">In qualitative sessions, non-legal users worked through real paperwork with visibly less document anxiety.</p>
+          </div>
+          <div class="case__outcome-fact">
+            <p class="case__outcome-fact__title">Patterns that stuck</p>
+            <p class="case__outcome-fact__desc">Progressive Disclosure became the core pattern for every document feature — and quick snapshot the most-used way into a file.</p>
+          </div>
         </div>
       </section>
 

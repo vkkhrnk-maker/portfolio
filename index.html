@@ -23,13 +23,15 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=217">
+  <link rel="stylesheet" href="styles.css?v=225">
   <script src="typographer.js?v=3" defer></script>
 </head>
 <body>
   <aside class="sidebar">
     <div class="sidebar__top">
-      <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">
+        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      </a>
       <nav class="menu">
         <a class="menu__item is-active" href="#works">Works</a>
         <a class="menu__item" href="#about">About</a>
@@ -39,22 +41,22 @@
     <div class="sidebar__buttons">
       <a class="btn btn--light" href="#">CV</a>
       <a class="btn btn--light" href="#">LinkedIn</a>
-      <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">Email</a>
+      <a class="btn btn--light" href="#">Telegram</a>
     </div>
   </aside>
 
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <main class="content">
-    <section class="profile-section">
+    <section class="profile-section" id="top" tabindex="-1">
       <button class="menu-toggle" type="button" data-menu-open aria-label="Open menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
         </svg>
       </button>
-      <a class="btn btn--dark profile-section__telegram" href="#">Telegram</a>
+      <a class="btn btn--dark profile-section__cta" href="#">Book a call</a>
       <div class="mobile-topbar mobile-topbar--cover">
-        <a class="mobile-topbar__link mobile-topbar__name" href="#">Victoria Kukharenko</a>
+        <a class="mobile-topbar__link mobile-topbar__name" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">Victoria Kukharenko</a>
         <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
@@ -63,8 +65,8 @@
         <div class="mobile-topbar__buttons">
           <a class="btn btn--light" href="#">CV</a>
           <a class="btn btn--light" href="#">LinkedIn</a>
-          <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">Email</a>
-          <a class="btn btn--dark" href="#">Telegram</a>
+          <a class="btn btn--light" href="#">Telegram</a>
+          <a class="btn btn--dark" href="#">Book a call</a>
         </div>
       </div>
       <div class="intro">
@@ -72,7 +74,7 @@
           <span class="intro__avatar">
             <img src="assets/profile.jpg" alt="">
           </span>
-          <p class="intro__greeting" data-greeting>Hello there!</p>
+          <p class="intro__greeting" data-greeting>Hello there</p>
         </div>
         <h2 class="intro__title">I design complex digital products and scalable systems</h2>
       </div>
@@ -467,10 +469,10 @@
       const greetingEl = document.querySelector('[data-greeting]');
       if (greetingEl) {
         const h = new Date().getHours();
-        let g = 'Hello there!';
-        if (h >= 5  && h < 12) g = 'Good morning!';
-        else if (h >= 12 && h < 18) g = 'Good afternoon!';
-        else if (h >= 18 && h < 23) g = 'Good evening!';
+        let g = 'Hello there';
+        if (h >= 5  && h < 12) g = 'Good morning';
+        else if (h >= 12 && h < 18) g = 'Good afternoon';
+        else if (h >= 18 && h < 23) g = 'Good evening';
         else g = 'Hey, night owl 🌙';
         greetingEl.textContent = g;
       }
