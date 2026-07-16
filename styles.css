@@ -1242,6 +1242,38 @@ body.case-page--fill .case__outcome-body p {
   right: 2.2%;
 }
 
+/* Feed: the summary-card feed next to the web dashboard, at the exports'
+   1200:1992 split. No phones here — the cards and the window are bare; the
+   window bleeds off the RIGHT edge (mirror of the report board) and the
+   card feed bleeds top and bottom, exactly as in the old flat export. */
+.case__hooh-board--feed {
+  grid-template-columns: 1200fr 1992fr;
+}
+
+.case__hooh-feed {
+  position: absolute;
+  left: 14.2%;
+  width: 71.3%;
+  top: -41.7%;
+}
+
+.case__hooh-feed img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* margin-% resolves against the strip width, so the gap scales with the
+   board just like every other measure here */
+.case__hooh-feed img + img {
+  margin-top: 4.44%;
+}
+
+.case__hooh-board--feed .case__hooh-board-window {
+  left: auto;
+  right: -16.4%;
+}
+
 /* Final iTAB section: three independent slides in one equal-width row. The
    middle slide clips the phone at its midpoint, so only the lower half
    remains visible; the 5px titanium shell is the only added treatment. */
@@ -1680,7 +1712,6 @@ body.case-page--fill .case__outcome-body p {
 .case__outcome {
   position: relative;
   display: flex;
-  flex-wrap: wrap; /* the facts row drops below the title/body pair */
   gap: 24px;
   align-items: flex-start;
   padding: 80px 24px;
@@ -1723,35 +1754,13 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-secondary);
 }
 
-/* Evidence chips inside the outcome plate — the measurable claims pulled
-   out of the prose so the result scans in seconds. White cards on the
-   blue plate; auto-fit handles 3 or 4 chips and phone widths alike. */
-.case__outcome-facts {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-}
-.case__outcome-fact {
-  background: rgba(255, 255, 255, 0.55);
-  border-radius: 16px;
-  padding: 18px 20px;
-}
-.case__outcome-fact__title {
-  margin: 0 0 6px;
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: -0.5px;
+/* Evidence lines inside the outcome — kept as plain text (a dark
+   lead-in per line, no card grid): the outcome often sits right after a
+   gap-card grid, and a second three-up in a row read as too many
+   columns. */
+.case__outcome-body p strong {
+  font-weight: 500;
   color: #0e0f10;
-}
-.case__outcome-fact__desc {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.3px;
-  color: var(--text-secondary);
 }
 
 .case__pager {
