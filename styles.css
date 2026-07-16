@@ -65,7 +65,7 @@
   --space-120: 120px;
 
   /* ===== Semantic spacing (mobile overrides below) ===== */
-  --page-x: 40px;          /* Spacing/Page X — horizontal page padding */
+  --page-x: 20px;          /* Spacing/Page X — desktop outer page padding */
   --section-y: 160px;      /* Spacing/Section Y — vertical gap between sections */
   --group-gap: 40px;       /* Spacing/Group Gap — gap inside section (title ↔ content) */
   --items-gap: 28px;       /* gap between list items (experience) */
@@ -171,7 +171,7 @@ img {
 .sidebar {
   width: 320px;
   flex-shrink: 0;
-  padding: 24px 20px 24px 40px;
+  padding: 24px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -190,8 +190,8 @@ img {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h5);
-  line-height: var(--lh-h5);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-primary);
 }
@@ -459,6 +459,22 @@ img {
   color: var(--text-secondary);
 }
 
+@media (min-width: 1200px) {
+  /* Optical alignment: the visible top of Team matches the first title line. */
+  .sidebar--case .sidebar__top {
+    gap: 199px;
+  }
+
+  .content--case > .case {
+    margin-top: -40px;
+  }
+}
+
+.case-page--fill .sidebar--case .case-meta dd {
+  font-size: 15px;
+  line-height: 22px;
+}
+
 /* Back-to-home — circle button + "Back" label (Figma node 756:4496) */
 .case__back {
   display: inline-flex;
@@ -688,16 +704,23 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 12px; /* same inset as the slider plates, so the phone matches them */
     box-sizing: border-box;
     overflow: hidden;
   }
+  /* The hero phone wears the same titanium bezel as every phone screen in
+     the case sliders — identical treatment, identical size. */
   .case__hero-split .case__hero-plate img {
     display: block;
+    box-sizing: content-box;
     width: auto;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 14px;
+    height: calc(100% - 10px);
+    aspect-ratio: 760 / 1652;
+    object-fit: cover;
+    object-position: top center;
+    padding: 5px;
+    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+    border-radius: 39px;
   }
 }
 
@@ -749,13 +772,14 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-secondary);
 }
 
-/* Hooh Smart Fill hero — flat side-by-side mockup, same shape as iTAB */
+/* Hooh PDF cover — supplied campaign image, shown uncropped on desktop and
+   centered around the phone/hand when the shared mobile hero ratio takes over. */
 .case__hero-image--fill {
   position: relative;
-  background: none;
+  background: #19afe4;
   border-radius: 0;
   overflow: hidden;
-  aspect-ratio: 1032 / 600;
+  aspect-ratio: 16 / 9;
 }
 
 .case__hero-image--fill img {
@@ -764,6 +788,8 @@ body.case-page--fill .case__outcome-body p {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: -1px;
 }
 
 /* 3-card gap grid — used in iTAB Research section to show the three research
@@ -1167,6 +1193,22 @@ body.case-page--fill .case__outcome-body p {
     max-height: none;
     object-fit: cover;
     object-position: top;
+  }
+  /* iTAB: real phone screens in the sliders wear the same titanium bezel
+     as the fill case's phones — content-box + padding draws the frame on
+     the screen itself, and the pinned 760:1652 ratio makes every framed
+     phone come out the exact same size across the cases. The pricing
+     card, the label sheet and the desktop screens stay bare. */
+  .case-page--itab .case__slider .case__shot--phone {
+    box-sizing: content-box;
+    width: auto;
+    height: calc(100% - 10px);
+    aspect-ratio: 760 / 1652;
+    object-fit: cover;
+    object-position: top center;
+    padding: 5px;
+    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+    border-radius: 39px;
   }
 
   /* STACK MODE: 2 screens shown full-width, one above the other (no swipe).
@@ -1787,10 +1829,12 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
-/* Hooh and iTAB cards sit on the shared neutral grey plate (base
-   .project-card) — the product visuals carry the colour, the magenta
-   arrow chip is the accent. Grey hover/active feedback comes from the
-   base rules. */
+/* iTAB gets its own quiet brand stage. The gradient is intentionally soft:
+   it separates the pale product UI from the card without competing with it. */
+.project-card--itab {
+  background-color: #d2e9d8;
+  background-image: linear-gradient(145deg, #edf5ef 0%, #d8ecdd 52%, #add9b9 100%);
+}
 
 /* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
 .project-card__link {
@@ -2017,46 +2061,56 @@ body.case-page--fill .case__outcome-body p {
   background: #000;
 }
 
-/* iTAB card — desktop screenshot (left) + mobile screenshot (right),
-   composition + spacing straight from Figma (node 1496:61214). Clean
-   rounded screenshots floating on the green gradient — no browser
-   chrome. Group is a container so the corner radii scale with width. */
+/* iTAB card — desktop is the broad stage, while the larger mobile screen
+   overlaps it as the focal object. Both intentionally bleed below the card
+   instead of ending on an almost-accidental crop. */
 .project-card__itab-group {
   position: absolute;
-  top: max(120px, 15%);   /* clear the fixed-height header on narrow desktops */
+  top: max(142px, 20%);
   left: 50%;
   transform: translateX(-50%);
-  width: 94.3%;            /* Figma image span: 973.6 / 1032 */
-  height: 83%;
+  width: 92.5%;
+  height: 80%;
   container-type: inline-size;
 }
 
-/* Desktop product page — left, 70.36% of the group (Figma 685/973.6).
-   The export is pre-cropped to the hero, so it shows at its own ratio. */
+/* Desktop product page — a calm base plane behind the phone. */
 .project-card__itab-desktop {
   position: absolute;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 70.36%;
+  width: 75%;
   height: auto;
   aspect-ratio: 1370 / 1144;
   object-fit: cover;
   object-position: top center;
-  border-radius: 1.4cqw;
+  border-radius: 1.6cqw;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: -1px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.05),
+    0 20px 48px rgba(32, 74, 45, 0.12);
 }
 
-/* Mobile product card — right, 25.84% of the group (Figma 251.6/973.6),
-   top-aligned with the desktop, ~3.8% gap between them. */
+/* Mobile product card — enlarged, lifted and overlapping the desktop so the
+   cover has a single foreground subject instead of two equal screenshots. */
 .project-card__itab-mobile {
   position: absolute;
-  right: 0;
-  top: 0;
-  width: 25.84%;
+  z-index: 2;
+  right: 1%;
+  top: -1.2cqw;
+  width: 29.5%;
   height: auto;
   aspect-ratio: 504 / 1088;
   object-fit: cover;
   object-position: top center;
-  border-radius: 2.2cqw;
+  border-radius: 2.8cqw;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: -1px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 28px 64px rgba(25, 61, 36, 0.2);
 }
 
 /* ===== Syno card (coming soon) ===== */
@@ -2380,32 +2434,40 @@ body.case-page--fill .case__outcome-body p {
     object-fit: cover;
   }
 
-  /* iTAB — show only the mobile screenshot (hide the desktop one) */
-  .project-card__itab-group {
-    position: static;
+  /* iTAB keeps the desktop + mobile relationship on smaller screens too.
+     The desktop becomes a cropped backdrop and the phone stays readable in
+     front, with the whole composition bleeding to the card edges. */
+  .project-card--itab .project-card__itab-group {
+    position: relative;
     top: auto;
     left: auto;
     transform: none;
-    width: 100%;
+    width: calc(100% + (2 * var(--card-x)));
+    height: clamp(300px, 58vw, 520px);
+    margin-inline: calc(-1 * var(--card-x));
+    margin-bottom: calc(-1 * var(--card-y));
+    display: block;
+    max-height: none;
+  }
+
+  .project-card--itab .project-card__itab-desktop {
+    display: block;
+    position: absolute;
+    left: -4%;
+    top: 16%;
+    width: 78%;
     height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-height: 620px;
+    border-radius: clamp(12px, 2.6cqw, 20px);
   }
 
-  .project-card__itab-desktop {
-    display: none;
-  }
-
-  .project-card__itab-mobile {
-    position: static;
-    right: auto;
-    top: auto;
-    width: 129px;
+  .project-card--itab .project-card__itab-mobile {
+    position: absolute;
+    right: 7%;
+    top: 4%;
+    width: clamp(136px, 36%, 220px);
     height: auto;
     aspect-ratio: 504 / 1088;
-    border-radius: 14px;
+    border-radius: clamp(20px, 4.8cqw, 32px);
   }
 
   /* Syno screenshot flows in the natural mobile card column */
@@ -3485,4 +3547,62 @@ body.case-page--fill .case__outcome-body p {
 @media (max-width: 640px) {
   .shot { width: clamp(150px, 42vw, 220px); }
   .shot--wide { width: min(86vw, 440px); }
+
+  /* ── Fill case: each .shots row becomes the same swipe slider as the
+     .case__slider carousels on the other case pages — full-width grey
+     plates, one screen per view, scroll-snap + dots (the dots come from
+     the page's inline script; a figure with a single .shot just gets the
+     big centred plate and no dots). The .shot itself turns into the
+     plate, so the titanium bezel moves onto the screen: padding + the
+     same gradient on the img/video reproduce the identical phone, and
+     the content clip at the padding edge keeps the 34px screen radius. */
+  .case-page--fill .shots {
+    flex-wrap: nowrap;
+    justify-content: flex-start; /* centred + overflow would trap the first slide */
+    gap: 12px;
+    background: transparent; /* the plates carry the grey now */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* full-bleed, same as .case__slider */
+    margin: 0 calc(-1 * var(--page-x));
+    padding: 0 var(--page-x);
+  }
+  .case-page--fill .shots::-webkit-scrollbar { display: none; }
+  .case-page--fill .shot {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    height: 56vh; /* the uniform plate height every case slider uses */
+    padding: 12px;
+    background: #E2E4E7;
+    border-radius: 0;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: center;
+    overflow: hidden;
+  }
+  /* <picture> must not form a box of its own, or the screen's %-height
+     inside the fixed-height plate has nothing to resolve against */
+  .case-page--fill .shot picture { display: contents; }
+  /* A slider must open on its animation when it has one: a .shot marked
+     --lead jumps to the front of the swipe order on phones, while the
+     desktop row keeps its narrative order (e.g. the signature video sits
+     centred between its two statics there). */
+  .case-page--fill .shots .shot--lead { order: -1; }
+  .case-page--fill .shot img,
+  .case-page--fill .shot video {
+    /* content-box: the 760:1652 ratio sizes the screen itself, the 5px
+       bezel wraps around it — same phone as the desktop .shot */
+    box-sizing: content-box;
+    height: calc(100% - 10px);
+    width: auto;
+    aspect-ratio: 760 / 1652;
+    padding: 5px;
+    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+    border-radius: 39px;
+  }
 }
