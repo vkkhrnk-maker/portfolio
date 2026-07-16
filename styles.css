@@ -657,7 +657,7 @@ img {
   top: 4.67%;
   bottom: 0;
   left: 50%;
-  width: 92.5%;
+  width: 84%;
   transform: translateX(-50%);
   container-type: inline-size;
 }
@@ -666,27 +666,25 @@ img {
   position: absolute;
   z-index: 1;
   left: 0;
-  top: 0;
-  width: 75%;
-  height: auto;
+  top: 3%;
+  width: auto;
+  height: 94%;
   aspect-ratio: 1370 / 1144;
   object-fit: cover;
   object-position: top center;
-  border-radius: 1.6cqw;
-  box-shadow:
-    0 24px 60px rgba(18, 27, 20, 0.20),
-    0 4px 12px rgba(18, 27, 20, 0.16),
-    0 0 0 1px rgba(0, 0, 0, 0.10);
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
 }
 
 .case__itab-cover-mobile {
   position: absolute;
   z-index: 2;
-  box-sizing: content-box;
-  right: 1%;
-  top: 0;
+  box-sizing: border-box;
+  right: 0;
+  top: 3%;
   width: auto;
-  height: calc(100% - 34px);
+  height: 94%;
   aspect-ratio: 504 / 1088;
   object-fit: cover;
   object-position: top center;
@@ -696,10 +694,7 @@ img {
     linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
     linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
   border-radius: 39px;
-  box-shadow:
-    0 28px 70px rgba(18, 27, 20, 0.22),
-    0 6px 16px rgba(18, 27, 20, 0.18),
-    0 0 0 1px rgba(0, 0, 0, 0.10);
+  box-shadow: none;
 }
 
 /* Legacy single-screen mobile fallback remains in the markup but is hidden;
@@ -716,23 +711,24 @@ img {
   .case__itab-cover {
     top: 0;
     bottom: 0;
-    left: 0;
-    width: 100%;
+    left: 8%;
+    width: 84%;
     height: 100%;
     transform: none;
   }
   .case__itab-cover-desktop {
-    left: -4%;
+    left: 0;
     top: 16%;
     width: 78%;
-    border-radius: clamp(12px, 2.6cqw, 20px);
+    height: auto;
+    border-radius: 0;
   }
   .case__itab-cover-mobile {
     left: auto;
-    right: 7%;
-    top: 12px;
+    right: 0;
+    top: 3%;
     width: auto;
-    height: calc(100% - 34px);
+    height: 94%;
     border-radius: 39px;
   }
 }
@@ -3438,6 +3434,46 @@ body.case-page--fill .case__outcome-body p {
 .case__hero-plate img,
 .case__figure-desktop img {
   cursor: zoom-in;
+}
+/* Fill-page screens: scoped to .has-lightbox (set by case.js) so the
+   cursor never promises a zoom on draft pages that don't load it. */
+.has-lightbox .shot img,
+.has-lightbox .shot video {
+  cursor: zoom-in;
+}
+
+/* Zoom hint — a magnifier-plus chip that rides with the cursor over
+   anything zoomable (mouse devices; created by case.js). The position
+   comes from an inline translate; only opacity/scale animate, so the
+   chip tracks the cursor without lag. */
+.zoom-hint {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 180; /* above content, below the lightbox (200) */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--button-primary);
+  color: var(--white);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.5;
+  transition: opacity 0.18s ease, scale 0.18s ease;
+  will-change: transform;
+}
+.zoom-hint.is-visible {
+  opacity: 1;
+  scale: 1;
+}
+.zoom-hint svg {
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .lightbox {

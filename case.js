@@ -195,14 +195,19 @@
 
   /* ---- Tap-to-zoom lightbox -------------------------------------------- */
   (() => {
-    /* `.shot img` covers the fill pages' screens (their videos stay
-       plain — a lightbox can't show a running loop). */
+    /* `.shot img` and `.shot video` cover the fill pages' screens — a
+       zoomed video keeps looping in the lightbox, picked up from the
+       exact frame the inline copy was on. */
     const zoomables = document.querySelectorAll(
-      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .shot img'
+      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .shot img, .shot video'
     );
     if (!zoomables.length) return;
+    /* Lets the stylesheet scope zoom affordances (cursor) to pages where
+       the lightbox is actually wired up. */
+    document.documentElement.classList.add('has-lightbox');
 
-    let box, imgEl, closeBtn, lastFocused;
+    let box, imgEl, videoEl, closeBtn, lastFocused;
+    let sourceVideo = null; // the inline video the open lightbox mirrors
 
     const build = () => {
       box = document.createElement('div');
@@ -215,6 +220,13 @@
       imgEl.className = 'lightbox__img';
       imgEl.alt = '';
 
+      videoEl = document.createElement('video');
+      videoEl.className = 'lightbox__img lightbox__video';
+      videoEl.muted = true;
+      videoEl.loop = true;
+      videoEl.setAttribute('playsinline', '');
+      videoEl.hidden = true;
+
       closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'lightbox__close';
@@ -222,17 +234,38 @@
       closeBtn.innerHTML = '&times;';
 
       box.appendChild(imgEl);
+      box.appendChild(videoEl);
       box.appendChild(closeBtn);
       document.body.appendChild(box);
 
-      box.addEventListener('click', (e) => { if (e.target !== imgEl) hide(); });
+      box.addEventListener('click', (e) => {
+        if (e.target !== imgEl && e.target !== videoEl) hide();
+      });
     };
 
-    const show = (src, alt) => {
+    const show = (el) => {
       if (!box) build();
       lastFocused = document.activeElement;
-      imgEl.src = src;
-      imgEl.alt = alt || '';
+      const isVideo = el.tagName === 'VIDEO';
+      imgEl.hidden = isVideo;
+      videoEl.hidden = !isVideo;
+      if (isVideo) {
+        /* Hand the loop over: the big copy starts on the frame the small
+           one was showing, and the small one pauses so only one copy
+           decodes at a time. */
+        sourceVideo = el;
+        if (el.poster) videoEl.poster = el.poster;
+        videoEl.src = el.currentSrc || el.src;
+        try { videoEl.currentTime = el.currentTime; } catch (err) {}
+        el.pause();
+        const p = videoEl.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+        videoEl.setAttribute('aria-label',
+          el.getAttribute('aria-label') || 'Enlarged screen recording');
+      } else {
+        imgEl.src = el.currentSrc || el.src;
+        imgEl.alt = el.alt || '';
+      }
       document.body.style.overflow = 'hidden';
       void box.offsetWidth; // reflow so the open transition runs from the hidden state
       box.classList.add('is-open');
@@ -245,21 +278,63 @@
       if (!box || !box.classList.contains('is-open')) return;
       box.classList.remove('is-open');
       document.body.style.overflow = '';
+      if (sourceVideo) {
+        /* …and hand it back: the inline copy resumes where the big one
+           left off, the lightbox releases its decoder. */
+        try { sourceVideo.currentTime = videoEl.currentTime; } catch (err) {}
+        videoEl.pause();
+        videoEl.removeAttribute('src');
+        videoEl.load();
+        const p = sourceVideo.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+        sourceVideo = null;
+      }
       if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
     };
 
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
 
-    zoomables.forEach((img) => {
-      const open = () => show(img.currentSrc || img.src, img.alt);
-      img.addEventListener('click', open);
-      // Keyboard access: images aren't natively focusable/activatable.
-      img.setAttribute('tabindex', '0');
-      img.setAttribute('role', 'button');
-      img.setAttribute('aria-label', 'Enlarge: ' + (img.alt || 'screen'));
-      img.addEventListener('keydown', (e) => {
+    zoomables.forEach((el) => {
+      const open = () => show(el);
+      el.addEventListener('click', open);
+      // Keyboard access: images/videos aren't natively focusable/activatable.
+      el.setAttribute('tabindex', '0');
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label',
+        'Enlarge: ' + (el.alt || el.getAttribute('aria-label') || 'screen'));
+      el.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       });
     });
+
+    /* ---- Zoom hint: a magnifier-plus chip that rides with the cursor
+       over anything zoomable. cursor: zoom-in alone was easy to miss —
+       the chip makes the affordance explicit. Mouse devices only; it
+       drops the moment the lightbox opens. */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      const hint = document.createElement('div');
+      hint.className = 'zoom-hint';
+      hint.setAttribute('aria-hidden', 'true');
+      hint.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
+        ' stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
+        '<circle cx="11" cy="11" r="7"/>' +
+        '<line x1="20" y1="20" x2="16.2" y2="16.2"/>' +
+        '<line x1="8.2" y1="11" x2="13.8" y2="11"/>' +
+        '<line x1="11" y1="8.2" x2="11" y2="13.8"/>' +
+        '</svg>';
+      document.body.appendChild(hint);
+
+      const move = (e) => {
+        hint.style.transform =
+          'translate(' + (e.clientX + 14) + 'px, ' + (e.clientY + 14) + 'px)';
+      };
+      zoomables.forEach((el) => {
+        el.addEventListener('mouseenter', (e) => { move(e); hint.classList.add('is-visible'); });
+        el.addEventListener('mousemove', move);
+        el.addEventListener('mouseleave', () => hint.classList.remove('is-visible'));
+        el.addEventListener('click', () => hint.classList.remove('is-visible'));
+      });
+    }
   })();
 })();
