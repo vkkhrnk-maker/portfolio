@@ -3194,7 +3194,7 @@ body.case-page--fill .case__outcome-body p {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-color: var(--button-primary);
+  background-color: var(--brand-pink-500);
   opacity: 0;
   transform: scaleY(0.92);
   transform-origin: center;
@@ -3486,17 +3486,21 @@ body.case-page--fill .case__outcome-body p {
   justify-content: center;
   gap: 16px;
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-shadow:
     inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
     inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* The arrow rides forward along its own direction on hover — the
-   directional-motion language of Back/pager/arrow chips, sized up for
-   the big pill. (Replaced the opacity dim.) */
-.contact__btn:hover .contact__arrow {
-  transform: rotate(135deg) translateX(8px);
+/* Same lift + shadow as every other button on the site (the arrow that
+   used to ride here is gone) — insets restated so the lift shadow
+   stacks on the magenta glow instead of wiping it. */
+.contact__btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
+    inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5),
+    0 10px 24px -8px rgba(0, 0, 0, 0.18);
 }
 
 .contact__text {
@@ -3506,14 +3510,6 @@ body.case-page--fill .case__outcome-body p {
   line-height: 1;
   letter-spacing: var(--ls-heading-lg);
   white-space: nowrap;
-}
-
-.contact__arrow {
-  display: block;
-  width: 70px;
-  height: 51px;
-  transform: rotate(135deg);
-  transition: transform 0.25s ease;
 }
 
 /* ===== Footer ===== */
@@ -3781,11 +3777,6 @@ body.case-page--fill .case__outcome-body p {
     line-height: var(--lh-h5);
     white-space: nowrap;
     color: var(--white);
-  }
-
-  .contact__arrow {
-    width: 28px;
-    height: 20px;
   }
 
   .menu-toggle {
