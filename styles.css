@@ -1754,12 +1754,17 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-secondary);
 }
 
-/* Evidence lines inside the outcome — kept as plain text (a dark
-   lead-in per line, no card grid): the outcome often sits right after a
-   gap-card grid, and a second three-up in a row read as too many
-   columns. */
+/* Evidence lines inside the outcome — kept as plain text (a lead-in per
+   line, no card grid): the outcome often sits right after a gap-card
+   grid, and a second three-up in a row read as too many columns. The
+   lead-in is set in the display serif (PP Editorial ships one weight —
+   no faux bold), sized up a notch so its smaller x-height reads
+   optically level with the Helvetica body around it. */
 .case__outcome-body p strong {
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.12em;
+  letter-spacing: -0.3px;
   color: #0e0f10;
 }
 
@@ -3589,54 +3594,9 @@ body.case-page--fill .case__outcome-body p {
 .has-lightbox .shot video {
   cursor: zoom-in;
 }
-/* Where the zoom-hint chip exists (mouse devices + wired lightbox), the
-   native zoom-in cursor — itself a magnifier-plus — doubled the icon
-   right next to the chip. A plain pointer says "clickable"; the chip
-   says what the click does. zoom-in stays as the fallback everywhere
-   else (touch hybrids, JS off). */
-@media (hover: hover) and (pointer: fine) {
-  .has-lightbox .case__shot,
-  .has-lightbox .case__hero-plate img,
-  .has-lightbox .case__figure-desktop img,
-  .has-lightbox .shot img,
-  .has-lightbox .shot video {
-    cursor: pointer;
-  }
-}
-
-/* Zoom hint — a magnifier-plus chip that rides with the cursor over
-   anything zoomable (mouse devices; created by case.js). The position
-   comes from an inline translate; only opacity/scale animate, so the
-   chip tracks the cursor without lag. */
-.zoom-hint {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 180; /* above content, below the lightbox (200) */
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  background: var(--button-primary);
-  color: var(--white);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
-  pointer-events: none;
-  opacity: 0;
-  scale: 0.5;
-  transition: opacity 0.18s ease, scale 0.18s ease;
-  will-change: transform;
-}
-.zoom-hint.is-visible {
-  opacity: 1;
-  scale: 1;
-}
-.zoom-hint svg {
-  width: 20px;
-  height: 20px;
-  display: block;
-}
+/* One zoom affordance only: the native zoom-in cursor (a magnifier-plus)
+   on everything the lightbox opens. The magenta cursor-chasing chip was
+   removed — cursor + chip read as two competing signals. */
 
 .lightbox {
   position: fixed;

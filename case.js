@@ -307,34 +307,5 @@
       });
     });
 
-    /* ---- Zoom hint: a magnifier-plus chip that rides with the cursor
-       over anything zoomable. cursor: zoom-in alone was easy to miss —
-       the chip makes the affordance explicit. Mouse devices only; it
-       drops the moment the lightbox opens. */
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      const hint = document.createElement('div');
-      hint.className = 'zoom-hint';
-      hint.setAttribute('aria-hidden', 'true');
-      hint.innerHTML =
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
-        ' stroke-width="2" stroke-linecap="round" aria-hidden="true">' +
-        '<circle cx="11" cy="11" r="7"/>' +
-        '<line x1="20" y1="20" x2="16.2" y2="16.2"/>' +
-        '<line x1="8.2" y1="11" x2="13.8" y2="11"/>' +
-        '<line x1="11" y1="8.2" x2="11" y2="13.8"/>' +
-        '</svg>';
-      document.body.appendChild(hint);
-
-      const move = (e) => {
-        hint.style.transform =
-          'translate(' + (e.clientX + 14) + 'px, ' + (e.clientY + 14) + 'px)';
-      };
-      zoomables.forEach((el) => {
-        el.addEventListener('mouseenter', (e) => { move(e); hint.classList.add('is-visible'); });
-        el.addEventListener('mousemove', move);
-        el.addEventListener('mouseleave', () => hint.classList.remove('is-visible'));
-        el.addEventListener('click', () => hint.classList.remove('is-visible'));
-      });
-    }
   })();
 })();
