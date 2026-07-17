@@ -506,6 +506,27 @@ img {
   transform: translateX(-3px);
 }
 
+/* Fixed Book-a-call CTA on case pages — desktop only (paired with the
+   sticky sidebar's breakpoint). The top-right corner sits empty for the
+   whole read otherwise; a reader who scrolls through a full case is a
+   hotter lead than one still on the home hero, so this stays visible
+   the entire time rather than scrolling away with a hero like home's
+   CTA does. Hidden below 1200px — the sticky mobile-topbar's Menu slot
+   already occupies that corner there. */
+.case__cta {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .case__cta {
+    display: inline-flex;
+    position: fixed;
+    top: 24px;
+    right: var(--page-x);
+    z-index: 90;
+  }
+}
+
 .case__back-icon {
   width: 56px;
   height: 56px;
