@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!--
+  ЧЕРНОВИК. Не опубликован, из index.html не слинкован, robots: noindex.
+
+  Что нужно, чтобы страница стала боевой:
+  1. Экспортировать кадры из Figma (файл BJJWcWhQGQW14FJYAv6MKR) и положить
+     в assets/ под именами case-syno-*.webp — имена уже проставлены в
+     подписях плейсхолдеров.
+  2. Заменить каждый <div class="shot-todo"> на <img> ровно так, как это
+     сделано в itab.html (десктопная композиция + слайдер по CARDS.md).
+  3. Заполнить <span class="todo"> — состав команды и год.
+  4. Убрать блок <style data-draft> и этот комментарий.
+  5. Дописать главу 2 публичной выдачей, когда она будет готова.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Syno — Case Study · Victoria Kukharenko</title>
+  <meta name="description" content="Syno — designing the artist side of an art platform: a studio for building a portfolio, a public profile, and the flow for applying to open calls. A case study by Victoria Kukharenko.">
+  <meta name="theme-color" content="#59ad3b">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Syno — Case Study · Victoria Kukharenko">
+  <meta property="og:description" content="The artist side of an art platform — from an empty profile to a submitted application.">
+  <meta property="og:url" content="https://vkkhrnk-maker.github.io/portfolio/syno.html">
+  <meta property="og:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/syno-desktop.png">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syno — Case Study · Victoria Kukharenko">
+  <meta name="twitter:description" content="The artist side of an art platform — from an empty profile to a submitted application.">
+  <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/syno-desktop.png">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="apple-touch-icon" href="assets/profile.jpg">
+  <link rel="stylesheet" href="styles.css?v=259">
+  <script src="typographer.js?v=3" defer></script>
+  <script>document.documentElement.classList.add('has-js');</script>
+
+  <!-- DRAFT-ONLY: серые плашки вместо ещё не экспортированных кадров.
+       Удалить целиком вместе с разметкой .shot-todo. -->
+  <style data-draft>
+    .shot-todo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      box-sizing: border-box;
+      background: rgb(227, 229, 230);
+      outline: 1px dashed rgba(0, 0, 0, .35);
+      outline-offset: -8px;
+      color: rgba(0, 0, 0, .55);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .case__figure-desktop .shot-todo { flex: 1 1 0; height: 340px; }
+    .case__figure-desktop--tall .shot-todo { height: 460px; }
+    .case__slider .shot-todo { width: 100%; height: 100%; }
+    .case__hero-image .shot-todo { width: 100%; height: 100%; min-height: 320px; }
+    .todo {
+      background: #ffe9a8;
+      box-shadow: 0 0 0 2px #ffe9a8;
+    }
+  </style>
+</head>
+<body class="case-page--syno">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd><span class="todo">состав команды — заполнить</span></dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. Responsible for the artist side end to end — flows, screens for desktop and mobile, the UI kit it is built from, and the specs engineering works to.</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Year</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="#">CV</a>
+      <a class="btn btn--light" href="#">LinkedIn</a>
+      <a class="btn btn--light" href="#">Telegram</a>
+    </div>
+  </aside>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <a class="mobile-topbar__link" href="#" data-menu-open>Menu</a>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Back</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h2 class="case__title">Syno — the artist side of an art platform, from an empty profile to a submitted application</h2>
+        <p class="case__intro">Syno connects artists, spaces and open calls. I designed the artist side end to end: the studio where an artist builds a portfolio, the public profile it produces, and the flow for applying to an open call — together with the UI kit the platform is assembled from and the specs engineering builds to.</p>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Team</dt>
+            <dd><span class="todo">состав команды — заполнить</span></dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>My Role</dt>
+            <dd>Product designer. Responsible for the artist side end to end — flows, screens for desktop and mobile, the UI kit it is built from, and the specs engineering works to.</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Year</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image">
+          <div class="shot-todo">Обложка: кабинет художника на 1280 + мобильный экран рядом<br>assets/case-syno-hero.webp</div>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h3 class="case__block-title">Problem</h3>
+          <p class="case__block-body">An artist's work refuses to be uniform: any proportion, photo and video, single pieces and series. The platform needs the opposite — comparable profiles an organiser can read side by side, and a public page that stays predictable whatever gets uploaded into it. Left to a plain form, one side always loses: either the work is squeezed into a database, or the platform ends up with entries nobody can compare.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Task</h3>
+          <p class="case__block-body">Design the artist side so that building a profile feels like arranging works rather than filling in a database — and so that the state of everything is legible: what is uploading, what is missing before publishing, where an application stands. Then hand engineering a system they can build the rest of the platform from.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">Users</h3>
+          <p class="case__block-body">Two readers share one profile. The artist fills it in and wants it to look like their portfolio, not a form. The organiser reads dozens of them during an open call and needs the same facts in the same place every time. Every decision here answers to both.</p>
+        </div>
+        <div class="case__block">
+          <h3 class="case__block-title">What changed</h3>
+          <p class="case__block-body">The artist side is built around one path — collect, publish, apply — and each step shows its own state instead of failing silently. It ships in two widths from a single kit, with specs attached to the screens they describe.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">Four constraints that shaped the work</h3>
+        <p class="case__section-body">Before any screens, four things were fixed and everything downstream had to live with them. They are the reason the studio looks the way it does — not style preferences, but properties of the content and of the people on both sides of the profile.</p>
+        <div class="case__gap-grid case__gap-grid--four">
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Work of any shape</h4>
+            <p class="case__gap-card__desc">Portrait, landscape, square and video, mixed inside one portfolio</p>
+          </div>
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Two readers, one profile</h4>
+            <p class="case__gap-card__desc">The artist fills it in; the organiser compares it against dozens of others</p>
+          </div>
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Uploads fail</h4>
+            <p class="case__gap-card__desc">Files are heavy — every tile needs its own error, retry and limits</p>
+          </div>
+          <div class="case__gap-card">
+            <h4 class="case__gap-card__title">Two widths, one kit</h4>
+            <p class="case__gap-card__desc">1280 and 375 assembled from the same components, not redrawn twice</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">1. Collect — a portfolio, not a file manager</h3>
+        <p class="case__section-body">Uploading is the first thing an artist does and the first place the product can feel like paperwork. So the upload area shows work as work: every file lands as a preview tile in the gallery it will become, and progress, errors and retries live on the tile itself rather than in a separate list of file names.</p>
+        <p class="case__section-body">Two decisions did the most here. <strong>Replace was removed from the tile menu</strong> — deleting and adding again produces the same result, without a branch where the replacement itself fails and leaves the artist with neither file. And on touch, <strong>the tile badge became ⋯ instead of ×</strong>: one element could not carry both "remove this" and "make this the cover", so the cross now appears only while a file is uploading or has failed, where it means one thing.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="The upload area — dropzone, the gallery of preview tiles, and a tile in the error state with retry">
+            <div class="shot-todo">Дропзона, пустое состояние<br>assets/case-syno-upload-s1.webp</div>
+            <div class="shot-todo">Сетка плиток с работами<br>assets/case-syno-upload-s2.webp</div>
+            <div class="shot-todo">Плитка: загрузка / ошибка + retry<br>assets/case-syno-upload-s3.webp</div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the upload area — dropzone, the gallery of tiles, upload and error states, and the cover action on mobile">
+            <div class="case__slide"><div class="shot-todo">Дропзона, пустое состояние<br>case-syno-upload-s1</div></div>
+            <div class="case__slide"><div class="shot-todo">Сетка плиток<br>case-syno-upload-s2</div></div>
+            <div class="case__slide"><div class="shot-todo">Загрузка / ошибка + retry<br>case-syno-upload-s3</div></div>
+            <div class="case__slide"><div class="shot-todo">Мобильная плитка с бейджем ⋯<br>case-syno-upload-s4</div></div>
+            <div class="case__slide"><div class="shot-todo">Шит действий: Make cover / Remove<br>case-syno-upload-s5</div></div>
+          </div>
+          <figcaption>Every state of a work lives on the tile — uploading, failed, ready, cover. On touch the badge opens the actions instead of destroying the file.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">2. Publish — a checklist, not a form error</h3>
+        <p class="case__section-body">A profile becomes public only when it carries what an organiser needs to judge it. That could have been enforced the usual way — let the artist press Publish, then paint the gaps red. Instead the requirements are visible before the attempt: the profile shows what is still missing while it is being filled in, so publishing is the end of a checklist rather than a rejected form.</p>
+        <p class="case__section-body">The same logic shapes the profile itself. Statement and main info are laid out as a page about an artist rather than a questionnaire, which is exactly how it has to read on the public side — where the work is what the visitor came for and the fields are only the frame around it.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="Profile editing with the publishing checklist, and the public profile it produces">
+            <div class="shot-todo">Редактирование профиля + чеклист публикации<br>assets/case-syno-publish-s1.webp</div>
+            <div class="shot-todo">Statement / main info<br>assets/case-syno-publish-s2.webp</div>
+            <div class="shot-todo">Публичный профиль художника<br>assets/case-syno-publish-s3.webp</div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through profile editing, the publishing checklist, the public profile and the work lightbox">
+            <div class="case__slide"><div class="shot-todo">Чеклист публикации<br>case-syno-publish-s1</div></div>
+            <div class="case__slide"><div class="shot-todo">Statement / main info<br>case-syno-publish-s2</div></div>
+            <div class="case__slide"><div class="shot-todo">Публичный профиль<br>case-syno-publish-s3</div></div>
+            <div class="case__slide"><div class="shot-todo">Лайтбокс работы, в т.ч. видео<br>case-syno-publish-s4</div></div>
+          </div>
+          <figcaption>What is missing is shown while the profile is being built, not after Publish is pressed.</figcaption>
+        </figure>
+        <!-- ГЛАВА ДОПИСЫВАЕТСЯ: сюда встанет публичная выдача — листинг
+             артистов и карта, — когда будет готова. Абзац: «вот как тебя
+             находят» + фигура с выдачей на 1280/375. -->
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">3. Apply — the portfolio pays off</h3>
+        <p class="case__section-body">Applying to an open call does not ask the artist to upload anything again: works are picked from the portfolio they already built, which is what the first two steps were for. After submitting, the application stops being a black box — the list shows where each one stands, so nobody has to email an organiser to find out whether it arrived.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="The apply flow — picking works from the portfolio, the application list with statuses, and application details">
+            <div class="shot-todo">Выбор работ из своего портфолио<br>assets/case-syno-apply-s1.webp</div>
+            <div class="shot-todo">Список заявок со статусами<br>assets/case-syno-apply-s2.webp</div>
+            <div class="shot-todo">Application details<br>assets/case-syno-apply-s3.webp</div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the apply flow — picking works, the application list with statuses, and application details">
+            <div class="case__slide"><div class="shot-todo">Выбор работ<br>case-syno-apply-s1</div></div>
+            <div class="case__slide"><div class="shot-todo">Список заявок<br>case-syno-apply-s2</div></div>
+            <div class="case__slide"><div class="shot-todo">Application details<br>case-syno-apply-s3</div></div>
+          </div>
+          <figcaption>Works are selected, not re-uploaded — and every application shows its own state.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h3 class="case__section-title">The system underneath</h3>
+        <p class="case__section-body">All of it is assembled from one library — around 40 pages of components shared with the product file. Variants are kept in check with boolean properties instead of multiplying combinations, spacing runs on tokens, and icon colour goes through semantic tokens so dark mode is a switch rather than a redraw.</p>
+        <p class="case__section-body">Handover has its own format. Specs are written on a <strong>Spec Sticker</strong> component and placed next to the screen they describe, so a developer reads the requirement in the same place they read the layout — no parallel document to keep in sync. A pass across the whole artist side added the states that are easy to leave out and expensive to add later: upload limits and file requirements, skeletons and retry, breakpoints, toasts, the lightbox, account deletion and email change.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop" aria-label="The UI kit and the spec stickers placed next to the screens they describe">
+            <div class="shot-todo">Страницы UI-кита: компоненты и пропы<br>assets/case-syno-system-s1.webp</div>
+            <div class="shot-todo">Spec Sticker рядом с экраном<br>assets/case-syno-system-s2.webp</div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the UI kit and the spec stickers">
+            <div class="case__slide"><div class="shot-todo">UI-кит<br>case-syno-system-s1</div></div>
+            <div class="case__slide"><div class="shot-todo">Spec Sticker у экрана<br>case-syno-system-s2</div></div>
+          </div>
+          <figcaption>The requirement sits next to the screen it belongs to, in the file developers already have open.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__outcome">
+        <h3 class="case__outcome-title">Result</h3>
+        <div class="case__outcome-body">
+          <p>The platform is in development, so there are no launch metrics to quote yet — what there is, is what shipped out of design and what it made possible.</p>
+          <p><strong>The artist side is in development:</strong> auth, profile, portfolio, the apply flow and applications went to engineering as designed screens plus specs on the same canvas.</p>
+          <p><strong>The kit is what the rest is built from:</strong> new sections are assembled from existing components in two widths instead of being drawn from scratch.</p>
+          <p><strong>Fewer states to build:</strong> removing Replace took an entire failure branch out of the product before anyone had to implement it.</p>
+          <p><strong>Next:</strong> public discovery — the artist listing and the art map — is in design now, and the organiser and jury side follows.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="hooh.html">
+          <span>Next case</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
+        <span class="contact__text">Book a call</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Works</a>
+      <a class="menu-drawer__item" href="index.html#about">About</a>
+      <a class="menu-drawer__item" href="index.html#experience">Experience</a>
+    </nav>
+    <div class="menu-drawer__contacts">
+      <a class="menu-drawer__contact" href="#">CV</a>
+      <a class="menu-drawer__contact" href="#">LinkedIn</a>
+      <a class="menu-drawer__contact" href="#">Telegram</a>
+    </div>
+  </div>
+
+  <script>
+    // Menu drawer
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('a');
+      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
+      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
+      openBtns.forEach(b => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach(i => i.addEventListener('click', close));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+    })();
+
+    // Auto-update year + scroll progress
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+
+      const bar = document.querySelector('.scroll-progress');
+      if (bar) {
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+          bar.style.transform = `scaleX(${pct/100})`;
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+      }
+    })();
+
+  </script>
+  <script src="case.js?v=16" defer></script>
+</body>
+</html>

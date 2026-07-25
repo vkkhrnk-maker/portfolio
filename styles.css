@@ -3471,16 +3471,14 @@ body.case-page--fill .case__outcome-body p {
     border-bottom-width: 1.5px;
   }
 
-  /* The rules run the full width of the screen while the text stays on the
-     --page-x rail — same move as the card plates. */
   .experience-editorial__item {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 16px;
-    margin-inline: calc(-1 * var(--page-x));
     /* Even top and bottom. It was 20/24, and because the 32px role carries
        more leading above its caps than the 17px date carries below its
-       figures, the row read even more top-tight than those numbers suggest. */
-    padding: 24px var(--page-x);
+       figures, the row read even more top-tight than those numbers suggest.
+       (The inline bleed comes from the ≤1199 rule further down.) */
+    padding-block: 24px;
     border-top-width: 1.5px;
   }
 
@@ -3535,10 +3533,14 @@ body.case-page--fill .case__outcome-body p {
     margin-bottom: 0;
   }
 
+  /* The date rides on the right of the role instead of taking a third line
+     of its own — the row is two lines now, not three. Aligned to the top so
+     it reads against the role, with a nudge that sets its cap on the role's. */
   .experience-editorial__date {
-    grid-column: 1;
-    grid-row: 2;
-    padding: 0;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    padding: 5px 0 0;
   }
 
   /* Phones read this list, they don't study it: logo, company + scope, role
@@ -3658,7 +3660,7 @@ body.case-page--fill .case__outcome-body p {
   background-color: rgba(240, 240, 240, 0.72);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   backdrop-filter: blur(24px) saturate(180%);
-  padding: 12px var(--page-x) 32px;
+  padding: 12px var(--page-x);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -3692,12 +3694,17 @@ body.case-page--fill .case__outcome-body p {
   padding-block: 8px;
 }
 
+/* The burger is a 40px chip; opening the menu shouldn't dissolve it into a
+   bare glyph. Same chip, same place on the rail — only the icon changes. */
 .menu-drawer__close {
-  background: none;
-  border: none;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--button-secondary);
   color: var(--text-primary);
-  padding: 8px;
-  margin-right: -8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -3707,14 +3714,14 @@ body.case-page--fill .case__outcome-body p {
 }
 
 .menu-drawer__close:active {
-  transform: scale(0.9);
-  opacity: 0.6;
+  transform: scale(0.92);
+  opacity: 0.75;
 }
 
 .menu-drawer__close svg {
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
 /* The list sits in the optical middle of the screen, centred — the one
@@ -3739,23 +3746,56 @@ body.case-page--fill .case__outcome-body p {
   text-decoration: none;
   white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
-  transition: color 0.2s ease, transform 0.18s cubic-bezier(0.2, 0, 0, 1);
+  transition: color 0.2s ease, opacity 0.3s ease,
+    transform 0.42s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.menu-drawer__item:active {
+/* The contents arrive just behind the glass, one after another — the same
+   entrance the Get in touch panel uses, so the two read as one material. */
+.menu-drawer__item,
+.menu-drawer__contacts {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.menu-drawer.is-open .menu-drawer__item,
+.menu-drawer.is-open .menu-drawer__contacts {
+  opacity: 1;
+  transform: none;
+}
+
+.menu-drawer.is-open .menu-drawer__item:nth-child(1) { transition-delay: 0.08s; }
+.menu-drawer.is-open .menu-drawer__item:nth-child(2) { transition-delay: 0.13s; }
+.menu-drawer.is-open .menu-drawer__item:nth-child(3) { transition-delay: 0.18s; }
+.menu-drawer.is-open .menu-drawer__contacts { transition-delay: 0.24s; }
+
+.menu-drawer.is-open .menu-drawer__item:active {
   color: var(--text-accent);
   transform: scale(0.97);
+  transition-delay: 0s;
 }
 
 /* Contacts close the panel off along the bottom edge, the way the sidebar
    buttons do on desktop. */
+/* Three columns rather than space-between: with links of different widths,
+   space-between puts the gaps at equal size, not the middle link in the
+   middle. The 1fr / auto / 1fr grid centres it on the screen. */
 .menu-drawer__contacts {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 16px;
   width: 100%;
+  /* Pulls back most of the links' own tap padding so the glyphs — not their
+     hit areas — land 12px off the bottom edge, the same line the cover
+     headline keeps. */
+  margin-bottom: -5px;
+  transition: opacity 0.3s ease, transform 0.42s cubic-bezier(0.2, 0, 0, 1);
 }
+
+.menu-drawer__contact:first-child { justify-self: start; }
+.menu-drawer__contact:nth-child(2) { justify-self: center; }
+.menu-drawer__contact:last-child { justify-self: end; }
 
 .menu-drawer__contact {
   font-family: var(--font-body);
@@ -3784,15 +3824,17 @@ body.case-page--fill .case__outcome-body p {
 
 @media (prefers-reduced-motion: reduce) {
   .menu-drawer__item,
+  .menu-drawer__contacts,
   .menu-drawer__close {
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s linear;
     transform: none;
+    transition-delay: 0s;
   }
 }
 
 @media (min-width: 600px) and (max-width: 1199px) {
   .menu-drawer {
-    padding: 12px var(--page-x) 40px;
+    padding: 12px var(--page-x);
   }
 }
 
@@ -3945,9 +3987,11 @@ body.case-page--fill .case__outcome-body p {
     -webkit-backdrop-filter: blur(22px) saturate(180%);
     backdrop-filter: blur(22px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.75);
+    /* Light, not voluminous: a small lift and the top highlight line. The
+       magenta glow came from the avatar bubble, where it's a toy; on a
+       utility menu it was borrowed importance. */
     box-shadow:
-      0 12px 32px rgba(0, 0, 0, 0.1),
-      0 0 20px rgba(217, 70, 239, 0.14),
+      0 6px 18px rgba(0, 0, 0, 0.07),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
     opacity: 0;
     visibility: hidden;
@@ -4695,13 +4739,14 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* ===== Full-bleed plates on phones =====
+/* ===== Full-bleed plates on phones and tablets =====
    The card plates run edge to edge. They carry no radius of their own, so
-   nothing competes with the phone's rounded screen corners, and everything
+   nothing competes with the device's rounded screen corners, and everything
    inside them — titles, subtitles, screenshots — drops onto the page's
    --page-x rail, the same one the cover, the section headings and the
-   experience list stand on. Media to the edge, text inset. */
-@media (max-width: 640px) {
+   experience list stand on. Media to the edge, text inset. (Desktop keeps
+   its inset cards: past 1200 the page is a column, not a screen.) */
+@media (max-width: 1199px) {
   .projects {
     padding-inline: 0;
   }
@@ -4717,4 +4762,18 @@ body.case-page--fill .case__outcome-body p {
   .about-card__face--front {
     padding-inline: var(--page-x);
   }
+
+  /* The experience rules reach both edges too, with the rows still on the
+     rail — the same law, one section further down. */
+  .experience-editorial__item {
+    margin-inline: calc(-1 * var(--page-x));
+    padding-inline: var(--page-x);
+  }
+}
+
+/* iOS paints a translucent blue-grey rectangle over any tapped link or
+   button by default. Our own press states carry that feedback, so the
+   system flash is only ever a stray blue shape on top of them. */
+a, button, [role="button"], summary, label {
+  -webkit-tap-highlight-color: transparent;
 }
