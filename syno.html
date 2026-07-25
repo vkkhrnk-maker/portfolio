@@ -37,7 +37,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=271">
+  <link rel="stylesheet" href="styles.css?v=275">
   <script src="typographer.js?v=3" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 
@@ -68,6 +68,20 @@
     }
     .case-page--syno .syno-pair > img { flex: 1 1 0; min-width: 0; width: auto; }
     .case-page--syno .syno-pair > img.is-narrow { flex: 0 0 280px; width: 280px; }
+    /* Phones inside the desktop board — the 375 work has to be visible to a
+       reader on a laptop, not only inside the ≤640px slider. */
+    .case-page--syno .syno-phones {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .case-page--syno .syno-phones img {
+      width: clamp(160px, 30%, 260px);
+      height: auto;
+      align-self: flex-start;
+    }
     /* Tall component sheets from the kit — show the top, clip the rest. */
     .case-page--syno .syno-clip {
       flex: 1 1 0;
@@ -237,8 +251,12 @@
         <p class="case__section-body">Two decisions did the most here. <strong>Replace was removed from the tile menu</strong> — deleting and adding again produces the same result, without a branch where the replacement itself fails and leaves the artist with neither file. And on touch, <strong>the tile badge became ⋯ instead of ×</strong>: one element could not carry both "remove this" and "make this the cover", so the cross now appears only while a file is uploading or has failed, where it means one thing.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop" aria-label="Add a work — the dropzone before anything is uploaded">
+          <div class="case__figure-desktop" aria-label="Add a work — the dropzone before anything is uploaded, and the same tile actions on mobile">
             <img src="assets/case-syno-upload-d1.png" alt="Add a work — the dropzone before anything is uploaded" loading="lazy">
+            <div class="syno-phones">
+              <img src="assets/case-syno-upload-m2.png" alt="Uploaded works on mobile — tiles carry the ⋯ badge" loading="lazy">
+              <img src="assets/case-syno-upload-m4.png" alt="The ⋯ badge opens Make cover and Remove instead of deleting on tap" loading="lazy">
+            </div>
           </div>
           <!-- DRAFT-ONLY -->
           <p class="vid-note">Заглушка. Здесь будет видео из прототипа: файлы падают в зону → плитки грузятся с прогрессом → третий файл падает в ошибку → retry</p>
@@ -273,6 +291,10 @@
           <div class="case__figure-desktop" aria-label="The statement editor and the public profile it produces">
             <img src="assets/case-syno-publish-d2.png" alt="The statement editor — a page about an artist, not a questionnaire" loading="lazy">
             <img src="assets/case-syno-publish-d3.png" alt="The public profile, just published" loading="lazy">
+            <div class="syno-phones">
+              <img src="assets/case-syno-publish-m2.png" alt="Editing the statement on mobile" loading="lazy">
+              <img src="assets/case-syno-publish-m3.png" alt="The work lightbox on mobile — video plays inside the profile" loading="lazy">
+            </div>
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the statement editor and the work lightbox on mobile">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m2.png" alt="Editing the statement on mobile" loading="lazy"></div>
@@ -287,17 +309,22 @@
 
       <section class="case__section">
         <h3 class="case__section-title">3. Apply — where a submission turns into a profile</h3>
-        <p class="case__section-body">An open call is what the whole artist side is for, and it is the one flow serving two people at once: an artist who already has a Registry profile, and someone who followed a link to the call with nothing at all. Both walk the same four steps — profile, works, questions, review — and the only difference is how much is already filled in. Signing up sits <strong>inside</strong> Apply rather than in front of it: the account is created at the moment of intent, through a magic link, with no wall between a person and the thing they came to do. And since a new user has by then written a profile and picked works, the submitted screen offers to keep it — the application that was going to be a one-off becomes a Registry profile.</p>
+        <p class="case__section-body">An open call is what the whole artist side is for, and it is the one flow serving two people at once: an artist who already has a Registry profile, and someone who followed a link to the call with nothing at all. Both walk the same four steps — profile, works, questions, review — and the only difference is how much is already filled in. Signing up sits <strong>inside</strong> Apply rather than in front of it: the account is created at the moment of intent — Google, Apple or a one-time code by email, no password to invent and no wall between a person and the thing they came to do. And since a new user has by then written a profile and picked works, the submitted screen offers to keep it — the application that was going to be a one-off becomes a Registry profile.</p>
         <p class="case__section-body">Works are selected from the portfolio, not uploaded again; anything missing is added right there through the same uploader as the studio, never a second parallel form. Review comes before submitting and says what is still incomplete — the same rule as the publishing checklist: nothing here fails after the fact when it could have been shown before. And because a deadline turns a saved draft into a real problem, the awkward cases are designed rather than left to chance.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop" aria-label="The open call page — Apply opens the sign-up modal in place">
+          <div class="case__figure-desktop" aria-label="The open call page with the sign-up modal, and the four steps on mobile">
             <img src="assets/case-syno-apply-d1.png" alt="The open call page — Apply opens the sign-up modal in place" loading="lazy">
+            <div class="syno-phones">
+              <img src="assets/case-syno-apply-m2.png" alt="Step 1 · Profile on mobile" loading="lazy">
+              <img src="assets/case-syno-apply-m4.png" alt="Step 3 · Questions on mobile" loading="lazy">
+              <img src="assets/case-syno-apply-m6.png" alt="Submitted — a new user is offered to keep the profile in the Registry" loading="lazy">
+            </div>
           </div>
           <!-- DRAFT-ONLY -->
           <p class="vid-note">Заглушка. Здесь будет видео из прототипа: Apply → регистрация по magic link → четыре шага подряд → Submitted с апселлом в Registry</p>
           <div class="case__slider" role="group" aria-label="Swipe through the apply flow on mobile — sign-up inside Apply, the four steps, and the submitted screen">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m1.png" alt="Sign up inside Apply on mobile — the magic-link form" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m1.png" alt="Sign up inside Apply on mobile" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m2.png" alt="Step 1 · Profile on mobile" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m3.png" alt="Step 2 · Works on mobile — picking from the portfolio" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m4.png" alt="Step 3 · Questions on mobile" loading="lazy"></div>
@@ -305,6 +332,17 @@
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m6.png" alt="Submitted — a new user is offered to keep the profile in the Registry" loading="lazy"></div>
           </div>
           <figcaption>One flow, two starting points — and the account is created at the moment of intent, not before it.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop" aria-label="Sign-up by magic link — the form, the check-your-email screen, the welcome after signing up, and the two ways a magic link fails">
+            <img src="assets/case-syno-auth-d1.png" alt="Create your account — Google, Apple, or an email address; no password to invent" loading="lazy">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through sign-up on mobile — the form and the check-your-email screen">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-auth-m1.png" alt="Sign up on mobile" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-auth-m2.png" alt="Check your email on mobile" loading="lazy"></div>
+          </div>
+          <figcaption>No password to invent, and the draft stays attached to the account being made. The ways it fails have screens too — an expired sign-in link asks for a new one instead of dead-ending.</figcaption>
         </figure>
 
         <figure class="case__figure">
@@ -326,7 +364,10 @@
           <div class="case__figure-desktop" aria-label="After submitting — the applications list with statuses, application details under review, and the empty state">
             <img src="assets/case-syno-after-d1.png" alt="Applications — every submission with its status" loading="lazy">
             <img src="assets/case-syno-after-d2.png" alt="Application details — under review" loading="lazy">
-            <img src="assets/case-syno-after-d3.png" alt="Applications before the first submission — the empty state points back to open calls" loading="lazy">
+            <div class="syno-phones">
+              <img src="assets/case-syno-after-m1.png" alt="Applications on mobile — every submission with its status" loading="lazy">
+              <img src="assets/case-syno-after-m3.png" alt="Applications empty state on mobile" loading="lazy">
+            </div>
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the applications list, application details and the empty state on mobile">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-after-m1.png" alt="Applications on mobile — every submission with its status" loading="lazy"></div>
@@ -344,10 +385,8 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop" aria-label="The system — a screen with its spec sticker beside it, component sheets from the kit, and every state of the upload tile">
-            <div class="syno-pair">
-              <img src="assets/case-syno-system-modal.png" alt="The upload-error modal — one of the screens a spec is written against" loading="lazy">
-              <img class="is-narrow" src="assets/case-syno-system-spec.png" alt="A Spec Sticker — upload refusal rules, written beside the screen it describes" loading="lazy">
-            </div>
+            <img src="assets/case-syno-upload-d3.png" alt="A failed upload in the works editor — the screen this spec is written against" loading="lazy">
+            <img class="is-natural" src="assets/case-syno-system-spec.png" alt="A Spec Sticker — what each upload refusal must say, written beside the screen it describes" loading="lazy">
             <div class="syno-pair">
               <div class="syno-clip"><img src="assets/case-syno-kit-cards.png" alt="Card / Artist Works — the component sheet from the kit" loading="lazy"></div>
               <div class="syno-clip"><img src="assets/case-syno-kit-uploader.png" alt="Media uploader — the component sheet from the kit" loading="lazy"></div>
@@ -356,7 +395,7 @@
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the spec sticker, the screen it describes, and the upload-tile states">
             <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-syno-system-spec.png" alt="A Spec Sticker — upload refusal rules, written beside the screen it describes" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-system-modal.png" alt="The upload-error modal — one of the screens a spec is written against" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-upload-d3.png" alt="A failed upload in the works editor — the screen this spec is written against" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-syno-system-tiles.png" alt="Upload tile — one component, every state" loading="lazy"></div>
           </div>
           <figcaption>The requirement sits next to the screen it belongs to, in the file developers already have open — and the components underneath carry their states with them.</figcaption>

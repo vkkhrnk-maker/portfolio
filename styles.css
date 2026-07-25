@@ -717,9 +717,14 @@ img {
   container-type: inline-size;
 }
 
+/* The desktop shot sits in the same monitor shell the home cover uses: the
+   phone beside it is a device, so an unframed browser screenshot next to it
+   read as a loose picture. Thin bezel, small corner — a 39px radius on a
+   landscape screen would turn it into a tablet. */
 .case__itab-cover-desktop {
   position: absolute;
   z-index: 1;
+  box-sizing: border-box;
   left: 0;
   top: 50%;
   width: 73%;
@@ -728,7 +733,12 @@ img {
   transform: translateY(-50%);
   object-fit: cover;
   object-position: top center;
-  border-radius: clamp(16px, 1.6cqw, 28px);
+  padding: clamp(4px, 0.55cqw, 9px);
+  --itab-screen-corner-fill: #fff;
+  background:
+    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: clamp(12px, 1.3cqw, 22px);
   box-shadow: none;
   outline: none;
 }
@@ -3499,7 +3509,10 @@ body.case-page--fill .case__outcome-body p {
 
   .experience-editorial__item {
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 16px;
+    /* No row gap: the second row is the collapsible panel, and a track gap
+       is charged even when the track is empty — that was the dead air under
+       every closed row. The panel brings its own top padding when it opens. */
+    gap: 0 16px;
     /* Even top and bottom. It was 20/24, and because the 32px role carries
        more leading above its caps than the 17px date carries below its
        figures, the row read even more top-tight than those numbers suggest.
@@ -3612,7 +3625,9 @@ body.case-page--fill .case__outcome-body p {
   .experience-editorial__detail {
     display: block;
     grid-column: 1 / -1;
-    grid-row: 3;
+    /* Row 2, not 3 — the company line moved inside the identity block, so
+       row 2 was left empty and the grid charged a 16px gap for it twice. */
+    grid-row: 2;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s cubic-bezier(0.2, 0, 0, 1);
@@ -3637,18 +3652,6 @@ body.case-page--fill .case__outcome-body p {
     padding-top: 16px;
     opacity: 1;
     transition-delay: 0.08s;
-  }
-
-  /* The row gap is charged for the third row even while it's collapsed —
-     take it back so a closed row keeps its own rhythm. */
-  .experience-editorial__detail {
-    margin-top: -16px;
-    transition: max-height 0.4s cubic-bezier(0.2, 0, 0, 1),
-      margin-top 0.4s cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  .experience-editorial__detail.is-open {
-    margin-top: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -4759,4 +4762,37 @@ body.case-page--fill .case__outcome-body p {
    system flash is only ever a stray blue shape on top of them. */
 a, button, [role="button"], summary, label {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== iTAB case hero on phones =====
+   At 375 the composition put a 215px-wide desktop page behind a phone —
+   neither was readable. The phone screens have the whole case to themselves
+   further down, so the hero keeps the one thing it can actually show at
+   this width: the product page, framed, across the full plate. */
+@media (max-width: 640px) {
+  .case__hero-image--itab {
+    aspect-ratio: auto;
+    height: auto;
+    padding: 24px var(--page-x);
+  }
+
+  .case__hero-image--itab .case__itab-cover {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .case__itab-cover-desktop {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
+    padding: 5px;
+    border-radius: 14px;
+  }
+
+  .case__itab-cover-mobile {
+    display: none;
+  }
 }
