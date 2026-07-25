@@ -286,6 +286,8 @@ img {
 .menu-drawer__item:focus-visible,
 .menu-toggle:focus-visible,
 .menu-drawer__close:focus-visible,
+.menu-drawer__name:focus-visible,
+.menu-drawer__contact:focus-visible,
 .sidebar__name-link:focus-visible,
 .mobile-topbar__link:focus-visible {
   outline: 2px solid var(--text-accent);
@@ -3645,15 +3647,21 @@ body.case-page--fill .case__outcome-body p {
 
 /* ===== Menu Drawer (mobile/tablet) ===== */
 
+/* The menu is a glass layer over the page, not a door closing in front of
+   it: the site stays legible underneath, blurred back. Same material as the
+   avatar bubble and the Get in touch panel — the language is already there,
+   this is just its largest surface. */
 .menu-drawer {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background-color: var(--text-accent);
-  padding: 24px 20px 60px;
+  background-color: rgba(240, 240, 240, 0.72);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  padding: 12px var(--page-x) 32px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -3664,22 +3672,43 @@ body.case-page--fill .case__outcome-body p {
   opacity: 1;
 }
 
+/* The bar carries on: the name keeps its place, the burger has become an ✕. */
 .menu-drawer__header {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   width: 100%;
+}
+
+.menu-drawer__name {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  padding-block: 8px;
 }
 
 .menu-drawer__close {
   background: none;
   border: none;
-  color: var(--white);
+  color: var(--text-primary);
   padding: 8px;
-  margin: -8px;
+  margin-right: -8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
+}
+
+.menu-drawer__close:active {
+  transform: scale(0.9);
+  opacity: 0.6;
 }
 
 .menu-drawer__close svg {
@@ -3688,28 +3717,82 @@ body.case-page--fill .case__outcome-body p {
   height: 24px;
 }
 
+/* The list sits in the optical middle of the screen, centred — the one
+   place on the site that isn't on the left rail, which is what makes it
+   read as a layer apart rather than another section. */
 .menu-drawer__nav {
-  margin-top: auto;
+  margin: auto 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 24px;
 }
 
 .menu-drawer__item {
   font-family: var(--font-display);
-  /* The H1 token, not a hard-coded 62/64 — that was louder than the cover
-     headline itself once H1 dropped to 50/54 on phones. */
+  /* The H1 token — same size as the cover headline, never louder (on phones
+     the H2 token is actually the larger of the two). */
   font-size: var(--fs-h1);
   line-height: var(--lh-h1);
   letter-spacing: var(--ls-heading-lg);
-  color: var(--white);
+  color: var(--text-primary);
   text-decoration: none;
   white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease, transform 0.18s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.menu-drawer__item:active {
+  color: var(--text-accent);
+  transform: scale(0.97);
+}
+
+/* Contacts close the panel off along the bottom edge, the way the sidebar
+   buttons do on desktop. */
+.menu-drawer__contacts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.menu-drawer__contact {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  padding-block: 8px;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease;
+}
+
+.menu-drawer__contact:active {
+  color: var(--text-accent);
+}
+
+@media (hover: hover) {
+  .menu-drawer__item:hover,
+  .menu-drawer__contact:hover {
+    color: var(--text-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-drawer__item,
+  .menu-drawer__close {
+    transition: color 0.2s ease;
+    transform: none;
+  }
 }
 
 @media (min-width: 600px) and (max-width: 1199px) {
   .menu-drawer {
-    padding: 24px 32px 60px;
+    padding: 12px var(--page-x) 40px;
   }
 }
 
