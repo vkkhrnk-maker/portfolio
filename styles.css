@@ -3475,7 +3475,10 @@ body.case-page--fill .case__outcome-body p {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
     margin-inline: calc(-1 * var(--page-x));
-    padding: 20px var(--page-x) 24px;
+    /* Even top and bottom. It was 20/24, and because the 32px role carries
+       more leading above its caps than the 17px date carries below its
+       figures, the row read even more top-tight than those numbers suggest. */
+    padding: 24px var(--page-x);
     border-top-width: 1.5px;
   }
 
