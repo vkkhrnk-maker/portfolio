@@ -37,7 +37,7 @@
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=266">
+  <link rel="stylesheet" href="styles.css?v=269">
   <script src="typographer.js?v=3" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 
@@ -92,6 +92,15 @@
       font-size: 15px;
       line-height: 1.4;
     }
+    /* DRAFT-ONLY: мелкая пометка «здесь будет видео из прототипа». */
+    .vid-note {
+      margin: 10px 0 0;
+      font-size: 12px;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .45);
+    }
+    .vid-note::before { content: "▶"; margin-right: 6px; font-size: 10px; }
     @media (max-width: 640px) {
       .case-page--syno .case__figure-desktop { display: none; }
     }
@@ -228,13 +237,11 @@
         <p class="case__section-body">Two decisions did the most here. <strong>Replace was removed from the tile menu</strong> — deleting and adding again produces the same result, without a branch where the replacement itself fails and leaves the artist with neither file. And on touch, <strong>the tile badge became ⋯ instead of ×</strong>: one element could not carry both "remove this" and "make this the cover", so the cross now appears only while a file is uploading or has failed, where it means one thing.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop" aria-label="The upload area — the empty dropzone, then the gallery with the cover set next to a failed upload with retry on the tile">
+          <div class="case__figure-desktop" aria-label="Add a work — the dropzone before anything is uploaded">
             <img src="assets/case-syno-upload-d1.png" alt="Add a work — the dropzone before anything is uploaded" loading="lazy">
-            <div class="syno-pair">
-              <img src="assets/case-syno-upload-d2.png" alt="The works gallery — uploaded tiles, with the cover already set" loading="lazy">
-              <img src="assets/case-syno-upload-d3.png" alt="A failed upload — the error and retry live on the tile itself" loading="lazy">
-            </div>
           </div>
+          <!-- DRAFT-ONLY -->
+          <p class="vid-note">Заглушка. Здесь будет видео из прототипа: файлы падают в зону → плитки грузятся с прогрессом → третий файл падает в ошибку → retry</p>
           <div class="case__slider" role="group" aria-label="Swipe through the upload area on mobile — the dropzone sheet, uploaded tiles, uploading, and the badge actions">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-upload-m1.png" alt="Add a work on mobile — the bottom-sheet dropzone" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-upload-m2.png" alt="Uploaded works on mobile — tiles carry the ⋯ badge" loading="lazy"></div>
@@ -251,19 +258,27 @@
         <p class="case__section-body">The same logic shapes the profile itself. Statement and main info are laid out as a page about an artist rather than a questionnaire, which is exactly how it has to read on the public side — where the work is what the visitor came for and the fields are only the frame around it.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop" aria-label="The draft profile with the publishing checklist next to the statement editor, and the public profile it produces">
-            <div class="syno-pair">
-              <img src="assets/case-syno-publish-d1.png" alt="The owner home in draft — the publishing checklist shows what is still missing" loading="lazy">
-              <img src="assets/case-syno-publish-d2.png" alt="The statement editor — a page about an artist, not a questionnaire" loading="lazy">
-            </div>
+          <div class="case__figure-desktop" aria-label="The owner home in draft — the publishing checklist shows what is still missing">
+            <img src="assets/case-syno-publish-d1.png" alt="The owner home in draft — the publishing checklist shows what is still missing" loading="lazy">
+          </div>
+          <!-- DRAFT-ONLY -->
+          <p class="vid-note">Заглушка. Здесь будет видео из прототипа: пункты чеклиста закрываются, счётчик едет 1 of 3 → 3 of 3, а Publish, нажатый раньше времени, подсвечивает незакрытое вместо ошибки</p>
+          <div class="case__slider" role="group" aria-label="The draft profile with the publishing checklist on mobile">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m1.png" alt="The draft profile on mobile with the publishing checklist" loading="lazy"></div>
+          </div>
+          <figcaption>What is missing is shown while the profile is being built, not after Publish is pressed.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop" aria-label="The statement editor and the public profile it produces">
+            <img src="assets/case-syno-publish-d2.png" alt="The statement editor — a page about an artist, not a questionnaire" loading="lazy">
             <img src="assets/case-syno-publish-d3.png" alt="The public profile, just published" loading="lazy">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the draft profile with the checklist, the statement editor, and the work lightbox on mobile">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m1.png" alt="The draft profile on mobile with the publishing checklist" loading="lazy"></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the statement editor and the work lightbox on mobile">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m2.png" alt="Editing the statement on mobile" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m3.png" alt="The work lightbox on mobile — video plays inside the profile" loading="lazy"></div>
           </div>
-          <figcaption>What is missing is shown while the profile is being built, not after Publish is pressed.</figcaption>
+          <figcaption>Statement and main info read as a page about an artist — which is exactly what the public side has to be.</figcaption>
         </figure>
         <!-- ГЛАВА ДОПИСЫВАЕТСЯ: сюда встанет публичная выдача — листинг
              артистов и карта, — когда будет готова. Абзац: «вот как тебя
@@ -276,17 +291,11 @@
         <p class="case__section-body">Works are selected from the portfolio, not uploaded again; anything missing is added right there through the same uploader as the studio, never a second parallel form. Review comes before submitting and says what is still incomplete — the same rule as the publishing checklist: nothing here fails after the fact when it could have been shown before. And because a deadline turns a saved draft into a real problem, the awkward cases are designed rather than left to chance.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop" aria-label="The apply flow — the open call page with the sign-up modal, then the four steps in pairs: profile and works, questions and review">
+          <div class="case__figure-desktop" aria-label="The open call page — Apply opens the sign-up modal in place">
             <img src="assets/case-syno-apply-d1.png" alt="The open call page — Apply opens the sign-up modal in place" loading="lazy">
-            <div class="syno-pair">
-              <img src="assets/case-syno-apply-d2.png" alt="Step 1 · Profile — prefilled for an artist who already has one" loading="lazy">
-              <img src="assets/case-syno-apply-d3.png" alt="Step 2 · Works — three works picked from the portfolio" loading="lazy">
-            </div>
-            <div class="syno-pair">
-              <img src="assets/case-syno-apply-d4.png" alt="Step 3 · Questions — the call's own questions, filled" loading="lazy">
-              <img src="assets/case-syno-apply-d5.png" alt="Step 4 · Review — the whole application before submitting" loading="lazy">
-            </div>
           </div>
+          <!-- DRAFT-ONLY -->
+          <p class="vid-note">Заглушка. Здесь будет видео из прототипа: Apply → регистрация по magic link → четыре шага подряд → Submitted с апселлом в Registry</p>
           <div class="case__slider" role="group" aria-label="Swipe through the apply flow on mobile — sign-up inside Apply, the four steps, and the submitted screen">
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m1.png" alt="Sign up inside Apply on mobile — the magic-link form" loading="lazy"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m2.png" alt="Step 1 · Profile on mobile" loading="lazy"></div>

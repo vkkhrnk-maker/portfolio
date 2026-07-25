@@ -2865,7 +2865,11 @@ body.case-page--fill .case__outcome-body p {
     position: static;
     width: 100%;
     height: auto;
-    aspect-ratio: 1728 / 1053;
+    /* 3:2 rather than the page's own 16:10 — it brings these covers within
+       45px of the phone cards' height. iTAB pays nothing for it (its source
+       is taller than the window and simply shows more of the page); Syno
+       gives up ~9% of its width, which is map margin. */
+    aspect-ratio: 3 / 2;
     object-fit: cover;
     border-radius: 0;   /* the shell does the rounding now */
   }
@@ -2880,8 +2884,14 @@ body.case-page--fill .case__outcome-body p {
   /* The Syno export has a 33px light mat baked around the page. Scaled up by
      that exact amount (1794/1728), the mat lands outside the window and the
      shell's own bezel replaces it — no frame inside a frame. */
+  /* `contain` rather than `cover` for Syno: its page runs edge to edge, so a
+     cover fit in the taller 3:2 window ate the logo on one side and the map
+     controls on the other. Contained, the page fills the width; the scale
+     then pushes the baked-in 33px mat out of frame and costs ~26px of map
+     margin per side instead of 116. */
   .project-card--syno .project-card__syno-shot img {
-    transform: scale(1.0382);
+    object-fit: contain;
+    transform: scale(1.066);
   }
 
   .project-card--itab .project-card__itab-mobile {
