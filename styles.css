@@ -2865,11 +2865,9 @@ body.case-page--fill .case__outcome-body p {
     position: static;
     width: 100%;
     height: auto;
-    /* 3:2 rather than the page's own 16:10 — it brings these covers within
-       45px of the phone cards' height. iTAB pays nothing for it (its source
-       is taller than the window and simply shows more of the page); Syno
-       gives up ~9% of its width, which is map margin. */
-    aspect-ratio: 3 / 2;
+    /* Syno keeps its page's own 16:10 (below): its screenshot runs edge to
+       edge, so every pixel of extra height costs a slice of the product. */
+    aspect-ratio: 1728 / 1053;
     object-fit: cover;
     border-radius: 0;   /* the shell does the rounding now */
   }
@@ -2884,14 +2882,16 @@ body.case-page--fill .case__outcome-body p {
   /* The Syno export has a 33px light mat baked around the page. Scaled up by
      that exact amount (1794/1728), the mat lands outside the window and the
      shell's own bezel replaces it — no frame inside a frame. */
-  /* `contain` rather than `cover` for Syno: its page runs edge to edge, so a
-     cover fit in the taller 3:2 window ate the logo on one side and the map
-     controls on the other. Contained, the page fills the width; the scale
-     then pushes the baked-in 33px mat out of frame and costs ~26px of map
-     margin per side instead of 116. */
+  /* iTAB is the one that can afford to be taller: its source is taller than
+     the window, so 3:2 just reveals more of the product page. */
+  .project-card--itab .project-card__itab-desktop {
+    aspect-ratio: 3 / 2;
+  }
+
+  /* Syno: the window matches the page, so the only thing cropped is the 33px
+     mat baked into the export — nothing of the product itself. */
   .project-card--syno .project-card__syno-shot img {
-    object-fit: contain;
-    transform: scale(1.066);
+    transform: scale(1.0382);
   }
 
   .project-card--itab .project-card__itab-mobile {
@@ -3976,6 +3976,15 @@ body.case-page--fill .case__outcome-body p {
   .intro {
     width: 100%;
     padding-inline: var(--page-x);
+  }
+
+  /* Photo on the right, greeting on the left: the text then starts on the
+     same rail as the headline under it, and the photo closes the line at
+     the opposite edge. */
+  .intro__header {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
   }
 
   /* On mobile — hide menu icon + the Book-a-call CTA (desktop topbar), show CV/Меню text instead */
