@@ -3756,8 +3756,7 @@ body.case-page--fill .case__outcome-body p {
     transform 0.42s cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* The contents arrive just behind the glass, one after another — the same
-   entrance the Get in touch panel uses, so the two read as one material. */
+/* The contents arrive just behind the glass, one after another. */
 .menu-drawer__item,
 .menu-drawer__contacts {
   opacity: 0;
@@ -3898,14 +3897,16 @@ body.case-page--fill .case__outcome-body p {
 
   /* Cover-page topbar: row 1 is the name + menu burger (the same
      pattern as the case-page topbars, so the visitor always sees whose
-     portfolio this is), row 2 is the CV/LinkedIn/Email/Telegram pills.
-     Replaces the earlier vertical pill stack (Figma 2:28733), which
-     read as a sidebar fragment and pushed the intro far down. Not
-     sticky — it's part of the cover hero, not a persistent toolbar. */
+     portfolio this is), and Book a call + the burger sit on the right of
+     the same line. The contact pills that used to take a second row live in
+     the menu now — they were duplicated in both places, and the menu is the
+     copy that also works on the case pages. Not sticky — it's part of the
+     cover hero, not a persistent toolbar. */
   .mobile-topbar--cover {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    row-gap: 10px;
+    justify-content: space-between;
+    gap: 12px;
     /* One inset all round: the name, the burger chip and the pills below
        all start exactly --page-x from the top and the left edge. The top
        used to read heavier — 12px section padding plus the bar's own 6px
@@ -3925,155 +3926,14 @@ body.case-page--fill .case__outcome-body p {
     padding-block: 8px;
   }
 
-  .mobile-topbar__buttons {
+  /* The CTA and the burger travel together on the right; the name takes
+     what's left and ellipsises before it can push them off the rail. */
+  .mobile-topbar__actions {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
-    /* full width forces the pill row onto its own line under the
-       name + burger row */
-    width: 100%;
-    gap: 8px;
-  }
-
-  /* ===== 'Get in touch' dropdown =====
-     CV / LinkedIn / Telegram used to sit out as three separate pills, which
-     — once Book a call joined them — wrapped into a ragged two-row strip on
-     every phone. They collapse into one pill instead, with Book a call
-     beside it: one calm row, the CTA still first-class. */
-  .contact-drop {
-    position: relative;
     flex: 0 0 auto;
-  }
-
-  .contact-drop__toggle {
-    gap: 6px;
-    /* Both pills carry the same 8px inner rhythm as the CTA next to them. */
-    padding-inline: 16px;
-    border: 0;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1),
-      background-color 0.18s ease, box-shadow 0.25s ease;
-  }
-
-  /* Pressed: the pill takes the finger — a small squish and a slightly
-     deeper surface, released the moment the touch ends. */
-  .contact-drop__toggle:active {
-    transform: scale(0.96);
-    background-color: #e6e6e6;
-  }
-
-  .contact-drop__chevron {
-    display: block;
-    /* Half a step down so the chevron reads as a hint, not a second label. */
-    opacity: 0.55;
-    transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
-  }
-
-  .contact-drop.is-open .contact-drop__chevron {
-    transform: rotate(180deg);
-    opacity: 1;
-  }
-
-  /* Liquid glass, the same material as the avatar's greeting bubble. */
-  .contact-drop__panel {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    z-index: 70;
-    min-width: 160px;
-    display: flex;
-    flex-direction: column;
-    padding: 6px;
-    border-radius: 20px;
-    /* A touch more opaque than the avatar bubble: this panel opens over the
-       cover photo, and at 0.55 the labels picked up its colours. */
-    background: rgba(255, 255, 255, 0.78);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.75);
-    /* Light, not voluminous: a small lift and the top highlight line. The
-       magenta glow came from the avatar bubble, where it's a toy; on a
-       utility menu it was borrowed importance. */
-    box-shadow:
-      0 6px 18px rgba(0, 0, 0, 0.07),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-6px) scale(0.96);
-    transform-origin: 24px 0;
-    transition:
-      opacity 0.18s ease,
-      visibility 0.18s,
-      transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .contact-drop.is-open .contact-drop__panel {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
-  }
-
-  .contact-drop__item {
-    display: flex;
-    align-items: center;
-    min-height: 44px; /* comfortable tap target */
-    padding: 0 14px;
-    border-radius: 14px;
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    letter-spacing: -1px;
-    color: var(--text-primary);
-    text-decoration: none;
-    white-space: nowrap;
-    -webkit-tap-highlight-color: transparent;
-    /* Each row slips in just behind the panel — the list assembles itself
-       instead of arriving as one block. */
-    opacity: 0;
-    transform: translateY(-4px);
-    transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0, 0, 1),
-      background-color 0.2s ease;
-  }
-
-  .contact-drop.is-open .contact-drop__item {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .contact-drop.is-open .contact-drop__item:nth-child(1) { transition-delay: 0.04s; }
-  .contact-drop.is-open .contact-drop__item:nth-child(2) { transition-delay: 0.08s; }
-  .contact-drop.is-open .contact-drop__item:nth-child(3) { transition-delay: 0.12s; }
-
-  /* Pressed row: a magenta wash + the accent colour, so a tap reads as a
-     choice being made rather than a link merely being touched. */
-  .contact-drop.is-open .contact-drop__item:active {
-    background-color: rgba(217, 70, 239, 0.14);
-    color: var(--text-accent);
-    /* Instant on press, so the row lights up under the finger, not after it. */
-    transition-duration: 0.06s;
-    transition-delay: 0s;
-  }
-
-  .contact-drop__item:focus-visible {
-    outline: 2px solid var(--text-accent);
-    outline-offset: -2px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .contact-drop__chevron,
-    .contact-drop__panel,
-    .contact-drop__item {
-      transition: opacity 0.15s linear;
-    }
-    .contact-drop__panel,
-    .contact-drop.is-open .contact-drop__panel {
-      transform: none;
-    }
-    .contact-drop.is-open .contact-drop__item {
-      transition-delay: 0s;
-    }
+    gap: 8px;
   }
 
   /* Menu icon button in the top-right corner — a circular 40×40 chip
