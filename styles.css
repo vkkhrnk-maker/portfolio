@@ -3657,9 +3657,15 @@ body.case-page--fill .case__outcome-body p {
   position: fixed;
   inset: 0;
   z-index: 200;
-  background-color: rgba(240, 240, 240, 0.72);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
+  /* A warm sheet over cool greys. At the page's own #f0f0f0 the glass was
+     invisible — there was nothing behind to blur, so the menu read as the
+     page going blank rather than a layer sliding over it. Now the whole
+     screen lifts and warms by ~4% when it opens: the layer is felt even
+     where the background is flat, and where there is content (a card, the
+     magenta CTA) more of it shows through than before. */
+  background-color: rgba(252, 250, 248, 0.7);
+  -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
+  backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
   padding: 12px var(--page-x);
   display: flex;
   flex-direction: column;
