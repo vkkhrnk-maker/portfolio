@@ -2762,20 +2762,26 @@ body.case-page--fill .case__outcome-body p {
     white-space: normal;
   }
 
-  /* Subtitle stays in col 1, row 2 (does not span under arrow) */
+  /* Subtitle fills the whole card width on row 2. It used to share the
+     title's column, so it wrapped against the arrow's edge and ran to three
+     lines with ~90px of empty card beside it; the arrow now sits on row 1
+     only, leaving row 2 clear. */
   .project-card__subtitle {
-    grid-column: 1;
+    grid-column: 1 / -1;
     grid-row: 2;
     font-size: var(--fs-body);
-    line-height: var(--lh-body);
+    /* One step tighter than the 25.5px mobile body (150% → 141%): as a
+       two-line caption under a big title the wider leading read as loose. */
+    line-height: 24px;
     max-width: none;
     white-space: normal;
   }
 
-  /* Arrow spans both rows, aligned to the top edge of the title */
+  /* Arrow keeps to row 1, aligned to the top edge of the title, so the
+     subtitle below can run the full width of the card */
   .project-card__header .arrow-btn {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     align-self: start;
   }
 
@@ -2807,48 +2813,105 @@ body.case-page--fill .case__outcome-body p {
     object-fit: cover;
   }
 
-  /* iTAB keeps the desktop + mobile relationship on smaller screens too.
-     The desktop becomes a cropped backdrop and the phone stays readable in
-     front, with the whole composition bleeding to the card edges. */
-  .project-card--itab .project-card__itab-group {
-    position: relative;
+  /* iTAB on phones/tablets: the desktop shot on its own, sitting in the same
+     column as the Syno screenshot below it. The overlapping phone is dropped
+     — at card width the composition had become a crop of a crop, with the
+     desktop bleeding off the left edge and unreadable either way. */
+  /* The group becomes the monitor shell: a thin titanium bezel around the
+     screen. Its box is locked to the Syno screenshot's 1794/1119 so the two
+     covers end up exactly the same height at the same width — that mismatch
+     was what made the pair read as unaligned. The bezel is the desktop cut,
+     not the phone one: 6px frame and a small radius (a 39px corner on a
+     landscape screen reads as a tablet). */
+  /* Both covers sit in the same monitor shell. The bezel is a transparent
+     6px border with the titanium gradient painted across the border box, so
+     the inner corner is derived from the outer one (14 − 6 = 8) instead of
+     being guessed — that mismatch was visible on the iTAB corners. overflow
+     clips the screenshot to the same inner curve. */
+  .project-card--itab .project-card__itab-group,
+  .project-card--syno .project-card__syno-shot {
+    position: static;
     top: auto;
     bottom: auto;
     left: auto;
     transform: none;
-    width: calc(100% + (2 * var(--card-x)));
-    height: clamp(300px, 58vw, 520px);
-    margin-inline: calc(-1 * var(--card-x));
-    margin-bottom: calc(-1 * var(--card-y));
+    box-sizing: border-box;
     display: block;
+    width: 100%;
+    height: auto;
     max-height: none;
+    margin: 0;
+    padding: 0;
+    /* 4px, not 6 — at card width a 6px bezel read as a chunky tablet frame.
+       The inner corner follows from this (12 − 4 = 8). */
+    border: 4px solid transparent;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+    overflow: hidden;
+  }
+
+  /* One window ratio for both screens — Syno's actual page area inside its
+     mat — so the two shells come out exactly the same height at the same
+     width. iTAB is cropped to it from the top; the page continues below. */
+  .project-card--itab .project-card__itab-desktop,
+  .project-card--syno .project-card__syno-shot img {
+    display: block;
+    position: static;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1728 / 1053;
+    object-fit: cover;
+    border-radius: 0;   /* the shell does the rounding now */
   }
 
   .project-card--itab .project-card__itab-desktop {
-    display: block;
-    position: absolute;
-    left: -4%;
-    top: 16%;
-    width: 78%;
-    height: auto;
-    border-radius: clamp(12px, 2.6cqw, 20px);
+    object-position: top center;
+    /* the asset carries its own rounded transparent corners; filling them
+       white keeps the shell's curve the only one on screen */
+    background-color: var(--white);
+  }
+
+  /* The Syno export has a 33px light mat baked around the page. Scaled up by
+     that exact amount (1794/1728), the mat lands outside the window and the
+     shell's own bezel replaces it — no frame inside a frame. */
+  .project-card--syno .project-card__syno-shot img {
+    transform: scale(1.0382);
   }
 
   .project-card--itab .project-card__itab-mobile {
-    position: absolute;
-    right: 7%;
-    top: 12px;
-    width: auto;
-    height: calc(100% - 34px);
-    aspect-ratio: 504 / 1088;
-    border-radius: 39px;
+    display: none;
   }
 
-  /* Syno screenshot flows in the natural mobile card column */
-  .project-card__syno-shot {
-    position: static;
-    transform: none;
-    width: 100%;
+  /* Syno's card has to grow with its shot: the card-specific 1040/760 ratio
+     outranked the generic `aspect-ratio: auto` at the top of this block, so
+     the inner box stayed shorter than the screenshot and overflow:hidden
+     sliced the bottom off it. */
+  .project-card--syno .project-card__inner {
+    aspect-ratio: auto;
+  }
+
+  /* The white stages existed to carry unframed screenshots. Now that both
+     shots sit in their own bezel, the cards go back onto the grey plate
+     every other card uses. iTAB is clickable, so it keeps the hover/press
+     feedback; Syno is not, so its surface stays put. */
+  .project-card--itab,
+  .project-card--syno,
+  .project-card--syno:active {
+    background-color: var(--grey-200);
+  }
+
+  .project-card--itab:active {
+    background-color: #ced2d7;
+  }
+
+  @media (hover: hover) {
+    .project-card--itab:hover {
+      background-color: #d6d9dd;
+    }
+
+    .project-card--syno:hover {
+      background-color: var(--grey-200);
+    }
   }
 }
 
@@ -3166,7 +3229,7 @@ body.case-page--fill .case__outcome-body p {
 }
 
 .experience-editorial__list {
-  border-bottom: 2px solid var(--text-primary);
+  border-bottom: 0;
 }
 
 .experience-editorial__item {
@@ -3179,6 +3242,10 @@ body.case-page--fill .case__outcome-body p {
   min-height: 156px;
   padding: 24px 0;
   border-top: 2px solid var(--text-primary);
+}
+
+.experience-editorial__item:first-child {
+  border-top: 0;
 }
 
 /* On desktop the 24px rows read squeezed against the large role titles —
@@ -3207,14 +3274,6 @@ body.case-page--fill .case__outcome-body p {
   .experience-editorial__item:hover::after {
     opacity: 1;
     transform: scaleY(1);
-  }
-
-  .experience-editorial__item:hover .experience-editorial__company,
-  .experience-editorial__item:hover .experience-editorial__role,
-  .experience-editorial__item:hover .experience-editorial__scope,
-  .experience-editorial__item:hover .experience-editorial__date,
-  .experience-editorial__item:hover .experience-editorial__description {
-    color: rgba(255, 255, 255, 0.9);
   }
 
   .experience-editorial__item:hover .experience-editorial__logo {
@@ -3283,21 +3342,12 @@ body.case-page--fill .case__outcome-body p {
   margin: 0;
 }
 
-.experience-editorial__company,
-.experience-editorial__role,
-.experience-editorial__scope,
-.experience-editorial__date,
-.experience-editorial__description {
-  transition: color 0.25s cubic-bezier(0.2, 0, 0, 1);
-}
-
 .experience-editorial__company {
   flex: 0 0 auto;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
-  text-transform: uppercase;
   color: var(--text-secondary);
 }
 
@@ -3330,10 +3380,9 @@ body.case-page--fill .case__outcome-body p {
 .experience-editorial__date {
   align-self: center;
   font-family: var(--font-display);
-  font-size: var(--fs-body-tight);
-  line-height: var(--lh-body-tight);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
-  text-transform: uppercase;
   color: var(--text-primary);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -3342,6 +3391,7 @@ body.case-page--fill .case__outcome-body p {
 .experience-editorial__description {
   max-width: 520px;
   justify-self: start;
+  padding-left: 24px;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
@@ -3352,12 +3402,7 @@ body.case-page--fill .case__outcome-body p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .experience-editorial__item::after,
-  .experience-editorial__company,
-  .experience-editorial__role,
-  .experience-editorial__scope,
-  .experience-editorial__date,
-  .experience-editorial__description {
+  .experience-editorial__item::after {
     transition: none;
   }
 }
@@ -3392,6 +3437,7 @@ body.case-page--fill .case__outcome-body p {
   .experience-editorial__description {
     grid-column: 1 / -1;
     justify-self: start;
+    padding-left: 0;
     max-width: 680px;
     text-align: left;
   }
@@ -3461,9 +3507,12 @@ body.case-page--fill .case__outcome-body p {
     padding: 0;
   }
 
+  /* Phones read this list, they don't study it: logo, company + scope, role
+     and dates carry the story, and four paragraphs of body copy on top of
+     them turned the section into a wall of text. The full descriptions stay
+     in the markup (and on tablet up) — they're just not shown here. */
   .experience-editorial__description {
-    grid-column: 1 / -1;
-    grid-row: 3;
+    display: none;
   }
 }
 
@@ -3515,10 +3564,10 @@ body.case-page--fill .case__outcome-body p {
 /* ===== Footer ===== */
 
 .footer {
-  /* Bottom padding 24px (not 60) so the footer text bottom-aligns with
-     the sidebar's CV/LinkedIn/Email buttons, which sit 24px off the
-     viewport bottom — at full scroll the two sit on the same line. */
-  padding: 60px var(--page-x) 24px;
+  /* Cancel the main layout's section gap after the CTA; the footer's own
+     40px top padding now sets the visual distance to its divider. */
+  margin-top: calc(0px - var(--section-y));
+  padding: var(--space-40) var(--page-x) 24px;
   display: flex;
   flex-direction: column;
 }
@@ -3542,8 +3591,10 @@ body.case-page--fill .case__outcome-body p {
 .footer__credit {
   margin: 0;
   font-family: var(--font-body);
+  font-weight: 400;
   font-size: var(--fs-body);
-  line-height: 24px;
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
   white-space: nowrap;
 }
 
@@ -3614,9 +3665,11 @@ body.case-page--fill .case__outcome-body p {
 
 .menu-drawer__item {
   font-family: var(--font-display);
-  font-size: 62px;
-  line-height: 64px;
-  letter-spacing: -2.2px;
+  /* The H1 token, not a hard-coded 62/64 — that was louder than the cover
+     headline itself once H1 dropped to 50/54 on phones. */
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-heading-lg);
   color: var(--white);
   text-decoration: none;
   white-space: nowrap;
@@ -3632,20 +3685,18 @@ body.case-page--fill .case__outcome-body p {
 
 @media (max-width: 1199px) {
   /* Profile section: topbar pinned to top, intro pinned to bottom,
-     auto gap between. Vertical padding stays small (12px) so the
-     topbar sits close to the screen edge. Horizontal padding dropped
-     — the topbar inset is handled by its own padding, and the intro
-     gets its own --page-x inset below. */
+     auto gap between. Horizontal padding dropped — the topbar inset is
+     handled by its own padding, and the intro gets its own --page-x
+     inset below. */
   .profile-section {
-    /* Natural height instead of the full-viewport cover: 100dvh with the
-       intro pinned to the bottom left ~40% of the first phone screen
-       empty (and even more on tablets). Now the header, greeting and
-       title stack with a fixed gap, and the first project card peeks
-       above the fold as a scroll cue. */
-    min-height: 0;
-    padding-block: 12px 44px;
+    /* Full-screen cover: the topbar sits on the top edge of the screen and
+       the greeting + headline are pinned to the bottom, with the empty space
+       between them doing the work. (Inherits min-height: 100dvh from the
+       base rule — dvh so the iOS URL bar can't clip the headline.) */
+    /* Top padding sits on the topbar itself, so its inset can be read
+       straight off --page-x — see .mobile-topbar--cover below. */
+    padding-block: 0 44px;
     padding-inline: 0;
-    justify-content: flex-start;
     align-items: stretch;
     gap: 48px;
   }
@@ -3690,7 +3741,23 @@ body.case-page--fill .case__outcome-body p {
     flex-wrap: wrap;
     align-items: center;
     row-gap: 10px;
-    padding-inline: var(--page-x);
+    /* One inset all round: the name, the burger chip and the pills below
+       all start exactly --page-x from the top and the left edge. The top
+       used to read heavier — 12px section padding plus the bar's own 6px
+       plus the name's 10px tap padding. */
+    padding: var(--page-x);
+  }
+
+  /* Flush with the left rail — the 4px tap padding pushed the name off the
+     line the pills underneath sit on. */
+  .mobile-topbar--cover .mobile-topbar__link {
+    padding-inline: 0;
+  }
+
+  /* 40px tall, same as the burger chip beside it, so both boxes start on
+     the same top line. */
+  .mobile-topbar--cover .mobile-topbar__name {
+    padding-block: 8px;
   }
 
   .mobile-topbar__buttons {
@@ -3702,6 +3769,144 @@ body.case-page--fill .case__outcome-body p {
        name + burger row */
     width: 100%;
     gap: 8px;
+  }
+
+  /* ===== 'Get in touch' dropdown =====
+     CV / LinkedIn / Telegram used to sit out as three separate pills, which
+     — once Book a call joined them — wrapped into a ragged two-row strip on
+     every phone. They collapse into one pill instead, with Book a call
+     beside it: one calm row, the CTA still first-class. */
+  .contact-drop {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .contact-drop__toggle {
+    gap: 6px;
+    /* Both pills carry the same 8px inner rhythm as the CTA next to them. */
+    padding-inline: 16px;
+    border: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1),
+      background-color 0.18s ease, box-shadow 0.25s ease;
+  }
+
+  /* Pressed: the pill takes the finger — a small squish and a slightly
+     deeper surface, released the moment the touch ends. */
+  .contact-drop__toggle:active {
+    transform: scale(0.96);
+    background-color: #e6e6e6;
+  }
+
+  .contact-drop__chevron {
+    display: block;
+    /* Half a step down so the chevron reads as a hint, not a second label. */
+    opacity: 0.55;
+    transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
+  }
+
+  .contact-drop.is-open .contact-drop__chevron {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+
+  /* Liquid glass, the same material as the avatar's greeting bubble. */
+  .contact-drop__panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 70;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    border-radius: 20px;
+    /* A touch more opaque than the avatar bubble: this panel opens over the
+       cover photo, and at 0.55 the labels picked up its colours. */
+    background: rgba(255, 255, 255, 0.78);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.1),
+      0 0 20px rgba(217, 70, 239, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.96);
+    transform-origin: 24px 0;
+    transition:
+      opacity 0.18s ease,
+      visibility 0.18s,
+      transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .contact-drop.is-open .contact-drop__panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .contact-drop__item {
+    display: flex;
+    align-items: center;
+    min-height: 44px; /* comfortable tap target */
+    padding: 0 14px;
+    border-radius: 14px;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: -1px;
+    color: var(--text-primary);
+    text-decoration: none;
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    /* Each row slips in just behind the panel — the list assembles itself
+       instead of arriving as one block. */
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+      background-color 0.2s ease;
+  }
+
+  .contact-drop.is-open .contact-drop__item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .contact-drop.is-open .contact-drop__item:nth-child(1) { transition-delay: 0.04s; }
+  .contact-drop.is-open .contact-drop__item:nth-child(2) { transition-delay: 0.08s; }
+  .contact-drop.is-open .contact-drop__item:nth-child(3) { transition-delay: 0.12s; }
+
+  /* Pressed row: a magenta wash + the accent colour, so a tap reads as a
+     choice being made rather than a link merely being touched. */
+  .contact-drop.is-open .contact-drop__item:active {
+    background-color: rgba(217, 70, 239, 0.14);
+    color: var(--text-accent);
+    /* Instant on press, so the row lights up under the finger, not after it. */
+    transition-duration: 0.06s;
+    transition-delay: 0s;
+  }
+
+  .contact-drop__item:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: -2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-drop__chevron,
+    .contact-drop__panel,
+    .contact-drop__item {
+      transition: opacity 0.15s linear;
+    }
+    .contact-drop__panel,
+    .contact-drop.is-open .contact-drop__panel {
+      transform: none;
+    }
+    .contact-drop.is-open .contact-drop__item {
+      transition-delay: 0s;
+    }
   }
 
   /* Menu icon button in the top-right corner — a circular 40×40 chip
@@ -4049,14 +4254,28 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
+/* ===== Home cover on phones: the greeting stays on one line =====
+   The greeting shares its row with the 96px photo, so at 375 it has ~231px
+   left and at 360 only ~216px — but at the 44px H3 "Good morning" measures
+   234px and "Good afternoon" 252px. So for most of the day (and on 360px
+   phones for all of it) the cover opened on a ragged two-line
+   "Good / afternoon" beside the photo. Scale the greeting to the width that
+   is actually left instead: the H3 token in full from ~415px up, a couple of
+   steps down on narrower phones — always a single line. */
+@media (max-width: 640px) {
+  .intro__greeting {
+    font-size: min(var(--fs-h3), (100vw - 113px) / 6.9);
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+}
+
 /* ===== Footer area on mobile: tighter (system) spacing + bolder CTA ===== */
 @media (max-width: 640px) {
-  /* The ~100px section gap is too much around the footer. Pull the CTA and the
-     footer up to a 40px (system token) gap — without touching the top spacing
-     (which shares the same flex gap). */
+  /* Pull the CTA closer to the preceding section. The footer inherits the
+     compact 40px CTA-to-divider spacing from the base rule above. */
   .contact { margin-top: calc(var(--space-40) - var(--section-y)); }
   .footer {
-    margin-top: calc(var(--space-40) - var(--section-y));
     padding: var(--space-40) var(--page-x);
   }
   /* Stack copyright + credit on phones — at 375 wide they crowd into
