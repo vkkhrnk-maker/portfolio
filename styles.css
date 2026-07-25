@@ -2882,6 +2882,13 @@ body.case-page--fill .case__outcome-body p {
     display: none;
   }
 
+  /* The Coming-soon ribbon cuts across this card's top-right corner. Now
+     that the subtitle runs the full card width it has to stop short of that
+     diagonal — the ribbon's edge crosses the second line at ~262px. */
+  .project-card--syno .project-card__subtitle {
+    padding-right: 90px;
+  }
+
   /* Syno's card has to grow with its shot: the card-specific 1040/760 ratio
      outranked the generic `aspect-ratio: auto` at the top of this block, so
      the inner box stayed shorter than the screenshot and overflow:hidden
@@ -3462,10 +3469,13 @@ body.case-page--fill .case__outcome-body p {
     border-bottom-width: 1.5px;
   }
 
+  /* The rules run the full width of the screen while the text stays on the
+     --page-x rail — same move as the card plates. */
   .experience-editorial__item {
     grid-template-columns: minmax(0, 1fr);
     gap: 16px;
-    padding: 20px 0 24px;
+    margin-inline: calc(-1 * var(--page-x));
+    padding: 20px var(--page-x) 24px;
     border-top-width: 1.5px;
   }
 
@@ -3496,9 +3506,24 @@ body.case-page--fill .case__outcome-body p {
     height: 12px;
   }
 
+  /* Role first, the place underneath: on a phone the row is read as a list
+     of what she does, and the company is the footnote to it. (Visual order
+     only — desktop keeps company-then-role.) */
   .experience-editorial__identity {
     grid-column: 1;
     grid-row: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .experience-editorial__role {
+    order: 1;
+  }
+
+  .experience-editorial__meta {
+    order: 2;
+    margin-top: 8px;
+    margin-bottom: 0;
   }
 
   .experience-editorial__date {
@@ -3694,8 +3719,10 @@ body.case-page--fill .case__outcome-body p {
        between them doing the work. (Inherits min-height: 100dvh from the
        base rule — dvh so the iOS URL bar can't clip the headline.) */
     /* Top padding sits on the topbar itself, so its inset can be read
-       straight off --page-x — see .mobile-topbar--cover below. */
-    padding-block: 0 44px;
+       straight off --page-x — see .mobile-topbar--cover below. The bottom
+       matches it: the headline sits as close to the bottom edge as the
+       topbar sits to the top one. */
+    padding-block: 0 var(--page-x);
     padding-inline: 0;
     align-items: stretch;
     gap: 48px;
@@ -4568,5 +4595,29 @@ body.case-page--fill .case__outcome-body p {
     padding: 5px;
     background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
     border-radius: 39px;
+  }
+}
+
+/* ===== Full-bleed plates on phones =====
+   The card plates run edge to edge. They carry no radius of their own, so
+   nothing competes with the phone's rounded screen corners, and everything
+   inside them — titles, subtitles, screenshots — drops onto the page's
+   --page-x rail, the same one the cover, the section headings and the
+   experience list stand on. Media to the edge, text inset. */
+@media (max-width: 640px) {
+  .projects {
+    padding-inline: 0;
+  }
+
+  .about__cards {
+    width: auto;
+    margin-inline: calc(-1 * var(--page-x));
+  }
+
+  .project-card__inner,
+  .project-card__inner--itab,
+  .about-card__face,
+  .about-card__face--front {
+    padding-inline: var(--page-x);
   }
 }
