@@ -104,6 +104,10 @@
 @media (max-width: 640px) {
   :root {
     --fs-h1: 50px;          --lh-h1: 54px;
+    /* Section titles come down to meet it. At the tablet values (60/60) the
+       H2s were bigger than the cover headline itself — the page's loudest
+       line has to be the H1, or the hierarchy is inverted. */
+    --fs-h2: 50px;          --lh-h2: 54px;
   }
 }
 
@@ -3397,6 +3401,18 @@ body.case-page--fill .case__outcome-body p {
   font-variant-numeric: tabular-nums;
 }
 
+/* The wrapper exists only for the mobile accordion. `display: contents`
+   dissolves it everywhere else, so the description stays a direct grid item
+   of the row and the desktop layout is untouched. */
+.experience-editorial__detail {
+  display: contents;
+}
+
+/* Same: the disclosure chevron belongs to the phone layout only. */
+.experience-editorial__toggle {
+  display: none;
+}
+
 .experience-editorial__description {
   max-width: 520px;
   justify-self: start;
@@ -3543,12 +3559,94 @@ body.case-page--fill .case__outcome-body p {
     padding: 5px 0 0;
   }
 
-  /* Phones read this list, they don't study it: logo, company + scope, role
-     and dates carry the story, and four paragraphs of body copy on top of
-     them turned the section into a wall of text. The full descriptions stay
-     in the markup (and on tablet up) — they're just not shown here. */
+  /* Phones read this list, they don't study it — six paragraphs of body copy
+     open at once turned the section into a wall of text. So each row keeps
+     its own: a chevron opens what she actually did there, one row at a time. */
+  .experience-editorial__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Bottom of the first row, under the date — the company line lives
+       inside the identity block, so a row of its own would only open a
+       32px hole in every closed row. */
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    align-self: end;
+    width: 32px;
+    height: 32px;
+    margin: -4px -6px -4px 0;   /* optical: the glyph sits on the rail, not its box */
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), color 0.2s ease;
+  }
+
+  .experience-editorial__toggle.is-open {
+    transform: rotate(180deg);
+    color: var(--text-primary);
+  }
+
+  .experience-editorial__toggle svg {
+    display: block;
+  }
+
+  /* max-height rather than the 0fr→1fr grid trick: the row lives inside the
+     item's own grid, and a grid track sizes an fr-based child's contribution
+     to zero, so the panel never claimed any height. The cap is generous —
+     it only has to clear the longest description. */
+  .experience-editorial__detail {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .experience-editorial__detail.is-open {
+    max-height: 320px;   /* JS replaces this with the panel's real height */
+  }
+
   .experience-editorial__description {
-    display: none;
+    min-height: 0;   /* lets the grid row actually collapse to zero */
+    overflow: hidden;
+    /* Padding rides the animation instead of sitting on the closed row —
+       a 0fr row still can't shrink below its item's padding. */
+    padding-top: 0;
+    opacity: 0;
+    transition: opacity 0.28s ease,
+      padding-top 0.42s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .experience-editorial__detail.is-open .experience-editorial__description {
+    padding-top: 16px;
+    opacity: 1;
+    transition-delay: 0.08s;
+  }
+
+  /* The row gap is charged for the third row even while it's collapsed —
+     take it back so a closed row keeps its own rhythm. */
+  .experience-editorial__detail {
+    margin-top: -16px;
+    transition: max-height 0.4s cubic-bezier(0.2, 0, 0, 1),
+      margin-top 0.4s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .experience-editorial__detail.is-open {
+    margin-top: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-editorial__detail,
+    .experience-editorial__toggle,
+    .experience-editorial__description {
+      transition-duration: 0.01s;
+    }
   }
 }
 

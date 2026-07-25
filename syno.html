@@ -2,15 +2,15 @@
 <!--
   ЧЕРНОВИК. Не опубликован, из index.html не слинкован, robots: noindex.
 
-  Что нужно, чтобы страница стала боевой:
-  1. Экспортировать кадры из Figma (файл BJJWcWhQGQW14FJYAv6MKR) и положить
-     в assets/ под именами case-syno-*.webp — имена уже проставлены в
-     подписях плейсхолдеров.
-  2. Заменить каждый <div class="shot-todo"> на <img> ровно так, как это
-     сделано в itab.html (десктопная композиция + слайдер по CARDS.md).
-  3. Заполнить <span class="todo"> — состав команды и год.
-  4. Убрать блок <style data-draft> и этот комментарий.
-  5. Дописать главу 2 публичной выдачей, когда она будет готова.
+  Кадры вытянуты из Figma через MCP (1x PNG). Что осталось до боевой версии:
+  1. Обложка: сейчас стоит assets/syno-desktop.webp (та же, что на карточке
+     главной). Если нужен отдельный hero-арт — заменить.
+  2. Team в мета-блоке — заполнить (подсвечено жёлтым).
+  3. Перед публикацией: пере-экспортировать кадры из Figma в 2x webp
+     (имена файлов сохранить), снять noindex, убрать этот комментарий,
+     перенести <style> из head в styles.css под .case-page--syno.
+  4. Глава 2: дописать публичную выдачу (листинг + карта), когда готова.
+  5. Слот под ссылку на прототип/продукт — закомментирован в Result.
 -->
 <html lang="en">
 <head>
@@ -21,52 +21,91 @@
   <meta http-equiv="Expires" content="0">
   <meta name="robots" content="noindex, nofollow">
   <title>Syno — Case Study · Victoria Kukharenko</title>
-  <meta name="description" content="Syno — designing the artist side of an art platform: a studio for building a portfolio, a public profile, and the flow for applying to open calls. A case study by Victoria Kukharenko.">
+  <meta name="description" content="Syno — designing the artist side of an art platform from scratch: the studio for building a portfolio, the public profile, and the flow for applying to open calls. A case study by Victoria Kukharenko.">
   <meta name="theme-color" content="#59ad3b">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Syno — Case Study · Victoria Kukharenko">
-  <meta property="og:description" content="The artist side of an art platform — from an empty profile to a submitted application.">
+  <meta property="og:description" content="The artist side of an art platform, designed from scratch — from an empty profile to a submitted application.">
   <meta property="og:url" content="https://vkkhrnk-maker.github.io/portfolio/syno.html">
   <meta property="og:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/syno-desktop.png">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Syno — Case Study · Victoria Kukharenko">
-  <meta name="twitter:description" content="The artist side of an art platform — from an empty profile to a submitted application.">
+  <meta name="twitter:description" content="The artist side of an art platform, designed from scratch — from an empty profile to a submitted application.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/syno-desktop.png">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
   <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=261">
+  <link rel="stylesheet" href="styles.css?v=266">
   <script src="typographer.js?v=3" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 
-  <!-- DRAFT-ONLY: серые плашки вместо ещё не экспортированных кадров.
-       Удалить целиком вместе с разметкой .shot-todo. -->
-  <style data-draft>
-    .shot-todo {
+  <!-- Syno-only composition helpers. Пока кейс в черновике, живут в
+       странице; при публикации перенести в styles.css. -->
+  <style>
+    /* Desktop composition: one grey board per figure, every screen shown
+       BIG — full column width, stacked. Same rule as everywhere else on
+       the site: screens are never runts. */
+    .case-page--syno .case__figure-desktop {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      gap: 24px;
+      background: #E2E4E7;
+      padding: 24px;
+    }
+    .case-page--syno .case__figure-desktop img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    /* The one true side-by-side case: a screen with its narrow spec
+       sticker (or two narrow kit sheets) — a pair, not a grid. */
+    .case-page--syno .syno-pair {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .case-page--syno .syno-pair > img { flex: 1 1 0; min-width: 0; width: auto; }
+    .case-page--syno .syno-pair > img.is-narrow { flex: 0 0 280px; width: 280px; }
+    /* Tall component sheets from the kit — show the top, clip the rest. */
+    .case-page--syno .syno-clip {
+      flex: 1 1 0;
+      min-width: 0;
+      max-height: 620px;
+      overflow: hidden;
+    }
+    .case-page--syno .syno-clip img { width: 100%; height: auto; display: block; }
+    /* The small variants strip sits at its natural size, centered. */
+    .case-page--syno img.is-natural {
+      width: auto;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    /* DRAFT-ONLY: слот под кликабельный прототип. */
+    .proto-slot {
+      margin-top: 24px;
+      padding: 28px 24px;
+      border: 1.5px dashed rgba(0, 0, 0, .3);
       text-align: center;
-      padding: 16px;
-      box-sizing: border-box;
-      background: rgb(227, 229, 230);
-      outline: 1px dashed rgba(0, 0, 0, .35);
-      outline-offset: -8px;
       color: rgba(0, 0, 0, .55);
-      font-size: 13px;
-      line-height: 1.35;
+      font-size: 15px;
+      line-height: 1.4;
     }
-    .case__figure-desktop:has(.shot-todo) { display: flex; gap: 16px; }
-    .case__figure-desktop .shot-todo { flex: 1 1 0; height: 340px; }
-    .case__figure-desktop--tall .shot-todo { height: 460px; }
-    .case__slider .shot-todo { width: 100%; height: 100%; }
-    .case__hero-image .shot-todo { width: 100%; height: 100%; min-height: 320px; }
-    .todo {
-      background: #ffe9a8;
-      box-shadow: 0 0 0 2px #ffe9a8;
+    @media (max-width: 640px) {
+      .case-page--syno .case__figure-desktop { display: none; }
     }
+    /* Hero: the studio screen fills the standard hero frame. */
+    .case-page--syno .case__hero-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* DRAFT-ONLY: жёлтая подсветка незаполненного. */
+    .todo { background: #ffe9a8; box-shadow: 0 0 0 2px #ffe9a8; }
   </style>
 </head>
 <body class="case-page--syno">
@@ -118,7 +157,7 @@
     <article class="case">
       <header class="case__hero">
         <h2 class="case__title">Syno — designing the artist side of an art platform from scratch</h2>
-        <p class="case__intro">Syno connects artists, spaces and open calls. There was nothing here to redesign: I defined and designed the artist side from the ground up, from an empty profile to a submitted application — the studio where an artist builds a portfolio, the public profile it produces, and the flow for applying to an open call, together with the UI kit it is all assembled from and the specs engineering builds from.</p>
+        <p class="case__intro">Syno connects artists, spaces and open calls. There was nothing here to redesign: I defined and designed the artist side from the ground up — the studio where an artist builds a portfolio, the public profile it produces, and the flow for applying to an open call. Underneath them, the UI kit the platform is assembled from and the specs engineering builds from.</p>
         <dl class="case-meta case-meta--mobile">
           <div class="case-meta__item">
             <dt>Team</dt>
@@ -134,7 +173,7 @@
           </div>
         </dl>
         <div class="case__hero-image">
-          <div class="shot-todo">Обложка: кабинет художника на 1280 + мобильный экран рядом<br>assets/case-syno-hero.webp</div>
+          <img src="assets/syno-desktop.webp?v=4" alt="Syno — the artist studio, desktop view" loading="eager" fetchpriority="high">
         </div>
       </header>
 
@@ -158,8 +197,11 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Four constraints that shaped the work</h3>
-        <p class="case__section-body">With no existing product to argue from, the brief came from the content itself and from the people on either side of the profile. Four things were settled before a single screen, and everything downstream had to live with them.</p>
+        <h3 class="case__section-title">Design process</h3>
+        <p class="case__section-body">With no product to look at, the work started outside Figma: a scan of how artist registries and open-call platforms already handle profiles and submissions, then interviews with the client about how a call actually runs — what an organiser compares, what artists send today, where it currently breaks. Those two produced the four constraints below, and everything after answers to them.</p>
+        <p class="case__section-body">Then the order that did the most: <strong>a clickable prototype came before the layouts</strong> — built in code with Claude rather than drawn. Flows are easy to agree with on a static screen and hard to defend once you walk them — how many steps an application really takes, where the publishing checklist belongs, what happens when a draft outlives its deadline. The prototype was walked through by the team rather than presented as a demo, and the mockups came last, once the shape had stopped moving — which is why the Figma file reads as decisions rather than options.</p>
+        <!-- DRAFT-ONLY: заглушка, убрать при публикации либо заменить на embed/ссылку -->
+        <div class="proto-slot">Здесь будет кликабельный прототип — embed или кнопка «Walk the prototype».<br>Пока показ наружу не согласован, флоу ниже показаны статичными экранами.</div>
         <div class="case__gap-grid case__gap-grid--four">
           <div class="case__gap-card">
             <h4 class="case__gap-card__title">Work of any shape</h4>
@@ -186,17 +228,18 @@
         <p class="case__section-body">Two decisions did the most here. <strong>Replace was removed from the tile menu</strong> — deleting and adding again produces the same result, without a branch where the replacement itself fails and leaves the artist with neither file. And on touch, <strong>the tile badge became ⋯ instead of ×</strong>: one element could not carry both "remove this" and "make this the cover", so the cross now appears only while a file is uploading or has failed, where it means one thing.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="The upload area — dropzone, the gallery of preview tiles, and a tile in the error state with retry">
-            <div class="shot-todo">Дропзона, пустое состояние<br>assets/case-syno-upload-s1.webp</div>
-            <div class="shot-todo">Сетка плиток с работами<br>assets/case-syno-upload-s2.webp</div>
-            <div class="shot-todo">Плитка: загрузка / ошибка + retry<br>assets/case-syno-upload-s3.webp</div>
+          <div class="case__figure-desktop" aria-label="The upload area — the empty dropzone, then the gallery with the cover set next to a failed upload with retry on the tile">
+            <img src="assets/case-syno-upload-d1.png" alt="Add a work — the dropzone before anything is uploaded" loading="lazy">
+            <div class="syno-pair">
+              <img src="assets/case-syno-upload-d2.png" alt="The works gallery — uploaded tiles, with the cover already set" loading="lazy">
+              <img src="assets/case-syno-upload-d3.png" alt="A failed upload — the error and retry live on the tile itself" loading="lazy">
+            </div>
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the upload area — dropzone, the gallery of tiles, upload and error states, and the cover action on mobile">
-            <div class="case__slide"><div class="shot-todo">Дропзона, пустое состояние<br>case-syno-upload-s1</div></div>
-            <div class="case__slide"><div class="shot-todo">Сетка плиток<br>case-syno-upload-s2</div></div>
-            <div class="case__slide"><div class="shot-todo">Загрузка / ошибка + retry<br>case-syno-upload-s3</div></div>
-            <div class="case__slide"><div class="shot-todo">Мобильная плитка с бейджем ⋯<br>case-syno-upload-s4</div></div>
-            <div class="case__slide"><div class="shot-todo">Шит действий: Make cover / Remove<br>case-syno-upload-s5</div></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the upload area on mobile — the dropzone sheet, uploaded tiles, uploading, and the badge actions">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-upload-m1.png" alt="Add a work on mobile — the bottom-sheet dropzone" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-upload-m2.png" alt="Uploaded works on mobile — tiles carry the ⋯ badge" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-upload-m3.png" alt="Uploading on mobile — progress on the tile, the cross means cancel" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-upload-m4.png" alt="The ⋯ badge opens Make cover and Remove instead of deleting on tap" loading="lazy"></div>
           </div>
           <figcaption>Every state of a work lives on the tile — uploading, failed, ready, cover. On touch the badge opens the actions instead of destroying the file.</figcaption>
         </figure>
@@ -208,16 +251,17 @@
         <p class="case__section-body">The same logic shapes the profile itself. Statement and main info are laid out as a page about an artist rather than a questionnaire, which is exactly how it has to read on the public side — where the work is what the visitor came for and the fields are only the frame around it.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="Profile editing with the publishing checklist, and the public profile it produces">
-            <div class="shot-todo">Редактирование профиля + чеклист публикации<br>assets/case-syno-publish-s1.webp</div>
-            <div class="shot-todo">Statement / main info<br>assets/case-syno-publish-s2.webp</div>
-            <div class="shot-todo">Публичный профиль художника<br>assets/case-syno-publish-s3.webp</div>
+          <div class="case__figure-desktop" aria-label="The draft profile with the publishing checklist next to the statement editor, and the public profile it produces">
+            <div class="syno-pair">
+              <img src="assets/case-syno-publish-d1.png" alt="The owner home in draft — the publishing checklist shows what is still missing" loading="lazy">
+              <img src="assets/case-syno-publish-d2.png" alt="The statement editor — a page about an artist, not a questionnaire" loading="lazy">
+            </div>
+            <img src="assets/case-syno-publish-d3.png" alt="The public profile, just published" loading="lazy">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through profile editing, the publishing checklist, the public profile and the work lightbox">
-            <div class="case__slide"><div class="shot-todo">Чеклист публикации<br>case-syno-publish-s1</div></div>
-            <div class="case__slide"><div class="shot-todo">Statement / main info<br>case-syno-publish-s2</div></div>
-            <div class="case__slide"><div class="shot-todo">Публичный профиль<br>case-syno-publish-s3</div></div>
-            <div class="case__slide"><div class="shot-todo">Лайтбокс работы, в т.ч. видео<br>case-syno-publish-s4</div></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the draft profile with the checklist, the statement editor, and the work lightbox on mobile">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m1.png" alt="The draft profile on mobile with the publishing checklist" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m2.png" alt="Editing the statement on mobile" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-publish-m3.png" alt="The work lightbox on mobile — video plays inside the profile" loading="lazy"></div>
           </div>
           <figcaption>What is missing is shown while the profile is being built, not after Publish is pressed.</figcaption>
         </figure>
@@ -232,49 +276,53 @@
         <p class="case__section-body">Works are selected from the portfolio, not uploaded again; anything missing is added right there through the same uploader as the studio, never a second parallel form. Review comes before submitting and says what is still incomplete — the same rule as the publishing checklist: nothing here fails after the fact when it could have been shown before. And because a deadline turns a saved draft into a real problem, the awkward cases are designed rather than left to chance.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="The four steps of the apply flow — profile, works, questions and review — starting from the open call page and the sign-up modal">
-            <div class="shot-todo">Open Call page → Apply → auth modal<br>963:20382 · case-syno-apply-s1.webp</div>
-            <div class="shot-todo">Step 1 · Profile (has profile / new user)<br>963:20312 · case-syno-apply-s2.webp</div>
-            <div class="shot-todo">Step 2 · Works · 3 selected<br>995:17768 · case-syno-apply-s3.webp</div>
-            <div class="shot-todo">Step 3 · Questions · filled<br>963:20110 · case-syno-apply-s4.webp</div>
-            <div class="shot-todo">Step 4 · Review<br>963:19995 · case-syno-apply-s5.webp</div>
+          <div class="case__figure-desktop" aria-label="The apply flow — the open call page with the sign-up modal, then the four steps in pairs: profile and works, questions and review">
+            <img src="assets/case-syno-apply-d1.png" alt="The open call page — Apply opens the sign-up modal in place" loading="lazy">
+            <div class="syno-pair">
+              <img src="assets/case-syno-apply-d2.png" alt="Step 1 · Profile — prefilled for an artist who already has one" loading="lazy">
+              <img src="assets/case-syno-apply-d3.png" alt="Step 2 · Works — three works picked from the portfolio" loading="lazy">
+            </div>
+            <div class="syno-pair">
+              <img src="assets/case-syno-apply-d4.png" alt="Step 3 · Questions — the call's own questions, filled" loading="lazy">
+              <img src="assets/case-syno-apply-d5.png" alt="Step 4 · Review — the whole application before submitting" loading="lazy">
+            </div>
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the apply flow — the open call page, sign-up, and the four steps up to review and submission">
-            <div class="case__slide"><div class="shot-todo">375 · Auth · Sign up · apply context<br>963:21312</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Step 1 · Profile<br>963:21093</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Step 2 · Works<br>963:21128</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Step 3 · Questions<br>963:21171</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Step 4 · Review<br>963:21192</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Submitted · new user — Registry upsell<br>963:21282</div></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the apply flow on mobile — sign-up inside Apply, the four steps, and the submitted screen">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m1.png" alt="Sign up inside Apply on mobile — the magic-link form" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m2.png" alt="Step 1 · Profile on mobile" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m3.png" alt="Step 2 · Works on mobile — picking from the portfolio" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m4.png" alt="Step 3 · Questions on mobile" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m5.png" alt="Step 4 · Review on mobile" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-apply-m6.png" alt="Submitted — a new user is offered to keep the profile in the Registry" loading="lazy"></div>
           </div>
           <figcaption>One flow, two starting points — and the account is created at the moment of intent, not before it.</figcaption>
         </figure>
 
         <figure class="case__figure">
           <div class="case__figure-desktop" aria-label="The edge cases of applying — a saved draft, a call that closed while the draft was open, and an artist who already applied">
-            <div class="shot-todo">Continue draft · Draft saved toast<br>963:20870 · case-syno-apply-edge1.webp</div>
-            <div class="shot-todo">Resume draft — call closed<br>963:20963 · case-syno-apply-edge2.webp</div>
-            <div class="shot-todo">Already applied<br>963:19975 · case-syno-apply-edge3.webp</div>
+            <img src="assets/case-syno-edge1.png" alt="Returning to a call with a saved draft — Continue draft, and the saved toast" loading="lazy">
+            <img src="assets/case-syno-edge2.png" alt="Resume draft — the call closed while the draft sat open" loading="lazy">
+            <img src="assets/case-syno-edge3.png" alt="Already applied — the call remembers" loading="lazy">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the edge cases — a saved draft, a closed call, and an application already submitted">
-            <div class="case__slide"><div class="shot-todo">Draft saved toast<br>963:20870</div></div>
-            <div class="case__slide"><div class="shot-todo">Resume draft — call closed<br>963:20963</div></div>
-            <div class="case__slide"><div class="shot-todo">Already applied<br>963:19975</div></div>
-            <div class="case__slide"><div class="shot-todo">Step 4 blocked<br>963:20581</div></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the edge cases — the saved draft, the closed call, the repeat application, and the blocked review">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-edge1.png" alt="Returning to a call with a saved draft — Continue draft, and the saved toast" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-edge2.png" alt="Resume draft — the call closed while the draft sat open" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-edge3.png" alt="Already applied — the call remembers" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-edge4.png" alt="Step 4 blocked — review lists what is still missing" loading="lazy"></div>
           </div>
           <figcaption>A draft resumed, a call that closed while it sat open, an artist who already applied — each of them a screen, not a support ticket.</figcaption>
         </figure>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__figure-desktop--tall" aria-label="After submitting — the applications list with statuses and the application details screen">
-            <div class="shot-todo">Applications · list<br>963:22843 · case-syno-apply-after1.webp</div>
-            <div class="shot-todo">Application details · Under review<br>963:22934 · case-syno-apply-after2.webp</div>
-            <div class="shot-todo">Applications · empty state<br>963:22243 · case-syno-apply-after3.webp</div>
+          <div class="case__figure-desktop" aria-label="After submitting — the applications list with statuses, application details under review, and the empty state">
+            <img src="assets/case-syno-after-d1.png" alt="Applications — every submission with its status" loading="lazy">
+            <img src="assets/case-syno-after-d2.png" alt="Application details — under review" loading="lazy">
+            <img src="assets/case-syno-after-d3.png" alt="Applications before the first submission — the empty state points back to open calls" loading="lazy">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the applications list, application details and the empty state">
-            <div class="case__slide"><div class="shot-todo">375 · Applications · list<br>963:23647</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Application details · Under review<br>963:23542</div></div>
-            <div class="case__slide"><div class="shot-todo">375 · Applications · empty<br>992:30264</div></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the applications list, application details and the empty state on mobile">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-after-m1.png" alt="Applications on mobile — every submission with its status" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-after-m2.png" alt="Application details on mobile — under review" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-syno-after-m3.png" alt="Applications empty state on mobile" loading="lazy"></div>
           </div>
           <figcaption>After submitting, an application stops being a black box — it carries its own state, under review, selected, not selected or withdrawn, so nobody has to email an organiser to ask whether it arrived.</figcaption>
         </figure>
@@ -286,15 +334,23 @@
         <p class="case__section-body">Handover has its own format. Specs are written on a <strong>Spec Sticker</strong> component and placed next to the screen they describe, so a developer reads the requirement in the same place they read the layout — no parallel document to keep in sync. A pass across the whole artist side added the states that are easy to leave out and expensive to add later: upload limits and file requirements, skeletons and retry, breakpoints, toasts, the lightbox, account deletion and email change.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop" aria-label="The UI kit and the spec stickers placed next to the screens they describe">
-            <div class="shot-todo">Страницы UI-кита: компоненты и пропы<br>assets/case-syno-system-s1.webp</div>
-            <div class="shot-todo">Spec Sticker рядом с экраном<br>assets/case-syno-system-s2.webp</div>
+          <div class="case__figure-desktop" aria-label="The system — a screen with its spec sticker beside it, component sheets from the kit, and every state of the upload tile">
+            <div class="syno-pair">
+              <img src="assets/case-syno-system-modal.png" alt="The upload-error modal — one of the screens a spec is written against" loading="lazy">
+              <img class="is-narrow" src="assets/case-syno-system-spec.png" alt="A Spec Sticker — upload refusal rules, written beside the screen it describes" loading="lazy">
+            </div>
+            <div class="syno-pair">
+              <div class="syno-clip"><img src="assets/case-syno-kit-cards.png" alt="Card / Artist Works — the component sheet from the kit" loading="lazy"></div>
+              <div class="syno-clip"><img src="assets/case-syno-kit-uploader.png" alt="Media uploader — the component sheet from the kit" loading="lazy"></div>
+            </div>
+            <img class="is-natural" src="assets/case-syno-system-tiles.png" alt="Upload tile — one component, every state: uploaded, cover, video, hover, uploading, error" loading="lazy">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the UI kit and the spec stickers">
-            <div class="case__slide"><div class="shot-todo">UI-кит<br>case-syno-system-s1</div></div>
-            <div class="case__slide"><div class="shot-todo">Spec Sticker у экрана<br>case-syno-system-s2</div></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the spec sticker, the screen it describes, and the upload-tile states">
+            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-syno-system-spec.png" alt="A Spec Sticker — upload refusal rules, written beside the screen it describes" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-syno-system-modal.png" alt="The upload-error modal — one of the screens a spec is written against" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-syno-system-tiles.png" alt="Upload tile — one component, every state" loading="lazy"></div>
           </div>
-          <figcaption>The requirement sits next to the screen it belongs to, in the file developers already have open.</figcaption>
+          <figcaption>The requirement sits next to the screen it belongs to, in the file developers already have open — and the components underneath carry their states with them.</figcaption>
         </figure>
       </section>
 
@@ -307,6 +363,12 @@
           <p><strong>Fewer states to build:</strong> removing Replace took an entire failure branch out of the product before anyone had to implement it.</p>
           <p><strong>Next:</strong> public discovery — the artist listing and the art map — is in design now, and the organiser and jury side follows.</p>
         </div>
+        <!-- СЛОТ ПОД ССЫЛКУ. Раскомментировать, когда будет что показывать:
+             сначала прототип, потом — когда Syno выйдет — сам продукт.
+             Подпись менять на «Visit Syno» / «Walk the prototype». -->
+        <!--
+        <a class="btn btn--light" href="ПОСТАВИТЬ_ССЫЛКУ" target="_blank" rel="noopener">Walk the prototype</a>
+        -->
       </section>
 
       <nav class="case__pager">
