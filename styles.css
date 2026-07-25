@@ -3518,6 +3518,10 @@ body.case-page--fill .case__outcome-body p {
 
   .experience-editorial__role {
     order: 1;
+    /* The same H4 the project and about card titles use — at H3 (44/48) the
+       role was the loudest thing on the page after the cover headline. */
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
   }
 
   .experience-editorial__meta {
@@ -4294,6 +4298,13 @@ body.case-page--fill .case__outcome-body p {
     font-size: min(var(--fs-h3), (100vw - 113px) / 6.9);
     line-height: 1.1;
     white-space: nowrap;
+  }
+
+  /* 60px between the photo row and the headline left a hole in the middle of
+     the cover — at 28px the distance reads like the one between the name and
+     the buttons in the topbar above. */
+  .intro {
+    gap: 28px;
   }
 }
 
