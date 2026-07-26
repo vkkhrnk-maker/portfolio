@@ -2209,18 +2209,11 @@ body.case-page--fill .case__outcome-body p {
   transform: scale(0.99);
 }
 
-/* iTAB uses a clean white stage at every breakpoint. Keep the surface white
-   through hover/press as well, so the card never flashes back to grey. */
-.project-card--itab:hover,
-.project-card--itab:active,
-.project-card--itab {
-  background-color: var(--white);
-  background-image: none;
-}
-
-/* The Workspace card sits on the same grey plate as every other card
-   (it used to be white, which broke the row and washed out the mostly
-   white signature screen — the base .project-card grey + hover apply). */
+/* The iTAB and Workspace cards sit on the same grey plate as every other
+   card (they used to be white, which broke the row and washed out their
+   mostly white screens — the base .project-card grey + hover apply). The
+   white stage existed to carry an unframed screenshot; both shots now sit
+   in their own monitor shell, so the plate can go back to grey. */
 
 /* Whole-card link covers the card. Inner arrow button sits above it (z-index) */
 .project-card__link {
@@ -2461,18 +2454,31 @@ body.case-page--fill .case__outcome-body p {
   container-type: inline-size;
 }
 
-/* Desktop product page — a calm base plane behind the phone. */
+/* Desktop product page — a calm base plane behind the phone, in the same
+   monitor shell the case hero and the mobile card use: a thin titanium bezel
+   with a small corner (a phone's 39px radius on a landscape screen reads as a
+   tablet). The phone beside it is a device, so an unframed browser screenshot
+   next to it read as a loose picture.
+   Height, not the source ratio, sizes the box: the bezel only reads as a
+   monitor when it is whole, so the shell stops 24px above the card edge —
+   level with the phone's bottom — instead of bleeding off it. `cover` then
+   crops the page from the bottom; the page continues below. */
 .project-card__itab-desktop {
   position: absolute;
   z-index: 1;
+  box-sizing: border-box;
   left: 0;
   top: 0;
   width: 75%;
-  height: auto;
-  aspect-ratio: 1370 / 1144;
+  height: calc(100% - 24px);
   object-fit: cover;
   object-position: top center;
-  border-radius: 1.6cqw;
+  padding: clamp(4px, 0.55cqw, 9px);
+  --itab-screen-corner-fill: #fff;
+  background:
+    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: clamp(12px, 1.3cqw, 22px);
 }
 
 /* The same 5px titanium bezel used by the case sliders. Height, rather than
@@ -2497,23 +2503,33 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* ===== Syno card (coming soon) ===== */
-/* A clean white stage for the dark Syno Art Map screenshot; the card is not
-   clickable yet, so its surface stays stable on hover and press. */
+/* The card is not clickable yet, so its surface stays stable on hover and
+   press — but it sits on the same grey plate as the rest of the row. */
 .project-card--syno,
 .project-card--syno:active {
-  background: var(--white);
+  background: var(--grey-200);
   transform: none;            /* not clickable — no press-in */
 }
 @media (hover: hover) {
-  .project-card--syno:hover { background: var(--white); }
+  .project-card--syno:hover { background: var(--grey-200); }
 }
 
 /* Taller than the 1040/693 tile so the wide screenshot fits at the same
-   side margins iTAB uses (≈2.85% each side) without clipping. */
+   side margins iTAB uses (≈2.85% each side) without clipping. 753, not the
+   earlier 760: inside its shell the screen is a touch shorter, and the tile
+   follows it down so the space under the monitor still matches the space
+   beside it.
+   The inner is also the query container the shell below measures itself
+   against — the shot can't query itself. */
 .project-card--syno .project-card__inner {
-  aspect-ratio: 1040 / 760;
+  aspect-ratio: 1040 / 753;
+  container-type: inline-size;
 }
 
+/* The screenshot sits in the same monitor shell as the iTAB cover. Here the
+   bezel is a transparent border with the titanium gradient painted across the
+   border box, so the inner corner is derived from the outer one rather than
+   guessed, and overflow clips the screen to that same curve. */
 .project-card__syno-shot {
   position: absolute;
   top: max(120px, 15%);     /* clear the fixed-height header on narrow desktops */
@@ -2521,12 +2537,22 @@ body.case-page--fill .case__outcome-body p {
   transform: translateX(-50%);
   width: 94.3%;              /* matches the iTAB composition side margins */
   z-index: 2;
+  border: clamp(4px, 0.55cqw, 9px) solid transparent;
+  border-radius: clamp(12px, 1.3cqw, 22px);
+  background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  overflow: hidden;
 }
+/* The window is the page's own ratio inside the export's 33px mat, and the
+   shot is scaled by exactly that mat (1794/1728) so it lands outside the
+   window — the shell's bezel replaces it instead of framing a frame. */
 .project-card__syno-shot img {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 0.8cqw;
+  aspect-ratio: 1728 / 1053;
+  object-fit: cover;
+  transform: scale(1.0382);
+  border-radius: 0;          /* the shell does the rounding now */
 }
 
 /* Diagonal 'Coming soon' ribbon across the top-right corner. The card
@@ -2884,6 +2910,11 @@ body.case-page--fill .case__outcome-body p {
 
   .project-card--itab .project-card__itab-desktop {
     object-position: top center;
+    /* The shot carries its own shell on desktop; here the group is the shell,
+       so the screen drops its bezel and keeps only the white corner fill —
+       otherwise it's a frame inside a frame. */
+    padding: 0;
+    background-image: none;
     /* the asset carries its own rounded transparent corners; filling them
        white keeps the shell's curve the only one on screen */
     background-color: var(--white);
@@ -2923,29 +2954,8 @@ body.case-page--fill .case__outcome-body p {
     aspect-ratio: auto;
   }
 
-  /* The white stages existed to carry unframed screenshots. Now that both
-     shots sit in their own bezel, the cards go back onto the grey plate
-     every other card uses. iTAB is clickable, so it keeps the hover/press
-     feedback; Syno is not, so its surface stays put. */
-  .project-card--itab,
-  .project-card--syno,
-  .project-card--syno:active {
-    background-color: var(--grey-200);
-  }
-
-  .project-card--itab:active {
-    background-color: #ced2d7;
-  }
-
-  @media (hover: hover) {
-    .project-card--itab:hover {
-      background-color: #d6d9dd;
-    }
-
-    .project-card--syno:hover {
-      background-color: var(--grey-200);
-    }
-  }
+  /* Both cards are on the grey plate at every breakpoint now — see the base
+     .project-card / .project-card--syno rules. */
 }
 
 /* Mobile + tablet (≤1199px): lock the Hooh single phone-video to the
