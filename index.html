@@ -23,10 +23,14 @@
   <meta name="twitter:description" content="Product designer crafting complex digital products and scalable design systems.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/profile.jpg">
 
+  <link rel="canonical" href="https://vkkhrnk-maker.github.io/portfolio/">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=277">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=278">
   <script src="typographer.js?v=3" defer></script>
+  <script src="shimmer.js?v=1" defer></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -41,9 +45,8 @@
       </nav>
     </div>
     <div class="sidebar__buttons">
-      <a class="btn btn--light" href="#">CV</a>
-      <a class="btn btn--light" href="#">LinkedIn</a>
-      <a class="btn btn--light" href="#">Telegram</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </aside>
 
@@ -71,7 +74,7 @@
       <div class="intro">
         <div class="intro__header">
           <span class="intro__avatar">
-            <img src="assets/profile.jpg" alt="">
+            <img src="assets/profile.jpg" alt="" width="640" height="640">
           </span>
           <p class="intro__greeting" data-greeting>Hello there</p>
         </div>
@@ -80,22 +83,15 @@
     </section>
 
     <section class="projects" id="works">
-      <article class="project-card project-card--hooh">
-        <a class="project-card__link" href="hooh.html" aria-label="Read the Hooh case study"></a>
+      <article class="project-card project-card--syno" aria-label="Syno — case study coming soon">
+        <span class="project-card__ribbon" aria-hidden="true">Coming soon</span>
         <div class="project-card__inner">
           <header class="project-card__header">
-            <h3 class="project-card__title">Hooh MVP App Design</h3>
-            <p class="project-card__subtitle">How we designed the MVP of the application from scratch</p>
-            <a class="arrow-btn" href="hooh.html" aria-label="Open Hooh MVP App Design">
-              <img src="assets/arrow.svg" alt="">
-            </a>
+            <h3 class="project-card__title">Syno</h3>
+            <p class="project-card__subtitle">An art map connecting artists, spaces and open calls</p>
           </header>
-          <div class="project-card__phones project-card__phones--single">
-            <div class="project-card__phone-video">
-              <video src="assets/hooh-cover.mp4?v=15" poster="assets/hooh-cover-poster.jpg?v=16"
-                     autoplay loop muted playsinline preload="metadata"
-                     aria-label="Hooh app walkthrough — upload, AI summary and assistant chat"></video>
-            </div>
+          <div class="project-card__syno-shot" data-shimmer>
+            <img src="assets/syno-desktop.webp?v=4" alt="Syno Art Map — desktop product view" loading="eager" width="1794" height="1119">
           </div>
         </div>
       </article>
@@ -120,6 +116,26 @@
         </div>
       </article>
 
+      <article class="project-card project-card--hooh">
+        <a class="project-card__link" href="hooh.html" aria-label="Read the Hooh case study"></a>
+        <div class="project-card__inner">
+          <header class="project-card__header">
+            <h3 class="project-card__title">Hooh MVP App Design</h3>
+            <p class="project-card__subtitle">How we designed the MVP of the application from scratch</p>
+            <a class="arrow-btn" href="hooh.html" aria-label="Open Hooh MVP App Design">
+              <img src="assets/arrow.svg" alt="">
+            </a>
+          </header>
+          <div class="project-card__phones project-card__phones--single">
+            <div class="project-card__phone-video">
+              <video src="assets/hooh-cover.mp4?v=15" poster="assets/hooh-cover-poster.jpg?v=16"
+                     autoplay loop muted playsinline preload="metadata"
+                     aria-label="Hooh app walkthrough — upload, AI summary and assistant chat"></video>
+            </div>
+          </div>
+        </div>
+      </article>
+
       <article class="project-card project-card--itab">
         <a class="project-card__link" href="itab.html" aria-label="Read the iTAB case study"></a>
         <div class="project-card__inner project-card__inner--itab">
@@ -130,22 +146,9 @@
               <img src="assets/arrow.svg" alt="">
             </a>
           </header>
-          <div class="project-card__itab-group">
-            <img class="project-card__itab-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop view" loading="lazy">
-            <img class="project-card__itab-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy">
-          </div>
-        </div>
-      </article>
-
-      <article class="project-card project-card--syno" aria-label="Syno — case study coming soon">
-        <span class="project-card__ribbon" aria-hidden="true">Coming soon</span>
-        <div class="project-card__inner">
-          <header class="project-card__header">
-            <h3 class="project-card__title">Syno</h3>
-            <p class="project-card__subtitle">An art map connecting artists, spaces and open calls</p>
-          </header>
-          <div class="project-card__syno-shot">
-            <img src="assets/syno-desktop.webp?v=4" alt="Syno Art Map — desktop product view" loading="lazy">
+          <div class="project-card__itab-group" data-shimmer>
+            <img class="project-card__itab-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop view" loading="lazy" width="1370" height="1144">
+            <img class="project-card__itab-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy" width="504" height="1088">
           </div>
         </div>
       </article>
@@ -242,7 +245,7 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Itab</p>
-              <p class="experience-editorial__scope">Mobile App, Web</p>
+              <p class="experience-editorial__scope">Mobile App, Web · Contract</p>
             </div>
             <h3 class="experience-editorial__role">Product designer</h3>
           </div>
@@ -280,7 +283,7 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Abramova School</p>
-              <p class="experience-editorial__scope">Education</p>
+              <p class="experience-editorial__scope">Education · Part-time</p>
             </div>
             <h3 class="experience-editorial__role">UI/UX designer, mentor</h3>
           </div>
@@ -301,7 +304,7 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Cryptomi</p>
-              <p class="experience-editorial__scope">Crypto product</p>
+              <p class="experience-editorial__scope">Crypto product · Contract</p>
             </div>
             <h3 class="experience-editorial__role">UI/UX designer</h3>
           </div>
@@ -421,9 +424,8 @@
       <a class="menu-drawer__item" href="#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
-      <a class="menu-drawer__contact" href="#">CV</a>
-      <a class="menu-drawer__contact" href="#">LinkedIn</a>
-      <a class="menu-drawer__contact" href="#">Telegram</a>
+      <a class="menu-drawer__contact" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="menu-drawer__contact" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 

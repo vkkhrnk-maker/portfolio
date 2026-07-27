@@ -2982,8 +2982,11 @@ body.case-page--fill .case__outcome-body p {
     flex: none;
     width: 100%;
     aspect-ratio: auto;
-    height: 400px;
-    min-height: 400px;
+    /* 320, not 400: tall enough for the deck-stacking peeks, short enough
+       that the number-top / text-bottom layout doesn't read as an empty
+       middle on phones and tablets. */
+    height: 320px;
+    min-height: 320px;
     position: sticky;
     transform: none;
     perspective: none;
@@ -3014,7 +3017,7 @@ body.case-page--fill .case__outcome-body p {
   }
 
   .about-card__inner {
-    height: 400px;
+    height: 320px;
     transform: none;
     transition: none;
   }
@@ -4805,4 +4808,30 @@ a, button, [role="button"], summary, label {
   .case__itab-cover-mobile {
     display: none;
   }
+}
+
+/* ===== Media shimmer (Syno-style loading sweep) =====
+   JS (shimmer.js) adds .is-loading to [data-shimmer] containers whose
+   images haven't finished loading, and removes it when they have — so
+   no-JS visitors never see a stuck placeholder. The overlay is opaque
+   bg-card with a soft light sweep, and inherits the container's radius. */
+[data-shimmer].is-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  background:
+    linear-gradient(100deg, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 64%) no-repeat 120% 0 / 200% 100%,
+    var(--bg-card);
+  animation: media-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes media-shimmer {
+  from { background-position: 120% 0, 0 0; }
+  to   { background-position: -80% 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-shimmer].is-loading::after { animation: none; }
 }

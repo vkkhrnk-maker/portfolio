@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>iTAB — Case Study · Victoria Kukharenko</title>
   <meta name="description" content="iTAB — redesigning a supplement product card across web and mobile to make product value, trust signals, and purchase actions clearer. A case study by Victoria Kukharenko.">
   <meta name="theme-color" content="#59ad3b">
@@ -23,10 +20,14 @@
   <meta name="twitter:description" content="Redesigning a supplement product card for clearer decisions across web and mobile.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-itab-hero.jpg">
 
+  <link rel="canonical" href="https://vkkhrnk-maker.github.io/portfolio/itab.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=277">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=278">
   <script src="typographer.js?v=3" defer></script>
+  <script src="shimmer.js?v=1" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body class="case-page--itab">
@@ -51,9 +52,8 @@
       </dl>
     </div>
     <div class="sidebar__buttons">
-      <a class="btn btn--light" href="#">CV</a>
-      <a class="btn btn--light" href="#">LinkedIn</a>
-      <a class="btn btn--light" href="#">Telegram</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </aside>
 
@@ -94,12 +94,12 @@
           </div>
         </dl>
         <div class="case__hero-image case__hero-image--itab">
-          <div class="case__hero-figma case__itab-cover">
-            <img class="case__itab-cover-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop web view" loading="eager">
-            <img class="case__itab-cover-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile supplement detail screen" loading="eager">
+          <div class="case__hero-figma case__itab-cover" data-shimmer>
+            <img class="case__itab-cover-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop web view" loading="eager" width="1370" height="1144">
+            <img class="case__itab-cover-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile supplement detail screen" loading="eager" width="504" height="1088">
           </div>
           <div class="case__hero-split">
-            <div class="case__hero-plate"><img src="assets/itab-mobile.webp?v=1" alt="iTAB mobile product card — supplement detail screen" loading="eager"></div>
+            <div class="case__hero-plate"><img src="assets/itab-mobile.webp?v=1" alt="iTAB mobile product card — supplement detail screen" loading="eager" width="504" height="1088"></div>
           </div>
         </div>
       </header>
@@ -152,22 +152,22 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--available" aria-label="Pricing card next to two mobile product cards showing the available-state CTA transitioning into quantity control after add-to-cart">
-            <img class="case__itab-board-card" src="assets/case-itab-uxA1-s1.webp?v=3" alt="Pricing card with add-to-cart, instalments, pickup points and earned points" loading="lazy">
-            <img class="case__itab-board-phone case__itab-board-phone--left" src="assets/case-itab-uxA1-s2.webp?v=1" alt="Product card with the available-state Add to cart button" loading="lazy">
-            <img class="case__itab-board-phone case__itab-board-phone--right" src="assets/case-itab-uxA1-s3.webp?v=1" alt="Product card after adding — the CTA becomes a quantity control" loading="lazy">
+            <img class="case__itab-board-card" src="assets/case-itab-uxA1-s1.webp?v=3" alt="Pricing card with add-to-cart, instalments, pickup points and earned points" loading="lazy" width="563" height="612">
+            <img class="case__itab-board-phone case__itab-board-phone--left" src="assets/case-itab-uxA1-s2.webp?v=1" alt="Product card with the available-state Add to cart button" loading="lazy" width="502" height="1088">
+            <img class="case__itab-board-phone case__itab-board-phone--right" src="assets/case-itab-uxA1-s3.webp?v=1" alt="Product card after adding — the CTA becomes a quantity control" loading="lazy" width="502" height="1088">
           </div>
           <div class="case__figure-desktop case__itab-board case__itab-board--unavailable" aria-label="The unavailable-state flow — Notify about arrival, the subscribed confirmation, and the basket showing a currently-unavailable item with restock details">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-uxA2-s1.webp?v=1" alt="Notify me about arrival on an unavailable product" loading="lazy">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-uxA2-s3.webp?v=1" alt="Basket showing the currently-unavailable item with restock details" loading="lazy">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-uxA2-s1.webp?v=1" alt="Notify me about arrival on an unavailable product" loading="lazy" width="502" height="1088">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy" width="503" height="1088">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-uxA2-s3.webp?v=1" alt="Basket showing the currently-unavailable item with restock details" loading="lazy" width="502" height="1088">
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the purchase states — the product card, add to cart, pricing, and the unavailable-state flow">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA1-s2.webp?v=1" alt="Product card with the available-state Add to cart button" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA1-s3.webp?v=1" alt="Product card after adding — the CTA becomes a quantity control" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxA1-s1.webp?v=3" alt="Pricing card with add-to-cart, instalments, pickup points and earned points" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s1.webp?v=1" alt="Notify me about arrival on an unavailable product" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s3.webp?v=1" alt="Basket showing the currently-unavailable item with restock details" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA1-s2.webp?v=1" alt="Product card with the available-state Add to cart button" loading="lazy" width="502" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA1-s3.webp?v=1" alt="Product card after adding — the CTA becomes a quantity control" loading="lazy" width="502" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxA1-s1.webp?v=3" alt="Pricing card with add-to-cart, instalments, pickup points and earned points" loading="lazy" width="563" height="612"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s1.webp?v=1" alt="Notify me about arrival on an unavailable product" loading="lazy" width="502" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="assets/case-itab-uxA2-s2.webp?v=2" alt="Subscribed confirmation — you'll be notified when the product is back" loading="lazy" width="503" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxA2-s3.webp?v=1" alt="Basket showing the currently-unavailable item with restock details" loading="lazy" width="502" height="1088"></div>
           </div>
         </figure>
       </section>
@@ -179,12 +179,12 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--evidence" aria-label="Research evidence on desktop next to the mobile reviews screen">
-            <img class="case__itab-board-desktop" src="assets/case-itab-uxB-s1.webp?v=2" alt="Web view of research evidence cards supporting the product" loading="lazy">
-            <img class="case__itab-board-phone case__itab-board-phone--evidence" src="assets/case-itab-uxB-s2.webp?v=1" alt="Product reviews with an AI summary of recurring customer feedback" loading="lazy">
+            <img class="case__itab-board-desktop" src="assets/case-itab-uxB-s1.webp?v=2" alt="Web view of research evidence cards supporting the product" loading="lazy" width="1782" height="1003">
+            <img class="case__itab-board-phone case__itab-board-phone--evidence" src="assets/case-itab-uxB-s2.webp?v=1" alt="Product reviews with an AI summary of recurring customer feedback" loading="lazy" width="525" height="1088">
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the research evidence and the reviews screen">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-uxB-s1.webp?v=2" alt="Web view of research evidence cards supporting the product" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxB-s2.webp?v=1" alt="Product reviews with an AI summary of recurring customer feedback" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-uxB-s1.webp?v=2" alt="Web view of research evidence cards supporting the product" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-uxB-s2.webp?v=1" alt="Product reviews with an AI summary of recurring customer feedback" loading="lazy" width="525" height="1088"></div>
           </div>
         </figure>
       </section>
@@ -196,29 +196,29 @@
         <figure class="case__figure">
           <div class="case__figure-desktop case__signals-slides" aria-label="Three separate slides for labels, the lab-confirmation interface, and its inline marker">
             <div class="case__signals-slide case__signals-slide--labels">
-              <img src="assets/case-itab-uxC-s1.webp?v=2" alt="System of promotional and status labels" loading="lazy">
+              <img src="assets/case-itab-uxC-s1.webp?v=2" alt="System of promotional and status labels" loading="lazy" width="252" height="634">
             </div>
             <div class="case__signals-slide case__signals-slide--phone">
               <div class="case__signals-phone">
                 <div class="case__signals-phone-viewport">
-                  <img src="assets/case-itab-uxC-s2.webp?v=3" alt="Lower half of the independent-lab composition-verified interface" loading="lazy">
+                  <img src="assets/case-itab-uxC-s2.webp?v=3" alt="Lower half of the independent-lab composition-verified interface" loading="lazy" width="743" height="1625">
                 </div>
               </div>
             </div>
             <div class="case__signals-slide case__signals-slide--marker">
-              <img src="assets/case-itab-uxC-s3.webp?v=1" alt="Inline composition-verified marker" loading="lazy">
+              <img src="assets/case-itab-uxC-s3.webp?v=1" alt="Inline composition-verified marker" loading="lazy" width="559" height="112">
             </div>
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the label system and the lab-confirmation detail">
-            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxC-s1.webp?v=2" alt="System of promotional and status labels — Pre-order, Black Friday, Expert's Choice and more" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxC-s1.webp?v=2" alt="System of promotional and status labels — Pre-order, Black Friday, Expert's Choice and more" loading="lazy" width="252" height="634"></div>
             <div class="case__slide">
               <div class="case__signals-phone">
                 <div class="case__signals-phone-viewport">
-                  <img src="assets/case-itab-uxC-s2.webp?v=3" alt="Lower half of the independent-lab composition-verified interface" loading="lazy">
+                  <img src="assets/case-itab-uxC-s2.webp?v=3" alt="Lower half of the independent-lab composition-verified interface" loading="lazy" width="743" height="1625">
                 </div>
               </div>
             </div>
-            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxC-s3.webp?v=1" alt="Inline composition-verified marker" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="assets/case-itab-uxC-s3.webp?v=1" alt="Inline composition-verified marker" loading="lazy" width="559" height="112"></div>
           </div>
         </figure>
       </section>
@@ -242,7 +242,7 @@
           </svg>
           <span>Home</span>
         </a>
-        <a class="case__pager-btn case__pager-btn--next" href="hooh.html">
+        <a class="case__pager-btn case__pager-btn--next" href="hooh-fill.html">
           <span>Next case</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"/>
@@ -281,9 +281,8 @@
       <a class="menu-drawer__item" href="index.html#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
-      <a class="menu-drawer__contact" href="#">CV</a>
-      <a class="menu-drawer__contact" href="#">LinkedIn</a>
-      <a class="menu-drawer__contact" href="#">Telegram</a>
+      <a class="menu-drawer__contact" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="menu-drawer__contact" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 

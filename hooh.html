@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>Hooh — Case Study · Victoria Kukharenko</title>
   <meta name="description" content="Hooh — an AI assistant translating complex bureaucracy into human language. A case study by Victoria Kukharenko: problem, process, key UX decisions and launched MVP across web and iOS.">
   <meta name="theme-color" content="#d946ef">
@@ -23,10 +20,14 @@
   <meta name="twitter:description" content="An AI assistant translating complex bureaucracy into human language.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-hero.jpg">
 
+  <link rel="canonical" href="https://vkkhrnk-maker.github.io/portfolio/hooh.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=277">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=278">
   <script src="typographer.js?v=3" defer></script>
+  <script src="shimmer.js?v=1" defer></script>
   <style>
     /* Loading-state, ChatGPT-style (kept inline so styles.css WIP stays untouched):
        the phrase sits still and a light shimmer sweeps across it; phrase changes
@@ -73,9 +74,8 @@
       </dl>
     </div>
     <div class="sidebar__buttons">
-      <a class="btn btn--light" href="#">CV</a>
-      <a class="btn btn--light" href="#">LinkedIn</a>
-      <a class="btn btn--light" href="#">Telegram</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </aside>
 
@@ -115,11 +115,11 @@
           </div>
         </dl>
         <div class="case__hero-image" data-parallax-root>
-          <img class="case__hero-clouds case__hero-clouds--back" src="assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-back">
-          <picture class="case__hero-photo" data-parallax-layer="photo">
-            <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager">
+          <img class="case__hero-clouds case__hero-clouds--back" src="assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-back" width="340" height="200">
+          <picture class="case__hero-photo" data-parallax-layer="photo" data-shimmer>
+            <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager" width="3264" height="2052">
           </picture>
-          <img class="case__hero-clouds case__hero-clouds--front" src="assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-front">
+          <img class="case__hero-clouds case__hero-clouds--front" src="assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-front" width="340" height="200">
         </div>
       </header>
 
@@ -168,12 +168,12 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__hooh-board case__hooh-board--onboard" role="group" aria-label="iOS start screen next to the auto-categorization panel">
-            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy"></div>
-            <div class="case__hooh-plate case__hooh-plate--gradient"><img class="case__hooh-tags" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy" width="742" height="1615"></div>
+            <div class="case__hooh-plate case__hooh-plate--gradient"><img class="case__hooh-tags" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy" width="443" height="1712"></div>
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the upload and categorization screens">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy"></div>
-            <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--card" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy" width="742" height="1615"></div>
+            <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--card" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy" width="443" height="1712"></div>
           </div>
           <figcaption>Users start by uploading a document, while the system helps organize it through automatic categorization.</figcaption>
         </figure>
@@ -182,39 +182,39 @@
           <div class="case__figure-desktop case__hooh-board case__hooh-board--feed" role="group" aria-label="iOS document summary feed next to the web documents dashboard">
             <div class="case__hooh-plate">
               <div class="case__hooh-feed">
-                <img src="assets/case-feed-1.webp?v=2" alt="Maria's blood test — the document requires attention" loading="lazy">
-                <img src="assets/case-feed-2.webp?v=2" alt="Kira's ELPAC report — the document requires attention" loading="lazy">
-                <img src="assets/case-feed-3.webp?v=2" alt="Vehicle inspection checklist — everything looks good" loading="lazy">
+                <img src="assets/case-feed-1.webp?v=2" alt="Maria's blood test — the document requires attention" loading="lazy" width="859" height="1084">
+                <img src="assets/case-feed-2.webp?v=2" alt="Kira's ELPAC report — the document requires attention" loading="lazy" width="859" height="1066">
+                <img src="assets/case-feed-3.webp?v=2" alt="Vehicle inspection checklist — everything looks good" loading="lazy" width="861" height="1204">
               </div>
             </div>
             <div class="case__hooh-plate">
-              <img class="case__hooh-board-window" src="assets/case-uxB-s2.webp?v=7" alt="Web documents folder view with categorized document cards" loading="lazy">
+              <img class="case__hooh-board-window" src="assets/case-uxB-s2.webp?v=7" alt="Web documents folder view with categorized document cards" loading="lazy" width="1600" height="1062">
             </div>
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the summary cards and documents dashboard">
             <div class="case__slide case__slide--feed">
               <div class="case__feed-track">
-                <img class="case__feed-card" src="assets/case-feed-3.webp?v=2" alt="" aria-hidden="true" loading="lazy">
-                <img class="case__feed-card" src="assets/case-feed-1.webp?v=2" alt="Maria's blood test — the document requires attention" loading="lazy">
-                <img class="case__feed-card" src="assets/case-feed-2.webp?v=2" alt="Kira's ELPAC report — the document requires attention" loading="lazy">
-                <img class="case__feed-card" src="assets/case-feed-3.webp?v=2" alt="Vehicle inspection checklist — everything looks good" loading="lazy">
-                <img class="case__feed-card" src="assets/case-feed-1.webp?v=2" alt="" aria-hidden="true" loading="lazy">
-                <img class="case__feed-card" src="assets/case-feed-2.webp?v=2" alt="" aria-hidden="true" loading="lazy">
+                <img class="case__feed-card" src="assets/case-feed-3.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="861" height="1204">
+                <img class="case__feed-card" src="assets/case-feed-1.webp?v=2" alt="Maria's blood test — the document requires attention" loading="lazy" width="859" height="1084">
+                <img class="case__feed-card" src="assets/case-feed-2.webp?v=2" alt="Kira's ELPAC report — the document requires attention" loading="lazy" width="859" height="1066">
+                <img class="case__feed-card" src="assets/case-feed-3.webp?v=2" alt="Vehicle inspection checklist — everything looks good" loading="lazy" width="861" height="1204">
+                <img class="case__feed-card" src="assets/case-feed-1.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="859" height="1084">
+                <img class="case__feed-card" src="assets/case-feed-2.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="859" height="1066">
               </div>
             </div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxB-s2.webp?v=7" alt="Web documents folder view with categorized document cards" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxB-s2.webp?v=7" alt="Web documents folder view with categorized document cards" loading="lazy" width="1600" height="1062"></div>
           </div>
           <figcaption>Color cues pinned to risk only, not document type. Users don't need to map "yellow = medical, red = legal" — they need "yellow = needs your attention". Type info lives in the card title, not the cue.</figcaption>
         </figure>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__hooh-board case__hooh-board--report" role="group" aria-label="Desktop view of the Complete Blood Count Report next to the iOS Summary screen">
-            <img class="case__hooh-board-window" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel with the Hooh assistant" loading="lazy">
-            <img class="case__hooh-board-phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy">
+            <img class="case__hooh-board-window" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel with the Hooh assistant" loading="lazy" width="1600" height="1062">
+            <img class="case__hooh-board-phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy" width="715" height="1618">
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the desktop report and the iOS summary">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel" loading="lazy" width="1600" height="1062"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy" width="715" height="1618"></div>
           </div>
           <figcaption>Users can move from a quick snapshot to a detailed summary and contextual Q&amp;A without reading the full file line by line.</figcaption>
         </figure>
@@ -226,14 +226,14 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__hooh-board case__hooh-board--chat" role="group" aria-label="Three iOS Hooh Assistant screens side by side">
-            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy"></div>
-            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary explanation" loading="lazy"></div>
-            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy" width="745" height="1621"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary explanation" loading="lazy" width="743" height="1622"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy" width="737" height="1612"></div>
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the three Hooh Assistant screens">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy" width="745" height="1621"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary" loading="lazy" width="743" height="1622"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy" width="737" height="1612"></div>
           </div>
         </figure>
 
@@ -241,21 +241,21 @@
           <div class="case__split case__split--chatB">
             <div class="case__split-pane case__split-pane--loading">
               <div class="loading-state" role="status" aria-label="Gathering information">
-                <img class="loading-state__mark" src="assets/hooh-loader.webp?v=1" alt="" aria-hidden="true">
+                <img class="loading-state__mark" src="assets/hooh-loader.webp?v=1" alt="" aria-hidden="true" width="600" height="600">
                 <span class="loading-state__text"><span class="loading-state__cycle" data-cycle="Gathering information|Reading your documents|Analyzing key findings"><span class="loading-state__phrase">Gathering information</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span></span>
               </div>
             </div>
             <div class="case__split-pane case__split-pane--suggestions">
-              <img class="case__split-pane-image" src="assets/case-chatB-suggestions.webp?v=1" alt="Suggested follow-up questions on a soft pastel gradient: Summarize this category, What is my latest hemoglobin level?, Analyze all files in this category">
+              <img class="case__split-pane-image" src="assets/case-chatB-suggestions.webp?v=1" alt="Suggested follow-up questions on a soft pastel gradient: Summarize this category, What is my latest hemoglobin level?, Analyze all files in this category" width="1602" height="636">
             </div>
           </div>
         </figure>
 
         <figure class="case__figure">
-          <picture class="case__figure-desktop"><img src="assets/case-chatC.webp?v=5" alt="Two desktop screens on a single backdrop — a fresh Hooh Assistant prompt 'What would you like to explore?' and an in-progress chat about elevated white blood cells with follow-up suggestions" loading="lazy"></picture>
+          <picture class="case__figure-desktop"><img src="assets/case-chatC.webp?v=5" alt="Two desktop screens on a single backdrop — a fresh Hooh Assistant prompt 'What would you like to explore?' and an in-progress chat about elevated white blood cells with follow-up suggestions" loading="lazy" width="3264" height="1801"></picture>
           <div class="case__slider" role="group" aria-label="Swipe through the two desktop assistant screens">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-chatC-s1.webp?v=7" alt="Fresh Hooh Assistant prompt: What would you like to explore?" loading="lazy"></div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-chatC-s2.webp?v=7" alt="In-progress chat about elevated white blood cells with follow-up suggestions" loading="lazy"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-chatC-s1.webp?v=7" alt="Fresh Hooh Assistant prompt: What would you like to explore?" loading="lazy" width="1600" height="1065"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-chatC-s2.webp?v=7" alt="In-progress chat about elevated white blood cells with follow-up suggestions" loading="lazy" width="1600" height="1062"></div>
           </div>
         </figure>
       </section>
@@ -298,7 +298,7 @@
           </svg>
           <span>Home</span>
         </a>
-        <a class="case__pager-btn case__pager-btn--next" href="hooh-fill.html">
+        <a class="case__pager-btn case__pager-btn--next" href="itab.html">
           <span>Next case</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"/>
@@ -337,9 +337,8 @@
       <a class="menu-drawer__item" href="index.html#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
-      <a class="menu-drawer__contact" href="#">CV</a>
-      <a class="menu-drawer__contact" href="#">LinkedIn</a>
-      <a class="menu-drawer__contact" href="#">Telegram</a>
+      <a class="menu-drawer__contact" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="menu-drawer__contact" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 

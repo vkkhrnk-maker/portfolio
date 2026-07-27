@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <title>Hooh Document Workspace — Case Study · Victoria Kukharenko</title>
   <meta name="description" content="Hooh Document Workspace — extending Hooh from understanding documents to acting on them. A case study by Victoria Kukharenko: auto-filling forms with data Hooh already knows, signing in one tap, and a ten-tool workspace for editing, converting and managing documents.">
   <meta name="theme-color" content="#d97706">
@@ -23,10 +20,14 @@
   <meta name="twitter:description" content="Extending Hooh from reading documents to acting on them — fill, sign, edit and manage, with data the app already knows.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/hooh-pdf-cover-final.jpg?v=1">
 
+  <link rel="canonical" href="https://vkkhrnk-maker.github.io/portfolio/hooh-fill.html">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=277">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=278">
   <script src="typographer.js?v=3" defer></script>
+  <script src="shimmer.js?v=1" defer></script>
 </head>
 <body class="case-page--fill">
   <aside class="sidebar sidebar--case">
@@ -50,9 +51,8 @@
       </dl>
     </div>
     <div class="sidebar__buttons">
-      <a class="btn btn--light" href="#">CV</a>
-      <a class="btn btn--light" href="#">LinkedIn</a>
-      <a class="btn btn--light" href="#">Telegram</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </aside>
 
@@ -95,7 +95,7 @@
             <dd>2026</dd>
           </div>
         </dl>
-        <div class="case__hero-image case__hero-image--fill">
+        <div class="case__hero-image case__hero-image--fill" data-shimmer>
           <picture>
             <source srcset="assets/hooh-pdf-cover-final.webp?v=1" type="image/webp">
             <img src="assets/hooh-pdf-cover-final.jpg?v=1"
@@ -109,19 +109,19 @@
       <section class="case__grid">
         <div class="case__block">
           <h3 class="case__block-title">Problem</h3>
-          <p class="case__block-body">Even when a document is clear, action still costs time. People retype the same personal data into every new form, search for where to sign, then convert the result to share or store — and each step that pushed them out to another app was a place the workflow, and the reason to keep using Hooh, quietly leaked. Reading was solved by the first release; everything after it was still manual</p>
+          <p class="case__block-body">Even when a document is clear, action still costs time. People retype the same personal data into every new form, search for where to sign, then convert the result to share or store — and each step that pushed them out to another app was a place where the workflow — and the reason to keep using Hooh — quietly leaked. Reading was solved by the first release; everything after it was still manual.</p>
         </div>
         <div class="case__block">
           <h3 class="case__block-title">Task</h3>
-          <p class="case__block-body">Extend Hooh from a reading tool into a complete document workflow. Let users fill and sign any form on iOS using data already available in their previously uploaded documents — without losing control over what gets submitted</p>
+          <p class="case__block-body">Extend Hooh from a reading tool into a complete document workflow. Let users fill and sign any form on iOS using data already available in their previously uploaded documents — without losing control over what gets submitted.</p>
         </div>
         <div class="case__block">
           <h3 class="case__block-title">Users</h3>
-          <p class="case__block-body">The same audience as the first Hooh release — expats, digital nomads, and people without a legal background. Most of them process a handful of new forms every month: visa applications, lease agreements, school paperwork, banking contracts</p>
+          <p class="case__block-body">The same audience as the first Hooh release — expats, digital nomads, and people without a legal background. Most of them process a handful of new forms every month: visa applications, lease agreements, school paperwork, banking contracts.</p>
         </div>
         <div class="case__block">
           <h3 class="case__block-title">Scope</h3>
-          <p class="case__block-body">Smart Fill mode with manual fallback, a signature flow that supports both drawing and camera capture, an explicit save and version model, and seven more tools on shared rules — markup, translate, scan to text, merge, pages, convert and compress</p>
+          <p class="case__block-body">Smart Fill mode with manual fallback, a signature flow that supports both drawing and camera capture, an explicit save and version model, and seven more tools on shared rules — markup, translate, scan to text, merge, pages, convert and compress.</p>
         </div>
       </section>
 
@@ -142,7 +142,7 @@
                      autoplay loop muted playsinline preload="metadata"
                      aria-label="The full Smart Fill flow — Hooh recognizes the form's fields and fills them from the user's stored documents, end to end"></video>
             </div>
-            <div class="shot"><picture><source srcset="assets/fill-guidance.webp?v=6" type="image/webp"><img src="assets/fill-guidance.png?v=6" alt="The More guidance sheet — the form explains exactly what a field expects before the user types" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-guidance.webp?v=6" type="image/webp"><img src="assets/fill-guidance.png?v=6" alt="The More guidance sheet — the form explains exactly what a field expects before the user types" loading="lazy" width="760" height="1652"></picture></div>
             <div class="shot">
               <video src="assets/hooh-veto.mp4?v=4" poster="assets/hooh-veto-poster.jpg?v=5"
                      autoplay loop muted playsinline preload="metadata"
@@ -154,9 +154,9 @@
 
         <figure class="case__figure">
           <div class="shots">
-            <div class="shot"><picture><source srcset="assets/fill-fieldsrc.webp?v=2" type="image/webp"><img src="assets/fill-fieldsrc.png?v=2" alt="A tapped field opens with its explanation and the exact source document pinned to the value" loading="lazy"></picture></div>
-            <div class="shot"><picture><source srcset="assets/fill-picker.webp?v=2" type="image/webp"><img src="assets/fill-picker.png?v=2" alt="Marital status — enumerated fields pick from a native list instead of free typing" loading="lazy"></picture></div>
-            <div class="shot"><picture><source srcset="assets/fill-preview.webp?v=2" type="image/webp"><img src="assets/fill-preview.png?v=2" alt="The eye — a live preview of the document with the current values, before anything is saved" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-fieldsrc.webp?v=2" type="image/webp"><img src="assets/fill-fieldsrc.png?v=2" alt="A tapped field opens with its explanation and the exact source document pinned to the value" loading="lazy" width="760" height="1652"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-picker.webp?v=2" type="image/webp"><img src="assets/fill-picker.png?v=2" alt="Marital status — enumerated fields pick from a native list instead of free typing" loading="lazy" width="760" height="1652"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-preview.webp?v=2" type="image/webp"><img src="assets/fill-preview.png?v=2" alt="The eye — a live preview of the document with the current values, before anything is saved" loading="lazy" width="760" height="1652"></picture></div>
           </div>
           <figcaption>Control at field level — a tapped value opens with its explanation and the exact source document, enumerated fields use a picker, and the eye previews the filled document before anything is saved.</figcaption>
         </figure>
@@ -168,13 +168,13 @@
 
         <figure class="case__figure">
           <div class="shots shots--center">
-            <div class="shot"><picture><source srcset="assets/fill-camera.webp?v=6" type="image/webp"><img src="assets/fill-camera.png?v=6" alt="Capturing an existing signature with the camera" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-camera.webp?v=6" type="image/webp"><img src="assets/fill-camera.png?v=6" alt="Capturing an existing signature with the camera" loading="lazy" width="760" height="1652"></picture></div>
             <div class="shot shot--lead">
               <video src="assets/hooh-sign.mp4?v=3" poster="assets/hooh-sign-poster.jpg?v=4"
                      autoplay loop muted playsinline preload="metadata"
                      aria-label="A signature drawn on the canvas stroke by stroke, then saved to the signature library in one tap"></video>
             </div>
-            <div class="shot"><picture><source srcset="assets/fill-sigplace.webp?v=8" type="image/webp"><img src="assets/fill-sigplace.png?v=8" alt="The saved signature dropped onto the W-4's signature line — drag to move, pinch to resize" loading="lazy"></picture></div>
+            <div class="shot"><picture><source srcset="assets/fill-sigplace.webp?v=8" type="image/webp"><img src="assets/fill-sigplace.png?v=8" alt="The saved signature dropped onto the W-4's signature line — drag to move, pinch to resize" loading="lazy" width="760" height="1652"></picture></div>
           </div>
           <figcaption>Same outcome, two routes — draw it once on the canvas, or capture an existing signature with the camera. Either way it lands in the library and drops onto the next document in one tap.</figcaption>
         </figure>
@@ -285,7 +285,7 @@
 
           <figure class="case__figure tools-grid__wide">
             <div class="shots">
-              <div class="shot"><picture><source srcset="assets/fill-whatsnext.webp" type="image/webp"><img src="assets/fill-whatsnext.png" alt="What's next? — share, email, download, print, convert or compress, offered the moment a flow completes" loading="lazy"></picture></div>
+              <div class="shot"><picture><source srcset="assets/fill-whatsnext.webp" type="image/webp"><img src="assets/fill-whatsnext.png" alt="What's next? — share, email, download, print, convert or compress, offered the moment a flow completes" loading="lazy" width="760" height="1652"></picture></div>
             </div>
             <figcaption>And every flow ends the same way — never in a dead end: “What's next?” lines up the follow-up actions the moment the work is saved.</figcaption>
           </figure>
@@ -310,7 +310,7 @@
           </svg>
           <span>Home</span>
         </a>
-        <a class="case__pager-btn case__pager-btn--next" href="itab.html">
+        <a class="case__pager-btn case__pager-btn--next" href="hooh.html">
           <span>Next case</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="5" y1="12" x2="19" y2="12"/>
@@ -349,9 +349,8 @@
       <a class="menu-drawer__item" href="index.html#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
-      <a class="menu-drawer__contact" href="#">CV</a>
-      <a class="menu-drawer__contact" href="#">LinkedIn</a>
-      <a class="menu-drawer__contact" href="#">Telegram</a>
+      <a class="menu-drawer__contact" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="menu-drawer__contact" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 

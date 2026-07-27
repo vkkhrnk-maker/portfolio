@@ -1,0 +1,15 @@
+# NOTE: crawlers only read robots.txt at the DOMAIN root, so on the
+# github.io project URL this file is inert — it starts working the day
+# the site moves to its own domain (CNAME). Until then the dev pages
+# are kept out of search via <meta name="robots" content="noindex">.
+User-agent: *
+Allow: /
+Disallow: /hooh-editor.html
+Disallow: /hooh-editor-ru.html
+Disallow: /hooh-fill-ru.html
+Disallow: /hooh-fill-clouds.html
+Disallow: /hooh-color-proto.html
+Disallow: /itab-proto.html
+Disallow: /syno-cover-proto.html
+
+Sitemap: https://vkkhrnk-maker.github.io/portfolio/sitemap.xml
