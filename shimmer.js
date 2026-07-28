@@ -36,10 +36,24 @@
     ph.style.backgroundImage = 'url("' + LQIP[file] + '")';
     box.insertBefore(ph, box.firstChild);
 
+    /* When every image has revealed, fade the LQIP out (.bu-done) — kept
+       under a partially-covering image it bleeds a soft gradient past the
+       edges (the iTAB group is wider than its shots). */
+    let left = imgs.length;
+    const settle = () => {
+      left -= 1;
+      if (left === 0) setTimeout(() => box.classList.add('bu-done'), 650);
+    };
     imgs.forEach((img) => {
-      const reveal = () => img.classList.add('bu-in');
+      let settled = false;
+      const reveal = () => {
+        img.classList.add('bu-in');
+        if (!settled) { settled = true; settle(); }
+      };
       if (img.complete && img.naturalWidth) {
         img.classList.add('bu-full', 'bu-in'); // cached: no fade, no flash
+        settled = true;
+        settle();
       } else {
         img.classList.add('bu-full');
         img.addEventListener('load', reveal, { once: true });

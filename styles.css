@@ -2233,7 +2233,7 @@ body.case-page--fill .case__outcome-body p {
      height and derives width from its own aspect ratio. */
   .project-pair .project-card__phones {
     top: 178px;
-    bottom: 20px;
+    bottom: 32px;
   }
   .project-pair .project-card__phone-video {
     width: auto;
@@ -3786,7 +3786,7 @@ body.case-page--fill .case__outcome-body p {
   /* Cancel the main layout's section gap after the CTA; the footer's own
      40px top padding now sets the visual distance to the content above. */
   margin-top: calc(0px - var(--section-y));
-  padding: var(--space-40) var(--page-x) 12px;
+  padding: var(--space-40) var(--page-x) 24px;
   display: flex;
   flex-direction: column;
 }
@@ -3811,8 +3811,10 @@ body.case-page--fill .case__outcome-body p {
   margin: 0;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  /* Body size on desktop — the 12px micro-strip is a phone-only thing
+     (see the ≤640px block). */
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   white-space: nowrap;
   text-decoration: none;
@@ -4544,9 +4546,15 @@ body.case-page--fill .case__outcome-body p {
      compact 40px CTA-to-divider spacing from the base rule above. */
   .contact { margin-top: calc(var(--space-40) - var(--section-y)); }
   .footer {
-    padding: var(--space-40) var(--page-x);
+    padding: var(--space-40) var(--page-x) 12px;
   }
-  /* The 12px micro-strip fits a 375 screen as one line — no stacking needed. */
+  /* 10byrs-style 12px micro-strip — phones only; it fits 375 as one line. */
+  .footer__social a,
+  .footer__copyright,
+  .footer__credit {
+    font-size: 12px;
+    line-height: 16px;
+  }
   /* Book-a-call bar: bolder, ~2x taller than before. */
   .contact__btn { height: 160px; }
 }
@@ -4923,6 +4931,13 @@ a, button, [role="button"], summary, label {
   background-position: center;
   filter: blur(16px);
   transform: scale(1.08);
+  transition: opacity 0.4s ease;
+}
+/* Once every image in the box has revealed, the LQIP fades away — left
+   under a partially-covering image it bleeds a soft gradient past the
+   edges (the iTAB group is wider than its shots). */
+[data-shimmer].bu-done .bu-lqip {
+  opacity: 0;
 }
 [data-shimmer] img.bu-full {
   opacity: 0;
