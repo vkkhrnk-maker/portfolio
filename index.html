@@ -28,7 +28,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=288">
+  <link rel="stylesheet" href="styles.min.css?v=289">
   <script src="typographer.js?v=3" defer></script>
   <script src="shimmer.js?v=3" defer></script>
 </head>
@@ -39,7 +39,8 @@
         <h1 class="sidebar__name">Victoria Kukharenko</h1>
       </a>
       <nav class="menu">
-        <a class="menu__item is-active" href="#works">Works</a>
+        <a class="menu__item is-active" href="#top">Hello</a>
+        <a class="menu__item" href="#works">Works</a>
         <a class="menu__item" href="#about">About</a>
         <a class="menu__item" href="#experience">Experience</a>
       </nav>
@@ -426,6 +427,7 @@
       </button>
     </div>
     <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="#top">Hello</a>
       <a class="menu-drawer__item" href="#works">Works</a>
       <a class="menu-drawer__item" href="#about">About</a>
       <a class="menu-drawer__item" href="#experience">Experience</a>
@@ -526,7 +528,7 @@
     // Scroll-spy: highlight active sidebar/drawer menu item based on visible section
     (() => {
       const navLinks = document.querySelectorAll('.menu__item, .menu-drawer__item');
-      const sectionIds = ['works', 'about', 'experience'];
+      const sectionIds = ['top', 'works', 'about', 'experience'];
       const sections = sectionIds
         .map((id) => document.getElementById(id))
         .filter(Boolean);
@@ -550,7 +552,7 @@
         setActive(active);
       };
 
-      setActive('works');
+      setActive('top');
       updateActive();
 
       window.addEventListener('scroll', updateActive, { passive: true });

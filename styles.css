@@ -329,6 +329,9 @@ img {
 .btn--light {
   background-color: var(--button-secondary);
   color: var(--text-primary);
+  /* The gradient page runs to pure white at the bottom — a hairline keeps
+     the white pills visible where the background catches up with them. */
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* ===== Main content column ===== */
@@ -2376,8 +2379,10 @@ body.case-page--fill .case__outcome-body p {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
+  /* One notch below the section scale (40->36 / 46->42): full h3 crowded
+     the half-width pair and read heavy on the wide cards too. */
+  font-size: calc(var(--fs-h3) - 4px);
+  line-height: calc(var(--lh-h3) - 4px);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
   white-space: nowrap;
@@ -2854,8 +2859,8 @@ body.case-page--fill .case__outcome-body p {
   .project-card__title {
     grid-column: 1;
     grid-row: 1;
-    font-size: var(--fs-h4);
-    line-height: var(--lh-h4);
+    font-size: calc(var(--fs-h4) - 2px);
+    line-height: calc(var(--lh-h4) - 2px);
     max-width: none;
     white-space: normal;
   }
@@ -4124,7 +4129,7 @@ body.case-page--fill .case__outcome-body p {
   align-items: center;
   justify-content: center;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 50%;
   background-color: var(--button-secondary);
   color: var(--text-primary);
@@ -4160,17 +4165,6 @@ body.case-page--fill .case__outcome-body p {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Desktop case pages: the topbar takes over from the old fixed corner CTA —
-   same bar as mobile, same blur, Book a call rides inside it. */
-@media (min-width: 1200px) {
-  .content--case > .mobile-topbar--case {
-    display: flex;
-  }
-  .case__cta {
-    display: none;
-  }
 }
 
 /* ===== Mobile/tablet overrides — must come after base rules ===== */
@@ -4932,6 +4926,10 @@ a, button, [role="button"], summary, label {
   filter: blur(16px);
   transform: scale(1.08);
   transition: opacity 0.4s ease;
+  /* The blur paints past the element's box — clip it, or the thumb husks
+     a soft colour halo onto the card around the image (the Syno-proto
+     original did this with overflow:hidden on the wrapper). */
+  clip-path: inset(0);
 }
 /* Once every image in the box has revealed, the LQIP fades away — left
    under a partially-covering image it bleeds a soft gradient past the
