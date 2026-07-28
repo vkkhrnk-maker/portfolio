@@ -151,6 +151,13 @@ section[id] {
 body {
   min-height: 100vh;
   background-color: var(--bg);
+  /* 10byrs-style page air: not flat grey but a cool vertical gradient pinned
+     to the viewport (fixed) — cards and text slide over it while the light
+     stays put. Stops are in vh so the white always lands one screen down.
+     The --bg colour above stays as the fallback where fixed attachment is
+     unsupported (older iOS). */
+  background-image: linear-gradient(rgb(205, 210, 218) 0vh, rgb(230, 233, 238) 45vh, rgb(255, 255, 255) 100vh);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -2191,6 +2198,43 @@ body.case-page--fill .case__outcome-body p {
   gap: 20px;
 }
 
+/* The two Hooh cases are one product story — pair them on one row, but only
+   on desktop: both visuals are phone verticals, so a half-width card still
+   fits them with air to spare. Type keeps its full size — only the long
+   header lines are allowed to wrap. On mobile the pair dissolves
+   (display:contents) and the cards stack full-width in the normal flow. */
+@media (min-width: 1200px) {
+  .project-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .project-pair .project-card__title,
+  .project-pair .project-card__subtitle {
+    white-space: normal;
+    max-width: none;
+  }
+  /* Half-width geometry: the wrapped header is taller (~170px), so the
+     phone starts below it instead of the full-card 120px; the card grows
+     taller to keep a good slice of the phone in view, and the video takes
+     a bigger share of the narrow card so the phone reads full-size. */
+  .project-pair .project-card__inner {
+    aspect-ratio: 1040 / 950;
+  }
+  .project-pair .project-card__phones {
+    top: 190px;
+  }
+  .project-pair .project-card__phone-video {
+    width: 40%;
+  }
+}
+
+@media (max-width: 1199px) {
+  .project-pair {
+    display: contents;
+  }
+}
+
 .project-card {
   width: 100%;
   overflow: hidden;
@@ -3721,41 +3765,53 @@ body.case-page--fill .case__outcome-body p {
   white-space: nowrap;
 }
 
-/* ===== Footer ===== */
+/* ===== Footer (10byrs-style micro-strip) =====
+   Three bottom-aligned zones on one 12px line: a tight column of social
+   links on the left, © in the middle, the credit on the right. No divider —
+   the page just quietly ends. */
 
 .footer {
   /* Cancel the main layout's section gap after the CTA; the footer's own
-     40px top padding now sets the visual distance to its divider. */
+     40px top padding now sets the visual distance to the content above. */
   margin-top: calc(0px - var(--section-y));
-  padding: var(--space-40) var(--page-x) 24px;
+  padding: var(--space-40) var(--page-x) 12px;
   display: flex;
   flex-direction: column;
 }
 
-.footer::before {
-  content: '';
-  display: block;
-  height: 1px;
-  background-color: rgba(178, 178, 178, 0.4);
-  margin-bottom: 40px;
-}
-
 .footer__row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
   width: 100%;
 }
 
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.footer__social a,
 .footer__copyright,
 .footer__credit {
   margin: 0;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
+  font-size: 12px;
+  line-height: 16px;
   letter-spacing: var(--ls-heading-body);
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.footer__social a {
+  color: var(--text-primary);
+}
+
+.footer__social a:hover {
+  text-decoration: underline;
 }
 
 .footer__copyright {
@@ -3764,6 +3820,7 @@ body.case-page--fill .case__outcome-body p {
 
 .footer__credit {
   color: var(--text-secondary);
+  justify-self: end;
 }
 
 .footer__heart {
@@ -3967,6 +4024,141 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
+/* ===== Topbar (all breakpoints) =====
+   The bar itself is styled here at the base level; the ≤1199px media block
+   only switches it on. On desktop it stays hidden except on case pages,
+   where it replaces the old fixed corner CTA (see the ≥1200px block below). */
+
+.mobile-topbar {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* Minimal top inset, 10byrs-style: the 40px burger sets the 48px row,
+     the bar itself adds only 4px around it. */
+  padding: 4px var(--page-x);
+  gap: 16px;
+}
+
+/* Case-page topbar: sticky bar so 'Home' (the name) and 'Menu' are always
+   one tap away on long case pages. Instead of a translucent plate with a
+   hard bottom edge, the page dissolves under the bar: six transparent
+   backdrop-filter layers (10byrs.com recipe), radius falling geometrically
+   (36→1.5px, ×1.9), each masked to its own overlapping band so the blur
+   fades out with no visible cutoff. The 120px zone is taller than the bar —
+   the tail runs past it and melts into the page. */
+.mobile-topbar--case {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+/* Links sit above the blur stack — painted under it they'd get smeared too. */
+.mobile-topbar--case > :not(.mobile-topbar__blur) {
+  position: relative;
+  z-index: 1;
+}
+.mobile-topbar__blur {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 0;
+}
+.mobile-topbar__blur i { position: absolute; inset: 0; }
+.mobile-topbar__blur i:nth-child(1) { -webkit-backdrop-filter: blur(36px);  backdrop-filter: blur(36px);  -webkit-mask-image: linear-gradient(#000 0%, #000 12%, transparent 40%);                    mask-image: linear-gradient(#000 0%, #000 12%, transparent 40%); }
+.mobile-topbar__blur i:nth-child(2) { -webkit-backdrop-filter: blur(19px);  backdrop-filter: blur(19px);  -webkit-mask-image: linear-gradient(transparent 0%, #000 8%, #000 28%, transparent 48%);   mask-image: linear-gradient(transparent 0%, #000 8%, #000 28%, transparent 48%); }
+.mobile-topbar__blur i:nth-child(3) { -webkit-backdrop-filter: blur(10px);  backdrop-filter: blur(10px);  -webkit-mask-image: linear-gradient(transparent 15%, #000 25%, #000 40%, transparent 58%); mask-image: linear-gradient(transparent 15%, #000 25%, #000 40%, transparent 58%); }
+.mobile-topbar__blur i:nth-child(4) { -webkit-backdrop-filter: blur(5.2px); backdrop-filter: blur(5.2px); -webkit-mask-image: linear-gradient(transparent 28%, #000 38%, #000 52%, transparent 68%); mask-image: linear-gradient(transparent 28%, #000 38%, #000 52%, transparent 68%); }
+.mobile-topbar__blur i:nth-child(5) { -webkit-backdrop-filter: blur(2.8px); backdrop-filter: blur(2.8px); -webkit-mask-image: linear-gradient(transparent 40%, #000 50%, #000 62%, transparent 78%); mask-image: linear-gradient(transparent 40%, #000 50%, #000 62%, transparent 78%); }
+.mobile-topbar__blur i:nth-child(6) { -webkit-backdrop-filter: blur(1.5px); backdrop-filter: blur(1.5px); -webkit-mask-image: linear-gradient(transparent 50%, #000 58%, #000 70%, transparent 88%); mask-image: linear-gradient(transparent 50%, #000 58%, #000 70%, transparent 88%); }
+
+/* Home-page topbar: the same case-bar (blur stack, compact paddings,
+   burger chip) but fixed instead of sticky — the cover hero underneath
+   keeps its clean 100dvh, and the bar starts dissolving the cards as
+   soon as they scroll up into it. On top of the flat hero background
+   the blur is simply invisible, so the cover still reads as untouched. */
+.mobile-topbar--home {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+/* The CTA and the burger travel together on the right; the name takes
+   what's left and ellipsises before it can push them off the rail. */
+.mobile-topbar__actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+/* One size down for the Book-a-call pill inside the compact bar — at the
+   full 17px/40px it crowded the row and ellipsed the name on 390px. */
+.mobile-topbar .btn {
+  height: 36px;
+  padding: 6px 14px;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/* Menu icon button — a circular 40×40 chip with the three-bar icon. */
+.mobile-topbar__menu-btn {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: var(--button-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.mobile-topbar__menu-btn:hover { opacity: 0.85; }
+.mobile-topbar__menu-btn:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 3px;
+}
+.mobile-topbar__menu-btn svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-topbar__link {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  /* The 48px bar row provides the tap height; the link keeps a small
+     cushion so the text still centres against the 40px burger chip. */
+  padding: 6px 4px;
+}
+/* Keep the name on one line; let it shrink before it ever wraps and
+   pushes the Menu link out of place. */
+.mobile-topbar__name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Desktop case pages: the topbar takes over from the old fixed corner CTA —
+   same bar as mobile, same blur, Book a call rides inside it. */
+@media (min-width: 1200px) {
+  .content--case > .mobile-topbar--case {
+    display: flex;
+  }
+  .case__cta {
+    display: none;
+  }
+}
+
 /* ===== Mobile/tablet overrides — must come after base rules ===== */
 
 @media (max-width: 1199px) {
@@ -3987,6 +4179,9 @@ body.case-page--fill .case__outcome-body p {
     padding-inline: 0;
     align-items: stretch;
     gap: 48px;
+    /* The topbar is fixed now (out of the flow), so the intro is the only
+       in-flow child left — pin it to the bottom edge where it always sat. */
+    justify-content: flex-end;
   }
 
   .intro {
@@ -4009,116 +4204,10 @@ body.case-page--fill .case__outcome-body p {
     display: none;
   }
 
+  /* Bar styling lives at the base level (see "Topbar" above) — the media
+     block only switches it on for mobile/tablet. */
   .mobile-topbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 6px var(--page-x);
-  }
-
-  /* Case-page topbar: sticky bar with a soft blur so 'Home' (the name)
-     and 'Menu' are always one tap away on long case pages. */
-  .mobile-topbar--case {
-    position: sticky;
-    top: 0;
-    z-index: 60;
-    background: rgba(240, 240, 240, 0.82);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-  }
-
-  /* Cover-page topbar: row 1 is the name + menu burger (the same
-     pattern as the case-page topbars, so the visitor always sees whose
-     portfolio this is), and Book a call + the burger sit on the right of
-     the same line. The contact pills that used to take a second row live in
-     the menu now — they were duplicated in both places, and the menu is the
-     copy that also works on the case pages. Not sticky — it's part of the
-     cover hero, not a persistent toolbar. */
-  .mobile-topbar--cover {
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    /* One inset all round: the name, the burger chip and the pills below
-       all start exactly --page-x from the top and the left edge. The top
-       used to read heavier — 12px section padding plus the bar's own 6px
-       plus the name's 10px tap padding. */
-    padding: var(--page-x);
-  }
-
-  /* Flush with the left rail — the 4px tap padding pushed the name off the
-     line the pills underneath sit on. */
-  .mobile-topbar--cover .mobile-topbar__link {
-    padding-inline: 0;
-  }
-
-  /* 40px tall, same as the burger chip beside it, so both boxes start on
-     the same top line. */
-  .mobile-topbar--cover .mobile-topbar__name {
-    padding-block: 8px;
-  }
-
-  /* The CTA and the burger travel together on the right; the name takes
-     what's left and ellipsises before it can push them off the rail. */
-  .mobile-topbar__actions {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex: 0 0 auto;
-    gap: 8px;
-  }
-
-  /* Menu icon button in the top-right corner — a circular 40×40 chip
-     with the Material 'menu' three-bar icon. Matches the height of
-     the CV/LinkedIn/Email pills so the top of the cover reads as one
-     consistent button strip across both sides. */
-  .mobile-topbar__menu-btn {
-    width: 40px;
-    height: 40px;
-    flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background-color: var(--button-secondary);
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-  }
-  .mobile-topbar__menu-btn:hover { opacity: 0.85; }
-  .mobile-topbar__menu-btn:focus-visible {
-    outline: 2px solid var(--text-accent);
-    outline-offset: 3px;
-  }
-  .mobile-topbar__menu-btn svg {
-    display: block;
-    width: 20px;
-    height: 20px;
-  }
-
-  .mobile-topbar__link {
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    letter-spacing: var(--ls-heading-body);
-    color: var(--text-primary);
-    text-decoration: none;
-    white-space: nowrap;
-    /* Bigger hit area (≥44px tall) without shifting the visual baseline. */
-    padding: 10px 4px;
-  }
-  /* Keep the name on one line; let it shrink before it ever wraps and
-     pushes the Menu link out of place. */
-  .mobile-topbar__name {
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .mobile-topbar {
-    gap: 16px;
   }
 
   /* Section padding-left handled by ≤1199px override (when sidebar is hidden) */
@@ -4445,14 +4534,7 @@ body.case-page--fill .case__outcome-body p {
   .footer {
     padding: var(--space-40) var(--page-x);
   }
-  /* Stack copyright + credit on phones — at 375 wide they crowd into
-     each other on a single space-between row and the eye reads them
-     as one run-on string. */
-  .footer__row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
+  /* The 12px micro-strip fits a 375 screen as one line — no stacking needed. */
   /* Book-a-call bar: bolder, ~2x taller than before. */
   .contact__btn { height: 160px; }
 }
@@ -4810,28 +4892,33 @@ a, button, [role="button"], summary, label {
   }
 }
 
-/* ===== Media shimmer (Syno-style loading sweep) =====
-   JS (shimmer.js) adds .is-loading to [data-shimmer] containers whose
-   images haven't finished loading, and removes it when they have — so
-   no-JS visitors never see a stuck placeholder. The overlay is opaque
-   bg-card with a soft light sweep, and inherits the container's radius. */
-[data-shimmer].is-loading::after {
-  content: "";
+/* ===== Media blur-up (the Syno profile-cover pattern) =====
+   JS (shimmer.js) drops a tiny base64 LQIP thumb into each [data-shimmer]
+   container and fades the sharp image in over it on load. The blur lives
+   ONLY on the placeholder; the reveal is a plain opacity fade. z-index:0
+   on the box scopes the placeholder's -1 so it never sinks below the
+   card background behind it. */
+[data-shimmer].bu {
+  z-index: 0;
+  border-radius: inherit;
+}
+[data-shimmer] .bu-lqip {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: -1;
   border-radius: inherit;
-  background:
-    linear-gradient(100deg, rgba(255, 255, 255, 0) 36%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 64%) no-repeat 120% 0 / 200% 100%,
-    var(--bg-card);
-  animation: media-shimmer 1.4s ease-in-out infinite;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px);
+  transform: scale(1.08);
 }
-
-@keyframes media-shimmer {
-  from { background-position: 120% 0, 0 0; }
-  to   { background-position: -80% 0, 0 0; }
+[data-shimmer] img.bu-full {
+  opacity: 0;
+  transition: opacity 0.55s ease;
 }
-
+[data-shimmer] img.bu-full.bu-in {
+  opacity: 1;
+}
 @media (prefers-reduced-motion: reduce) {
-  [data-shimmer].is-loading::after { animation: none; }
+  [data-shimmer] img.bu-full { transition: none; }
 }

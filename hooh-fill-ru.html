@@ -51,8 +51,16 @@
 
   <main class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
+      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
-      <a class="mobile-topbar__link" href="#" data-menu-open>Меню</a>
+      <div class="mobile-topbar__actions">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <a class="case__back" href="index.html#works">
@@ -232,6 +240,10 @@
 
     <footer class="footer">
       <div class="footer__row">
+        <div class="footer__social">
+          <a href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+        </div>
         <p class="footer__copyright">© <span data-year>2026</span></p>
         <p class="footer__credit">Дизайн и разработка — Victoria Kukharenko</p>
       </div>
