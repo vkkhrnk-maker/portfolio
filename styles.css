@@ -2227,16 +2227,17 @@ body.case-page--fill .case__outcome-body p {
     aspect-ratio: 1040 / 1418;
     height: calc(100cqw * 693 / 1040);
   }
+  /* Case-page manner (.case__hooh-plate): the phone stands WHOLE inside
+     the card, fitted to the zone between the header and the bottom edge —
+     no cropping. top+bottom stretch the zone, the video takes its full
+     height and derives width from its own aspect ratio. */
   .project-pair .project-card__phones {
-    top: 190px;
+    top: 178px;
+    bottom: 20px;
   }
   .project-pair .project-card__phone-video {
-    /* The phone keeps the physical size it has in a full-width card.
-       There it is 31% of the 74.1% phones strip of the full row; in the
-       half-card the same pixels are 31% x (full row / half row) ≈ 63.4%.
-       (cqw can't express this — the phones strip is itself a container
-       and would hijack the unit.) */
-    width: 63.4%;
+    width: auto;
+    height: 100%;
   }
 }
 
