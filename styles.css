@@ -2231,7 +2231,12 @@ body.case-page--fill .case__outcome-body p {
     top: 190px;
   }
   .project-pair .project-card__phone-video {
-    width: 40%;
+    /* The phone keeps the physical size it has in a full-width card.
+       There it is 31% of the 74.1% phones strip of the full row; in the
+       half-card the same pixels are 31% x (full row / half row) ≈ 63.4%.
+       (cqw can't express this — the phones strip is itself a container
+       and would hijack the unit.) */
+    width: 63.4%;
   }
 }
 
