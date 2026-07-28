@@ -2196,6 +2196,9 @@ body.case-page--fill .case__outcome-body p {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  /* Size container so paired cards can compute "the height a full-width
+     card would have" (100cqw * 693/1040) regardless of viewport. */
+  container-type: inline-size;
 }
 
 /* The two Hooh cases are one product story — pair them on one row, but only
@@ -2214,12 +2217,15 @@ body.case-page--fill .case__outcome-body p {
     white-space: normal;
     max-width: none;
   }
-  /* Half-width geometry: the wrapped header is taller (~170px), so the
-     phone starts below it instead of the full-card 120px; the card grows
-     taller to keep a good slice of the phone in view, and the video takes
-     a bigger share of the narrow card so the phone reads full-size. */
+  /* Half-width geometry: the paired cards keep exactly the height a
+     full-width card has (100cqw = the .projects row width), so the row
+     lines up with the Syno and iTAB cards around it. The aspect-ratio is
+     only a fallback for browsers without container-query units. The
+     wrapped header is taller (~170px), so the phone starts below it, and
+     the video takes a bigger share of the narrow card. */
   .project-pair .project-card__inner {
-    aspect-ratio: 1040 / 950;
+    aspect-ratio: 1040 / 1418;
+    height: calc(100cqw * 693 / 1040);
   }
   .project-pair .project-card__phones {
     top: 190px;
@@ -2855,10 +2861,10 @@ body.case-page--fill .case__outcome-body p {
   .project-card__subtitle {
     grid-column: 1 / -1;
     grid-row: 2;
-    font-size: var(--fs-body);
-    /* One step tighter than the 25.5px mobile body (150% → 141%): as a
-       two-line caption under a big title the wider leading read as loose. */
-    line-height: 24px;
+    /* Two steps below the 17px body: as a caption under a 32px title the
+       body size read heavy on phones. */
+    font-size: 15px;
+    line-height: 21px;
     max-width: none;
     white-space: normal;
   }
