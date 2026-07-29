@@ -150,14 +150,12 @@ section[id] {
 
 body {
   min-height: 100vh;
+  /* Flat page. The "air" gradient that used to live here was pinned to the
+     viewport, so every element's contrast with the background drifted as you
+     scrolled — the grey plates dissolved into it mid-screen and read as
+     gradient fills, and the white pills vanished at its light end. Flat, the
+     plate is just a material: the same grey at any scroll position. */
   background-color: var(--bg);
-  /* 10byrs-style page air: not flat grey but a cool vertical gradient pinned
-     to the viewport (fixed) — cards and text slide over it while the light
-     stays put. Stops are in vh so the white always lands one screen down.
-     The --bg colour above stays as the fallback where fixed attachment is
-     unsupported (older iOS). */
-  background-image: linear-gradient(rgb(205, 210, 218) 0vh, rgb(230, 233, 238) 45vh, rgb(255, 255, 255) 100vh);
-  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -326,12 +324,12 @@ img {
     0 10px 24px -8px rgba(0, 0, 0, 0.18);
 }
 
+/* Plain white pill, no outline — the page is a flat grey again, so the
+   hairline that kept these from dissolving into the gradient's white end
+   has nothing left to do. */
 .btn--light {
   background-color: var(--button-secondary);
   color: var(--text-primary);
-  /* The gradient page runs to pure white at the bottom — a hairline keeps
-     the white pills visible where the background catches up with them. */
-  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* ===== Main content column ===== */
@@ -390,6 +388,24 @@ img {
 
 .profile-section__cta {
   align-self: flex-end;
+}
+
+/* Desktop: pin Book a call to the top-right corner for the whole page, the
+   way the mobile topbar stays put and the case pages' .case__cta already
+   does — the sidebar (name + nav) is sticky, so this was the one piece of
+   the header that scrolled away with the cover. Out of flow, so the cover's
+   space-between loses its top item — flex-end keeps the intro at the bottom. */
+@media (min-width: 1200px) {
+  .profile-section {
+    justify-content: flex-end;
+  }
+
+  .profile-section__cta {
+    position: fixed;
+    top: 24px;
+    right: var(--page-x);
+    z-index: 90;
+  }
 }
 
 /* Mobile topbar (CV / Меню) — visible only on mobile */
@@ -534,7 +550,7 @@ img {
 }
 
 .case__back:hover {
-  transform: translateX(-3px);
+  transform: translate(-3px, -2px);
 }
 
 /* Fixed Book-a-call CTA on case pages — desktop only (paired with the
@@ -1864,8 +1880,11 @@ body.case-page--fill .case__outcome-body p {
   box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.12);
 }
 
-.case__pager-btn--prev:hover { transform: translateX(-3px); }
-.case__pager-btn--next:hover { transform: translateX(3px); }
+/* Both axes in one declaration — a bare translateX here replaced the lift
+   above instead of adding to it, so the pager was the one button on the
+   site that never rose. */
+.case__pager-btn--prev:hover { transform: translate(-3px, -2px); }
+.case__pager-btn--next:hover { transform: translate(3px, -2px); }
 
 /* On desktop (1200+) drop the 780px cap inside 2-column block grids
    (Problem/Task/Users/What we launched + outcome) so each column's
@@ -2312,8 +2331,12 @@ body.case-page--fill .case__outcome-body p {
     transform: translateX(-50%) scale(1.04);
   }
 
+  /* This overrides the base .arrow-btn transition, so `transform` has to be
+     restated here — without it the hover nudge fired instantly while every
+     pill on the site eased, which is exactly what read as "sharp". The 0.32s
+     box-shadow is the card-hover magenta glow and stays slower on purpose. */
   .project-card .arrow-btn {
-    transition: opacity 0.2s ease, box-shadow 0.32s ease;
+    transition: transform 0.25s ease, opacity 0.2s ease, box-shadow 0.32s ease;
   }
 
   /* Hovering anywhere on the card makes the magenta arrow chip glow —
@@ -2654,11 +2677,12 @@ body.case-page--fill .case__outcome-body p {
     inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* Directional nudge toward the case it opens — same grammar as the
-   Back circle (left) and the pager arrows. Insets restated so the lift
-   shadow stacks instead of replacing the inner glow. */
+/* Same lift as every pill on the site, plus a nudge toward the case it
+   opens — one `translate`, both axes, because two `transform` rules would
+   overwrite each other. Back (left) and the pager arrows share the pair.
+   Insets restated so the lift shadow stacks instead of replacing the glow. */
 .arrow-btn:hover {
-  transform: translateX(3px);
+  transform: translate(3px, -2px);
   box-shadow:
     inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5),
     inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5),
@@ -3796,6 +3820,11 @@ body.case-page--fill .case__outcome-body p {
   flex-direction: column;
 }
 
+/* Three tracks, and on the four shipping pages the left one is empty:
+   LinkedIn/Telegram used to sit there and were a straight duplicate of the
+   sidebar's pills. Explicit columns keep the year centred and the credit on
+   the right edge with nothing on the left. .footer__social below is still
+   live on the WIP pages (syno.html, the hooh-editor/fill variants). */
 .footer__row {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -3803,11 +3832,22 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
 }
 
+.footer__copyright { grid-column: 2; }
+.footer__credit { grid-column: 3; }
+
 .footer__social {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+}
+
+.footer__social a {
+  color: var(--text-primary);
+}
+
+.footer__social a:hover {
+  text-decoration: underline;
 }
 
 .footer__social a,
@@ -3823,14 +3863,6 @@ body.case-page--fill .case__outcome-body p {
   letter-spacing: var(--ls-heading-body);
   white-space: nowrap;
   text-decoration: none;
-}
-
-.footer__social a {
-  color: var(--text-primary);
-}
-
-.footer__social a:hover {
-  text-decoration: underline;
 }
 
 .footer__copyright {
@@ -4101,6 +4133,33 @@ body.case-page--fill .case__outcome-body p {
   right: 0;
 }
 
+/* Desktop: the same bar, stripped to its blur alone — no name, no burger,
+   no plate. It is the cushion under the pinned Book-a-call: without it the
+   CTA floats naked over the grid and a card's magenta arrow slides up level
+   with it, with it whatever passes underneath dissolves first. Starts after
+   the 320px sidebar so the sticky name is never blurred, and sits under the
+   CTA's z-index. Must come after the base `.mobile-topbar { display: none }`
+   and the --home block above, or it loses on source order. */
+@media (min-width: 1200px) {
+  .mobile-topbar--home {
+    display: block;
+    top: 0;
+    left: 320px;
+    right: 0;
+    /* the base bar is width:100%, which would beat the right inset and hang
+       320px off the viewport */
+    width: auto;
+    height: 120px;
+    padding: 0;
+    pointer-events: none;
+    z-index: 80;
+  }
+
+  .mobile-topbar--home > :not(.mobile-topbar__blur) {
+    display: none;
+  }
+}
+
 /* The CTA and the burger travel together on the right; the name takes
    what's left and ellipsises before it can push them off the rail. */
 .mobile-topbar__actions {
@@ -4129,7 +4188,7 @@ body.case-page--fill .case__outcome-body p {
   align-items: center;
   justify-content: center;
   padding: 0;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 0;
   border-radius: 50%;
   background-color: var(--button-secondary);
   color: var(--text-primary);
@@ -4912,7 +4971,12 @@ a, button, [role="button"], summary, label {
    ONLY on the placeholder; the reveal is a plain opacity fade. z-index:0
    on the box scopes the placeholder's -1 so it never sinks below the
    card background behind it. */
-[data-shimmer].bu {
+/* :where() drops this to zero specificity on purpose. The Syno shot IS the
+   titanium shell — it carries its own border-radius and z-index — and this
+   rule (a class + an attribute) used to outweigh the shell's single class
+   and flatten its corners to the parent's 0. At zero weight the host's own
+   values win, and boxes that set neither still pick these up. */
+:where([data-shimmer].bu) {
   z-index: 0;
   border-radius: inherit;
 }
