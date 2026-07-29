@@ -219,15 +219,17 @@ img {
   color: var(--text-primary);
 }
 
-/* The label, not a claim: body face, one step quieter than the name, so it
-   reads as identification and leaves the cover headline to say the thing
-   only she can say. Home only — case sidebars carry a fuller "My Role". */
+/* The label, not a claim: it leaves the cover headline to say the thing only
+   she can say. Same display face as the name — the two are one identity, so
+   the step down is carried by colour alone. A sans line butted 2px under a
+   serif name read as an accident rather than a contrast. Home only — case
+   sidebars carry a fuller "My Role". */
 .sidebar__role {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -0.3px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-tertiary);
 }
 
