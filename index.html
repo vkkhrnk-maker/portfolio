@@ -674,12 +674,25 @@
 
       const greetingEl = document.querySelector('[data-greeting]');
       if (greetingEl) {
-        const h = new Date().getHours();
-        let g = 'Hello there';
-        if (h >= 5  && h < 12) g = 'Good morning';
-        else if (h >= 12 && h < 18) g = 'Good afternoon';
-        else if (h >= 18 && h < 23) g = 'Good evening';
-        else g = 'Hey, night owl';
+        // The visitor's local time and day, not mine. Business hours stay
+        // plain on purpose — the special lines land precisely because they
+        // almost never fire. Order matters: night wins over everything, and
+        // the early-riser line wins over the weekend one.
+        const now = new Date();
+        const h = now.getHours();
+        const day = now.getDay();                    // 0 Sun … 6 Sat
+        const weekend = day === 0 || day === 6;
+
+        let g;
+        if (h < 5 || h >= 23)          g = 'Hey, night owl';
+        else if (h < 8)                g = 'Up early';
+        else if (weekend)              g = 'Happy weekend';
+        else if (day === 1 && h < 12)  g = 'Made it to Monday';
+        else if (day === 5 && h >= 18) g = 'Friday, finally';
+        else if (h < 12)               g = 'Good morning';
+        else if (h < 18)               g = 'Good afternoon';
+        else                           g = 'Good evening';
+
         greetingEl.textContent = g;
       }
     })();
