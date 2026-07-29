@@ -15,9 +15,9 @@
   --bg-card: #e2e4e7;                    /* Bg/Card — project cards */
   --text-primary: #2d3036;               /* Text/Primary, Grey 1000 */
   --text-secondary: rgba(0, 0, 0, 0.62); /* Text/Secondary — WCAG AA contrast on bg-primary/card */
-  --text-tertiary: #b1b0b0;              /* Text/Tertiary — inactive menu items */
+  --text-tertiary: #7f7f82;              /* Text/Tertiary — inactive menu items */
   --text-accent: #d946ef;                /* Text/Primary_Accent (now magenta, was blue) */
-  --button-primary: #d946ef;             /* Button/Surface/Primary */
+  --button-primary: #bb35d0;             /* Button/Surface/Primary */
   --button-secondary: #ffffff;           /* Button/Surface/Secondary */
   --brand-pink-500: #fcc9ff;             /* Brand/Pink 500 (now light pink, was light blue) */
   --stroke-primary: #d4d2d2;             /* Stroke/Primary — dividers */
@@ -161,7 +161,9 @@ body {
 }
 
 section[id] {
-  scroll-margin-top: 24px;
+  /* Clear the 120px blurred top rail and leave a small optical gap when
+     navigating from the menu instead of pinning the section under it. */
+  scroll-margin-top: 136px;
 }
 
 body {
@@ -194,6 +196,28 @@ a {
 img {
   display: block;
   max-width: 100%;
+}
+
+/* ===== Global typography =====
+   Headings should compose as shapes, not leave a single word hanging on the
+   last line. `balance` redistributes short display blocks across their lines;
+   the normal word-breaking rules keep names and long words intact. Body copy
+   uses `pretty`, which only adjusts awkward final lines without forcing the
+   even rhythm used by headings. The selectors also cover title-like text that
+   is intentionally marked up as a paragraph inside cards and controls. */
+:where(p, li, dd, figcaption, blockquote) {
+  text-wrap: pretty;
+}
+
+:where(
+  h1, h2, h3, h4, h5, h6,
+  [class$="__title"], [class*="__title "],
+  [class$="-title"], [class*="-title "]
+) {
+  text-wrap: balance;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 /* ===== Sidebar ===== */
@@ -323,6 +347,10 @@ img {
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+  transform: scale(0.96);
 }
 
 /* ===== Focus styles (keyboard accessibility) ===== */
@@ -482,11 +510,15 @@ img {
   border-radius: 0;
   padding: 0;
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
 }
 
 .menu-toggle:hover {
   opacity: 0.85;
+}
+
+.menu-toggle:active {
+  transform: scale(0.96);
 }
 
 .menu-toggle svg {
@@ -537,7 +569,7 @@ img {
 
 /* Quick squish on touch press for tactile feedback */
 .intro__avatar:active {
-  transform: rotate(-4deg) scale(0.94);
+  transform: rotate(-4deg) scale(0.96);
 }
 
 .intro__avatar:focus-visible {
@@ -608,6 +640,10 @@ img {
 
 .case__back:hover {
   transform: translate(-3px, -2px);
+}
+
+.case__back:active {
+  transform: scale(0.96);
 }
 
 /* Fixed Book-a-call CTA on case pages — desktop only (paired with the
@@ -896,6 +932,46 @@ img {
   letter-spacing: -1px;
   color: var(--text-secondary);
   max-width: 780px;
+}
+
+/* Concise evidence near the top keeps the result visible before the full
+   narrative. This is a typographic strip, not another rounded card. */
+.case__proof-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: -28px 0 -12px;
+  padding: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.case__proof-strip > div {
+  min-width: 0;
+  padding: 18px 20px 20px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.case__proof-strip > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.case__proof-strip dt {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.3px;
+  color: var(--text-tertiary);
+}
+
+.case__proof-strip dd {
+  margin: 5px 0 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.8px;
+  color: var(--text-primary);
+  text-wrap: balance;
 }
 
 /* iTAB case theme — green accent instead of magenta. Scoped to body class so
@@ -1935,6 +2011,7 @@ body.case-page--fill .case__outcome-body p {
    site that never rose. */
 .case__pager-btn--prev:hover { transform: translate(-3px, -2px); }
 .case__pager-btn--next:hover { transform: translate(3px, -2px); }
+.case__pager-btn:active { transform: scale(0.96); }
 
 /* On desktop (1200+) drop the 780px cap inside 2-column block grids
    (Problem/Task/Users/What we launched + outcome) so each column's
@@ -2077,6 +2154,27 @@ body.case-page--fill .case__outcome-body p {
    the ≤640 :root override sets --fs-h1 to 42/46, matching the cover
    H1 size. (No explicit case-only override needed.) */
 @media (max-width: 640px) {
+  .case__proof-strip {
+    grid-template-columns: 1fr;
+    margin: 0;
+  }
+
+  .case__proof-strip > div,
+  .case__proof-strip > div:first-child {
+    padding: 14px 0 16px;
+    border-left: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .case__proof-strip > div:first-child {
+    border-top: 0;
+  }
+
+  .case__proof-strip dd {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
   /* Outcome body matches section body 16/24 on phones (placed after the
      base .case__outcome-body p rule so it wins). */
   .case__outcome-body p {
@@ -2125,23 +2223,13 @@ html {
   height: 14px;
   border-radius: 50%;
   background: var(--text-accent);
-  /* Halo ring around the dot for a two-layer "premium" look */
-  box-shadow:
-    0 0 0 1.5px rgba(217, 70, 239, 0.35),
-    0 0 14px rgba(217, 70, 239, 0.25);
-  border: 2px solid transparent;
+  box-shadow: 0 0 10px rgba(217, 70, 239, 0.22);
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
   display: none;
-  will-change: transform, width, height;
-  transition:
-    opacity 0.22s ease,
-    width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-    background 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease;
+  will-change: transform;
+  transition: opacity 0.22s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -2152,16 +2240,6 @@ html {
 
 .custom-cursor.is-active {
   opacity: 1;
-}
-
-.custom-cursor.is-hover {
-  width: 44px;
-  height: 44px;
-  background: transparent;
-  border-color: var(--text-accent);
-  box-shadow:
-    0 0 0 0 rgba(217, 70, 239, 0),
-    0 0 24px rgba(217, 70, 239, 0.28);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2246,12 +2324,10 @@ html {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
   letter-spacing: var(--ls-heading-lg);
-  /* The greeting is a pleasantry, the line under it is the claim. At the same
-     near-black they read as two equal statements stacked on each other. */
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 .intro__title {
@@ -2291,6 +2367,9 @@ html {
   .project-pair .project-card__subtitle {
     white-space: normal;
     max-width: none;
+  }
+  .project-pair .project-card__header {
+    column-gap: 20px;
   }
   /* Half-width geometry: the paired cards keep exactly the height a
      full-width card has (100cqw = the .projects row width), so the row
@@ -2461,7 +2540,7 @@ html {
   line-height: calc(var(--lh-h3) - 4px);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .project-card__subtitle {
@@ -2747,6 +2826,10 @@ html {
     0 10px 24px -8px rgba(0, 0, 0, 0.18);
 }
 
+.arrow-btn:active {
+  transform: scale(0.96);
+}
+
 .arrow-btn img {
   display: block;
   width: 20px;
@@ -2811,7 +2894,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--card-x);
+  padding: clamp(20px, 1.8vw, var(--card-x));
   box-sizing: border-box;
   overflow: hidden;
   -webkit-backface-visibility: hidden;
@@ -2851,6 +2934,20 @@ html {
   line-height: var(--lh-h3);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
+  /* These titles live in very narrow portrait cards. Balancing every line
+     would turn each semantic word group into its own row; `pretty` keeps the
+     natural fill and only prevents a weak last line. */
+  text-wrap: pretty;
+}
+
+/* Four cards share one desktop row. A fixed 40px title at 1200–1600px left
+   room for only one word per line; the type now grows with the available
+   card width and reaches the full H3 token on wide screens. */
+@media (min-width: 1200px) {
+  .about-card__title {
+    font-size: clamp(21px, calc(2.5vw - 9px), var(--fs-h3));
+    line-height: 1;
+  }
 }
 
 .about-card__back-text {
@@ -3855,6 +3952,10 @@ html {
     0 10px 24px -8px rgba(0, 0, 0, 0.18);
 }
 
+.contact__btn:active {
+  transform: scale(0.96);
+}
+
 .contact__text {
   font-family: var(--font-display);
   font-weight: 400;
@@ -4029,7 +4130,7 @@ html {
 }
 
 .menu-drawer__close:active {
-  transform: scale(0.92);
+  transform: scale(0.96);
   opacity: 0.75;
 }
 
@@ -4085,7 +4186,7 @@ html {
 
 .menu-drawer.is-open .menu-drawer__item:active {
   color: var(--text-accent);
-  transform: scale(0.97);
+  transform: scale(0.96);
   transition-delay: 0s;
 }
 
@@ -4244,9 +4345,10 @@ html {
   background-color: var(--button-secondary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: opacity 0.2s ease;
+  transition: transform 0.18s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease;
 }
 .mobile-topbar__menu-btn:hover { opacity: 0.85; }
+.mobile-topbar__menu-btn:active { transform: scale(0.96); }
 .mobile-topbar__menu-btn:focus-visible {
   outline: 2px solid var(--text-accent);
   outline-offset: 3px;
@@ -4474,6 +4576,7 @@ html {
 @media (prefers-reduced-motion: no-preference) {
   .has-js .case__title,
   .has-js .case__intro,
+  .has-js .case__proof-strip,
   .has-js .case-meta--mobile,
   .has-js .case__hero-image,
   .has-js .case__block,
@@ -4501,11 +4604,13 @@ html {
      SAME rise as everything else (no special bigger/longer move) so it reads
      consistently and doesn't lurch. */
   .has-js .case__intro { transition-delay: 0.1s; }
-  .has-js .case-meta--mobile { transition-delay: 0.15s; }
-  .has-js .case__hero-image { transition-delay: 0.2s; }
+  .has-js .case__proof-strip { transition-delay: 0.15s; }
+  .has-js .case-meta--mobile { transition-delay: 0.2s; }
+  .has-js .case__hero-image { transition-delay: 0.25s; }
 
   .has-js .case__title.is-visible,
   .has-js .case__intro.is-visible,
+  .has-js .case__proof-strip.is-visible,
   .has-js .case-meta--mobile.is-visible,
   .has-js .case__hero-image.is-visible,
   .has-js .case__block.is-visible,
@@ -4660,17 +4765,12 @@ html {
 }
 
 /* ===== Home cover on phones: the greeting stays on one line =====
-   The greeting shares its row with the 96px photo, so at 375 it has ~231px
-   left and at 360 only ~216px — but at the 44px H3 "Good morning" measures
-   234px and "Good afternoon" 252px. So for most of the day (and on 360px
-   phones for all of it) the cover opened on a ragged two-line
-   "Good / afternoon" beside the photo. Scale the greeting to the width that
-   is actually left instead: the H3 token in full from ~415px up, a couple of
-   steps down on narrower phones — always a single line. */
+   H4 is intentionally smaller than the claim beneath it and fits beside the
+   photo without a one-off fluid type value. */
 @media (max-width: 640px) {
   .intro__greeting {
-    font-size: min(var(--fs-h3), (100vw - 113px) / 6.9);
-    line-height: 1.1;
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
     white-space: nowrap;
   }
 

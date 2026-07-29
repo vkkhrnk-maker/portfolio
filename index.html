@@ -28,8 +28,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=304">
-  <script src="typographer.js?v=3" defer></script>
+  <link rel="stylesheet" href="styles.min.css?v=308">
+  <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=3" defer></script>
 </head>
 <body>
@@ -82,7 +82,7 @@
           </span>
           <p class="intro__greeting" data-greeting>Hello there</p>
         </div>
-        <h2 class="intro__title">I take products from the first flow to something engineers can ship</h2>
+        <h2 class="intro__title">I take products from the first flow to something engineers can&nbsp;ship</h2>
       </div>
     </section>
 
@@ -193,12 +193,12 @@
           <div class="about-card__inner">
             <div class="about-card__face about-card__face--front">
               <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__title">I balance aesthetics and logic</p>
-              <p class="about-card__description">I turn messy product logic into clear flows, intuitive interfaces, and team-ready decisions</p>
+              <p class="about-card__title">I build systems, not one-off screens</p>
+              <p class="about-card__description">I turn product logic into reusable patterns, components, and clear specs that keep web and mobile aligned through handoff</p>
             </div>
             <div class="about-card__face about-card__face--back">
               <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__back-text">I turn messy product logic into clear flows, intuitive interfaces, and team-ready decisions</p>
+              <p class="about-card__back-text">I turn product logic into reusable patterns, components, and clear specs that keep web and mobile aligned through handoff</p>
             </div>
           </div>
         </div>
@@ -745,7 +745,7 @@
       });
 
       hero.addEventListener('mouseleave', () => {
-        cursor.classList.remove('is-active', 'is-hover');
+        cursor.classList.remove('is-active');
       });
 
       hero.addEventListener('mousemove', (e) => {
@@ -753,14 +753,6 @@
         targetY = e.clientY;
       });
 
-      // Grow into a ring when hovering interactive hero elements
-      const interactives = hero.querySelectorAll(
-        'a, button, .intro__avatar, [role="button"], [data-menu-open]'
-      );
-      interactives.forEach((el) => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
-      });
     })();
 
     /* Card phone-videos: belt-and-braces autoplay for EVERY video card

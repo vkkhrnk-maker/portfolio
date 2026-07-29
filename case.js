@@ -15,7 +15,8 @@
     if (reducedMotion) return;
 
     const selector = [
-      '.case__title', '.case__intro', '.case-meta--mobile', '.case__hero-image',
+      '.case__title', '.case__intro', '.case__proof-strip',
+      '.case-meta--mobile', '.case__hero-image',
       '.case__block', '.case__section-title', '.case__section-body',
       '.case__gap-card', '.case__figure', '.case__outcome', '.case__pager'
     ].join(',');
