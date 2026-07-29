@@ -6,21 +6,21 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Victoria Kukharenko — Product Designer</title>
-  <meta name="description" content="Victoria Kukharenko — product designer crafting complex digital products and scalable design systems. Selected work, experience and a few notes on the way I work.">
+  <meta name="description" content="Victoria Kukharenko — product designer. I take products from the first flow to something engineers can ship. Selected work, experience and a few notes on the way I work.">
   <meta name="author" content="Victoria Kukharenko">
   <meta name="theme-color" content="#d946ef">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Victoria Kukharenko — Product Designer">
-  <meta property="og:description" content="Product designer crafting complex digital products and scalable design systems.">
+  <meta property="og:description" content="Victoria Kukharenko — product designer. I take products from the first flow to something engineers can ship.">
   <meta property="og:url" content="https://vkkhrnk-maker.github.io/portfolio/">
   <meta property="og:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/profile.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Victoria Kukharenko — Product Designer">
-  <meta name="twitter:description" content="Product designer crafting complex digital products and scalable design systems.">
+  <meta name="twitter:description" content="Victoria Kukharenko — product designer. I take products from the first flow to something engineers can ship.">
   <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/profile.jpg">
 
   <link rel="canonical" href="https://vkkhrnk-maker.github.io/portfolio/">
@@ -28,16 +28,19 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=295">
+  <link rel="stylesheet" href="styles.min.css?v=299">
   <script src="typographer.js?v=3" defer></script>
   <script src="shimmer.js?v=3" defer></script>
 </head>
 <body>
   <aside class="sidebar">
     <div class="sidebar__top">
-      <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">
-        <h1 class="sidebar__name">Victoria Kukharenko</h1>
-      </a>
+      <div class="sidebar__identity">
+        <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">
+          <h1 class="sidebar__name">Victoria Kukharenko</h1>
+        </a>
+        <p class="sidebar__role">Product designer</p>
+      </div>
       <nav class="menu">
         <a class="menu__item is-active" href="#top">Hello</a>
         <a class="menu__item" href="#works">Works</a>
@@ -51,7 +54,6 @@
     </div>
   </aside>
 
-  <div class="scroll-progress" aria-hidden="true"></div>
 
   <main class="content">
     <div class="mobile-topbar mobile-topbar--case mobile-topbar--home">
@@ -80,7 +82,7 @@
           </span>
           <p class="intro__greeting" data-greeting>Hello there</p>
         </div>
-        <h2 class="intro__title">I design complex digital products and scalable systems</h2>
+        <h2 class="intro__title">I take products from the first flow to something engineers can ship</h2>
       </div>
     </section>
 
@@ -415,7 +417,10 @@
 
   <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
     <div class="menu-drawer__header">
-      <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
+      <div class="menu-drawer__identity">
+        <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
+        <p class="menu-drawer__role">Product designer</p>
+      </div>
       <button class="menu-drawer__close" type="button" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -429,8 +434,8 @@
       <a class="menu-drawer__item" href="#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
-      <a class="menu-drawer__contact" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="menu-drawer__contact" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 
@@ -679,21 +684,6 @@
       }
     })();
 
-    // Top scroll-progress bar (magenta, page reading indicator)
-    (() => {
-      const bar = document.querySelector('.scroll-progress');
-      if (!bar) return;
-      const update = () => {
-        const h = document.documentElement;
-        const scrolled = h.scrollTop;
-        const max = h.scrollHeight - h.clientHeight;
-        const pct = max > 0 ? (scrolled / max) * 100 : 0;
-        bar.style.transform = `scaleX(${pct / 100})`;
-      };
-      update();
-      window.addEventListener('scroll', update, { passive: true });
-      window.addEventListener('resize', update);
-    })();
 
     // Avatar discovery pulse — gentle magenta halo for the first 3s
     (() => {

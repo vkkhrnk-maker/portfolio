@@ -25,7 +25,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=295">
+  <link rel="stylesheet" href="styles.min.css?v=299">
   <script src="typographer.js?v=3" defer></script>
   <script src="shimmer.js?v=3" defer></script>
   <style>
@@ -79,7 +79,6 @@
     </div>
   </aside>
 
-  <div class="scroll-progress" aria-hidden="true"></div>
   <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
 
   <main class="content content--case">
@@ -345,8 +344,8 @@
       <a class="menu-drawer__item" href="index.html#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
-      <a class="menu-drawer__contact" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="menu-drawer__contact" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
     </div>
   </div>
 
@@ -369,22 +368,9 @@
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
     })();
 
-    // Auto-update year + scroll progress
+    // Auto-update year
     (() => {
       document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
-
-      const bar = document.querySelector('.scroll-progress');
-      if (bar) {
-        const update = () => {
-          const h = document.documentElement;
-          const max = h.scrollHeight - h.clientHeight;
-          const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
-          bar.style.transform = `scaleX(${pct/100})`;
-        };
-        update();
-        window.addEventListener('scroll', update, { passive: true });
-        window.addEventListener('resize', update);
-      }
     })();
 
     // Hero parallax — multiple layers translate at different rates on

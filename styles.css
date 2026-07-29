@@ -200,6 +200,15 @@ img {
   gap: var(--space-60);
 }
 
+/* Name and role are one unit — they sit tight together and keep the full
+   --space-60 to the nav below, which is why they're wrapped rather than
+   dropped straight into .sidebar__top's 60px gap. */
+.sidebar__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .sidebar__name {
   margin: 0;
   font-family: var(--font-display);
@@ -208,6 +217,18 @@ img {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-primary);
+}
+
+/* The label, not a claim: body face, one step quieter than the name, so it
+   reads as identification and leaves the cover headline to say the thing
+   only she can say. Home only — case sidebars carry a fuller "My Role". */
+.sidebar__role {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -0.3px;
+  color: var(--text-tertiary);
 }
 
 .sidebar__name-link {
@@ -296,7 +317,6 @@ img {
 .menu-toggle:focus-visible,
 .menu-drawer__close:focus-visible,
 .menu-drawer__name:focus-visible,
-.menu-drawer__contact:focus-visible,
 .sidebar__name-link:focus-visible,
 .mobile-topbar__link:focus-visible {
   outline: 2px solid var(--text-accent);
@@ -854,10 +874,6 @@ body.case-page--itab .case__section + .case__section {
   border-top: 0;
 }
 
-body.case-page--itab .scroll-progress {
-  box-shadow: 0 0 12px rgba(89, 173, 59, 0.45);
-}
-
 /* iTAB: Result body uses the same body-text style as section bodies for
    in-page consistency (rest of the case talks in body 16/24 secondary;
    Result should too instead of Hooh's larger primary outcome style). */
@@ -872,10 +888,6 @@ body.case-page--itab .case__outcome-body p {
    up; Hooh stays magenta, iTAB stays green. */
 body.case-page--fill {
   --text-accent: #d97706;
-}
-
-body.case-page--fill .scroll-progress {
-  box-shadow: 0 0 12px rgba(217, 119, 6, 0.45);
 }
 
 body.case-page--fill .case__outcome-body p {
@@ -1436,7 +1448,8 @@ body.case-page--fill .case__outcome-body p {
   z-index: 0;
   border-radius: 16cqw;
   background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
-  box-shadow: 0 2cqw 6cqw rgba(0, 0, 0, 0.18), 0 14cqw 34cqw -6cqw rgba(0, 0, 0, 0.38);
+  /* Same softened pair as the home-card phones — see .project-card__phone-video. */
+  box-shadow: 0 1.5cqw 5cqw rgba(0, 0, 0, 0.10), 0 11cqw 32cqw -7cqw rgba(0, 0, 0, 0.20);
 }
 .case__phone-frame video {
   position: relative;
@@ -2025,27 +2038,17 @@ body.case-page--fill .case__outcome-body p {
 }
 
 /* ===== Scroll progress bar ===== */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--text-accent);
-  transform: scaleX(0);
-  transform-origin: left center;
-  z-index: 1000;
-  pointer-events: none;
-  box-shadow: 0 0 12px rgba(217, 70, 239, 0.45);
-}
-
-/* Hide the magenta scroll-progress bar on phones — at small widths it
-   reads as a misplaced pink toolbar above the mobile-topbar rather
-   than a subtle progress indicator. */
-@media (max-width: 640px) {
-  .scroll-progress {
-    display: none;
-  }
+/* ===== Native scrollbar =====
+   The magenta reading bar that used to run across the top of every page is
+   gone: it said exactly what the browser's own scrollbar already says, in a
+   second place. Colouring the real one keeps the signal and drops the
+   element. Standard properties only — ::-webkit-scrollbar would turn macOS
+   overlay scrollbars into permanent classic ones and steal layout width;
+   this tints the overlay and leaves its behaviour alone. Safari doesn't
+   support scrollbar-color yet and keeps its native grey. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--button-primary) transparent;
 }
 
 /* ===== Avatar discovery pulse (first 3s after load) ===== */
@@ -2493,9 +2496,14 @@ body.case-page--fill .case__outcome-body p {
   border-radius: 16cqw;                /* device corner — screen radius + bezel */
   background:
     linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+  /* Grounded, not cast. The old pair (.18 / .38) pulled the plate under the
+     phone from 226 down to ~199 and took ~75px to recover, which read as a
+     dark wash across the card rather than a shadow. Roughly half the alpha,
+     a shorter drop and a wider spread: the phone still sits on the plate,
+     the plate stays one colour. */
   box-shadow:
-    0 2cqw 6cqw rgba(0, 0, 0, 0.18),
-    0 14cqw 34cqw -6cqw rgba(0, 0, 0, 0.38);   /* soft grounded drop shadow */
+    0 1.5cqw 5cqw rgba(0, 0, 0, 0.10),
+    0 11cqw 32cqw -7cqw rgba(0, 0, 0, 0.20);
 }
 
 /* The screen itself — the looping recording, clipped to iPhone corners */
@@ -3921,6 +3929,17 @@ body.case-page--fill .case__outcome-body p {
   width: 100%;
 }
 
+/* Same name + role unit as the desktop sidebar — below 1200px the sidebar is
+   gone, so without this the role would only exist in the <title>. The 8px
+   tap padding moves to the wrapper so the two lines stay tight. */
+.menu-drawer__identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  padding-block: 8px;
+}
+
 .menu-drawer__name {
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -3929,7 +3948,15 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-primary);
   text-decoration: none;
   white-space: nowrap;
-  padding-block: 8px;
+}
+
+.menu-drawer__role {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.3px;
+  color: var(--text-tertiary);
 }
 
 /* The burger is a 40px chip; opening the menu shouldn't dissolve it into a
@@ -4012,49 +4039,23 @@ body.case-page--fill .case__outcome-body p {
   transition-delay: 0s;
 }
 
-/* Contacts close the panel off along the bottom edge, the way the sidebar
-   buttons do on desktop. */
-/* Three columns rather than space-between: with links of different widths,
-   space-between puts the gaps at equal size, not the middle link in the
-   middle. The 1fr / auto / 1fr grid centres it on the screen. */
+/* Contacts close the panel off along the bottom edge — the same .btn--light
+   pills the desktop sidebar carries, not a second styling of the same two
+   links. They used to be underlined text pushed to the far corners by a
+   1fr/auto/1fr grid built for three items, back when a CV chip sat in the
+   middle; with two left it read as two stray links rather than a pair.
+   Centred row, 8px apart — the sidebar's own gap. */
 .menu-drawer__contacts {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-8);
   width: 100%;
-  /* Pulls back most of the links' own tap padding so the glyphs — not their
-     hit areas — land 12px off the bottom edge, the same line the cover
-     headline keeps. */
-  margin-bottom: -5px;
   transition: opacity 0.3s ease, transform 0.42s cubic-bezier(0.2, 0, 0, 1);
 }
 
-.menu-drawer__contact:first-child { justify-self: start; }
-.menu-drawer__contact:nth-child(2) { justify-self: center; }
-.menu-drawer__contact:last-child { justify-self: end; }
-
-.menu-drawer__contact {
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: var(--ls-heading-body);
-  color: var(--text-secondary);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-  padding-block: 8px;
-  -webkit-tap-highlight-color: transparent;
-  transition: color 0.2s ease;
-}
-
-.menu-drawer__contact:active {
-  color: var(--text-accent);
-}
-
 @media (hover: hover) {
-  .menu-drawer__item:hover,
-  .menu-drawer__contact:hover {
+  .menu-drawer__item:hover {
     color: var(--text-accent);
   }
 }
