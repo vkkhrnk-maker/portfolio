@@ -125,6 +125,22 @@
   }
 }
 
+/* One more step for 2560-class monitors. The 1920 scale was set against a
+   1440px content column; past 2400 that column is 1900+ wide and the same
+   headings start reading like captions on a billboard — the page grows but
+   its voice doesn't. Headings only: body stays at 23/32, which is already
+   generous, so the step also widens the gap between a title and its text. */
+@media (min-width: 2400px) {
+  :root {
+    --fs-h1: 124px;        --lh-h1: 128px;
+    --fs-h2: 96px;         --lh-h2: 104px;
+    --fs-h3: 52px;         --lh-h3: 62px;
+    --fs-h4: 42px;         --lh-h4: 48px;
+    --fs-h5: 38px;         --lh-h5: 46px;
+    --fs-h6: 32px;         --lh-h6: 38px;          /* sidebar menu */
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -390,14 +406,20 @@ img {
    room (320 → 360) and the content column drops its 1526px cap so
    figures and text grow with the viewport — but a wider gutter sits
    between the sidebar and the content so the right column doesn't read
-   as one oversized slab. */
+   as one oversized slab.
+
+   That gutter is fluid rather than fixed, because the thing it separates
+   isn't: the content column keeps growing with the viewport, so a constant
+   120px shrank against it and by 2560 the two columns were touching
+   shoulders again. 7vw keeps the proportion — ~190px at 1920, ~235px at
+   2560 — and stops at 280px so a 4K desktop doesn't push the page over. */
 @media (min-width: 1920px) {
   .sidebar {
     width: 360px;
   }
   .content {
     max-width: none;
-    margin-left: 64px; /* + the 56px gutter above = the same 120px total as before */
+    margin-left: clamp(64px, 7vw, 224px); /* + the 56px gutter above */
   }
 }
 
@@ -494,7 +516,11 @@ img {
   height: 72px;
   flex-shrink: 0;
   border: 1.5px solid var(--border-image);
-  overflow: hidden;
+  /* No overflow: hidden here. The greeting bubble is appended inside the
+     avatar and sits above it, so clipping the box killed the whole easter
+     egg — the bubble was still being built and filled, just never visible.
+     The photo can't overflow anyway: it's 100%/100% with object-fit: cover
+     and the frame has no radius, so there was nothing to clip. */
   transform: rotate(-4deg);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -1947,6 +1973,17 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
+/* …and one step further at 2400+, in line with the heading tokens. The case
+   pages carry these titles instead of the H2, so they have to move with it
+   or the case reads a size quieter than the home page. */
+@media (min-width: 2400px) {
+  .case__block-title,
+  .case__section-title {
+    font-size: 62px;
+    line-height: 70px;
+  }
+}
+
 /* Case page — mobile overrides */
 @media (max-width: 1199px) {
   .case {
@@ -2212,7 +2249,9 @@ html {
   font-size: var(--fs-h3);
   line-height: var(--lh-h3);
   letter-spacing: var(--ls-heading-lg);
-  color: var(--text-primary);
+  /* The greeting is a pleasantry, the line under it is the claim. At the same
+     near-black they read as two equal statements stacked on each other. */
+  color: var(--text-secondary);
 }
 
 .intro__title {
@@ -4277,6 +4316,27 @@ html {
     width: 100%;
   }
 
+  /* The photo leaves the flow so the header row is only as tall as the
+     greeting. The cover is bottom-aligned, so a shorter header pulls the
+     greeting down onto the headline instead of leaving a hole between them
+     — and the photo, freed from the row, hangs past the row's bottom edge
+     and overlaps the first headline line on the right, where that line has
+     already ended. */
+  .intro__avatar {
+    position: absolute;
+    right: 0;
+    /* Lifted so the photo's bottom edge crosses only the top of the first
+       headline line. At top:0 it hung 37px in and swallowed the last letter
+       of "products", which reads as broken rather than deliberate. */
+    top: -25px;
+    z-index: 1;
+  }
+
+  /* Closes the gap the photo used to hold open. */
+  .intro {
+    gap: 20px;
+  }
+
   /* On mobile — hide menu icon + the Book-a-call CTA (desktop topbar), show CV/Меню text instead */
   .menu-toggle,
   .profile-section__cta {
@@ -4326,8 +4386,25 @@ html {
     height: 96px;
   }
 
+  /* The photo hugs the right edge on mobile, so a bubble centred on it would
+     hang half its width off-screen and get eaten by body's overflow-x: hidden.
+     Hang it from the photo's right edge instead, and slide the tail back under
+     the photo's centre so it still points at what it came from. */
   .intro__avatar__bubble {
-    left: 50%;
+    left: auto;
+    right: 0;
+    transform: translateY(6px) scale(0.6);
+    transform-origin: calc(100% - 48px) 100%;
+  }
+
+  .intro__avatar__bubble.is-visible {
+    transform: translateY(0) scale(1);
+  }
+
+  .intro__avatar__bubble::after {
+    left: auto;
+    right: 41px; /* 48px (half the 96px photo) − 7px (half the tail) */
+    margin-left: 0;
   }
 
   /* About card title — mobile H4 (32/32) — same as Experience role for consistency */
@@ -4597,11 +4674,10 @@ html {
     white-space: nowrap;
   }
 
-  /* 60px between the photo row and the headline left a hole in the middle of
-     the cover — at 28px the distance reads like the one between the name and
-     the buttons in the topbar above. */
+  /* Same 20px as the rest of mobile — the photo is out of the flow now, so
+     this gap is measured from the greeting's baseline, not the photo's edge. */
   .intro {
-    gap: 28px;
+    gap: 20px;
   }
 }
 
