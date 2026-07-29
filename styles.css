@@ -323,6 +323,15 @@ img {
   outline-offset: 3px;
 }
 
+/* #top is a scroll destination, not a control. It carries tabindex="-1" so
+   the sidebar name and the Hello nav item land screen readers on the cover
+   instead of leaving focus behind — but the browser then draws its default
+   ring around the entire first screen. Nothing can tab to it, so the focus
+   move stays and only the box goes. */
+.profile-section:focus {
+  outline: none;
+}
+
 /* CTA button — magenta with inner shadow (Telegram, contact CTA) */
 .btn--dark {
   background-color: var(--button-primary);
