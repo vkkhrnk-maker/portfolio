@@ -208,7 +208,15 @@
     document.documentElement.classList.add('has-lightbox');
 
     let box, imgEl, videoEl, closeBtn, lastFocused;
+    let background = [];
     let sourceVideo = null; // the inline video the open lightbox mirrors
+
+    const setBackgroundInert = (inert) => {
+      background.forEach((el) => {
+        if (inert) el.setAttribute('inert', '');
+        else el.removeAttribute('inert');
+      });
+    };
 
     const build = () => {
       box = document.createElement('div');
@@ -216,6 +224,7 @@
       box.setAttribute('role', 'dialog');
       box.setAttribute('aria-modal', 'true');
       box.setAttribute('aria-label', 'Enlarged screen');
+      box.setAttribute('aria-hidden', 'true');
 
       imgEl = document.createElement('img');
       imgEl.className = 'lightbox__img';
@@ -256,7 +265,7 @@
            decodes at a time. */
         sourceVideo = el;
         if (el.poster) videoEl.poster = el.poster;
-        videoEl.src = el.currentSrc || el.src;
+        videoEl.src = el.currentSrc || el.src || el.dataset.src;
         try { videoEl.currentTime = el.currentTime; } catch (err) {}
         el.pause();
         const p = videoEl.play();
@@ -267,17 +276,21 @@
         imgEl.src = el.currentSrc || el.src;
         imgEl.alt = el.alt || '';
       }
+      background = Array.from(document.body.children)
+        .filter((child) => child !== box && child.tagName !== 'SCRIPT');
+      setBackgroundInert(true);
       document.body.style.overflow = 'hidden';
       void box.offsetWidth; // reflow so the open transition runs from the hidden state
       box.classList.add('is-open');
-      // Focus after styles apply — while visibility is still 'hidden',
-      // focus() silently fails.
-      requestAnimationFrame(() => closeBtn.focus());
+      box.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
     };
 
     const hide = () => {
       if (!box || !box.classList.contains('is-open')) return;
       box.classList.remove('is-open');
+      box.setAttribute('aria-hidden', 'true');
+      setBackgroundInert(false);
       document.body.style.overflow = '';
       if (sourceVideo) {
         /* …and hand it back: the inline copy resumes where the big one
@@ -290,10 +303,22 @@
         if (p && typeof p.catch === 'function') p.catch(() => {});
         sourceVideo = null;
       }
-      if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
+      if (lastFocused && document.contains(lastFocused)) {
+        lastFocused.focus({ preventScroll: true });
+      }
     };
 
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+    document.addEventListener('keydown', (e) => {
+      if (!box || !box.classList.contains('is-open')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        hide();
+      } else if (e.key === 'Tab') {
+        // Close is intentionally the only control in this modal.
+        e.preventDefault();
+        closeBtn.focus();
+      }
+    });
 
     zoomables.forEach((el) => {
       const open = () => show(el);

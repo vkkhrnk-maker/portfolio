@@ -25,15 +25,15 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=308">
+  <link rel="stylesheet" href="styles.min.css?v=309">
   <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=3" defer></script>
+  <script src="shimmer.js?v=4" defer></script>
 </head>
 <body class="case-page--fill">
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
-        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+        <span class="sidebar__name">Victoria Kukharenko</span>
       </a>
       <dl class="case-meta">
         <div class="case-meta__item">
@@ -83,7 +83,7 @@
 
     <article class="case">
       <header class="case__hero">
-        <h2 class="case__title">Hooh Document Workspace — from understanding a document to acting on it</h2>
+        <h1 class="case__title">Hooh Document Workspace — from understanding a document to acting on it</h1>
         <div class="case__intro">
           <p>After Hooh shipped the reading experience, the next gap was action: people understood their documents but still retyped the same data — name, ID, address, tax number — into every new form.</p>
           <p>Smart Fill closes that gap. Hooh recognizes form fields and fills them from documents the user has already uploaded, then lets them sign and save without leaving the app. Around it grew a full workspace — ten tools on shared rules, from markup and translate to merge and compress, one tap from the open document.</p>
@@ -120,44 +120,44 @@
 
       <section class="case__grid">
         <div class="case__block">
-          <h3 class="case__block-title">Problem</h3>
+          <h2 class="case__block-title">Problem</h2>
           <p class="case__block-body">Even when a document is clear, action still costs time. People retype the same personal data into every new form, search for where to sign, then convert the result to share or store — and each step that pushed them out to another app was a place where the workflow — and the reason to keep using Hooh — quietly leaked. Reading was solved by the first release; everything after it was still manual.</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Task</h3>
+          <h2 class="case__block-title">Task</h2>
           <p class="case__block-body">Extend Hooh from a reading tool into a complete document workflow. Let users fill and sign any form on iOS using data already available in their previously uploaded documents — without losing control over what gets submitted.</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Users</h3>
+          <h2 class="case__block-title">Users</h2>
           <p class="case__block-body">The same audience as the first Hooh release — expats, digital nomads, and people without a legal background. Most of them process a handful of new forms every month: visa applications, lease agreements, school paperwork, banking contracts.</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Scope</h3>
+          <h2 class="case__block-title">Scope</h2>
           <p class="case__block-body">Smart Fill mode with manual fallback, a signature flow that supports both drawing and camera capture, an explicit save and version model, and seven more tools on shared rules — markup, translate, scan to text, merge, pages, convert and compress.</p>
         </div>
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Design process</h3>
+        <h2 class="case__section-title">Design process</h2>
         <p class="case__section-body">Sessions with the first-release cohort surfaced a clear pattern: the data a form needed was almost always already sitting in a document the user had uploaded. Smart Fill grew out of that — instead of asking the user to retype, recognize the fields and reuse what Hooh already knows.</p>
         <p class="case__section-body">The constraint shaping every decision below was trust. Auto-fill is only useful if the user can see what was filled, override it, and turn it off entirely. The whole flow was designed around that veto.</p>
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">1. Smart Fill — automation with a veto</h3>
+        <h2 class="case__section-title">1. Smart Fill — automation with a veto</h2>
         <p class="case__section-body">Hooh recognizes form fields and fills them from the user's stored documents — and nothing is submitted silently. When Smart Fill has a match, the documents it drew from stay pinned at the top, so the user sees its sources; any value can be overridden in place; and a single toggle hands the whole form back to manual entry. It defaults to on because the time saved is the point, but the user is never more than one tap from doing it by hand. When a field has no match, the form highlights it and keeps moving — an unfinished form is a first-class state, not an error.</p>
 
         <figure class="case__figure">
           <div class="shots">
             <div class="shot">
-              <video src="assets/hooh-fill-cover.mp4?v=2" poster="assets/hooh-fill-cover-poster.jpg?v=3"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-fill-cover.mp4?v=2" poster="assets/hooh-fill-cover-poster.jpg?v=3"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="The full Smart Fill flow — Hooh recognizes the form's fields and fills them from the user's stored documents, end to end"></video>
             </div>
             <div class="shot"><picture><source srcset="assets/fill-guidance.webp?v=6" type="image/webp"><img src="assets/fill-guidance.png?v=6" alt="The More guidance sheet — the form explains exactly what a field expects before the user types" loading="lazy" width="760" height="1652"></picture></div>
             <div class="shot">
-              <video src="assets/hooh-veto.mp4?v=4" poster="assets/hooh-veto-poster.jpg?v=5"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-veto.mp4?v=4" poster="assets/hooh-veto-poster.jpg?v=5"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="Smart Fill toggled off — the auto-filled form empties back to manual entry in one tap"></video>
             </div>
           </div>
@@ -175,15 +175,15 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">2. Signature — captured once, reused everywhere</h3>
+        <h2 class="case__section-title">2. Signature — captured once, reused everywhere</h2>
         <p class="case__section-body">One signature, made once. Draw it on the canvas or capture an existing one with the camera — either way it becomes a reusable asset, saved to a library and ready to drop into the next document.</p>
 
         <figure class="case__figure">
           <div class="shots shots--center">
             <div class="shot"><picture><source srcset="assets/fill-camera.webp?v=6" type="image/webp"><img src="assets/fill-camera.png?v=6" alt="Capturing an existing signature with the camera" loading="lazy" width="760" height="1652"></picture></div>
             <div class="shot shot--lead">
-              <video src="assets/hooh-sign.mp4?v=3" poster="assets/hooh-sign-poster.jpg?v=4"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-sign.mp4?v=3" poster="assets/hooh-sign-poster.jpg?v=4"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="A signature drawn on the canvas stroke by stroke, then saved to the signature library in one tap"></video>
             </div>
             <div class="shot"><picture><source srcset="assets/fill-sigplace.webp?v=8" type="image/webp"><img src="assets/fill-sigplace.png?v=8" alt="The saved signature dropped onto the W-4's signature line — drag to move, pinch to resize" loading="lazy" width="760" height="1652"></picture></div>
@@ -193,14 +193,14 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">3. Annotations &amp; editing — powerful, without a learning curve</h3>
+        <h2 class="case__section-title">3. Annotations &amp; editing — powerful, without a learning curve</h2>
         <p class="case__section-body">Markup is usually where an editor turns into a cockpit. Hooh keeps one tool switcher and one colour system for everything — marker, text, shapes, freehand ink — so the controls never multiply. The tool appears where the user touches, its parameters live in a single sheet, and everything drawn sits as a separate layer above the original. Undo one mark or clear the whole markup: the source page never changes.</p>
 
         <figure class="case__figure">
           <div class="shots">
             <div class="shot">
-              <video src="assets/hooh-markup.mp4?v=4" poster="assets/hooh-markup-poster.jpg?v=5"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-markup.mp4?v=4" poster="assets/hooh-markup-poster.jpg?v=5"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="A marker highlight and a note added over the W-4, then peeled off with two taps of undo — the original page underneath stays untouched"></video>
             </div>
           </div>
@@ -209,14 +209,14 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">4. Saving — without fear of overwriting</h3>
+        <h2 class="case__section-title">4. Saving — without fear of overwriting</h2>
         <p class="case__section-body">Saving never overwrites by accident. The original file stays untouched — the user can save a new copy or branch off a brand-new document, and every version lives inside the document itself: switchable from the nav bar and renamable in place. Iterating on the same form keeps every state without cluttering the document list.</p>
 
         <figure class="case__figure">
           <div class="shots">
             <div class="shot">
-              <video src="assets/hooh-versions.mp4?v=4" poster="assets/hooh-versions-poster.jpg?v=5"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-versions.mp4?v=4" poster="assets/hooh-versions-poster.jpg?v=5"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="Switching between the original, filled and signed versions stored inside the document, then saving the pick as a new document"></video>
             </div>
           </div>
@@ -225,15 +225,15 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Other tools</h3>
+        <h2 class="case__section-title">Other tools</h2>
         <p class="case__section-body">Six more tools round out the workspace — all on the same rules, all reachable from the same document screen. Each is a complete scenario in brief: pick, one amber confirm, done.</p>
 
         <div class="tools-grid">
           <figure class="case__figure tools-grid__wide">
             <div class="shots">
               <div class="shot">
-                <video src="assets/hooh-tools.mp4?v=3" poster="assets/hooh-tools-poster.jpg?v=4"
-                       autoplay loop muted playsinline preload="metadata"
+                <video data-src="assets/hooh-tools.mp4?v=3" poster="assets/hooh-tools-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
                        aria-label="The document screen at rest — one tap on the grid summons the All-actions sheet: fill, sign, markup, convert, translate, merge and more"></video>
               </div>
             </div>
@@ -243,8 +243,8 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video src="assets/hooh-translate.mp4?v=4" poster="assets/hooh-translate-poster.jpg?v=5"
-                       autoplay loop muted playsinline preload="metadata"
+                <video data-src="assets/hooh-translate.mp4?v=4" poster="assets/hooh-translate-poster.jpg?v=5"
+                       autoplay loop muted playsinline preload="none"
                        aria-label="One tap translates the whole W-4 — the result opens as full text and flips to translated key data, every field one tap to copy"></video>
               </div>
             </div>
@@ -254,8 +254,8 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video src="assets/hooh-merge.mp4?v=3" poster="assets/hooh-merge-poster.jpg?v=4"
-                       autoplay loop muted playsinline preload="metadata"
+                <video data-src="assets/hooh-merge.mp4?v=3" poster="assets/hooh-merge-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
                        aria-label="Two documents picked from the library and merged into the current one, with optional compression — saved as a new version"></video>
               </div>
             </div>
@@ -265,8 +265,8 @@
           <figure class="case__figure tools-grid__wide">
             <div class="shots">
               <div class="shot">
-                <video src="assets/hooh-pages.mp4?v=5" poster="assets/hooh-pages-poster.jpg?v=6"
-                       autoplay loop muted playsinline preload="metadata"
+                <video data-src="assets/hooh-pages.mp4?v=5" poster="assets/hooh-pages-poster.jpg?v=6"
+                       autoplay loop muted playsinline preload="none"
                        aria-label="A sideways page slides to the front of the grid, then one tap of rotate straightens it"></video>
               </div>
             </div>
@@ -276,8 +276,8 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video src="assets/hooh-convert.mp4?v=3" poster="assets/hooh-convert-poster.jpg?v=4"
-                       autoplay loop muted playsinline preload="metadata"
+                <video data-src="assets/hooh-convert.mp4?v=3" poster="assets/hooh-convert-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
                        aria-label="Excel picked as the target format and the W-4 converted — saved as a new copy, the original untouched"></video>
               </div>
             </div>
@@ -287,8 +287,8 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video src="assets/hooh-compress.mp4?v=3" poster="assets/hooh-compress-poster.jpg?v=4"
-                       autoplay loop muted playsinline preload="metadata"
+                <video data-src="assets/hooh-compress.mp4?v=3" poster="assets/hooh-compress-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
                        aria-label="Picking the Maximum preset and compressing — processing ends on a smaller file, saved as a new copy"></video>
               </div>
             </div>
@@ -305,7 +305,7 @@
       </section>
 
       <section class="case__outcome">
-        <h3 class="case__outcome-title">Outcome</h3>
+        <h2 class="case__outcome-title">Outcome</h2>
         <div class="case__outcome-body">
           <p>Designed end-to-end in about six weeks and handed off to engineering. Every decision pulled in one direction: the app removes the repetitive work while the user keeps the final word. This scope didn't reach a public release within the engagement — it's ready to ship when the product picks the work back up.</p>
           <p><strong>Ten flows, one scaffold:</strong> the four deepest flow maps alone run to almost sixty screens, yet every tool shares one header, one confirm pattern and one completion screen — nothing lives more than one level deep.</p>
@@ -372,26 +372,58 @@
       if (!drawer) return;
       const openBtns = document.querySelectorAll('[data-menu-open]');
       const closeBtn = drawer.querySelector('.menu-drawer__close');
-      // Every link inside closes it — including the name and the contact
-      // row. On the home page the name is a same-page anchor, so without
-      // this a tap scrolled the page underneath and left the menu covering it.
       const items = drawer.querySelectorAll('a');
-      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
-      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
-      openBtns.forEach(b => b.addEventListener('click', open));
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
       closeBtn.addEventListener('click', close);
-      items.forEach(i => i.addEventListener('click', close));
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
     })();
 
     (() => {
       document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
     })();
 
-    /* Play each loop only while it's on screen (the HTML keeps `autoplay`, so
-       with JS off every video still animates). Cuts decode load from 11
-       simultaneous streams to the one or two in view, honours reduced-motion,
-       and starts each loop from the top the first time it's reached.
+    /* Play each hydrated loop only while it's on screen. This cuts decode load
+       from 11 simultaneous streams to the one or two in view, honours
+       reduced-motion, and starts each loop from the top the first time reached.
        A plain rAF-throttled scroll handler (not IntersectionObserver) — the
        same reliable pattern as the reveal code in case.js; IO's initial
        callback doesn't fire in every renderer, which left loops stuck paused. */
@@ -485,6 +517,6 @@
       });
     })();
   </script>
-  <script src="case.js?v=16" defer></script>
+  <script src="case.js?v=17" defer></script>
 </body>
 </html>

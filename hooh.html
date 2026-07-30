@@ -25,9 +25,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=308">
+  <link rel="stylesheet" href="styles.min.css?v=309">
   <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=3" defer></script>
+  <script src="shimmer.js?v=4" defer></script>
   <style>
     /* Loading-state, ChatGPT-style (kept inline so styles.css WIP stays untouched):
        the phrase sits still and a light shimmer sweeps across it; phrase changes
@@ -56,7 +56,7 @@
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
-        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+        <span class="sidebar__name">Victoria Kukharenko</span>
       </a>
       <dl class="case-meta">
         <div class="case-meta__item">
@@ -106,7 +106,7 @@
 
     <article class="case">
       <header class="case__hero">
-        <h2 class="case__title">Hooh. An AI assistant translating complex bureaucracy into human language</h2>
+        <h1 class="case__title">Hooh. An AI assistant translating complex bureaucracy into human language</h1>
         <p class="case__intro">We shipped Hooh’s MVP on web and iOS: upload, layered reading, assistant chat, and file organization. I designed the core flow and MVP system; Progressive Disclosure became the shared pattern that let people choose how deeply to read without losing context.</p>
         <dl class="case__proof-strip" aria-label="Project results at a glance">
           <div><dt>Launch</dt><dd>Web + iOS shipped</dd></div>
@@ -138,43 +138,43 @@
 
       <section class="case__grid">
         <div class="case__block">
-          <h3 class="case__block-title">Problem</h3>
+          <h2 class="case__block-title">Problem</h2>
           <p class="case__block-body">People face document anxiety when dealing with contracts, reports, insurance papers, or legal texts. The problem is not just volume, but uncertainty: users don't know where to start, what matters most, or whether they are missing hidden risks, deadlines, or critical clauses. They need a lower-stress way to understand the essence of a document before deciding whether to go deeper.</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Task</h3>
+          <h2 class="case__block-title">Task</h2>
           <p class="case__block-body">Design an MVP for web and iOS that helps users understand complex documents faster, with less stress and less manual reading.</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Users</h3>
+          <h2 class="case__block-title">Users</h2>
           <p class="case__block-body">The product is designed for people without a legal background who regularly deal with complex paperwork — expats, digital nomads, and everyday users. They use Hooh to quickly decode lease agreements, visa requirements, insurance papers, and banking contracts, and understand what matters without reading every page line by line.</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">What we launched</h3>
+          <h2 class="case__block-title">What we launched</h2>
           <p class="case__block-body">We designed and launched the MVP across web and iOS, defining the core experience for document upload, layered reading, conversational exploration, and file organization.</p>
         </div>
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Design process</h3>
+        <h2 class="case__section-title">Design process</h2>
         <p class="case__section-body">Started with competitor analysis — Genei, Notion AI, Microsoft Copilot for docs all gave full summary upfront, which removed user agency: you couldn't choose how deep to go. Early prototypes tried single-step summary, but internal testing showed users either felt over-summarised or wanted to dig further. This pushed us to layered reading.</p>
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Key UX decision: Progressive Disclosure</h3>
+        <h2 class="case__section-title">Key UX decision: Progressive Disclosure</h2>
         <p class="case__section-body">Single-step summary risks oversimplification; full document keeps overwhelm. Three layers let users self-calibrate depth: skim with snapshot, dive deeper if signal is meaningful, ask targeted questions if specific concern surfaces. Each layer is a commitment threshold — users don't pay attention cost until they've decided the document is worth it.</p>
 
         <div class="case__gap-grid">
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">1. Snapshot</h4>
+            <h3 class="case__gap-card__title">1. Snapshot</h3>
             <p class="case__gap-card__desc">A one-glance verdict — skim the gist before committing any attention</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">2. Summary</h4>
+            <h3 class="case__gap-card__title">2. Summary</h3>
             <p class="case__gap-card__desc">A structured breakdown — dive deeper when the signal looks meaningful</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">3. Q&amp;A</h4>
+            <h3 class="case__gap-card__title">3. Q&amp;A</h3>
             <p class="case__gap-card__desc">A contextual chat — ask targeted questions when a specific concern surfaces</p>
           </div>
         </div>
@@ -234,7 +234,7 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Designed a conversational experience for document exploration</h3>
+        <h2 class="case__section-title">Designed a conversational experience for document exploration</h2>
         <p class="case__section-body">The assistant uses uploaded documents as context, allowing users to ask follow-up questions, explore categories, and retrieve relevant information without manually scanning long text.</p>
 
         <figure class="case__figure">
@@ -274,27 +274,27 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Trust by design: the assistant can be wrong</h3>
+        <h2 class="case__section-title">Trust by design: the assistant can be wrong</h2>
         <p class="case__section-body">An assistant that reads your contracts and lab results only earns trust if it can show its work. Three guardrails run through the whole experience: every claim links back to the exact source document, users see and control which documents the assistant reasons over, and the interface says plainly that Hooh may be wrong — keeping the original file one tap away.</p>
 
         <div class="case__gap-grid">
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Sources on every claim</h4>
+            <h3 class="case__gap-card__title">Sources on every claim</h3>
             <p class="case__gap-card__desc">Citation chips in answers open the exact document behind each number</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Scoped context</h4>
+            <h3 class="case__gap-card__title">Scoped context</h3>
             <p class="case__gap-card__desc">The All-documents selector shows — and limits — what the assistant reads</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Honest uncertainty</h4>
+            <h3 class="case__gap-card__title">Honest uncertainty</h3>
             <p class="case__gap-card__desc">A permanent "Hooh may be wrong" notice points users back to the original</p>
           </div>
         </div>
       </section>
 
       <section class="case__outcome">
-        <h3 class="case__outcome-title">Outcome</h3>
+        <h2 class="case__outcome-title">Outcome</h2>
         <div class="case__outcome-body">
           <p>MVP shipped on web and iOS. Public-release analytics weren't part of this engagement — the evidence below is what we validated before launch.</p>
           <p><strong>Shipped on two platforms:</strong> the MVP went live on web and iOS — upload, layered reading, assistant chat and file organization.</p>
@@ -362,16 +362,49 @@
       if (!drawer) return;
       const openBtns = document.querySelectorAll('[data-menu-open]');
       const closeBtn = drawer.querySelector('.menu-drawer__close');
-      // Every link inside closes it — including the name and the contact
-      // row. On the home page the name is a same-page anchor, so without
-      // this a tap scrolled the page underneath and left the menu covering it.
       const items = drawer.querySelectorAll('a');
-      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
-      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
-      openBtns.forEach(b => b.addEventListener('click', open));
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
       closeBtn.addEventListener('click', close);
-      items.forEach(i => i.addEventListener('click', close));
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
     })();
 
     // Auto-update year
@@ -454,6 +487,6 @@
     })();
 
   </script>
-  <script src="case.js?v=16" defer></script>
+  <script src="case.js?v=17" defer></script>
 </body>
 </html>

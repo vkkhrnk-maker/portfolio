@@ -135,7 +135,7 @@
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
-        <h1 class="sidebar__name">Victoria Kukharenko</h1>
+        <span class="sidebar__name">Victoria Kukharenko</span>
       </a>
       <dl class="case-meta">
         <div class="case-meta__item">
@@ -187,7 +187,7 @@
 
     <article class="case">
       <header class="case__hero">
-        <h2 class="case__title">Syno — designing the artist side of an art platform from scratch</h2>
+        <h1 class="case__title">Syno — designing the artist side of an art platform from scratch</h1>
         <p class="case__intro">Syno connects artists, spaces and open calls. There was nothing here to redesign: I defined and designed the artist side from the ground up — the studio where an artist builds a portfolio, the public profile it produces, and the flow for applying to an open call. Underneath them, the UI kit the platform is assembled from and the specs engineering builds from.</p>
         <dl class="case-meta case-meta--mobile">
           <div class="case-meta__item">
@@ -210,51 +210,51 @@
 
       <section class="case__grid">
         <div class="case__block">
-          <h3 class="case__block-title">Problem</h3>
+          <h2 class="case__block-title">Problem</h2>
           <p class="case__block-body">With nothing to redesign, the first question was not what to fix but what the artist side even is. The hard part sits in the content: an artist's work refuses to be uniform — any proportion, photo and video, single pieces and series. The platform needs the opposite: comparable profiles an organiser can read side by side, and a public page that stays predictable whatever gets uploaded into it. Left to a plain form, one side always loses — either the work is squeezed into a database, or the platform fills up with entries nobody can compare</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Task</h3>
+          <h2 class="case__block-title">Task</h2>
           <p class="case__block-body">Define and design the artist side end to end: building a profile should feel like arranging works rather than filling in a form, and the state of everything should be legible — what is uploading, what is missing before publishing, where an application stands. Then hand engineering a system they can build the rest of the platform from</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Users</h3>
+          <h2 class="case__block-title">Users</h2>
           <p class="case__block-body">Two readers share one profile. The artist fills it in and wants it to look like their portfolio, not a form. The organiser reads dozens of them during an open call and needs the same facts in the same place every time. Every decision here answers to both</p>
         </div>
         <div class="case__block">
-          <h3 class="case__block-title">Scope</h3>
+          <h2 class="case__block-title">Scope</h2>
           <p class="case__block-body">Three connected flows — collect, publish, apply — on desktop and mobile, the UI kit they are assembled from, and the specs attached to the screens they describe. Every step carries its own state instead of failing silently, and the whole artist side went to development out of this one file</p>
         </div>
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">Design process</h3>
+        <h2 class="case__section-title">Design process</h2>
         <p class="case__section-body">With no product to look at, the work started outside Figma: a scan of how artist registries and open-call platforms already handle profiles and submissions, then interviews with the client about how a call actually runs — what an organiser compares, what artists send today, where it currently breaks. Those two produced the four constraints below, and everything after answers to them.</p>
         <p class="case__section-body">Then the order that did the most: <strong>a clickable prototype came before the layouts</strong> — built in code with Claude rather than drawn. Flows are easy to agree with on a static screen and hard to defend once you walk them — how many steps an application really takes, where the publishing checklist belongs, what happens when a draft outlives its deadline. The prototype was walked through by the team rather than presented as a demo, and the mockups came last, once the shape had stopped moving — which is why the Figma file reads as decisions rather than options.</p>
         <!-- DRAFT-ONLY: заглушка, убрать при публикации либо заменить на embed/ссылку -->
         <div class="proto-slot">Здесь будет кликабельный прототип — embed или кнопка «Walk the prototype».<br>Пока показ наружу не согласован, флоу ниже показаны статичными экранами.</div>
         <div class="case__gap-grid case__gap-grid--four">
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Work of any shape</h4>
+            <h3 class="case__gap-card__title">Work of any shape</h3>
             <p class="case__gap-card__desc">Portrait, landscape, square and video, mixed inside one portfolio</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Two readers, one profile</h4>
+            <h3 class="case__gap-card__title">Two readers, one profile</h3>
             <p class="case__gap-card__desc">The artist fills it in; the organiser compares it against dozens of others</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Uploads fail</h4>
+            <h3 class="case__gap-card__title">Uploads fail</h3>
             <p class="case__gap-card__desc">Files are heavy — every tile needs its own error, retry and limits</p>
           </div>
           <div class="case__gap-card">
-            <h4 class="case__gap-card__title">Two widths, one kit</h4>
+            <h3 class="case__gap-card__title">Two widths, one kit</h3>
             <p class="case__gap-card__desc">1280 and 375 assembled from the same components, not redrawn twice</p>
           </div>
         </div>
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">1. Collect — a portfolio, not a file manager</h3>
+        <h2 class="case__section-title">1. Collect — a portfolio, not a file manager</h2>
         <p class="case__section-body">Uploading is the first thing an artist does and the first place the product can feel like paperwork. So the upload area shows work as work: every file lands as a preview tile in the gallery it will become, and progress, errors and retries live on the tile itself rather than in a separate list of file names.</p>
         <p class="case__section-body">Two decisions did the most here. <strong>Replace was removed from the tile menu</strong> — deleting and adding again produces the same result, without a branch where the replacement itself fails and leaves the artist with neither file. And on touch, <strong>the tile badge became ⋯ instead of ×</strong>: one element could not carry both "remove this" and "make this the cover", so the cross now appears only while a file is uploading or has failed, where it means one thing.</p>
 
@@ -279,7 +279,7 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">2. Publish — a checklist, not a form error</h3>
+        <h2 class="case__section-title">2. Publish — a checklist, not a form error</h2>
         <p class="case__section-body">A profile becomes public only when it carries what an organiser needs to judge it. That could have been enforced the usual way — let the artist press Publish, then paint the gaps red. Instead the requirements are visible before the attempt: the profile shows what is still missing while it is being filled in, so publishing is the end of a checklist rather than a rejected form.</p>
         <p class="case__section-body">The same logic shapes the profile itself. Statement and main info are laid out as a page about an artist rather than a questionnaire, which is exactly how it has to read on the public side — where the work is what the visitor came for and the fields are only the frame around it.</p>
 
@@ -316,7 +316,7 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">3. Apply — where a submission turns into a profile</h3>
+        <h2 class="case__section-title">3. Apply — where a submission turns into a profile</h2>
         <p class="case__section-body">An open call is what the whole artist side is for, and it is the one flow serving two people at once: an artist who already has a Registry profile, and someone who followed a link to the call with nothing at all. Both walk the same four steps — profile, works, questions, review — and the only difference is how much is already filled in. Signing up sits <strong>inside</strong> Apply rather than in front of it: the account is created at the moment of intent — Google, Apple or a one-time code by email, no password to invent and no wall between a person and the thing they came to do. And since a new user has by then written a profile and picked works, the submitted screen offers to keep it — the application that was going to be a one-off becomes a Registry profile.</p>
         <p class="case__section-body">Works are selected from the portfolio, not uploaded again; anything missing is added right there through the same uploader as the studio, never a second parallel form. Review comes before submitting and says what is still incomplete — the same rule as the publishing checklist: nothing here fails after the fact when it could have been shown before. And because a deadline turns a saved draft into a real problem, the awkward cases are designed rather than left to chance.</p>
 
@@ -387,7 +387,7 @@
       </section>
 
       <section class="case__section">
-        <h3 class="case__section-title">The system underneath — grown with the product, not after it</h3>
+        <h2 class="case__section-title">The system underneath — grown with the product, not after it</h2>
         <p class="case__section-body">All of it is assembled from one library — and the library did not exist either. It grew with the product into around 40 pages of components shared with the design file. Variants are kept in check with boolean properties instead of multiplying combinations, spacing runs on tokens, and icon colour goes through semantic tokens, so dark mode is a switch rather than a redraw.</p>
         <p class="case__section-body">Handover has its own format. Specs are written on a <strong>Spec Sticker</strong> component and placed next to the screen they describe, so a developer reads the requirement in the same place they read the layout — no parallel document to keep in sync. A pass across the whole artist side added the states that are easy to leave out and expensive to add later: upload limits and file requirements, skeletons and retry, breakpoints, toasts, the lightbox, account deletion and email change.</p>
 
@@ -411,7 +411,7 @@
       </section>
 
       <section class="case__outcome">
-        <h3 class="case__outcome-title">Result</h3>
+        <h2 class="case__outcome-title">Result</h2>
         <div class="case__outcome-body">
           <p>The platform is in development, so there are no launch metrics to quote yet — the result is what left design, and what it made possible.</p>
           <p><strong>The artist side is in development:</strong> auth, profile, portfolio, the apply flow and applications went to engineering as designed screens plus specs on the same canvas.</p>
@@ -492,12 +492,48 @@
       const openBtns = document.querySelectorAll('[data-menu-open]');
       const closeBtn = drawer.querySelector('.menu-drawer__close');
       const items = drawer.querySelectorAll('a');
-      const open = (e) => { if (e) e.preventDefault(); drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; };
-      const close = () => { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; };
-      openBtns.forEach(b => b.addEventListener('click', open));
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
       closeBtn.addEventListener('click', close);
-      items.forEach(i => i.addEventListener('click', close));
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
     })();
 
     // Auto-update year + scroll progress
@@ -519,6 +555,6 @@
     })();
 
   </script>
-  <script src="case.js?v=16" defer></script>
+  <script src="case.js?v=17" defer></script>
 </body>
 </html>

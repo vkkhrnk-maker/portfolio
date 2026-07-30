@@ -1,3 +1,39 @@
+/* Video files are substantially heavier than their posters. Keep only the
+   poster in the initial page load, then attach the source shortly before the
+   video reaches the viewport. */
+(() => {
+  const videos = Array.from(document.querySelectorAll('video[data-src]'));
+  if (!videos.length) return;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hydrate = (video) => {
+    const src = video.dataset.src;
+    if (!src) return;
+    video.src = src;
+    video.removeAttribute('data-src');
+    video.load();
+    if (video.autoplay && !reducedMotion) {
+      const playback = video.play();
+      if (playback && typeof playback.catch === 'function') playback.catch(() => {});
+    }
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    videos.forEach(hydrate);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      hydrate(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '160px 0px', threshold: 0.01 });
+
+  videos.forEach((video) => observer.observe(video));
+})();
+
 /* Media blur-up (the Syno profile-cover pattern): a tiny (~1KB, base64)
    blurred placeholder sits under each big case image from the first paint,
    and the sharp file fades in over it once loaded. Replaces the old shimmer

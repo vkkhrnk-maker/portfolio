@@ -28,16 +28,16 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=308">
+  <link rel="stylesheet" href="styles.min.css?v=309">
   <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=3" defer></script>
+  <script src="shimmer.js?v=4" defer></script>
 </head>
 <body>
   <aside class="sidebar">
     <div class="sidebar__top">
       <div class="sidebar__identity">
         <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">
-          <h1 class="sidebar__name">Victoria Kukharenko</h1>
+          <span class="sidebar__name">Victoria Kukharenko</span>
         </a>
         <p class="sidebar__role">Product designer</p>
       </div>
@@ -82,7 +82,7 @@
           </span>
           <p class="intro__greeting" data-greeting>Hello there</p>
         </div>
-        <h2 class="intro__title">I take products from the first flow to something engineers can&nbsp;ship</h2>
+        <h1 class="intro__title">I take products from the first flow to something engineers can&nbsp;ship</h1>
       </div>
     </section>
 
@@ -113,8 +113,8 @@
           </header>
           <div class="project-card__phones project-card__phones--single">
             <div class="project-card__phone-video">
-              <video src="assets/hooh-sign.mp4?v=3" poster="assets/hooh-sign-poster.jpg?v=4"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-sign.mp4?v=3" poster="assets/hooh-sign-poster.jpg?v=4"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="A signature drawn on the canvas stroke by stroke, then saved to the signature library"></video>
             </div>
           </div>
@@ -133,8 +133,8 @@
           </header>
           <div class="project-card__phones project-card__phones--single">
             <div class="project-card__phone-video">
-              <video src="assets/hooh-cover.mp4?v=15" poster="assets/hooh-cover-poster.jpg?v=16"
-                     autoplay loop muted playsinline preload="metadata"
+              <video data-src="assets/hooh-cover.mp4?v=15" poster="assets/hooh-cover-poster.jpg?v=16"
+                     autoplay loop muted playsinline preload="none"
                      aria-label="Hooh app walkthrough — upload, AI summary and assistant chat"></video>
             </div>
           </div>
@@ -452,30 +452,77 @@
 
     (() => {
       const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
       const openBtns = document.querySelectorAll('[data-menu-open]');
       const closeBtn = drawer.querySelector('.menu-drawer__close');
-      // Every link inside closes it — including the name and the contact
-      // row. On the home page the name is a same-page anchor, so without
-      // this a tap scrolled the page underneath and left the menu covering it.
       const items = drawer.querySelectorAll('a');
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => {
+          if (inert) el.setAttribute('inert', '');
+          else el.removeAttribute('inert');
+        });
+      };
+
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
 
       const open = (e) => {
         if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children)
+          .filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
         drawer.classList.add('is-open');
         drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
         document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
       };
 
-      const close = () => {
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
         drawer.classList.remove('is-open');
         drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
         document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) {
+          opener.focus({ preventScroll: true });
+        }
       };
 
       openBtns.forEach((btn) => btn.addEventListener('click', open));
       closeBtn.addEventListener('click', close);
-      items.forEach((item) => item.addEventListener('click', close));
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          close();
+          return;
+        }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        if (!elements.length) {
+          e.preventDefault();
+          closeBtn.focus();
+          return;
+        }
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      });
     })();
 
     // Experience rows open one at a time on phones — the chevron (and the
