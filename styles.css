@@ -4302,11 +4302,20 @@ html {
    CTA floats naked over the grid and a card's magenta arrow slides up level
    with it, with it whatever passes underneath dissolves first. Starts after
    the 320px sidebar so the sticky name is never blurred, and sits under the
-   CTA's z-index. Must come after the base `.mobile-topbar { display: none }`
-   and the --home block above, or it loses on source order. */
+   CTA's z-index (90 on both .profile-section__cta and .case__cta).
+
+   The case and CV pages pin the identical CTA and were left without the
+   cushion, so on those the pill sat over live text with nothing dissolving
+   under it — the blur looked broken next to the homepage. They get it too;
+   the homepage bar carries both classes, so it matches either way. `position`
+   is restated because --case is sticky in the mobile layout and a sticky box
+   ignores left/right. Must come after the base `.mobile-topbar { display:
+   none }` and the --home block above, or it loses on source order. */
 @media (min-width: 1200px) {
+  .mobile-topbar--case,
   .mobile-topbar--home {
     display: block;
+    position: fixed;
     top: 0;
     left: 320px;
     right: 0;
@@ -4319,6 +4328,7 @@ html {
     z-index: 80;
   }
 
+  .mobile-topbar--case > :not(.mobile-topbar__blur),
   .mobile-topbar--home > :not(.mobile-topbar__blur) {
     display: none;
   }
@@ -5381,28 +5391,15 @@ a, button, [role="button"], summary, label {
 }
 
 /* Each role that has a case study says so, so a reader can go from the line
-   in the CV to the work behind it without hunting the homepage. */
+   in the CV to the work behind it without hunting the homepage. They are the
+   site's white pills, not text links: on a page whose only other magenta is
+   the download CTA, a coloured run of text read as emphasis rather than as
+   something to press. 12px gap matches .cv__actions. */
 .cv__role-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  margin: 2px 0 0;
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: var(--ls-heading-body);
-}
-
-.cv__role-links a {
-  color: var(--text-accent);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.cv__role-links a:hover,
-.cv__role-links a:focus-visible {
-  border-bottom-color: currentColor;
+  gap: 12px;
+  margin: 6px 0 0;
 }
 
 /* Label-and-body rows for Skills and Education. The label column is fixed so

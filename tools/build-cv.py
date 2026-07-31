@@ -149,7 +149,7 @@ def page_body(doc):
     p = []
     a = p.append
     a('      <header class="cv__hero">')
-    a('        <p class="cv__eyebrow">Curriculum vitae</p>')
+    a('        <p class="cv__eyebrow">CV</p>')
     # The headline is the one line written for the page rather than the sheet.
     headline = doc["meta"].get("Headline", doc["role"])
     a(f'        <h1 class="cv__title">{nbsp_last(inline(headline))}</h1>')
@@ -186,7 +186,7 @@ def page_body(doc):
         if r["cases"]:
             a('          <p class="cv__role-links">')
             for c in r["cases"]:
-                a(f'            <a href="{html.escape(c["href"])}">{inline(c["label"])}</a>')
+                a(f'            <a class="btn btn--light" href="{html.escape(c["href"])}">{inline(c["label"])}</a>')
             a('          </p>')
         a('        </div>')
     a('      </section>')
