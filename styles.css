@@ -5220,13 +5220,15 @@ a, button, [role="button"], summary, label {
    its body is a document, not a narrative: no plates, no figures, just a
    measured column. Sections are separated by the same hairline rule the print
    CV uses, so the page and the PDF read as one artefact. */
+/* Full column width, like the case pages: the section rules and the dates are
+   structure and want the whole measure. The prose inside keeps its own caps
+   (.cv__summary, .cv__list) exactly as .case__intro does — the article spans,
+   the reading line does not. */
 .cv {
   display: flex;
   flex-direction: column;
   gap: 72px;
   padding: 0 var(--page-x);
-  /* A CV is read, not scanned across a wide screen — hold the measure. */
-  max-width: 900px;
 }
 
 .cv__hero {
@@ -5448,7 +5450,6 @@ a, button, [role="button"], summary, label {
 @media (max-width: 1199px) {
   .cv {
     gap: 56px;
-    max-width: none;
   }
 
   .cv__title {
