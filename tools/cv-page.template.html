@@ -28,8 +28,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=311">
-  <script src="typographer.js?v=6" defer></script>
+  <link rel="stylesheet" href="{{STYLES}}">
+  <script src="{{TYPOGRAPHER}}" defer></script>
 </head>
 <body class="cv-page">
   <aside class="sidebar sidebar--case">
@@ -84,137 +84,7 @@
     </a>
 
     <article class="cv">
-      <header class="cv__hero">
-        <p class="cv__eyebrow">Curriculum vitae</p>
-        <h1 class="cv__title">Product designer taking products from the first flow to something engineers can&nbsp;ship</h1>
-        <p class="cv__summary">Product designer working end to end across iOS and web. Shipped an AI document assistant MVP on two platforms, redesigned an e-commerce product card that became the catalog-wide standard, and built the design systems those products ship from.</p>
-        <div class="cv__actions">
-          <!-- ?v= is bumped whenever the PDF is re-rendered from cv-print.html,
-               since it is replaced in place and would otherwise stay cached. -->
-          <a class="btn btn--dark cv__download" href="Victoria-Kukharenko-Product-Designer-CV.pdf?v=32606" download>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <path fill="currentColor" d="M12 16 7 11l1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11l-5 5zm-7 4v-2h14v2H5z"/>
-            </svg>
-            <span>Download PDF</span>
-          </a>
-          <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">vkkhrnk@gmail.com</a>
-        </div>
-      </header>
-
-      <section class="cv__section" aria-labelledby="cv-experience">
-        <h2 class="cv__section-title" id="cv-experience">Experience</h2>
-
-        <div class="cv__role">
-          <div class="cv__role-head">
-            <h3 class="cv__role-title">Product Designer — Hooh</h3>
-            <p class="cv__role-dates">Jan 2025 — Mar 2026</p>
-          </div>
-          <p class="cv__role-meta">Full-time, remote · AI document assistant, iOS and web · startup — the only product designer, with a PM, product owner, art director and two engineers</p>
-          <ul class="cv__list">
-            <li>Designed and shipped the MVP on web and iOS — upload, layered AI summaries, assistant chat and file organization. In internal testing every participant took a real document from upload to understanding unaided.</li>
-            <li>Introduced Progressive Disclosure (Snapshot → Summary → Q&amp;A) after testing showed a single-step summary left users either over-summarized or unable to go deeper; it became the pattern for every later document feature.</li>
-            <li>Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.</li>
-            <li>Extended the reader into a document workspace — Smart Fill (form fields recognized and filled from the user’s own documents, every value overridable), reusable signature, non-destructive markup and versioning: ten flows on one scaffold, designed in six weeks and handed off complete, plus the design system the team ships from.</li>
-          </ul>
-          <p class="cv__role-links">
-            <a href="hooh.html">Read the MVP case</a>
-            <a href="hooh-fill.html">Read the workspace case</a>
-          </p>
-        </div>
-
-        <div class="cv__role">
-          <div class="cv__role-head">
-            <h3 class="cv__role-title">Product Designer — iTAB</h3>
-            <p class="cv__role-dates">May 2024 — Apr 2026</p>
-          </div>
-          <p class="cv__role-meta">Part-time, remote · health and wellness e-commerce · web and mobile app</p>
-          <ul class="cv__list">
-            <li>Designed the specialist-consultations direction — specialist catalog, specialist card and the user-side booking flow — alongside a homepage redesign and sections throughout the app and the site.</li>
-            <li>Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. After launch drop-off fell and add-to-cart rose on every step redesigned, and the card system rolled out across the entire catalog as the new standard; figures under NDA.</li>
-            <li>Defined purchase states: the CTA becomes a quantity control with immediate feedback, and unavailable products offer restock and alternatives instead of a dead end.</li>
-          </ul>
-          <p class="cv__role-links">
-            <a href="itab.html">Read the case</a>
-          </p>
-        </div>
-
-        <div class="cv__role">
-          <div class="cv__role-head">
-            <h3 class="cv__role-title">UX/UI Designer — Infomedia</h3>
-            <p class="cv__role-dates">May 2023 — Feb 2025</p>
-          </div>
-          <p class="cv__role-meta">Full-time, remote · communication products</p>
-          <ul class="cv__list">
-            <li>Worked on products for Russian Railways (RZD) and Rosatom, turning complex requirements into clear user flows and interfaces. Project details under NDA.</li>
-          </ul>
-        </div>
-
-        <div class="cv__role">
-          <div class="cv__role-head">
-            <h3 class="cv__role-title">Product Designer — Freelance</h3>
-            <p class="cv__role-dates">Mar 2022 — Present</p>
-          </div>
-          <ul class="cv__list">
-            <li><b>Syno.art</b> (2026 — Present) — art platform for Cyprus. Designed the artist side end to end — auth, profile and portfolio, the open-call flow and applications dashboard — 180+ screens across desktop and mobile, built on a design system of 296 components and 400 tokens in primitive, semantic and adaptive layers.</li>
-            <li><b>Cryptomi</b> (2023–2024) — interfaces for a crypto product; dense, data-heavy flows made approachable.</li>
-            <li><b>Abramova School</b> (2023–2024) — UX/UI design alongside mentoring junior designers: critiques, portfolio reviews, feedback.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="cv__section" aria-labelledby="cv-skills">
-        <h2 class="cv__section-title" id="cv-skills">Skills</h2>
-        <dl class="cv__defs">
-          <div class="cv__def">
-            <dt>AI products</dt>
-            <dd>LLM assistants and conversational UI · progressive disclosure of model output · source citations and provenance · scoped context control · uncertainty and failure states · human-in-the-loop override</dd>
-          </div>
-          <div class="cv__def">
-            <dt>Design</dt>
-            <dd>Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · iOS and web</dd>
-          </div>
-          <div class="cv__def">
-            <dt>Design systems</dt>
-            <dd>Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA</dd>
-          </div>
-          <div class="cv__def">
-            <dt>Research and delivery</dt>
-            <dd>Usability testing · user interviews · UX audit · competitor analysis · developer handoff and specs · mentoring</dd>
-          </div>
-          <div class="cv__def">
-            <dt>Tools</dt>
-            <dd>Figma (variables, components, auto-layout, Plugin API) · FigJam · HTML / CSS / JavaScript · AI coding agents (Claude Code, Codex) — working prototypes and custom Figma plugins for bulk token audits and migrations</dd>
-          </div>
-        </dl>
-      </section>
-
-      <section class="cv__section" aria-labelledby="cv-education">
-        <h2 class="cv__section-title" id="cv-education">Education</h2>
-        <dl class="cv__defs">
-          <div class="cv__def">
-            <dt>2022 — 2024</dt>
-            <dd><b>Uprock School</b> — Certificate, product / UX-UI design</dd>
-          </div>
-          <div class="cv__def">
-            <dt>2019 — 2021</dt>
-            <dd><b>Syktyvkar State University</b> — Master’s degree, Ecology</dd>
-          </div>
-          <div class="cv__def">
-            <dt>2012 — 2016</dt>
-            <dd><b>Ukhta State Technical University</b> — Bachelor’s degree, Geodesy for Land Management and Cadastre</dd>
-          </div>
-        </dl>
-      </section>
-
-      <section class="cv__section cv__section--closing">
-        <h2 class="cv__section-title">Get in touch</h2>
-        <p class="cv__summary">The fastest way is a call — or email and Telegram if you would rather write first.</p>
-        <div class="cv__actions">
-          <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
-          <a class="btn btn--light" href="mailto:vkkhrnk@gmail.com">vkkhrnk@gmail.com</a>
-          <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-        </div>
-      </section>
+{{BODY}}
     </article>
 
     <footer class="footer">
