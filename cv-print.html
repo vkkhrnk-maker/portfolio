@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Victoria Kukharenko — Product Designer — CV</title>
+<style>
+  /* Print-first CV. Single column, real text, no icons, no layout tables —
+     everything an ATS parser needs to extract cleanly, with the typography
+     doing the work instead of graphics. Content is sized to one A4 page. */
+  @page { size: A4; margin: 11mm 13mm; }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 9pt;
+    line-height: 1.3;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---- header ---- */
+  .name {
+    font-size: 18pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .role {
+    font-size: 9.6pt;
+    font-weight: 500;
+    color: #b4137f;
+    margin: 1mm 0 0;
+  }
+  .contacts {
+    margin: 1.8mm 0 0;
+    color: #4a4a4a;
+    font-size: 8.6pt;
+    line-height: 1.35;
+  }
+  .contacts span { white-space: nowrap; }
+  .sep { color: #b0b0b0; padding: 0 1.5mm; }
+
+  /* ---- sections ---- */
+  /* The vertical rhythm is set so the whole CV lands on one A4 page. Print lays
+     out taller than the screen preview does — measured, it needed ~8mm shaved —
+     so these margins carry about 3mm of slack. Add a role or a bullet and check
+     the render is still one page before shipping the PDF. */
+  h2 {
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    margin: 2.2mm 0 0;
+    padding-bottom: 0.6mm;
+    border-bottom: 0.6pt solid #c9c9c9;
+  }
+  h2 + * { margin-top: 1.3mm; }
+
+  p { margin: 0; }
+
+  /* ---- roles ---- */
+  .role-block { margin-top: 1.8mm; page-break-inside: avoid; }
+  .role-block:first-of-type { margin-top: 0; }
+
+  .role-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4mm;
+  }
+  .role-title { font-weight: 700; }
+  .role-dates {
+    color: #4a4a4a;
+    font-size: 8.6pt;
+    white-space: nowrap;
+  }
+  .role-meta {
+    color: #6a6a6a;
+    font-size: 8.4pt;
+    margin-top: 0.3mm;
+  }
+
+  ul { margin: 1mm 0 0; padding-left: 3.8mm; }
+  li { margin-bottom: 0.45mm; }
+  li:last-child { margin-bottom: 0; }
+  li::marker { color: #9a9a9a; }
+
+  .skills p { margin: 0 0 0.9mm; }
+  .skills p:last-child { margin-bottom: 0; }
+
+  .edu p { margin: 0 0 0.7mm; }
+  .edu p:last-child { margin-bottom: 0; }
+  .url { color: #4a4a4a; }
+</style>
+</head>
+<body>
+
+  <header>
+    <h1 class="name">Victoria Kukharenko</h1>
+    <p class="role">Product Designer</p>
+    <p class="contacts">
+      <span>Remote &middot; UTC+2</span><span class="sep">|</span><span>vkkhrnk@gmail.com</span><span class="sep">|</span><span>Telegram @Viktoria_UxUi</span><br>
+      <span>vkkhrnk-maker.github.io/portfolio</span><span class="sep">|</span><span>linkedin.com/in/viktoria-kukharenko-9b4200233</span>
+    </p>
+  </header>
+
+  <h2>Summary</h2>
+  <p>
+    Product designer working end to end across iOS and web. Shipped an AI document assistant MVP on
+    two platforms, redesigned an e-commerce product card that became the catalog-wide standard, and
+    built the design systems those products ship from.
+  </p>
+
+  <h2>Experience</h2>
+
+  <div class="role-block">
+    <div class="role-head">
+      <div class="role-title">Product Designer — Hooh</div>
+      <div class="role-dates">Jan 2025 — Mar 2026</div>
+    </div>
+    <div class="role-meta">Full-time, remote &middot; AI document assistant, iOS and web &middot;
+      startup — the only product designer, with a PM, product owner, art director and two
+      engineers</div>
+    <ul>
+      <li>Designed and shipped the MVP on web and iOS — upload, layered AI summaries, assistant chat
+        and file organization. In internal testing every participant took a real document from
+        upload to understanding unaided.</li>
+      <li>Introduced Progressive Disclosure (Snapshot → Summary → Q&amp;A) after testing showed a
+        single-step summary left users either over-summarized or unable to go deeper; it became the
+        pattern for every later document feature.</li>
+      <li>Designed the trust model for an assistant that can be wrong: source citations on every
+        claim, user-controlled document scope, stated uncertainty, the original always one tap
+        away.</li>
+      <li>Extended the reader into a document workspace — Smart Fill (form fields recognized and
+        filled from the user's own documents, every value overridable), reusable signature,
+        non-destructive markup and versioning: ten flows on one scaffold, designed in six weeks and
+        handed off complete, plus the design system the team ships from.</li>
+    </ul>
+  </div>
+
+  <div class="role-block">
+    <div class="role-head">
+      <div class="role-title">Product Designer — iTAB</div>
+      <div class="role-dates">May 2024 — Apr 2026</div>
+    </div>
+    <div class="role-meta">Part-time, remote &middot; health and wellness e-commerce &middot; web and mobile app</div>
+    <ul>
+      <li>Designed the specialist-consultations direction — specialist catalog, specialist card and
+        the user-side booking flow — alongside a homepage redesign and sections throughout the app
+        and the site.</li>
+      <li>Redesigned the supplement product card across web and mobile to cut drop-off in a
+        high-trust category. After launch drop-off fell and add-to-cart rose on every step
+        redesigned, and the card system rolled out across the entire catalog as the new standard;
+        figures under NDA.</li>
+      <li>Defined purchase states: the CTA becomes a quantity control with immediate feedback, and
+        unavailable products offer restock and alternatives instead of a dead end.</li>
+    </ul>
+  </div>
+
+  <div class="role-block">
+    <div class="role-head">
+      <div class="role-title">UX/UI Designer — Infomedia</div>
+      <div class="role-dates">May 2023 — Feb 2025</div>
+    </div>
+    <div class="role-meta">Full-time, remote &middot; communication products</div>
+    <ul>
+      <li>Worked on products for Russian Railways (RZD) and Rosatom, turning complex requirements
+        into clear user flows and interfaces. Project details under NDA.</li>
+    </ul>
+  </div>
+
+  <div class="role-block">
+    <div class="role-head">
+      <div class="role-title">Product Designer — Freelance</div>
+      <div class="role-dates">Mar 2022 — Present</div>
+    </div>
+    <ul>
+      <li><b>Syno.art</b> (2026 — Present) — art platform for Cyprus. Designed the artist side end
+        to end — auth, profile and portfolio, the open-call flow and applications dashboard —
+        180+ screens across desktop and mobile, built on a design system of 296 components and 400
+        tokens in primitive, semantic and adaptive layers.</li>
+      <li><b>Cryptomi</b> (2023–2024) — interfaces for a crypto product; dense, data-heavy flows
+        made approachable.</li>
+      <li><b>Abramova School</b> (2023–2024) — UX/UI design alongside mentoring junior designers:
+        critiques, portfolio reviews, feedback.</li>
+    </ul>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <p><b>AI products</b> — LLM assistants and conversational UI &middot; progressive disclosure of
+      model output &middot; source citations and provenance &middot; scoped context control
+      &middot; uncertainty and failure states &middot; human-in-the-loop override</p>
+    <p><b>Design</b> — product and UX/UI design &middot; interaction design &middot; information
+      architecture &middot; user flows &middot; interactive prototyping &middot; responsive design
+      &middot; iOS and web</p>
+    <p><b>Design systems</b> — component libraries &middot; design tokens &middot; theming and dark
+      mode &middot; adaptive breakpoints &middot; design QA</p>
+    <p><b>Research and delivery</b> — usability testing &middot; user interviews &middot; UX audit
+      &middot; competitor analysis &middot; developer handoff and specs &middot; mentoring</p>
+    <p><b>Tools</b> — Figma (variables, components, auto-layout, Plugin API) &middot; FigJam
+      &middot; HTML / CSS / JavaScript &middot; AI coding agents (Claude Code, Codex) — working
+      prototypes and custom Figma plugins for bulk token audits and migrations</p>
+  </div>
+
+  <h2>Education</h2>
+  <div class="edu">
+    <p><b>Uprock School</b> — Certificate, product / UX-UI design. 2022 — 2024.</p>
+    <p><b>Syktyvkar State University</b> — Master's degree, Ecology. 2019 — 2021.</p>
+    <p><b>Ukhta State Technical University</b> — Bachelor's degree, Geodesy for Land Management and Cadastre. 2012 — 2016.</p>
+  </div>
+
+  <h2>Languages</h2>
+  <p>Russian — native &middot; English — B1–B2, working proficiency</p>
+
+</body>
+</html>
