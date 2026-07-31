@@ -5439,11 +5439,15 @@ a, button, [role="button"], summary, label {
   align-items: baseline;
 }
 
+/* Regular weight, like the section titles and the sidebar labels. Bold was
+   doing a job that colour already does — the label is --text-primary against
+   the value's --text-secondary — and it made the labels heavier than every
+   heading on the page. */
 .cv__def dt {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: var(--ls-heading-body);
   color: var(--text-primary);
   font-variant-numeric: tabular-nums;
