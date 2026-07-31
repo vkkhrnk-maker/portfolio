@@ -628,6 +628,10 @@ img {
 }
 
 /* Back-to-home — circle button + "Back" label (Figma node 756:4496) */
+/* Above the desktop blur cushion (z-80) and below the pinned CTA (z-90). Back
+   is chrome, not content: it sits inside the cushion's 120px band at the top
+   of every case page, so without a stacking context of its own the arrow and
+   its label were the first things the blur dissolved. */
 .case__back {
   display: inline-flex;
   align-items: center;
@@ -635,6 +639,8 @@ img {
   color: var(--text-primary);
   margin: 0 var(--page-x) 24px;
   align-self: flex-start;
+  position: relative;
+  z-index: 85;
   transition: transform 0.25s ease;
 }
 
@@ -3530,8 +3536,14 @@ html {
   border-top: 2px solid var(--text-primary);
 }
 
+/* No rule above the first row, so its top padding has nothing to sit off —
+   it just stacked onto the section's --group-gap and opened a hole under
+   "Where I've been" roughly twice the space every later row gets after its
+   divider. The gap alone does the separating here. (Specificity beats the
+   padding-block in the ≥1200 block below, so this holds at every width.) */
 .experience-editorial__item:first-child {
   border-top: 0;
+  padding-top: 0;
 }
 
 /* On desktop the 24px rows read squeezed against the large role titles —
@@ -5321,6 +5333,15 @@ a, button, [role="button"], summary, label {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+/* Roles were 32px apart — the same distance the section title sits from the
+   first one, and only three times the 10px inside a role, so a "Read the case"
+   pill sat about as close to the next job as to its own bullets. 56px puts
+   them between the section title's 32 and the 72 between sections, which is
+   where they belong in the hierarchy. */
+.cv__role + .cv__role {
+  margin-top: 24px;
 }
 
 /* Title and dates share a baseline; the dates hold their own column so the
