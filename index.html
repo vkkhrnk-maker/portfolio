@@ -30,7 +30,7 @@
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.min.css?v=309">
   <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=4" defer></script>
+  <script src="shimmer.js?v=6" defer></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -499,6 +499,22 @@
       openBtns.forEach((btn) => btn.addEventListener('click', open));
       closeBtn.addEventListener('click', close);
       items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+
+      /* The burger is the only way in, so a drawer left open while the window
+         widens past the breakpoint turns into a full-screen panel over the
+         desktop layout — page inert, scroll locked, and nothing on screen that
+         explains it. Asking the openers whether they are still visible keeps
+         this in step with the CSS instead of repeating the breakpoint here. */
+      window.addEventListener('resize', () => {
+        if (!drawer.classList.contains('is-open')) return;
+        const reachable = Array.from(openBtns).some((btn) => btn.getBoundingClientRect().width > 0);
+        if (reachable) return;
+        /* Focus sits on the close button, which is about to be hidden, and the
+           opener went with the burger — drop focus rather than strand it. */
+        if (drawer.contains(document.activeElement)) document.activeElement.blur();
+        close({ restoreFocus: false });
+      });
+
       document.addEventListener('keydown', (e) => {
         if (!drawer.classList.contains('is-open')) return;
         if (e.key === 'Escape') {

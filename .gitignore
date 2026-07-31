@@ -1,3 +1,8 @@
 .DS_Store
 .claude/
 *.log
+
+# Scratch space for generated artefacts — CV renders, screenshot crops and the
+# scripts that make them. Nothing here is served by the site.
+output/
+tmp/

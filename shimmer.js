@@ -59,9 +59,27 @@
     });
     if (!imgs.length) return;
 
-    if (getComputedStyle(box).position === 'static') {
-      box.style.position = 'relative';
-    }
+    /* The placeholder is absolute, so the box has to be its containing block.
+       Only boxes the stylesheet leaves `static` need help — but which ones
+       those are changes with the breakpoint (the iTAB card and its case hero
+       are absolute wide, static narrow). Writing the inline style once at load
+       froze the narrow answer: an inline `relative` outranks every stylesheet
+       rule, so widening the window past the breakpoint left the box without
+       the `absolute` its layout is built on and collapsed it to zero height.
+       Clearing the patch before re-reading asks the stylesheet fresh, so the
+       box ends up exactly as a reload at this width would leave it. */
+    const anchor = () => {
+      box.style.position = '';
+      if (getComputedStyle(box).position === 'static') {
+        box.style.position = 'relative';
+      }
+    };
+    anchor();
+    /* Re-asked on resize, so crossing a breakpoint hands the box back to the
+       stylesheet. The browser already caps `resize` at one event per frame and
+       there are only ever a couple of these boxes per page, so it runs inline
+       rather than behind a rAF — which would stall in a background tab. */
+    window.addEventListener('resize', anchor);
     box.classList.add('bu');
 
     /* One placeholder per box, painted from the first covered image —
