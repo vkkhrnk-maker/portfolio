@@ -13,6 +13,7 @@ The parser is deliberately strict: anything it cannot place raises with the
 line number and what it expected, rather than silently dropping a bullet.
 """
 import argparse
+import hashlib
 import html
 import os
 import re
@@ -294,10 +295,17 @@ def nbsp_last(escaped):
 
 
 def pdf_version():
-    """Bump with the PDF's mtime so a replaced file is never served from cache."""
+    """A short digest of the PDF, so the ?v= changes only when the file does.
+
+    This was the mtime first, which looked equivalent and was not: git rewrites
+    files on checkout, rebase and clone, so any branch operation bumped the
+    version and left a spurious cv.html diff behind. Hashing the bytes means a
+    rebuild that produces the same PDF produces the same link.
+    """
     if not os.path.exists(PDF_OUT):
-        return 1
-    return int(os.path.getmtime(PDF_OUT)) % 100000
+        return "0"
+    digest = hashlib.sha256(open(PDF_OUT, "rb").read()).hexdigest()
+    return digest[:8]
 
 
 # ------------------------------------------------------------------ build

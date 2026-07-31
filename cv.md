@@ -6,6 +6,9 @@
      re-renders the PDF. Both of those are generated — editing them directly
      gets your work overwritten on the next build.
 
+     A hook rebuilds the two HTML files whenever this one is saved, so only
+     the PDF needs the command above. If the build fails you get told why.
+
      The format below is strict, because the builder reads structure out of it
      and refuses to guess. It will tell you exactly what is wrong if a line
      does not fit. The rules:
