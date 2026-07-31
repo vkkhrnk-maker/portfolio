@@ -20,16 +20,32 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache-bust styles.css with commit SHA
+      - name: Cache-bust public assets with commit SHA
         run: |
           SHA=$(git rev-parse --short HEAD)
-          for f in index.html hooh.html; do
+          for f in index.html cv.html hooh.html hooh-fill.html itab.html; do
             if [ -f "$f" ]; then
-              sed -i "s|href=\"styles.css\"|href=\"styles.css?v=$SHA\"|g" "$f"
-              echo "Injected ?v=$SHA into $f"
+              sed -i -E 's#(href|src)="(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)(\?v=[^"]*)?"#\1="\2?v='"$SHA"'"#g' "$f"
+              echo "Injected asset version $SHA into $f"
             fi
           done
-          grep -h -o "styles\.css[^\"]*" index.html hooh.html | head -5
+          grep -h -E -o '(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)\?v=[^"]*' \
+            index.html cv.html hooh.html hooh-fill.html itab.html | sort -u
+
+      # Syno stays visible as a non-clickable "Coming soon" card on the
+      # homepage. Keep its working file in the repository, but do not publish
+      # the unfinished direct URL until the case and its assets are ready.
+      - name: Exclude draft pages from the public artifact
+        run: |
+          rm -f \
+            syno.html \
+            syno-cover-proto.html \
+            hooh-color-proto.html \
+            hooh-editor.html \
+            hooh-editor-ru.html \
+            hooh-fill-clouds.html \
+            hooh-fill-ru.html \
+            itab-proto.html
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
