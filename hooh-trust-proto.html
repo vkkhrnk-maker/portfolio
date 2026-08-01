@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>PROTO · Hooh trust-first — Victoria Kukharenko</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Hooh — an AI assistant translating complex bureaucracy into human language. A case study by Victoria Kukharenko: problem, process, key UX decisions and launched MVP across web and iOS.">
+  <meta name="theme-color" content="#d946ef">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hooh — Case Study · Victoria Kukharenko">
+  <meta property="og:description" content="An AI assistant translating complex bureaucracy into human language. Launched MVP across web and iOS.">
+  <meta property="og:url" content="https://vkkhrnk-maker.github.io/portfolio/hooh.html">
+  <meta property="og:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-hero.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hooh — Case Study · Victoria Kukharenko">
+  <meta name="twitter:description" content="An AI assistant translating complex bureaucracy into human language.">
+  <meta name="twitter:image" content="https://vkkhrnk-maker.github.io/portfolio/assets/case-hero.jpg">
+
+  
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=319">
+  <script src="typographer.js?v=6" defer></script>
+  <script src="shimmer.js?v=6" defer></script>
+  <style>
+    /* Loading-state, ChatGPT-style (kept inline so styles.css WIP stays untouched):
+       the phrase sits still and a light shimmer sweeps across it; phrase changes
+       are an in-place fade — no vertical travel. Shimmer replaces the typing dots. */
+    .loading-state__dots { display: none; }
+    .loading-state__cycle { transition: opacity .35s ease; transform: none; }
+    .loading-state__cycle.is-fading { opacity: 0; transform: none; }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .loading-state__phrase {
+        background-image: linear-gradient(90deg, #9a9a9a 40%, #e3e3e3 50%, #9a9a9a 60%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: hooh-shimmer 2.4s linear infinite;
+      }
+    }
+    @keyframes hooh-shimmer {
+      0%   { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+  </style>
+  <script>document.documentElement.classList.add('has-js');</script>
+  <style>
+    /* PROTO ONLY — not shipped. Excluded from the deploy artifact in
+       .github/workflows/deploy.yml alongside the other *-proto pages. */
+    .proto-todo {
+      margin: 16px 0 0;
+      padding: 12px 16px;
+      border-left: 3px solid var(--text-accent);
+      background: rgba(217, 70, 239, 0.06);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 22px;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+      max-width: 780px;
+    }
+    .proto-todo b { color: var(--text-accent); }
+    .proto-flag {
+      position: fixed; left: 0; right: 0; top: 0; z-index: 200;
+      background: var(--text-accent); color: #fff; text-align: center;
+      font-family: var(--font-body); font-size: 13px; line-height: 28px;
+      letter-spacing: -0.2px; pointer-events: none;
+    }
+  </style>
+</head>
+<body class="case-page--hooh">
+  <div class="proto-flag">PROTO — trust-first cut of the Hooh case. Not published.</div>
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <span class="sidebar__name">Victoria Kukharenko</span>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd>PM, Design Lead / Art Director, iOS and Web Developer</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. Responsible for UX analytics, UX/UI design, prototyping, and creating the MVP design system</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Year</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </aside>
+
+  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <div class="mobile-topbar__actions">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Back</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h1 class="case__title">Designing trust into an assistant that can be&nbsp;wrong</h1>
+        <p class="case__intro">Hooh reads contracts, insurance papers and lab results for people who cannot check the answer themselves — and like any assistant, it can be wrong. That is the design problem this case is about. I built the trust model: every claim traceable to its source, the reading scope visible and under the user’s control, and the limits of the system said out loud rather than buried in terms. Shipped on web and iOS.</p>
+        <dl class="case__proof-strip" aria-label="Project results at a glance">
+          <div><dt>Trust model</dt><dd>Three guardrails, every claim sourced</dd></div>
+          <div><dt>Launch</dt><dd>Web + iOS shipped</dd></div>
+          <div><dt>Validation</dt><dd>Core flow completed unaided</dd></div>
+        </dl>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Team</dt>
+            <dd>PM, Design Lead / Art Director, iOS and Web Developer</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>My Role</dt>
+            <dd>Product designer. Responsible for UX analytics, UX/UI design, prototyping, and creating the MVP design system</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Year</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image" data-parallax-root>
+          <img class="case__hero-clouds case__hero-clouds--back" src="assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-back" width="340" height="200">
+          <picture class="case__hero-photo" data-parallax-layer="photo" data-shimmer>
+            <img src="assets/case-hero.webp" alt="Hooh mobile app — a hand holding a phone showing the welcome screen with the tagline 'Paperwork, finally human'" loading="eager" width="3264" height="2052">
+          </picture>
+          <img class="case__hero-clouds case__hero-clouds--front" src="assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-front" width="340" height="200">
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h2 class="case__block-title">Problem</h2>
+          <p class="case__block-body">People face document anxiety when dealing with contracts, reports, insurance papers, or legal texts. The problem is not just volume, but uncertainty: users don't know where to start, what matters most, or whether they are missing hidden risks, deadlines, or critical clauses. They need a lower-stress way to understand the essence of a document before deciding whether to go deeper.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Task</h2>
+          <p class="case__block-body">Design an MVP for web and iOS that helps users understand complex documents faster, with less stress and less manual reading.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Users</h2>
+          <p class="case__block-body">The product is designed for people without a legal background who regularly deal with complex paperwork — expats, digital nomads, and everyday users. They use Hooh to quickly decode lease agreements, visa requirements, insurance papers, and banking contracts, and understand what matters without reading every page line by line.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">What we launched</h2>
+          <p class="case__block-body">We designed and launched the MVP across web and iOS, defining the core experience for document upload, layered reading, conversational exploration, and file organization.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Design process</h2>
+        <p class="case__section-body">Started with competitor analysis — Genei, Notion AI, Microsoft Copilot for docs all gave full summary upfront, which removed user agency: you couldn't choose how deep to go. Early prototypes tried single-step summary, but internal testing showed users either felt over-summarised or wanted to dig further. This pushed us to layered reading.</p>
+      </section>
+      <!-- ============ THE SPINE, PROMOTED ============ -->
+      <section class="case__section">
+        <h2 class="case__section-title">The problem underneath: an answer you can’t check</h2>
+        <p class="case__section-body">Hooh’s users are the people least able to audit it. They come to it precisely because they cannot read a lease or a lab result themselves — so they have no way to tell a correct answer from a confident one. Summarising well is the easy half. The hard half is making a system whose output cannot be verified still safe to act on.</p>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Trust by design: the assistant can be wrong</h2>
+        <p class="case__section-body">An assistant that reads your contracts and lab results only earns trust if it can show its work. Three guardrails run through the whole experience: every claim links back to the exact source document, users see and control which documents the assistant reasons over, and the interface says plainly that Hooh may be wrong — keeping the original file one tap away.</p>
+
+        <div class="case__gap-grid">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Sources on every claim</h3>
+            <p class="case__gap-card__desc">Citation chips in answers open the exact document behind each number</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Scoped context</h3>
+            <p class="case__gap-card__desc">The All-documents selector shows — and limits — what the assistant reads</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Honest uncertainty</h3>
+            <p class="case__gap-card__desc">A permanent “Hooh may be wrong” notice points users back to the original</p>
+          </div>
+        </div>
+
+        <p class="proto-todo"><b>TODO —</b> this section currently shows none of the three. It is the case’s whole argument and it has no screenshots at all — Progressive Disclosure below has 35. Capture three figures: a citation chip being tapped through to the source, the All-documents selector open, and the uncertainty notice in place. Same board treatment as the sections below.</p>
+        <p class="proto-todo"><b>TODO —</b> for each guardrail, one line on what you rejected. Inline chips vs. a collected source list vs. footnotes — you chose chips; why? That sentence is the difference between describing a feature and showing judgment.</p>
+      </section>
+
+      <!-- ============ NEW: WHERE THIS SITS IN THE CATEGORY ============ -->
+      <section class="case__section">
+        <h2 class="case__section-title">The same problem, four other answers</h2>
+        <p class="case__section-body">Citation and uncertainty are not solved conventions — every major assistant answers them differently, and each answer trades something away. Placing Hooh against them is what separates a considered decision from a default one.</p>
+
+        <div class="case__gap-grid">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Chips inside the sentence</h3>
+            <p class="case__gap-card__desc">Perplexity/Comet attaches sources to the claim itself. Most precise, and it interrupts reading.</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">A drawer of sources</h3>
+            <p class="case__gap-card__desc">ChatGPT collects them in a sheet below. Never interrupts — and is rarely opened.</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Hedge in the copy</h3>
+            <p class="case__gap-card__desc">Agoda writes the doubt into the answer and points back to the authoritative page.</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Name the blind spot</h3>
+            <p class="case__gap-card__desc">Beside states what it cannot see, then answers under a stated assumption.</p>
+          </div>
+        </div>
+
+        <p class="proto-todo"><b>TODO —</b> say where Hooh landed and why the stakes moved it. A wrong restaurant recommendation costs an evening; a missed clause in a lease costs a deposit. That difference should drive the choice — make it explicit.</p>
+        <p class="proto-todo"><b>TODO —</b> scope control is <i>not</i> your invention — Gemini ships a source picker, ChatGPT Projects ships a Sources tab. Do not claim novelty here; claim the reasoning. Deciding it was mandatory for documents this consequential is the defensible position.</p>
+      </section>
+
+
+      <section class="case__section">
+        <h2 class="case__section-title">The other half: letting people choose how much to believe at once</h2>
+        <p class="case__section-body">Sourcing answers the question “can I check this?”. Progressive Disclosure answers “how much do I have to take on at once?” — the same problem of unverifiable output, approached from reading depth rather than provenance.</p>
+        <p class="case__section-body">Single-step summary risks oversimplification; full document keeps overwhelm. Three layers let users self-calibrate depth: skim with snapshot, dive deeper if signal is meaningful, ask targeted questions if specific concern surfaces. Each layer is a commitment threshold — users don't pay attention cost until they've decided the document is worth it.</p>
+
+        <div class="case__gap-grid">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">1. Snapshot</h3>
+            <p class="case__gap-card__desc">A one-glance verdict — skim the gist before committing any attention</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">2. Summary</h3>
+            <p class="case__gap-card__desc">A structured breakdown — dive deeper when the signal looks meaningful</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">3. Q&amp;A</h3>
+            <p class="case__gap-card__desc">A contextual chat — ask targeted questions when a specific concern surfaces</p>
+          </div>
+        </div>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--onboard" role="group" aria-label="iOS start screen next to the auto-categorization panel">
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy" width="742" height="1615"></div>
+            <div class="case__hooh-plate case__hooh-plate--gradient"><img class="case__hooh-tags" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy" width="443" height="1712"></div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the upload and categorization screens">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxA-s1.webp?v=6" alt="iOS start screen with Upload your first document prompt" loading="lazy" width="742" height="1615"></div>
+            <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--card" src="assets/case-uxA-tags.webp?v=2" alt="Auto-categorization panel with Business, Medicine, Finance and other categories" loading="lazy" width="443" height="1712"></div>
+          </div>
+          <figcaption>Users start by uploading a document, while the system helps organize it through automatic categorization.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--feed" role="group" aria-label="iOS document summary feed next to the web documents dashboard">
+            <div class="case__hooh-plate">
+              <div class="case__hooh-feed">
+                <img src="assets/case-feed-1.webp?v=2" alt="Maria's blood test — the document requires attention" loading="lazy" width="859" height="1084">
+                <img src="assets/case-feed-2.webp?v=2" alt="Kira's ELPAC report — the document requires attention" loading="lazy" width="859" height="1066">
+                <img src="assets/case-feed-3.webp?v=2" alt="Vehicle inspection checklist — everything looks good" loading="lazy" width="861" height="1204">
+              </div>
+            </div>
+            <div class="case__hooh-plate">
+              <img class="case__hooh-board-window" src="assets/case-uxB-s2.webp?v=7" alt="Web documents folder view with categorized document cards" loading="lazy" width="1600" height="1062">
+            </div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the summary cards and documents dashboard">
+            <div class="case__slide case__slide--feed">
+              <div class="case__feed-track">
+                <img class="case__feed-card" src="assets/case-feed-3.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="861" height="1204">
+                <img class="case__feed-card" src="assets/case-feed-1.webp?v=2" alt="Maria's blood test — the document requires attention" loading="lazy" width="859" height="1084">
+                <img class="case__feed-card" src="assets/case-feed-2.webp?v=2" alt="Kira's ELPAC report — the document requires attention" loading="lazy" width="859" height="1066">
+                <img class="case__feed-card" src="assets/case-feed-3.webp?v=2" alt="Vehicle inspection checklist — everything looks good" loading="lazy" width="861" height="1204">
+                <img class="case__feed-card" src="assets/case-feed-1.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="859" height="1084">
+                <img class="case__feed-card" src="assets/case-feed-2.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="859" height="1066">
+              </div>
+            </div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxB-s2.webp?v=7" alt="Web documents folder view with categorized document cards" loading="lazy" width="1600" height="1062"></div>
+          </div>
+          <figcaption>Color cues pinned to risk only, not document type. Users don't need to map "yellow = medical, red = legal" — they need "yellow = needs your attention". Type info lives in the card title, not the cue.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--report" role="group" aria-label="Desktop view of the Complete Blood Count Report next to the iOS Summary screen">
+            <img class="case__hooh-board-window" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel with the Hooh assistant" loading="lazy" width="1600" height="1062">
+            <img class="case__hooh-board-phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy" width="715" height="1618">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the desktop report and the iOS summary">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-uxC-s1.webp?v=7" alt="Desktop Complete Blood Count Report with a Mostly good summary callout and a contextual Q&amp;A chat panel" loading="lazy" width="1600" height="1062"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-uxC-s2.webp?v=6" alt="iOS Summary screen showing the same Complete Blood Count Report" loading="lazy" width="715" height="1618"></div>
+          </div>
+          <figcaption>Users can move from a quick snapshot to a detailed summary and contextual Q&amp;A without reading the full file line by line.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Designed a conversational experience for document exploration</h2>
+        <p class="case__section-body">The assistant uses uploaded documents as context, allowing users to ask follow-up questions, explore categories, and retrieve relevant information without manually scanning long text.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--chat" role="group" aria-label="Three iOS Hooh Assistant screens side by side">
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy" width="745" height="1621"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary explanation" loading="lazy" width="743" height="1622"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy" width="737" height="1612"></div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the three Hooh Assistant screens">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s1.webp?v=8" alt="Hooh Assistant intro with suggested prompts" loading="lazy" width="745" height="1621"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s2.webp?v=8" alt="My hemoglobin chat with inline source citations and a Health summary" loading="lazy" width="743" height="1622"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-chatA-s3.webp?v=8" alt="My hemoglobin chat with a Blood analysis document card" loading="lazy" width="737" height="1612"></div>
+          </div>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__split case__split--chatB">
+            <div class="case__split-pane case__split-pane--loading">
+              <div class="loading-state" role="status" aria-label="Gathering information">
+                <img class="loading-state__mark" src="assets/hooh-loader.webp?v=1" alt="" aria-hidden="true" width="600" height="600">
+                <span class="loading-state__text"><span class="loading-state__cycle" data-cycle="Gathering information|Reading your documents|Analyzing key findings"><span class="loading-state__phrase">Gathering information</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span></span>
+              </div>
+            </div>
+            <div class="case__split-pane case__split-pane--suggestions">
+              <img class="case__split-pane-image" src="assets/case-chatB-suggestions.webp?v=1" alt="Suggested follow-up questions on a soft pastel gradient: Summarize this category, What is my latest hemoglobin level?, Analyze all files in this category" width="1602" height="636">
+            </div>
+          </div>
+        </figure>
+
+        <figure class="case__figure">
+          <picture class="case__figure-desktop"><img src="assets/case-chatC.webp?v=5" alt="Two desktop screens on a single backdrop — a fresh Hooh Assistant prompt 'What would you like to explore?' and an in-progress chat about elevated white blood cells with follow-up suggestions" loading="lazy" width="3264" height="1801"></picture>
+          <div class="case__slider" role="group" aria-label="Swipe through the two desktop assistant screens">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-chatC-s1.webp?v=7" alt="Fresh Hooh Assistant prompt: What would you like to explore?" loading="lazy" width="1600" height="1065"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-chatC-s2.webp?v=7" alt="In-progress chat about elevated white blood cells with follow-up suggestions" loading="lazy" width="1600" height="1062"></div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="case__outcome">
+        <h2 class="case__outcome-title">Outcome</h2>
+        <div class="case__outcome-body">
+          <p>MVP shipped on web and iOS. Public-release analytics weren't part of this engagement — the evidence below is what we validated before launch.</p>
+          <p><strong>Shipped on two platforms:</strong> the MVP went live on web and iOS — upload, layered reading, assistant chat and file organization.</p>
+          <p><strong>A clean pass on the core flow:</strong> in every internal test session, participants took a real document from upload to understanding and completed it without help.</p>
+          <p><strong>Patterns that stuck:</strong> Progressive Disclosure became the core pattern for every document feature — and quick snapshot the most-used way into a file.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="itab.html">
+          <span>Next case</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
+        <span class="contact__text">Book a call</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Works</a>
+      <a class="menu-drawer__item" href="index.html#about">About</a>
+      <a class="menu-drawer__item" href="index.html#experience">Experience</a>
+    </nav>
+    <div class="menu-drawer__contacts">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko-9b4200233" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+    </div>
+  </div>
+
+  <script>
+    // Menu drawer
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('a');
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      /* Widened past the breakpoint the burger is gone, so a drawer left open
+         would sit over the desktop layout with the page inert and the scroll
+         locked. Ask the openers rather than repeat the breakpoint here. */
+      window.addEventListener('resize', () => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (Array.from(openBtns).some((b) => b.getBoundingClientRect().width > 0)) return;
+        if (drawer.contains(document.activeElement)) document.activeElement.blur();
+        close({ restoreFocus: false });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+    // Auto-update year
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+    })();
+
+    // Hero parallax — multiple layers translate at different rates on
+    // scroll for a layered depth effect (clouds drift slower than the
+    // phone photo).
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const root = document.querySelector('[data-parallax-root]');
+      if (!root) return;
+
+      // [selector, strength] — higher strength = lags more behind scroll
+      const layers = [
+        ['[data-parallax-layer="clouds-back"]', 0.32],
+        ['[data-parallax-layer="clouds-front"]', 0.10],
+        ['[data-parallax-layer="photo"]', 0.18],
+      ].map(([sel, s]) => [document.querySelector(sel), s])
+        .filter(([el]) => !!el);
+
+      if (!layers.length) return;
+
+      let ticking = false;
+      const update = () => {
+        const rect = root.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) {
+          ticking = false;
+          return;
+        }
+        const scrolledPast = Math.max(0, -rect.top);
+        for (const [el, strength] of layers) {
+          el.style.setProperty('--parallax-y', `${scrolledPast * strength}px`);
+        }
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      };
+
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    })();
+
+    (() => {
+      const cycle = document.querySelector('.loading-state__cycle');
+      if (!cycle || !cycle.dataset.cycle) return;
+      const phrase = cycle.querySelector('.loading-state__phrase');
+      const items = cycle.dataset.cycle.split('|');
+
+      // Lock cycle width to the widest phrase so the dots travel with the
+      // text without ever causing the surrounding layout to jump.
+      let maxW = 0;
+      for (const t of items) {
+        phrase.textContent = t;
+        maxW = Math.max(maxW, cycle.getBoundingClientRect().width);
+      }
+      phrase.textContent = items[0];
+      cycle.style.minWidth = Math.ceil(maxW) + 'px';
+
+      let i = 0;
+      setInterval(() => {
+        // Skip swaps while the tab is hidden — throttled timers otherwise pile
+        // up and the text visibly jumps when the user returns.
+        if (document.hidden) return;
+        cycle.classList.add('is-fading');            // old phrase: fade out in place
+        setTimeout(() => {
+          i = (i + 1) % items.length;
+          phrase.textContent = items[i];
+          cycle.classList.remove('is-fading');       // new phrase: fade in, no travel
+        }, 360);
+      }, 3200);
+    })();
+
+  </script>
+  <script src="case.js?v=17" defer></script>
+</body>
+</html>

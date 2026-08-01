@@ -40,6 +40,7 @@ jobs:
           rm -f \
             syno.html \
             syno-cover-proto.html \
+            hooh-trust-proto.html \
             hooh-color-proto.html \
             hooh-editor.html \
             hooh-editor-ru.html \
