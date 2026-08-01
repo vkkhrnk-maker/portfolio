@@ -5406,8 +5406,10 @@ a, button, [role="button"], summary, label {
   color: var(--stroke-subtle);
 }
 
+/* Company and school names lift out of the grey by colour alone, same as the
+   label column does. Nothing on this page is bold now. */
 .cv__list b {
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-primary);
 }
 
@@ -5464,7 +5466,7 @@ a, button, [role="button"], summary, label {
 }
 
 .cv__def dd b {
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text-primary);
 }
 
