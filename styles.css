@@ -123,8 +123,13 @@
    deeper and its inner glow drops from 50% to 14% — at 50% it washed the
    whole button out against a dark page. Accent SURFACES are tints of the
    plate, never colour blocks: the pink card is the plate with ~10% magenta
-   in it, the Outcome panel a cool-cast grey — a plum card and a navy panel
-   were tried and read as foreign objects on the near-black page. Imagery
+   the Outcome panel a cool-cast grey — a plum card and a navy panel were
+   tried and read as foreign objects on the near-black page, and the tinted
+   card that replaced the plum still read as a dusty lilac, so it is now the
+   pill grey: a step above the plate, no hue at all, and no new value in the
+   system. (It cannot simply BE the plate — cards 02 and 04 would stop
+   differing from 01 and 03, and on phones they stack as a deck whose
+   neighbours have to read apart.) Imagery
    is left alone: the screenshots, covers and videos are the work, not the
    chrome.
    Both blocks must stay identical. The first follows the system; the second
@@ -143,7 +148,7 @@
     --text-accent: #e879f9;
     --button-primary: #a72cc0;
     --button-secondary: #2e2e35;
-    --brand-pink-500: #372b3d;
+    --brand-pink-500: #2e2e35;
     --stroke-primary: #2e2e34;
     --stroke-subtle: #4a4a52;
     --rule: #4a4a52;
@@ -184,7 +189,7 @@
   --text-accent: #e879f9;
   --button-primary: #a72cc0;
   --button-secondary: #2e2e35;
-  --brand-pink-500: #372b3d;
+  --brand-pink-500: #2e2e35;
   --stroke-primary: #2e2e34;
   --stroke-subtle: #4a4a52;
   --rule: #4a4a52;
