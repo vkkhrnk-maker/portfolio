@@ -596,7 +596,6 @@
     td { padding: 0; border: none; }
     td.name { grid-column: 1; grid-row: 1; width: auto; }
     td.hrs { grid-column: 2; grid-row: 1; text-align: right; }
-    td.hrs::after { content: " h"; color: var(--ink-3); }
     td:not(.name):not(.hrs) { grid-column: 1 / -1; grid-row: 2; font-size: 14.5px; }
     tr.total { border-top: 1px solid var(--line); border-bottom: none; padding-top: 16px; }
     .table-wrap tr.total td,
@@ -803,7 +802,7 @@
     <h1>What the Shell Ivory website costs, and why</h1>
     <p class="lede">
       I went through the brief, the existing Figma file and the brand guide before writing this.
-      <strong>Pick the options that match your plans — hours, timeline and price update as you go.</strong>
+      <strong>Pick the options that match your plans — price and timeline update as you go.</strong>
       Then press Send — that is the only reply I need to lock the scope.
     </p>
     <div class="meta">
@@ -842,13 +841,13 @@
             <label class="opt">
               <input type="radio" name="portal" data-min="48" data-max="62" data-label="Portal: minimal account area" data-key="portal-min">
               <span class="opt-name">A minimal account area</span>
-              <span class="opt-delta plus">+48–62 h</span>
+              <span class="opt-delta plus">+$1,860</span>
               <span class="opt-note">Dashboard with application status, a page per purchased service, invoices, profile and password reset — plus empty, pending and declined states.</span>
             </label>
             <label class="opt">
               <input type="radio" name="portal" data-min="100" data-max="130" data-label="Portal: full client portal" data-key="portal-full">
               <span class="opt-name">A full client portal</span>
-              <span class="opt-delta plus">+100–130 h</span>
+              <span class="opt-delta plus">+$3,900</span>
               <span class="opt-note">Everything above plus file exchange, project stages, deliverable approvals and staged payments. Realistically its own project.</span>
             </label>
           </div>
@@ -872,7 +871,7 @@
             <label class="opt">
               <input type="radio" name="checkout" data-min="32" data-max="40" data-label="Checkout: fully custom multi-step checkout" data-key="checkout-custom">
               <span class="opt-name">Fully custom checkout on the site</span>
-              <span class="opt-delta plus">+32–40 h</span>
+              <span class="opt-delta plus">+$1,200</span>
               <span class="opt-note">Order summary, billing, payment and subscription management designed end to end, on your own pages. Possible only on a custom build or Shopify Plus; Squarespace, Wix and Webflow will not allow it.</span>
             </label>
           </div>
@@ -894,13 +893,13 @@
             <label class="opt">
               <input type="radio" name="services" data-min="18" data-max="22" data-label="Service pages: template plus two bespoke" data-key="services-2">
               <span class="opt-name">Template plus two bespoke pages</span>
-              <span class="opt-delta plus">+18–22 h</span>
+              <span class="opt-delta plus">+$660</span>
               <span class="opt-note">Your two flagship services get their own layouts; everything else uses the template.</span>
             </label>
             <label class="opt">
               <input type="radio" name="services" data-min="36" data-max="44" data-label="Service pages: template plus four bespoke" data-key="services-4">
               <span class="opt-name">Template plus four bespoke pages</span>
-              <span class="opt-delta plus">+36–44 h</span>
+              <span class="opt-delta plus">+$1,320</span>
               <span class="opt-note">Worth it only if the services are sold very differently from one another.</span>
             </label>
           </div>
@@ -923,13 +922,13 @@
             <label class="opt">
               <input type="radio" name="cases" data-min="26" data-max="32" data-label="Work: case template plus three case pages" data-key="cases-3">
               <span class="opt-name">Case template plus three cases</span>
-              <span class="opt-delta plus">+26–32 h</span>
+              <span class="opt-delta plus">+$960</span>
               <span class="opt-note">A modular case layout — problem, approach, work, result — built once and filled three times. Every future case drops into the same template.</span>
             </label>
             <label class="opt">
               <input type="radio" name="cases" data-min="44" data-max="54" data-label="Work: case template plus six case pages" data-key="cases-6">
               <span class="opt-name">Case template plus six cases</span>
-              <span class="opt-delta plus">+44–54 h</span>
+              <span class="opt-delta plus">+$1,620</span>
               <span class="opt-note">Enough range to show different services and industries. Worth it only if you have six cases with real results to tell.</span>
             </label>
           </div>
@@ -954,7 +953,7 @@
             <label class="opt">
               <input type="radio" name="breakpoints" data-min="-24" data-max="-22" data-label="Breakpoints: 1440 and 375 only" data-key="bp-2">
               <span class="opt-name">Desktop and mobile only</span>
-              <span class="opt-delta minus">about −23 h</span>
+              <span class="opt-delta minus">−$660</span>
               <span class="opt-note">1440 and 375. Wide screens and tablet left to the developer’s judgement — cheapest, and the most likely to disappoint on the screens your clients actually use.</span>
             </label>
             <label class="opt">
@@ -975,7 +974,7 @@
             <label class="opt">
               <input type="radio" name="revisions" data-min="-15" data-max="-13" data-label="Revisions: one round per stage" data-key="rev-1">
               <span class="opt-name">One round per stage</span>
-              <span class="opt-delta minus">about −14 h</span>
+              <span class="opt-delta minus">−$390</span>
               <span class="opt-note">Works when one person decides, and decides quickly.</span>
             </label>
             <label class="opt">
@@ -987,7 +986,7 @@
             <label class="opt">
               <input type="radio" name="revisions" data-min="15" data-max="19" data-label="Revisions: three rounds per stage" data-key="rev-3">
               <span class="opt-name">Three rounds per stage</span>
-              <span class="opt-delta plus">+15–19 h</span>
+              <span class="opt-delta plus">+$570</span>
               <span class="opt-note">Sensible when several people sign off, or when a decision usually takes a few passes to settle.</span>
             </label>
           </div>
@@ -1000,13 +999,13 @@
             <label class="opt">
               <input type="checkbox" name="extra" data-min="34" data-max="42" data-label="Extra: design supervision during development" data-key="extra-qa">
               <span class="opt-name">Page-by-page QA during the build</span>
-              <span class="opt-delta plus">+34–42 h</span>
+              <span class="opt-delta plus">+$1,260</span>
               <span class="opt-note">Answering your developer’s questions and one final review before launch are already included. This is the fuller version: every page checked against the design at each breakpoint, written fixes, and a re-check after they land.</span>
             </label>
             <label class="opt">
               <input type="checkbox" name="extra" data-min="16" data-max="20" data-label="Extra: email and newsletter templates" data-key="extra-email">
               <span class="opt-name">Email and newsletter templates</span>
-              <span class="opt-delta plus">+16–20 h</span>
+              <span class="opt-delta plus">+$600</span>
               <span class="opt-note">Your file already contains newsletter flows. Application received, application approved, purchase confirmation and one newsletter layout, all on brand.</span>
             </label>
           </div>
@@ -1026,10 +1025,9 @@
 
       <section class="block">
         <div class="block-head">
-          <h2>What the core estimate covers</h2>
+          <h2>What the price covers</h2>
           <p>
-            Every line is real hours — here is what each one buys. The rows that depend on your choices above update
-            with them.
+            Here is what each part of the price buys. The rows that depend on your choices above update with them.
           </p>
         </div>
 
@@ -1039,29 +1037,29 @@
               <tr>
                 <th>Stage</th>
                 <th>What happens</th>
-                <th>Hours</th>
+                <th>Price</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td class="name">Discovery and audit</td>
                 <td>Reading the brief against the brand guide, auditing the existing Figma file, agreeing the direction and locking scope.</td>
-                <td class="hrs">14–16</td>
+                <td class="hrs">$480</td>
               </tr>
               <tr>
                 <td class="name">Structure and flows</td>
                 <td>Your brief and file already set the structure, so this is a check rather than a blank page: walking every path a visitor can take — buy, apply, log in, get stuck — and wireframing only what is missing or does not hold up.</td>
-                <td class="hrs">18–22</td>
+                <td class="hrs">$660</td>
               </tr>
               <tr>
                 <td class="name">Visual direction</td>
                 <td>Turning brand guide pages 56–69 into a working web direction: hero plus two defining sections, approved before anything is rolled out.</td>
-                <td class="hrs">18–22</td>
+                <td class="hrs">$660</td>
               </tr>
               <tr>
                 <td class="name">Design system</td>
                 <td>Type scale, spacing, grid and colour tokens, plus every component the site needs — buttons, forms, cards, pricing, testimonials, FAQ and the rest — each with all its states. Built the way developers want to receive it — named tokens, variants, auto-layout — so whoever builds the site works from the system, not from screenshots.</td>
-                <td class="hrs">36–42</td>
+                <td class="hrs">$1,260</td>
               </tr>
               <tr>
                 <td class="name">Homepage</td>
@@ -1077,7 +1075,7 @@
                     <li>Footer</li>
                   </ul>
                 </td>
-                <td class="hrs">38–46</td>
+                <td class="hrs">$1,380</td>
               </tr>
               <tr>
                 <td class="name">Inner pages</td>
@@ -1093,68 +1091,68 @@
                     <li>404 and cookie notice</li>
                   </ul>
                 </td>
-                <td class="hrs" id="inner-hrs">38–46</td>
+                <td class="hrs" id="inner-hrs">$1,380</td>
               </tr>
               <tr>
                 <td class="name">Responsive</td>
                 <td id="responsive-desc">Layouts at 1920, 1440, 768 and 375, plus how the collage compositions reflow between them and where the page stops growing on very wide screens.</td>
-                <td class="hrs" id="responsive-hrs">44–50</td>
+                <td class="hrs" id="responsive-hrs">$1,500</td>
               </tr>
               <tr>
                 <td class="name">Imagery</td>
                 <td>I generate what the layouts need — illustrations, textures and graphic elements — to the photography direction in your guide. You do not need to hunt for stock, and nothing ships as a grey placeholder.</td>
-                <td class="hrs">10–14</td>
+                <td class="hrs">$420</td>
               </tr>
               <tr>
                 <td class="name">Copy</td>
                 <td>Give me your notes, positioning and service outlines, and I write the site from them — headlines, section copy, service descriptions, and every piece of interface text: buttons, labels, errors, empty and success states. Nothing ships as placeholder.</td>
-                <td class="hrs">12–16</td>
+                <td class="hrs">$480</td>
               </tr>
               <tr>
                 <td class="name">States</td>
                 <td>Validation, errors, loading, empty and success states across every form and the purchase flow. Usually forgotten, always needed.</td>
-                <td class="hrs">14–17</td>
+                <td class="hrs">$510</td>
               </tr>
               <tr>
                 <td class="name">Prototype and motion</td>
                 <td>A prototype built in code rather than clicked together in Figma: every screen and state, mobile included, with real scroll and real motion — you can open it on your phone. Your developer gets those files too, so timings, easing and scroll behaviour arrive as something they can open and measure rather than a paragraph they have to interpret.</td>
-                <td class="hrs">22–26</td>
+                <td class="hrs">$780</td>
               </tr>
               <tr>
                 <td class="name">Developer handoff</td>
                 <td>Naming, auto-layout, annotations, a walkthrough call, availability for your developer’s questions during the build and one review before launch.</td>
-                <td class="hrs">13–16</td>
+                <td class="hrs">$480</td>
               </tr>
               <tr>
                 <td class="name">Revisions</td>
                 <td id="revisions-desc">Two consolidated rounds across the stages.</td>
-                <td class="hrs" id="revisions-hrs">22–26</td>
+                <td class="hrs" id="revisions-hrs">$780</td>
               </tr>
               <tr>
                 <td class="name">Communication and reviews</td>
                 <td>Calls, review sessions, written summaries after each decision, and the back-and-forth between stages — the part of a project that is invisible until it is missing.</td>
-                <td class="hrs">20–24</td>
+                <td class="hrs">$720</td>
               </tr>
               <tr id="row-qa" hidden>
                 <td class="name">Page-by-page QA</td>
                 <td>Every built page checked against the design at each breakpoint, written fixes, and a re-check after they land.</td>
-                <td class="hrs">34–42</td>
+                <td class="hrs">$1,260</td>
               </tr>
               <tr id="row-email" hidden>
                 <td class="name">Email templates</td>
                 <td>Application received, application approved, purchase confirmation and one newsletter layout.</td>
-                <td class="hrs">16–20</td>
+                <td class="hrs">$600</td>
               </tr>
               <tr class="total">
-                <td class="name" id="total-label">Total for your selection</td>
-                <td id="total-note">Matches the panel — it moves as you change the options above</td>
-                <td class="hrs" id="total-hrs">319–383</td>
+                <td class="name" id="total-label">Your price</td>
+                <td id="total-note">Fixed once you send your selections; moves only with the options above</td>
+                <td class="hrs" id="total-hrs">$11,490</td>
               </tr>
             </tbody>
           </table>
           <p class="fine">
-            Counted as artboards rather than pages, that is around forty: ten to twelve desktop screens, their
-            wide, tablet and mobile versions, and the states every form and the purchase flow need.
+            The price is fixed against this scope: a smooth project does not become a cheaper one, and a fiddly one
+            does not become a dearer one. Counted as artboards rather than pages, it is around forty.
           </p>
         </div>
       </section>
@@ -1242,20 +1240,17 @@
     <aside>
       <div class="panel">
         <div class="figure">
-          <span class="figure-label">Design hours</span>
-          <span class="figure-value" id="hours">319–383</span>
+          <span class="figure-label">Price</span>
+          <span class="figure-value" id="cost">$11,500</span>
+          <span class="figure-sub">fixed once you send your selections · excludes font licences and development</span>
         </div>
         <div class="divider"></div>
         <div class="figure">
-          <span class="figure-label">Calendar time</span>
-          <span class="figure-value small" id="weeks">10–12 weeks</span>
-          <span class="figure-sub">at roughly 32 hours a week</span>
+          <span class="figure-label">Timeline</span>
+          <span class="figure-value small" id="weeks">about 12 weeks</span>
+          <span class="figure-sub">from the day we start</span>
         </div>
-        <div class="figure">
-          <span class="figure-label">Price</span>
-          <span class="figure-value small" id="cost">$11,500</span>
-          <span class="figure-sub">fixed once you send your selections · excludes font licences and development</span>
-        </div>
+        <span id="hours" hidden></span>
         <div class="divider"></div>
         <div>
           <button class="copy" id="send-btn" type="button">Send my selections</button>
@@ -1277,12 +1272,12 @@
 <div class="mobile-bar">
   <div class="mobile-bar__figures">
     <div class="figure">
-      <span class="figure-label">Hours</span>
-      <span class="figure-value" id="hours-m">319–383</span>
+      <span class="figure-label">Price</span>
+      <span class="figure-value" id="cost-m">$11,500</span>
     </div>
     <div class="figure">
-      <span class="figure-label">Price</span>
-      <span class="figure-value" id="cost-m">$11.5k</span>
+      <span class="figure-label">Timeline</span>
+      <span class="figure-value" id="hours-m">~12 wks</span>
     </div>
   </div>
   <button class="copy mobile-bar__send is-waiting" id="send-btn-m" type="button">Send</button>
@@ -1321,16 +1316,18 @@
 
     function render() {
       var s = collect();
-      var hoursText = s.min + '–' + s.max + ' h';
-      var weeksText = Math.round(s.min / HOURS_PER_WEEK) + '–' + Math.ceil(s.max / HOURS_PER_WEEK) + ' weeks';
+      var hours = Math.ceil(s.max / 5) * 5;                       // the figure the price is built on
+      var hoursText = 'about ' + hours + ' h';
+      var weeks = Math.ceil(s.max / HOURS_PER_WEEK);
+      var weeksText = 'about ' + weeks + ' weeks';
       var fixedPrice = Math.ceil((s.max * RATE) / 50) * 50;
       var costText = money(fixedPrice);
 
       document.getElementById('hours').textContent = hoursText;
       document.getElementById('weeks').textContent = weeksText;
       document.getElementById('cost').textContent = costText;
-      document.getElementById('hours-m').textContent = hoursText;
-      document.getElementById('cost-m').textContent = compactMoney(fixedPrice);
+      document.getElementById('hours-m').textContent = '~' + weeks + ' wks';
+      document.getElementById('cost-m').textContent = money(fixedPrice);
       syncTable(s);
 
       return { s: s, hoursText: hoursText, weeksText: weeksText, costText: costText };
@@ -1343,13 +1340,11 @@
         var p = r.s.picked[i];
         var delta = (p.min === 0 && p.max === 0)
           ? 'included'
-          : (p.min < 0
-              ? 'about ' + Math.round((p.min + p.max) / 2) + ' h'
-              : '+' + p.min + ' to +' + p.max + ' h');
+          : (p.max < 0 ? '-' + money(Math.abs(Math.round((p.min + p.max) / 2)) * RATE) : '+' + money(p.max * RATE));
         lines.push('- ' + p.label + '  (' + delta + ')');
       }
       lines.push('');
-      lines.push('Total: ' + r.hoursText + '  |  ' + r.weeksText + '  |  ' + r.costText + ' fixed');
+      lines.push('Total: ' + r.costText + ' fixed  |  ' + r.weeksText);
 
       var notes = document.getElementById('notes');
       if (notes && notes.value.trim()) {
@@ -1368,7 +1363,7 @@
       var el = document.querySelector('.options input[data-key^="' + prefix + '"]:checked');
       return el ? el.getAttribute('data-key') : '';
     }
-    function range(a, b) { return a + '–' + b; }
+    function range(a, b) { return money(b * RATE); }   // one figure per row: its price
     function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
 
     function syncTable(total) {
@@ -1410,7 +1405,7 @@
       if (rowEm) rowEm.hidden = !(em && em.checked);
 
       // total: the table's own total mirrors the panel (extras included)
-      setText('total-hrs', range(total.min, total.max));
+      setText('total-hrs', money(Math.ceil((total.max * RATE) / 50) * 50));
     }
 
     document.addEventListener('change', function (e) {
