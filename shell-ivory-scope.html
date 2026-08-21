@@ -542,6 +542,7 @@
     td { padding: 0; border: none; }
     td.name { grid-column: 1; grid-row: 1; width: auto; }
     td.hrs { grid-column: 2; grid-row: 1; text-align: right; }
+    td.hrs::after { content: " h"; color: var(--ink-3); }
     td:not(.name):not(.hrs) { grid-column: 1 / -1; grid-row: 2; font-size: 14.5px; }
     tr.total { border-top: 1px solid var(--line); border-bottom: none; padding-top: 16px; }
     .table-wrap tr.total td,
