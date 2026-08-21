@@ -824,9 +824,9 @@
 
       <section class="block">
         <div class="block-head">
-          <h2>Four questions worth answering</h2>
+          <h2>Three questions worth answering</h2>
           <p>
-            Everything else I can assume safely. These four genuinely change the size of the project.
+            Everything else I can assume safely. These three genuinely change the size of the project.
           </p>
         </div>
 
@@ -883,32 +883,6 @@
         </div>
 
         <div class="card">
-          <h3>How many service pages are genuinely different?</h3>
-          <p class="why">
-            The file has two so far — Brand Strategy and Email Marketing — and they share a structure. One good
-            template costs a fraction of bespoke pages and keeps the site consistent as you add services.
-          </p>
-          <div class="options">
-            <label class="opt">
-              <input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" data-key="services-1" checked>
-              <span class="opt-name">One flexible template<span class="pill">Suggested</span></span>
-              <span class="opt-delta">included</span>
-              <span class="opt-note">Built from modular sections, so every service — including ones you launch next year — drops straight in.</span>
-            </label>
-            <label class="opt">
-              <input type="radio" name="services" data-min="19" data-max="24" data-label="Service pages: template plus two bespoke" data-key="services-2">
-              <span class="opt-name">Template plus two bespoke pages</span>
-              <span class="opt-delta plus">+$720</span>
-              <span class="opt-note">$360 a page — the same components, recomposed and art-directed, not drawn from scratch. Your two flagship services get their own layouts; everything else uses the template that is already in the price.</span>
-            </label>
-            <label class="opt">
-              <input type="radio" name="services" data-min="39" data-max="48" data-label="Service pages: template plus four bespoke" data-key="services-4">
-              <span class="opt-name">Template plus four bespoke pages</span>
-              <span class="opt-delta plus">+$1,440</span>
-              <span class="opt-note">$360 a page. Worth it only if the services are genuinely sold differently from one another — if they share a sales argument, the template does the job and costs you nothing extra.</span>
-            </label>
-          </div>
-        </div>
         <div class="card">
           <h3>Does Work link to anything?</h3>
           <p class="why">
@@ -1084,7 +1058,7 @@
               </tr>
               <tr>
                 <td class="name">Inner pages</td>
-                <td>At desktop, each page complete with its own states — validation, errors, loading, empty and success. The service template is effectively a landing page of its own, and Apply Now carries the full qualification form.
+                <td>At desktop, each page complete with its own states — validation, errors, loading, empty and success. The service template is effectively a landing page of its own, and Apply Now carries the full qualification form. Every service you have now and every one you launch later drops into that template at no extra cost; if a service ever needs its own layout instead, that is $360 for the page.
                   <ul class="scope-list" id="inner-list">
                     <li>Service template</li>
                     <li>Contact form</li>
@@ -1361,15 +1335,13 @@
     function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
 
     function syncTable(total) {
-      // inner pages: portal, checkout, services, cases add screens to this row
+      // inner pages: portal, checkout and cases add screens to this row
       var items = ['Service template', 'Contact form', 'Apply Now', 'Cart and hosted checkout', 'Client Login', 'Confirmation screens', 'Legal pages (one text template)', '404 and cookie notice'];
       var add = [0, 0];          // desktop
       var respAdd = [0, 0];      // the same pages at every screen size
-      var portal = picked('portal'), checkout = picked('checkout'), services = picked('services'), cases = picked('cases');
+      var portal = picked('portal'), checkout = picked('checkout'), cases = picked('cases');
       if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 36; add[1] += 45; respAdd[0] += 9; respAdd[1] += 11; }
       if (checkout === 'checkout-custom') { items[items.indexOf('Cart and hosted checkout')] = 'Cart and custom multi-step checkout'; add[0] += 32; add[1] += 40; respAdd[0] += 8; respAdd[1] += 10; }
-      if (services === 'services-2') { items[0] = 'Service template + 2 bespoke pages'; add[0] += 13; add[1] += 16; respAdd[0] += 6; respAdd[1] += 8; }
-      if (services === 'services-4') { items[0] = 'Service template + 4 bespoke pages'; add[0] += 26; add[1] += 32; respAdd[0] += 13; respAdd[1] += 16; }
       if (cases === 'cases-3') { items.push('Case template + 3 cases'); add[0] += 26; add[1] += 32; respAdd[0] += 12; respAdd[1] += 16; }
       if (cases === 'cases-6') { items.push('Case template + 6 cases'); add[0] += 44; add[1] += 54; respAdd[0] += 14; respAdd[1] += 18; }
       var list = document.getElementById('inner-list');
