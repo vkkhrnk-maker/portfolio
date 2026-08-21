@@ -31,7 +31,7 @@ Based: Remote · UTC+2
 Email: vkkhrnk@gmail.com
 Telegram: @Viktoria_UxUi
 Portfolio: https://vkkhrnk-maker.github.io/portfolio/
-LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko-9b4200233
+LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
 Focus: AI interfaces, SaaS and e-commerce across iOS and web — from research and CJM through release
 Headline: Product designer taking products from the first flow to something engineers can ship
 
@@ -54,7 +54,7 @@ Cases: [Read the MVP case](hooh.html), [Read the workspace case](hooh-fill.html)
 ### Product Designer — iTAB
 **May 2024 — Apr 2026 · part-time, remote · health and wellness e-commerce · web and mobile app**
 
-- Designed the specialist-consultations direction — specialist catalog, specialist card and the user-side booking flow — alongside a homepage redesign and sections throughout the app and the site.
+- Designed the specialist-consultations service end to end — specialist listing, specialist card and the user-side booking flow — alongside redesigns of the homepage and the product catalog, and sections throughout the app and the site.
 - Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. After launch drop-off fell and add-to-cart rose on every step redesigned, and the card system rolled out across the entire catalog as the new standard; figures under NDA.
 - Defined purchase states: the CTA becomes a quantity control with immediate feedback, and unavailable products offer restock and alternatives instead of a dead end.
 
