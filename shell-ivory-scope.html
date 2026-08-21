@@ -846,9 +846,9 @@
               <span class="opt-note">Clients live in Dubsado, HoneyBook or your platform’s built-in accounts, and both buttons point there. Nothing custom to design, and easy to replace with your own later.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="portal" data-min="72" data-max="93" data-label="Portal: minimal account area" data-key="portal-min">
+              <input type="radio" name="portal" data-min="60" data-max="78" data-label="Portal: minimal account area" data-key="portal-min">
               <span class="opt-name">A minimal account area</span>
-              <span class="opt-delta plus">+$2,790</span>
+              <span class="opt-delta plus">+$2,340</span>
               <span class="opt-note">Dashboard with application status, a page per purchased service, invoices, profile and password reset — plus empty, pending and declined states, at every screen size.</span>
             </label>
           </div>
@@ -874,9 +874,9 @@
               <span class="opt-note">Your cart pop-up and confirmation screens, designed in full; the payment step itself is Stripe’s or your platform’s hosted page, styled to match. Approved projects get a payment link in the approval email. Works on any platform, and subscriptions come for free.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="checkout" data-min="48" data-max="60" data-label="Checkout: fully custom multi-step checkout" data-key="checkout-custom">
+              <input type="radio" name="checkout" data-min="40" data-max="50" data-label="Checkout: fully custom multi-step checkout" data-key="checkout-custom">
               <span class="opt-name">Fully custom checkout on the site</span>
-              <span class="opt-delta plus">+$1,800</span>
+              <span class="opt-delta plus">+$1,500</span>
               <span class="opt-note">Order summary, billing, payment and subscription management designed end to end, on your own pages, at every screen size. Possible only on a custom build or Shopify Plus; Squarespace, Wix and Webflow will not allow it.</span>
             </label>
           </div>
@@ -896,16 +896,16 @@
               <span class="opt-note">Built from modular sections, so every service — including ones you launch next year — drops straight in.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="services" data-min="26" data-max="32" data-label="Service pages: template plus two bespoke" data-key="services-2">
+              <input type="radio" name="services" data-min="19" data-max="24" data-label="Service pages: template plus two bespoke" data-key="services-2">
               <span class="opt-name">Template plus two bespoke pages</span>
-              <span class="opt-delta plus">+$960</span>
-              <span class="opt-note">$480 a page. Your two flagship services get their own layouts; everything else uses the template that is already in the price.</span>
+              <span class="opt-delta plus">+$720</span>
+              <span class="opt-note">$360 a page — the same components, recomposed and art-directed, not drawn from scratch. Your two flagship services get their own layouts; everything else uses the template that is already in the price.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="services" data-min="51" data-max="64" data-label="Service pages: template plus four bespoke" data-key="services-4">
+              <input type="radio" name="services" data-min="39" data-max="48" data-label="Service pages: template plus four bespoke" data-key="services-4">
               <span class="opt-name">Template plus four bespoke pages</span>
-              <span class="opt-delta plus">+$1,920</span>
-              <span class="opt-note">$480 a page. Worth it only if the services are sold very differently from one another.</span>
+              <span class="opt-delta plus">+$1,440</span>
+              <span class="opt-note">$360 a page. Worth it only if the services are genuinely sold differently from one another — if they share a sales argument, the template does the job and costs you nothing extra.</span>
             </label>
           </div>
         </div>
@@ -1366,10 +1366,10 @@
       var add = [0, 0];          // desktop
       var respAdd = [0, 0];      // the same pages at every screen size
       var portal = picked('portal'), checkout = picked('checkout'), services = picked('services'), cases = picked('cases');
-      if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 48; add[1] += 62; respAdd[0] += 24; respAdd[1] += 31; }
-      if (checkout === 'checkout-custom') { items[items.indexOf('Cart and hosted checkout')] = 'Cart and custom multi-step checkout'; add[0] += 32; add[1] += 40; respAdd[0] += 16; respAdd[1] += 20; }
-      if (services === 'services-2') { items[0] = 'Service template + 2 bespoke pages'; add[0] += 18; add[1] += 22; respAdd[0] += 8; respAdd[1] += 10; }
-      if (services === 'services-4') { items[0] = 'Service template + 4 bespoke pages'; add[0] += 36; add[1] += 44; respAdd[0] += 15; respAdd[1] += 20; }
+      if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 48; add[1] += 62; respAdd[0] += 12; respAdd[1] += 16; }
+      if (checkout === 'checkout-custom') { items[items.indexOf('Cart and hosted checkout')] = 'Cart and custom multi-step checkout'; add[0] += 32; add[1] += 40; respAdd[0] += 8; respAdd[1] += 10; }
+      if (services === 'services-2') { items[0] = 'Service template + 2 bespoke pages'; add[0] += 13; add[1] += 16; respAdd[0] += 6; respAdd[1] += 8; }
+      if (services === 'services-4') { items[0] = 'Service template + 4 bespoke pages'; add[0] += 26; add[1] += 32; respAdd[0] += 13; respAdd[1] += 16; }
       if (cases === 'cases-3') { items.push('Case template + 3 cases'); add[0] += 26; add[1] += 32; respAdd[0] += 12; respAdd[1] += 16; }
       if (cases === 'cases-6') { items.push('Case template + 6 cases'); add[0] += 44; add[1] += 54; respAdd[0] += 14; respAdd[1] += 18; }
       var list = document.getElementById('inner-list');
