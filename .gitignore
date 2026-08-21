@@ -6,3 +6,9 @@
 # scripts that make them. Nothing here is served by the site.
 output/
 tmp/
+
+# Working drafts for outside platforms — they carry rate strategy and
+# negotiation notes, and this repository is public. Kept on disk, out of git.
+linkedin-profile.md
+upwork-profile.md
+upwork-proposals.md
