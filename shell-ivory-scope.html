@@ -518,6 +518,7 @@
     td.name, td.hrs { width: auto; }
     thead { display: none; }
     tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+    tr[hidden] { display: none; }
     tr:last-child { border-bottom: none; }
     td { padding: 0; border: none; }
     td.name { grid-column: 1; grid-row: 1; width: auto; }
@@ -880,13 +881,13 @@
           <p class="why">Each is genuinely optional — none of them are needed to launch.</p>
           <div class="options">
             <label class="opt">
-              <input type="checkbox" name="extra" data-min="34" data-max="42" data-label="Extra: design supervision during development">
+              <input type="checkbox" name="extra" data-min="34" data-max="42" data-label="Extra: design supervision during development" data-key="extra-qa">
               <span class="opt-name">Page-by-page QA during the build</span>
               <span class="opt-delta plus">+34–42 h</span>
               <span class="opt-note">Answering your developer’s questions and one final review before launch are already included. This is the fuller version: every page checked against the design at each breakpoint, written fixes, and a re-check after they land.</span>
             </label>
             <label class="opt">
-              <input type="checkbox" name="extra" data-min="16" data-max="20" data-label="Extra: email and newsletter templates">
+              <input type="checkbox" name="extra" data-min="16" data-max="20" data-label="Extra: email and newsletter templates" data-key="extra-email">
               <span class="opt-name">Email and newsletter templates</span>
               <span class="opt-delta plus">+16–20 h</span>
               <span class="opt-note">Your file already contains newsletter flows. Application received, application approved, purchase confirmation and one newsletter layout, all on brand.</span>
@@ -1019,6 +1020,16 @@
                 <td class="name">Communication and reviews</td>
                 <td>Calls, review sessions, written summaries after each decision, and the back-and-forth between stages — the part of a project that is invisible until it is missing.</td>
                 <td class="hrs">20–24</td>
+              </tr>
+              <tr id="row-qa" hidden>
+                <td class="name">Page-by-page QA</td>
+                <td>Every built page checked against the design at each breakpoint, written fixes, and a re-check after they land.</td>
+                <td class="hrs">34–42</td>
+              </tr>
+              <tr id="row-email" hidden>
+                <td class="name">Email templates</td>
+                <td>Application received, application approved, purchase confirmation and one newsletter layout.</td>
+                <td class="hrs">16–20</td>
               </tr>
               <tr class="total">
                 <td class="name" id="total-label">Total for your selection</td>
@@ -1266,6 +1277,13 @@
       if (rev === 'rev-1') { setText('revisions-desc', 'One consolidated round per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] - 15, BASE_REVISIONS[1] - 13)); }
       else if (rev === 'rev-3') { setText('revisions-desc', 'Three consolidated rounds per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] + 15, BASE_REVISIONS[1] + 19)); }
       else { setText('revisions-desc', 'Two consolidated rounds across the stages.'); setText('revisions-hrs', range(BASE_REVISIONS[0], BASE_REVISIONS[1])); }
+
+      // extras get their own rows only when chosen
+      var qa = document.querySelector('input[data-key="extra-qa"]');
+      var em = document.querySelector('input[data-key="extra-email"]');
+      var rowQa = document.getElementById('row-qa'), rowEm = document.getElementById('row-email');
+      if (rowQa) rowQa.hidden = !(qa && qa.checked);
+      if (rowEm) rowEm.hidden = !(em && em.checked);
 
       // total: the table's own total mirrors the panel (extras included)
       setText('total-hrs', range(total.min, total.max));
