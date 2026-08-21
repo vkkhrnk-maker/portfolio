@@ -713,6 +713,12 @@
     flex: 0 0 auto;
     padding: 12px 22px;
     font-size: 15px;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  button.copy.mobile-bar__send.is-waiting {
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
   }
 
   .mobile-bar { transition: transform .24s ease; will-change: transform; }
@@ -1217,7 +1223,7 @@
       <span class="figure-value" id="cost-m">$9.6–11.5k</span>
     </div>
   </div>
-  <button class="copy mobile-bar__send" id="send-btn-m" type="button">Send</button>
+  <button class="copy mobile-bar__send is-waiting" id="send-btn-m" type="button">Send</button>
 </div>
 
 <script>
@@ -1427,6 +1433,21 @@
         ticking = false;
       });
     }, { passive: true });
+
+    // the bar's Send appears once the first choice has scrolled into view — before
+    // that there is nothing to send yet
+    var firstChoice = document.querySelector('main .card');
+    if (sendBtnM && firstChoice && 'IntersectionObserver' in window) {
+      var reveal = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) {
+          sendBtnM.classList.remove('is-waiting');
+          reveal.disconnect();
+        }
+      }, { threshold: 0.2 });
+      reveal.observe(firstChoice);
+    } else if (sendBtnM) {
+      sendBtnM.classList.remove('is-waiting');
+    }
 
     // the notes field grows with what is typed instead of scrolling inside itself
     var notesField = document.getElementById('notes');
