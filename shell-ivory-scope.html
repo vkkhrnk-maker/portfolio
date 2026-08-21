@@ -594,7 +594,7 @@
     .block-head { margin-bottom: 18px; gap: 10px; }
     .block-head p { font-size: 16px; }
     tr { gap: 8px 16px; padding: 16px 0; }
-    .layout > main > footer.sign { margin-top: 32px; }
+    .layout > main > footer.sign { margin-top: 32px; padding-top: 20px; }
     .layout { gap: 28px; }
 
     /* cards run edge to edge as on the portfolio — done by removing the page's side
@@ -708,10 +708,12 @@
 
   footer.sign {
     margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-soft);
     color: var(--ink-3);
     font-size: 15px;
-    max-width: 66ch;
   }
+  footer.sign p { max-width: 66ch; }
 
   /* ---------- mobile summary bar ---------- */
 
@@ -1201,11 +1203,13 @@
       </section>
 
       <footer class="sign">
-        Every number is an estimate against the brief as written today. If the scope changes, we agree the change
-        before any extra hours are spent — no surprise invoices. Disagreement is as welcome as questions.
-        <br><br>
-        Victoria Kukharenko, UX/UI &amp; Product Designer ·
-        <a href="https://vkkhrnk-maker.github.io/portfolio/" target="_blank" rel="noopener">Portfolio</a>
+        <p>
+          Every number is an estimate against the brief as written today. If the scope changes, we agree the change
+          before any extra hours are spent — no surprise invoices. Disagreement is as welcome as questions.
+          <br><br>
+          Victoria Kukharenko, UX/UI &amp; Product Designer ·
+          <a href="https://vkkhrnk-maker.github.io/portfolio/" target="_blank" rel="noopener">Portfolio</a>
+        </p>
       </footer>
 
     </main>
