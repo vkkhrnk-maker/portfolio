@@ -72,7 +72,8 @@
 
   * { box-sizing: border-box; }
 
-  html, body { overflow-x: hidden; }
+  html, body { overflow-x: clip; }
+  html { overscroll-behavior-x: none; }
 
   body {
     margin: 0;
@@ -89,6 +90,7 @@
     max-width: 1160px;
     margin: 0 auto;
     padding: 64px 32px 140px;
+    overflow-x: clip;
   }
 
   @media (max-width: 720px) {
@@ -193,12 +195,30 @@
 
   @media (max-width: 940px) {
     .layout > aside { padding-top: 0 !important; }
+    /* below 940 the panel is a block in the flow: give it the same inner air as a card
+       and a heading, so the first figure does not sit on the border */
+    .panel {
+      padding: 28px 26px 30px;
+      max-height: none;
+      overflow: visible;
+      gap: 20px;
+    }
+    .panel::before {
+      content: "Your estimate";
+      font-family: var(--font-display);
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
   }
 
   @media (max-width: 940px) {
     .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; }
     .layout > main { display: contents; }
     .layout > main > section.block { margin-top: 0; }
+    .layout > aside { margin-top: 8px; }
     .layout > main > section.block:first-child { order: 1; }
     .layout > aside { order: 2; height: auto; }
     .layout > main > section.block:not(:first-child) { order: 3; }
@@ -302,9 +322,8 @@
 
   .pill {
     display: inline-block;
-    margin-left: 8px;
-    margin-top: 2px;
-    margin-bottom: 2px;
+    margin: 2px 0 2px 8px;
+    vertical-align: 2px;
     padding: 2px 10px;
     border-radius: var(--radius-pill);
     background: var(--accent-soft);
@@ -558,7 +577,7 @@
     label.opt { grid-template-columns: 18px minmax(0, 1fr); }
     .opt-delta { grid-row: 2; grid-column: 2; padding-top: 0; }
     .opt-note { grid-row: 3; grid-column: 2; }
-    .pill { display: inline-block; margin: 6px 0 0; }
+    .pill { display: table; margin: 8px 0 0; }
   }
 
   tr.total td {
@@ -666,6 +685,16 @@
   }
 
   .mobile-bar .figure-value { font-size: 24px; letter-spacing: -.8px; }
+
+  .mobile-bar {
+    transition: transform .28s ease;
+    will-change: transform;
+  }
+  .mobile-bar.is-hidden { transform: translateY(110%); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-bar { transition: none; }
+  }
 
   @media (max-width: 940px) {
     .panel { position: static; }
@@ -799,7 +828,7 @@
           <div class="options">
             <label class="opt">
               <input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked><input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked>
-              <span class="opt-name">Homepage section only<span class="pill">Suggested for launch</span></span>
+              <span class="opt-name">Homepage section only<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Work stays a section on the homepage — images, client names, one line each. Fastest to launch, and easy to extend later.</span>
             </label>
@@ -974,12 +1003,14 @@
                     <li>Service template</li>
                     <li>Contact form</li>
                     <li>Apply Now</li>
-                    <li>Cart</li>
+                    <li>Cart and hosted checkout</li>
                     <li>Client Login</li>
                     <li>Confirmation screens</li>
+                    <li>Legal pages (one text template)</li>
+                    <li>404 and cookie notice</li>
                   </ul>
                 </td>
-                <td class="hrs" id="inner-hrs">34–42</td>
+                <td class="hrs" id="inner-hrs">38–46</td>
               </tr>
               <tr>
                 <td class="name">Responsive</td>
@@ -1034,12 +1065,12 @@
               <tr class="total">
                 <td class="name" id="total-label">Total for your selection</td>
                 <td id="total-note">Matches the panel — it moves as you change the options above</td>
-                <td class="hrs" id="total-hrs">315–379</td>
+                <td class="hrs" id="total-hrs">319–383</td>
               </tr>
             </tbody>
           </table>
           <p class="fine">
-            Counted as artboards rather than pages, that is around thirty-five: nine to eleven desktop screens, their
+            Counted as artboards rather than pages, that is around forty: ten to twelve desktop screens, their
             wide, tablet and mobile versions, and the states every form and the purchase flow need.
           </p>
         </div>
@@ -1060,7 +1091,6 @@
               <li><strong>Accessible by default</strong> — readable contrast, visible focus, keyboard-reachable forms, motion that respects reduced-motion settings. No extra charge, no formal audit either.</li>
               <li><strong>Delivery is Figma</strong> — organised, named, developer-ready.</li>
               <li><strong>Timeline assumes</strong> roughly 32 focused hours a week.</li>
-              <li><strong>Legal pages</strong> (privacy, terms, refunds) get one simple text template; the wording comes from your side.</li>
             </ul>
           </div>
           <div class="card">
@@ -1127,7 +1157,7 @@
       <div class="panel">
         <div class="figure">
           <span class="figure-label">Design hours</span>
-          <span class="figure-value" id="hours">315–379</span>
+          <span class="figure-value" id="hours">319–383</span>
         </div>
         <div class="divider"></div>
         <div class="figure">
@@ -1137,7 +1167,7 @@
         </div>
         <div class="figure">
           <span class="figure-label">Estimated fee</span>
-          <span class="figure-value small" id="cost">$9,450–11,370</span>
+          <span class="figure-value small" id="cost">$9,570–11,490</span>
           <span class="figure-sub">excludes font licences and development</span>
         </div>
         <div class="divider"></div>
@@ -1154,18 +1184,18 @@
 <div class="mobile-bar">
   <div class="figure">
     <span class="figure-label">Hours</span>
-    <span class="figure-value" id="hours-m">315–379</span>
+    <span class="figure-value" id="hours-m">319–383</span>
   </div>
   <div class="figure">
     <span class="figure-label">Fee</span>
-    <span class="figure-value" id="cost-m">$9,450–11,370</span>
+    <span class="figure-value" id="cost-m">$9,570–11,490</span>
   </div>
 </div>
 
 <script>
   (function () {
-    var BASE_MIN = 315;
-    var BASE_MAX = 379;
+    var BASE_MIN = 319;
+    var BASE_MAX = 383;
     var HOURS_PER_WEEK = 32;
     var RATE = 30;
 
@@ -1236,7 +1266,7 @@
     }
 
     // rows in the base table that depend on the options
-    var BASE_INNER = [34, 42];
+    var BASE_INNER = [38, 46];
     var BASE_RESPONSIVE = [44, 50];
     var BASE_REVISIONS = [22, 26];
 
@@ -1249,12 +1279,12 @@
 
     function syncTable(total) {
       // inner pages: portal, checkout, services, cases add screens to this row
-      var items = ['Service template', 'Contact form', 'Apply Now', 'Cart', 'Client Login', 'Confirmation screens'];
+      var items = ['Service template', 'Contact form', 'Apply Now', 'Cart and hosted checkout', 'Client Login', 'Confirmation screens', 'Legal pages (one text template)', '404 and cookie notice'];
       var add = [0, 0];
       var portal = picked('portal'), checkout = picked('checkout'), services = picked('services'), cases = picked('cases');
       if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 48; add[1] += 62; }
       if (portal === 'portal-full') { items.push('Client portal (dashboard, files, stages, payments)'); add[0] += 100; add[1] += 130; }
-      if (checkout === 'checkout-custom') { items[items.indexOf('Cart')] = 'Cart and multi-step checkout'; add[0] += 32; add[1] += 40; }
+      if (checkout === 'checkout-custom') { items[items.indexOf('Cart and hosted checkout')] = 'Cart and custom multi-step checkout'; add[0] += 32; add[1] += 40; }
       if (services === 'services-2') { items[0] = 'Service template + 2 bespoke pages'; add[0] += 18; add[1] += 22; }
       if (services === 'services-4') { items[0] = 'Service template + 4 bespoke pages'; add[0] += 36; add[1] += 44; }
       if (cases === 'cases-3') { items.push('Case template + 3 cases'); add[0] += 26; add[1] += 32; }
@@ -1328,6 +1358,27 @@
 
     alignPanel();
     window.addEventListener('resize', alignPanel);
+
+    // the summary bar on phones behaves like a browser toolbar: out of the way while
+    // reading down, back the moment you scroll up or reach the end
+    var bar = document.querySelector('.mobile-bar');
+    var lastY = window.scrollY;
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        var atEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 40;
+        if (bar) {
+          if (y < 120 || atEnd || y < lastY - 4) bar.classList.remove('is-hidden');
+          else if (y > lastY + 8) bar.classList.add('is-hidden');
+        }
+        lastY = y;
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     // the notes field grows with what is typed instead of scrolling inside itself
     var notesField = document.getElementById('notes');
