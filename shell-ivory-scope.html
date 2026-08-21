@@ -1032,12 +1032,12 @@
               <tr>
                 <td class="name">Visual direction</td>
                 <td>Turning brand guide pages 56–69 into a working web direction, tested on the hero and two defining sections. You approve the look here, on real layouts, before I build anything on top of it — everything below is the rollout of what you sign off at this stage.</td>
-                <td class="hrs">$660</td>
+                <td class="hrs">$780</td>
               </tr>
               <tr>
                 <td class="name">Design system</td>
                 <td>Type scale, spacing, grid and colour tokens, plus every component the site needs — buttons, forms, cards, pricing, testimonials, FAQ and the rest — each with all its states and a short spec. This is where the time pays back: every page after the first is assembled from the system rather than drawn, and new pages later go the same way.</td>
-                <td class="hrs">$1,260</td>
+                <td class="hrs">$1,350</td>
               </tr>
               <tr>
                 <td class="name">Homepage</td>
@@ -1053,7 +1053,7 @@
                     <li>Footer</li>
                   </ul>
                 </td>
-                <td class="hrs">$1,500</td>
+                <td class="hrs">$1,620</td>
               </tr>
               <tr>
                 <td class="name">Inner pages</td>
@@ -1069,7 +1069,7 @@
                     <li>404 and cookie notice</li>
                   </ul>
                 </td>
-                <td class="hrs" id="inner-hrs">$1,770</td>
+                <td class="hrs" id="inner-hrs">$1,890</td>
               </tr>
               <tr>
                 <td class="name">Responsive</td>
@@ -1094,12 +1094,12 @@
               <tr>
                 <td class="name">Developer handoff</td>
                 <td>Naming, auto-layout, annotations, a written walkthrough of the file, availability for your developer’s questions during the build and one review before launch.</td>
-                <td class="hrs">$480</td>
+                <td class="hrs">$570</td>
               </tr>
               <tr>
-                <td class="name">Reviews and revisions</td>
-                <td id="revisions-desc">Two consolidated rounds across the stages. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.</td>
-                <td class="hrs" id="revisions-hrs">$1,320</td>
+                <td class="name">Revisions</td>
+                <td id="revisions-desc">Two consolidated rounds across the stages.</td>
+                <td class="hrs" id="revisions-hrs">$780</td>
               </tr>
               <tr id="row-qa" hidden>
                 <td class="name">Page-by-page QA</td>
@@ -1118,6 +1118,10 @@
               </tr>
             </tbody>
           </table>
+          <p class="fine">
+            Every stage carries its own review and a written summary of what was decided — that time sits inside the
+            rows above rather than in a line of its own. You are not billed for the conversation.
+          </p>
           <p class="fine">
             The price is fixed against this scope: a smooth project does not become a cheaper one, and a fiddly one
             does not become a dearer one. Counted as artboards rather than pages, it is around forty.
@@ -1322,9 +1326,9 @@
     }
 
     // rows in the base table that depend on the options
-    var BASE_INNER = [51, 59];
+    var BASE_INNER = [55, 63];
     var BASE_RESPONSIVE = [44, 50];
-    var BASE_REVISIONS = [40, 44];
+    var BASE_REVISIONS = [22, 26];
 
     function picked(prefix) {
       var el = document.querySelector('.options input[data-key^="' + prefix + '"]:checked');
@@ -1358,9 +1362,9 @@
 
       // revisions: rounds
       var rev = picked('rev');
-      if (rev === 'rev-1') { setText('revisions-desc', 'One consolidated round per stage. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.'); setText('revisions-hrs', range(BASE_REVISIONS[0] - 15, BASE_REVISIONS[1] - 13)); }
-      else if (rev === 'rev-3') { setText('revisions-desc', 'Three consolidated rounds per stage. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.'); setText('revisions-hrs', range(BASE_REVISIONS[0] + 15, BASE_REVISIONS[1] + 19)); }
-      else { setText('revisions-desc', 'Two consolidated rounds across the stages. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.'); setText('revisions-hrs', range(BASE_REVISIONS[0], BASE_REVISIONS[1])); }
+      if (rev === 'rev-1') { setText('revisions-desc', 'One consolidated round per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] - 15, BASE_REVISIONS[1] - 13)); }
+      else if (rev === 'rev-3') { setText('revisions-desc', 'Three consolidated rounds per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] + 15, BASE_REVISIONS[1] + 19)); }
+      else { setText('revisions-desc', 'Two consolidated rounds across the stages.'); setText('revisions-hrs', range(BASE_REVISIONS[0], BASE_REVISIONS[1])); }
 
       // extras get their own rows only when chosen
       var qa = document.querySelector('input[data-key="extra-qa"]');
