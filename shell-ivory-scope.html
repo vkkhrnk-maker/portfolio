@@ -717,19 +717,19 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" checked><input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" checked>
+              <input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" data-key="portal-none" checked><input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" data-key="portal-none" checked>
               <span class="opt-name">An existing tool does it<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Clients live in Dubsado, HoneyBook or your platform’s built-in accounts, and Client Login in the header points there. Nothing custom to design.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="portal" data-min="48" data-max="62" data-label="Portal: minimal account area">
+              <input type="radio" name="portal" data-min="48" data-max="62" data-label="Portal: minimal account area" data-key="portal-min">
               <span class="opt-name">A minimal account area</span>
               <span class="opt-delta plus">+48–62 h</span>
               <span class="opt-note">Dashboard with application status, a page per purchased service, invoices, profile and password reset — plus empty, pending and declined states.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="portal" data-min="100" data-max="130" data-label="Portal: full client portal">
+              <input type="radio" name="portal" data-min="100" data-max="130" data-label="Portal: full client portal" data-key="portal-full">
               <span class="opt-name">A full client portal</span>
               <span class="opt-delta plus">+100–130 h</span>
               <span class="opt-note">Everything above plus file exchange, project stages, deliverable approvals and staged payments. Realistically its own project.</span>
@@ -746,13 +746,13 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: payment links after approval, light cart for ready-made packages" checked><input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: payment links after approval, light cart for ready-made packages" checked>
+              <input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: payment links after approval, light cart for ready-made packages" data-key="checkout-link" checked><input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: payment links after approval, light cart for ready-made packages" data-key="checkout-link" checked>
               <span class="opt-name">Payment link on approval<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Ready-made packages get a light cart and hosted Stripe checkout. Approved projects get a payment link inside the approval email. Fewer screens, less to build, less to break. Which services fall on which side is something we settle at the start.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="checkout" data-min="32" data-max="40" data-label="Checkout: fully custom multi-step checkout">
+              <input type="radio" name="checkout" data-min="32" data-max="40" data-label="Checkout: fully custom multi-step checkout" data-key="checkout-custom">
               <span class="opt-name">Fully custom checkout on the site</span>
               <span class="opt-delta plus">+32–40 h</span>
               <span class="opt-note">Multi-step cart, order summary, billing, payment, confirmation — designed end to end. Possible only on a custom build or Shopify Plus; Squarespace and Wix will not allow it.</span>
@@ -768,19 +768,19 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" checked><input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" checked>
+              <input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" data-key="services-1" checked><input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" data-key="services-1" checked>
               <span class="opt-name">One flexible template<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Built from modular sections, so every service — including ones you launch next year — drops straight in.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="services" data-min="18" data-max="22" data-label="Service pages: template plus two bespoke">
+              <input type="radio" name="services" data-min="18" data-max="22" data-label="Service pages: template plus two bespoke" data-key="services-2">
               <span class="opt-name">Template plus two bespoke pages</span>
               <span class="opt-delta plus">+18–22 h</span>
               <span class="opt-note">Your two flagship services get their own layouts; everything else uses the template.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="services" data-min="36" data-max="44" data-label="Service pages: template plus four bespoke">
+              <input type="radio" name="services" data-min="36" data-max="44" data-label="Service pages: template plus four bespoke" data-key="services-4">
               <span class="opt-name">Template plus four bespoke pages</span>
               <span class="opt-delta plus">+36–44 h</span>
               <span class="opt-note">Worth it only if the services are sold very differently from one another.</span>
@@ -797,19 +797,19 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" checked><input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" checked>
+              <input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked><input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked>
               <span class="opt-name">Homepage section only<span class="pill">Suggested for launch</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Work stays a section on the homepage — images, client names, one line each. Fastest to launch, and easy to extend later.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="cases" data-min="26" data-max="32" data-label="Work: case template plus three case pages">
+              <input type="radio" name="cases" data-min="26" data-max="32" data-label="Work: case template plus three case pages" data-key="cases-3">
               <span class="opt-name">Case template plus three cases</span>
               <span class="opt-delta plus">+26–32 h</span>
               <span class="opt-note">A modular case layout — problem, approach, work, result — built once and filled three times. Every future case drops into the same template.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="cases" data-min="44" data-max="54" data-label="Work: case template plus six case pages">
+              <input type="radio" name="cases" data-min="44" data-max="54" data-label="Work: case template plus six case pages" data-key="cases-6">
               <span class="opt-name">Case template plus six cases</span>
               <span class="opt-delta plus">+44–54 h</span>
               <span class="opt-note">Enough range to show different services and industries. Worth it only if you have six cases with real results to tell.</span>
@@ -834,13 +834,13 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="breakpoints" data-min="-38" data-max="-34" data-label="Breakpoints: 1440 and 375 only">
+              <input type="radio" name="breakpoints" data-min="-24" data-max="-22" data-label="Breakpoints: 1440 and 375 only" data-key="bp-2">
               <span class="opt-name">Desktop and mobile only</span>
-              <span class="opt-delta minus">about −36 h</span>
+              <span class="opt-delta minus">about −23 h</span>
               <span class="opt-note">1440 and 375. Wide screens and tablet left to the developer’s judgement — cheapest, and the most likely to disappoint on the screens your clients actually use.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" checked><input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" checked>
+              <input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" data-key="bp-4" checked><input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" data-key="bp-4" checked>
               <span class="opt-name">1920, 1440, 768 and 375<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Full layouts at all four, plus written rules for the widths in between and a decision on how the page behaves beyond 1920 — capped container or fluid scaling.</span>
@@ -855,19 +855,19 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="revisions" data-min="-15" data-max="-13" data-label="Revisions: one round per stage">
+              <input type="radio" name="revisions" data-min="-15" data-max="-13" data-label="Revisions: one round per stage" data-key="rev-1">
               <span class="opt-name">One round per stage</span>
               <span class="opt-delta minus">about −14 h</span>
               <span class="opt-note">Works when one person decides, and decides quickly.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" checked><input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" checked>
+              <input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" data-key="rev-2" checked><input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" data-key="rev-2" checked>
               <span class="opt-name">Two rounds per stage<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Room to react, sit with it, then refine once more.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="revisions" data-min="15" data-max="19" data-label="Revisions: three rounds per stage">
+              <input type="radio" name="revisions" data-min="15" data-max="19" data-label="Revisions: three rounds per stage" data-key="rev-3">
               <span class="opt-name">Three rounds per stage</span>
               <span class="opt-delta plus">+15–19 h</span>
               <span class="opt-note">Sensible when several people sign off, or when a decision usually takes a few passes to settle.</span>
@@ -915,7 +915,8 @@
         <div class="block-head">
           <h2>What the core estimate covers</h2>
           <p>
-            This work happens regardless of the choices above. Every line is real hours — here is what each one buys.
+            Every line is real hours — here is what each one buys. The rows that depend on your choices above update
+            with them.
           </p>
         </div>
 
@@ -968,7 +969,7 @@
               <tr>
                 <td class="name">Inner pages</td>
                 <td>At desktop. The service template is effectively a landing page of its own, and Apply Now carries the full qualification form.
-                  <ul class="scope-list">
+                  <ul class="scope-list" id="inner-list">
                     <li>Service template</li>
                     <li>Contact form</li>
                     <li>Apply Now</li>
@@ -977,12 +978,12 @@
                     <li>Confirmation screens</li>
                   </ul>
                 </td>
-                <td class="hrs">34–42</td>
+                <td class="hrs" id="inner-hrs">34–42</td>
               </tr>
               <tr>
                 <td class="name">Responsive</td>
-                <td>Layouts at 1920, 1440, 768 and 375, plus how the collage compositions reflow between them and where the page stops growing on very wide screens.</td>
-                <td class="hrs">44–50</td>
+                <td id="responsive-desc">Layouts at 1920, 1440, 768 and 375, plus how the collage compositions reflow between them and where the page stops growing on very wide screens.</td>
+                <td class="hrs" id="responsive-hrs">44–50</td>
               </tr>
               <tr>
                 <td class="name">Imagery</td>
@@ -1011,8 +1012,8 @@
               </tr>
               <tr>
                 <td class="name">Revisions</td>
-                <td>Two consolidated rounds across the stages.</td>
-                <td class="hrs">22–26</td>
+                <td id="revisions-desc">Two consolidated rounds across the stages.</td>
+                <td class="hrs" id="revisions-hrs">22–26</td>
               </tr>
               <tr>
                 <td class="name">Communication and reviews</td>
@@ -1020,9 +1021,9 @@
                 <td class="hrs">20–24</td>
               </tr>
               <tr class="total">
-                <td class="name">Base total</td>
-                <td>Before any of the options above</td>
-                <td class="hrs">315–379</td>
+                <td class="name" id="total-label">Total for your selection</td>
+                <td id="total-note">Matches the panel — it moves as you change the options above</td>
+                <td class="hrs" id="total-hrs">315–379</td>
               </tr>
             </tbody>
           </table>
@@ -1190,6 +1191,7 @@
       document.getElementById('cost').textContent = costText;
       document.getElementById('hours-m').textContent = hoursText;
       document.getElementById('cost-m').textContent = costText;
+      syncTable(s);
 
       return { s: s, hoursText: hoursText, weeksText: weeksText, costText: costText };
     }
@@ -1220,6 +1222,53 @@
         lines.push('Notes: ' + notes.value.trim());
       }
       return lines.join('\n');
+    }
+
+    // rows in the base table that depend on the options
+    var BASE_INNER = [34, 42];
+    var BASE_RESPONSIVE = [44, 50];
+    var BASE_REVISIONS = [22, 26];
+
+    function picked(prefix) {
+      var el = document.querySelector('.options input[data-key^="' + prefix + '"]:checked');
+      return el ? el.getAttribute('data-key') : '';
+    }
+    function range(a, b) { return a + '–' + b; }
+    function setText(id, text) { var el = document.getElementById(id); if (el) el.textContent = text; }
+
+    function syncTable(total) {
+      // inner pages: portal, checkout, services, cases add screens to this row
+      var items = ['Service template', 'Contact form', 'Apply Now', 'Cart', 'Client Login', 'Confirmation screens'];
+      var add = [0, 0];
+      var portal = picked('portal'), checkout = picked('checkout'), services = picked('services'), cases = picked('cases');
+      if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 48; add[1] += 62; }
+      if (portal === 'portal-full') { items.push('Client portal (dashboard, files, stages, payments)'); add[0] += 100; add[1] += 130; }
+      if (checkout === 'checkout-custom') { items[items.indexOf('Cart')] = 'Cart and multi-step checkout'; add[0] += 32; add[1] += 40; }
+      if (services === 'services-2') { items[0] = 'Service template + 2 bespoke pages'; add[0] += 18; add[1] += 22; }
+      if (services === 'services-4') { items[0] = 'Service template + 4 bespoke pages'; add[0] += 36; add[1] += 44; }
+      if (cases === 'cases-3') { items.push('Case template + 3 cases'); add[0] += 26; add[1] += 32; }
+      if (cases === 'cases-6') { items.push('Case template + 6 cases'); add[0] += 44; add[1] += 54; }
+      var list = document.getElementById('inner-list');
+      if (list) list.innerHTML = items.map(function (t) { return '<li>' + t + '</li>'; }).join('');
+      setText('inner-hrs', range(BASE_INNER[0] + add[0], BASE_INNER[1] + add[1]));
+
+      // responsive: breakpoints
+      if (picked('bp') === 'bp-2') {
+        setText('responsive-desc', 'Layouts at 1440 and 375. Wide screens and tablet are left to the developer’s judgement.');
+        setText('responsive-hrs', range(BASE_RESPONSIVE[0] - 24, BASE_RESPONSIVE[1] - 22));
+      } else {
+        setText('responsive-desc', 'Layouts at 1920, 1440, 768 and 375, plus how the collage compositions reflow between them and where the page stops growing on very wide screens.');
+        setText('responsive-hrs', range(BASE_RESPONSIVE[0], BASE_RESPONSIVE[1]));
+      }
+
+      // revisions: rounds
+      var rev = picked('rev');
+      if (rev === 'rev-1') { setText('revisions-desc', 'One consolidated round per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] - 15, BASE_REVISIONS[1] - 13)); }
+      else if (rev === 'rev-3') { setText('revisions-desc', 'Three consolidated rounds per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] + 15, BASE_REVISIONS[1] + 19)); }
+      else { setText('revisions-desc', 'Two consolidated rounds across the stages.'); setText('revisions-hrs', range(BASE_REVISIONS[0], BASE_REVISIONS[1])); }
+
+      // total: the table's own total mirrors the panel (extras included)
+      setText('total-hrs', range(total.min, total.max));
     }
 
     document.addEventListener('change', function (e) {
