@@ -825,20 +825,20 @@
         <div class="card">
           <h3>What sits behind Client Login?</h3>
           <p class="why">
-            Client Login appears in the navigation, the forms table and the user journeys — but no account screens
-            exist anywhere, in the brief or the file. Right now it is a door into an empty room.
-            <em>This is the biggest variable in the estimate.</em>
+            Your purchase confirmation screen ends with “Access your client portal”, and Client Login sits in the
+            navigation — but no portal screens exist yet, in the brief or the file. Something has to be behind that
+            button on launch day. <em>This is the biggest variable in the estimate.</em>
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" data-key="portal-none" checked><input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" data-key="portal-none" checked>
-              <span class="opt-name">An existing tool does it<span class="pill">Suggested</span></span>
+              <input type="radio" name="portal" data-min="0" data-max="0" data-label="Portal: existing tool, no custom screens" data-key="portal-none">
+              <span class="opt-name">An existing tool does it</span>
               <span class="opt-delta">included</span>
-              <span class="opt-note">Clients live in Dubsado, HoneyBook or your platform’s built-in accounts, and Client Login in the header points there. Nothing custom to design.</span>
+              <span class="opt-note">Clients live in Dubsado, HoneyBook or your platform’s built-in accounts, and the portal button points there. Nothing custom to design — but the handoff from your site to someone else’s is where premium feel usually leaks.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="portal" data-min="48" data-max="62" data-label="Portal: minimal account area" data-key="portal-min">
-              <span class="opt-name">A minimal account area</span>
+              <input type="radio" name="portal" data-min="48" data-max="62" data-label="Portal: minimal account area" data-key="portal-min" checked>
+              <span class="opt-name">A minimal account area<span class="pill">Suggested</span></span>
               <span class="opt-delta plus">+48–62 h</span>
               <span class="opt-note">Dashboard with application status, a page per purchased service, invoices, profile and password reset — plus empty, pending and declined states.</span>
             </label>
@@ -854,22 +854,23 @@
         <div class="card">
           <h3>How does money actually change hands?</h3>
           <p class="why">
-            Your file says the cart flow is for services that need approval first. Worth questioning: after you
-            approve someone three days later, asking them to come back and re-add the service to a cart is friction
-            with no payoff. <em>Most platforms also will not let you redesign their checkout at all.</em>
+            Your file already splits this in two: productised services — email marketing, upkeep, content — go
+            through the cart and a monthly checkout; brand strategy and website development go through the
+            application first. That split is right. <em>The open question is how much of the checkout itself is
+            yours to design — most platforms will not let you touch theirs.</em>
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: payment links after approval, light cart for ready-made packages" data-key="checkout-link" checked><input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: payment links after approval, light cart for ready-made packages" data-key="checkout-link" checked>
-              <span class="opt-name">Payment link on approval<span class="pill">Suggested</span></span>
+              <input type="radio" name="checkout" data-min="0" data-max="0" data-label="Checkout: cart pop-up plus hosted checkout" data-key="checkout-link" checked>
+              <span class="opt-name">Cart pop-up plus hosted checkout<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
-              <span class="opt-note">Ready-made packages get a light cart and hosted Stripe checkout. Approved projects get a payment link inside the approval email. Fewer screens, less to build, less to break.</span>
+              <span class="opt-note">Your cart pop-up and confirmation screens, designed in full; the payment step itself is Stripe’s or your platform’s hosted page, styled to match. Approved projects get a payment link in the approval email. Works on any platform, and subscriptions come for free.</span>
             </label>
             <label class="opt">
               <input type="radio" name="checkout" data-min="32" data-max="40" data-label="Checkout: fully custom multi-step checkout" data-key="checkout-custom">
               <span class="opt-name">Fully custom checkout on the site</span>
               <span class="opt-delta plus">+32–40 h</span>
-              <span class="opt-note">Multi-step cart, order summary, billing, payment, confirmation — designed end to end. Possible only on a custom build or Shopify Plus; Squarespace and Wix will not allow it.</span>
+              <span class="opt-note">Order summary, billing, payment and subscription management designed end to end, on your own pages. Possible only on a custom build or Shopify Plus; Squarespace, Wix and Webflow will not allow it.</span>
             </label>
           </div>
         </div>
@@ -882,7 +883,7 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" data-key="services-1" checked><input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" data-key="services-1" checked>
+              <input type="radio" name="services" data-min="0" data-max="0" data-label="Service pages: one flexible template" data-key="services-1" checked>
               <span class="opt-name">One flexible template<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Built from modular sections, so every service — including ones you launch next year — drops straight in.</span>
@@ -911,7 +912,7 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked><input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked>
+              <input type="radio" name="cases" data-min="0" data-max="0" data-label="Work: homepage section only, no case pages" data-key="cases-0" checked>
               <span class="opt-name">Homepage section only<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Work stays a section on the homepage — images, client names, one line each. Fastest to launch, and easy to extend later.</span>
@@ -954,7 +955,7 @@
               <span class="opt-note">1440 and 375. Wide screens and tablet left to the developer’s judgement — cheapest, and the most likely to disappoint on the screens your clients actually use.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" data-key="bp-4" checked><input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" data-key="bp-4" checked>
+              <input type="radio" name="breakpoints" data-min="0" data-max="0" data-label="Breakpoints: 1920 / 1440 / 768 / 375 plus rules for in-between widths" data-key="bp-4" checked>
               <span class="opt-name">1920, 1440, 768 and 375<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Full layouts at all four, plus written rules for the widths in between and a decision on how the page behaves beyond 1920 — capped container or fluid scaling.</span>
@@ -975,7 +976,7 @@
               <span class="opt-note">Works when one person decides, and decides quickly.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" data-key="rev-2" checked><input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" data-key="rev-2" checked>
+              <input type="radio" name="revisions" data-min="0" data-max="0" data-label="Revisions: two rounds per stage" data-key="rev-2" checked>
               <span class="opt-name">Two rounds per stage<span class="pill">Suggested</span></span>
               <span class="opt-delta">included</span>
               <span class="opt-note">Room to react, sit with it, then refine once more.</span>
@@ -1144,7 +1145,7 @@
               <tr class="total">
                 <td class="name" id="total-label">Total for your selection</td>
                 <td id="total-note">Matches the panel — it moves as you change the options above</td>
-                <td class="hrs" id="total-hrs">319–383</td>
+                <td class="hrs" id="total-hrs">367–445</td>
               </tr>
             </tbody>
           </table>
@@ -1238,17 +1239,17 @@
       <div class="panel">
         <div class="figure">
           <span class="figure-label">Design hours</span>
-          <span class="figure-value" id="hours">319–383</span>
+          <span class="figure-value" id="hours">367–445</span>
         </div>
         <div class="divider"></div>
         <div class="figure">
           <span class="figure-label">Calendar time</span>
-          <span class="figure-value small" id="weeks">10–12 weeks</span>
+          <span class="figure-value small" id="weeks">11–14 weeks</span>
           <span class="figure-sub">at roughly 32 hours a week</span>
         </div>
         <div class="figure">
           <span class="figure-label">Estimated fee</span>
-          <span class="figure-value small" id="cost">$9,570–11,490</span>
+          <span class="figure-value small" id="cost">$11,010–13,350</span>
           <span class="figure-sub">excludes font licences and development</span>
         </div>
         <div class="divider"></div>
@@ -1273,11 +1274,11 @@
   <div class="mobile-bar__figures">
     <div class="figure">
       <span class="figure-label">Hours</span>
-      <span class="figure-value" id="hours-m">319–383</span>
+      <span class="figure-value" id="hours-m">367–445</span>
     </div>
     <div class="figure">
       <span class="figure-label">Fee</span>
-      <span class="figure-value" id="cost-m">$9.6–11.5k</span>
+      <span class="figure-value" id="cost-m">$11k–13.4k</span>
     </div>
   </div>
   <button class="copy mobile-bar__send is-waiting" id="send-btn-m" type="button">Send</button>
