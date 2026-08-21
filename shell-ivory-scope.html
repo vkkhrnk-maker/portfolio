@@ -846,9 +846,9 @@
               <span class="opt-note">Clients live in Dubsado, HoneyBook or your platform’s built-in accounts, and both buttons point there. Nothing custom to design, and easy to replace with your own later.</span>
             </label>
             <label class="opt">
-              <input type="radio" name="portal" data-min="60" data-max="78" data-label="Portal: minimal account area" data-key="portal-min">
+              <input type="radio" name="portal" data-min="45" data-max="56" data-label="Portal: minimal account area" data-key="portal-min">
               <span class="opt-name">A minimal account area</span>
-              <span class="opt-delta plus">+$2,340</span>
+              <span class="opt-delta plus">+$1,680</span>
               <span class="opt-note">Dashboard with application status, a page per purchased service, invoices, profile and password reset — plus empty, pending and declined states, at every screen size.</span>
             </label>
           </div>
@@ -1366,7 +1366,7 @@
       var add = [0, 0];          // desktop
       var respAdd = [0, 0];      // the same pages at every screen size
       var portal = picked('portal'), checkout = picked('checkout'), services = picked('services'), cases = picked('cases');
-      if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 48; add[1] += 62; respAdd[0] += 12; respAdd[1] += 16; }
+      if (portal === 'portal-min') { items.push('Client dashboard', 'Invoices and profile'); add[0] += 36; add[1] += 45; respAdd[0] += 9; respAdd[1] += 11; }
       if (checkout === 'checkout-custom') { items[items.indexOf('Cart and hosted checkout')] = 'Cart and custom multi-step checkout'; add[0] += 32; add[1] += 40; respAdd[0] += 8; respAdd[1] += 10; }
       if (services === 'services-2') { items[0] = 'Service template + 2 bespoke pages'; add[0] += 13; add[1] += 16; respAdd[0] += 6; respAdd[1] += 8; }
       if (services === 'services-4') { items[0] = 'Service template + 4 bespoke pages'; add[0] += 26; add[1] += 32; respAdd[0] += 13; respAdd[1] += 16; }
