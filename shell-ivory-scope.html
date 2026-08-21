@@ -1247,7 +1247,9 @@
     function growNotes() {
       if (!notesField) return;
       notesField.style.height = 'auto';
-      notesField.style.height = Math.max(96, notesField.scrollHeight + 2) + 'px';
+      var cs = getComputedStyle(notesField);
+      var extra = parseFloat(cs.paddingBottom) + parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
+      notesField.style.height = Math.max(96, notesField.scrollHeight + extra) + 'px';
     }
     if (notesField) {
       notesField.addEventListener('input', growNotes);
