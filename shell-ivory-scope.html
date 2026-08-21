@@ -487,6 +487,25 @@
   button.copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 
+  .sent { margin-top: 14px; font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+  .sent__ok { color: var(--ink); font-weight: 500; }
+  .sent__note a { color: var(--accent-deep); text-decoration: none; border-bottom: 1px solid transparent; }
+  .sent__note a:hover { border-bottom-color: currentColor; }
+  .copy-out {
+    width: 100%;
+    min-height: 160px;
+    margin-top: 10px;
+    padding: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line-soft);
+    border-radius: 0;
+    resize: vertical;
+  }
+
   /* ---------- scope table ---------- */
 
   .table-wrap {
@@ -1233,7 +1252,15 @@
         </div>
         <div class="divider"></div>
         <div>
-          <button class="copy" id="send-btn" type="button">Email my selections</button>
+          <button class="copy" id="send-btn" type="button">Send my selections</button>
+          <div class="sent" id="sent" hidden>
+            <p class="sent__ok" id="sent-ok" hidden>Sent — thank you. I will come back to you with a locked scope.</p>
+            <div id="sent-fallback" hidden>
+              <p class="sent__note">Your selections are copied. Paste them into an email to
+                <a href="mailto:vkkhrnk@gmail.com">vkkhrnk@gmail.com</a> — or use the summary below.</p>
+              <textarea class="copy-out" id="copy-out" readonly aria-label="Your selections"></textarea>
+            </div>
+          </div>
         </div>
       </div>
     </aside>
@@ -1405,22 +1432,58 @@
 
     var TO = 'vkkhrnk@gmail.com';
     var SUBJECT = 'Shell Ivory website — my selections';
+    // Paste a Formspree form id here (e.g. 'xyzabcd') to have selections emailed directly.
+    // Leave empty and the page falls back to the share sheet / copy flow below.
+    var FORM_ENDPOINT = '';
     var sendBtn = document.getElementById('send-btn');
+    var sentBox = document.getElementById('sent');
+    var sentOk = document.getElementById('sent-ok');
+    var sentFallback = document.getElementById('sent-fallback');
+    var copyOut = document.getElementById('copy-out');
 
-    function sendSelections() {
-      var text = summaryText();
-      var mailto = 'mailto:' + TO + '?subject=' + encodeURIComponent(SUBJECT) + '&body=' + encodeURIComponent(text);
-      // the share sheet only makes sense on a phone or tablet (Mail, Messages, WhatsApp…);
-      // on a desktop Mac it lists Notes and Freeform and hides Mail, so go straight to email there
+    function showSent(ok, text) {
+      if (!sentBox) return;
+      sentBox.hidden = false;
+      sentOk.hidden = !ok;
+      sentFallback.hidden = ok;
+      if (!ok && copyOut) { copyOut.value = text; }
+      sentBox.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+      return Promise.reject();
+    }
+
+    function fallbackDeliver(text) {
       var touchDevice = window.matchMedia('(pointer: coarse)').matches;
       if (touchDevice && navigator.share) {
         navigator.share({ title: SUBJECT, text: text }).catch(function (err) {
-          // user closed the sheet: do nothing; anything else: fall back to email
-          if (err && err.name !== 'AbortError') window.location.href = mailto;
+          if (err && err.name !== 'AbortError') { copyToClipboard(text).catch(function(){}); showSent(false, text); }
         });
       } else {
-        window.location.href = mailto;
+        copyToClipboard(text).catch(function(){});
+        showSent(false, text);
       }
+    }
+
+    function sendSelections() {
+      var text = summaryText();
+      var btn = this;
+      if (!FORM_ENDPOINT) { fallbackDeliver(text); return; }
+      if (btn && btn.textContent) btn.textContent = 'Sending…';
+      fetch('https://formspree.io/f/' + FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ _subject: SUBJECT, selections: text })
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        showSent(true, text);
+        if (btn) btn.textContent = 'Sent';
+      }).catch(function () {
+        if (btn) btn.textContent = 'Send my selections';
+        fallbackDeliver(text);
+      });
     }
     if (sendBtn) sendBtn.addEventListener('click', sendSelections);
     var sendBtnM = document.getElementById('send-btn-m');
