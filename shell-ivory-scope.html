@@ -90,11 +90,10 @@
     max-width: 1160px;
     margin: 0 auto;
     padding: 64px 32px 140px;
-    overflow-x: clip;
   }
 
   @media (max-width: 720px) {
-    .wrap { padding: 40px 20px 120px; }
+    .wrap { padding: 40px 0 120px; }
   }
 
   h1, h2, h3 {
@@ -571,12 +570,16 @@
   }
 
   @media (max-width: 720px) {
-    /* cards bleed to the screen edges, as on the portfolio; their borders become rules */
+    /* cards run edge to edge as on the portfolio — done by removing the page's side
+       padding (not with negative margins, which iOS Safari lets you drag sideways) */
+    .wrap { padding-left: 0; padding-right: 0; }
+    .topbar,
+    .masthead,
+    .block-head,
+    footer.sign { padding-left: 20px; padding-right: 20px; }
     .card,
     .table-wrap,
     .panel {
-      margin-left: -20px;
-      margin-right: -20px;
       border-left: none;
       border-right: none;
       padding-left: 20px;
@@ -584,7 +587,6 @@
     }
     .card + .card { margin-top: 12px; }
     .grid-2 { gap: 12px; }
-    .table-wrap { padding-left: 20px; padding-right: 20px; }
 
     /* inputs at 16px so iOS does not zoom into them on focus */
     .field input,
@@ -695,7 +697,7 @@
     z-index: 20;
     background: var(--surface);
     border-top: 1px solid var(--line-soft);
-    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+    padding: 12px 20px calc(14px + env(safe-area-inset-bottom, 0px));
     align-items: center;
     justify-content: space-between;
     gap: 20px;
@@ -703,19 +705,12 @@
 
   .mobile-bar .figure-value { font-size: 24px; letter-spacing: -.8px; }
 
-  .mobile-bar {
-    transition: transform .28s ease;
-    will-change: transform;
-  }
-  .mobile-bar.is-hidden { transform: translateY(110%); }
 
-  @media (prefers-reduced-motion: reduce) {
-    .mobile-bar { transition: none; }
-  }
 
   @media (max-width: 940px) {
     .panel { position: static; }
     .mobile-bar { display: flex; }
+    .wrap { padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1390,27 +1385,6 @@
 
     alignPanel();
     window.addEventListener('resize', alignPanel);
-
-    // the summary bar on phones behaves like a browser toolbar: out of the way while
-    // reading down, back the moment you scroll up or reach the end
-    var bar = document.querySelector('.mobile-bar');
-    var lastY = window.scrollY;
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(function () {
-        var y = window.scrollY;
-        var atEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 40;
-        if (bar) {
-          if (y < 120 || atEnd || y < lastY - 4) bar.classList.remove('is-hidden');
-          else if (y > lastY + 8) bar.classList.add('is-hidden');
-        }
-        lastY = y;
-        ticking = false;
-      });
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
 
     // the notes field grows with what is typed instead of scrolling inside itself
     var notesField = document.getElementById('notes');
