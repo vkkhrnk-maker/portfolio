@@ -1060,7 +1060,7 @@
               </tr>
               <tr>
                 <td class="name">Visual direction</td>
-                <td>Turning brand guide pages 56–69 into a working web direction: hero plus two defining sections, approved before anything is rolled out.</td>
+                <td>Turning brand guide pages 56–69 into a working web direction, tested on the hero and two defining sections. You approve the look here, on real layouts, before I build anything on top of it — everything below is the rollout of what you sign off at this stage.</td>
                 <td class="hrs">$660</td>
               </tr>
               <tr>
@@ -1070,7 +1070,7 @@
               </tr>
               <tr>
                 <td class="name">Homepage</td>
-                <td>All eight sections at desktop, composed rather than stacked. Hero and Work carry the most weight and take the most passes.
+                <td>The approved direction rolled out across all eight sections at desktop, composed rather than stacked, each complete with its interaction and form states — hover, validation, error, empty and success. Hero and Work carry the most weight and take the most passes.
                   <ul class="scope-list">
                     <li>Hero</li>
                     <li>Services</li>
@@ -1082,11 +1082,11 @@
                     <li>Footer</li>
                   </ul>
                 </td>
-                <td class="hrs">$1,380</td>
+                <td class="hrs">$1,500</td>
               </tr>
               <tr>
                 <td class="name">Inner pages</td>
-                <td>At desktop. The service template is effectively a landing page of its own, and Apply Now carries the full qualification form.
+                <td>At desktop, each page complete with its own states — validation, errors, loading, empty and success. The service template is effectively a landing page of its own, and Apply Now carries the full qualification form.
                   <ul class="scope-list" id="inner-list">
                     <li>Service template</li>
                     <li>Contact form</li>
@@ -1098,7 +1098,7 @@
                     <li>404 and cookie notice</li>
                   </ul>
                 </td>
-                <td class="hrs" id="inner-hrs">$1,380</td>
+                <td class="hrs" id="inner-hrs">$1,770</td>
               </tr>
               <tr>
                 <td class="name">Responsive</td>
@@ -1116,11 +1116,6 @@
                 <td class="hrs">$480</td>
               </tr>
               <tr>
-                <td class="name">States</td>
-                <td>Validation, errors, loading, empty and success states across every form and the purchase flow. Usually forgotten, always needed.</td>
-                <td class="hrs">$510</td>
-              </tr>
-              <tr>
                 <td class="name">Prototype and motion</td>
                 <td>A prototype built in code rather than clicked together in Figma: every screen and state, mobile included, with real scroll and real motion — you can open it on your phone. Your developer gets those files too, so timings, easing and scroll behaviour arrive as something they can open and measure rather than a paragraph they have to interpret.</td>
                 <td class="hrs">$540</td>
@@ -1131,14 +1126,9 @@
                 <td class="hrs">$480</td>
               </tr>
               <tr>
-                <td class="name">Revisions</td>
-                <td id="revisions-desc">Two consolidated rounds across the stages.</td>
-                <td class="hrs" id="revisions-hrs">$780</td>
-              </tr>
-              <tr>
-                <td class="name">Communication and reviews</td>
-                <td>Reviews at each stage, written summaries after each decision, and the back-and-forth in between — async by default, a call when it is faster. The part of a project that is invisible until it is missing.</td>
-                <td class="hrs">$540</td>
+                <td class="name">Reviews and revisions</td>
+                <td id="revisions-desc">Two consolidated rounds across the stages. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.</td>
+                <td class="hrs" id="revisions-hrs">$1,320</td>
               </tr>
               <tr id="row-qa" hidden>
                 <td class="name">Page-by-page QA</td>
@@ -1361,9 +1351,9 @@
     }
 
     // rows in the base table that depend on the options
-    var BASE_INNER = [38, 46];
+    var BASE_INNER = [51, 59];
     var BASE_RESPONSIVE = [44, 50];
-    var BASE_REVISIONS = [22, 26];
+    var BASE_REVISIONS = [40, 44];
 
     function picked(prefix) {
       var el = document.querySelector('.options input[data-key^="' + prefix + '"]:checked');
@@ -1399,9 +1389,9 @@
 
       // revisions: rounds
       var rev = picked('rev');
-      if (rev === 'rev-1') { setText('revisions-desc', 'One consolidated round per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] - 15, BASE_REVISIONS[1] - 13)); }
-      else if (rev === 'rev-3') { setText('revisions-desc', 'Three consolidated rounds per stage.'); setText('revisions-hrs', range(BASE_REVISIONS[0] + 15, BASE_REVISIONS[1] + 19)); }
-      else { setText('revisions-desc', 'Two consolidated rounds across the stages.'); setText('revisions-hrs', range(BASE_REVISIONS[0], BASE_REVISIONS[1])); }
+      if (rev === 'rev-1') { setText('revisions-desc', 'One consolidated round per stage. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.'); setText('revisions-hrs', range(BASE_REVISIONS[0] - 15, BASE_REVISIONS[1] - 13)); }
+      else if (rev === 'rev-3') { setText('revisions-desc', 'Three consolidated rounds per stage. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.'); setText('revisions-hrs', range(BASE_REVISIONS[0] + 15, BASE_REVISIONS[1] + 19)); }
+      else { setText('revisions-desc', 'Two consolidated rounds across the stages. Plus a review at each stage, a written summary after every decision, and the back-and-forth in between — async by default, a call when it is faster.'); setText('revisions-hrs', range(BASE_REVISIONS[0], BASE_REVISIONS[1])); }
 
       // extras get their own rows only when chosen
       var qa = document.querySelector('input[data-key="extra-qa"]');
