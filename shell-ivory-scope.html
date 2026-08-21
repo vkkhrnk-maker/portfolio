@@ -803,7 +803,7 @@
     <h1>What the Shell Ivory website costs, and why</h1>
     <p class="lede">
       I went through the brief, the existing Figma file and the brand guide before writing this.
-      <strong>Pick the options that match your plans — hours, timeline and fee update as you go.</strong>
+      <strong>Pick the options that match your plans — hours, timeline and price update as you go.</strong>
       Then press Send — that is the only reply I need to lock the scope.
     </p>
     <div class="meta">
@@ -1252,9 +1252,9 @@
           <span class="figure-sub">at roughly 32 hours a week</span>
         </div>
         <div class="figure">
-          <span class="figure-label">Estimated fee</span>
-          <span class="figure-value small" id="cost">$9,570–11,490</span>
-          <span class="figure-sub">excludes font licences and development</span>
+          <span class="figure-label">Price</span>
+          <span class="figure-value small" id="cost">$11,500</span>
+          <span class="figure-sub">fixed once you send your selections · excludes font licences and development</span>
         </div>
         <div class="divider"></div>
         <div>
@@ -1281,8 +1281,8 @@
       <span class="figure-value" id="hours-m">319–383</span>
     </div>
     <div class="figure">
-      <span class="figure-label">Fee</span>
-      <span class="figure-value" id="cost-m">$9.6k–11.5k</span>
+      <span class="figure-label">Price</span>
+      <span class="figure-value" id="cost-m">$11.5k</span>
     </div>
   </div>
   <button class="copy mobile-bar__send is-waiting" id="send-btn-m" type="button">Send</button>
@@ -1323,13 +1323,14 @@
       var s = collect();
       var hoursText = s.min + '–' + s.max + ' h';
       var weeksText = Math.round(s.min / HOURS_PER_WEEK) + '–' + Math.ceil(s.max / HOURS_PER_WEEK) + ' weeks';
-      var costText = money(s.min * RATE) + '–' + money(s.max * RATE);
+      var fixedPrice = Math.ceil((s.max * RATE) / 50) * 50;
+      var costText = money(fixedPrice);
 
       document.getElementById('hours').textContent = hoursText;
       document.getElementById('weeks').textContent = weeksText;
       document.getElementById('cost').textContent = costText;
       document.getElementById('hours-m').textContent = hoursText;
-      document.getElementById('cost-m').textContent = compactMoney(s.min * RATE) + '–' + compactMoney(s.max * RATE).replace('$', '');
+      document.getElementById('cost-m').textContent = compactMoney(fixedPrice);
       syncTable(s);
 
       return { s: s, hoursText: hoursText, weeksText: weeksText, costText: costText };
@@ -1348,7 +1349,7 @@
         lines.push('- ' + p.label + '  (' + delta + ')');
       }
       lines.push('');
-      lines.push('Total: ' + r.hoursText + '  |  ' + r.weeksText + '  |  ' + r.costText);
+      lines.push('Total: ' + r.hoursText + '  |  ' + r.weeksText + '  |  ' + r.costText + ' fixed');
 
       var notes = document.getElementById('notes');
       if (notes && notes.value.trim()) {
