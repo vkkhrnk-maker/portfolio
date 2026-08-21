@@ -1197,7 +1197,7 @@
         </div>
         <div class="divider"></div>
         <div>
-          <button class="copy" id="send-btn" type="button">Send my selections</button>
+          <button class="copy" id="send-btn" type="button">Email my selections</button>
         </div>
       </div>
     </aside>
@@ -1374,7 +1374,10 @@
     function sendSelections() {
       var text = summaryText();
       var mailto = 'mailto:' + TO + '?subject=' + encodeURIComponent(SUBJECT) + '&body=' + encodeURIComponent(text);
-      if (navigator.share) {
+      // the share sheet only makes sense on a phone or tablet (Mail, Messages, WhatsApp…);
+      // on a desktop Mac it lists Notes and Freeform and hides Mail, so go straight to email there
+      var touchDevice = window.matchMedia('(pointer: coarse)').matches;
+      if (touchDevice && navigator.share) {
         navigator.share({ title: SUBJECT, text: text }).catch(function (err) {
           // user closed the sheet: do nothing; anything else: fall back to email
           if (err && err.name !== 'AbortError') window.location.href = mailto;
