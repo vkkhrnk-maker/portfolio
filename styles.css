@@ -25,6 +25,7 @@
   --stroke-primary: #d4d2d2;             /* Stroke/Primary — dividers */
   --stroke-subtle: #b1b0b0;              /* Stroke/Subtle */
   --rule: #2d3036;                       /* the hard editorial rules between experience rows */
+  --media-dim: none;                     /* screenshots are already at home on a light page */
   --white: #ffffff;
 
   /* ===== Chrome that needed a value of its own in the dark theme =====
@@ -146,6 +147,7 @@
     --stroke-primary: #2e2e34;
     --stroke-subtle: #4a4a52;
     --rule: #4a4a52;
+    --media-dim: brightness(0.9);
     --surface-paper: #1b1b1f;
     --btn-glow: rgba(255, 255, 255, 0.14);
     --hairline: rgba(255, 255, 255, 0.06);
@@ -186,6 +188,7 @@
   --stroke-primary: #2e2e34;
   --stroke-subtle: #4a4a52;
   --rule: #4a4a52;
+  --media-dim: brightness(0.9);
   --surface-paper: #1b1b1f;
   --btn-glow: rgba(255, 255, 255, 0.14);
   --hairline: rgba(255, 255, 255, 0.06);
@@ -5324,6 +5327,42 @@ a, button, [role="button"], summary, label {
   }
 }
 
+/* ===== Media on a dark page =====
+   The work is bright and the page is not, so at night every screenshot reads
+   as a lamp on a black wall. A light dim takes the glare off without touching
+   a single colour, and it is given back in full the moment the image is
+   looked at: hovering a card or a figure on desktop, opening the lightbox on
+   a phone (where there is no hover to rely on). --media-dim is `none` in the
+   light theme, so all of this is inert there.
+   The filter sits on the img/video leaves, never on a container — a filtered
+   box becomes the containing block for its absolutely positioned children,
+   which would move every phone inside its bezel. */
+.project-card :is(img, video),
+.case :is(img, video),
+.intro__avatar img {
+  filter: var(--media-dim);
+  transition: filter 0.3s ease;
+}
+
+/* The arrow chip is UI on a magenta pill, not a piece of the work. */
+.arrow-btn img {
+  filter: none;
+}
+
+@media (hover: hover) {
+  .project-card:hover :is(img, video),
+  .case :is(img, video):hover,
+  .case__figure:hover :is(img, video),
+  .intro__avatar:hover img {
+    filter: none;
+  }
+}
+
+/* Zoomed, an image is the only thing on screen — nothing to glare against. */
+.lightbox__img {
+  filter: none;
+}
+
 /* ===== Media blur-up (the Syno profile-cover pattern) =====
    JS (shimmer.js) drops a tiny base64 LQIP thumb into each [data-shimmer]
    container and fades the sharp image in over it on load. The blur lives
@@ -5362,7 +5401,7 @@ a, button, [role="button"], summary, label {
 }
 [data-shimmer] img.bu-full {
   opacity: 0;
-  transition: opacity 0.55s ease;
+  transition: opacity 0.55s ease, filter 0.3s ease;
 }
 [data-shimmer] img.bu-full.bu-in {
   opacity: 1;

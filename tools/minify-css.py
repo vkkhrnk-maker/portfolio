@@ -16,7 +16,12 @@ out_path = os.path.join(root, "styles.min.css")
 css = open(src_path, encoding="utf-8").read()
 css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)      # strip comments
 css = re.sub(r"\s+", " ", css)                        # collapse whitespace
-css = re.sub(r"\s*([{};:,>])\s*", r"\1", css)         # tighten punctuation
+css = re.sub(r"\s*([{};,>])\s*", r"\1", css)          # tighten punctuation
+# `:` only loses the space AFTER it. Stripping the space BEFORE a colon also
+# eats the descendant combinator in selectors like `.card :is(img, video)`
+# or `.card :hover`, silently turning them into `.card:is(...)` — a rule that
+# matches the container instead of its children.
+css = re.sub(r":\s+", ":", css)
 css = css.replace(";}", "}")
 
 open(out_path, "w", encoding="utf-8").write(css.strip() + "\n")
