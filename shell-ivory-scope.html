@@ -72,6 +72,8 @@
 
   * { box-sizing: border-box; }
 
+  html, body { overflow-x: hidden; }
+
   body {
     margin: 0;
     background: var(--bg);
@@ -301,6 +303,8 @@
   .pill {
     display: inline-block;
     margin-left: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
     padding: 2px 10px;
     border-radius: var(--radius-pill);
     background: var(--accent-soft);
@@ -530,11 +534,30 @@
   }
 
   @media (max-width: 720px) {
+    /* cards bleed to the screen edges, as on the portfolio; their borders become rules */
+    .card,
+    .table-wrap,
+    .panel {
+      margin-left: -20px;
+      margin-right: -20px;
+      border-left: none;
+      border-right: none;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .card + .card { margin-top: 12px; }
+    .grid-2 { gap: 12px; }
+    .table-wrap { padding-left: 20px; padding-right: 20px; }
+
+    /* inputs at 16px so iOS does not zoom into them on focus */
+    .field input,
+    .field textarea { font-size: 16px; }
+
     /* the option header: name (pill wraps inline), then delta, then note */
     label.opt { grid-template-columns: 18px minmax(0, 1fr); }
     .opt-delta { grid-row: 2; grid-column: 2; padding-top: 0; }
     .opt-note { grid-row: 3; grid-column: 2; }
-    .pill { display: inline-block; margin-left: 6px; }
+    .pill { display: inline-block; margin: 6px 0 0; }
   }
 
   tr.total td {
@@ -1024,11 +1047,8 @@
               <li><strong>Feedback</strong> arrives consolidated, one voice per round.</li>
               <li><strong>Accessible by default</strong> — readable contrast, visible focus, keyboard-reachable forms, motion that respects reduced-motion settings. No extra charge, no formal audit either.</li>
               <li><strong>Delivery is Figma</strong> — organised, named, developer-ready.</li>
-              <li><strong>Built to load fast</strong> — I specify only the font weights the design actually uses and hand your developer an image budget per page.</li>
               <li><strong>Timeline assumes</strong> roughly 32 focused hours a week.</li>
-              <li><strong>Legal pages</strong> (privacy, terms, refunds) get one simple text template; the wording comes from your side. Selling online without them is a risk worth closing before launch.</li>
-              <li><strong>Existing designs</strong> are reused for their flow logic; the visual layer is rebuilt to the new brand.</li>
-              <li><strong>The cart stays a pop-up</strong>, as in your file, rather than separate Cart and Checkout pages.</li>
+              <li><strong>Legal pages</strong> (privacy, terms, refunds) get one simple text template; the wording comes from your side.</li>
             </ul>
           </div>
           <div class="card">
@@ -1086,7 +1106,7 @@
         before any extra hours are spent — no surprise invoices. Disagreement is as welcome as questions.
         <br><br>
         Victoria Kukharenko, UX/UI &amp; Product Designer ·
-        <a href="https://vkkhrnk-maker.github.io/portfolio/" target="_blank" rel="noopener">portfolio</a>
+        <a href="https://vkkhrnk-maker.github.io/portfolio/" target="_blank" rel="noopener">Portfolio</a>
       </footer>
 
     </main>
