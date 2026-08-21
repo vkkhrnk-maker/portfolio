@@ -780,7 +780,7 @@
             <label class="opt">
               <input type="radio" name="breakpoints" data-min="-38" data-max="-34" data-label="Breakpoints: 1440 and 375 only">
               <span class="opt-name">Desktop and mobile only</span>
-              <span class="opt-delta minus">−34–38 h</span>
+              <span class="opt-delta minus">about −36 h</span>
               <span class="opt-note">1440 and 375. Wide screens and tablet left to the developer’s judgement — cheapest, and the most likely to disappoint on the screens your clients actually use.</span>
             </label>
             <label class="opt">
@@ -801,7 +801,7 @@
             <label class="opt">
               <input type="radio" name="revisions" data-min="-15" data-max="-13" data-label="Revisions: one round per stage">
               <span class="opt-name">One round per stage</span>
-              <span class="opt-delta minus">−13–15 h</span>
+              <span class="opt-delta minus">about −14 h</span>
               <span class="opt-note">Works when one person decides, and decides quickly.</span>
             </label>
             <label class="opt">
@@ -1174,7 +1174,9 @@
         var p = r.s.picked[i];
         var delta = (p.min === 0 && p.max === 0)
           ? 'included'
-          : (p.min > 0 ? '+' : '') + p.min + ' to ' + (p.max > 0 ? '+' : '') + p.max + ' h';
+          : (p.min < 0
+              ? 'about ' + Math.round((p.min + p.max) / 2) + ' h'
+              : '+' + p.min + ' to +' + p.max + ' h');
         lines.push('- ' + p.label + '  (' + delta + ')');
       }
       lines.push('');
