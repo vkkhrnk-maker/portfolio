@@ -290,6 +290,8 @@
     background: var(--accent-wash);
   }
 
+  /* the control is drawn in CSS from the same :checked state that colours the card, so the
+     two can never disagree — iOS Safari is lazy about repainting native radios set by script */
   label.opt input {
     grid-row: 1 / span 3;
     grid-column: 1;
@@ -298,8 +300,33 @@
     margin: 2.7px 0 0;
     width: 16px;
     height: 16px;
-    accent-color: var(--accent-deep);
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1.5px solid var(--ink-3);
+    border-radius: 50%;
+    background: var(--surface);
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+    transition: border-color .12s ease;
   }
+  label.opt input[type="checkbox"] { border-radius: 3px; }
+  label.opt input::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-deep);
+    transform: scale(0);
+    transition: transform .12s ease;
+  }
+  label.opt input[type="checkbox"]::before {
+    width: 10px;
+    height: 10px;
+    border-radius: 1.5px;
+  }
+  label.opt input:checked { border-color: var(--accent-deep); }
+  label.opt input:checked::before { transform: scale(1); }
 
   label.opt input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
