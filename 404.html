@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <meta name="robots" content="noindex">
   <title>Page not found · Victoria Kukharenko</title>
   <!-- Self-contained on purpose: GitHub Pages serves this file for ANY
@@ -50,6 +51,16 @@
       box-shadow: inset -3px -4px 14px 0 rgba(255, 255, 255, 0.5), inset 3px 4px 14px 0 rgba(255, 255, 255, 0.5);
     }
     a.btn:hover { filter: brightness(1.05); }
+    /* Same dark palette as styles.css — this page is self-contained on purpose. */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { color-scheme: dark; }
+      :root:not([data-theme="light"]) body { background: #131316; color: #ececee; }
+      :root:not([data-theme="light"]) p { color: rgba(255, 255, 255, 0.66); }
+      :root:not([data-theme="light"]) a.btn {
+        background: #a72cc0;
+        box-shadow: inset -3px -4px 14px 0 rgba(255, 255, 255, 0.14), inset 3px 4px 14px 0 rgba(255, 255, 255, 0.14);
+      }
+    }
   </style>
 </head>
 <body>
