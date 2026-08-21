@@ -951,9 +951,9 @@
           </p>
           <div class="options">
             <label class="opt">
-              <input type="radio" name="breakpoints" data-min="-24" data-max="-22" data-label="Breakpoints: 1440 and 375 only" data-key="bp-2">
+              <input type="radio" name="breakpoints" data-min="-33" data-max="-33" data-label="Breakpoints: 1440 and 375 only" data-key="bp-2">
               <span class="opt-name">Desktop and mobile only</span>
-              <span class="opt-delta minus">−$660</span>
+              <span class="opt-delta minus">−$990</span>
               <span class="opt-note">1440 and 375. Wide screens and tablet left to the developer’s judgement — cheapest, and the most likely to disappoint on the screens your clients actually use.</span>
             </label>
             <label class="opt">
@@ -1384,7 +1384,7 @@
       // responsive: breakpoints
       if (picked('bp') === 'bp-2') {
         setText('responsive-desc', 'Layouts at 1440 and 375. Wide screens and tablet are left to the developer’s judgement.');
-        setText('responsive-hrs', range(BASE_RESPONSIVE[0] - 24, BASE_RESPONSIVE[1] - 22));
+        setText('responsive-hrs', range(BASE_RESPONSIVE[0] - 33, BASE_RESPONSIVE[1] - 33));
       } else {
         setText('responsive-desc', 'Layouts at 1920, 1440, 768 and 375, plus how the collage compositions reflow between them and where the page stops growing on very wide screens.');
         setText('responsive-hrs', range(BASE_RESPONSIVE[0], BASE_RESPONSIVE[1]));
