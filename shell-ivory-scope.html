@@ -340,7 +340,11 @@
     resize: vertical;
   }
 
-  .field textarea { min-height: 96px; }
+  .field textarea {
+    min-height: 96px;
+    overflow: hidden;
+    resize: none;
+  }
 
   .field input::placeholder,
   .field textarea::placeholder { color: var(--ink-3); }
@@ -1235,6 +1239,18 @@
 
     alignPanel();
     window.addEventListener('resize', alignPanel);
+
+    // the notes field grows with what is typed instead of scrolling inside itself
+    var notesField = document.getElementById('notes');
+    function growNotes() {
+      if (!notesField) return;
+      notesField.style.height = 'auto';
+      notesField.style.height = Math.max(96, notesField.scrollHeight + 2) + 'px';
+    }
+    if (notesField) {
+      notesField.addEventListener('input', growNotes);
+      growNotes();
+    }
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(alignPanel);
     }
