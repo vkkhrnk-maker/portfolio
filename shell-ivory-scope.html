@@ -1146,7 +1146,7 @@
               <tr class="total">
                 <td class="name" id="total-label">Your price</td>
                 <td id="total-note">Fixed once you send your selections; moves only with the options above</td>
-                <td class="hrs" id="total-hrs">$11,050</td>
+                <td class="hrs" id="total-hrs">$11,010</td>
               </tr>
             </tbody>
           </table>
@@ -1241,7 +1241,7 @@
       <div class="panel">
         <div class="figure">
           <span class="figure-label">Price</span>
-          <span class="figure-value" id="cost">$11,050</span>
+          <span class="figure-value" id="cost">$11,010</span>
           <span class="figure-sub">fixed once you send your selections</span>
         </div>
         <div class="divider"></div>
@@ -1272,7 +1272,7 @@
   <div class="mobile-bar__figures">
     <div class="figure">
       <span class="figure-label">Price</span>
-      <span class="figure-value" id="cost-m">$11,050</span>
+      <span class="figure-value" id="cost-m">$11,010</span>
     </div>
     <div class="figure">
       <span class="figure-label">Timeline</span>
@@ -1319,7 +1319,7 @@
       var hoursText = 'about ' + hours + ' h';
       var weeks = Math.ceil(s.max / HOURS_PER_WEEK);
       var weeksText = 'about ' + weeks + ' weeks';
-      var fixedPrice = Math.ceil((s.max * RATE) / 50) * 50;
+      var fixedPrice = s.max * RATE;
       var costText = money(fixedPrice);
 
       document.getElementById('hours').textContent = hoursText;
@@ -1404,7 +1404,7 @@
       if (rowEm) rowEm.hidden = !(em && em.checked);
 
       // total: the table's own total mirrors the panel (extras included)
-      setText('total-hrs', money(Math.ceil((total.max * RATE) / 50) * 50));
+      setText('total-hrs', money(total.max * RATE));
     }
 
     document.addEventListener('change', function (e) {
