@@ -30,7 +30,7 @@
 Based: Remote · UTC+2
 Email: vkkhrnk@gmail.com
 Telegram: @Viktoria_UxUi
-Portfolio: https://vkkhrnk-maker.github.io/portfolio/
+Portfolio: https://victoriakukharenko.com/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
 Focus: AI interfaces, SaaS and e-commerce across iOS and web — from research and CJM through release
 Headline: Product designer taking products from the first flow to something engineers can ship
