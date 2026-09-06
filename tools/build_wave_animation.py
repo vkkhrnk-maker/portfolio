@@ -430,6 +430,7 @@ def foreground_mask(frame: Image.Image) -> Image.Image:
 # camera and body never move, only the hand turns inside its zone.
 CLEAR_ZONES = (
     (0.09, 0.13, 0.34, 0.31),   # hand, with room for the swing
+    (0.64, 0.43, 0.80, 0.57),   # hanging hand, without the pale shirt or shoes
     (0.40, 0.52, 0.60, 0.82),   # between the legs, stopping above the shoes
 )
 
@@ -476,6 +477,45 @@ def defringe(frame: Image.Image, mask: Image.Image, band_base: float = 3.2) -> I
     return Image.fromarray(np.clip(cleaned, 0, 255).astype(np.uint8), "RGB")
 
 
+def remove_light_matte(
+    layer: Image.Image,
+    erosion_px: int,
+    band_px: float,
+    brightness_floor: float,
+    neutral_spread: float,
+) -> Image.Image:
+    """Remove pale studio-background colour from a transparent web layer."""
+    alpha = np.asarray(layer.getchannel("A"))
+    if erosion_px:
+        alpha = np.asarray(
+            Image.fromarray(alpha).filter(ImageFilter.MinFilter(erosion_px * 2 + 1))
+        )
+
+    subject = alpha > 3
+    core = binary_erosion(alpha > 220, iterations=3)
+    if not core.any():
+        return layer
+
+    _, nearest = distance_transform_edt(~core, return_indices=True)
+    pixels = np.asarray(layer.convert("RGB")).astype(np.float32)
+    interior = pixels[nearest[0], nearest[1]]
+
+    distance_inside = distance_transform_edt(subject)
+    edge = smoothstep(np.clip((band_px + 1.0 - distance_inside) / band_px, 0.0, 1.0))
+    edge *= subject
+
+    brightness = pixels.mean(axis=2)
+    spread = pixels.max(axis=2) - pixels.min(axis=2)
+    pale_neutral = smoothstep((brightness - brightness_floor) / 70.0)
+    pale_neutral *= smoothstep((neutral_spread - spread) / neutral_spread)
+    strength = edge * pale_neutral
+
+    cleaned = pixels * (1.0 - strength[:, :, None]) + interior * strength[:, :, None]
+    result = Image.fromarray(np.clip(cleaned, 0, 255).astype(np.uint8), "RGB").convert("RGBA")
+    result.putalpha(Image.fromarray(alpha))
+    return result
+
+
 def export_css_rig(
     clean_plate: Image.Image,
     hand_layer: Image.Image,
@@ -505,16 +545,16 @@ def export_css_rig(
     clean_hand.putalpha(hand_alpha)
 
     layers = {
-        "viktoria-wave-rig-body-v7.png": body,
-        "viktoria-wave-rig-hand-v7.png": clean_hand,
-        "viktoria-wave-rig-wrist-v7.png": wrist_patch,
-        "viktoria-wave-rig-cuff-v7.png": cuff_layer,
+        "viktoria-wave-rig-body-v7.png": (body, (1, 6.0, 120.0, 85.0)),
+        "viktoria-wave-rig-hand-v7.png": (clean_hand, (1, 4.0, 130.0, 70.0)),
+        "viktoria-wave-rig-wrist-v7.png": (wrist_patch, None),
+        "viktoria-wave-rig-cuff-v7.png": (cuff_layer, (1, 4.0, 130.0, 70.0)),
     }
-    for filename, layer in layers.items():
-        layer.resize((WEB_WIDTH, WEB_HEIGHT), Image.Resampling.LANCZOS).save(
-            OUT_DIR / filename,
-            optimize=True,
-        )
+    for filename, (layer, cleanup) in layers.items():
+        web_layer = layer.resize((WEB_WIDTH, WEB_HEIGHT), Image.Resampling.LANCZOS)
+        if cleanup:
+            web_layer = remove_light_matte(web_layer, *cleanup)
+        web_layer.save(OUT_DIR / filename, optimize=True)
 
 
 def place_on_background(
