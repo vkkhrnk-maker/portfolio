@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* A visitor who picked English with the switcher stays on English,
+       whatever their browser asks for. Runs before paint, so there is no
+       flash of the wrong language. */
+    (function () {
+      try {
+        if (localStorage.getItem("lang") === "en") {
+          location.replace("/itab.html" + location.hash);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>iTAB — кейс · Victoria Kukharenko</title>
+  <meta name="description" content="iTAB — редизайн карточки БАДов для веба и мобильного: понятнее ценность товара, сигналы доверия и действия покупки. Кейс Victoria Kukharenko.">
+  <meta name="theme-color" content="#59ad3b">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="iTAB — кейс · Victoria Kukharenko">
+  <meta property="og:description" content="Редизайн карточки БАДов: решение о покупке даётся легче — и в вебе, и в мобильном.">
+  <meta property="og:url" content="https://victoriakukharenko.com/ru/itab.html">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://victoriakukharenko.com/assets/case-itab-hero.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="iTAB — кейс · Victoria Kukharenko">
+  <meta name="twitter:description" content="Редизайн карточки БАДов: решение о покупке даётся легче — и в вебе, и в мобильном.">
+  <meta name="twitter:image" content="https://victoriakukharenko.com/assets/case-itab-hero.jpg">
+
+  <link rel="canonical" href="https://victoriakukharenko.com/ru/itab.html">
+  <link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/itab.html">
+  <link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/itab.html">
+  <link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/itab.html">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <!-- Editorial New is not used on this page at all — the Russian
+       display face carries Latin too, so there is nothing to preload it for. -->
+  <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <script src="../typographer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=6" defer></script>
+  <script>document.documentElement.classList.add('has-js');</script>
+</head>
+<body class="case-page--itab">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <span class="sidebar__name">Victoria Kukharenko</span>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Команда</dt>
+          <dd>PM, мобильный разработчик, веб-разработчик</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Моя роль</dt>
+          <dd>Продуктовый дизайнер. На мне UX-аналитика, UX/UI для веба и мобильного и система карточки товара, которая потом разошлась по всему каталогу. Работала напрямую с PM и разработкой.</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Год</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/itab.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </div>
+  </aside>
+
+  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <div class="mobile-topbar__actions">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Открыть меню">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Назад</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h1 class="case__title">iTAB — редизайн карточки БАДов, чтобы выбор давался легче</h1>
+        <p class="case__intro">iTAB — российский маркетплейс товаров для здоровья; все экраны в кейсе — живой интерфейс с реальными товарами. Я переделала карточку товара для веба и мобильного: понятнее ценность, сигналы доверия и действия покупки.</p>
+        <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
+          <div><dt>Воронка</dt><dd>Отвал ниже · NDA</dd></div>
+          <div><dt>Покупка</dt><dd>Добавлений в корзину больше · NDA</dd></div>
+          <div><dt>Раскатка</dt><dd>Разошлась по всему каталогу</dd></div>
+        </dl>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Команда</dt>
+            <dd>PM, мобильный разработчик, веб-разработчик</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Моя роль</dt>
+            <dd>Продуктовый дизайнер. На мне UX-аналитика, UX/UI для веба и мобильного и система карточки товара, которая потом разошлась по всему каталогу. Работала напрямую с PM и разработкой.</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Год</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image case__hero-image--itab">
+          <div class="case__hero-figma case__itab-cover" data-shimmer>
+            <img class="case__itab-cover-desktop" src="../assets/itab-desktop.webp?v=1" alt="Страница товара iTAB — десктопный веб" loading="eager" width="1370" height="1144">
+            <img class="case__itab-cover-mobile" src="../assets/itab-mobile.webp?v=1" alt="Карточка товара iTAB — мобильный экран БАДа" loading="eager" width="504" height="1088">
+          </div>
+          <div class="case__hero-split">
+            <div class="case__hero-plate"><img src="../assets/itab-mobile.webp?v=1" alt="Мобильная карточка iTAB — экран БАДа" loading="eager" width="504" height="1088"></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h2 class="case__block-title">Проблема</h2>
+          <p class="case__block-body">В БАДах доверие решает всё, а карточка товара была слабым звеном воронки — люди уходили, не доводя покупку до конца. Решение приходилось принимать почти вслепую: польза, состав, лабораторное подтверждение, отзывы и наличие были разбросаны по странице или не выстроены по важности.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Задача</h2>
+          <p class="case__block-body">Переделать карточку для веба и мобильного и снизить отвал в категории БАДов. Карточка должна была упростить оценку товара, усилить сигналы доверия в момент решения и удержать человека в воронке, когда нужного товара нет в наличии.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Пользователи</h2>
+          <p class="case__block-body">Товары для здоровья выбирают придирчиво. До покупки человеку нужно понять, что это за продукт, можно ли доверять составу, чем он отличается от аналогов и что делать, если его нет в наличии.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Что изменилось</h2>
+          <p class="case__block-body">Я пересобрала карточку вокруг того, как человек принимает решение: понять товар, довериться, сравнить, купить — и что делать, если купить не получилось.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Исследование и процесс</h2>
+        <p class="case__section-body">Начала с двух заходов параллельно: аудит текущей карточки по тем вопросам, которые человек задаёт себе перед покупкой, и разбор пяти карточек конкурентов из смежных категорий — посмотреть, какие конвенции уже сформировали ожидания. Оба захода указали на одни и те же четыре дыры. То, что уехало в продакшн, — третий подход: две полные итерации до него прошли через ревью команды.</p>
+        <div class="case__gap-grid case__gap-grid--four">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Обратная связь при покупке</h3>
+            <p class="case__gap-card__desc">После нажатия непонятно, что произошло</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Сигналы доверия</h3>
+            <p class="case__gap-card__desc">Отзывы, лабораторное подтверждение и исследования не складывались в один сюжет</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Состояние «нет в наличии»</h3>
+            <p class="case__gap-card__desc">Товару не в наличии нужен следующий шаг, а не тупик</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Перегрузка сигналами</h3>
+            <p class="case__gap-card__desc">Бейджи, плашки и маркеры боролись за внимание без всякой системы</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">1. Состояния покупки — понятные и с продолжением</h2>
+        <p class="case__section-body">Я описала состояния покупки для товаров в наличии и без. Если товар есть, кнопка после нажатия превращается в счётчик количества и сразу отвечает действием. Если товара нет, карточка предлагает подписку на поступление и держит связь с альтернативами, а не обрывает путь.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--available" aria-label="Блок цены рядом с двумя мобильными карточками: кнопка в наличии превращается в счётчик количества после добавления в корзину">
+            <img class="case__itab-board-card" src="../assets/case-itab-uxA1-s1.webp?v=3" alt="Блок цены: добавить в корзину, рассрочка, пункты выдачи и начисляемые баллы" loading="lazy" width="563" height="612">
+            <img class="case__itab-board-phone case__itab-board-phone--left" src="../assets/case-itab-uxA1-s2.webp?v=1" alt="Карточка товара с кнопкой «В корзину» в состоянии «в наличии»" loading="lazy" width="502" height="1088">
+            <img class="case__itab-board-phone case__itab-board-phone--right" src="../assets/case-itab-uxA1-s3.webp?v=1" alt="Карточка после добавления — кнопка стала счётчиком количества" loading="lazy" width="502" height="1088">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--unavailable" aria-label="Сценарий «нет в наличии» — подписка на поступление, подтверждение подписки и корзина с недоступным товаром и деталями поставки">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-uxA2-s1.webp?v=1" alt="Подписка на поступление у недоступного товара" loading="lazy" width="502" height="1088">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-uxA2-s2.webp?v=2" alt="Подтверждение подписки — сообщим, когда товар вернётся" loading="lazy" width="503" height="1088">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-uxA2-s3.webp?v=1" alt="Корзина с недоступным сейчас товаром и деталями поставки" loading="lazy" width="502" height="1088">
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте состояния покупки — карточка, добавление в корзину, цена и сценарий «нет в наличии»">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-uxA1-s2.webp?v=1" alt="Карточка товара с кнопкой «В корзину» в состоянии «в наличии»" loading="lazy" width="502" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-uxA1-s3.webp?v=1" alt="Карточка после добавления — кнопка стала счётчиком количества" loading="lazy" width="502" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="../assets/case-itab-uxA1-s1.webp?v=3" alt="Блок цены: добавить в корзину, рассрочка, пункты выдачи и начисляемые баллы" loading="lazy" width="563" height="612"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-uxA2-s1.webp?v=1" alt="Подписка на поступление у недоступного товара" loading="lazy" width="502" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="../assets/case-itab-uxA2-s2.webp?v=2" alt="Подтверждение подписки — сообщим, когда товар вернётся" loading="lazy" width="503" height="1088"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-uxA2-s3.webp?v=1" alt="Корзина с недоступным сейчас товаром и деталями поставки" loading="lazy" width="502" height="1088"></div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">2. Доверие через отзывы и доказательства</h2>
+        <p class="case__section-body">Я развела слои доверия внутри карточки: карточки исследований дают дополнительный контекст, а отзывы и AI-саммари помогают быстрее увидеть, что повторяется в обратной связи. Уверенности больше, а основная зона покупки не перегружена.</p>
+        <p class="case__section-body">Доказательства остались вспомогательным слоем — чтобы карточка укрепляла доверие, а не превращалась в длинную медицинскую статью.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--evidence" aria-label="Карточки исследований на десктопе рядом с мобильным экраном отзывов">
+            <img class="case__itab-board-desktop" src="../assets/case-itab-uxB-s1.webp?v=2" alt="Веб-версия: карточки исследований, подтверждающих свойства товара" loading="lazy" width="1782" height="1003">
+            <img class="case__itab-board-phone case__itab-board-phone--evidence" src="../assets/case-itab-uxB-s2.webp?v=1" alt="Отзывы о товаре с AI-саммари того, что повторяется в обратной связи" loading="lazy" width="525" height="1088">
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте карточки исследований и экран отзывов">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-uxB-s1.webp?v=2" alt="Веб-версия: карточки исследований, подтверждающих свойства товара" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-uxB-s2.webp?v=1" alt="Отзывы о товаре с AI-саммари того, что повторяется в обратной связи" loading="lazy" width="525" height="1088"></div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">3. Порядок среди вспомогательных сигналов</h2>
+        <p class="case__section-body">Бейджи, лабораторное подтверждение, категорийные маркеры и промо-плашки я собрала в понятную визуальную систему. Маркерам доверия добавила интерактивный слой: подробности открываются по запросу и не занимают место в карточке постоянно.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__signals-slides" aria-label="Три отдельных слайда: плашки, интерфейс лабораторного подтверждения и его маркер в строке">
+            <div class="case__signals-slide case__signals-slide--labels">
+              <img src="../assets/case-itab-uxC-s1.webp?v=3" alt="Система промо- и статусных плашек" loading="lazy" width="252" height="634">
+            </div>
+            <div class="case__signals-slide case__signals-slide--phone">
+              <div class="case__signals-phone">
+                <div class="case__signals-phone-viewport">
+                  <img src="../assets/case-itab-uxC-s2.webp?v=3" alt="Нижняя часть интерфейса «состав подтверждён независимой лабораторией»" loading="lazy" width="743" height="1625">
+                </div>
+              </div>
+            </div>
+            <div class="case__signals-slide case__signals-slide--marker">
+              <img src="../assets/case-itab-uxC-s3.webp?v=1" alt="Маркер «состав подтверждён» в строке" loading="lazy" width="559" height="112">
+            </div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте систему плашек и детали лабораторного подтверждения">
+            <div class="case__slide"><img class="case__shot case__shot--card" src="../assets/case-itab-uxC-s1.webp?v=3" alt="Система промо- и статусных плашек — предзаказ, чёрная пятница, выбор эксперта и другие" loading="lazy" width="252" height="634"></div>
+            <div class="case__slide">
+              <div class="case__signals-phone">
+                <div class="case__signals-phone-viewport">
+                  <img src="../assets/case-itab-uxC-s2.webp?v=3" alt="Нижняя часть интерфейса «состав подтверждён независимой лабораторией»" loading="lazy" width="743" height="1625">
+                </div>
+              </div>
+            </div>
+            <div class="case__slide"><img class="case__shot case__shot--card" src="../assets/case-itab-uxC-s3.webp?v=1" alt="Маркер «состав подтверждён» в строке" loading="lazy" width="559" height="112"></div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="case__outcome">
+        <h2 class="case__outcome-title">Результат</h2>
+        <div class="case__outcome-body">
+          <p>После запуска воронка сдвинулась в нужную сторону на каждом шаге, который мы переделывали. Точные цифры под NDA iTAB — готова голосом рассказать, как мы их мерили.</p>
+          <p><strong>Отвал ниже:</strong> на шаге карточки стало уходить меньше людей.</p>
+          <p><strong>Добавлений в корзину больше:</strong> в категории БАДов до этого шага стало доходить больше людей.</p>
+          <p><strong>Нет в наличии — больше не тупик:</strong> заметная доля визитов продолжилась через подписку на поступление или альтернативы, а не закончилась уходом.</p>
+          <p><strong>Новый стандарт каталога:</strong> система карточки разошлась по всему каталогу — один язык для доверия, наличия и состояний покупки.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>На главную</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="itab-specialists.html">
+          <span>Следующий кейс</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
+        <span class="contact__text">Созвониться</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Дизайн и код — Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Работы</a>
+      <a class="menu-drawer__item" href="index.html#about">Подход</a>
+      <a class="menu-drawer__item" href="index.html#experience">Опыт</a>
+    </nav>
+    <div class="menu-drawer__contacts">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/itab.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </div>
+  </div>
+
+  <script>
+    // Menu drawer
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('a');
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      /* Widened past the breakpoint the burger is gone, so a drawer left open
+         would sit over the desktop layout with the page inert and the scroll
+         locked. Ask the openers rather than repeat the breakpoint here. */
+      window.addEventListener('resize', () => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (Array.from(openBtns).some((b) => b.getBoundingClientRect().width > 0)) return;
+        if (drawer.contains(document.activeElement)) document.activeElement.blur();
+        close({ restoreFocus: false });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+    // Auto-update year
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+    })();
+
+  </script>
+  <script src="../case.js?v=17" defer></script>
+  <script>
+    /* The switcher is a preference, not a one-off jump: remember it so the
+       guard in <head> stops second-guessing the browser on the next visit. */
+    (function () {
+      var links = document.querySelectorAll('[data-lang-switch]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () {
+          try { localStorage.setItem('lang', this.getAttribute('data-lang-switch')); }
+          catch (e) {}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

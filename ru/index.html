@@ -1,87 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script>
-    /* Hand a Russian-speaking visitor the Russian page instead of letting
-       Chrome machine-translate this one. Runs before paint, so there is no
-       flash of the wrong language. Whatever the visitor picks with the
-       switcher wins from then on — the browser is only asked on a first
-       visit, and only its top preference counts, so someone reading English
-       first is left alone. */
+    /* A visitor who picked English with the switcher stays on English,
+       whatever their browser asks for. Runs before paint, so there is no
+       flash of the wrong language. */
     (function () {
       try {
-        var saved = localStorage.getItem('lang');
-        if (saved === 'ru') { location.replace('/ru/' + location.hash); return; }
-        if (saved) return;
-        var langs = navigator.languages || [navigator.language || ''];
-        for (var i = 0; i < langs.length; i++) {
-          var l = String(langs[i]).toLowerCase();
-          if (l.indexOf('en') === 0) return;
-          if (l.indexOf('ru') === 0) { location.replace('/ru/' + location.hash); return; }
+        if (localStorage.getItem("lang") === "en") {
+          location.replace("/" + location.hash);
         }
       } catch (e) {}
     })();
   </script>
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-  <title>Victoria Kukharenko — Product Designer</title>
-  <meta name="description" content="Victoria Kukharenko — product designer. I take products from the first flow to something engineers can ship. Selected work, experience and a few notes on the way I work.">
+  <title>Victoria Kukharenko — продуктовый дизайнер</title>
+  <meta name="description" content="Victoria Kukharenko — продуктовый дизайнер. Проектирую в Figma, собираю в HTML, проверяю в браузере — решение работает до того, как уйдёт в разработку. Избранные работы, опыт и несколько заметок о том, как я работаю.">
   <meta name="author" content="Victoria Kukharenko">
   <meta name="theme-color" content="#d946ef">
   <meta name="color-scheme" content="light dark">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Victoria Kukharenko — Product Designer">
-  <meta property="og:description" content="Victoria Kukharenko — product designer. I take products from the first flow to something engineers can ship.">
-  <meta property="og:url" content="https://victoriakukharenko.com/">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="Victoria Kukharenko — продуктовый дизайнер">
+  <meta property="og:description" content="Victoria Kukharenko — продуктовый дизайнер. Проектирую в Figma, собираю в HTML, проверяю в браузере — решение работает до того, как уйдёт в разработку.">
+  <meta property="og:url" content="https://victoriakukharenko.com/ru/">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
   <meta property="og:image" content="https://victoriakukharenko.com/assets/og-cover.jpg">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Victoria Kukharenko — Product Designer">
-  <meta name="twitter:description" content="Victoria Kukharenko — product designer. I take products from the first flow to something engineers can ship.">
+  <meta name="twitter:title" content="Victoria Kukharenko — продуктовый дизайнер">
+  <meta name="twitter:description" content="Victoria Kukharenko — продуктовый дизайнер. Проектирую в Figma, собираю в HTML, проверяю в браузере — решение работает до того, как уйдёт в разработку.">
   <meta name="twitter:image" content="https://victoriakukharenko.com/assets/og-cover.jpg">
 
-  <link rel="canonical" href="https://victoriakukharenko.com/">
-  <!-- Tells Chrome a real Russian page exists, so it offers that instead of
-       its own translation of this one. -->
+  <link rel="canonical" href="https://victoriakukharenko.com/ru/">
   <link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/">
   <link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/">
   <link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/">
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=337">
-  <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=6" defer></script>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <!-- Editorial New is not used on this page at all — the Russian display
+       face carries Latin too, so there is nothing to preload it for. -->
+  <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <script src="../typographer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=6" defer></script>
 </head>
 <body>
   <aside class="sidebar">
     <div class="sidebar__top">
       <div class="sidebar__identity">
-        <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">
+        <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — наверх страницы">
           <span class="sidebar__name">Victoria Kukharenko</span>
         </a>
-        <p class="sidebar__role">Product designer</p>
+        <p class="sidebar__role">Продуктовый дизайнер</p>
       </div>
       <nav class="menu">
-        <a class="menu__item is-active" href="#top">Hello</a>
-        <a class="menu__item" href="#works">Works</a>
-        <a class="menu__item" href="#about">About</a>
-        <a class="menu__item" href="#experience">Experience</a>
+        <a class="menu__item is-active" href="#top">Привет</a>
+        <a class="menu__item" href="#works">Работы</a>
+        <a class="menu__item" href="#about">Подход</a>
+        <a class="menu__item" href="#experience">Опыт</a>
       </nav>
     </div>
     <div class="sidebar__buttons">
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
+      <a class="btn btn--light" href="/" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </aside>
 
@@ -89,10 +80,10 @@
   <main class="content">
     <div class="mobile-topbar mobile-topbar--case mobile-topbar--home">
       <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <a class="mobile-topbar__link mobile-topbar__name" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">Victoria Kukharenko</a>
+      <a class="mobile-topbar__link mobile-topbar__name" href="#top" aria-label="Victoria Kukharenko — наверх страницы">Victoria Kukharenko</a>
       <div class="mobile-topbar__actions">
-        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
-        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Открыть меню">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
           </svg>
@@ -100,84 +91,84 @@
       </div>
     </div>
     <section class="profile-section" id="top" tabindex="-1">
-      <button class="menu-toggle" type="button" data-menu-open aria-label="Open menu">
+      <button class="menu-toggle" type="button" data-menu-open aria-label="Открыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
         </svg>
       </button>
-      <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+      <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
       <div class="intro">
         <div class="intro__header">
-          <p class="intro__greeting" data-greeting>Hello there</p>
+          <p class="intro__greeting" data-greeting>Привет</p>
         </div>
         <div class="intro__title-stage">
           <div class="profile-character" aria-hidden="true">
             <video class="profile-character__video"
-                   src="assets/viktoria-wave-blue-alive-light-v5.mp4?v=8"
-                   poster="assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3"
+                   src="../assets/viktoria-wave-blue-alive-light-v5.mp4?v=8"
+                   poster="../assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3"
                    autoplay loop muted playsinline preload="auto"
-                   data-webm-light="assets/viktoria-wave-blue-alive-light-alpha-v5.webm?v=3"
-                   data-webm-dark="assets/viktoria-wave-blue-alive-dark-alpha-v5.webm?v=3"
-                   data-mp4-light="assets/viktoria-wave-blue-alive-light-v5.mp4?v=8"
-                   data-poster-light="assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3"
-                   data-mp4-dark="assets/viktoria-wave-blue-alive-dark-v5.mp4?v=8"
-                   data-poster-dark="assets/viktoria-wave-blue-alive-dark-poster-v5.jpg?v=3"></video>
+                   data-webm-light="../assets/viktoria-wave-blue-alive-light-alpha-v5.webm?v=3"
+                   data-webm-dark="../assets/viktoria-wave-blue-alive-dark-alpha-v5.webm?v=3"
+                   data-mp4-light="../assets/viktoria-wave-blue-alive-light-v5.mp4?v=8"
+                   data-poster-light="../assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3"
+                   data-mp4-dark="../assets/viktoria-wave-blue-alive-dark-v5.mp4?v=8"
+                   data-poster-dark="../assets/viktoria-wave-blue-alive-dark-poster-v5.jpg?v=3"></video>
           </div>
-          <h1 class="intro__title">I take products from the first flow to something engineers can&nbsp;ship</h1>
+          <h1 class="intro__title">Проектирую в Figma, собираю в HTML, проверяю в&nbsp;браузере</h1>
         </div>
       </div>
     </section>
 
     <section class="projects" id="works">
-      <article class="project-card project-card--syno" aria-label="Syno — case study coming soon">
-        <span class="project-card__ribbon" aria-hidden="true">Coming soon</span>
+      <article class="project-card project-card--syno" aria-label="Syno — кейс скоро">
+        <span class="project-card__ribbon" aria-hidden="true">Скоро</span>
         <div class="project-card__inner">
           <header class="project-card__header">
             <h3 class="project-card__title">Syno</h3>
-            <p class="project-card__subtitle">An art map connecting artists, spaces and open calls</p>
+            <p class="project-card__subtitle">Арт-карта: художники, площадки и опен-коллы в одном месте</p>
           </header>
           <div class="project-card__syno-shot" data-shimmer>
-            <img src="assets/syno-desktop.webp?v=4" alt="Syno Art Map — desktop product view" loading="eager" width="1794" height="1119">
+            <img src="../assets/syno-desktop.webp?v=4" alt="Syno Art Map — десктопная версия продукта" loading="eager" width="1794" height="1119">
           </div>
         </div>
       </article>
 
       <div class="project-pair">
       <article class="project-card project-card--fill">
-        <a class="project-card__link" href="hooh-fill.html" aria-label="Read the Hooh Document Workspace case study"></a>
+        <a class="project-card__link" href="hooh-fill.html" aria-label="Открыть кейс Hooh — работа с документами"></a>
         <div class="project-card__inner">
           <header class="project-card__header">
-            <h3 class="project-card__title">Hooh Document Workspace</h3>
-            <p class="project-card__subtitle">Fill, sign, edit and manage documents — with data the app already knows</p>
-            <a class="arrow-btn" href="hooh-fill.html" aria-label="Open Hooh Document Workspace case">
-              <img src="assets/arrow.svg" alt="">
+            <h3 class="project-card__title">Hooh — работа с документами</h3>
+            <p class="project-card__subtitle">Заполнить, подписать, отредактировать — на данных, которые приложение уже знает</p>
+            <a class="arrow-btn" href="hooh-fill.html" aria-label="Открыть кейс Hooh — работа с документами">
+              <img src="../assets/arrow.svg" alt="">
             </a>
           </header>
           <div class="project-card__phones project-card__phones--single">
             <div class="project-card__phone-video">
-              <video data-src="assets/hooh-sign.mp4?v=3" poster="assets/hooh-sign-poster.jpg?v=4"
+              <video data-src="../assets/hooh-sign.mp4?v=3" poster="../assets/hooh-sign-poster.jpg?v=4"
                      autoplay loop muted playsinline preload="none"
-                     aria-label="A signature drawn on the canvas stroke by stroke, then saved to the signature library"></video>
+                     aria-label="Подпись рисуется на холсте штрих за штрихом и сохраняется в библиотеку подписей"></video>
             </div>
           </div>
         </div>
       </article>
 
       <article class="project-card project-card--hooh">
-        <a class="project-card__link" href="hooh.html" aria-label="Read the Hooh case study"></a>
+        <a class="project-card__link" href="hooh.html" aria-label="Открыть кейс Hooh — дизайн MVP"></a>
         <div class="project-card__inner">
           <header class="project-card__header">
-            <h3 class="project-card__title">Hooh MVP App Design</h3>
-            <p class="project-card__subtitle">How we designed the MVP of the application from scratch</p>
-            <a class="arrow-btn" href="hooh.html" aria-label="Open Hooh MVP App Design">
-              <img src="assets/arrow.svg" alt="">
+            <h3 class="project-card__title">Hooh — дизайн MVP приложения</h3>
+            <p class="project-card__subtitle">Как мы собрали MVP приложения с нуля</p>
+            <a class="arrow-btn" href="hooh.html" aria-label="Открыть кейс Hooh — дизайн MVP">
+              <img src="../assets/arrow.svg" alt="">
             </a>
           </header>
           <div class="project-card__phones project-card__phones--single">
             <div class="project-card__phone-video">
-              <video data-src="assets/hooh-cover.mp4?v=15" poster="assets/hooh-cover-poster.jpg?v=16"
+              <video data-src="../assets/hooh-cover.mp4?v=15" poster="../assets/hooh-cover-poster.jpg?v=16"
                      autoplay loop muted playsinline preload="none"
-                     aria-label="Hooh app walkthrough — upload, AI summary and assistant chat"></video>
+                     aria-label="Обзор приложения Hooh — загрузка, AI-саммари и чат с ассистентом"></video>
             </div>
           </div>
         </div>
@@ -185,34 +176,34 @@
       </div>
 
       <article class="project-card project-card--itab">
-        <a class="project-card__link" href="itab.html" aria-label="Read the iTAB case study"></a>
+        <a class="project-card__link" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара"></a>
         <div class="project-card__inner project-card__inner--itab">
           <header class="project-card__header project-card__header--itab">
-            <h3 class="project-card__title">iTAB Product Card Redesign</h3>
-            <p class="project-card__subtitle">Making a dense marketplace page easy to buy from</p>
-            <a class="arrow-btn" href="itab.html" aria-label="Open iTAB Product Card Redesign">
-              <img src="assets/arrow.svg" alt="">
+            <h3 class="project-card__title">iTAB — редизайн карточки товара</h3>
+            <p class="project-card__subtitle">Перегруженная карточка маркетплейса, с которой стало удобно покупать</p>
+            <a class="arrow-btn" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара">
+              <img src="../assets/arrow.svg" alt="">
             </a>
           </header>
           <div class="project-card__itab-group" data-shimmer>
-            <img class="project-card__itab-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop view" loading="lazy" width="1370" height="1144">
-            <img class="project-card__itab-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy" width="504" height="1088">
+            <img class="project-card__itab-desktop" src="../assets/itab-desktop.webp?v=1" alt="Карточка товара iTAB — десктоп" loading="lazy" width="1370" height="1144">
+            <img class="project-card__itab-mobile" src="../assets/itab-mobile.webp?v=1" alt="Карточка товара iTAB — мобильная версия" loading="lazy" width="504" height="1088">
           </div>
         </div>
       </article>
       <article class="project-card project-card--itab-sp">
-        <a class="project-card__link" href="itab-specialists.html" aria-label="Read the iTAB Specialists case study"></a>
+        <a class="project-card__link" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов"></a>
         <div class="project-card__inner">
           <header class="project-card__header">
-            <h3 class="project-card__title">iTAB Specialist Consultations</h3>
-            <p class="project-card__subtitle">A two-sided consultation service inside a supplements store — specialists, clients, schedules and payouts</p>
-            <a class="arrow-btn" href="itab-specialists.html" aria-label="Open iTAB Specialists case">
-              <img src="assets/arrow.svg" alt="">
+            <h3 class="project-card__title">iTAB — консультации специалистов</h3>
+            <p class="project-card__subtitle">Двусторонний сервис консультаций внутри магазина БАДов — специалисты, клиенты, расписание и выплаты</p>
+            <a class="arrow-btn" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов">
+              <img src="../assets/arrow.svg" alt="">
             </a>
           </header>
           <div class="project-card__phones project-card__phones--single">
             <div class="project-card__phone-video">
-              <img src="assets/case-itab-sp-b-card.webp?v=1" alt="iTAB specialist card — credentials, free slots, consultation format and price" loading="lazy" width="585" height="1287">
+              <img src="../assets/case-itab-sp-b-card.webp?v=1" alt="Карточка специалиста iTAB — регалии, свободные слоты, формат и цена консультации" loading="lazy" width="585" height="1287">
             </div>
           </div>
         </div>
@@ -220,18 +211,18 @@
     </section>
 
     <section class="about" id="about">
-      <h2 class="about__title">How I work</h2>
+      <h2 class="about__title">Как я работаю</h2>
       <div class="about__cards">
         <div class="about-card about-card--1">
           <div class="about-card__inner">
             <div class="about-card__face about-card__face--front">
               <span class="about-card__number" aria-hidden="true">01</span>
-              <p class="about-card__title">I design for real product constraints</p>
-              <p class="about-card__description">I work with real-world limits — time, code, devices — and turn them into focused, shippable design decisions</p>
+              <p class="about-card__title">Проектирую под реальные ограничения</p>
+              <p class="about-card__description">Сроки, код, устройства — беру их как данность и превращаю в решения, которые действительно можно собрать</p>
             </div>
             <div class="about-card__face about-card__face--back">
               <span class="about-card__number" aria-hidden="true">01</span>
-              <p class="about-card__back-text">I work with real-world limits — time, code, devices — and turn them into focused, shippable design decisions</p>
+              <p class="about-card__back-text">Сроки, код, устройства — беру их как данность и превращаю в решения, которые действительно можно собрать</p>
             </div>
           </div>
         </div>
@@ -239,12 +230,12 @@
           <div class="about-card__inner">
             <div class="about-card__face about-card__face--front">
               <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__title">I untangle complex UX</p>
-              <p class="about-card__description">I take dense data, multi-step flows, and ambiguous problems, then transform them into clear, navigable user experiences</p>
+              <p class="about-card__title">Распутываю сложный UX</p>
+              <p class="about-card__description">Плотные данные, многошаговые сценарии и задачи без внятной постановки привожу к понятному маршруту, по которому легко идти</p>
             </div>
             <div class="about-card__face about-card__face--back">
               <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__back-text">I take dense data, multi-step flows, and ambiguous problems, then transform them into clear, navigable user experiences</p>
+              <p class="about-card__back-text">Плотные данные, многошаговые сценарии и задачи без внятной постановки привожу к понятному маршруту, по которому легко идти</p>
             </div>
           </div>
         </div>
@@ -252,12 +243,12 @@
           <div class="about-card__inner">
             <div class="about-card__face about-card__face--front">
               <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__title">I build systems, not one-off screens</p>
-              <p class="about-card__description">I turn product logic into reusable patterns, components, and clear specs that keep web and mobile aligned through handoff</p>
+              <p class="about-card__title">Собираю системы, а не отдельные экраны</p>
+              <p class="about-card__description">Логику продукта превращаю в переиспользуемые паттерны, компоненты и внятные спеки — так веб и мобилка не расходятся при передаче в разработку</p>
             </div>
             <div class="about-card__face about-card__face--back">
               <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__back-text">I turn product logic into reusable patterns, components, and clear specs that keep web and mobile aligned through handoff</p>
+              <p class="about-card__back-text">Логику продукта превращаю в переиспользуемые паттерны, компоненты и внятные спеки — так веб и мобилка не расходятся при передаче в разработку</p>
             </div>
           </div>
         </div>
@@ -265,12 +256,12 @@
           <div class="about-card__inner">
             <div class="about-card__face about-card__face--front">
               <span class="about-card__number" aria-hidden="true">04</span>
-              <p class="about-card__title">I mentor and grow with others</p>
-              <p class="about-card__description">I mentor designers through feedback, portfolio reviews, and honest guidance</p>
+              <p class="about-card__title">Менторю и расту вместе с другими</p>
+              <p class="about-card__description">Менторю дизайнеров: обратная связь, разборы портфолио и честные советы</p>
             </div>
             <div class="about-card__face about-card__face--back">
               <span class="about-card__number" aria-hidden="true">04</span>
-              <p class="about-card__back-text">I mentor designers through feedback, portfolio reviews, and honest guidance</p>
+              <p class="about-card__back-text">Менторю дизайнеров: обратная связь, разборы портфолио и честные советы</p>
             </div>
           </div>
         </div>
@@ -279,7 +270,7 @@
 
     <section class="experience experience--editorial" id="experience" aria-labelledby="experience-title">
       <header class="experience-editorial__header">
-        <h2 class="experience__title" id="experience-title">Where I’ve been</h2>
+        <h2 class="experience__title" id="experience-title">Где я работала</h2>
       </header>
 
       <div class="experience-editorial__list">
@@ -292,14 +283,14 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Hooh</p>
-              <p class="experience-editorial__scope">Mobile App, Web</p>
+              <p class="experience-editorial__scope">Мобильное приложение, веб</p>
             </div>
-            <h3 class="experience-editorial__role">Product designer</h3>
+            <h3 class="experience-editorial__role">Продуктовый дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2025 / 2026</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-1">
-            <p class="experience-editorial__description">Designed the MVP end to end — document uploads, AI summaries and an assistant chat — across iOS and web. Owned the flows, UI and the component system the team ships from.</p>
+            <p class="experience-editorial__description">Собрала MVP целиком — загрузка документов, AI-саммари и чат с ассистентом — на iOS и в вебе. На мне были сценарии, интерфейс и компонентная система, из которой команда собирает продукт.</p>
           </div>
         </article>
 
@@ -310,14 +301,14 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Itab</p>
-              <p class="experience-editorial__scope">Mobile App, Web · Contract</p>
+              <p class="experience-editorial__scope">Мобильное приложение, веб · контракт</p>
             </div>
-            <h3 class="experience-editorial__role">Product designer</h3>
+            <h3 class="experience-editorial__role">Продуктовый дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2024 / 2026</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-2">
-            <p class="experience-editorial__description">Redesigned the supplement product card across web and mobile to make value, trust signals and purchase actions clearer — cutting drop-off in a high-trust category.</p>
+            <p class="experience-editorial__description">Переделала карточку БАДов для веба и мобилки: понятнее показала ценность, сигналы доверия и действия покупки — и снизила отвал в категории, где доверие решает всё.</p>
           </div>
         </article>
 
@@ -328,14 +319,14 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Infomedia</p>
-              <p class="experience-editorial__scope">Communication products</p>
+              <p class="experience-editorial__scope">Коммуникационные продукты</p>
             </div>
-            <h3 class="experience-editorial__role">UI/UX designer</h3>
+            <h3 class="experience-editorial__role">UI/UX-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-3" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-3" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-3">
-            <p class="experience-editorial__description">Designed communication products and interfaces — turning complex requirements into clear, usable UX/UI across the product.</p>
+            <p class="experience-editorial__description">Проектировала коммуникационные продукты и интерфейсы — переводила сложные требования в понятный и рабочий UX/UI.</p>
           </div>
         </article>
 
@@ -348,14 +339,14 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Abramova School</p>
-              <p class="experience-editorial__scope">Education · Part-time</p>
+              <p class="experience-editorial__scope">Образование · частичная занятость</p>
             </div>
-            <h3 class="experience-editorial__role">UI/UX designer, mentor</h3>
+            <h3 class="experience-editorial__role">UI/UX-дизайнер, ментор</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-4">
-            <p class="experience-editorial__description">Designed UX/UI while mentoring junior designers — reviewing work, running critiques and helping them level up their craft.</p>
+            <p class="experience-editorial__description">Проектировала UX/UI и менторила джунов — разбирала работы, вела критики и помогала расти в ремесле.</p>
           </div>
         </article>
 
@@ -369,14 +360,14 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Cryptomi</p>
-              <p class="experience-editorial__scope">Crypto product · Contract</p>
+              <p class="experience-editorial__scope">Крипто-продукт · контракт</p>
             </div>
-            <h3 class="experience-editorial__role">UI/UX designer</h3>
+            <h3 class="experience-editorial__role">UI/UX-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-5" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-5" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-5">
-            <p class="experience-editorial__description">Designed interfaces for a crypto product — making dense, data-heavy flows approachable and clear.</p>
+            <p class="experience-editorial__description">Проектировала интерфейсы крипто-продукта — делала плотные, перегруженные данными сценарии понятными.</p>
           </div>
         </article>
 
@@ -389,14 +380,14 @@
           <div class="experience-editorial__identity">
             <div class="experience-editorial__meta">
               <p class="experience-editorial__company">Prokachka Studio</p>
-              <p class="experience-editorial__scope">Marketing sites</p>
+              <p class="experience-editorial__scope">Промо-сайты</p>
             </div>
-            <h3 class="experience-editorial__role">Web designer</h3>
+            <h3 class="experience-editorial__role">Веб-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2022 / 2023</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-6" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-6" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-6">
-            <p class="experience-editorial__description">Designed marketing sites and landing pages — visual design, layout and responsive behaviour from concept through to developer handoff.</p>
+            <p class="experience-editorial__description">Делала промо-сайты и лендинги — визуал, вёрстку и адаптив от концепции до передачи в разработку.</p>
           </div>
         </article>
       </div>
@@ -406,55 +397,55 @@
          index.html?experience=legacy#experience. -->
     <template id="experience-legacy-template">
     <section class="experience" id="experience">
-      <h2 class="experience__title">Where I’ve been</h2>
+      <h2 class="experience__title">Где я работала</h2>
       <ul class="experience__list">
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
-            <p class="experience-item__role">Product designer</p>
-            <span class="experience-item__date">2025–Present</span>
+            <p class="experience-item__role">Продуктовый дизайнер</p>
+            <span class="experience-item__date">2025 — сейчас</span>
             <p class="experience-item__company">Hooh. Mobile App (iOS), Web</p>
           </div>
-          <div class="experience-item__detail"><p>Designed the MVP end to end — document uploads, AI summaries and an assistant chat — across iOS and web. Owned the flows, UI and the component system the team ships from.</p></div>
+          <div class="experience-item__detail"><p>Собрала MVP целиком — загрузка документов, AI-саммари и чат с ассистентом — на iOS и в вебе. На мне были сценарии, интерфейс и компонентная система, из которой команда собирает продукт.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
-            <p class="experience-item__role">Product designer</p>
+            <p class="experience-item__role">Продуктовый дизайнер</p>
             <span class="experience-item__date">2024–2026</span>
             <p class="experience-item__company">iTAB. Mobile App (Crossplatform), Web</p>
           </div>
-          <div class="experience-item__detail"><p>Redesigned the supplement product card across web and mobile to make value, trust signals and purchase actions clearer — cutting drop-off in a high-trust category.</p></div>
+          <div class="experience-item__detail"><p>Переделала карточку БАДов для веба и мобилки: понятнее показала ценность, сигналы доверия и действия покупки — и снизила отвал в категории, где доверие решает всё.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
-            <p class="experience-item__role">UI/UX designer</p>
+            <p class="experience-item__role">UI/UX-дизайнер</p>
             <span class="experience-item__date">2023–2024</span>
             <p class="experience-item__company">Infomedia. Communication, UX/UI design</p>
           </div>
-          <div class="experience-item__detail"><p>Designed communication products and interfaces — turning complex requirements into clear, usable UX/UI across the product.</p></div>
+          <div class="experience-item__detail"><p>Проектировала коммуникационные продукты и интерфейсы — переводила сложные требования в понятный и рабочий UX/UI.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
-            <p class="experience-item__role">UI/UX designer, mentor</p>
+            <p class="experience-item__role">UI/UX-дизайнер, ментор</p>
             <span class="experience-item__date">2023–2024</span>
             <p class="experience-item__company">Abramova School. UX/UI designer, mentor</p>
           </div>
-          <div class="experience-item__detail"><p>Designed UX/UI while mentoring junior designers — reviewing work, running critiques and helping them level up their craft.</p></div>
+          <div class="experience-item__detail"><p>Проектировала UX/UI и менторила джунов — разбирала работы, вела критики и помогала расти в ремесле.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
-            <p class="experience-item__role">UI/UX designer</p>
+            <p class="experience-item__role">UI/UX-дизайнер</p>
             <span class="experience-item__date">2023–2024</span>
             <p class="experience-item__company">Cryptomi</p>
           </div>
-          <div class="experience-item__detail"><p>Designed interfaces for a crypto product — making dense, data-heavy flows approachable and clear.</p></div>
+          <div class="experience-item__detail"><p>Проектировала интерфейсы крипто-продукта — делала плотные, перегруженные данными сценарии понятными.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
-            <p class="experience-item__role">Web designer</p>
+            <p class="experience-item__role">Веб-дизайнер</p>
             <span class="experience-item__date">2022–2023</span>
             <p class="experience-item__company">Prokachka studio</p>
           </div>
-          <div class="experience-item__detail"><p>Designed marketing sites and landing pages — visual design, layout and responsive behaviour from concept through to developer handoff.</p></div>
+          <div class="experience-item__detail"><p>Делала промо-сайты и лендинги — визуал, вёрстку и адаптив от концепции до передачи в разработку.</p></div>
         </li>
       </ul>
     </section>
@@ -462,14 +453,14 @@
 
     <section class="contact">
       <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
-        <span class="contact__text">Book a call</span>
+        <span class="contact__text">Созвониться</span>
       </a>
     </section>
 
     <footer class="footer">
       <div class="footer__row">
         <p class="footer__copyright">© <span data-year>2026</span></p>
-        <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
+        <p class="footer__credit">Дизайн и код — Victoria Kukharenko</p>
       </div>
     </footer>
   </main>
@@ -478,25 +469,25 @@
     <div class="menu-drawer__header">
       <div class="menu-drawer__identity">
         <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
-        <p class="menu-drawer__role">Product designer</p>
+        <p class="menu-drawer__role">Продуктовый дизайнер</p>
       </div>
-      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+      <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
         </svg>
       </button>
     </div>
     <nav class="menu-drawer__nav">
-      <a class="menu-drawer__item" href="#top">Hello</a>
-      <a class="menu-drawer__item" href="#works">Works</a>
-      <a class="menu-drawer__item" href="#about">About</a>
-      <a class="menu-drawer__item" href="#experience">Experience</a>
+      <a class="menu-drawer__item" href="#top">Привет</a>
+      <a class="menu-drawer__item" href="#works">Работы</a>
+      <a class="menu-drawer__item" href="#about">Подход</a>
+      <a class="menu-drawer__item" href="#experience">Опыт</a>
     </nav>
     <div class="menu-drawer__contacts">
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
+      <a class="btn btn--light" href="/" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </div>
 
@@ -692,15 +683,15 @@
 
       avatar.setAttribute('role', 'button');
       avatar.setAttribute('tabindex', '0');
-      avatar.setAttribute('aria-label', 'Profile photo — tap for a greeting');
+      avatar.setAttribute('aria-label', 'Фото — нажми, чтобы поздороваться');
 
       const greetings = [
-        'hi! 👋',
-        'hey 👀',
         'привет!',
+        'о, привет 👀',
+        'хай 👋',
         'ciao!',
         'aloha 🌺',
-        'howdy',
+        'здравствуйте',
         'bonjour',
         '👋',
         'こんにちは',
@@ -708,9 +699,9 @@
         'salut',
         '안녕',
         'выходи на связь ✨',
-        'tap me again',
-        'thanks for stopping by',
-        'have a good one 💫',
+        'ещё разок',
+        'спасибо, что заглянули',
+        'хорошего дня 💫',
       ];
 
       let lastGreeting = '';
@@ -903,14 +894,14 @@
         const weekend = day === 0 || day === 6;
 
         let g;
-        if (h < 5 || h >= 23)          g = 'Hey, night owl';
-        else if (h < 8)                g = 'Up early';
-        else if (weekend)              g = 'Happy weekend';
-        else if (day === 1 && h < 12)  g = 'Made it to Monday';
-        else if (day === 5 && h >= 18) g = 'Friday, finally';
-        else if (h < 12)               g = 'Good morning';
-        else if (h < 18)               g = 'Good afternoon';
-        else                           g = 'Good evening';
+        if (h < 5 || h >= 23)          g = 'Привет, сова';
+        else if (h < 8)                g = 'Ранняя пташка';
+        else if (weekend)              g = 'Хороших выходных';
+        else if (day === 1 && h < 12)  g = 'Понедельник, держись';
+        else if (day === 5 && h >= 18) g = 'Наконец пятница';
+        else if (h < 12)               g = 'Доброе утро';
+        else if (h < 18)               g = 'Добрый день';
+        else                           g = 'Добрый вечер';
 
         greetingEl.textContent = g;
       }
@@ -1040,7 +1031,6 @@
       });
     })();
   </script>
-
   <script>
     /* The switcher is a preference, not a one-off jump: remember it so the
        guard in <head> stops second-guessing the browser on the next visit. */

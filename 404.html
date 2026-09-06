@@ -8,11 +8,15 @@
   <title>Page not found · Victoria Kukharenko</title>
   <!-- Self-contained on purpose: GitHub Pages serves this file for ANY
        missing path, so relative asset URLs can't be trusted here. The
-       font falls back to Georgia if the absolute path doesn't resolve. -->
+       font falls back to Georgia if the absolute path doesn't resolve.
+       The path is /fonts/ — the site moved off the /portfolio/ project
+       URL onto its own domain, and this reference was left behind.
+       Only "404" is set in the display face, and digits are the same in
+       both languages, so this page needs no Cyrillic font. -->
   <style>
     @font-face {
       font-family: 'PP Editorial New';
-      src: url('/portfolio/fonts/PPEditorialNew-Regular.woff2') format('woff2');
+      src: url('/fonts/PPEditorialNew-Regular.woff2') format('woff2');
       font-weight: 400;
       font-display: swap;
     }
@@ -65,7 +69,38 @@
 </head>
 <body>
   <h1>404</h1>
-  <p>This page doesn&rsquo;t exist &mdash; the work does.</p>
-  <a class="btn" href="/">Back to works</a>
+  <p data-copy>This page doesn&rsquo;t exist &mdash; the work does.</p>
+  <a class="btn" data-home href="/">Back to works</a>
+
+  <script>
+    /* GitHub Pages serves this one file for every missing path, at the root
+       and under /ru/ alike, so there is no second Russian 404 to route to —
+       the page swaps its own two strings instead. Same preference the rest of
+       the site uses: an explicit choice wins, otherwise the browser's top
+       language decides. */
+    (function () {
+      var ru = false;
+      try {
+        var saved = localStorage.getItem('lang');
+        if (saved) {
+          ru = saved === 'ru';
+        } else {
+          var langs = navigator.languages || [navigator.language || ''];
+          for (var i = 0; i < langs.length; i++) {
+            var l = String(langs[i]).toLowerCase();
+            if (l.indexOf('en') === 0) break;
+            if (l.indexOf('ru') === 0) { ru = true; break; }
+          }
+        }
+      } catch (e) {}
+      if (!ru) return;
+      document.documentElement.lang = 'ru';
+      document.title = 'Страница не найдена · Victoria Kukharenko';
+      document.querySelector('[data-copy]').textContent = 'Такой страницы нет — а работы есть.';
+      var home = document.querySelector('[data-home]');
+      home.textContent = 'К работам';
+      home.href = '/ru/';
+    })();
+  </script>
 </body>
 </html>

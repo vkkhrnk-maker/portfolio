@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* A visitor who picked English with the switcher stays on English,
+       whatever their browser asks for. Runs before paint, so there is no
+       flash of the wrong language. */
+    (function () {
+      try {
+        if (localStorage.getItem("lang") === "en") {
+          location.replace("/hooh.html" + location.hash);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>Hooh — кейс · Victoria Kukharenko</title>
+  <meta name="description" content="Hooh — AI-ассистент, который переводит бюрократию на человеческий язык. Кейс Victoria Kukharenko: проблема, процесс, ключевые UX-решения и запущенный MVP на вебе и iOS.">
+  <meta name="theme-color" content="#d946ef">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hooh — кейс · Victoria Kukharenko">
+  <meta property="og:description" content="AI-ассистент, который переводит бюрократию на человеческий язык. MVP запущен на вебе и iOS.">
+  <meta property="og:url" content="https://victoriakukharenko.com/ru/hooh.html">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://victoriakukharenko.com/assets/case-hero.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hooh — кейс · Victoria Kukharenko">
+  <meta name="twitter:description" content="AI-ассистент, который переводит бюрократию на человеческий язык.">
+  <meta name="twitter:image" content="https://victoriakukharenko.com/assets/case-hero.jpg">
+
+  <link rel="canonical" href="https://victoriakukharenko.com/ru/hooh.html">
+  <link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/hooh.html">
+  <link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/hooh.html">
+  <link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/hooh.html">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <!-- Editorial New is not used on this page at all — the Russian
+       display face carries Latin too, so there is nothing to preload it for. -->
+  <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <script src="../typographer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=6" defer></script>
+  <style>
+    /* Loading-state, ChatGPT-style (kept inline so styles.css WIP stays untouched):
+       the phrase sits still and a light shimmer sweeps across it; phrase changes
+       are an in-place fade — no vertical travel. Shimmer replaces the typing dots. */
+    .loading-state__dots { display: none; }
+    .loading-state__cycle { transition: opacity .35s ease; transform: none; }
+    .loading-state__cycle.is-fading { opacity: 0; transform: none; }
+    @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+      .loading-state__phrase {
+        background-image: linear-gradient(90deg, #9a9a9a 40%, #e3e3e3 50%, #9a9a9a 60%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: hooh-shimmer 2.4s linear infinite;
+      }
+    }
+    @keyframes hooh-shimmer {
+      0%   { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
+  </style>
+  <script>document.documentElement.classList.add('has-js');</script>
+</head>
+<body class="case-page--hooh">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <span class="sidebar__name">Victoria Kukharenko</span>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Команда</dt>
+          <dd>PM, дизайн-лид / арт-директор, iOS- и веб-разработчик</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Моя роль</dt>
+          <dd>Продуктовый дизайнер. На мне UX-аналитика, UX/UI, прототипирование и дизайн-система MVP</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Год</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/hooh.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </div>
+  </aside>
+
+  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <div class="mobile-topbar__actions">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Открыть меню">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Назад</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h1 class="case__title">Hooh. AI-ассистент, который переводит бюрократию на человеческий язык</h1>
+        <p class="case__intro">Мы запустили MVP Hooh на вебе и iOS: загрузка, послойное чтение, чат с ассистентом и разбор файлов. Я спроектировала основной сценарий и систему MVP; Progressive Disclosure стал общим паттерном — он позволяет самому выбирать глубину чтения, не теряя контекст.</p>
+        <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
+          <div><dt>Запуск</dt><dd>Веб и iOS в проде</dd></div>
+          <div><dt>Проверка</dt><dd>Основной сценарий проходят без подсказок</dd></div>
+          <div><dt>Ключевой паттерн</dt><dd>Progressive Disclosure</dd></div>
+        </dl>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Команда</dt>
+            <dd>PM, дизайн-лид / арт-директор, iOS- и веб-разработчик</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Моя роль</dt>
+            <dd>Продуктовый дизайнер. На мне UX-аналитика, UX/UI, прототипирование и дизайн-система MVP</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Год</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image" data-parallax-root>
+          <img class="case__hero-clouds case__hero-clouds--back" src="../assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-back" width="340" height="200">
+          <picture class="case__hero-photo" data-parallax-layer="photo" data-shimmer>
+            <img src="../assets/case-hero.webp" alt="Мобильное приложение Hooh — рука с телефоном, на экране приветствие со слоганом «Paperwork, finally human»" loading="eager" width="3264" height="2052">
+          </picture>
+          <img class="case__hero-clouds case__hero-clouds--front" src="../assets/case-clouds.webp?v=3" alt="" aria-hidden="true" data-parallax-layer="clouds-front" width="340" height="200">
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h2 class="case__block-title">Проблема</h2>
+          <p class="case__block-body">Договоры, отчёты, страховые бумаги и юридические тексты вызывают тревогу. Дело даже не в объёме, а в неопределённости: непонятно, с чего начать, что здесь главное и не упущены ли скрытые риски, сроки или критичные пункты. Нужен спокойный способ понять суть документа до того, как решать, стоит ли углубляться.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Задача</h2>
+          <p class="case__block-body">Спроектировать MVP для веба и iOS, который помогает разобраться в сложных документах быстрее — с меньшим стрессом и без чтения от корки до корки.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Пользователи</h2>
+          <p class="case__block-body">Продукт для тех, у кого нет юридического образования, но регулярно есть сложные бумаги: экспаты, диджитал-номады и обычные люди. Через Hooh они быстро разбирают договоры аренды, визовые требования, страховки и банковские документы — и понимают, что там важно, не вычитывая каждую страницу построчно.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Что мы запустили</h2>
+          <p class="case__block-body">Мы спроектировали и запустили MVP на вебе и iOS, определив основной опыт: загрузка документа, послойное чтение, разговор с ассистентом и разбор файлов.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Процесс</h2>
+        <p class="case__section-body">Начала с анализа конкурентов: Genei, Notion AI, Microsoft Copilot для документов — все выдают полное саммари сразу, и это отбирает у человека выбор: глубину не задать. Первые прототипы делали одношаговое саммари, но на внутренних тестах люди либо чувствовали, что за них слишком много решили, либо хотели копнуть дальше. Так мы пришли к послойному чтению.</p>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Ключевое UX-решение: Progressive Disclosure</h2>
+        <p class="case__section-body">Одношаговое саммари рискует упростить до бессмыслицы, полный документ оставляет человека наедине с завалом. Три слоя дают настроить глубину самому: пробежать снапшот, углубиться, если сигнал важный, задать точечный вопрос, если всплыла конкретная тревога. Каждый слой — порог вовлечения: человек не платит вниманием, пока сам не решил, что документ того стоит.</p>
+
+        <div class="case__gap-grid">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">1. Снапшот</h3>
+            <p class="case__gap-card__desc">Вердикт с одного взгляда — ухватить суть, ещё ничего не вкладывая</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">2. Саммари</h3>
+            <p class="case__gap-card__desc">Структурированный разбор — углубиться, когда сигнал выглядит важным</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">3. Q&amp;A</h3>
+            <p class="case__gap-card__desc">Чат в контексте документа — точечный вопрос, когда всплыла конкретная тревога</p>
+          </div>
+        </div>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--onboard" role="group" aria-label="Стартовый экран iOS рядом с панелью автокатегоризации">
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="../assets/case-uxA-s1.webp?v=6" alt="Стартовый экран iOS с предложением загрузить первый документ" loading="lazy" width="742" height="1615"></div>
+            <div class="case__hooh-plate case__hooh-plate--gradient"><img class="case__hooh-tags" src="../assets/case-uxA-tags.webp?v=2" alt="Панель автокатегоризации: бизнес, медицина, финансы и другие категории" loading="lazy" width="443" height="1712"></div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте экраны загрузки и категоризации">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-uxA-s1.webp?v=6" alt="Стартовый экран iOS с предложением загрузить первый документ" loading="lazy" width="742" height="1615"></div>
+            <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--card" src="../assets/case-uxA-tags.webp?v=2" alt="Панель автокатегоризации: бизнес, медицина, финансы и другие категории" loading="lazy" width="443" height="1712"></div>
+          </div>
+          <figcaption>Всё начинается с загрузки документа, а система сама раскладывает его по категориям.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--feed" role="group" aria-label="Лента саммари на iOS рядом с веб-дашбордом документов">
+            <div class="case__hooh-plate">
+              <div class="case__hooh-feed">
+                <img src="../assets/case-feed-1.webp?v=2" alt="Анализ крови Марии — документ требует внимания" loading="lazy" width="859" height="1084">
+                <img src="../assets/case-feed-2.webp?v=2" alt="Отчёт ELPAC Киры — документ требует внимания" loading="lazy" width="859" height="1066">
+                <img src="../assets/case-feed-3.webp?v=2" alt="Чек-лист техосмотра — всё в порядке" loading="lazy" width="861" height="1204">
+              </div>
+            </div>
+            <div class="case__hooh-plate">
+              <img class="case__hooh-board-window" src="../assets/case-uxB-s2.webp?v=7" alt="Веб-версия: папка документов с карточками по категориям" loading="lazy" width="1600" height="1062">
+            </div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте карточки саммари и дашборд документов">
+            <div class="case__slide case__slide--feed">
+              <div class="case__feed-track">
+                <img class="case__feed-card" src="../assets/case-feed-3.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="861" height="1204">
+                <img class="case__feed-card" src="../assets/case-feed-1.webp?v=2" alt="Анализ крови Марии — документ требует внимания" loading="lazy" width="859" height="1084">
+                <img class="case__feed-card" src="../assets/case-feed-2.webp?v=2" alt="Отчёт ELPAC Киры — документ требует внимания" loading="lazy" width="859" height="1066">
+                <img class="case__feed-card" src="../assets/case-feed-3.webp?v=2" alt="Чек-лист техосмотра — всё в порядке" loading="lazy" width="861" height="1204">
+                <img class="case__feed-card" src="../assets/case-feed-1.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="859" height="1084">
+                <img class="case__feed-card" src="../assets/case-feed-2.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="859" height="1066">
+              </div>
+            </div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-uxB-s2.webp?v=7" alt="Веб-версия: папка документов с карточками по категориям" loading="lazy" width="1600" height="1062"></div>
+          </div>
+          <figcaption>Цвет кодирует только риск, а не тип документа. Человеку не нужно запоминать, что «жёлтый — медицина, красный — юристы»; ему нужно «жёлтый — требует внимания». Тип живёт в заголовке карточки, а не в цвете.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--report" role="group" aria-label="Десктопный общий анализ крови рядом с экраном саммари на iOS">
+            <img class="case__hooh-board-window" src="../assets/case-uxC-s1.webp?v=7" alt="Десктопный общий анализ крови с выноской «в основном хорошо» и панелью Q&amp;A с ассистентом Hooh" loading="lazy" width="1600" height="1062">
+            <img class="case__hooh-board-phone" src="../assets/case-uxC-s2.webp?v=6" alt="Экран саммари на iOS с тем же общим анализом крови" loading="lazy" width="715" height="1618">
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте десктопный отчёт и саммари на iOS">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-uxC-s1.webp?v=7" alt="Десктопный общий анализ крови с выноской «в основном хорошо» и панелью Q&amp;A" loading="lazy" width="1600" height="1062"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-uxC-s2.webp?v=6" alt="Экран саммари на iOS с тем же общим анализом крови" loading="lazy" width="715" height="1618"></div>
+          </div>
+          <figcaption>От быстрого снапшота можно перейти к подробному саммари и к Q&amp;A в контексте — не вычитывая файл построчно.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Разговор как способ разобраться в документе</h2>
+        <p class="case__section-body">Ассистент держит загруженные документы как контекст: можно задавать уточняющие вопросы, ходить по категориям и доставать нужное, не просматривая длинный текст руками.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--chat" role="group" aria-label="Три экрана ассистента Hooh на iOS рядом">
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="../assets/case-chatA-s1.webp?v=8" alt="Экран знакомства с ассистентом Hooh и подсказками" loading="lazy" width="745" height="1621"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="../assets/case-chatA-s2.webp?v=8" alt="Чат про гемоглобин со ссылками на источники и пояснением из сводки о здоровье" loading="lazy" width="743" height="1622"></div>
+            <div class="case__hooh-plate"><img class="case__hooh-board-phone" src="../assets/case-chatA-s3.webp?v=8" alt="Чат про гемоглобин с карточкой документа «анализ крови»" loading="lazy" width="737" height="1612"></div>
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте три экрана ассистента Hooh">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-chatA-s1.webp?v=8" alt="Экран знакомства с ассистентом Hooh и подсказками" loading="lazy" width="745" height="1621"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-chatA-s2.webp?v=8" alt="Чат про гемоглобин со ссылками на источники и сводкой о здоровье" loading="lazy" width="743" height="1622"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-chatA-s3.webp?v=8" alt="Чат про гемоглобин с карточкой документа «анализ крови»" loading="lazy" width="737" height="1612"></div>
+          </div>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__split case__split--chatB">
+            <div class="case__split-pane case__split-pane--loading">
+              <div class="loading-state" role="status" aria-label="Собираю информацию">
+                <img class="loading-state__mark" src="../assets/hooh-loader.webp?v=1" alt="" aria-hidden="true" width="600" height="600">
+                <span class="loading-state__text"><span class="loading-state__cycle" data-cycle="Собираю информацию|Reading your documents|Analyzing key findings"><span class="loading-state__phrase">Собираю информацию</span><span class="loading-state__dots" aria-hidden="true"><span></span><span></span><span></span></span></span></span>
+              </div>
+            </div>
+            <div class="case__split-pane case__split-pane--suggestions">
+              <img class="case__split-pane-image" src="../assets/case-chatB-suggestions.webp?v=1" alt="Подсказки для следующего вопроса на мягком градиенте: сделай саммари по категории, какой у меня последний гемоглобин, разбери все файлы в этой категории" width="1602" height="636">
+            </div>
+          </div>
+        </figure>
+
+        <figure class="case__figure">
+          <picture class="case__figure-desktop"><img src="../assets/case-chatC.webp?v=5" alt="Два десктопных экрана на общем фоне — чистый экран ассистента Hooh с вопросом «что разберём?» и идущий чат про повышенные лейкоциты с подсказками" loading="lazy" width="3264" height="1801"></picture>
+          <div class="case__slider" role="group" aria-label="Пролистайте два десктопных экрана ассистента">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-chatC-s1.webp?v=7" alt="Чистый экран ассистента Hooh: что разберём?" loading="lazy" width="1600" height="1065"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-chatC-s2.webp?v=7" alt="Идущий чат про повышенные лейкоциты с подсказками для следующего вопроса" loading="lazy" width="1600" height="1062"></div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Доверие по устройству: ассистент может ошибаться</h2>
+        <p class="case__section-body">Ассистент, который читает твои договоры и анализы, заслуживает доверия только если может показать основания. Через весь опыт проходят три ограничителя: каждое утверждение ведёт к конкретному документу-источнику; видно и настраивается, по каким документам ассистент рассуждает; интерфейс прямо говорит, что Hooh может ошибаться — и держит оригинал в одном касании.</p>
+
+        <div class="case__gap-grid">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Источник у каждого утверждения</h3>
+            <p class="case__gap-card__desc">Чипы-ссылки в ответе открывают тот самый документ, откуда взята цифра</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Ограниченный контекст</h3>
+            <p class="case__gap-card__desc">Селектор документов показывает и ограничивает то, что ассистент читает</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Честная неуверенность</h3>
+            <p class="case__gap-card__desc">Постоянная пометка «Hooh может ошибаться» возвращает к оригиналу</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__outcome">
+        <h2 class="case__outcome-title">Итог</h2>
+        <div class="case__outcome-body">
+          <p>MVP запущен на вебе и iOS. Аналитика после публичного релиза в этот контракт не входила — ниже то, что мы проверили до запуска.</p>
+          <p><strong>Две платформы в проде:</strong> MVP вышел на вебе и iOS — загрузка, послойное чтение, чат с ассистентом и разбор файлов.</p>
+          <p><strong>Основной сценарий проходится начисто:</strong> на всех внутренних тестах участники доводили реальный документ от загрузки до понимания без подсказок.</p>
+          <p><strong>Паттерны, которые прижились:</strong> Progressive Disclosure стал основой для всех документных фич, а быстрый снапшот — самым частым входом в файл.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>На главную</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="itab.html">
+          <span>Следующий кейс</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
+        <span class="contact__text">Созвониться</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Дизайн и код — Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Работы</a>
+      <a class="menu-drawer__item" href="index.html#about">Подход</a>
+      <a class="menu-drawer__item" href="index.html#experience">Опыт</a>
+    </nav>
+    <div class="menu-drawer__contacts">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/hooh.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </div>
+  </div>
+
+  <script>
+    // Menu drawer
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('a');
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      /* Widened past the breakpoint the burger is gone, so a drawer left open
+         would sit over the desktop layout with the page inert and the scroll
+         locked. Ask the openers rather than repeat the breakpoint here. */
+      window.addEventListener('resize', () => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (Array.from(openBtns).some((b) => b.getBoundingClientRect().width > 0)) return;
+        if (drawer.contains(document.activeElement)) document.activeElement.blur();
+        close({ restoreFocus: false });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+    // Auto-update year
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+    })();
+
+    // Hero parallax — multiple layers translate at different rates on
+    // scroll for a layered depth effect (clouds drift slower than the
+    // phone photo).
+    (() => {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const root = document.querySelector('[data-parallax-root]');
+      if (!root) return;
+
+      // [selector, strength] — higher strength = lags more behind scroll
+      const layers = [
+        ['[data-parallax-layer="clouds-back"]', 0.32],
+        ['[data-parallax-layer="clouds-front"]', 0.10],
+        ['[data-parallax-layer="photo"]', 0.18],
+      ].map(([sel, s]) => [document.querySelector(sel), s])
+        .filter(([el]) => !!el);
+
+      if (!layers.length) return;
+
+      let ticking = false;
+      const update = () => {
+        const rect = root.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) {
+          ticking = false;
+          return;
+        }
+        const scrolledPast = Math.max(0, -rect.top);
+        for (const [el, strength] of layers) {
+          el.style.setProperty('--parallax-y', `${scrolledPast * strength}px`);
+        }
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      };
+
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+    })();
+
+    (() => {
+      const cycle = document.querySelector('.loading-state__cycle');
+      if (!cycle || !cycle.dataset.cycle) return;
+      const phrase = cycle.querySelector('.loading-state__phrase');
+      const items = cycle.dataset.cycle.split('|');
+
+      // Lock cycle width to the widest phrase so the dots travel with the
+      // text without ever causing the surrounding layout to jump.
+      let maxW = 0;
+      for (const t of items) {
+        phrase.textContent = t;
+        maxW = Math.max(maxW, cycle.getBoundingClientRect().width);
+      }
+      phrase.textContent = items[0];
+      cycle.style.minWidth = Math.ceil(maxW) + 'px';
+
+      let i = 0;
+      setInterval(() => {
+        // Skip swaps while the tab is hidden — throttled timers otherwise pile
+        // up and the text visibly jumps when the user returns.
+        if (document.hidden) return;
+        cycle.classList.add('is-fading');            // old phrase: fade out in place
+        setTimeout(() => {
+          i = (i + 1) % items.length;
+          phrase.textContent = items[i];
+          cycle.classList.remove('is-fading');       // new phrase: fade in, no travel
+        }, 360);
+      }, 3200);
+    })();
+
+  </script>
+  <script src="../case.js?v=17" defer></script>
+  <script>
+    /* The switcher is a preference, not a one-off jump: remember it so the
+       guard in <head> stops second-guessing the browser on the next visit. */
+    (function () {
+      var links = document.querySelectorAll('[data-lang-switch]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () {
+          try { localStorage.setItem('lang', this.getAttribute('data-lang-switch')); }
+          catch (e) {}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* A visitor who picked English with the switcher stays on English,
+       whatever their browser asks for. Runs before paint, so there is no
+       flash of the wrong language. */
+    (function () {
+      try {
+        if (localStorage.getItem("lang") === "en") {
+          location.replace("/hooh-fill.html" + location.hash);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>Hooh Document Workspace — кейс · Victoria Kukharenko</title>
+  <meta name="description" content="Hooh Document Workspace — как Hooh перешёл от понимания документов к действиям с ними. Кейс Victoria Kukharenko: автозаполнение форм данными, которые Hooh уже знает, подпись в одно касание и рабочая среда из десяти инструментов для правки, конвертации и хранения документов.">
+  <meta name="theme-color" content="#d97706">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Hooh Document Workspace — кейс · Victoria Kukharenko">
+  <meta property="og:description" content="Hooh переходит от чтения документов к действиям с ними — заполнить, подписать, отредактировать и разложить, на данных, которые приложение уже знает.">
+  <meta property="og:url" content="https://victoriakukharenko.com/ru/hooh-fill.html">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:image" content="https://victoriakukharenko.com/assets/hooh-pdf-cover-final.jpg?v=1">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hooh Document Workspace — кейс · Victoria Kukharenko">
+  <meta name="twitter:description" content="Hooh переходит от чтения документов к действиям с ними — заполнить, подписать, отредактировать и разложить, на данных, которые приложение уже знает.">
+  <meta name="twitter:image" content="https://victoriakukharenko.com/assets/hooh-pdf-cover-final.jpg?v=1">
+
+  <link rel="canonical" href="https://victoriakukharenko.com/ru/hooh-fill.html">
+  <link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/hooh-fill.html">
+  <link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/hooh-fill.html">
+  <link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/hooh-fill.html">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+  <!-- Editorial New is not used on this page at all — the Russian
+       display face carries Latin too, so there is nothing to preload it for. -->
+  <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <script src="../typographer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=6" defer></script>
+</head>
+<body class="case-page--fill">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <span class="sidebar__name">Victoria Kukharenko</span>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Команда</dt>
+          <dd>PM, арт-директор, iOS- и веб-разработчик</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Моя роль</dt>
+          <dd>Продуктовый дизайнер. На мне UX, UI, прототипы и дизайн-решения для Smart Fill, подписи, версий и вспомогательных действий с документом</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Год</dt>
+          <dd>2026</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </div>
+  </aside>
+
+  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <div class="mobile-topbar__actions">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Открыть меню">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Назад</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h1 class="case__title">Hooh Document Workspace — от понимания документа к действию с ним</h1>
+        <div class="case__intro">
+          <p>После того как Hooh закрыл чтение, осталась дыра с действием: документ человек понимал, но всё равно перепечатывал одни и те же данные — имя, номер документа, адрес, ИНН — в каждую новую форму.</p>
+          <p>Smart Fill эту дыру закрывает. Hooh распознаёт поля формы и заполняет их из уже загруженных документов, а дальше даёт подписать и сохранить, не выходя из приложения. Вокруг него выросла целая рабочая среда — десять инструментов по общим правилам, от разметки и перевода до объединения и сжатия, в одно касание от открытого документа.</p>
+        </div>
+        <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
+          <div><dt>Сроки</dt><dd>6 недель, от начала до конца</dd></div>
+          <div><dt>Система</dt><dd>10 сценариев, один каркас</dd></div>
+          <div><dt>Передача</dt><dd>Готово к разработке</dd></div>
+        </dl>
+        <dl class="case-meta case-meta--mobile">
+          <div class="case-meta__item">
+            <dt>Команда</dt>
+            <dd>PM, арт-директор, iOS- и веб-разработчик</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Моя роль</dt>
+            <dd>Продуктовый дизайнер. На мне UX, UI, прототипы и дизайн-решения для Smart Fill, подписи, версий и вспомогательных действий с документом</dd>
+          </div>
+          <div class="case-meta__item">
+            <dt>Год</dt>
+            <dd>2026</dd>
+          </div>
+        </dl>
+        <div class="case__hero-image case__hero-image--fill" data-shimmer>
+          <picture>
+            <source srcset="../assets/hooh-pdf-cover-final.webp?v=1" type="image/webp">
+            <img src="../assets/hooh-pdf-cover-final.jpg?v=1"
+                 width="1672" height="941"
+                 alt="Рука с короткими чёрными ногтями держит телефон в жёлтом пушистом чехле с открытым Hooh Document Workspace на ярко-синем фоне"
+                 loading="eager" fetchpriority="high">
+          </picture>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h2 class="case__block-title">Проблема</h2>
+          <p class="case__block-body">Даже когда документ понятен, действие всё равно стоит времени. Одни и те же личные данные перепечатываются в каждую новую форму, место для подписи приходится искать, результат — конвертировать, чтобы отправить или сохранить. И каждый шаг, который выталкивал человека в другое приложение, тихо утекал вместе с поводом возвращаться в Hooh. Чтение закрыл первый релиз; всё, что после него, оставалось ручным.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Задача</h2>
+          <p class="case__block-body">Развернуть Hooh из инструмента для чтения в полный документный процесс. Дать заполнять и подписывать любую форму на iOS данными, которые уже лежат в загруженных документах — не теряя контроля над тем, что в итоге отправится.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Пользователи</h2>
+          <p class="case__block-body">Та же аудитория, что у первого релиза Hooh: экспаты, диджитал-номады и люди без юридического образования. У большинства каждый месяц проходит несколько новых форм — визовые анкеты, договоры аренды, школьные бумаги, банковские документы.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Объём</h2>
+          <p class="case__block-body">Режим Smart Fill с ручным откатом, подпись — и рисованием, и камерой, явная модель сохранения и версий и ещё семь инструментов по общим правилам: разметка, перевод, распознавание текста, объединение, страницы, конвертация и сжатие.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Процесс</h2>
+        <p class="case__section-body">Сессии с теми, кто пользовался первым релизом, показали внятную закономерность: данные, которые просит форма, почти всегда уже лежат в загруженном документе. Из этого и вырос Smart Fill — вместо того чтобы просить перепечатать, распознать поля и переиспользовать то, что Hooh уже знает.</p>
+        <p class="case__section-body">Ограничением, определившим все решения ниже, было доверие. Автозаполнение полезно только если видно, что именно подставилось, это можно перебить и можно выключить целиком. Весь сценарий построен вокруг этого права вето.</p>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">1. Smart Fill — автоматизация с правом вето</h2>
+        <p class="case__section-body">Hooh распознаёт поля формы и заполняет их из сохранённых документов — и ничего не отправляется молча. Когда совпадение найдено, документы-источники остаются закреплены сверху, так что видно, откуда взято; любое значение правится на месте; один переключатель возвращает всю форму в ручной режим. По умолчанию режим включён — ради сэкономленного времени он и делался, — но до ручного заполнения всегда одно касание. Если совпадения нет, форма подсвечивает поле и идёт дальше: незаконченная форма — это полноценное состояние, а не ошибка.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot">
+              <video data-src="../assets/hooh-fill-cover.mp4?v=2" poster="../assets/hooh-fill-cover-poster.jpg?v=3"
+                     autoplay loop muted playsinline preload="none"
+                     aria-label="Полный сценарий Smart Fill — Hooh распознаёт поля формы и заполняет их из сохранённых документов, от начала до конца"></video>
+            </div>
+            <div class="shot"><picture><source srcset="../assets/fill-guidance.webp?v=6" type="image/webp"><img src="../assets/fill-guidance.png?v=6" alt="Шторка «Подробнее» — форма объясняет, чего именно ждёт поле, ещё до ввода" loading="lazy" width="760" height="1652"></picture></div>
+            <div class="shot">
+              <video data-src="../assets/hooh-veto.mp4?v=4" poster="../assets/hooh-veto-poster.jpg?v=5"
+                     autoplay loop muted playsinline preload="none"
+                     aria-label="Smart Fill выключен — автозаполненная форма одним касанием возвращается к ручному вводу"></video>
+            </div>
+          </div>
+          <figcaption>Smart Fill заполняет всё, что может взять из собственных документов человека, — и отдаёт управление обратно: по «Подробнее» любое поле объясняет, чего именно от него ждут; поля без источника остаются помеченными на месте (сохранить сейчас, дозаполнить потом); одно касание очищает форму до ручного ввода.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot"><picture><source srcset="../assets/fill-fieldsrc.webp?v=2" type="image/webp"><img src="../assets/fill-fieldsrc.png?v=2" alt="Поле по касанию открывается с пояснением и точным документом-источником рядом со значением" loading="lazy" width="760" height="1652"></picture></div>
+            <div class="shot"><picture><source srcset="../assets/fill-picker.webp?v=2" type="image/webp"><img src="../assets/fill-picker.png?v=2" alt="Семейное положение — перечислимые поля выбираются из системного списка, а не набираются" loading="lazy" width="760" height="1652"></picture></div>
+            <div class="shot"><picture><source srcset="../assets/fill-preview.webp?v=2" type="image/webp"><img src="../assets/fill-preview.png?v=2" alt="«Глаз» — живой предпросмотр документа с текущими значениями, до всякого сохранения" loading="lazy" width="760" height="1652"></picture></div>
+          </div>
+          <figcaption>Контроль на уровне поля: по касанию значение открывается с пояснением и точным документом-источником, перечислимые поля выбираются из списка, а «глаз» показывает заполненный документ до того, как что-либо сохранится.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">2. Подпись — один раз сделал, дальше переиспользуешь</h2>
+        <p class="case__section-body">Одна подпись, сделанная один раз. Нарисовать на холсте или снять существующую камерой — в обоих случаях она становится переиспользуемым объектом, попадает в библиотеку и готова лечь в следующий документ.</p>
+
+        <figure class="case__figure">
+          <div class="shots shots--center">
+            <div class="shot"><picture><source srcset="../assets/fill-camera.webp?v=6" type="image/webp"><img src="../assets/fill-camera.png?v=6" alt="Съёмка готовой подписи камерой" loading="lazy" width="760" height="1652"></picture></div>
+            <div class="shot shot--lead">
+              <video data-src="../assets/hooh-sign.mp4?v=3" poster="../assets/hooh-sign-poster.jpg?v=4"
+                     autoplay loop muted playsinline preload="none"
+                     aria-label="Подпись рисуется на холсте штрих за штрихом и одним касанием уходит в библиотеку подписей"></video>
+            </div>
+            <div class="shot"><picture><source srcset="../assets/fill-sigplace.webp?v=8" type="image/webp"><img src="../assets/fill-sigplace.png?v=8" alt="Сохранённая подпись легла на строку подписи в W-4 — перетащить, чтобы сдвинуть, свести пальцы, чтобы изменить размер" loading="lazy" width="760" height="1652"></picture></div>
+          </div>
+          <figcaption>Один результат, два пути — нарисовать на холсте или снять готовую подпись камерой. И там, и там она попадает в библиотеку и ложится в следующий документ одним касанием.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">3. Разметка и правки — мощно, но без обучения</h2>
+        <p class="case__section-body">Разметка — обычно то место, где редактор превращается в кабину пилота. В Hooh на всё один переключатель инструментов и одна система цвета — маркер, текст, фигуры, свободное перо, — поэтому органы управления не размножаются. Инструмент появляется там, где палец коснулся экрана, его параметры живут в одной шторке, а всё нарисованное лежит отдельным слоем над оригиналом. Отменить одну пометку или снять всю разметку: исходная страница не меняется никогда.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot">
+              <video data-src="../assets/hooh-markup.mp4?v=4" poster="../assets/hooh-markup-poster.jpg?v=5"
+                     autoplay loop muted playsinline preload="none"
+                     aria-label="Поверх W-4 добавлены выделение маркером и заметка, затем сняты двумя отменами — исходная страница под ними не тронута"></video>
+            </div>
+          </div>
+          <figcaption>Каждая пометка — снимаемый слой: отмена счищает их, и оригинал на месте. Один переключатель и одна система цвета управляют всеми инструментами, а любую поставленную пометку можно взять обратно, поправить или удалить.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">4. Сохранение — без страха затереть</h2>
+        <p class="case__section-body">Сохранение никогда не затирает по случайности. Исходный файл остаётся нетронутым: можно сохранить новую копию или отпочковать совсем новый документ, и все версии живут внутри самого документа — переключаются из панели навигации и переименовываются на месте. Итерации по одной форме сохраняют каждое состояние, не засоряя список документов.</p>
+
+        <figure class="case__figure">
+          <div class="shots">
+            <div class="shot">
+              <video data-src="../assets/hooh-versions.mp4?v=4" poster="../assets/hooh-versions-poster.jpg?v=5"
+                     autoplay loop muted playsinline preload="none"
+                     aria-label="Переключение между оригиналом, заполненной и подписанной версиями внутри документа и сохранение выбранной как нового документа"></video>
+            </div>
+          </div>
+          <figcaption>Версии — свойство документа, а не отдельные файлы: между ними переключаются, копию переименовывают прямо в списке, новый документ отпочковывают — и всё это не трогая оригинал.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Остальные инструменты</h2>
+        <p class="case__section-body">Ещё шесть инструментов достраивают рабочую среду — все по тем же правилам и все доступны с того же экрана документа. Каждый — законченный сценарий в сжатом виде: выбрать, одно янтарное подтверждение, готово.</p>
+
+        <div class="tools-grid">
+          <figure class="case__figure tools-grid__wide">
+            <div class="shots">
+              <div class="shot">
+                <video data-src="../assets/hooh-tools.mp4?v=3" poster="../assets/hooh-tools-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
+                       aria-label="Экран документа в покое — касание по сетке поднимает шторку со всеми действиями: заполнить, подписать, разметить, конвертировать, перевести, объединить и другое"></video>
+              </div>
+            </div>
+            <figcaption>Любой инструмент в одно касание — шторка со всеми действиями поднимается над любым открытым документом; ничего не лежит глубже одного уровня.</figcaption>
+          </figure>
+
+          <figure class="case__figure">
+            <div class="shots">
+              <div class="shot">
+                <video data-src="../assets/hooh-translate.mp4?v=4" poster="../assets/hooh-translate-poster.jpg?v=5"
+                       autoplay loop muted playsinline preload="none"
+                       aria-label="Одно касание переводит весь W-4 — результат открывается полным текстом и переключается на переведённые ключевые данные, каждое поле копируется касанием"></video>
+              </div>
+            </div>
+            <figcaption>Перевод и распознавание текста — страницу читает один конвейер: сначала весь документ на другом языке, затем тот же результат в виде ключевых данных, каждое поле копируется касанием.</figcaption>
+          </figure>
+
+          <figure class="case__figure">
+            <div class="shots">
+              <div class="shot">
+                <video data-src="../assets/hooh-merge.mp4?v=3" poster="../assets/hooh-merge-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
+                       aria-label="Два документа выбраны из библиотеки и объединены с текущим, при желании со сжатием — сохранено новой версией"></video>
+              </div>
+            </div>
+            <figcaption>Объединение — выбрать документы из библиотеки, переставить, при желании сжать; результат сохраняется новой версией.</figcaption>
+          </figure>
+
+          <figure class="case__figure tools-grid__wide">
+            <div class="shots">
+              <div class="shot">
+                <video data-src="../assets/hooh-pages.mp4?v=5" poster="../assets/hooh-pages-poster.jpg?v=6"
+                       autoplay loop muted playsinline preload="none"
+                       aria-label="Завалившаяся страница переезжает в начало сетки, одно касание поворота её выпрямляет"></video>
+              </div>
+            </div>
+            <figcaption>Страницы — перетащить в новый порядок, выпрямить завалившийся скан, добавить или продублировать страницу на месте.</figcaption>
+          </figure>
+
+          <figure class="case__figure">
+            <div class="shots">
+              <div class="shot">
+                <video data-src="../assets/hooh-convert.mp4?v=3" poster="../assets/hooh-convert-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
+                       aria-label="Excel выбран целевым форматом, W-4 сконвертирован — сохранён новой копией, оригинал не тронут"></video>
+              </div>
+            </div>
+            <figcaption>Конвертация — Word, Excel, PowerPoint, текст или картинки; экспорт сохраняется новой копией, поверх оригинала — никогда.</figcaption>
+          </figure>
+
+          <figure class="case__figure">
+            <div class="shots">
+              <div class="shot">
+                <video data-src="../assets/hooh-compress.mp4?v=3" poster="../assets/hooh-compress-poster.jpg?v=4"
+                       autoplay loop muted playsinline preload="none"
+                       aria-label="Выбран пресет «максимальное» и запущено сжатие — обработка заканчивается файлом меньшего размера, сохранённым новой копией"></video>
+              </div>
+            </div>
+            <figcaption>Сжатие — три пресета качества, от щадящего до максимального; результат ложится новой копией.</figcaption>
+          </figure>
+
+          <figure class="case__figure tools-grid__wide">
+            <div class="shots">
+              <div class="shot"><picture><source srcset="../assets/fill-whatsnext.webp" type="image/webp"><img src="../assets/fill-whatsnext.png" alt="«Что дальше?» — поделиться, отправить почтой, скачать, распечатать, конвертировать или сжать, предлагается сразу по завершении сценария" loading="lazy" width="760" height="1652"></picture></div>
+            </div>
+            <figcaption>И каждый сценарий заканчивается одинаково — не тупиком: «Что дальше?» выстраивает следующие действия ровно в тот момент, когда работа сохранена.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case__outcome">
+        <h2 class="case__outcome-title">Итог</h2>
+        <div class="case__outcome-body">
+          <p>Спроектировано целиком примерно за шесть недель и передано в разработку. Все решения тянули в одну сторону: приложение снимает рутину, последнее слово остаётся за человеком. В рамках контракта этот объём до публичного релиза не дошёл — он готов к запуску, когда продукт вернётся к этой работе.</p>
+          <p><strong>Десять сценариев, один каркас:</strong> только четыре самые глубокие карты сценариев дают почти шестьдесят экранов, но у всех инструментов общая шапка, общий паттерн подтверждения и общий экран завершения — ничего глубже одного уровня.</p>
+          <p><strong>Прототип на устройстве:</strong> каждый экран крутился живьём на iOS — зациклённые записи сценариев и стали основой спецификации для разработки.</p>
+          <p><strong>Передача закрыта:</strong> дизайн-система, компоненты и все десять сценариев описаны — собирается без ещё одного захода дизайнера.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>На главную</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="hooh.html">
+          <span>Следующий кейс</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
+        <span class="contact__text">Созвониться</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Дизайн и код — Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+    <div class="menu-drawer__header">
+      <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Работы</a>
+      <a class="menu-drawer__item" href="index.html#about">Подход</a>
+      <a class="menu-drawer__item" href="index.html#experience">Опыт</a>
+    </nav>
+    <div class="menu-drawer__contacts">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('a');
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      /* Widened past the breakpoint the burger is gone, so a drawer left open
+         would sit over the desktop layout with the page inert and the scroll
+         locked. Ask the openers rather than repeat the breakpoint here. */
+      window.addEventListener('resize', () => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (Array.from(openBtns).some((b) => b.getBoundingClientRect().width > 0)) return;
+        if (drawer.contains(document.activeElement)) document.activeElement.blur();
+        close({ restoreFocus: false });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+    })();
+
+    /* Play each hydrated loop only while it's on screen. This cuts decode load
+       from 11 simultaneous streams to the one or two in view, honours
+       reduced-motion, and starts each loop from the top the first time reached.
+       A plain rAF-throttled scroll handler (not IntersectionObserver) — the
+       same reliable pattern as the reveal code in case.js; IO's initial
+       callback doesn't fire in every renderer, which left loops stuck paused. */
+    (() => {
+      const vids = Array.from(document.querySelectorAll('.shots video'));
+      if (!vids.length) return;
+
+      vids.forEach((v) => v.pause());   // only what enters the viewport will play
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; // leave them on their posters
+
+      const seen = new WeakSet();
+      const sync = () => {
+        const h = window.innerHeight;
+        vids.forEach((v) => {
+          const r = v.getBoundingClientRect();
+          const visible = Math.max(0, Math.min(r.bottom, h) - Math.max(r.top, 0)) / (r.height || 1);
+          if (visible >= 0.35) {
+            if (!seen.has(v)) { seen.add(v); v.currentTime = 0; }   // first view: story from the start
+            if (v.paused) v.play().catch(() => {});
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      };
+
+      let ticking = false;
+      const onScroll = () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; sync(); }); }
+      };
+      sync();  // play whatever's already in view
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      window.addEventListener('load', onScroll);   // re-check once fonts/images settle the layout
+    })();
+
+    /* Swipe dots under each multi-screen .shots row — on phones the rows
+       become scroll-snap sliders (see styles.css), and these dots mirror the
+       .case__slider dots that case.js builds on the other case pages. The
+       dots are always in the DOM but only display at ≤640px. */
+    (() => {
+      document.querySelectorAll('.shots').forEach((slider) => {
+        const slides = Array.from(slider.children).filter(
+          (c) => c.classList && c.classList.contains('shot')
+        );
+        if (slides.length < 2) return;
+        /* dots must follow the on-screen order, which .shot--lead can
+           change from the DOM order — otherwise the lit dot hops around
+           as you swipe */
+        slides.sort((a, b) => a.offsetLeft - b.offsetLeft);
+
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'case__dots';
+
+        const dots = slides.map((slide, i) => {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'case__dot' + (i === 0 ? ' is-active' : '');
+          dot.setAttribute('aria-label', 'Go to screen ' + (i + 1));
+          dot.addEventListener('click', () => {
+            const left = slide.offsetLeft - (slider.clientWidth - slide.clientWidth) / 2;
+            slider.scrollTo({ left, behavior: 'smooth' });
+          });
+          dotsWrap.appendChild(dot);
+          return dot;
+        });
+
+        slider.insertAdjacentElement('afterend', dotsWrap);
+
+        let ticking = false;
+        const setActive = () => {
+          ticking = false;
+          const center = slider.scrollLeft + slider.clientWidth / 2;
+          let best = 0, bestDist = Infinity;
+          slides.forEach((s, i) => {
+            const c = s.offsetLeft + s.clientWidth / 2;
+            const d = Math.abs(c - center);
+            if (d < bestDist) { bestDist = d; best = i; }
+          });
+          dots.forEach((dot, i) => dot.classList.toggle('is-active', i === best));
+        };
+
+        slider.addEventListener('scroll', () => {
+          if (!ticking) { ticking = true; requestAnimationFrame(setActive); }
+        }, { passive: true });
+        /* initial state — with .shot--lead the visually-first slide
+           isn't the DOM-first one, so don't assume dot 0. A direct call
+           (not rAF): layout is ready here, and rAF is suspended in
+           background tabs, which would leave the wrong dot lit. */
+        setActive();
+      });
+    })();
+  </script>
+  <script src="../case.js?v=17" defer></script>
+  <script>
+    /* The switcher is a preference, not a one-off jump: remember it so the
+       guard in <head> stops second-guessing the browser on the next visit. */
+    (function () {
+      var links = document.querySelectorAll('[data-lang-switch]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () {
+          try { localStorage.setItem('lang', this.getAttribute('data-lang-switch')); }
+          catch (e) {}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

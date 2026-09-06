@@ -23,14 +23,18 @@ jobs:
       - name: Cache-bust public assets with commit SHA
         run: |
           SHA=$(git rev-parse --short HEAD)
-          for f in index.html cv.html hooh.html hooh-fill.html itab.html; do
+          # ru/index.html sits one level down and reaches the assets through
+          # ../, so the prefix is captured and put back rather than dropped.
+          for f in index.html cv.html hooh.html hooh-fill.html itab.html itab-specialists.html \
+                   ru/index.html ru/cv.html ru/hooh.html ru/hooh-fill.html ru/itab.html ru/itab-specialists.html; do
             if [ -f "$f" ]; then
-              sed -i -E 's#(href|src)="(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)(\?v=[^"]*)?"#\1="\2?v='"$SHA"'"#g' "$f"
+              sed -i -E 's#(href|src)="(\.\./)?(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)(\?v=[^"]*)?"#\1="\2\3?v='"$SHA"'"#g' "$f"
               echo "Injected asset version $SHA into $f"
             fi
           done
-          grep -h -E -o '(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)\?v=[^"]*' \
-            index.html cv.html hooh.html hooh-fill.html itab.html | sort -u
+          grep -h -E -o '(\.\./)?(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)\?v=[^"]*' \
+            index.html cv.html hooh.html hooh-fill.html itab.html itab-specialists.html \
+            ru/*.html | sort -u
 
       # Syno stays visible as a non-clickable "Coming soon" card on the
       # homepage. Keep its working file in the repository, but do not publish

@@ -12,3 +12,6 @@ tmp/
 linkedin-profile.md
 upwork-profile.md
 upwork-proposals.md
+
+# Python bytecode from the build scripts in tools/
+__pycache__/

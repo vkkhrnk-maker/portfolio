@@ -9,6 +9,31 @@
   font-display: swap;
 }
 
+/* The Russian page's display face, Latin and Cyrillic both.
+
+   PP Editorial New ships 463 glyphs and not one of them is Cyrillic. Pairing
+   the two faces — Editorial New for Latin, this one for Cyrillic — was tried
+   first and looked wrong: Editorial New's cap-height-to-x-height ratio is
+   1.418, Noto's is 1.284, so no single size-adjust aligns both, and Editorial
+   New's hairline contrast made "Figma" read as a second typeface mid-headline.
+   So the languages are separated rather than blended. English keeps Editorial
+   New alone; Russian uses this alone. Nothing mixes inside one line.
+
+   Pinned to wdth 70, it sets 'o' at 0.492 em against Editorial New's 0.493,
+   and size-adjust lifts its x-height from 0.555 to 0.564 — so the Russian page
+   keeps the English page's measure and optical size, and the layout needs no
+   second set of breakpoints.
+
+   Built by tools/build-display-cyrillic.py. Do not hand-edit the .woff2. */
+@font-face {
+  font-family: 'Noto Serif Display Cond';
+  src: url('fonts/NotoSerifDisplay-Cond.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 101.6%;
+}
+
 :root {
   color-scheme: light;
 
@@ -111,6 +136,23 @@
 
   /* ===== Misc ===== */
   --radius-button: 100px;
+}
+
+/* ===== The Russian page =====
+   One display face for the whole page, Latin included — so "Figma", "HTML"
+   and the brand names sit in the same typeface as the Russian around them.
+   Editorial New is deliberately absent here; see the @font-face note above.
+
+   The tracking is looser too. Latin's -2.2px is too tight for Cyrillic: "и",
+   "ш", "щ", "м", "п" are built from repeated verticals and close up into a
+   picket fence at that value on a 106px cover. Loosening the tokens fixes
+   every display heading at once, because they all read --ls-heading-*. The
+   type scale and the layout are untouched. */
+:root[lang="ru"] {
+  --font-display: 'Noto Serif Display Cond', Georgia, serif;
+  --ls-heading-lg: -1.5px;
+  --ls-heading-sm: -0.9px;
+  --ls-heading-body: -0.7px;
 }
 
 /* ===== Dark theme =====
@@ -1487,13 +1529,29 @@ body.case-page--fill .case__outcome-body p {
   right: 8%;
 }
 
+/* The web view wears the same monitor shell as the case hero: a browser
+   screenshot shown bare next to a bezelled phone reads as a loose picture.
+   Thin bezel and a small corner — 39px on a landscape screen would turn it
+   into a tablet. A bezel is only a monitor when it's whole, so unlike the
+   old bare crop this one stops short of the plate edge (6%, mirroring the
+   phone's inset) and is sized by its own ratio instead of a height box. */
 .case__itab-board .case__itab-board-desktop {
   position: absolute;
-  left: 0;
-  top: 8%;
-  width: 66%;
-  height: 84%;
-  object-fit: contain;
+  box-sizing: border-box;
+  left: 6%;
+  top: 50%;
+  width: 58%;
+  height: auto;
+  aspect-ratio: 1782 / 1003;
+  transform: translateY(-50%);
+  object-fit: cover;
+  object-position: top center;
+  padding: 5px;
+  --itab-screen-corner-fill: #f3f3f3;
+  background:
+    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+  border-radius: 16px;
 }
 
 .case__itab-board--evidence .case__itab-board-phone--evidence {
@@ -1872,6 +1930,26 @@ body.case-page--fill .case__outcome-body p {
 
   .case-page--itab .case__slider .case__shot--phone.case__shot--dim {
     --itab-screen-corner-fill: #7d7d7d;
+  }
+
+  /* Same monitor shell as the desktop board, at slider scale: the web view
+     is the only full screen in the case that used to sit on the plate bare.
+     Sized by its own ratio so the shell is whole, and the flex-centred slide
+     leaves the usual grey above and below. Radius drops to the hero clamp's
+     floor — the plate is much narrower here than the board. */
+  .case-page--itab .case__slider .case__shot--desktop {
+    box-sizing: content-box;
+    width: calc(100% - 10px);
+    height: auto;
+    aspect-ratio: 1782 / 1003;
+    object-fit: cover;
+    object-position: top center;
+    padding: 5px;
+    --itab-screen-corner-fill: #f3f3f3;
+    background:
+      linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
+      linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
+    border-radius: 12px;
   }
 
   /* STACK MODE: 2 screens shown full-width, one above the other (no swipe).
@@ -2481,7 +2559,7 @@ html {
   font-weight: 400;
   font-size: var(--fs-h1);
   line-height: var(--lh-h1);
-  letter-spacing: -2.2px;
+  letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
 
@@ -2996,7 +3074,7 @@ html {
   font-weight: 400;
   font-size: var(--fs-h2);
   line-height: var(--lh-h2);
-  letter-spacing: -2.2px;
+  letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
   max-width: 628px;
 }
@@ -3455,7 +3533,7 @@ html {
   font-weight: 400;
   font-size: var(--fs-h2);
   line-height: var(--lh-h2);
-  letter-spacing: -2.2px;
+  letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
 
@@ -5707,4 +5785,225 @@ a, button, [role="button"], summary, label {
   }
 
   .cv__role-links { display: none; }
+}
+
+/* ===== Animated profile character =====
+   One portrait, two baked backgrounds: each video edge exactly matches the
+   active page theme. The figure is anchored to the title stage but stays out
+   of flow, so the original hero typography keeps its exact layout. */
+.profile-section {
+  overflow: clip;
+}
+
+.intro__title-stage {
+  position: relative;
+  width: 100%;
+}
+
+.profile-character {
+  position: absolute;
+  left: auto;
+  right: 12%;
+  bottom: calc(100% + 20px);
+  z-index: 2;
+  width: clamp(150px, 10vw, 180px);
+  height: auto;
+  aspect-ratio: 864 / 1820;
+  background: var(--bg-primary) url('assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3') center / contain no-repeat;
+  pointer-events: none;
+  transform: none;
+
+  /* She is a cutout on a flat plate the same colour as the page, so nothing
+     should show but her. The poster manages that exactly. The video does not:
+     its backdrop is stored correctly — canvas reads #f0f0f0 back out of it —
+     but the browser's video pipeline composites it at #f2f2f2, two levels
+     light, and a two-level step along a straight edge is enough to draw a
+     visible rectangle. Nudging the source would only be right on the display
+     it was measured on, since the shift comes from colour management. So the
+     edge goes instead of the colour: a soft ramp on all four sides spreads
+     those two levels over ~10px, which no eye finds. The figure clears 14% to
+     the sides and 3% top and bottom, so the ramps never touch her. */
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 11%, #000 89%, transparent),
+    linear-gradient(to bottom, transparent, #000 2.6%, #000 97.4%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent, #000 11%, #000 89%, transparent),
+    linear-gradient(to bottom, transparent, #000 2.6%, #000 97.4%, transparent);
+  mask-composite: intersect;
+}
+
+/* Set by the cover script only once it has PROVED the browser keeps VP9's
+   alpha channel — Safari plays VP9 WebM but paints it opaque, so asking
+   canPlayType is not enough. With real alpha there is no plate to hide, and
+   the poster has to come off the box behind the video: an opaque image would
+   show through the transparent areas and double the figure while she waves.
+   The feather stays. Its ramps only ever touch empty space, and if the probe
+   is ever wrong the fallback still gets its softened edge. */
+.profile-character.is-alpha {
+  background-image: none;
+}
+
+.profile-character__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (prefers-color-scheme: dark) {
+  .profile-character {
+    background-image: url('assets/viktoria-wave-blue-alive-dark-poster-v5.jpg?v=3');
+  }
+}
+
+@media (max-width: 1199px) {
+  .profile-character {
+    left: 50%;
+    right: auto;
+    bottom: calc(100% + 20px);
+    width: clamp(126px, 18vw, 156px);
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-character {
+    left: auto;
+    right: 0;
+    bottom: calc(100% + 76px);
+    width: clamp(124px, 34vw, 140px);
+    transform: none;
+  }
+}
+
+/* ── iTAB specialists case (itab-specialists.html) ─────────────────────
+   Boards reuse the .case__itab-board bezel rules above. `--trio` is the
+   generic three-phone layout (same positions as the unavailable board but
+   without its grey corner fill on the middle phone); `--duo` is two phones.
+   A phone that shows a dimmed overlay (bottom sheet, action sheet) takes
+   `--dim` so its screen corners are filled with the overlay grey, not white. */
+.case__itab-board--trio,
+.case__itab-board--duo {
+  aspect-ratio: 2064 / 1200;
+}
+
+.case__itab-board--trio .case__itab-board-phone--first,
+.case__itab-board--duo .case__itab-board-phone--first {
+  left: 8%;
+}
+
+.case__itab-board--trio .case__itab-board-phone--second {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.case__itab-board--trio .case__itab-board-phone--third,
+.case__itab-board--duo .case__itab-board-phone--second {
+  right: 8%;
+}
+
+.case__itab-board--duo .case__itab-board-phone--first { left: 22%; }
+.case__itab-board--duo .case__itab-board-phone--second { right: 22%; }
+
+.case__itab-board .case__itab-board-phone--dim {
+  --itab-screen-corner-fill: #7d7d7d;
+}
+
+/* Hero: a live three-phone board on the brand green. The phones start a bit
+   below the top and run off the bottom edge, so the cover reads as a cropped
+   device scene rather than a row of complete screenshots. */
+.case__hero-image--sp {
+  background: #59ad3b linear-gradient(135deg, #74c957 0%, #59ad3b 48%, #3e8e2c 100%);
+  aspect-ratio: 1088 / 684;
+}
+
+.case__hero-image--sp .case__itab-board {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  background: transparent;
+}
+
+.case__hero-image--sp .case__itab-board .case__itab-board-phone {
+  top: 12%;
+  height: 104%;
+}
+
+@media (max-width: 640px) {
+  .case__hero-image--sp .case__itab-board .case__itab-board-phone {
+    top: 14%;
+    height: 118%;
+  }
+  .case__hero-image--sp .case__itab-board .case__itab-board-phone--first,
+  .case__hero-image--sp .case__itab-board .case__itab-board-phone--third {
+    display: none;
+  }
+}
+
+/* Home card for the iTAB specialists case: the phone frame takes a still
+   screen instead of a recording — same shell, same corner, same island. */
+.project-card__phone-video img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 13cqw;
+  background: #fff;
+}
+
+/* The specialists card carries no tint of its own. It briefly had a pale green
+   plate (#e7f2df) borrowed from the iTAB accent, which made it the one card on
+   the page that was not grey — and, being a raw hex with no dark-theme value,
+   it stayed pale green on the dark page too. The base .project-card grey is
+   the whole rule; the accent belongs on the case page, not the cover. */
+
+/* The specialists case is intentionally denser than the other case studies:
+   its value is the connected two-sided model, not the number of screens. Keep
+   long copy comfortable and bring the first product visual forward on narrow
+   viewports, before the supporting proof and project metadata. */
+.case-page--itab-sp :is(
+  .case__intro,
+  .case__block-body,
+  .case__section-body,
+  .case__figure figcaption,
+  .case__outcome-body p
+) {
+  letter-spacing: -0.3px;
+}
+
+/* Web screens get one monitor shell per plate, 76% wide on the same
+   2064/1200 plate the phone boards use, so a web figure reads at the same
+   height as the evidence board in itab.html. The catalogue and the profile
+   are long pages, so their shells hold a scroll video (hydrated by
+   shimmer.js from data-src, poster = the top of the page) instead of a
+   still; the video takes the same bezel rules as the img. */
+.case__itab-board--web-one {
+  aspect-ratio: 2064 / 1200;
+}
+
+.case__itab-board--web-one .case__itab-board-desktop {
+  left: 12%;
+  width: 76%;
+}
+
+.case__itab-board--web-one + .case__itab-board--web-one {
+  margin-top: 12px;
+}
+
+video.case__itab-board-desktop,
+.case__slider video.case__shot--desktop {
+  display: block;
+  background: #f3f3f3;
+}
+
+@media (max-width: 1199px) {
+  .case-page--itab-sp .case__title { order: 1; }
+  .case-page--itab-sp .case__intro { order: 2; }
+  .case-page--itab-sp .case__hero-image { order: 3; }
+  .case-page--itab-sp .case__proof-strip { order: 4; }
+  .case-page--itab-sp .case-meta--mobile { order: 5; }
 }

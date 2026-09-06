@@ -29,7 +29,27 @@ PAGE_TPL = os.path.join(ROOT, "tools", "cv-page.template.html")
 PRINT_TPL = os.path.join(ROOT, "tools", "cv-print.template.html")
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
+# The Russian CV. Same parser, same grammar, same section keys — only the
+# values and the rendered labels differ, so the two cannot drift structurally.
+# There is no Russian print sheet or PDF: the sheet's spacing is tuned to fit
+# one page of English, and Russian runs longer. The Russian page therefore
+# offers the English PDF, and says so on the button.
+RU_SRC = os.path.join(ROOT, "cv.ru.md")
+RU_PAGE_OUT = os.path.join(ROOT, "ru", "cv.html")
+RU_PAGE_TPL = os.path.join(ROOT, "tools", "cv-page.ru.template.html")
+
 KNOWN_SECTIONS = {"Summary", "Experience", "Skills", "Education", "Languages", "Closing"}
+
+# Section names in the source are structure, not display text. These are what
+# the reader actually sees.
+LABELS = {
+    "en": {"experience": "Experience", "skills": "Skills", "education": "Education",
+           "closing": "Get in touch", "download": "Download PDF",
+           "call": "Book a call", "prefix": ""},
+    "ru": {"experience": "Опыт", "skills": "Навыки", "education": "Образование",
+           "closing": "Связаться", "download": "Скачать PDF — на английском",
+           "call": "Созвониться", "prefix": "../"},
+}
 
 
 class SourceError(Exception):
@@ -144,8 +164,9 @@ def inline(text):
     return out
 
 
-def page_body(doc):
+def page_body(doc, lang="en"):
     """The site page: .cv__* classes, styled by the CV block in styles.css."""
+    L = LABELS[lang]
     p = []
     a = p.append
     a('      <header class="cv__hero">')
@@ -157,18 +178,18 @@ def page_body(doc):
     a('        <div class="cv__actions">')
     a('          <!-- ?v= is bumped whenever the PDF is re-rendered from cv-print.html,')
     a('               since it is replaced in place and would otherwise stay cached. -->')
-    a(f'          <a class="btn btn--dark cv__download" href="{os.path.basename(PDF_OUT)}?v={pdf_version()}" download>')
+    a(f'          <a class="btn btn--dark cv__download" href="{L["prefix"]}{os.path.basename(PDF_OUT)}?v={pdf_version()}" download>')
     a('            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">')
     a('              <path fill="currentColor" d="M12 16 7 11l1.4-1.4 2.6 2.6V4h2v8.2l2.6-2.6L17 11l-5 5zm-7 4v-2h14v2H5z"/>')
     a('            </svg>')
-    a('            <span>Download PDF</span>')
+    a(f'            <span>{L["download"]}</span>')
     a('          </a>')
     a(f'          <a class="btn btn--light" href="mailto:{doc["meta"]["Email"]}">{doc["meta"]["Email"]}</a>')
     a('        </div>')
     a('      </header>')
     a('')
     a('      <section class="cv__section" aria-labelledby="cv-experience">')
-    a('        <h2 class="cv__section-title" id="cv-experience">Experience</h2>')
+    a(f'        <h2 class="cv__section-title" id="cv-experience">{L["experience"]}</h2>')
     for r in doc["experience"]:
         a('')
         a('        <div class="cv__role">')
@@ -191,8 +212,8 @@ def page_body(doc):
         a('        </div>')
     a('      </section>')
 
-    for key, heading, anchor in (("skills", "Skills", "cv-skills"),
-                                 ("education", "Education", "cv-education")):
+    for key, heading, anchor in (("skills", L["skills"], "cv-skills"),
+                                 ("education", L["education"], "cv-education")):
         a('')
         a(f'      <section class="cv__section" aria-labelledby="{anchor}">')
         a(f'        <h2 class="cv__section-title" id="{anchor}">{heading}</h2>')
@@ -207,10 +228,10 @@ def page_body(doc):
 
     a('')
     a('      <section class="cv__section cv__section--closing">')
-    a('        <h2 class="cv__section-title">Get in touch</h2>')
+    a(f'        <h2 class="cv__section-title">{L["closing"]}</h2>')
     a(f'        <p class="cv__summary">{inline(doc["closing"])}</p>')
     a('        <div class="cv__actions">')
-    a('          <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>')
+    a(f'          <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">{L["call"]}</a>')
     a(f'          <a class="btn btn--light" href="mailto:{doc["meta"]["Email"]}">{doc["meta"]["Email"]}</a>')
     a('          <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>')
     a('        </div>')
@@ -332,6 +353,7 @@ def render(template_path, body, out_path):
     out = tpl.replace("{{BODY}}", body)
     out = out.replace("{{STYLES}}", asset_ref("styles.min.css"))
     out = out.replace("{{TYPOGRAPHER}}", asset_ref("typographer.js"))
+    out = out.replace("{{PDF}}", os.path.basename(PDF_OUT))
     open(out_path, "w", encoding="utf-8").write(out)
     return out_path
 
@@ -357,6 +379,9 @@ def main():
         doc = parse(open(SRC, encoding="utf-8").read())
         render(PRINT_TPL, print_body(doc), PRINT_OUT)
         render(PAGE_TPL, page_body(doc), PAGE_OUT)
+        ru = parse(open(RU_SRC, encoding="utf-8").read())
+        os.makedirs(os.path.dirname(RU_PAGE_OUT), exist_ok=True)
+        render(RU_PAGE_TPL, page_body(ru, "ru"), RU_PAGE_OUT)
     except SourceError as e:
         print(f"build-cv: {e}", file=sys.stderr)
         return 1
@@ -365,6 +390,11 @@ def main():
     bullets = sum(len(r["bullets"]) for r in doc["experience"])
     print(f"cv.html + cv-print.html: {roles} roles, {bullets} bullets, "
           f"{len(doc['skills'])} skills, {len(doc['education'])} education")
+    if len(ru["experience"]) != roles:
+        print(f"build-cv: WARNING — cv.ru.md has {len(ru['experience'])} roles "
+              f"against cv.md's {roles}; the two CVs have drifted.", file=sys.stderr)
+    print(f"ru/cv.html: {len(ru['experience'])} roles, "
+          f"{sum(len(r['bullets']) for r in ru['experience'])} bullets")
 
     if args.pdf:
         try:
@@ -381,8 +411,9 @@ def main():
                   "Trim a line or tighten the rhythm in cv-print.template.html.",
                   file=sys.stderr)
             return 1
-        # cv.html embeds the PDF's ?v=; rebuild so the two agree.
+        # Both pages embed the PDF's ?v=; rebuild so they agree.
         render(PAGE_TPL, page_body(doc), PAGE_OUT)
+        render(RU_PAGE_TPL, page_body(ru, "ru"), RU_PAGE_OUT)
     return 0
 
 

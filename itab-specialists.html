@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    /* Hand a Russian-speaking visitor the Russian page instead of letting
+       Chrome machine-translate this one. Only a first visit consults the
+       browser, and only its top preference counts; the switcher's choice
+       wins from then on. */
+    (function () {
+      try {
+        var saved = localStorage.getItem('lang');
+        if (saved === 'ru') { location.replace('/ru/itab-specialists.html' + location.hash); return; }
+        if (saved) return;
+        var langs = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < langs.length; i++) {
+          var l = String(langs[i]).toLowerCase();
+          if (l.indexOf('en') === 0) return;
+          if (l.indexOf('ru') === 0) { location.replace('/ru/itab-specialists.html' + location.hash); return; }
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+  <title>iTAB Specialists — Case Study · Victoria Kukharenko</title>
+  <meta name="description" content="iTAB — designing a specialist consultation service inside a supplements store: specialist onboarding and cabinet, client-side catalogue and booking, schedules, consultations and a partner programme. A case study by Victoria Kukharenko.">
+  <meta name="theme-color" content="#59ad3b">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="iTAB Specialists — Case Study · Victoria Kukharenko">
+  <meta property="og:description" content="Adding a two-sided consultation service to a supplements store — specialists, clients, schedules and payouts in one app.">
+  <meta property="og:url" content="https://victoriakukharenko.com/itab-specialists.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:image" content="https://victoriakukharenko.com/assets/case-itab-sp-b-card.webp">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="iTAB Specialists — Case Study · Victoria Kukharenko">
+  <meta name="twitter:description" content="Adding a two-sided consultation service to a supplements store — specialists, clients, schedules and payouts in one app.">
+  <meta name="twitter:image" content="https://victoriakukharenko.com/assets/case-itab-sp-b-card.webp">
+
+  <link rel="canonical" href="https://victoriakukharenko.com/itab-specialists.html">
+  <!-- Tells Chrome a real Russian page exists, so it offers that instead of
+       its own translation of this one. -->
+  <link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/itab-specialists.html">
+  <link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/itab-specialists.html">
+  <link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/itab-specialists.html">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=337">
+  <script src="typographer.js?v=6" defer></script>
+  <script src="shimmer.js?v=6" defer></script>
+  <script>document.documentElement.classList.add('has-js');</script>
+</head>
+<body class="case-page--itab case-page--itab-sp">
+  <aside class="sidebar sidebar--case">
+    <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <span class="sidebar__name">Victoria Kukharenko</span>
+      </a>
+      <dl class="case-meta">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd>PM, iOS and Android developers, backend</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. Owned the end-to-end specialist and client flows, from onboarding and scheduling to booking and payment.</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Status</dt>
+          <dd>Mobile concept + shipped web service</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="sidebar__buttons">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/ru/itab-specialists.html" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
+    </div>
+  </aside>
+
+  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+
+  <main class="content content--case">
+    <div class="mobile-topbar mobile-topbar--case">
+      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
+      <div class="mobile-topbar__actions">
+        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <a class="case__back" href="index.html#works">
+      <span class="case__back-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M11.59 17.41 6.17 12l5.42-5.41L13 8l-3 3h10v2H10l3 3z"/>
+        </svg>
+      </span>
+      <span class="case__back-label">Back</span>
+    </a>
+
+    <article class="case">
+      <header class="case__hero">
+        <h1 class="case__title">iTAB — adding a specialist consultation service to a supplements store</h1>
+        <p class="case__intro">iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem — specialists get a cabinet, a schedule and a questionnaire that puts them in a catalogue; clients find, book and pay without leaving the store. The mobile direction remained a product concept, but its logic became the web service that shipped, and I designed that version too. The web screens sit next to the mobile ones below.</p>
+        <dl class="case__proof-strip" aria-label="Project scope at a glance">
+          <div><dt>Roles</dt><dd>Specialist + client, one account</dd></div>
+          <div><dt>Scope</dt><dd>60+ screens · five flows</dd></div>
+          <div><dt>Gate</dt><dd>Legal status before listing</dd></div>
+        </dl>
+        <dl class="case-meta case-meta--mobile">
+        <div class="case-meta__item">
+          <dt>Team</dt>
+          <dd>PM, iOS and Android developers, backend</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>My Role</dt>
+          <dd>Product designer. Owned the end-to-end specialist and client flows, from onboarding and scheduling to booking and payment.</dd>
+        </div>
+        <div class="case-meta__item">
+          <dt>Status</dt>
+          <dd>Mobile concept + shipped web service</dd>
+        </div>
+        </dl>
+        <div class="case__hero-image case__hero-image--sp" data-shimmer>
+          <div class="case__itab-board case__itab-board--trio" aria-label="Three screens of the service: the specialists catalogue, a specialist card and the specialist cabinet">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-b-list.webp?v=3" alt="Specialists catalogue — specialty strip, sorting, quick filters and specialist cards with credentials and price" loading="eager" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-b-card.webp?v=3" alt="Specialist card — credentials, patient types, next free slots, consultation format and a single price" loading="eager" width="1170" height="2574">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Specialist cabinet after moderation — consultations, schedule, recommendations and the referral code" loading="eager" width="1170" height="2532">
+          </div>
+        </div>
+      </header>
+
+      <section class="case__grid">
+        <div class="case__block">
+          <h2 class="case__block-title">Problem</h2>
+          <p class="case__block-body">iTAB sold supplements, but the people who actually recommend supplements — nutritionists, therapists, preventive-medicine doctors — lived outside the app. A client who wanted advice left for a messenger or a clinic, and the recommendation came back as a screenshot at best. The store had no way to host a consultation, and a specialist had no reason to bring clients into it.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Task</h2>
+          <p class="case__block-body">Design a consultation service inside the existing app: a way for specialists to get listed and paid, a way for clients to find, book and pay for a consultation, and the operational layer in between — schedules, confirmations, cancellations, chat. It had to work as one account with two contexts, not a second app.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">Users</h2>
+          <p class="case__block-body">Two roles with opposite needs. A specialist wants clients and as little paperwork as possible, but the platform can only pay them once their legal status and qualifications check out. A client wants to trust a stranger with a health question, so credentials, price and the next free slot have to come before anything else.</p>
+        </div>
+        <div class="case__block">
+          <h2 class="case__block-title">What changed</h2>
+          <p class="case__block-body">Instead of designing a separate app for doctors, I framed the service as a second context inside the client’s own account: a cabinet that appears after a questionnaire, a catalogue that inherits the store’s card language, and a booking flow that ends in the store’s own checkout.</p>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">Design constraints</h2>
+        <p class="case__section-body">The service had no predecessor inside iTAB, so I mapped the two role journeys and the constraints around them: what the platform legally needs before it can list and pay a specialist, what a client needs to see before paying a stranger, and where the two journeys meet — booking, confirmation and cancellation. Those four constraints shaped both sides of the service.</p>
+        <div class="case__gap-grid case__gap-grid--four">
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Legal gate</h3>
+            <p class="case__gap-card__desc">The platform can only pay a registered specialist, so status and documents come before the listing</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Two contexts, one account</h3>
+            <p class="case__gap-card__desc">A specialist is also a customer, so the cabinet has to live next to the store profile, not replace it</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Trust before payment</h3>
+            <p class="case__gap-card__desc">Credentials, format and price have to be readable in the list, not only on the profile</p>
+          </div>
+          <div class="case__gap-card">
+            <h3 class="case__gap-card__title">Schedule reality</h3>
+            <p class="case__gap-card__desc">Specialists cancel, clients move bookings, slots collide — the operational states have to exist from day one</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">1. Getting a specialist into the catalogue</h2>
+        <p class="case__section-body">The entry point is the questionnaire. It opens with the reasons to fill it in — recommendations for clients, a flow of clients, a payout every month — and promises fifteen minutes. The form is cut into short steps with a progress bar, and closing it at any point offers to keep the progress rather than lose it.</p>
+        <p class="case__section-body">The steps follow what the platform needs before it can list anyone: personal data, professional data with diplomas and memberships, the consultation format, services with a price for each, and the legal gate. Without a registered employment status the platform cannot pay a specialist, so the questionnaire asks for it before the catalogue ever shows them. The result goes to moderation and comes back within a working day.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The questionnaire: value proposition, professional information and employment-status gate">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-q-start.webp?v=3" alt="Questionnaire start screen — why fill it in: recommendations for clients, a client flow, monthly payouts" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-q-prof.webp?v=3" alt="Questionnaire step two — professional information with specialty, courses, memberships and diplomas" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-q-employment.webp?v=3" alt="Questionnaire — employment status: self-employed, sole trader or company, required before listing" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the specialist questionnaire from the start screen to moderation">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-start.webp?v=3" alt="Questionnaire start screen — why fill it in: recommendations for clients, a client flow, monthly payouts" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-prof.webp?v=3" alt="Questionnaire step two — professional information with specialty, courses, memberships and diplomas" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-employment.webp?v=3" alt="Questionnaire — employment status: self-employed, sole trader or company, required before listing" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>Value first, professional proof next, legal eligibility last: the form earns the effort before it asks for the gate that determines whether a specialist can be listed and paid.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist questionnaire — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist questionnaire — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist questionnaire — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist questionnaire — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two questionnaire steps on the web: professional information and employment status">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist questionnaire — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist questionnaire — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003"></div>
+          </div>
+          <figcaption>Shipped on the web: the same questionnaire as a five-step form. Professional data with documents comes second, and the legal gate stays last, with the reason it exists stated on the step itself.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">2. One account, two contexts</h2>
+        <p class="case__section-body">A specialist is also a customer of the store, so the cabinet is a second context of the same account, not a second login. Before the questionnaire it holds one call to action and the referral code; after moderation it gains consultations, the schedule and recommendations, and a single button switches back to the client profile with its orders and appointments.</p>
+        <p class="case__section-body">The professional profile keeps the structure of the questionnaire — main and professional information as two tabs — so nothing is typed twice and every field can be edited where it was entered.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The specialist cabinet before and after moderation, and the client context of the same account">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-cab-empty.webp?v=3" alt="Specialist cabinet before the questionnaire — a single call to action and the referral code" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Specialist cabinet after moderation — consultations, schedule, recommendations and the referral code" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-cab-client.webp?v=3" alt="The same account in its client context — orders, consultations and appointments" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the cabinet before and after moderation and the client context">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-empty.webp?v=3" alt="Specialist cabinet before the questionnaire — a single call to action and the referral code" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Specialist cabinet after moderation — consultations, schedule, recommendations and the referral code" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-client.webp?v=3" alt="The same account in its client context — orders, consultations and appointments" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>The account keeps one identity and changes context: the specialist cabinet grows after moderation, while the client profile remains one tap away.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">3. Finding and booking a specialist</h2>
+        <p class="case__section-body">On the client side the service inherits the language of the store: a strip of specialties, sorting, quick filters for online, in person and nearby, and a detailed filter for rank, category, price and experience. The specialist card puts credentials, patient types and the next free slots above the fold and ends in a single price — the things a client checks before trusting a stranger with a health question.</p>
+        <p class="case__section-body">Booking is date, time and format, then a checkout with a comment for the doctor, the offer agreement and the cancellation rule stated up front. Payment closes with a sheet that leads straight to the client’s consultations, and the store home announces the new section next to the products.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Date and time, checkout and payment confirmation">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-b-datetime.webp?v=3" alt="Choose date and time — format toggle, calendar and free slots" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-b-checkout.webp?v=3" alt="Booking checkout — specialist, consultation details, comment for the doctor, offer agreement and the cancellation rule" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third case__itab-board-phone--dim" src="assets/case-itab-sp-b-paid.webp?v=3" alt="Payment succeeded — a sheet that leads straight to the client’s consultations" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the client side from the catalogue to payment">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-b-datetime.webp?v=3" alt="Choose date and time — format toggle, calendar and free slots" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-b-checkout.webp?v=3" alt="Booking checkout — specialist, consultation details, comment for the doctor, offer agreement and the cancellation rule" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="assets/case-itab-sp-b-paid.webp?v=3" alt="Payment succeeded — a sheet that leads straight to the client’s consultations" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>Once trust is established in the catalogue and profile, the booking flow narrows to three decisions: when, what exactly is being purchased, and where the confirmed consultation now lives.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web catalogue of specialists — format, sorting and date filters above a grid of specialist cards with category, experience, price and the next booking date">
+            <video class="case__itab-board-desktop" data-src="assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web catalogue of specialists: search, popular specialties, format and date filters, and the grid of specialist cards with their next free slots"></video>
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist profile — photo, category and experience chips, patient types, services, and a price card that states the cancellation rule before booking">
+            <video class="case__itab-board-desktop" data-src="assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web specialist profile: credentials, services, consultation format, appointment date and time, about, education, professional associations and reviews"></video>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two shipped web screens: the specialists catalogue and a specialist profile">
+            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web catalogue of specialists: search, popular specialties, format and date filters, and the grid of specialist cards with their next free slots"></video></div>
+            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web specialist profile: credentials, services, consultation format, appointment date and time, about, education, professional associations and reviews"></video></div>
+          </div>
+          <figcaption>Shipped on the web: the catalogue keeps the card language of the store, and the profile keeps credentials, services and the cancellation rule on one screen with the price.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">4. Running consultations</h2>
+        <p class="case__section-body">For the specialist the service is a schedule and a list. The schedule starts empty and is built in two moves — pick the dates open for booking, then the slots for each day, with a repeat option for a regular week. The consultations list separates planned from completed; each planned entry can be confirmed, taken to chat or cancelled with a reason that the client receives.</p>
+        <p class="case__section-body">Chat lives next to the booking, so moving a consultation is a conversation inside the app rather than a phone call outside it.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Choosing available dates, setting slots and managing a consultation">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-s-dates.webp?v=3" alt="Schedule — choosing the dates open for booking on a calendar" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-s-slots.webp?v=3" alt="Schedule — time slots per day with a repeat option" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third case__itab-board-phone--dim" src="assets/case-itab-sp-c-actions.webp?v=3" alt="Consultation actions — confirm, write to the client or cancel" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the schedule and the consultation management screens">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-s-dates.webp?v=3" alt="Schedule — choosing the dates open for booking on a calendar" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-s-slots.webp?v=3" alt="Schedule — time slots per day with a repeat option" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="assets/case-itab-sp-c-actions.webp?v=3" alt="Consultation actions — confirm, write to the client or cancel" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>Availability is built before appointments arrive; each booked slot then leads to the same operational actions — confirm, contact the client or cancel with a reason.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-cabinet.webp?v=6" alt="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-schedule.webp?v=6" alt="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two specialist cabinet screens: consultations and schedule">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-cabinet.webp?v=6" alt="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-schedule.webp?v=6" alt="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action" loading="lazy" width="1782" height="1003"></div>
+          </div>
+          <figcaption>Shipped on the web: consultations carry their status and the three actions from the mobile model, and the schedule is set once as open days and time slots, repeated weekly.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">5. Supporting flow: the partner programme</h2>
+        <p class="case__section-body">Specialists bring clients into the store through a personal promo code: the client gets a discount on the catalogue, the specialist gets cashback on every order and a bonus when the month’s total crosses a threshold. Joining is a short questionnaire of its own — city, how you heard about the programme, personal details and the code — with the one error that matters handled inline: a code that is already taken.</p>
+        <p class="case__section-body">The code lands in the cabinet next to consultations. That is the loop the service was built for: advice in a consultation, a recommendation with a code, a purchase in the same app.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Partner programme: joining, choosing a promo code and the created code">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short questionnaire to join" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the partner programme from the rules to the created code">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short questionnaire to join" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>A personal code closes the commercial loop inside the same product: consultation, recommendation and purchase.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">6. A later audit: the states the flow was missing</h2>
+        <p class="case__section-body">A later case-study audit found the happy path complete and eight failure states missing — the ones a real service meets early. I designed all eight in the existing component and content system. The three shown here carry the highest operational risk: a profile returned for fixes, a date with no available time, and a booked slot that cannot simply be removed.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Profile returned for fixes, no free time and a booked slot that cannot be deleted">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-st-fix.webp?v=3" alt="Cabinet when the questionnaire comes back — the reason and a way to fix it" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-st-notime.webp?v=3" alt="No free time on the chosen date — the nearest slot is offered instead" loading="lazy" width="1170" height="2574">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-st-slotbooked.webp?v=3" alt="A schedule slot with a booking cannot be removed — the specialist is offered to reschedule" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through three representative states added in the later audit">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-fix.webp?v=3" alt="Cabinet when the questionnaire comes back — the reason and a way to fix it" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-notime.webp?v=3" alt="No free time on the chosen date — the nearest slot is offered instead" loading="lazy" width="1170" height="2574"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-slotbooked.webp?v=3" alt="A schedule slot with a booking cannot be removed — the specialist is offered to reschedule" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>The audit keeps the original delivery separate from the later case-study work, while showing how the product model handles real operational exceptions.</figcaption>
+        </figure>
+      </section>
+
+      
+
+      <section class="case__outcome">
+        <h2 class="case__outcome-title">Result</h2>
+        <div class="case__outcome-body">
+          <p>The work defined a connected consultation service inside the iTAB ecosystem. Specialists move from application and moderation to managing availability and consultations in one account; clients discover, compare, book and pay without leaving the store. The same model became the foundation for the web service that shipped.</p>
+          <p><strong>One product model for two journeys:</strong> eligibility, scheduling, payment and cancellation follow shared rules across the specialist and client sides.</p>
+          <p><strong>An extension of the store, not a second product:</strong> the service reuses the existing account, catalogue language and checkout instead of introducing another login and a disconnected experience.</p>
+          <p><strong>From concept to release:</strong> I carried the core journey into the shipped web version, from specialist onboarding and scheduling through client booking and payment. A later audit expanded the mobile model with the failure and edge states shown in this case.</p>
+        </div>
+      </section>
+
+      <nav class="case__pager">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="hooh-fill.html">
+          <span>Next case</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
+    </article>
+
+    <section class="contact">
+      <a class="contact__btn" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">
+        <span class="contact__text">Book a call</span>
+      </a>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__row">
+        <p class="footer__copyright">© <span data-year>2026</span></p>
+        <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Site navigation">
+    <div class="menu-drawer__header">
+      <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <button class="menu-drawer__close" type="button" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+    </div>
+    <nav class="menu-drawer__nav">
+      <a class="menu-drawer__item" href="index.html#works">Works</a>
+      <a class="menu-drawer__item" href="index.html#about">About</a>
+      <a class="menu-drawer__item" href="index.html#experience">Experience</a>
+    </nav>
+    <div class="menu-drawer__contacts">
+      <a class="btn btn--light" href="cv.html">CV</a>
+      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn btn--light" href="/ru/itab-specialists.html" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
+    </div>
+  </div>
+
+  <script>
+    // Menu drawer
+    (() => {
+      const drawer = document.getElementById('menu-drawer');
+      if (!drawer) return;
+      const openBtns = document.querySelectorAll('[data-menu-open]');
+      const closeBtn = drawer.querySelector('.menu-drawer__close');
+      const items = drawer.querySelectorAll('a');
+      const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let opener = null;
+      let background = [];
+      drawer.setAttribute('role', 'dialog');
+      drawer.setAttribute('aria-modal', 'true');
+      const setBackgroundInert = (inert) => {
+        background.forEach((el) => inert ? el.setAttribute('inert', '') : el.removeAttribute('inert'));
+      };
+      const focusables = () => Array.from(drawer.querySelectorAll(focusableSelector))
+        .filter((el) => getComputedStyle(el).visibility !== 'hidden');
+      const open = (e) => {
+        if (e) e.preventDefault();
+        opener = (e && e.currentTarget) || document.activeElement;
+        background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
+        drawer.classList.add('is-open');
+        drawer.setAttribute('aria-hidden', 'false');
+        setBackgroundInert(true);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+      };
+      const close = ({ restoreFocus = true } = {}) => {
+        if (!drawer.classList.contains('is-open')) return;
+        drawer.classList.remove('is-open');
+        drawer.setAttribute('aria-hidden', 'true');
+        setBackgroundInert(false);
+        document.body.style.overflow = '';
+        if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      };
+      openBtns.forEach((b) => b.addEventListener('click', open));
+      closeBtn.addEventListener('click', close);
+      items.forEach((item) => item.addEventListener('click', () => close({ restoreFocus: false })));
+      /* Widened past the breakpoint the burger is gone, so a drawer left open
+         would sit over the desktop layout with the page inert and the scroll
+         locked. Ask the openers rather than repeat the breakpoint here. */
+      window.addEventListener('resize', () => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (Array.from(openBtns).some((b) => b.getBoundingClientRect().width > 0)) return;
+        if (drawer.contains(document.activeElement)) document.activeElement.blur();
+        close({ restoreFocus: false });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (!drawer.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key !== 'Tab') return;
+        const elements = focusables();
+        const first = elements[0];
+        const last = elements[elements.length - 1];
+        if (!first) { e.preventDefault(); closeBtn.focus(); }
+        else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    })();
+
+    // Auto-update year
+    (() => {
+      document.querySelectorAll('[data-year]').forEach(el => { el.textContent = new Date().getFullYear(); });
+    })();
+
+  </script>
+  <script src="case.js?v=17" defer></script>
+  <script>
+    /* The switcher is a preference, not a one-off jump: remember it so the
+       guard in <head> stops second-guessing the browser on the next visit. */
+    (function () {
+      var links = document.querySelectorAll('[data-lang-switch]');
+      for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', function () {
+          try { localStorage.setItem('lang', this.getAttribute('data-lang-switch')); }
+          catch (e) {}
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
