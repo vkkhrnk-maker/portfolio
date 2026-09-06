@@ -4,7 +4,7 @@
 from pathlib import Path
 
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,41 +23,34 @@ VARIANTS = {
 }
 
 
-def connected_background(image: Image.Image, theme: str) -> np.ndarray:
-    pixels = np.asarray(image.convert("RGB")).astype(np.int16)
-    brightness = pixels.mean(axis=2)
-    spread = pixels.max(axis=2) - pixels.min(axis=2)
+def blend_plate_edges(image: Image.Image, background: tuple[int, int, int]) -> Image.Image:
+    """Match the outer plate to the page without classifying dark clothing as background."""
+    pixels = np.asarray(image.convert("RGB"), dtype=np.float32)
+    height, width = pixels.shape[:2]
+    y, x = np.ogrid[:height, :width]
+    edge_distance = np.minimum.reduce(
+        np.broadcast_arrays(x, y, width - 1 - x, height - 1 - y)
+    ).astype(np.float32)
 
-    if theme == "dark":
-        candidate = (brightness < 100) & (spread < 18)
-    else:
-        candidate = (brightness > 160) & (spread < 18)
-
-    flood_map = Image.fromarray(np.where(candidate, 0, 255).astype(np.uint8)).copy()
-    for seed in (
-        (0, 0),
-        (flood_map.width - 1, 0),
-        (0, flood_map.height - 1),
-        (flood_map.width - 1, flood_map.height - 1),
-    ):
-        if flood_map.getpixel(seed) == 0:
-            ImageDraw.floodfill(flood_map, seed, 128, thresh=0)
-    return np.asarray(flood_map) == 128
+    # Keep a solid theme-coloured rim, then ease into the untouched render.
+    # The character is comfortably outside this narrow edge zone.
+    blend = 1.0 - np.clip((edge_distance - 8.0) / 40.0, 0.0, 1.0)
+    target = np.asarray(background, dtype=np.float32)
+    pixels = pixels * (1.0 - blend[..., None]) + target * blend[..., None]
+    return Image.fromarray(np.rint(pixels).astype(np.uint8))
 
 
-def build_variant(theme: str, config: dict[str, object]) -> None:
+def build_variant(config: dict[str, object]) -> None:
     source = Image.open(config["source"]).convert("RGB")
-    pixels = np.asarray(source).copy()
-    pixels[connected_background(source, theme)] = config["background"]
-
-    result = Image.fromarray(pixels, "RGB").resize(OUTPUT_SIZE, Image.Resampling.LANCZOS)
+    result = blend_plate_edges(source, config["background"])
+    result = result.resize(OUTPUT_SIZE, Image.Resampling.LANCZOS)
     result.save(config["output"], optimize=True)
     print(f"Built {Path(config['output']).relative_to(ROOT)} ({OUTPUT_SIZE[0]}x{OUTPUT_SIZE[1]}, RGB)")
 
 
 def main() -> None:
-    for theme, config in VARIANTS.items():
-        build_variant(theme, config)
+    for config in VARIANTS.values():
+        build_variant(config)
 
 
 if __name__ == "__main__":
