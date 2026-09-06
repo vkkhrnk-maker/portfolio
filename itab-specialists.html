@@ -116,10 +116,11 @@
     <article class="case">
       <header class="case__hero">
         <h1 class="case__title">iTAB — adding a specialist consultation service to a supplements store</h1>
-        <p class="case__intro">iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem — specialists get a cabinet, a schedule and an application that puts them in a catalogue; clients find, book and pay without leaving the store. The mobile direction remained a product concept, but its logic became the web service that shipped, and I designed that version too. The web screens sit next to the mobile ones below.</p>
+        <p class="case__intro">iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem — specialists get a cabinet, a schedule and an application that puts them in a catalogue; clients find, book and pay without leaving the store. The mobile direction remained a product concept, but its logic became the web service that shipped, and I designed that version too. The shipped web version has a section of its own at the end.</p>
         <dl class="case__proof-strip" aria-label="Project scope at a glance">
           <div><dt>Roles</dt><dd>Specialist + client, one account</dd></div>
           <div><dt>Gate</dt><dd>Legal status before listing</dd></div>
+          <div><dt>Scope</dt><dd>2 roles&nbsp;· 6 flows&nbsp;· 8 failure states</dd></div>
           <div><dt>Outcome</dt><dd>Shipped as the web service</dd></div>
         </dl>
         <dl class="case-meta case-meta--mobile">
@@ -156,7 +157,7 @@
         </div>
         <div class="case__block">
           <h2 class="case__block-title">Users</h2>
-          <p class="case__block-body">Two roles with opposite needs. A specialist wants clients and as little paperwork as possible, but the platform can only pay them once their legal status and qualifications check out. A client wants to trust a stranger with a health question, so credentials, price and the next free slot have to come before anything else.</p>
+          <p class="case__block-body">Two roles with opposite needs. A specialist wants clients and as little paperwork as possible, but the platform can only pay them once their legal status and qualifications check out. A client wants to trust a stranger with a health question, so credentials, price and the next free slot have to come before anything else. I worked both roles out with the PM: what the platform must verify before it can pay anyone, and how the store’s existing account, catalogue and checkout already behave.</p>
         </div>
         <div class="case__block">
           <h2 class="case__block-title">What changed</h2>
@@ -206,19 +207,6 @@
           <figcaption>Value first, professional proof next, legal eligibility last: the form earns the effort before it asks for the gate that determines whether a specialist can be listed and paid.</figcaption>
         </figure>
 
-        <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right">
-            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003">
-          </div>
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid">
-            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003">
-          </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the two application steps on the web: professional information and employment status">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003"></div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003"></div>
-          </div>
-          <figcaption>Shipped on the web: the same application as a five-step form. Professional data with documents comes second, and the legal gate stays last, with the reason it exists stated on the step itself.</figcaption>
-        </figure>
       </section>
       <section class="case__section">
         <h2 class="case__section-title">2. One account, two contexts</h2>
@@ -237,6 +225,21 @@
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-client.webp?v=3" alt="The same account in its client context — orders, consultations and appointments" loading="lazy" width="1170" height="2532"></div>
           </div>
           <figcaption>The account keeps one identity and changes context: the specialist cabinet grows after moderation, while the client profile remains one tap away.</figcaption>
+        </figure>
+        <p class="case__section-body">The cabinet carries the partner programme too. Specialists bring clients into the store through a personal promo code: the client gets a discount, the specialist gets cashback on every order and a bonus once the month crosses a threshold. Joining is a short form of its own, with the one error that matters handled inline — a code that is already taken. The code then lands in the cabinet next to consultations, closing the loop the service was built for: advice, a recommendation with a code, a purchase in the same app.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Partner programme: joining, choosing a promo code and the created code">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short form to join" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the partner programme from the rules to the created code">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short form to join" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>A personal code closes the commercial loop inside the same product: consultation, recommendation and purchase.</figcaption>
         </figure>
       </section>
       <section class="case__section">
@@ -258,19 +261,6 @@
           <figcaption>Once trust is established in the catalogue and profile, the booking flow narrows to three decisions: when, what exactly is being purchased, and where the confirmed consultation now lives.</figcaption>
         </figure>
 
-        <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web catalogue of specialists — format, sorting and date filters above a grid of specialist cards with category, experience, price and the next booking date">
-            <video class="case__itab-board-desktop" data-src="assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web catalogue of specialists: search, popular specialties, format and date filters, and the grid of specialist cards with their next free slots"></video>
-          </div>
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist profile — photo, category and experience chips, patient types, services, and a price card that states the cancellation rule before booking">
-            <video class="case__itab-board-desktop" data-src="assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web specialist profile: credentials, services, consultation format, appointment date and time, about, education, professional associations and reviews"></video>
-          </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the two shipped web screens: the specialists catalogue and a specialist profile">
-            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web catalogue of specialists: search, popular specialties, format and date filters, and the grid of specialist cards with their next free slots"></video></div>
-            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web specialist profile: credentials, services, consultation format, appointment date and time, about, education, professional associations and reviews"></video></div>
-          </div>
-          <figcaption>Shipped on the web: the catalogue keeps the card language of the store, and the profile keeps credentials, services and the cancellation rule on one screen with the price.</figcaption>
-        </figure>
       </section>
 
       <section class="case__section">
@@ -311,40 +301,9 @@
           <figcaption>Availability is built before appointments arrive; each booked slot then leads to the same operational actions — confirm, contact the client or cancel with a reason.</figcaption>
         </figure>
 
-        <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code">
-            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-cabinet.webp?v=6" alt="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code" loading="lazy" width="1782" height="1003">
-          </div>
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action">
-            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-schedule.webp?v=6" alt="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action" loading="lazy" width="1782" height="1003">
-          </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the two specialist cabinet screens: consultations and schedule">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-cabinet.webp?v=6" alt="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code" loading="lazy" width="1782" height="1003"></div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-schedule.webp?v=6" alt="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action" loading="lazy" width="1782" height="1003"></div>
-          </div>
-          <figcaption>Shipped on the web: consultations carry their status and the three actions from the mobile model, and the schedule is set once as open days and time slots, repeated weekly.</figcaption>
-        </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">6. Supporting flow: the partner programme</h2>
-        <p class="case__section-body">Specialists bring clients into the store through a personal promo code: the client gets a discount, the specialist gets cashback on every order and a bonus once the month crosses a threshold. Joining is a short form of its own, with the one error that matters handled inline — a code that is already taken. The code then lands in the cabinet next to consultations, closing the loop the service was built for: advice, a recommendation with a code, a purchase in the same app.</p>
-
-        <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Partner programme: joining, choosing a promo code and the created code">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short form to join" loading="lazy" width="1170" height="2532">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532">
-          </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the partner programme from the rules to the created code">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short form to join" loading="lazy" width="1170" height="2532"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532"></div>
-          </div>
-          <figcaption>A personal code closes the commercial loop inside the same product: consultation, recommendation and purchase.</figcaption>
-        </figure>
-      </section>
-      <section class="case__section">
-        <h2 class="case__section-title">7. Failure and edge states</h2>
+        <h2 class="case__section-title">6. Failure and edge states</h2>
         <p class="case__section-body">Alongside the main flow I designed the eight failure states a real service meets in its first weeks. All eight sit inside the existing component and content system. The three here carry the highest operational risk: an application returned for fixes, a date with no free time, and a booked slot that cannot simply be removed.</p>
 
         <figure class="case__figure">
@@ -359,6 +318,49 @@
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-slotbooked.webp?v=3" alt="A schedule slot with a booking cannot be removed — the specialist is offered to reschedule" loading="lazy" width="1170" height="2532"></div>
           </div>
           <figcaption>The states a real service meets in its first weeks. Each one keeps the person moving — a reason and a fix, the nearest free slot, a reschedule — instead of ending the flow.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">7. The shipped web version</h2>
+        <p class="case__section-body">The mobile service stayed a concept; its logic shipped as the web version, and I designed that one too. Specialist onboarding, the catalogue and profile, consultations and the schedule all carry the mobile model across — the same five-step application with the legal gate last, the same card language, the same three actions on a booking.</p>
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two application steps on the web: professional information and employment status">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003"></div>
+          </div>
+          <figcaption>The same application as a five-step form. Professional data with documents comes second, and the legal gate stays last, with the reason it exists stated on the step itself.</figcaption>
+        </figure>
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web catalogue of specialists — format, sorting and date filters above a grid of specialist cards with category, experience, price and the next booking date">
+            <video class="case__itab-board-desktop" data-src="assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web catalogue of specialists: search, popular specialties, format and date filters, and the grid of specialist cards with their next free slots"></video>
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist profile — photo, category and experience chips, patient types, services, and a price card that states the cancellation rule before booking">
+            <video class="case__itab-board-desktop" data-src="assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web specialist profile: credentials, services, consultation format, appointment date and time, about, education, professional associations and reviews"></video>
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two shipped web screens: the specialists catalogue and a specialist profile">
+            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web catalogue of specialists: search, popular specialties, format and date filters, and the grid of specialist cards with their next free slots"></video></div>
+            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Scrolling through the web specialist profile: credentials, services, consultation format, appointment date and time, about, education, professional associations and reviews"></video></div>
+          </div>
+          <figcaption>The catalogue keeps the card language of the store, and the profile keeps credentials, services and the cancellation rule on one screen with the price.</figcaption>
+        </figure>
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-cabinet.webp?v=6" alt="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-schedule.webp?v=6" alt="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two specialist cabinet screens: consultations and schedule">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-cabinet.webp?v=6" alt="Web specialist cabinet — the list of upcoming consultations with client, request, payment status and the actions to confirm, message or cancel, next to a schedule summary and the personal promo code" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-schedule.webp?v=6" alt="Web specialist schedule — a month calendar with the days open for booking, the time slots of the selected day, a weekly repeat toggle and the save action" loading="lazy" width="1782" height="1003"></div>
+          </div>
+          <figcaption>Consultations carry their status and the three actions from the mobile model, and the schedule is set once as open days and time slots, repeated weekly.</figcaption>
         </figure>
       </section>
 

@@ -1222,7 +1222,7 @@ img {
    narrative. This is a typographic strip, not another rounded card. */
 .case__proof-strip {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: -28px 0 -12px;
   padding: 0;
   border-top: 1px solid var(--hairline-strong);
@@ -2467,6 +2467,25 @@ body.case-page--fill .case__outcome-body p {
      (the order:-1 above only makes sense for the 3-column row). */
   .case-meta--mobile .case-meta__item:nth-child(3) {
     order: 0;
+  }
+}
+
+/* Four proof chips do not fit one row on a narrow desktop or a tablet, so
+   they fold to two by two. The left hairline separates the columns and the
+   top hairline separates the rows, which means the first item of each row
+   drops its left border and the second row gains a top one. */
+@media (min-width: 641px) and (max-width: 1100px) {
+  .case__proof-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .case__proof-strip > div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .case__proof-strip > div:nth-child(n + 3) {
+    border-top: 1px solid var(--hairline-strong);
   }
 }
 
@@ -5958,7 +5977,7 @@ a, button, [role="button"], summary, label {
   z-index: 2;
   width: clamp(150px, 10vw, 180px);
   height: auto;
-  aspect-ratio: 480 / 1011;
+  aspect-ratio: 480 / 1012;
   pointer-events: none;
   transform: none;
 }
@@ -5971,6 +5990,10 @@ a, button, [role="button"], summary, label {
   transform-origin: 50% 88%;
   animation: profile-idle 5.6s cubic-bezier(0.2, 0, 0, 1) infinite;
   will-change: transform;
+}
+
+.profile-character picture {
+  display: contents;
 }
 
 @keyframes profile-idle {

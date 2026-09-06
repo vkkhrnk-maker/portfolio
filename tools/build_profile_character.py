@@ -1,38 +1,63 @@
 #!/usr/bin/env python3
-"""Build one clean transparent profile character from a single master."""
+"""Build theme-matched opaque profile images without alpha extraction."""
 
 from pathlib import Path
 
-from PIL import Image
-
-from build_wave_animation import (
-    HEIGHT,
-    WEB_HEIGHT,
-    WEB_WIDTH,
-    WIDTH,
-    defringe,
-    foreground_mask,
-    remove_light_matte,
-    strip_sealed_backdrop,
-)
+import numpy as np
+from PIL import Image, ImageDraw
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "assets/hero-wave-frames/viktoria-profile-master-v8.png"
-OUTPUT = ROOT / "assets/viktoria-profile-single-v8.png"
+OUTPUT_SIZE = (480, 1012)
+VARIANTS = {
+    "dark": {
+        "source": ROOT / "assets/hero-wave-frames/viktoria-profile-dark-master-v10.png",
+        "output": ROOT / "assets/viktoria-profile-dark-v10.png",
+        "background": (19, 19, 22),
+    },
+    "light": {
+        "source": ROOT / "assets/hero-wave-frames/viktoria-profile-light-master-v10.png",
+        "output": ROOT / "assets/viktoria-profile-light-v10.png",
+        "background": (240, 240, 240),
+    },
+}
+
+
+def connected_background(image: Image.Image, theme: str) -> np.ndarray:
+    pixels = np.asarray(image.convert("RGB")).astype(np.int16)
+    brightness = pixels.mean(axis=2)
+    spread = pixels.max(axis=2) - pixels.min(axis=2)
+
+    if theme == "dark":
+        candidate = (brightness < 100) & (spread < 18)
+    else:
+        candidate = (brightness > 160) & (spread < 18)
+
+    flood_map = Image.fromarray(np.where(candidate, 0, 255).astype(np.uint8)).copy()
+    for seed in (
+        (0, 0),
+        (flood_map.width - 1, 0),
+        (0, flood_map.height - 1),
+        (flood_map.width - 1, flood_map.height - 1),
+    ):
+        if flood_map.getpixel(seed) == 0:
+            ImageDraw.floodfill(flood_map, seed, 128, thresh=0)
+    return np.asarray(flood_map) == 128
+
+
+def build_variant(theme: str, config: dict[str, object]) -> None:
+    source = Image.open(config["source"]).convert("RGB")
+    pixels = np.asarray(source).copy()
+    pixels[connected_background(source, theme)] = config["background"]
+
+    result = Image.fromarray(pixels, "RGB").resize(OUTPUT_SIZE, Image.Resampling.LANCZOS)
+    result.save(config["output"], optimize=True)
+    print(f"Built {Path(config['output']).relative_to(ROOT)} ({OUTPUT_SIZE[0]}x{OUTPUT_SIZE[1]}, RGB)")
 
 
 def main() -> None:
-    source = Image.open(SOURCE).resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS).convert("RGB")
-    alpha = strip_sealed_backdrop(foreground_mask(source), source)
-
-    figure = defringe(source, alpha, band_base=7.0).convert("RGBA")
-    figure.putalpha(alpha)
-    figure = figure.resize((WEB_WIDTH, WEB_HEIGHT), Image.Resampling.LANCZOS)
-    figure = remove_light_matte(figure, 1, 6.0, 120.0, 85.0)
-    figure.save(OUTPUT, optimize=True)
-
-    print(f"Built {OUTPUT.relative_to(ROOT)} ({WEB_WIDTH}x{WEB_HEIGHT}, RGBA)")
+    for theme, config in VARIANTS.items():
+        build_variant(theme, config)
 
 
 if __name__ == "__main__":
