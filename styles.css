@@ -6078,9 +6078,13 @@ a, button, [role="button"], summary, label {
   background: transparent;
 }
 
+/* One phone only since 7 Sep 2026 — the live specialist card (itab-live.js).
+   It stands taller than the plate on purpose: the top of the card (strip,
+   photo, name, chips, next slots) is the story, and the crop at the bottom
+   keeps it reading as a device scene rather than a screenshot in a box. */
 .case__hero-image--sp .case__itab-board .case__itab-board-phone {
-  top: 12%;
-  height: 104%;
+  top: 7%;
+  height: 132%;
 }
 
 @media (max-width: 640px) {
