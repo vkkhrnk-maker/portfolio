@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build a small 2.5D greeting loop from one fixed portrait.
+"""Build a small 2.5D greeting rig from one fixed portrait.
 
-The face, body, clothes, and camera remain a single raster throughout the
-animation. The raised hand is rotated around the wrist; a tiny local warp adds
-head, hair, and smile motion without generating replacement identity frames.
+The production version is exported as four transparent PNG layers: a fixed
+body, a raised hand, a wrist seam, and a cuff cover. The browser rotates only
+the hand layer, so frames can never accumulate or duplicate the character.
 """
 
 from __future__ import annotations
@@ -16,7 +16,7 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image, ImageChops, ImageDraw, ImageFilter
-from scipy.ndimage import binary_erosion, distance_transform_edt
+from scipy.ndimage import binary_erosion, distance_transform_edt, label
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -455,7 +455,7 @@ def strip_sealed_backdrop(mask: Image.Image, frame: Image.Image) -> Image.Image:
     return Image.fromarray(np.clip(alpha * 255.0, 0, 255).astype(np.uint8), "L")
 
 
-def defringe(frame: Image.Image, mask: Image.Image) -> Image.Image:
+def defringe(frame: Image.Image, mask: Image.Image, band_base: float = 3.2) -> Image.Image:
     """Replace the narrow light-matted rim with nearest interior colours."""
     pixels = np.asarray(frame.convert("RGB")).astype(np.float32)
     alpha = np.asarray(mask).astype(np.float32) / 255.0
@@ -469,11 +469,52 @@ def defringe(frame: Image.Image, mask: Image.Image) -> Image.Image:
     interior_color = pixels[nearest[0], nearest[1]]
 
     distance_inside = distance_transform_edt(subject)
-    band_width = max(3.0, sx(3.2))
+    band_width = max(3.0, sx(band_base))
     strength = np.clip((band_width - distance_inside) / band_width, 0.0, 1.0)
     strength *= subject
     cleaned = pixels * (1.0 - strength[:, :, None]) + interior_color * strength[:, :, None]
     return Image.fromarray(np.clip(cleaned, 0, 255).astype(np.uint8), "RGB")
+
+
+def export_css_rig(
+    clean_plate: Image.Image,
+    hand_layer: Image.Image,
+    wrist_patch: Image.Image,
+    cuff_layer: Image.Image,
+) -> None:
+    """Export independent browser layers at the exact production resolution."""
+    body_mask = strip_sealed_backdrop(foreground_mask(clean_plate), clean_plate)
+    # The fixed body must contain no residue from the source hand. Keep only
+    # the main connected silhouette, which removes detached skin-colour and
+    # studio-matte specks without cutting into the nearby hair or shoulder.
+    body_alpha = np.asarray(body_mask).copy()
+    components, count = label(body_alpha > 8)
+    if count:
+        sizes = np.bincount(components.ravel())
+        sizes[0] = 0
+        body_alpha[components != sizes.argmax()] = 0
+    body_mask = Image.fromarray(body_alpha, "L")
+    body = defringe(clean_plate, body_mask, band_base=7.0).convert("RGBA")
+    body.putalpha(body_mask)
+
+    # Contract the generated hand matte by one native pixel before export.
+    # The source was rendered against a pale studio background; this removes
+    # its bright outermost fringe without thinning fingers at web size.
+    hand_alpha = hand_layer.split()[-1].filter(ImageFilter.MinFilter(3))
+    clean_hand = defringe(hand_layer, hand_alpha).convert("RGBA")
+    clean_hand.putalpha(hand_alpha)
+
+    layers = {
+        "viktoria-wave-rig-body-v7.png": body,
+        "viktoria-wave-rig-hand-v7.png": clean_hand,
+        "viktoria-wave-rig-wrist-v7.png": wrist_patch,
+        "viktoria-wave-rig-cuff-v7.png": cuff_layer,
+    }
+    for filename, layer in layers.items():
+        layer.resize((WEB_WIDTH, WEB_HEIGHT), Image.Resampling.LANCZOS).save(
+            OUT_DIR / filename,
+            optimize=True,
+        )
 
 
 def place_on_background(
@@ -505,6 +546,7 @@ def main() -> None:
     hand_layer.save(LAYER_DIR / "blue-wave-hand-layer.png")
     wrist_patch.save(LAYER_DIR / "blue-wave-wrist-seam-v6.png")
     cuff_layer.save(LAYER_DIR / "blue-wave-cuff-front-v6.png")
+    export_css_rig(clean_plate, hand_layer, wrist_patch, cuff_layer)
 
     light_mp4 = OUT_DIR / "viktoria-wave-blue-alive-light-v5.mp4"
     light_webm = OUT_DIR / "viktoria-wave-blue-alive-light-v5.webm"

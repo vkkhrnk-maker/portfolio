@@ -57,7 +57,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=338">
+  <link rel="stylesheet" href="styles.min.css?v=339">
   <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=7" defer></script>
 </head>
@@ -114,16 +114,18 @@
         </div>
         <div class="intro__title-stage">
           <div class="profile-character" aria-hidden="true">
-            <video class="profile-character__video"
-                   src="assets/viktoria-wave-blue-alive-light-v5.mp4?v=8"
-                   poster="assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3"
-                   autoplay loop muted playsinline preload="auto"
-                   data-webm-light="assets/viktoria-wave-blue-alive-light-alpha-v5.webm?v=3"
-                   data-webm-dark="assets/viktoria-wave-blue-alive-dark-alpha-v5.webm?v=3"
-                   data-mp4-light="assets/viktoria-wave-blue-alive-light-v5.mp4?v=8"
-                   data-poster-light="assets/viktoria-wave-blue-alive-light-poster-v5.jpg?v=3"
-                   data-mp4-dark="assets/viktoria-wave-blue-alive-dark-v5.mp4?v=8"
-                   data-poster-dark="assets/viktoria-wave-blue-alive-dark-poster-v5.jpg?v=3"></video>
+            <img class="profile-character__layer profile-character__layer--body"
+                 src="assets/viktoria-wave-rig-body-v7.png?v=1"
+                 width="480" height="1011" alt="" decoding="async" fetchpriority="high">
+            <img class="profile-character__layer profile-character__layer--hand"
+                 src="assets/viktoria-wave-rig-hand-v7.png?v=1"
+                 width="480" height="1011" alt="" decoding="async">
+            <img class="profile-character__layer profile-character__layer--wrist"
+                 src="assets/viktoria-wave-rig-wrist-v7.png?v=1"
+                 width="480" height="1011" alt="" decoding="async">
+            <img class="profile-character__layer profile-character__layer--cuff"
+                 src="assets/viktoria-wave-rig-cuff-v7.png?v=1"
+                 width="480" height="1011" alt="" decoding="async">
           </div>
           <h1 class="intro__title">I take products from the first flow to something engineers can&nbsp;ship</h1>
         </div>
@@ -794,100 +796,6 @@
       });
     })();
 
-    // Load the portrait that exactly matches the visitor's system theme.
-    // Reduced-motion visitors get the same first frame without autoplay.
-    (() => {
-      const video = document.querySelector('.profile-character__video');
-      if (!video) return;
-
-      const darkMode = window.matchMedia('(prefers-color-scheme: dark)');
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      // H.264/yuv420p is used deliberately here. Safari may report generic
-      // VP9 support while still rejecting the RGB Profile 1 WebM produced by
-      // the animation pipeline, which leaves only the poster visible.
-      video.muted = true;
-      video.defaultMuted = true;
-      video.playsInline = true;
-
-      /* VP9 in WebM carries a real alpha channel, so the figure can sit on the
-         page itself instead of on a plate the video pipeline paints two levels
-         off. But support has to be PROVED, not asked for: Safari plays VP9
-         WebM and answers canPlayType with "probably", then paints the alpha
-         cut opaque. So a 16px, one-frame, fully transparent clip is decoded
-         into a canvas and its alpha byte read. Anything but a clear 0 — no
-         decode, a timeout, an opaque paint — keeps the mp4, the poster and
-         the feather exactly as they shipped, so the fallback is never worse
-         than it was. */
-      const stage = video.closest('.profile-character');
-      let alphaCapable = false;
-      const ALPHA_PROBE = 'data:video/webm;base64,GkXfo59ChoEBQveBAULygQRC84EIQoKEd2VibUKHgQRChYECGFOAZwEAAAAAAAI3EU2bdLpNu4tTq4QVSalmU6yBoU27i1OrhBZUrmtTrIHYTbuMU6uEElTDZ1OsggEpTbuMU6uEHFO7a1OsggIh7AEAAAAAAABZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVSalmsirXsYMPQkBNgI1MYXZmNjIuMTIuMTAxV0GNTGF2ZjYyLjEyLjEwMUSJiECPQAAAAAAAFlSua8yuAQAAAAAAAEPXgQFzxYjYTNesMIgrsJyBACK1nIN1bmSIgQCGhVZfVlA5g4EBI+ODhDuaygDglLCBELqBEJqBAlPAgQFVsIRVuYEBElTDZ0CUc3OgY8CAZ8iaRaOHRU5DT0RFUkSHjUxhdmY2Mi4xMi4xMDFzc+5jwItjxYjYTNesMIgrsGfIpUWjh0VOQ09ERVJEh5hMYXZjNjIuMjguMTAxIGxpYnZweC12cDlnyJFFo4pBTFBIQV9NT0RFRIeBMWfIoUWjiERVUkFUSU9ORIeTMDA6MDA6MDEuMDAwMDAwMDAwAB9DtnXZ54EAoNShq4EAAACCSYNCAADwAPYAOCQcGEoAADBgAAAQv//3Ha////9f3/////IqwAB1oaSmou6BAaWdgkmDQgAA8AD2ADgkHBhKAAAwYAAAEL///aXMAAAcU7trkbuPs4EAt4r3gQHxggHD8IED';
-      const probeAlpha = () => new Promise((resolve) => {
-        const probe = document.createElement('video');
-        probe.muted = true;
-        probe.playsInline = true;
-        probe.preload = 'auto';
-        let settled = false;
-        const finish = (ok) => {
-          if (settled) return;
-          settled = true;
-          probe.removeAttribute('src');
-          resolve(ok);
-        };
-        const timer = setTimeout(() => finish(false), 2000);
-        probe.addEventListener('error', () => { clearTimeout(timer); finish(false); }, { once: true });
-        probe.addEventListener('loadeddata', () => {
-          try {
-            const canvas = document.createElement('canvas');
-            canvas.width = canvas.height = 4;
-            const ctx = canvas.getContext('2d', { willReadFrequently: true });
-            ctx.drawImage(probe, 0, 0, 4, 4);
-            clearTimeout(timer);
-            finish(ctx.getImageData(1, 1, 1, 1).data[3] === 0);
-          } catch (e) {
-            clearTimeout(timer);
-            finish(false);
-          }
-        }, { once: true });
-        probe.src = ALPHA_PROBE;
-        probe.load();
-      });
-
-      const syncPortrait = () => {
-        const theme = darkMode.matches ? 'Dark' : 'Light';
-        const source = video.dataset[(alphaCapable ? 'webm' : 'mp4') + theme];
-        const poster = video.dataset[`poster${theme}`];
-        const currentSource = video.getAttribute('src');
-
-        if (alphaCapable) video.removeAttribute('poster');
-        else video.poster = poster;
-        if (currentSource !== source) {
-          video.src = source;
-          video.load();
-        }
-
-        if (reducedMotion.matches) {
-          video.pause();
-        } else {
-          const playback = video.play();
-          if (playback) playback.catch(() => {});
-        }
-      };
-
-      probeAlpha().then((ok) => {
-
-        alphaCapable = ok;
-
-        if (ok && stage) stage.classList.add('is-alpha');
-
-        syncPortrait();
-
-      });
-      video.addEventListener('canplay', syncPortrait);
-      window.addEventListener('pageshow', syncPortrait);
-      darkMode.addEventListener?.('change', syncPortrait);
-      reducedMotion.addEventListener?.('change', syncPortrait);
-    })();
 
     // Auto-update footer year + time-aware hero greeting
     (() => {
