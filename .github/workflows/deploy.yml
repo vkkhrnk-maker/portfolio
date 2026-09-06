@@ -39,6 +39,9 @@ jobs:
       # Syno stays visible as a non-clickable "Coming soon" card on the
       # homepage. Keep its working file in the repository, but do not publish
       # the unfinished direct URL until the case and its assets are ready.
+      # The specialists case is held back the same way while it is still
+      # being worked on — both language versions, or /ru/ would serve a page
+      # the English site does not have.
       - name: Exclude draft pages from the public artifact
         run: |
           rm -f \
@@ -50,7 +53,9 @@ jobs:
             hooh-editor-ru.html \
             hooh-fill-clouds.html \
             hooh-fill-ru.html \
-            itab-proto.html
+            itab-proto.html \
+            itab-specialists.html \
+            ru/itab-specialists.html
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

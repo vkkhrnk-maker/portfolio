@@ -3119,12 +3119,25 @@ html {
 /* The card is not clickable yet, so its surface stays stable on hover and
    press — but it sits on the same grey plate as the rest of the row. */
 .project-card--syno,
-.project-card--syno:active {
+.project-card--syno:active,
+.project-card--soon,
+.project-card--soon:active {
   background: var(--grey-200);
   transform: none;            /* not clickable — no press-in */
 }
 @media (hover: hover) {
-  .project-card--syno:hover { background: var(--grey-200); }
+  .project-card--syno:hover,
+  .project-card--soon:hover { background: var(--grey-200); }
+}
+
+/* A held-back card inside a pair. The pair lets the header run the full
+   width of the half-card (no arrow button to make room for), so the title
+   and subtitle have to stop short of the ribbon's diagonal themselves. */
+@media (min-width: 1200px) {
+  .project-pair .project-card--soon .project-card__title,
+  .project-pair .project-card--soon .project-card__subtitle {
+    padding-right: 96px;
+  }
 }
 
 /* Taller than the 1040/693 tile so the wide screenshot fits at the same
