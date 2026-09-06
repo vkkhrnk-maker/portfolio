@@ -53,9 +53,15 @@
       "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAHKADAAQAAAABAAAADwAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8IAEQgADwAcAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAMCBAEFAAYHCAkKC//EAMMQAAEDAwIEAwQGBAcGBAgGcwECAAMRBBIhBTETIhAGQVEyFGFxIweBIJFCFaFSM7EkYjAWwXLRQ5I0ggjhU0AlYxc18JNzolBEsoPxJlQ2ZJR0wmDShKMYcOInRTdls1V1pJXDhfLTRnaA40dWZrQJChkaKCkqODk6SElKV1hZWmdoaWp3eHl6hoeIiYqQlpeYmZqgpaanqKmqsLW2t7i5usDExcbHyMnK0NTV1tfY2drg5OXm5+jp6vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAQIAAwQFBgcICQoL/8QAwxEAAgIBAwMDAgMFAgUCBASHAQACEQMQEiEEIDFBEwUwIjJRFEAGMyNhQhVxUjSBUCSRoUOxFgdiNVPw0SVgwUThcvEXgmM2cCZFVJInotIICQoYGRooKSo3ODk6RkdISUpVVldYWVpkZWZnaGlqc3R1dnd4eXqAg4SFhoeIiYqQk5SVlpeYmZqgo6SlpqeoqaqwsrO0tba3uLm6wMLDxMXGx8jJytDT1NXW19jZ2uDi4+Tl5ufo6ery8/T19vf4+fr/2wBDAAQEBAQEBAgEBAgLCAgICw8LCwsLDxIPDw8PDxIWEhISEhISFhYWFhYWFhYbGxsbGxsfHx8fHyMjIyMjIyMjIyP/2wBDAQUGBgkICQ8ICA8kGRQZJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/2gAMAwEAAhEDEQAAAXnUN3fs/H8436Bzvyf/2gAIAQEAAQUCELsbWCVqhBPu7SliRVu4CJY8X//aAAgBAxEBPwH4kw9+snr4/wAL1UduaYH5l//aAAgBAhEBPwHr5yOPhwZz7cb/ACf/2gAIAQEABj8CZTJ5as07laBV5+vb/8QAMxABAAMAAgICAgIDAQEAAAILAREAITFBUWFxgZGhscHw0RDh8SAwQFBgcICQoLDA0OD/2gAIAQEAAT8hvCfYU7CNa2dNElzPiiIxr+am/wD/2gAMAwEAAhEDEQAAEAwv/8QAMxEBAQEAAwABAgUFAQEAAQEJAQARITEQQVFhIHHwkYGhsdHB4fEwQFBgcICQoLDA0OD/2gAIAQMRAT8QEPgZ+Ymf4n4cAZ9OW//aAAgBAhEBPxD6Ajr+QMx1rj+1/9oACAEBAAE/EBeqVoYRBjJCo5lheIgOCGKM8VBVwoAJCEvXiWg/Qo5jVC8X/9k="
   };
   document.querySelectorAll('[data-shimmer]').forEach((box) => {
+    /* Only the images this breakpoint actually shows. The iTAB card carries
+       both its desktop shot and its phone and hides one of them depending on
+       the width — and a `display:none` image is never fetched, so counting it
+       here would leave the placeholder waiting for a load event that never
+       comes, with the blurred thumb of the hidden shot sitting under the
+       visible one for good. */
     const imgs = Array.from(box.querySelectorAll('img')).filter((img) => {
       const file = (img.getAttribute('src') || '').split('/').pop().split('?')[0];
-      return LQIP[file];
+      return LQIP[file] && getComputedStyle(img).display !== 'none';
     });
     if (!imgs.length) return;
 

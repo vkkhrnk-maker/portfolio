@@ -45,9 +45,9 @@
   <!-- Editorial New is not used on this page at all — the Russian
        display face carries Latin too, so there is nothing to preload it for. -->
   <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <link rel="stylesheet" href="../styles.min.css?v=338">
   <script src="../typographer.js?v=6" defer></script>
-  <script src="../shimmer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=7" defer></script>
 </head>
 <body class="case-page--fill">
   <aside class="sidebar sidebar--case">
@@ -74,11 +74,13 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </aside>
 
-  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+  <div class="topbar-right">
+    <nav class="lang-switch" aria-label="Язык"><a class="lang-switch__opt" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
+    <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+  </div>
 
   <main class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
@@ -107,8 +109,8 @@
       <header class="case__hero">
         <h1 class="case__title">Hooh Document Workspace — от понимания документа к действию с ним</h1>
         <div class="case__intro">
-          <p>После того как Hooh закрыл чтение, осталась дыра с действием: документ человек понимал, но всё равно перепечатывал одни и те же данные — имя, номер документа, адрес, ИНН — в каждую новую форму.</p>
-          <p>Smart Fill эту дыру закрывает. Hooh распознаёт поля формы и заполняет их из уже загруженных документов, а дальше даёт подписать и сохранить, не выходя из приложения. Вокруг него выросла целая рабочая среда — десять инструментов по общим правилам, от разметки и перевода до объединения и сжатия, в одно касание от открытого документа.</p>
+          <p>После того как Hooh закрыл чтение, остался разрыв на действии: документ человек понимал, но всё равно перепечатывал одни и те же данные — имя, номер документа, адрес, ИНН — в каждую новую форму.</p>
+          <p>Smart Fill закрывает этот разрыв. Hooh распознаёт поля формы и заполняет их из уже загруженных документов, а дальше даёт подписать и сохранить, не выходя из приложения. Вокруг него выросла целая рабочая среда — десять инструментов по общим правилам, от разметки и перевода до объединения и сжатия, в одно касание от открытого документа.</p>
         </div>
         <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
           <div><dt>Сроки</dt><dd>6 недель, от начала до конца</dd></div>
@@ -371,6 +373,7 @@
   <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <nav class="lang-switch lang-switch--compact" aria-label="Язык"><a class="lang-switch__opt" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
       <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -386,7 +389,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </div>
 

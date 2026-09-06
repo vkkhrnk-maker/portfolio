@@ -20,7 +20,10 @@ from scipy.ndimage import binary_erosion, distance_transform_edt
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "assets/hero-wave-frames/blue-wave-out.png"
+# v6 starts from one high-resolution master. Motion is derived locally from
+# this exact image, so the face, clothes and silhouette never get regenerated
+# from frame to frame.
+SOURCE = ROOT / "assets/hero-wave-frames/blue-wave-master-v6.png"
 OUT_DIR = ROOT / "assets"
 LAYER_DIR = OUT_DIR / "hero-wave-frames"
 
@@ -28,8 +31,11 @@ BASE_WIDTH = 480
 BASE_HEIGHT = 1012
 WIDTH = 864
 HEIGHT = 1820
-FPS = 24
+FPS = 18
 DURATION = 4.0
+
+WEB_WIDTH = 480
+WEB_HEIGHT = round(HEIGHT * WEB_WIDTH / WIDTH)
 
 SCALE_X = WIDTH / BASE_WIDTH
 SCALE_Y = HEIGHT / BASE_HEIGHT
@@ -160,7 +166,9 @@ def fit_background(image: np.ndarray, foreground: np.ndarray) -> np.ndarray:
     return np.clip(backdrop, 0, 255).astype(np.uint8)
 
 
-def prepare_layers(source: Image.Image) -> tuple[Image.Image, Image.Image, tuple[int, int]]:
+def prepare_layers(
+    source: Image.Image,
+) -> tuple[Image.Image, Image.Image, Image.Image, Image.Image, tuple[int, int]]:
     image = source.resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS).convert("RGB")
     pixels = np.asarray(image).astype(np.float32)
     red, green, blue = pixels[:, :, 0], pixels[:, :, 1], pixels[:, :, 2]
@@ -185,7 +193,10 @@ def prepare_layers(source: Image.Image) -> tuple[Image.Image, Image.Image, tuple
     mask = mask.filter(ImageFilter.MaxFilter(3)).filter(ImageFilter.GaussianBlur(0.55))
     alpha = np.asarray(mask).astype(np.float32) / 255.0
 
-    pivot = (round(WIDTH * 0.231), round(HEIGHT * 0.258))
+    # The new master has a deliberately clean, round cuff. Its wrist sits a
+    # little higher than v5, so the hand rotates inside the cuff rather than
+    # pulling the sleeve edge with it.
+    pivot = (round(WIDTH * 0.238), round(HEIGHT * 0.245))
 
     # Leave the final few pixels of the wrist attached to the cuff. This hides
     # the rotational seam without allowing the original hand to ghost through.
@@ -232,7 +243,48 @@ def prepare_layers(source: Image.Image) -> tuple[Image.Image, Image.Image, tuple
     # so the alpha alone draws the edge.
     hand_layer = defringe(image, mask).convert("RGBA")
     hand_layer.putalpha(mask)
-    return clean_plate, hand_layer, pivot
+
+    # A dedicated front cuff is the mechanical seam cover of the rig. The
+    # moving wrist always sits behind it, so no rotation can reveal a notch,
+    # background-coloured wedge or disconnected sleeve.
+    cuff_region = (
+        (xx >= int(WIDTH * 0.185))
+        & (xx <= int(WIDTH * 0.292))
+        & (yy >= int(HEIGHT * 0.230))
+        & (yy <= int(HEIGHT * 0.280))
+    )
+    cuff_blue = cuff_region & (blue > red + 24) & (blue > green + 18)
+    cuff_mask = Image.fromarray((cuff_blue * 255).astype(np.uint8), "L")
+    cuff_mask = cuff_mask.filter(ImageFilter.MaxFilter(5)).filter(ImageFilter.GaussianBlur(0.65))
+    cuff_layer = image.convert("RGBA")
+    cuff_layer.putalpha(cuff_mask)
+
+    # A tiny skin continuation lives between the articulated hand and the
+    # front cuff. It replaces the few source pixels exposed at the two extreme
+    # angles, so the cuff opening always contains wrist rather than backdrop.
+    wrist_sample = (
+        skin
+        & (xx >= pivot[0] - round(sx(12)))
+        & (xx <= pivot[0] + round(sx(12)))
+        & (yy >= pivot[1] - round(sy(18)))
+        & (yy <= pivot[1] + round(sy(2)))
+    )
+    wrist_color = tuple(np.median(pixels[wrist_sample], axis=0).astype(np.uint8))
+    wrist_alpha = Image.new("L", (WIDTH, HEIGHT), 0)
+    wrist_draw = ImageDraw.Draw(wrist_alpha)
+    wrist_draw.ellipse(
+        (
+            pivot[0] - round(sx(13)),
+            pivot[1] - round(sy(16)),
+            pivot[0] + round(sx(13)),
+            pivot[1] + round(sy(5)),
+        ),
+        fill=255,
+    )
+    wrist_alpha = wrist_alpha.filter(ImageFilter.GaussianBlur(sx(0.8)))
+    wrist_patch = Image.new("RGBA", (WIDTH, HEIGHT), wrist_color + (0,))
+    wrist_patch.putalpha(wrist_alpha)
+    return clean_plate, hand_layer, wrist_patch, cuff_layer, pivot
 
 
 def smoothstep(values: np.ndarray) -> np.ndarray:
@@ -448,9 +500,11 @@ def main() -> None:
     LAYER_DIR.mkdir(parents=True, exist_ok=True)
 
     source = Image.open(SOURCE)
-    clean_plate, hand_layer, pivot = prepare_layers(source)
+    clean_plate, hand_layer, wrist_patch, cuff_layer, pivot = prepare_layers(source)
     clean_plate.save(LAYER_DIR / "blue-wave-clean-plate.png")
     hand_layer.save(LAYER_DIR / "blue-wave-hand-layer.png")
+    wrist_patch.save(LAYER_DIR / "blue-wave-wrist-seam-v6.png")
+    cuff_layer.save(LAYER_DIR / "blue-wave-cuff-front-v6.png")
 
     light_mp4 = OUT_DIR / "viktoria-wave-blue-alive-light-v5.mp4"
     light_webm = OUT_DIR / "viktoria-wave-blue-alive-light-v5.webm"
@@ -464,6 +518,8 @@ def main() -> None:
     # channel there is no plate to mismatch: the page itself shows through.
     light_alpha = OUT_DIR / "viktoria-wave-blue-alive-light-alpha-v5.webm"
     dark_alpha = OUT_DIR / "viktoria-wave-blue-alive-dark-alpha-v5.webm"
+    animated_webp = OUT_DIR / "viktoria-wave-blue-rig-v6.webp"
+    transparent_poster = OUT_DIR / "viktoria-wave-blue-rig-poster-v6.png"
     motion_data = prepare_motion_masks(clean_plate)
 
     with tempfile.TemporaryDirectory(prefix="viktoria-wave-") as temp_name:
@@ -472,7 +528,8 @@ def main() -> None:
         dark_dir = temp_dir / "dark"
         light_alpha_dir = temp_dir / "light-alpha"
         dark_alpha_dir = temp_dir / "dark-alpha"
-        for d in (light_dir, dark_dir, light_alpha_dir, dark_alpha_dir):
+        webp_dir = temp_dir / "webp"
+        for d in (light_dir, dark_dir, light_alpha_dir, dark_alpha_dir, webp_dir):
             d.mkdir()
         total_frames = round(FPS * DURATION)
         for frame_number in range(total_frames):
@@ -485,6 +542,8 @@ def main() -> None:
             )
             frame = animate_head(clean_plate, seconds, motion_data).convert("RGBA")
             frame.alpha_composite(moving_hand)
+            frame.alpha_composite(wrist_patch)
+            frame.alpha_composite(cuff_layer)
             frame = frame.convert("RGB")
             # The flood-fill mask is right for the body but crude on the hand:
             # it loses fingertips to the erosion and steps along the fingers.
@@ -511,11 +570,37 @@ def main() -> None:
                 cut.putalpha(alpha)
                 cut.save(alpha_dir / f"frame-{frame_number:04d}.png")
 
+            # WebP is the production asset: one genuinely transparent file,
+            # with no theme-coloured plate and no browser-specific VP9 alpha
+            # probe. The 480px render is still comfortably above 2x at the
+            # largest CSS size used by the site.
+            web_frame = frame.convert("RGBA")
+            web_frame.putalpha(alpha)
+            web_frame = web_frame.resize((WEB_WIDTH, WEB_HEIGHT), Image.Resampling.LANCZOS)
+            web_frame.save(webp_dir / f"frame-{frame_number:04d}.png")
+
         Image.open(light_dir / "frame-0000.png").convert("RGB").save(
             light_poster, quality=95, optimize=True
         )
         Image.open(dark_dir / "frame-0000.png").convert("RGB").save(
             dark_poster, quality=95, optimize=True
+        )
+
+        poster = Image.open(webp_dir / "frame-0000.png").convert("RGBA")
+        poster.save(transparent_poster, optimize=True)
+        webp_frames = [
+            Image.open(webp_dir / f"frame-{number:04d}.png").convert("RGBA")
+            for number in range(total_frames)
+        ]
+        webp_frames[0].save(
+            animated_webp,
+            save_all=True,
+            append_images=webp_frames[1:],
+            duration=round(1000 / FPS),
+            loop=0,
+            quality=92,
+            method=6,
+            minimize_size=True,
         )
 
         # VP9 keeps an alpha channel in WebM; H.264 cannot, so the opaque mp4
@@ -631,6 +716,8 @@ def main() -> None:
     print(light_webm)
     print(dark_mp4)
     print(dark_webm)
+    print(animated_webp)
+    print(transparent_poster)
 
 
 if __name__ == "__main__":

@@ -45,9 +45,9 @@
   <!-- Editorial New is not used on this page at all — the Russian
        display face carries Latin too, so there is nothing to preload it for. -->
   <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <link rel="stylesheet" href="../styles.min.css?v=338">
   <script src="../typographer.js?v=6" defer></script>
-  <script src="../shimmer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=7" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body class="case-page--itab">
@@ -75,11 +75,13 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/itab.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </aside>
 
-  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+  <div class="topbar-right">
+    <nav class="lang-switch" aria-label="Язык"><a class="lang-switch__opt" href="/itab.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
+    <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+  </div>
 
   <main class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
@@ -109,7 +111,7 @@
         <h1 class="case__title">iTAB — редизайн карточки БАДов, чтобы выбор давался легче</h1>
         <p class="case__intro">iTAB — российский маркетплейс товаров для здоровья; все экраны в кейсе — живой интерфейс с реальными товарами. Я переделала карточку товара для веба и мобильного: понятнее ценность, сигналы доверия и действия покупки.</p>
         <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
-          <div><dt>Воронка</dt><dd>Отвал ниже · NDA</dd></div>
+          <div><dt>Воронка</dt><dd>Уходов меньше · NDA</dd></div>
           <div><dt>Покупка</dt><dd>Добавлений в корзину больше · NDA</dd></div>
           <div><dt>Раскатка</dt><dd>Разошлась по всему каталогу</dd></div>
         </dl>
@@ -145,7 +147,7 @@
         </div>
         <div class="case__block">
           <h2 class="case__block-title">Задача</h2>
-          <p class="case__block-body">Переделать карточку для веба и мобильного и снизить отвал в категории БАДов. Карточка должна была упростить оценку товара, усилить сигналы доверия в момент решения и удержать человека в воронке, когда нужного товара нет в наличии.</p>
+          <p class="case__block-body">Переделать карточку для веба и мобильного и снизить потери в категории БАДов. Карточка должна была упростить оценку товара, усилить сигналы доверия в момент решения и удержать человека в воронке, когда нужного товара нет в наличии.</p>
         </div>
         <div class="case__block">
           <h2 class="case__block-title">Пользователи</h2>
@@ -171,7 +173,7 @@
           </div>
           <div class="case__gap-card">
             <h3 class="case__gap-card__title">Состояние «нет в наличии»</h3>
-            <p class="case__gap-card__desc">Товару не в наличии нужен следующий шаг, а не тупик</p>
+            <p class="case__gap-card__desc">Товару, которого нет в наличии, нужен следующий шаг, а не тупик</p>
           </div>
           <div class="case__gap-card">
             <h3 class="case__gap-card__title">Перегрузка сигналами</h3>
@@ -260,9 +262,9 @@
       <section class="case__outcome">
         <h2 class="case__outcome-title">Результат</h2>
         <div class="case__outcome-body">
-          <p>После запуска воронка сдвинулась в нужную сторону на каждом шаге, который мы переделывали. Точные цифры под NDA iTAB — готова голосом рассказать, как мы их мерили.</p>
-          <p><strong>Отвал ниже:</strong> на шаге карточки стало уходить меньше людей.</p>
-          <p><strong>Добавлений в корзину больше:</strong> в категории БАДов до этого шага стало доходить больше людей.</p>
+          <p>После запуска воронка сдвинулась в нужную сторону на каждом шаге, который мы переделывали. Точные цифры под NDA iTAB — расскажу на созвоне, как мы их считали.</p>
+          <p><strong>Уходов меньше:</strong> на шаге карточки стало уходить меньше людей.</p>
+          <p><strong>Добавлений в корзину больше:</strong> в категории БАДов товар стали чаще класть в корзину.</p>
           <p><strong>Нет в наличии — больше не тупик:</strong> заметная доля визитов продолжилась через подписку на поступление или альтернативы, а не закончилась уходом.</p>
           <p><strong>Новый стандарт каталога:</strong> система карточки разошлась по всему каталогу — один язык для доверия, наличия и состояний покупки.</p>
         </div>
@@ -303,6 +305,7 @@
   <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <nav class="lang-switch lang-switch--compact" aria-label="Язык"><a class="lang-switch__opt" href="/itab.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
       <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -318,7 +321,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/itab.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </div>
 

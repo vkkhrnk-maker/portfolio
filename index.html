@@ -57,9 +57,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=337">
+  <link rel="stylesheet" href="styles.min.css?v=338">
   <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=6" defer></script>
+  <script src="shimmer.js?v=7" defer></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -81,7 +81,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
     </div>
   </aside>
 
@@ -105,7 +104,10 @@
           <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
         </svg>
       </button>
-      <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+      <div class="topbar-right">
+        <nav class="lang-switch" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
+        <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+      </div>
       <div class="intro">
         <div class="intro__header">
           <p class="intro__greeting" data-greeting>Hello there</p>
@@ -184,39 +186,41 @@
       </article>
       </div>
 
-      <article class="project-card project-card--itab">
-        <a class="project-card__link" href="itab.html" aria-label="Read the iTAB case study"></a>
-        <div class="project-card__inner project-card__inner--itab">
-          <header class="project-card__header project-card__header--itab">
-            <h3 class="project-card__title">iTAB Product Card Redesign</h3>
-            <p class="project-card__subtitle">Making a dense marketplace page easy to buy from</p>
-            <a class="arrow-btn" href="itab.html" aria-label="Open iTAB Product Card Redesign">
-              <img src="assets/arrow.svg" alt="">
-            </a>
-          </header>
-          <div class="project-card__itab-group" data-shimmer>
-            <img class="project-card__itab-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop view" loading="lazy" width="1370" height="1144">
-            <img class="project-card__itab-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy" width="504" height="1088">
-          </div>
-        </div>
-      </article>
-      <article class="project-card project-card--itab-sp">
-        <a class="project-card__link" href="itab-specialists.html" aria-label="Read the iTAB Specialists case study"></a>
-        <div class="project-card__inner">
-          <header class="project-card__header">
-            <h3 class="project-card__title">iTAB Specialist Consultations</h3>
-            <p class="project-card__subtitle">A two-sided consultation service inside a supplements store — specialists, clients, schedules and payouts</p>
-            <a class="arrow-btn" href="itab-specialists.html" aria-label="Open iTAB Specialists case">
-              <img src="assets/arrow.svg" alt="">
-            </a>
-          </header>
-          <div class="project-card__phones project-card__phones--single">
-            <div class="project-card__phone-video">
-              <img src="assets/case-itab-sp-b-card.webp?v=1" alt="iTAB specialist card — credentials, free slots, consultation format and price" loading="lazy" width="585" height="1287">
+      <div class="project-pair">
+        <article class="project-card project-card--itab">
+          <a class="project-card__link" href="itab.html" aria-label="Read the iTAB case study"></a>
+          <div class="project-card__inner project-card__inner--itab">
+            <header class="project-card__header project-card__header--itab">
+              <h3 class="project-card__title">iTAB Product Card Redesign</h3>
+              <p class="project-card__subtitle">A dense product card, made easy to buy from</p>
+              <a class="arrow-btn" href="itab.html" aria-label="Open iTAB Product Card Redesign">
+                <img src="assets/arrow.svg" alt="">
+              </a>
+            </header>
+            <div class="project-card__itab-group" data-shimmer>
+              <img class="project-card__itab-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop view" loading="lazy" width="1370" height="1144">
+              <img class="project-card__itab-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy" width="504" height="1088">
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+        <article class="project-card project-card--itab-sp">
+          <a class="project-card__link" href="itab-specialists.html" aria-label="Read the iTAB Specialists case study"></a>
+          <div class="project-card__inner">
+            <header class="project-card__header">
+              <h3 class="project-card__title">iTAB Specialist Consultations</h3>
+              <p class="project-card__subtitle">A consultation service built inside a supplements store</p>
+              <a class="arrow-btn" href="itab-specialists.html" aria-label="Open iTAB Specialists case">
+                <img src="assets/arrow.svg" alt="">
+              </a>
+            </header>
+            <div class="project-card__phones project-card__phones--single">
+              <div class="project-card__phone-video">
+                <img src="assets/case-itab-sp-b-list.webp?v=4" alt="iTAB specialists catalogue — specialty strip, quick filters and specialist cards with credentials and price" loading="lazy" width="585" height="1266">
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="about" id="about">
@@ -480,6 +484,7 @@
         <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
         <p class="menu-drawer__role">Product designer</p>
       </div>
+      <nav class="lang-switch lang-switch--compact" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
       <button class="menu-drawer__close" type="button" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -496,7 +501,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
     </div>
   </div>
 

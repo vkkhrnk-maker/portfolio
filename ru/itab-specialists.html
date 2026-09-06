@@ -45,9 +45,9 @@
   <!-- Editorial New is not used on this page at all — the Russian
        display face carries Latin too, so there is nothing to preload it for. -->
   <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <link rel="stylesheet" href="../styles.min.css?v=338">
   <script src="../typographer.js?v=6" defer></script>
-  <script src="../shimmer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=7" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body class="case-page--itab case-page--itab-sp">
@@ -75,11 +75,13 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/itab-specialists.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </aside>
 
-  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+  <div class="topbar-right">
+    <nav class="lang-switch" aria-label="Язык"><a class="lang-switch__opt" href="/itab-specialists.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
+    <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+  </div>
 
   <main class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
@@ -107,11 +109,11 @@
     <article class="case">
       <header class="case__hero">
         <h1 class="case__title">iTAB — сервис консультаций специалистов внутри магазина БАДов</h1>
-        <p class="case__intro">iTAB — российский магазин товаров для здоровья: БАДы, скидки на анализы, экспертный контент. Для той же экосистемы я спроектировала мобильный сервис консультаций: у специалиста появляются кабинет, расписание и анкета, которая выводит его в каталог; клиент находит, записывается и платит, не выходя из магазина. Позже я перенесла ту же продуктовую модель в веб-сервис, который и запустился.</p>
+        <p class="case__intro">iTAB — российский магазин товаров для здоровья: БАДы, скидки на анализы, экспертный контент. Для той же экосистемы я спроектировала мобильный сервис консультаций: у специалиста появляются кабинет, расписание и анкета, которая выводит его в каталог; клиент находит, записывается и платит, не выходя из магазина. Мобильное направление осталось продуктовым концептом, но его логика стала веб-сервисом, который запустился, — эту версию я тоже спроектировала. Веб-экраны стоят ниже рядом с мобильными.</p>
         <dl class="case__proof-strip" aria-label="Объём проекта коротко">
           <div><dt>Роли</dt><dd>Специалист и клиент в одном аккаунте</dd></div>
-          <div><dt>Объём</dt><dd>60+ экранов · пять сценариев</dd></div>
           <div><dt>Условие</dt><dd>Правовой статус до публикации</dd></div>
+          <div><dt>Результат</dt><dd>Запущено как веб-сервис</dd></div>
         </dl>
         <dl class="case-meta case-meta--mobile">
         <div class="case-meta__item">
@@ -129,9 +131,9 @@
         </dl>
         <div class="case__hero-image case__hero-image--sp" data-shimmer>
           <div class="case__itab-board case__itab-board--trio" aria-label="Три экрана сервиса: каталог специалистов, карточка специалиста и кабинет специалиста">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-b-list.webp?v=1" alt="Каталог специалистов — лента специальностей, сортировка, быстрые фильтры и карточки с регалиями и ценой" loading="eager" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-b-card.webp?v=1" alt="Карточка специалиста — регалии, типы пациентов, ближайшие свободные слоты, формат консультации и одна цена" loading="eager" width="585" height="1287">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-cab-confirmed.webp?v=1" alt="Кабинет специалиста после модерации — консультации, расписание, рекомендации и реферальный код" loading="eager" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-b-list.webp?v=4" alt="Каталог специалистов — лента специальностей, сортировка, быстрые фильтры и карточки с регалиями и ценой" loading="eager" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-b-card.webp?v=3" alt="Карточка специалиста — регалии, типы пациентов, ближайшие свободные слоты, формат консультации и одна цена" loading="eager" width="585" height="1287">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Кабинет специалиста после модерации — консультации, расписание, рекомендации и реферальный код" loading="eager" width="585" height="1266">
           </div>
         </div>
       </header>
@@ -185,16 +187,30 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Анкета: польза, профессиональная информация и барьер статуса занятости">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-q-start.webp?v=1" alt="Стартовый экран анкеты — зачем её заполнять: рекомендации клиентам, поток клиентов, ежемесячные выплаты" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-q-prof.webp?v=1" alt="Второй шаг анкеты — профессиональная информация: специальность, курсы, членства и дипломы" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-q-employment.webp?v=1" alt="Анкета — статус занятости: самозанятый, ИП или компания; обязателен до публикации" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-q-start.webp?v=3" alt="Стартовый экран анкеты — зачем её заполнять: рекомендации клиентам, поток клиентов, ежемесячные выплаты" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-q-prof.webp?v=3" alt="Второй шаг анкеты — профессиональная информация: специальность, курсы, членства и дипломы" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-q-employment.webp?v=3" alt="Анкета — статус занятости: самозанятый, ИП или компания; обязателен до публикации" loading="lazy" width="585" height="1266">
           </div>
           <div class="case__slider" role="group" aria-label="Пролистайте анкету специалиста от стартового экрана до модерации">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-q-start.webp?v=1" alt="Стартовый экран анкеты — зачем её заполнять: рекомендации клиентам, поток клиентов, ежемесячные выплаты" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-q-prof.webp?v=1" alt="Второй шаг анкеты — профессиональная информация: специальность, курсы, членства и дипломы" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-q-employment.webp?v=1" alt="Анкета — статус занятости: самозанятый, ИП или компания; обязателен до публикации" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-q-start.webp?v=3" alt="Стартовый экран анкеты — зачем её заполнять: рекомендации клиентам, поток клиентов, ежемесячные выплаты" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-q-prof.webp?v=3" alt="Второй шаг анкеты — профессиональная информация: специальность, курсы, членства и дипломы" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-q-employment.webp?v=3" alt="Анкета — статус занятости: самозанятый, ИП или компания; обязателен до публикации" loading="lazy" width="585" height="1266"></div>
           </div>
           <figcaption>Сначала польза, потом профессиональные подтверждения, в конце — правовая часть: форма сначала оправдывает потраченное время и только потом спрашивает то, от чего зависит публикация и выплаты.</figcaption>
+        </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-анкета специалиста — форма из пяти шагов: слева прогресс, в центре шаг с профессиональной информацией, специальностями, опытом, образованием, типами пациентов и документами">
+            <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-onboarding.webp?v=6" alt="Веб-анкета специалиста — форма из пяти шагов: слева прогресс, в центре шаг с профессиональной информацией, специальностями, опытом, образованием, типами пациентов и документами" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-анкета специалиста — шаг статуса занятости: самозанятый, ИП или ООО, поля ИНН и карты для выплат и предупреждение, что без оформленного статуса профиль не попадёт в каталог">
+            <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-legal.webp?v=6" alt="Веб-анкета специалиста — шаг статуса занятости: самозанятый, ИП или ООО, поля ИНН и карты для выплат и предупреждение, что без оформленного статуса профиль не попадёт в каталог" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте два шага веб-анкеты: профессиональная информация и статус занятости">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-onboarding.webp?v=6" alt="Веб-анкета специалиста — форма из пяти шагов: слева прогресс, в центре шаг с профессиональной информацией, специальностями, опытом, образованием, типами пациентов и документами" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-legal.webp?v=6" alt="Веб-анкета специалиста — шаг статуса занятости: самозанятый, ИП или ООО, поля ИНН и карты для выплат и предупреждение, что без оформленного статуса профиль не попадёт в каталог" loading="lazy" width="1782" height="1003"></div>
+          </div>
+          <figcaption>Запущено в вебе: та же анкета в виде формы из пяти шагов. Профессиональные данные с документами идут вторым шагом, правовой барьер остаётся последним, и причина, по которой он существует, названа прямо на шаге.</figcaption>
         </figure>
       </section>
       <section class="case__section">
@@ -204,14 +220,14 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Кабинет специалиста до и после модерации и клиентский контекст того же аккаунта">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-cab-empty.webp?v=1" alt="Кабинет специалиста до анкеты — один призыв к действию и реферальный код" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-cab-confirmed.webp?v=1" alt="Кабинет специалиста после модерации — консультации, расписание, рекомендации и реферальный код" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-cab-client.webp?v=1" alt="Тот же аккаунт в клиентском контексте — заказы, консультации и записи" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-cab-empty.webp?v=3" alt="Кабинет специалиста до анкеты — один призыв к действию и реферальный код" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Кабинет специалиста после модерации — консультации, расписание, рекомендации и реферальный код" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-cab-client.webp?v=3" alt="Тот же аккаунт в клиентском контексте — заказы, консультации и записи" loading="lazy" width="585" height="1266">
           </div>
           <div class="case__slider" role="group" aria-label="Пролистайте кабинет до и после модерации и клиентский контекст">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-cab-empty.webp?v=1" alt="Кабинет специалиста до анкеты — один призыв к действию и реферальный код" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-cab-confirmed.webp?v=1" alt="Кабинет специалиста после модерации — консультации, расписание, рекомендации и реферальный код" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-cab-client.webp?v=1" alt="Тот же аккаунт в клиентском контексте — заказы, консультации и записи" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-cab-empty.webp?v=3" alt="Кабинет специалиста до анкеты — один призыв к действию и реферальный код" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Кабинет специалиста после модерации — консультации, расписание, рекомендации и реферальный код" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-cab-client.webp?v=3" alt="Тот же аккаунт в клиентском контексте — заказы, консультации и записи" loading="lazy" width="585" height="1266"></div>
           </div>
           <figcaption>Личность в аккаунте одна, меняется контекст: кабинет специалиста разрастается после модерации, а клиентский профиль остаётся в одном касании.</figcaption>
         </figure>
@@ -223,119 +239,129 @@
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Дата и время, оформление и подтверждение оплаты">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-b-datetime.webp?v=1" alt="Выбор даты и времени — переключатель формата, календарь и свободные слоты" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-b-checkout.webp?v=1" alt="Оформление записи — специалист, детали консультации, комментарий для врача, оферта и правило отмены" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--third case__itab-board-phone--dim" src="../assets/case-itab-sp-b-paid.webp?v=1" alt="Оплата прошла — шторка, которая ведёт прямо в консультации клиента" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-b-datetime.webp?v=3" alt="Выбор даты и времени — переключатель формата, календарь и свободные слоты" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-b-checkout.webp?v=3" alt="Оформление записи — специалист, детали консультации, комментарий для врача, оферта и правило отмены" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--third case__itab-board-phone--dim" src="../assets/case-itab-sp-b-paid.webp?v=3" alt="Оплата прошла — шторка, которая ведёт прямо в консультации клиента" loading="lazy" width="585" height="1266">
           </div>
           <div class="case__slider" role="group" aria-label="Пролистайте клиентскую сторону от каталога до оплаты">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-b-datetime.webp?v=1" alt="Выбор даты и времени — переключатель формата, календарь и свободные слоты" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-b-checkout.webp?v=1" alt="Оформление записи — специалист, детали консультации, комментарий для врача, оферта и правило отмены" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="../assets/case-itab-sp-b-paid.webp?v=1" alt="Оплата прошла — шторка, которая ведёт прямо в консультации клиента" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-b-datetime.webp?v=3" alt="Выбор даты и времени — переключатель формата, календарь и свободные слоты" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-b-checkout.webp?v=3" alt="Оформление записи — специалист, детали консультации, комментарий для врача, оферта и правило отмены" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="../assets/case-itab-sp-b-paid.webp?v=3" alt="Оплата прошла — шторка, которая ведёт прямо в консультации клиента" loading="lazy" width="585" height="1266"></div>
           </div>
           <figcaption>Когда доверие уже набрано в каталоге и профиле, запись сужается до трёх решений: когда, что именно покупается и где теперь лежит подтверждённая консультация.</figcaption>
         </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Прокрутка веб-каталога специалистов: поиск, популярные темы, фильтры по формату и датам и сетка карточек с ближайшими свободными слотами">
+            <video class="case__itab-board-desktop" data-src="../assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="../assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Прокрутка веб-каталога специалистов: поиск, популярные темы, фильтры по формату и датам и сетка карточек с ближайшими свободными слотами"></video>
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Прокрутка веб-страницы специалиста: регалии, услуги, формат консультации, дата и время записи, о специалисте, образование, сообщества и отзывы">
+            <video class="case__itab-board-desktop" data-src="../assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="../assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Прокрутка веб-страницы специалиста: регалии, услуги, формат консультации, дата и время записи, о специалисте, образование, сообщества и отзывы"></video>
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте два запущенных веб-экрана: каталог специалистов и страницу специалиста">
+            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="../assets/case-itab-sp-web-catalog-scroll.mp4?v=2" poster="../assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Прокрутка веб-каталога специалистов: поиск, популярные темы, фильтры по формату и датам и сетка карточек с ближайшими свободными слотами"></video></div>
+            <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="../assets/case-itab-sp-web-profile-scroll.mp4?v=2" poster="../assets/case-itab-sp-web-profile.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Прокрутка веб-страницы специалиста: регалии, услуги, формат консультации, дата и время записи, о специалисте, образование, сообщества и отзывы"></video></div>
+          </div>
+          <figcaption>Запущено в вебе: каталог сохраняет язык карточек магазина, а профиль держит регалии, услуги и правило отмены на одном экране с ценой.</figcaption>
+        </figure>
+      </section>
+
+      <section class="case__section">
+        <h2 class="case__section-title">4. Двое часов, одна запись</h2>
+        <p class="case__section-body">iTAB продаёт по стране шириной в одиннадцать часовых поясов, поэтому у консультации двое часов: клиента и специалиста. Каждый экран говорит, чьё время он показывает. Клиент выбирает слот в своём поясе, и список это подписывает. Специалист собирает расписание в своём, под строкой о том, что клиенты видят своё время. Оформление — единственное место, где часы встречаются, поэтому оно печатает оба: 17:00 у клиента, 10:00 в Москве у врача.</p>
+        <p class="case__section-body">То же правило закрывает случай, на котором ломаются наивные реализации: клиент переехал между записью и приёмом. Запись сохраняет время, в которое её создали, и добавляет время, в которое она начнётся в текущем поясе клиента.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Часовые пояса в сервисе: список слотов клиента, оформление с обоими временами и расписание специалиста">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-tz-client.webp?v=1" alt="Выбор слота — список времени подписан поясом самого клиента, Владивосток UTC+10" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-tz-checkout.webp?v=1" alt="Оформление — время записи напечатано в обоих поясах: 17:00 у клиента, 10:00 в Москве" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-tz-specialist.webp?v=1" alt="Расписание специалиста — строка сообщает, что слоты в поясе специалиста, а клиенты видят своё время" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте правило часовых поясов: слоты клиента, оформление и расписание специалиста">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-tz-client.webp?v=1" alt="Выбор слота — список времени подписан поясом самого клиента, Владивосток UTC+10" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-tz-checkout.webp?v=1" alt="Оформление — время записи напечатано в обоих поясах: 17:00 у клиента, 10:00 в Москве" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-tz-specialist.webp?v=1" alt="Расписание специалиста — строка сообщает, что слоты в поясе специалиста, а клиенты видят своё время" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>Каждый экран называет часы, которые показывает, а единственное место, где часы встречаются, показывает оба времени.</figcaption>
+        </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">4. Как идут консультации</h2>
+        <h2 class="case__section-title">5. Как идут консультации</h2>
         <p class="case__section-body">Для специалиста сервис — это расписание и список. Расписание начинается пустым и собирается в два движения: выбрать даты, открытые для записи, затем слоты на каждый день, с повтором для типовой недели. Список консультаций делит запланированные и проведённые; запланированную можно подтвердить, увести в чат или отменить с причиной, которую увидит клиент.</p>
         <p class="case__section-body">Чат живёт рядом с записью, поэтому перенос консультации — это разговор внутри приложения, а не звонок за его пределами.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Выбор доступных дат, настройка слотов и управление консультацией">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-s-dates.webp?v=1" alt="Расписание — выбор дат, открытых для записи, в календаре" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-s-slots.webp?v=1" alt="Расписание — слоты по дням с опцией повтора" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--third case__itab-board-phone--dim" src="../assets/case-itab-sp-c-actions.webp?v=1" alt="Действия с консультацией — подтвердить, написать клиенту или отменить" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-s-dates.webp?v=3" alt="Расписание — выбор дат, открытых для записи, в календаре" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-s-slots.webp?v=3" alt="Расписание — слоты по дням с опцией повтора" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--third case__itab-board-phone--dim" src="../assets/case-itab-sp-c-actions.webp?v=3" alt="Действия с консультацией — подтвердить, написать клиенту или отменить" loading="lazy" width="585" height="1266">
           </div>
           <div class="case__slider" role="group" aria-label="Пролистайте расписание и экраны управления консультациями">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-s-dates.webp?v=1" alt="Расписание — выбор дат, открытых для записи, в календаре" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-s-slots.webp?v=1" alt="Расписание — слоты по дням с опцией повтора" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="../assets/case-itab-sp-c-actions.webp?v=1" alt="Действия с консультацией — подтвердить, написать клиенту или отменить" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-s-dates.webp?v=3" alt="Расписание — выбор дат, открытых для записи, в календаре" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-s-slots.webp?v=3" alt="Расписание — слоты по дням с опцией повтора" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone case__shot--dim" src="../assets/case-itab-sp-c-actions.webp?v=3" alt="Действия с консультацией — подтвердить, написать клиенту или отменить" loading="lazy" width="585" height="1266"></div>
           </div>
           <figcaption>Доступность собирается до того, как придут записи; дальше каждый занятый слот ведёт к одним и тем же действиям — подтвердить, написать клиенту или отменить с причиной.</figcaption>
         </figure>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-кабинет специалиста — список предстоящих консультаций с клиентом, запросом, статусом оплаты и действиями подтвердить, написать или отменить, рядом сводка расписания и реферальный код">
+            <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-cabinet.webp?v=6" alt="Веб-кабинет специалиста — список предстоящих консультаций с клиентом, запросом, статусом оплаты и действиями подтвердить, написать или отменить, рядом сводка расписания и реферальный код" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-расписание специалиста — календарь месяца с открытыми для записи днями, слоты выбранного дня с повтором по неделям и кнопка сохранения">
+            <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-schedule.webp?v=6" alt="Веб-расписание специалиста — календарь месяца с открытыми для записи днями, слоты выбранного дня с повтором по неделям и кнопка сохранения" loading="lazy" width="1782" height="1003">
+          </div>
+          <div class="case__slider" role="group" aria-label="Пролистайте два экрана кабинета специалиста: консультации и расписание">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-cabinet.webp?v=6" alt="Веб-кабинет специалиста — список предстоящих консультаций с клиентом, запросом, статусом оплаты и действиями подтвердить, написать или отменить, рядом сводка расписания и реферальный код" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-schedule.webp?v=6" alt="Веб-расписание специалиста — календарь месяца с открытыми для записи днями, слоты выбранного дня с повтором по неделям и кнопка сохранения" loading="lazy" width="1782" height="1003"></div>
+          </div>
+          <figcaption>Запущено в вебе: у консультаций свой статус и те же три действия, что и в мобильной модели, а расписание задаётся один раз — открытые дни и слоты времени с повтором по неделям.</figcaption>
+        </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">5. Вспомогательный сценарий: партнёрская программа</h2>
-        <p class="case__section-body">Специалисты приводят клиентов в магазин личным промокодом: клиент получает скидку на каталог, специалист — кешбэк с каждого заказа и бонус, когда сумма за месяц переходит порог. Вступление — своя короткая анкета: город, откуда узнали о программе, личные данные и код, — с единственной по-настоящему важной ошибкой прямо в поле: такой код уже занят.</p>
-        <p class="case__section-body">Код попадает в кабинет рядом с консультациями. Ради этой петли сервис и строился: совет на консультации, рекомендация с кодом, покупка в том же приложении.</p>
+        <h2 class="case__section-title">6. Вспомогательный сценарий: партнёрская программа</h2>
+        <p class="case__section-body">Специалисты приводят клиентов в магазин личным промокодом: клиент получает скидку, специалист — кешбэк с каждого заказа и бонус, когда сумма за месяц переходит порог. Вступление — своя короткая форма, с единственной по-настоящему важной ошибкой прямо в поле: такой код уже занят. Код попадает в кабинет рядом с консультациями и замыкает петлю, ради которой сервис и строился: совет, рекомендация с кодом, покупка в том же приложении.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Партнёрская программа: вступление, выбор промокода и созданный код">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-r-intro.webp?v=1" alt="Партнёрская программа — короткая анкета для вступления" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-r-promo.webp?v=1" alt="Выбор личного промокода" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-r-success.webp?v=1" alt="Промокод создан — теперь он живёт в кабинете специалиста" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-r-intro.webp?v=3" alt="Партнёрская программа — короткая анкета для вступления" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-r-promo.webp?v=3" alt="Выбор личного промокода" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-r-success.webp?v=3" alt="Промокод создан — теперь он живёт в кабинете специалиста" loading="lazy" width="585" height="1266">
           </div>
           <div class="case__slider" role="group" aria-label="Пролистайте партнёрскую программу от правил до созданного кода">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-r-intro.webp?v=1" alt="Партнёрская программа — короткая анкета для вступления" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-r-promo.webp?v=1" alt="Выбор личного промокода" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-r-success.webp?v=1" alt="Промокод создан — теперь он живёт в кабинете специалиста" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-r-intro.webp?v=3" alt="Партнёрская программа — короткая анкета для вступления" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-r-promo.webp?v=3" alt="Выбор личного промокода" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-r-success.webp?v=3" alt="Промокод создан — теперь он живёт в кабинете специалиста" loading="lazy" width="585" height="1266"></div>
           </div>
           <figcaption>Личный код замыкает коммерческую петлю внутри одного продукта: консультация, рекомендация, покупка.</figcaption>
         </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">6. Поздний аудит: состояния, которых не хватало</h2>
-        <p class="case__section-body">Поздний аудит для кейса показал: счастливый путь собран целиком, а восьми состояний отказа нет — тех самых, с которыми настоящий сервис сталкивается сразу. Я дорисовала все восемь в существующей системе компонентов и текстов. Три показанных здесь несут наибольший операционный риск: анкета вернулась на доработку, на выбранную дату нет свободного времени и занятый слот, который нельзя просто удалить.</p>
+        <h2 class="case__section-title">7. Второй проход: состояния, которых не хватало</h2>
+        <p class="case__section-body">Вернувшись к готовому сценарию, я нашла счастливый путь собранным целиком, а восьми состояний отказа — тех самых, с которыми настоящий сервис сталкивается в первые недели, — не хватало. Все восемь я спроектировала в существующей системе компонентов и текстов. Три показанных здесь несут наибольший операционный риск: анкета вернулась на доработку, на выбранную дату нет свободного времени и занятый слот, который нельзя просто удалить.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Анкета вернулась на доработку, нет свободного времени и занятый слот, который нельзя удалить">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-st-fix.webp?v=1" alt="Кабинет, когда анкета вернулась — причина и способ исправить" loading="lazy" width="585" height="1266">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-st-notime.webp?v=1" alt="На выбранную дату нет свободного времени — предлагается ближайший слот" loading="lazy" width="585" height="1287">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-st-slotbooked.webp?v=1" alt="Слот с записью нельзя удалить — специалисту предлагается перенос" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="../assets/case-itab-sp-st-fix.webp?v=3" alt="Кабинет, когда анкета вернулась — причина и способ исправить" loading="lazy" width="585" height="1266">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="../assets/case-itab-sp-st-notime.webp?v=3" alt="На выбранную дату нет свободного времени — предлагается ближайший слот" loading="lazy" width="585" height="1287">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="../assets/case-itab-sp-st-slotbooked.webp?v=3" alt="Слот с записью нельзя удалить — специалисту предлагается перенос" loading="lazy" width="585" height="1266">
           </div>
           <div class="case__slider" role="group" aria-label="Пролистайте три показательных состояния, добавленных в позднем аудите">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-st-fix.webp?v=1" alt="Кабинет, когда анкета вернулась — причина и способ исправить" loading="lazy" width="585" height="1266"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-st-notime.webp?v=1" alt="На выбранную дату нет свободного времени — предлагается ближайший слот" loading="lazy" width="585" height="1287"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-st-slotbooked.webp?v=1" alt="Слот с записью нельзя удалить — специалисту предлагается перенос" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-st-fix.webp?v=3" alt="Кабинет, когда анкета вернулась — причина и способ исправить" loading="lazy" width="585" height="1266"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-st-notime.webp?v=3" alt="На выбранную дату нет свободного времени — предлагается ближайший слот" loading="lazy" width="585" height="1287"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-itab-sp-st-slotbooked.webp?v=3" alt="Слот с записью нельзя удалить — специалисту предлагается перенос" loading="lazy" width="585" height="1266"></div>
           </div>
-          <figcaption>Аудит отделяет то, что было сдано изначально, от поздней работы для кейса — и заодно показывает, как продуктовая модель держит реальные операционные исключения.</figcaption>
-        </figure>
-      </section>
-
-      <section class="case__section case__section--web-outcome">
-        <h2 class="case__section-title">7. Что запустилось в вебе</h2>
-        <p class="case__section-body">Мобильное направление осталось продуктовым концептом, но его логика легла в основу веб-сервиса, который запустился. Эту версию я тоже спроектировала, перенеся ту же двустороннюю модель в рабочее место специалиста и клиентскую запись.</p>
-
-        <figure class="case__figure">
-          <div class="case__figure-desktop case__web-slots" role="group" aria-label="Два плейсхолдера под экраны запущенного веб-сервиса">
-            <div class="case__web-slot">
-              <span class="case__web-slot-index">Веб-экран 01</span>
-              <strong>Рабочее место специалиста</strong>
-              <span>Финальный экспорт будет добавлен</span>
-            </div>
-            <div class="case__web-slot">
-              <span class="case__web-slot-index">Веб-экран 02</span>
-              <strong>Клиентская запись</strong>
-              <span>Финальный экспорт будет добавлен</span>
-            </div>
-          </div>
-          <div class="case__slider" role="group" aria-label="Пролистайте два плейсхолдера под экраны запущенного веб-сервиса">
-            <div class="case__slide">
-              <div class="case__web-slot">
-                <span class="case__web-slot-index">Веб-экран 01</span>
-                <strong>Рабочее место специалиста</strong>
-                <span>Финальный экспорт будет добавлен</span>
-              </div>
-            </div>
-            <div class="case__slide">
-              <div class="case__web-slot">
-                <span class="case__web-slot-index">Веб-экран 02</span>
-                <strong>Клиентская запись</strong>
-                <span>Финальный экспорт будет добавлен</span>
-              </div>
-            </div>
-          </div>
-          <figcaption>Два финальных веб-экспорта свяжут мобильную продуктовую модель выше с версией, которая дошла до пользователей.</figcaption>
+          <figcaption>Состояния, с которыми сервис сталкивается в первые недели. Каждое ведёт человека дальше — причина и способ исправить, ближайший свободный слот, перенос, — вместо тупика.</figcaption>
         </figure>
       </section>
 
       <section class="case__outcome">
         <h2 class="case__outcome-title">Результат</h2>
         <div class="case__outcome-body">
-          <p>Работа задала связный сервис консультаций внутри экосистемы iTAB. Специалист проходит путь от анкеты и модерации до управления доступностью и консультациями в одном аккаунте; клиент находит, сравнивает, записывается и платит, не выходя из магазина. Эта же модель легла в основу запущенного веб-сервиса.</p>
+          <p>Работа задала связный сервис консультаций внутри экосистемы iTAB. Специалист проходит путь от анкеты и модерации до управления доступностью и консультациями в одном аккаунте; клиент находит, сравнивает, записывается и платит, не выходя из магазина. Эта же модель легла в основу запущенного веб-сервиса. Цифры по нему остаются под NDA iTAB, поэтому кейс показывает модель, а не метрики.</p>
           <p><strong>Одна продуктовая модель на два пути:</strong> допуск, расписание, оплата и отмена живут по общим правилам и на стороне специалиста, и на стороне клиента.</p>
           <p><strong>Расширение магазина, а не второй продукт:</strong> сервис переиспользует существующий аккаунт, язык каталога и оформление заказа вместо ещё одного логина и оторванного опыта.</p>
-          <p><strong>От концепта до релиза:</strong> основной путь я перенесла в запущенную веб-версию — от анкеты и расписания специалиста до записи и оплаты клиентом. Поздний аудит дополнил мобильную модель состояниями отказа и краевыми случаями, показанными в кейсе.</p>
+          <p><strong>От концепта до релиза:</strong> основной путь я перенесла в запущенную веб-версию — от анкеты и расписания специалиста до записи и оплаты клиентом. Второй проход дополнил модель состояниями отказа и краевыми случаями, показанными здесь.</p>
         </div>
       </section>
 
@@ -374,6 +400,7 @@
   <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Навигация по сайту">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <nav class="lang-switch lang-switch--compact" aria-label="Язык"><a class="lang-switch__opt" href="/itab-specialists.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
       <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -389,7 +416,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/itab-specialists.html" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </div>
 

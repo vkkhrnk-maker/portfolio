@@ -48,9 +48,9 @@
   <!-- Editorial New is not used on this page at all — the Russian display
        face carries Latin too, so there is nothing to preload it for. -->
   <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.min.css?v=337">
+  <link rel="stylesheet" href="../styles.min.css?v=338">
   <script src="../typographer.js?v=6" defer></script>
-  <script src="../shimmer.js?v=6" defer></script>
+  <script src="../shimmer.js?v=7" defer></script>
 </head>
 <body>
   <aside class="sidebar">
@@ -72,7 +72,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </aside>
 
@@ -96,7 +95,10 @@
           <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
         </svg>
       </button>
-      <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+      <div class="topbar-right">
+        <nav class="lang-switch" aria-label="Язык"><a class="lang-switch__opt" href="/" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
+        <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Созвониться</a>
+      </div>
       <div class="intro">
         <div class="intro__header">
           <p class="intro__greeting" data-greeting>Привет</p>
@@ -139,7 +141,7 @@
         <div class="project-card__inner">
           <header class="project-card__header">
             <h3 class="project-card__title">Hooh — работа с документами</h3>
-            <p class="project-card__subtitle">Заполнить, подписать, отредактировать — на данных, которые приложение уже знает</p>
+            <p class="project-card__subtitle">Заполнить, подписать, отредактировать — с данными, которые приложение уже знает</p>
             <a class="arrow-btn" href="hooh-fill.html" aria-label="Открыть кейс Hooh — работа с документами">
               <img src="../assets/arrow.svg" alt="">
             </a>
@@ -175,39 +177,41 @@
       </article>
       </div>
 
-      <article class="project-card project-card--itab">
-        <a class="project-card__link" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара"></a>
-        <div class="project-card__inner project-card__inner--itab">
-          <header class="project-card__header project-card__header--itab">
-            <h3 class="project-card__title">iTAB — редизайн карточки товара</h3>
-            <p class="project-card__subtitle">Перегруженная карточка маркетплейса, с которой стало удобно покупать</p>
-            <a class="arrow-btn" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара">
-              <img src="../assets/arrow.svg" alt="">
-            </a>
-          </header>
-          <div class="project-card__itab-group" data-shimmer>
-            <img class="project-card__itab-desktop" src="../assets/itab-desktop.webp?v=1" alt="Карточка товара iTAB — десктоп" loading="lazy" width="1370" height="1144">
-            <img class="project-card__itab-mobile" src="../assets/itab-mobile.webp?v=1" alt="Карточка товара iTAB — мобильная версия" loading="lazy" width="504" height="1088">
-          </div>
-        </div>
-      </article>
-      <article class="project-card project-card--itab-sp">
-        <a class="project-card__link" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов"></a>
-        <div class="project-card__inner">
-          <header class="project-card__header">
-            <h3 class="project-card__title">iTAB — консультации специалистов</h3>
-            <p class="project-card__subtitle">Двусторонний сервис консультаций внутри магазина БАДов — специалисты, клиенты, расписание и выплаты</p>
-            <a class="arrow-btn" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов">
-              <img src="../assets/arrow.svg" alt="">
-            </a>
-          </header>
-          <div class="project-card__phones project-card__phones--single">
-            <div class="project-card__phone-video">
-              <img src="../assets/case-itab-sp-b-card.webp?v=1" alt="Карточка специалиста iTAB — регалии, свободные слоты, формат и цена консультации" loading="lazy" width="585" height="1287">
+      <div class="project-pair">
+        <article class="project-card project-card--itab">
+          <a class="project-card__link" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара"></a>
+          <div class="project-card__inner project-card__inner--itab">
+            <header class="project-card__header project-card__header--itab">
+              <h3 class="project-card__title">iTAB — редизайн карточки товара</h3>
+              <p class="project-card__subtitle">Плотная карточка товара, в которой легко дойти до покупки</p>
+              <a class="arrow-btn" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара">
+                <img src="../assets/arrow.svg" alt="">
+              </a>
+            </header>
+            <div class="project-card__itab-group" data-shimmer>
+              <img class="project-card__itab-desktop" src="../assets/itab-desktop.webp?v=1" alt="Карточка товара iTAB — десктоп" loading="lazy" width="1370" height="1144">
+              <img class="project-card__itab-mobile" src="../assets/itab-mobile.webp?v=1" alt="Карточка товара iTAB — мобильная версия" loading="lazy" width="504" height="1088">
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+        <article class="project-card project-card--itab-sp">
+          <a class="project-card__link" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов"></a>
+          <div class="project-card__inner">
+            <header class="project-card__header">
+              <h3 class="project-card__title">iTAB — консультации специалистов</h3>
+              <p class="project-card__subtitle">Сервис консультаций внутри магазина БАДов: запись, расписание, выплаты</p>
+              <a class="arrow-btn" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов">
+                <img src="../assets/arrow.svg" alt="">
+              </a>
+            </header>
+            <div class="project-card__phones project-card__phones--single">
+              <div class="project-card__phone-video">
+                <img src="../assets/case-itab-sp-b-list.webp?v=4" alt="Каталог специалистов iTAB — лента специальностей, быстрые фильтры и карточки специалистов с регалиями и ценой" loading="lazy" width="585" height="1266">
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section class="about" id="about">
@@ -231,11 +235,11 @@
             <div class="about-card__face about-card__face--front">
               <span class="about-card__number" aria-hidden="true">02</span>
               <p class="about-card__title">Распутываю сложный UX</p>
-              <p class="about-card__description">Плотные данные, многошаговые сценарии и задачи без внятной постановки привожу к понятному маршруту, по которому легко идти</p>
+              <p class="about-card__description">Плотные данные, многошаговые сценарии и задачи без внятной постановки свожу к маршруту, по которому легко пройти</p>
             </div>
             <div class="about-card__face about-card__face--back">
               <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__back-text">Плотные данные, многошаговые сценарии и задачи без внятной постановки привожу к понятному маршруту, по которому легко идти</p>
+              <p class="about-card__back-text">Плотные данные, многошаговые сценарии и задачи без внятной постановки свожу к маршруту, по которому легко пройти</p>
             </div>
           </div>
         </div>
@@ -308,7 +312,7 @@
           <time class="experience-editorial__date">2024 / 2026</time>
           <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-2">
-            <p class="experience-editorial__description">Переделала карточку БАДов для веба и мобилки: понятнее показала ценность, сигналы доверия и действия покупки — и снизила отвал в категории, где доверие решает всё.</p>
+            <p class="experience-editorial__description">Переделала карточку БАДов для веба и мобилки: понятнее показала ценность, сигналы доверия и действия покупки — и сократила потери на пути к покупке в категории, где доверие решает всё.</p>
           </div>
         </article>
 
@@ -413,7 +417,7 @@
             <span class="experience-item__date">2024–2026</span>
             <p class="experience-item__company">iTAB. Mobile App (Crossplatform), Web</p>
           </div>
-          <div class="experience-item__detail"><p>Переделала карточку БАДов для веба и мобилки: понятнее показала ценность, сигналы доверия и действия покупки — и снизила отвал в категории, где доверие решает всё.</p></div>
+          <div class="experience-item__detail"><p>Переделала карточку БАДов для веба и мобилки: понятнее показала ценность, сигналы доверия и действия покупки — и сократила потери на пути к покупке в категории, где доверие решает всё.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
@@ -471,6 +475,7 @@
         <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
         <p class="menu-drawer__role">Продуктовый дизайнер</p>
       </div>
+      <nav class="lang-switch lang-switch--compact" aria-label="Язык"><a class="lang-switch__opt" href="/" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
       <button class="menu-drawer__close" type="button" aria-label="Закрыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -487,7 +492,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/" hreflang="en" lang="en" data-lang-switch="en">English</a>
     </div>
   </div>
 

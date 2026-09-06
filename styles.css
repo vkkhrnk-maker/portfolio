@@ -854,6 +854,103 @@ img {
   }
 }
 
+/* ── Language switch ──────────────────────────────────────────────────
+   RU/EN is a control, not a fourth contact link. It used to sit in the
+   sidebar under CV / LinkedIn / Telegram, where a language name in a list
+   of destination names read as one more place to go, and only ever named
+   the language you were NOT reading. As a two-state switch it shows both
+   options and marks the current one, and it shares the top-right corner
+   with Book a call — the page's own controls, above the contact pills.
+   `display: contents` keeps the wrapper inert below 1200px, where the CTA
+   hides and the compact copy in the sticky mobile bar takes over. */
+.topbar-right {
+  display: contents;
+}
+
+.lang-switch {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  height: 40px;
+  padding: 4px;
+  border-radius: 40px;
+  background: var(--bg-card);
+}
+
+.lang-switch--compact {
+  display: inline-flex;
+  height: 32px;
+  padding: 3px;
+}
+
+.lang-switch__opt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 40px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.4px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lang-switch--compact .lang-switch__opt {
+  min-width: 30px;
+  height: 26px;
+  padding: 0 8px;
+  font-size: 13px;
+}
+
+/* Inside the drawer header the switch sits beside the close button, so the
+   sticky bar keeps room for the full name — at 375px the compact copy was
+   squeezing "Victoria Kukharenko" into an ellipsis. */
+.menu-drawer__header .lang-switch--compact {
+  flex: 0 0 auto;
+  margin-left: auto;
+}
+
+/* The current language is a label, not a link — it carries the thumb. */
+.lang-switch__opt.is-active {
+  background: var(--button-secondary);
+  color: var(--text-primary);
+}
+
+.lang-switch__opt:not(.is-active):hover {
+  color: var(--text-primary);
+}
+
+@media (min-width: 1200px) {
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: fixed;
+    top: 24px;
+    right: var(--page-x);
+    z-index: 90;
+  }
+
+  /* Both CTAs pin themselves to this corner; inside the row they sit in flow. */
+  .topbar-right .case__cta,
+  .topbar-right .profile-section__cta {
+    position: static;
+  }
+
+  .lang-switch {
+    display: inline-flex;
+  }
+
+  .lang-switch--compact {
+    display: none;
+  }
+}
+
 .case__back-icon {
   width: 56px;
   height: 56px;
@@ -2597,24 +2694,77 @@ html {
   /* Half-width geometry: the paired cards keep exactly the height a
      full-width card has (100cqw = the .projects row width), so the row
      lines up with the Syno and iTAB cards around it. The aspect-ratio is
-     only a fallback for browsers without container-query units. The
-     wrapped header is taller (~170px), so the phone starts below it, and
-     the video takes a bigger share of the narrow card. */
+     only a fallback for browsers without container-query units.
+
+     Inside, the paired card drops the absolute positioning the full-width
+     cards use and becomes a two-row grid: the header takes the height its
+     text actually needs, the visual takes the rest. A fixed top for the
+     visual could not hold — a wrapped subtitle is three lines in Russian
+     where it is two in English, and the phone ran up under it. */
   .project-pair .project-card__inner {
     aspect-ratio: 1040 / 1418;
     height: calc(100cqw * 693 / 1040);
+    display: grid;
+    /* 154px is the old fixed geometry: 28px inset + a two-line header, so a
+       short header still puts the visual at exactly 178px and the two cards
+       of a pair keep phones of the same height. A header that needs more
+       than that pushes the visual down instead of being run over. */
+    grid-template-rows: minmax(154px, auto) 1fr;
   }
-  /* Case-page manner (.case__hooh-plate): the phone stands WHOLE inside
-     the card, fitted to the zone between the header and the bottom edge —
-     no cropping. top+bottom stretch the zone, the video takes its full
-     height and derives width from its own aspect ratio. */
-  .project-pair .project-card__phones {
-    top: 178px;
-    bottom: 32px;
+  .project-pair .project-card__header {
+    position: static;
+    /* The header is a two-row grid of its own. As a stretched grid item it
+       filled the whole reserved row and its title and subtitle drifted
+       apart, so it sits at the top of the row and keeps its own row-gap. */
+    align-self: start;
+    margin: 28px 28px 0;
+  }
+  /* Case-page manner (.case__hooh-plate): the phone stands WHOLE in the
+     row left over under the header — fitted to it, never cropped. It takes
+     the row's full height and derives its width from its own ratio. */
+  .project-pair .project-card__phones,
+  .project-pair .project-card__itab-group {
+    position: static;
+    /* shimmer.js writes an inline `position: relative` on a blur-up box the
+       stylesheet leaves static, so the offsets the full-width layout sets
+       have to be cleared by hand — as a relative box the iTAB group kept
+       obeying its `top` and `left` and slid out of the card. */
+    inset: auto;
+    transform: none;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    margin: 24px 28px 32px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
   }
   .project-pair .project-card__phone-video {
     width: auto;
     height: 100%;
+  }
+  /* The hover zoom carries the centring transform on the full-width cards;
+     here the grid does the centring, so the zoom is only a zoom. */
+  .project-pair .project-card:hover .project-card__phones,
+  .project-pair .project-card:hover .project-card__itab-group {
+    transform: scale(1.04);
+  }
+
+  /* The iTAB pair. At half width the card's box turns portrait, and the
+     desktop-plus-phone composition stops fitting: the landscape screen is
+     cropped to a vertical slice of itself and the phone runs off the card
+     edge. So the pair shows the phone alone, standing whole in the same
+     zone as the card beside it — the same trade the ≤1199px rules make,
+     resolved the other way round because there the card is wide and here
+     it is tall. The desktop shot returns below 1200px. */
+  .project-pair .project-card__itab-desktop {
+    display: none;
+  }
+  .project-pair .project-card__itab-mobile {
+    position: static;
+    box-sizing: border-box;
+    height: 100%;
+    width: auto;
   }
 }
 
@@ -5914,7 +6064,9 @@ a, button, [role="button"], summary, label {
    below the top and run off the bottom edge, so the cover reads as a cropped
    device scene rather than a row of complete screenshots. */
 .case__hero-image--sp {
-  background: #59ad3b linear-gradient(135deg, #74c957 0%, #59ad3b 48%, #3e8e2c 100%);
+  /* Cover runs the service's own blue, not the store's green: every screen
+     in this case is the specialist service, which is blue throughout. */
+  background: #6e9fff linear-gradient(135deg, #8fb6ff 0%, #6e9fff 48%, #496df0 100%);
   aspect-ratio: 1088 / 684;
 }
 

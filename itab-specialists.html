@@ -52,9 +52,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=337">
+  <link rel="stylesheet" href="styles.min.css?v=338">
   <script src="typographer.js?v=6" defer></script>
-  <script src="shimmer.js?v=6" defer></script>
+  <script src="shimmer.js?v=7" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
 </head>
 <body class="case-page--itab case-page--itab-sp">
@@ -82,11 +82,13 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/ru/itab-specialists.html" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
     </div>
   </aside>
 
-  <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+  <div class="topbar-right">
+    <nav class="lang-switch" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/itab-specialists.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
+    <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+  </div>
 
   <main class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
@@ -114,11 +116,11 @@
     <article class="case">
       <header class="case__hero">
         <h1 class="case__title">iTAB — adding a specialist consultation service to a supplements store</h1>
-        <p class="case__intro">iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem — specialists get a cabinet, a schedule and a questionnaire that puts them in a catalogue; clients find, book and pay without leaving the store. The mobile direction remained a product concept, but its logic became the web service that shipped, and I designed that version too. The web screens sit next to the mobile ones below.</p>
+        <p class="case__intro">iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem — specialists get a cabinet, a schedule and an application that puts them in a catalogue; clients find, book and pay without leaving the store. The mobile direction remained a product concept, but its logic became the web service that shipped, and I designed that version too. The web screens sit next to the mobile ones below.</p>
         <dl class="case__proof-strip" aria-label="Project scope at a glance">
           <div><dt>Roles</dt><dd>Specialist + client, one account</dd></div>
-          <div><dt>Scope</dt><dd>60+ screens · five flows</dd></div>
           <div><dt>Gate</dt><dd>Legal status before listing</dd></div>
+          <div><dt>Outcome</dt><dd>Shipped as the web service</dd></div>
         </dl>
         <dl class="case-meta case-meta--mobile">
         <div class="case-meta__item">
@@ -136,7 +138,7 @@
         </dl>
         <div class="case__hero-image case__hero-image--sp" data-shimmer>
           <div class="case__itab-board case__itab-board--trio" aria-label="Three screens of the service: the specialists catalogue, a specialist card and the specialist cabinet">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-b-list.webp?v=3" alt="Specialists catalogue — specialty strip, sorting, quick filters and specialist cards with credentials and price" loading="eager" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-b-list.webp?v=4" alt="Specialists catalogue — specialty strip, sorting, quick filters and specialist cards with credentials and price" loading="eager" width="1170" height="2532">
             <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-b-card.webp?v=3" alt="Specialist card — credentials, patient types, next free slots, consultation format and a single price" loading="eager" width="1170" height="2574">
             <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Specialist cabinet after moderation — consultations, schedule, recommendations and the referral code" loading="eager" width="1170" height="2532">
           </div>
@@ -158,7 +160,7 @@
         </div>
         <div class="case__block">
           <h2 class="case__block-title">What changed</h2>
-          <p class="case__block-body">Instead of designing a separate app for doctors, I framed the service as a second context inside the client’s own account: a cabinet that appears after a questionnaire, a catalogue that inherits the store’s card language, and a booking flow that ends in the store’s own checkout.</p>
+          <p class="case__block-body">Instead of designing a separate app for doctors, I framed the service as a second context inside the client’s own account: a cabinet that appears after an application, a catalogue that inherits the store’s card language, and a booking flow that ends in the store’s own checkout.</p>
         </div>
       </section>
 
@@ -187,50 +189,50 @@
 
       <section class="case__section">
         <h2 class="case__section-title">1. Getting a specialist into the catalogue</h2>
-        <p class="case__section-body">The entry point is the questionnaire. It opens with the reasons to fill it in — recommendations for clients, a flow of clients, a payout every month — and promises fifteen minutes. The form is cut into short steps with a progress bar, and closing it at any point offers to keep the progress rather than lose it.</p>
-        <p class="case__section-body">The steps follow what the platform needs before it can list anyone: personal data, professional data with diplomas and memberships, the consultation format, services with a price for each, and the legal gate. Without a registered employment status the platform cannot pay a specialist, so the questionnaire asks for it before the catalogue ever shows them. The result goes to moderation and comes back within a working day.</p>
+        <p class="case__section-body">The entry point is the application. It opens with the reasons to fill it in — recommendations for clients, a flow of clients, a payout every month — and promises fifteen minutes. The form is cut into short steps with a progress bar, and closing it at any point offers to keep the progress rather than lose it.</p>
+        <p class="case__section-body">The steps follow what the platform needs before it can list anyone: personal data, professional data with diplomas and memberships, the consultation format, services with a price for each, and the legal gate. Without a registered employment status the platform cannot pay a specialist, so the application asks for it before the catalogue ever shows them. The result goes to moderation and comes back within a working day.</p>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The questionnaire: value proposition, professional information and employment-status gate">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-q-start.webp?v=3" alt="Questionnaire start screen — why fill it in: recommendations for clients, a client flow, monthly payouts" loading="lazy" width="1170" height="2532">
-            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-q-prof.webp?v=3" alt="Questionnaire step two — professional information with specialty, courses, memberships and diplomas" loading="lazy" width="1170" height="2532">
-            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-q-employment.webp?v=3" alt="Questionnaire — employment status: self-employed, sole trader or company, required before listing" loading="lazy" width="1170" height="2532">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The application: value proposition, professional information and employment-status gate">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-q-start.webp?v=3" alt="Application start screen — why fill it in: recommendations for clients, a client flow, monthly payouts" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-q-prof.webp?v=3" alt="Application step two — professional information with specialty, courses, memberships and diplomas" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-q-employment.webp?v=3" alt="Application — employment status: self-employed, sole trader or company, required before listing" loading="lazy" width="1170" height="2532">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the specialist questionnaire from the start screen to moderation">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-start.webp?v=3" alt="Questionnaire start screen — why fill it in: recommendations for clients, a client flow, monthly payouts" loading="lazy" width="1170" height="2532"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-prof.webp?v=3" alt="Questionnaire step two — professional information with specialty, courses, memberships and diplomas" loading="lazy" width="1170" height="2532"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-employment.webp?v=3" alt="Questionnaire — employment status: self-employed, sole trader or company, required before listing" loading="lazy" width="1170" height="2532"></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the specialist application from the start screen to moderation">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-start.webp?v=3" alt="Application start screen — why fill it in: recommendations for clients, a client flow, monthly payouts" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-prof.webp?v=3" alt="Application step two — professional information with specialty, courses, memberships and diplomas" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-q-employment.webp?v=3" alt="Application — employment status: self-employed, sole trader or company, required before listing" loading="lazy" width="1170" height="2532"></div>
           </div>
           <figcaption>Value first, professional proof next, legal eligibility last: the form earns the effort before it asks for the gate that determines whether a specialist can be listed and paid.</figcaption>
         </figure>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist questionnaire — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right">
-            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist questionnaire — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003">
           </div>
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist questionnaire — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid">
-            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist questionnaire — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003">
+          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid">
+            <img class="case__itab-board-desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003">
           </div>
-          <div class="case__slider" role="group" aria-label="Swipe through the two questionnaire steps on the web: professional information and employment status">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist questionnaire — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003"></div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist questionnaire — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003"></div>
+          <div class="case__slider" role="group" aria-label="Swipe through the two application steps on the web: professional information and employment status">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-onboarding.webp?v=6" alt="Web specialist application — a five-step form with the progress on the left, the professional information step with specialty, experience, education, patient types and document upload, and the reasons to join on the right" loading="lazy" width="1782" height="1003"></div>
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="assets/case-itab-sp-web-legal.webp?v=6" alt="Web specialist application — the employment status step: self-employed, sole proprietor or LLC, the tax ID and payout card fields, and the note that a registered status is required to be listed and paid" loading="lazy" width="1782" height="1003"></div>
           </div>
-          <figcaption>Shipped on the web: the same questionnaire as a five-step form. Professional data with documents comes second, and the legal gate stays last, with the reason it exists stated on the step itself.</figcaption>
+          <figcaption>Shipped on the web: the same application as a five-step form. Professional data with documents comes second, and the legal gate stays last, with the reason it exists stated on the step itself.</figcaption>
         </figure>
       </section>
       <section class="case__section">
         <h2 class="case__section-title">2. One account, two contexts</h2>
-        <p class="case__section-body">A specialist is also a customer of the store, so the cabinet is a second context of the same account, not a second login. Before the questionnaire it holds one call to action and the referral code; after moderation it gains consultations, the schedule and recommendations, and a single button switches back to the client profile with its orders and appointments.</p>
-        <p class="case__section-body">The professional profile keeps the structure of the questionnaire — main and professional information as two tabs — so nothing is typed twice and every field can be edited where it was entered.</p>
+        <p class="case__section-body">A specialist is also a customer of the store, so the cabinet is a second context of the same account, not a second login. Before the application it holds one call to action and the referral code; after moderation it gains consultations, the schedule and recommendations, and a single button switches back to the client profile with its orders and appointments.</p>
+        <p class="case__section-body">The professional profile keeps the structure of the application — main and professional information as two tabs — so nothing is typed twice and every field can be edited where it was entered.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The specialist cabinet before and after moderation, and the client context of the same account">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-cab-empty.webp?v=3" alt="Specialist cabinet before the questionnaire — a single call to action and the referral code" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-cab-empty.webp?v=3" alt="Specialist cabinet before the application — a single call to action and the referral code" loading="lazy" width="1170" height="2532">
             <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Specialist cabinet after moderation — consultations, schedule, recommendations and the referral code" loading="lazy" width="1170" height="2532">
             <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-cab-client.webp?v=3" alt="The same account in its client context — orders, consultations and appointments" loading="lazy" width="1170" height="2532">
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the cabinet before and after moderation and the client context">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-empty.webp?v=3" alt="Specialist cabinet before the questionnaire — a single call to action and the referral code" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-empty.webp?v=3" alt="Specialist cabinet before the application — a single call to action and the referral code" loading="lazy" width="1170" height="2532"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-confirmed.webp?v=3" alt="Specialist cabinet after moderation — consultations, schedule, recommendations and the referral code" loading="lazy" width="1170" height="2532"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-cab-client.webp?v=3" alt="The same account in its client context — orders, consultations and appointments" loading="lazy" width="1170" height="2532"></div>
           </div>
@@ -270,8 +272,28 @@
           <figcaption>Shipped on the web: the catalogue keeps the card language of the store, and the profile keeps credentials, services and the cancellation rule on one screen with the price.</figcaption>
         </figure>
       </section>
+
       <section class="case__section">
-        <h2 class="case__section-title">4. Running consultations</h2>
+        <h2 class="case__section-title">4. Two clocks, one appointment</h2>
+        <p class="case__section-body">iTAB sells across a country eleven time zones wide, so a consultation has two clocks: the client’s and the specialist’s. Every screen states which one it is showing. The client picks a slot in their own zone and the list says so. The specialist builds the schedule in theirs, under a line that says clients see their own time. Checkout is where the two meet, so it prints both — 17:00 for the client, 10:00 in Moscow for the doctor.</p>
+        <p class="case__section-body">The same rule covers the case that breaks naive implementations: a client who moves between booking and appointment. The entry keeps the time it was booked in and adds the time it will actually start in the zone the client is in now.</p>
+
+        <figure class="case__figure">
+          <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Time zones across the service: the client’s slot list, the checkout with both times, and the specialist’s schedule">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-tz-client.webp?v=1" alt="Choosing a slot — the list of times is labelled with the client’s own zone, Vladivostok UTC+10" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-tz-checkout.webp?v=1" alt="Checkout — the appointment time is printed in both zones: 17:00 for the client, 10:00 in Moscow" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-tz-specialist.webp?v=1" alt="Specialist schedule — a line states that the slots are in the specialist’s zone and that clients see their own" loading="lazy" width="1170" height="2532">
+          </div>
+          <div class="case__slider" role="group" aria-label="Swipe through the time-zone rule: the client’s slots, the checkout and the specialist’s schedule">
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-tz-client.webp?v=1" alt="Choosing a slot — the list of times is labelled with the client’s own zone, Vladivostok UTC+10" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-tz-checkout.webp?v=1" alt="Checkout — the appointment time is printed in both zones: 17:00 for the client, 10:00 in Moscow" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-tz-specialist.webp?v=1" alt="Specialist schedule — a line states that the slots are in the specialist’s zone and that clients see their own" loading="lazy" width="1170" height="2532"></div>
+          </div>
+          <figcaption>Every screen names the clock it is showing, and the one place the two clocks meet shows both.</figcaption>
+        </figure>
+      </section>
+      <section class="case__section">
+        <h2 class="case__section-title">5. Running consultations</h2>
         <p class="case__section-body">For the specialist the service is a schedule and a list. The schedule starts empty and is built in two moves — pick the dates open for booking, then the slots for each day, with a repeat option for a regular week. The consultations list separates planned from completed; each planned entry can be confirmed, taken to chat or cancelled with a reason that the client receives.</p>
         <p class="case__section-body">Chat lives next to the booking, so moving a consultation is a conversation inside the app rather than a phone call outside it.</p>
 
@@ -304,18 +326,17 @@
         </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">5. Supporting flow: the partner programme</h2>
-        <p class="case__section-body">Specialists bring clients into the store through a personal promo code: the client gets a discount on the catalogue, the specialist gets cashback on every order and a bonus when the month’s total crosses a threshold. Joining is a short questionnaire of its own — city, how you heard about the programme, personal details and the code — with the one error that matters handled inline: a code that is already taken.</p>
-        <p class="case__section-body">The code lands in the cabinet next to consultations. That is the loop the service was built for: advice in a consultation, a recommendation with a code, a purchase in the same app.</p>
+        <h2 class="case__section-title">6. Supporting flow: the partner programme</h2>
+        <p class="case__section-body">Specialists bring clients into the store through a personal promo code: the client gets a discount, the specialist gets cashback on every order and a bonus once the month crosses a threshold. Joining is a short form of its own, with the one error that matters handled inline — a code that is already taken. The code then lands in the cabinet next to consultations, closing the loop the service was built for: advice, a recommendation with a code, a purchase in the same app.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Partner programme: joining, choosing a promo code and the created code">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short questionnaire to join" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short form to join" loading="lazy" width="1170" height="2532">
             <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532">
             <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532">
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through the partner programme from the rules to the created code">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short questionnaire to join" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-intro.webp?v=3" alt="Partner programme — a short form to join" loading="lazy" width="1170" height="2532"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-promo.webp?v=3" alt="Choosing a personal promo code" loading="lazy" width="1170" height="2532"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-r-success.webp?v=3" alt="Promo code created — it now lives in the specialist cabinet" loading="lazy" width="1170" height="2532"></div>
           </div>
@@ -323,21 +344,21 @@
         </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">6. A later audit: the states the flow was missing</h2>
-        <p class="case__section-body">A later case-study audit found the happy path complete and eight failure states missing — the ones a real service meets early. I designed all eight in the existing component and content system. The three shown here carry the highest operational risk: a profile returned for fixes, a date with no available time, and a booked slot that cannot simply be removed.</p>
+        <h2 class="case__section-title">7. Second pass: the states the happy path missed</h2>
+        <p class="case__section-body">Going back over the finished flow, I found the happy path complete and eight failure states missing — the ones a real service meets in its first weeks. I designed all eight inside the existing component and content system. The three here carry the highest operational risk: an application returned for fixes, a date with no free time, and a booked slot that cannot simply be removed.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Profile returned for fixes, no free time and a booked slot that cannot be deleted">
-            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-st-fix.webp?v=3" alt="Cabinet when the questionnaire comes back — the reason and a way to fix it" loading="lazy" width="1170" height="2532">
+            <img class="case__itab-board-phone case__itab-board-phone--first" src="assets/case-itab-sp-st-fix.webp?v=3" alt="Cabinet when the application comes back — the reason and a way to fix it" loading="lazy" width="1170" height="2532">
             <img class="case__itab-board-phone case__itab-board-phone--second" src="assets/case-itab-sp-st-notime.webp?v=3" alt="No free time on the chosen date — the nearest slot is offered instead" loading="lazy" width="1170" height="2574">
             <img class="case__itab-board-phone case__itab-board-phone--third" src="assets/case-itab-sp-st-slotbooked.webp?v=3" alt="A schedule slot with a booking cannot be removed — the specialist is offered to reschedule" loading="lazy" width="1170" height="2532">
           </div>
           <div class="case__slider" role="group" aria-label="Swipe through three representative states added in the later audit">
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-fix.webp?v=3" alt="Cabinet when the questionnaire comes back — the reason and a way to fix it" loading="lazy" width="1170" height="2532"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-fix.webp?v=3" alt="Cabinet when the application comes back — the reason and a way to fix it" loading="lazy" width="1170" height="2532"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-notime.webp?v=3" alt="No free time on the chosen date — the nearest slot is offered instead" loading="lazy" width="1170" height="2574"></div>
             <div class="case__slide"><img class="case__shot case__shot--phone" src="assets/case-itab-sp-st-slotbooked.webp?v=3" alt="A schedule slot with a booking cannot be removed — the specialist is offered to reschedule" loading="lazy" width="1170" height="2532"></div>
           </div>
-          <figcaption>The audit keeps the original delivery separate from the later case-study work, while showing how the product model handles real operational exceptions.</figcaption>
+          <figcaption>The states a real service meets in its first weeks. Each one keeps the person moving — a reason and a fix, the nearest free slot, a reschedule — instead of ending the flow.</figcaption>
         </figure>
       </section>
 
@@ -346,10 +367,10 @@
       <section class="case__outcome">
         <h2 class="case__outcome-title">Result</h2>
         <div class="case__outcome-body">
-          <p>The work defined a connected consultation service inside the iTAB ecosystem. Specialists move from application and moderation to managing availability and consultations in one account; clients discover, compare, book and pay without leaving the store. The same model became the foundation for the web service that shipped.</p>
+          <p>The work defined a connected consultation service inside the iTAB ecosystem. Specialists move from application and moderation to managing availability and consultations in one account; clients discover, compare, book and pay without leaving the store. The same model became the foundation for the web service that shipped. Usage numbers for it stay under iTAB’s NDA, so this case shows the model rather than the metrics.</p>
           <p><strong>One product model for two journeys:</strong> eligibility, scheduling, payment and cancellation follow shared rules across the specialist and client sides.</p>
           <p><strong>An extension of the store, not a second product:</strong> the service reuses the existing account, catalogue language and checkout instead of introducing another login and a disconnected experience.</p>
-          <p><strong>From concept to release:</strong> I carried the core journey into the shipped web version, from specialist onboarding and scheduling through client booking and payment. A later audit expanded the mobile model with the failure and edge states shown in this case.</p>
+          <p><strong>From concept to release:</strong> I carried the core journey into the shipped web version, from specialist onboarding and scheduling through client booking and payment. A second pass expanded the model with the failure and edge states shown here.</p>
         </div>
       </section>
 
@@ -388,6 +409,7 @@
   <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Site navigation">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
+      <nav class="lang-switch lang-switch--compact" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/itab-specialists.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
       <button class="menu-drawer__close" type="button" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -403,7 +425,6 @@
       <a class="btn btn--light" href="cv.html">CV</a>
       <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-      <a class="btn btn--light" href="/ru/itab-specialists.html" hreflang="ru" lang="ru" data-lang-switch="ru">Русский</a>
     </div>
   </div>
 
