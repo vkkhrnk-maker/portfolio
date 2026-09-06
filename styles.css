@@ -6160,3 +6160,318 @@ video.case__itab-board-desktop,
   .case-page--itab-sp .case__proof-strip { order: 4; }
   .case-page--itab-sp .case-meta--mobile { order: 5; }
 }
+
+/* ── iTAB specialists cover: live specialist card (itab-live.js) ─────────
+   The middle phone of the hero is rebuilt in HTML at the Figma size
+   (390×844) and scaled to the phone by --il-scale (set from the wrapper
+   width by the script). It wears the same bezel rules as the image phones
+   (.case__itab-board-phone) and the same --second placement; only the inside
+   is live. Type is Roboto, the font of the app screens, so the live phone
+   does not fall out of line with the two exported ones next to it. */
+@font-face {
+  font-family: 'Roboto Live';
+  src: url('fonts/Roboto-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+.case__itab-board .itab-live {
+  aspect-ratio: 390 / 844;
+  height: 104%;
+  width: auto;
+  cursor: default;
+}
+
+.itab-live-fallback[hidden] { display: none; }
+
+.itab-live__wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 34px;
+  background: #fff;
+}
+
+.itab-live__screen {
+  --il-scale: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 844px;
+  transform: scale(var(--il-scale));
+  transform-origin: 0 0;
+  background: #fff;
+  color: #1c1f28;
+  font-family: 'Roboto Live', Roboto, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.31px;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+}
+.itab-live__screen * { box-sizing: border-box; }
+.itab-live__screen svg { display: block; }
+
+/* status bar + header plate */
+.il-status {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 53px;
+  z-index: 2;
+}
+.il-time {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 134px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
+  letter-spacing: -0.41px;
+  color: #000;
+}
+.il-island {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 125px;
+  height: 37px;
+  border-radius: 100px;
+  background: #000;
+  transform: translateX(-50%);
+}
+.il-sysicons {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  width: 134px;
+  display: flex;
+  justify-content: center;
+}
+.il-header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  height: 117px;
+  background: #f8f8f8;
+  border-radius: 0 0 24px 24px;
+}
+.il-back { position: absolute; left: 41px; top: 63px; }
+.il-heart { position: absolute; left: 344px; top: 63px; }
+
+/* the strip: a clipped window, a fixed ring at the screen centre, a row that
+   slides so the chosen avatar lands under the ring — the same construction as
+   the Figma prototype */
+.il-strip {
+  position: absolute;
+  left: 65px;
+  top: 59px;
+  width: 260px;
+  height: 36px;
+  overflow: hidden;
+}
+.il-ring {
+  position: absolute;
+  left: 112px;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #496df0;
+  border-radius: 50%;
+}
+.il-row {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  height: 32px;
+  display: flex;
+  gap: 2px;
+  transition: transform 0.36s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.il-avatar {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #e6e6e6;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.il-avatar img { display: block; width: 32px; height: 32px; border-radius: 50%; }
+.il-avatar:focus-visible { outline: 2px solid #496df0; outline-offset: 2px; }
+.il-fade {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 36px;
+  pointer-events: none;
+}
+.il-fade--l { left: 0; background: linear-gradient(90deg, #f8f8f8, rgba(248, 248, 248, 0)); }
+.il-fade--r { right: 0; background: linear-gradient(270deg, #f8f8f8, rgba(248, 248, 248, 0)); }
+
+/* card body */
+.il-content {
+  position: absolute;
+  left: 20px;
+  top: 141px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  transition: opacity 0.16s ease;
+}
+.itab-live__screen.is-switching .il-content { opacity: 0.35; }
+.il-photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1.5px solid #f3f3f3;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+.il-photo__img { display: block; width: 100%; height: 100%; }
+.il-title { text-align: center; }
+.il-name {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+.il-spec {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.15px;
+  color: #7f8082;
+}
+.il-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: -8px;
+}
+.il-chip {
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: 14px;
+  background: #f3f3f3;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.15px;
+  white-space: nowrap;
+}
+.il-switch {
+  align-self: stretch;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #f3f3f3;
+  margin-top: -4px;
+}
+.il-switch__tab {
+  flex: 1 1 0;
+  height: 32px;
+  border-radius: 12px;
+  background: #f6f6f6;
+  color: #6e9fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: -0.15px;
+  text-align: center;
+}
+.il-switch__tab.is-on { background: #496df0; color: #fff; }
+.il-slots {
+  align-self: stretch;
+  padding-bottom: 12px;
+  border-radius: 16px;
+  background: #f3f3f3;
+  margin-top: -4px;
+}
+.il-slots__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.il-slots__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 16px;
+}
+.il-slot {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.31px;
+}
+.il-section {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+.il-h {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+.il-format { display: flex; gap: 8px; }
+.il-tab {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 44px;
+  padding: 12px;
+  border-radius: 16px;
+  background: #f3f3f3;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.15px;
+  white-space: nowrap;
+}
+.il-tab.is-on { box-shadow: inset 0 0 0 1.5px #496df0; }
+.il-about {
+  margin: -4px 0 0;
+  color: #7b7b7b;
+  font-size: 16px;
+  line-height: 1.4;
+  letter-spacing: -0.31px;
+}
+.il-more {
+  margin-top: -8px;
+  color: #496df0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.15px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .il-row, .il-content { transition: none; }
+}
