@@ -150,28 +150,6 @@
         </div>
       </section>
 
-      <section class="case__section">
-        <h2 class="case__section-title">Ограничения</h2>
-        <p class="case__section-body">Внутри iTAB у сервиса не было предшественника, поэтому я разобрала оба пути — специалиста и клиента — и ограничения вокруг них. Эти четыре и определили обе стороны сервиса.</p>
-        <div class="case__gap-grid case__gap-grid--four">
-          <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Правовой барьер</h3>
-            <p class="case__gap-card__desc">Платформа может платить только оформленному специалисту, поэтому статус и документы идут раньше публикации</p>
-          </div>
-          <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Два контекста, один аккаунт</h3>
-            <p class="case__gap-card__desc">Специалист — ещё и покупатель, поэтому кабинет должен стоять рядом с профилем магазина, а не вместо него</p>
-          </div>
-          <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Доверие до оплаты</h3>
-            <p class="case__gap-card__desc">Регалии, формат и цена должны читаться прямо в списке, а не только в профиле</p>
-          </div>
-          <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Реальное расписание</h3>
-            <p class="case__gap-card__desc">Специалисты отменяют, клиенты переносят, слоты сталкиваются — операционные состояния нужны с первого дня</p>
-          </div>
-        </div>
-      </section>
 
       <section class="case__section">
         <h2 class="case__section-title">1. Как специалист попадает в каталог</h2>
@@ -285,9 +263,6 @@
           <figcaption>Свободное время специалист выставляет заранее; дальше каждый занятый слот ведёт к одним и тем же действиям — подтвердить, написать клиенту или отменить с причиной.</figcaption>
         </figure>
 
-      </section>
-      <section class="case__section">
-        <h2 class="case__section-title">6. Ошибки и крайние случаи</h2>
         <p class="case__section-body">Кроме основного сценария я спроектировала состояния, в которые сервис попадает в первые же недели. Все собраны из существующих компонентов и текстов. Три самых рискованных: анкета вернулась на доработку, на выбранную дату нет времени, слот занят и его нельзя просто удалить.</p>
 
         <figure class="case__figure">
@@ -305,22 +280,8 @@
         </figure>
       </section>
       <section class="case__section">
-        <h2 class="case__section-title">7. Что запустилось в вебе</h2>
-        <p class="case__section-body">Веб-версия переносит мобильную модель целиком: та же анкета из пяти шагов с правовым барьером в конце, тот же язык карточек, те же три действия на записи.</p>
-        <figure class="case__figure">
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-анкета специалиста — форма из пяти шагов: слева прогресс, в центре шаг с профессиональной информацией, специальностями, опытом, образованием, типами пациентов и документами">
-            <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-onboarding.webp?v=6" alt="Веб-анкета специалиста — форма из пяти шагов: слева прогресс, в центре шаг с профессиональной информацией, специальностями, опытом, образованием, типами пациентов и документами" loading="lazy" width="1782" height="1003">
-          </div>
-          <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-анкета специалиста — шаг статуса занятости: самозанятый, ИП или ООО, поля ИНН и карты для выплат и предупреждение, что без оформленного статуса профиль не попадёт в каталог">
-            <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-legal.webp?v=6" alt="Веб-анкета специалиста — шаг статуса занятости: самозанятый, ИП или ООО, поля ИНН и карты для выплат и предупреждение, что без оформленного статуса профиль не попадёт в каталог" loading="lazy" width="1782" height="1003">
-          </div>
-          <div class="case__slider" role="group" aria-label="Пролистайте два шага веб-анкеты: профессиональная информация и статус занятости">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-onboarding.webp?v=6" alt="Веб-анкета специалиста — форма из пяти шагов: слева прогресс, в центре шаг с профессиональной информацией, специальностями, опытом, образованием, типами пациентов и документами" loading="lazy" width="1782" height="1003"></div>
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-legal.webp?v=6" alt="Веб-анкета специалиста — шаг статуса занятости: самозанятый, ИП или ООО, поля ИНН и карты для выплат и предупреждение, что без оформленного статуса профиль не попадёт в каталог" loading="lazy" width="1782" height="1003"></div>
-          </div>
-          <figcaption>Та же анкета в виде формы из пяти шагов. Профессиональные данные с документами идут вторым шагом, правовой барьер остаётся последним, и причина, по которой он существует, названа прямо на шаге.</figcaption>
-        </figure>
-        <figure class="case__figure">
+        <h2 class="case__section-title">6. Что запустилось в вебе</h2>
+        <figure class="case__figure case__figure--web-pair">
           <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Прокрутка веб-каталога специалистов: поиск, популярные темы, фильтры по формату и датам и сетка карточек с ближайшими свободными слотами">
             <video class="case__itab-board-desktop" data-src="../assets/case-itab-sp-web-catalog-scroll.mp4?v=3" poster="../assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Прокрутка веб-каталога специалистов: поиск, популярные темы, фильтры по формату и датам и сетка карточек с ближайшими свободными слотами"></video>
           </div>
@@ -331,9 +292,8 @@
             <div class="case__slide"><video class="case__shot case__shot--desktop" data-src="../assets/case-itab-sp-web-catalog-scroll.mp4?v=3" poster="../assets/case-itab-sp-web-catalog.webp?v=6" autoplay loop muted playsinline preload="none" width="1782" height="1003" aria-label="Прокрутка веб-каталога специалистов: поиск, популярные темы, фильтры по формату и датам и сетка карточек с ближайшими свободными слотами"></video></div>
             <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-profile.webp?v=6" alt="Веб-страница специалиста — регалии, услуги, формат консультации, дата и время записи, о специалисте, образование, сообщества и отзывы" loading="lazy" width="1782" height="1003"></div>
           </div>
-          <figcaption>Каталог сохраняет язык карточек магазина, а профиль держит регалии, услуги и правило отмены на одном экране с ценой.</figcaption>
         </figure>
-        <figure class="case__figure">
+        <figure class="case__figure case__figure--web-pair">
           <div class="case__figure-desktop case__itab-board case__itab-board--web-one" aria-label="Веб-кабинет специалиста — список предстоящих консультаций с клиентом, запросом, статусом оплаты и действиями подтвердить, написать или отменить, рядом сводка расписания и реферальный код">
             <img class="case__itab-board-desktop" src="../assets/case-itab-sp-web-cabinet.webp?v=6" alt="Веб-кабинет специалиста — список предстоящих консультаций с клиентом, запросом, статусом оплаты и действиями подтвердить, написать или отменить, рядом сводка расписания и реферальный код" loading="lazy" width="1782" height="1003">
           </div>
@@ -344,7 +304,6 @@
             <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-cabinet.webp?v=6" alt="Веб-кабинет специалиста — список предстоящих консультаций с клиентом, запросом, статусом оплаты и действиями подтвердить, написать или отменить, рядом сводка расписания и реферальный код" loading="lazy" width="1782" height="1003"></div>
             <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-itab-sp-web-schedule.webp?v=6" alt="Веб-расписание специалиста — календарь месяца с открытыми для записи днями, слоты выбранного дня с повтором по неделям и кнопка сохранения" loading="lazy" width="1782" height="1003"></div>
           </div>
-          <figcaption>У консультаций свой статус и те же три действия, что и в мобильной модели, а расписание задаётся один раз — открытые дни и слоты времени с повтором по неделям.</figcaption>
         </figure>
       </section>
 

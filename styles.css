@@ -6271,6 +6271,28 @@ a, button, [role="button"], summary, label {
   margin-top: 12px;
 }
 
+/* The two shipped web screens of a pair sit side by side on desktop rather
+   than stacked. Stacked, this one section ran 2625px — twice any other in
+   the case and a fifth of the whole page — for two landscape screens that
+   read well at half width, each a whole monitor either way. Below 1200 the
+   boards are hidden and the slider takes over, so this is desktop-only. */
+@media (min-width: 1200px) {
+  .case__figure--web-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .case__figure--web-pair .case__itab-board--web-one + .case__itab-board--web-one {
+    margin-top: 0;
+  }
+
+  .case__figure--web-pair figcaption {
+    grid-column: 1 / -1;
+  }
+}
+
 video.case__itab-board-desktop,
 .case__slider video.case__shot--desktop {
   display: block;
