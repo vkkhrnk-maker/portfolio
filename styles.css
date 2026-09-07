@@ -3584,11 +3584,16 @@ html {
     display: none;
   }
 
-  /* The Coming-soon ribbon cuts across this card's top-right corner. Now
-     that the subtitle runs the full card width it has to stop short of that
-     diagonal — the ribbon's edge crosses the second line at ~262px. */
-  .project-card--syno .project-card__subtitle {
-    padding-right: 90px;
+  /* The diagonal ribbon owns the top-right corner. Reserve that corner for
+     both lines of every held-back card so longer EN/RU titles wrap before the
+     strip instead of disappearing underneath it. The reservation grows with
+     phone width, then stops at the desktop value. */
+  .project-card--syno .project-card__title,
+  .project-card--syno .project-card__subtitle,
+  .project-card--soon .project-card__title,
+  .project-card--soon .project-card__subtitle {
+    min-width: 0;
+    padding-right: clamp(76px, 24vw, 96px);
   }
 
   /* Syno's card has to grow with its shot: the card-specific 1040/760 ratio
@@ -5498,15 +5503,27 @@ html {
     scroll-snap-align: center;
     overflow: hidden;
   }
-  /* <picture> must not form a box of its own, or the screen's %-height
-     inside the fixed-height plate has nothing to resolve against */
-  .case-page--fill .shot picture { display: contents; }
+  /* Static screens need two real boxes for concentric iPhone corners:
+     picture is the 39px device shell and img is the 34px screen inside its
+     5px bezel. Putting the bezel on the replaced <img> itself gave its
+     content the outer radius too, which made the lower corners look uneven. */
+  .case-page--fill .shot picture {
+    box-sizing: content-box;
+    display: block;
+    flex: 0 0 auto;
+    height: calc(100% - 10px);
+    width: auto;
+    aspect-ratio: 760 / 1652;
+    padding: 5px;
+    background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
+    border-radius: 39px;
+    overflow: hidden;
+  }
   /* A slider must open on its animation when it has one: a .shot marked
      --lead jumps to the front of the swipe order on phones, while the
      desktop row keeps its narrative order (e.g. the signature video sits
      centred between its two statics there). */
   .case-page--fill .shots .shot--lead { order: -1; }
-  .case-page--fill .shot img,
   .case-page--fill .shot video {
     /* content-box: the 760:1652 ratio sizes the screen itself, the 5px
        bezel wraps around it — same phone as the desktop .shot */
@@ -5517,6 +5534,18 @@ html {
     padding: 5px;
     background: linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%);
     border-radius: 39px;
+  }
+  .case-page--fill .shot picture img {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 760 / 1652;
+    padding: 0;
+    background: none;
+    border-radius: 34px;
+    object-fit: cover;
+    object-position: top center;
   }
 }
 
