@@ -57,6 +57,37 @@ jobs:
             itab-specialists.html \
             ru/itab-specialists.html
 
+
+      # Cloudflare Web Analytics. The beacon is injected here rather than kept
+      # in the page sources, so every published page carries it without having
+      # to be listed anywhere, and so pages opened from disk while working do
+      # not report visits. The step runs after the draft removal above, which
+      # is what keeps unfinished pages out of the counter as well as the site.
+      - name: Add the analytics beacon to every published page
+        env:
+          CF_BEACON_TOKEN: a44507ecd2b34673965ce2891e24d42d
+        run: |
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+
+          beacon = (
+              "  <!-- Cloudflare Web Analytics --><script type='module' "
+              "src='https://static.cloudflareinsights.com/beacon.min.js' "
+              "data-cf-beacon='{\"token\": \"%s\"}'></script>\n"
+              % os.environ["CF_BEACON_TOKEN"]
+          )
+          for page in sorted(Path(".").rglob("*.html")):
+              if page.parts[0] in {"tools", "tmp", "output"}:
+                  continue
+              html = page.read_text(encoding="utf-8")
+              if "</body>" not in html:
+                  print("No closing body tag, skipped %s" % page)
+                  continue
+              page.write_text(html.replace("</body>", beacon + "</body>", 1), encoding="utf-8")
+              print("Beacon added to %s" % page)
+          PY
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
