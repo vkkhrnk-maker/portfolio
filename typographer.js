@@ -39,6 +39,13 @@
   ].join(',');
   const trailingPairPattern =
     /([^\s\u00a0]+)[\t\n\f\r ]+([^\s\u00a0]+)([\t\n\f\r \u00a0]*)$/u;
+  /* The same last pair once it has been bound, so a later pass can take it
+     apart again and weigh it afresh. A pair the service-word rule made is
+     left alone: keeping a preposition off the end of a line is not a
+     judgement call, it stays whatever the measurements say. */
+  const boundPairPattern =
+    /([^\s\u00a0]+)\u00a0([^\s\u00a0]+)([\t\n\f\r \u00a0]*)$/u;
+  const serviceWordSet = new Set(serviceWords);
   const excludedAncestor = [
     'script', 'style', 'noscript', 'template', 'textarea', 'pre', 'code',
     '[contenteditable]:not([contenteditable="false"])'
@@ -109,9 +116,34 @@
     }
   };
 
+  /* The width of the shortest line a heading currently wraps onto. Returns 0
+     for a heading that fits on one line, where there is nothing to weigh. */
+  const narrowestLineWidth = (element) => {
+    const range = document.createRange();
+    range.selectNodeContents(element);
+
+    const lines = new Map();
+    const rects = range.getClientRects();
+    for (let i = 0; i < rects.length; i += 1) {
+      const rect = rects[i];
+      if (rect.width <= 0) continue;
+      const top = Math.round(rect.top);
+      lines.set(top, Math.max(lines.get(top) || 0, rect.width));
+    }
+    if (lines.size < 2) return 0;
+    return Math.min.apply(null, Array.from(lines.values()));
+  };
+
   /* A balanced heading can still leave its final word alone when a narrow
      card or an older browser limits the CSS wrapping algorithm. Keep the
-     last two words together as a small, predictable fallback. */
+     last two words together as a small, predictable fallback.
+
+     The fallback is not free: binding the last pair makes it one wide unit,
+     which can push a short group ahead of it onto a line of its own. On the
+     Russian homepage "Собираю системы, а не отдельные экраны" that turned a
+     lone final word into a far worse orphan, the two-letter "а не" stranded
+     mid-heading. So measure both ways and keep the pair only when it does not
+     leave a line narrower than the one it was there to prevent. */
   const protectHeadingEnding = (heading) => {
     if (!heading || heading.closest(excludedAncestor)) return;
 
@@ -123,12 +155,29 @@
     }
     if (!lastTextNode) return;
 
-    const typed = lastTextNode.nodeValue.replace(
-      trailingPairPattern,
-      '$1\u00a0$2$3'
-    );
-    if (typed !== lastTextNode.nodeValue) {
-      writeTextNode(lastTextNode, typed);
+    /* An earlier pass may already have bound this pair — against the
+       fallback font, or at a width the window has since left. Undo our own
+       binding first so the decision below is made on what is true now. */
+    const bound = lastTextNode.nodeValue.match(boundPairPattern);
+    if (bound && !serviceWordSet.has(bound[1].toLowerCase())) {
+      writeTextNode(
+        lastTextNode,
+        lastTextNode.nodeValue.replace(boundPairPattern, '$1 $2$3')
+      );
+    }
+
+    const released = lastTextNode.nodeValue;
+    const typed = released.replace(trailingPairPattern, '$1\u00a0$2$3');
+    if (typed === released) return;
+
+    const narrowestReleased = narrowestLineWidth(heading);
+
+    writeTextNode(lastTextNode, typed);
+    relaxOverflowingSpaces(lastTextNode);
+
+    const narrowestBound = narrowestLineWidth(heading);
+    if (narrowestReleased && narrowestBound && narrowestBound < narrowestReleased) {
+      writeTextNode(lastTextNode, released);
       relaxOverflowingSpaces(lastTextNode);
     }
   };
@@ -179,6 +228,28 @@
     });
   }).observe(document.body, { childList: true, characterData: true, subtree: true });
 
+  /* Re-weigh every stored pair against the space actually available now. */
+  const reflowTypography = () => {
+    typographedTextNodes.forEach((textNode) => {
+      if (!textNode.isConnected) {
+        typographedTextNodes.delete(textNode);
+        return;
+      }
+      setNonBreakingSpaces(textNode);
+      relaxOverflowingSpaces(textNode);
+    });
+    protectHeadingEndings(document.body);
+  };
+
+  /* The first pass runs on a deferred script, which is usually earlier than
+     the display webfont finishes loading — so it measures the fallback face.
+     Its metrics differ enough to change where a heading wraps, and every
+     decision above is made from measured widths. Re-run once the real face is
+     in, or a heading keeps the break that suited Georgia. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(reflowTypography).catch(() => {});
+  }
+
   /* Re-evaluate the stored pairs when the available width changes. A pair
      released on a phone can be restored on desktop, and a desktop pair is
      relaxed before it can overflow after rotation or window resizing. */
@@ -187,15 +258,7 @@
     if (resizeFrame !== null) cancelAnimationFrame(resizeFrame);
     resizeFrame = requestAnimationFrame(() => {
       resizeFrame = null;
-      typographedTextNodes.forEach((textNode) => {
-        if (!textNode.isConnected) {
-          typographedTextNodes.delete(textNode);
-          return;
-        }
-        setNonBreakingSpaces(textNode);
-        relaxOverflowingSpaces(textNode);
-      });
-      protectHeadingEndings(document.body);
+      reflowTypography();
     });
   }, { passive: true });
 })();
