@@ -855,19 +855,36 @@
         for (const r of range.getClientRects()) {
           if (r.width <= 0) continue;
           const line = lines.find((l) => Math.abs(l.top - r.top) < 4);
-          if (line) line.right = Math.max(line.right, r.right);
-          else lines.push({ top: r.top, right: r.right });
+          if (line) { line.right = Math.max(line.right, r.right); line.bottom = Math.max(line.bottom, r.bottom); }
+          else lines.push({ top: r.top, bottom: r.bottom, right: r.right });
         }
         lines.sort((a, b) => a.top - b.top);
         let clear = 0;
         for (const l of lines) { if (l.right < left) clear += 1; else break; }
+        // Then check the result rather than trust it. A line's rag is wide
+        // enough to stand in only if the figure, once dropped, actually
+        // misses every line — and the drop is what moves it into reach.
+        // 8px of slack, because a line's client rect is not its ink: the
+        // display face's ascender pushes the rect ~20px above the line box,
+        // so a figure resting the required 20px above the headline reads as
+        // a 1px collision. A real landing is a hundred px, not one.
+        const SLACK = 8;
+        const lands = () => {
+          const box = fig.getBoundingClientRect();
+          return lines.some((l) => l.right > box.left + SLACK
+            && l.bottom > box.top + SLACK && l.top < box.bottom - SLACK);
+        };
         fig.style.setProperty('--character-rag', String(clear));
+        while (clear > 0 && lands()) {
+          clear -= 1;
+          fig.style.setProperty('--character-rag', String(clear));
+        }
         // Below its floor the figure cannot get out from under the corner
         // controls on a window this low. Hidden beats a face blurred by the
         // glass pill — her first complaint about this cover.
         const pill = document.querySelector('.lang-switch') || document.querySelector('.profile-section__cta');
         const limit = pill ? pill.getBoundingClientRect().bottom + 8 : 88;
-        fig.classList.toggle('is-tucked', fig.getBoundingClientRect().top < limit);
+        fig.classList.toggle('is-tucked', fig.getBoundingClientRect().top < limit || lands());
       };
       measure();
       window.addEventListener('resize', measure);

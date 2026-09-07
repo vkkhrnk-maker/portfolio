@@ -6094,7 +6094,14 @@ a, button, [role="button"], summary, label {
    need is 0 and every value here collapses to the base rule above. */
 @media (min-width: 1200px) {
   .profile-character {
-    --character-w: clamp(150px, 10vw, 180px);
+    /* Bumped from clamp(150px, 10vw, 180px) 2026-09-07: at 150px the figure
+       read as a sticker beside a 430px headline. The ceiling is set by the
+       height budget, not by taste — the figure is 2.1x taller than it is
+       wide, so every 10px of width costs 21px of the room above the
+       headline. Below ~810px of viewport height the cap never binds and
+       these numbers change nothing; from 1512x890 up they are the whole
+       difference. */
+    --character-w: clamp(160px, 13vw, 220px);
     --character-h: calc(var(--character-w) * 1012 / 480);
     --character-top-min: 88px;
     --character-rag: 0;
