@@ -1099,17 +1099,20 @@ img {
   }
 }
 
-/* iTAB hero — temporary water/olive photographic cover test. */
+/* iTAB hero — the site's own plate. The olive water photograph that sat
+   here was labelled a temporary test and was the last per-brand background
+   left on a case cover; a token plate keeps the cover in the grey-plus-
+   magenta system and follows the dark theme without a second asset. */
 .case__hero-image--itab {
   position: relative;
-  background: #c9cdbd url('assets/itab-hero-water.jpg?v=1') center / cover no-repeat;
+  background: var(--bg-card);
   border-radius: 0;
   overflow: hidden;
   aspect-ratio: 1032 / 600;
 }
 
 /* iTAB case cover — the exact desktop/mobile relationship used by the home
-   project card, placed on the temporary water/olive background. */
+   project card, placed on the plate. */
 .case__itab-cover {
   position: absolute;
   top: 0;
