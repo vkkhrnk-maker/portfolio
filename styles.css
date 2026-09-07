@@ -6035,7 +6035,7 @@ a, button, [role="button"], summary, label {
   .profile-character {
     left: auto;
     right: 0;
-    bottom: calc(100% + 76px);
+    bottom: calc(100% + 40px);
     width: clamp(124px, 34vw, 140px);
     transform: none;
   }
