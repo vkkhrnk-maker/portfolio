@@ -1222,7 +1222,13 @@ img {
    narrative. This is a typographic strip, not another rounded card. */
 .case__proof-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* One equal track per result, whatever the count — the strip carries four
+     on the specialists case, three on iTAB and Hooh, two on Smart Fill. A
+     fixed repeat(4) left the missing tracks as dead space on the right, so
+     three results filled three quarters of the rule and read as a grid that
+     had slipped out of alignment. */
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   margin: -28px 0 -12px;
   padding: 0;
   border-top: 1px solid var(--hairline-strong);
@@ -2321,6 +2327,21 @@ body.case-page--fill .case__outcome-body p {
   flex-shrink: 0;
 }
 
+/* The label never breaks across two lines — the pill is a control, not a
+   paragraph. The Russian "Следующий кейс" is 40% longer than "Next case"
+   and the pair no longer fits one phone line, so the word "кейс" drops out
+   below 640px and the button reads "Следующий"; the arrow already says the
+   rest. English is short enough to keep its full label everywhere. */
+.case__pager-btn span {
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .case__pager-tail {
+    display: none;
+  }
+}
+
 .case__pager-btn:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lift);
@@ -2476,6 +2497,7 @@ body.case-page--fill .case__outcome-body p {
    drops its left border and the second row gains a top one. */
 @media (min-width: 641px) and (max-width: 1100px) {
   .case__proof-strip {
+    grid-auto-flow: row;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2487,6 +2509,13 @@ body.case-page--fill .case__outcome-body p {
   .case__proof-strip > div:nth-child(n + 3) {
     border-top: 1px solid var(--hairline-strong);
   }
+
+  /* An odd third result runs the full width rather than leaving a hole
+     beside it — matches on exactly three items, so the two- and
+     four-result strips are untouched. */
+  .case__proof-strip > div:nth-child(3):last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 /* Phones: case H1 inherits from --fs-h1 via the base .case__title rule;
@@ -2494,6 +2523,7 @@ body.case-page--fill .case__outcome-body p {
    H1 size. (No explicit case-only override needed.) */
 @media (max-width: 640px) {
   .case__proof-strip {
+    grid-auto-flow: row;
     grid-template-columns: 1fr;
     margin: 0;
   }
@@ -6036,6 +6066,45 @@ a, button, [role="button"], summary, label {
 
 .profile-character picture {
   display: contents;
+}
+
+/* Desktop (≥1200): the EN/RU switch and "Book a call" are pinned to the
+   top-right corner while the figure hangs off the headline's top edge, so a
+   short window used to push its head off-screen (1280×720, 1366×657) or
+   under the glass EN/RU pill, whose blur ate the face (1440×810). Three
+   moves, in this order:
+   1. --character-need: how far the figure has to come down for its top to
+      clear the pills — 24px top inset + 40px pill + 24px of air = 88px.
+   2. --character-allow: how far it MAY come down beside the headline, into
+      the rag to the right of the short opening lines. Two lines for the EN
+      copy ("I take products" / "from the first"), one for the RU copy
+      ("Проектирую"); a three-line headline (≥1600 EN, ≥1366 RU) opens with
+      a long line, so none. It stops 12px above the next line's box.
+   3. Whatever need is left after the drop comes off the height, down to a
+      200px floor — below that (windows under ~600px tall) the head goes
+      under the pills again rather than the figure shrinking to a dot.
+   `right`: between 1200 and 1290 the 12% inset would park the figure's
+   baked plate on the tail of "products" (606px into the stage); keep the
+   box 12px clear of it. On a window tall enough for the figure to fit,
+   need is 0 and every value here collapses to the base rule above. */
+@media (min-width: 1200px) {
+  .profile-character {
+    --character-w: clamp(150px, 10vw, 180px);
+    --character-h: calc(var(--character-w) * 1012 / 480);
+    --character-top-min: 88px;
+    --character-rag: 2;
+    --character-need: max(0px, calc(var(--character-top-min) - (100dvh - 24px - 100% - 20px - var(--character-h))));
+    --character-allow: clamp(0px, calc((100% - 3 * var(--lh-h1)) * 2), calc(var(--character-rag) * var(--lh-h1) - 12px));
+    --character-drop: min(var(--character-need), var(--character-allow));
+    right: min(12%, calc(100% - 768px));
+    bottom: calc(100% + 20px - var(--character-drop));
+    width: auto;
+    height: max(200px, calc(var(--character-h) - (var(--character-need) - var(--character-drop))));
+  }
+
+  html[lang="ru"] .profile-character {
+    --character-rag: 1;
+  }
 }
 
 @keyframes profile-idle {
