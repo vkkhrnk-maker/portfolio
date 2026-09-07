@@ -116,7 +116,10 @@
     <article class="case">
       <header class="case__hero">
         <h1 class="case__title">iTAB — adding a specialist consultation service to a supplements store</h1>
-        <p class="case__intro">iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem — specialists get a dashboard, a schedule and an application form that gets them listed in the catalogue; clients find, book and pay without leaving the store. The mobile side is postponed rather than dropped and is still to be built. Its logic became the web service, which is live and has its first metrics behind it, and I designed that version too. The shipped web version has a section of its own at the end.</p>
+        <div class="case__intro">
+          <p>iTAB is a health and wellness store on the Russian market: supplements, lab discounts, expert content. I designed a mobile consultation service for the same ecosystem. Specialists get a dashboard, a schedule and an application form that lists them in the catalogue. Clients find, book and pay without leaving the store.</p>
+          <p>The mobile version is postponed: it is still to be built. Its logic became the web service. That one is live, it has its first metrics behind it, and I designed it too. It has a section of its own at the end.</p>
+        </div>
         <dl class="case__proof-strip" aria-label="Project scope at a glance">
           <div><dt>Roles</dt><dd>Specialist + client, one account</dd></div>
           <div><dt>Gate</dt><dd>Legal status before listing</dd></div>
@@ -155,7 +158,7 @@
         </div>
         <div class="case__block">
           <h2 class="case__block-title">Users</h2>
-          <p class="case__block-body">Two roles with opposite needs. A specialist wants clients and as little paperwork as possible, but the platform can only pay them once their legal status and qualifications check out. A client wants to trust a stranger with a health question, so credentials, price and the next free slot have to come before anything else. I worked both roles out with the PM: what the platform must verify before it can pay anyone, and how the store’s existing account, catalogue and checkout already behave.</p>
+          <p class="case__block-body">Two roles with opposite needs. A specialist wants clients and as little paperwork as possible, but the platform can only pay them once their legal status and qualifications check out. A client wants to trust a stranger with a health question, so credentials, price and the next free slot come before anything else. I worked both roles out with the PM.</p>
         </div>
         <div class="case__block">
           <h2 class="case__block-title">What changed</h2>
@@ -188,8 +191,8 @@
 
       <section class="case__section">
         <h2 class="case__section-title">1. Getting a specialist into the catalogue</h2>
-        <p class="case__section-body">The entry point is the application. It opens with the reasons to fill it in — recommendations for clients, a steady stream of clients, a payout every month — and promises fifteen minutes. The form is cut into short steps with a progress bar, and closing it at any point offers to keep the progress rather than lose it.</p>
-        <p class="case__section-body">The steps follow what the platform needs before it can list anyone: personal data, professional data with diplomas and memberships, the consultation format, services with a price for each, and the legal gate. Without a registered employment status the platform cannot pay a specialist, so the application asks for it before the catalogue ever shows them. The result goes to moderation and comes back within a working day.</p>
+        <p class="case__section-body">The entry point is the application. It opens with the reasons to fill it in: recommendations for clients, a steady stream of clients, a payout every month. And it promises fifteen minutes. The form is cut into short steps with a progress bar. Closing it offers to keep the progress.</p>
+        <p class="case__section-body">The order of the steps is the platform’s: without a registered employment status it cannot pay a specialist, so the application asks for that before the catalogue ever shows them. The result goes to moderation and comes back within a working day.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The application: value proposition, professional information and employment-status gate">
@@ -209,7 +212,6 @@
       <section class="case__section">
         <h2 class="case__section-title">2. One account, two contexts</h2>
         <p class="case__section-body">A specialist is also a customer of the store, so the dashboard is a second context of the same account, not a second login. Before the application it holds one call to action and the referral code; after moderation it gains consultations, the schedule and recommendations, and a single button switches back to the client profile with its orders and appointments.</p>
-        <p class="case__section-body">The professional profile keeps the structure of the application — main and professional information as two tabs — so nothing is typed twice and every field can be edited where it was entered.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="The specialist dashboard before and after moderation, and the client context of the same account">
@@ -224,7 +226,7 @@
           </div>
           <figcaption>The account keeps one identity and changes context: the specialist dashboard grows after moderation, while the client profile remains one tap away.</figcaption>
         </figure>
-        <p class="case__section-body">The dashboard also holds the partner programme. Specialists bring clients into the store through a personal promo code: the client gets a discount, the specialist gets cashback on every order and a bonus once the month crosses a threshold. Joining is a short form of its own, with the one error that matters handled inline — a code that is already taken. The code then lands in the dashboard next to consultations, closing the loop the service was built for: advice, a recommendation with a code, a purchase in the same app.</p>
+        <p class="case__section-body">The dashboard also holds the partner programme. Specialists bring clients into the store through a personal promo code: the client gets a discount, the specialist gets cashback on every order and a bonus once the month crosses a threshold. The code sits in the dashboard next to consultations. That closes the loop: advice, a recommendation with a code, a purchase in the same app.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Partner programme: joining, choosing a promo code and the created code">
@@ -242,8 +244,8 @@
       </section>
       <section class="case__section">
         <h2 class="case__section-title">3. Finding and booking a specialist</h2>
-        <p class="case__section-body">On the client side the service inherits the language of the store: a strip of specialties, sorting, quick filters for online, in person and nearby, and a detailed filter for rank, category, price and experience. The specialist card puts credentials, patient types and the next free slots above the fold and ends in a single price — the things a client checks before trusting a stranger with a health question.</p>
-        <p class="case__section-body">Booking is date, time and format, then a checkout with a comment for the doctor, the offer agreement and the cancellation rule stated up front. Payment closes with a sheet that leads straight to the client’s consultations, and the store home announces the new section next to the products.</p>
+        <p class="case__section-body">On the client side the service inherits the language of the store: a strip of specialties, sorting and filters for format, price and experience. The specialist card puts credentials, patient types, the next free slots and the price above the fold.</p>
+        <p class="case__section-body">Booking is date, time and format. Then a checkout with a comment for the doctor, the offer agreement and the cancellation rule. Payment closes with a sheet that leads to the client’s consultations. The store home carries the new section next to the products.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Date and time, checkout and payment confirmation">
@@ -264,7 +266,7 @@
       <section class="case__section">
         <h2 class="case__section-title">4. Two clocks, one appointment</h2>
         <p class="case__section-body">iTAB sells across a country eleven time zones wide, so a consultation has two clocks: the client’s and the specialist’s. Every screen states which one it is showing. The client picks a slot in their own zone and the list says so. The specialist builds the schedule in theirs, under a line that says clients see their own time. Checkout is where the two meet, so it prints both — 17:00 for the client, 10:00 in Moscow for the doctor.</p>
-        <p class="case__section-body">The same rule covers the case that breaks naive implementations: a client who moves between booking and appointment. The entry keeps the time it was booked in and adds the time it will actually start in the zone the client is in now.</p>
+        <p class="case__section-body">A client can move between booking and appointment. The entry keeps the time it was booked in and shows the time in the client’s current zone.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Time zones across the service: the client’s slot list, the checkout with both times, and the specialist’s schedule">
@@ -282,8 +284,8 @@
       </section>
       <section class="case__section">
         <h2 class="case__section-title">5. Running consultations</h2>
-        <p class="case__section-body">For the specialist the service is a schedule and a list. The schedule starts empty and is built in two moves — pick the dates open for booking, then the slots for each day, with a repeat option for a regular week. The consultations list separates planned from completed; each planned entry can be confirmed, taken to chat or cancelled with a reason that the client receives.</p>
-        <p class="case__section-body">Chat lives next to the booking, so moving a consultation is a conversation inside the app rather than a phone call outside it.</p>
+        <p class="case__section-body">For the specialist the service is a schedule and a list. The schedule is built in two moves: pick the dates open for booking, then the slots for each day. A repeat option covers a regular week. The list separates planned consultations from completed ones. A planned one can be confirmed, taken to chat or cancelled with a reason the client receives.</p>
+        <p class="case__section-body">Chat sits next to the booking. Moving a consultation is a message, not a phone call outside the app.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Choosing available dates, setting slots and managing a consultation">
@@ -302,7 +304,7 @@
       </section>
       <section class="case__section">
         <h2 class="case__section-title">6. Failure and edge states</h2>
-        <p class="case__section-body">Alongside the main flow I designed what happens to a service in its first weeks, building those states out of the existing component and content system. The three here carry the highest operational risk: an application returned for fixes, a date with no free time, and a booked slot that cannot simply be removed.</p>
+        <p class="case__section-body">Alongside the main flow I designed the states a service lands in during its first weeks. All are built from the existing components and content. The three riskiest: an application returned for fixes, a date with no free time, a slot already booked that cannot simply be removed.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__itab-board case__itab-board--trio" aria-label="Profile returned for fixes, no free time and a booked slot that cannot be deleted">
