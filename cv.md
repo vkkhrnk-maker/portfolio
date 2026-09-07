@@ -45,9 +45,9 @@ Product designer working end to end across iOS and web. Shipped an AI document a
 **Jan 2025 — Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup — the only product designer, with a PM, product owner, art director and two engineers**
 
 - Designed and shipped the MVP on web and iOS — upload, layered AI summaries, assistant chat and file organization. In internal testing every participant took a real document from upload to understanding unaided.
-- Introduced Progressive Disclosure (Snapshot → Summary → Q&A) after testing showed a single-step summary left users either over-summarized or unable to go deeper; it became the pattern for every later document feature.
+- Introduced reading in layers (snapshot, summary, Q&A) after testing showed a single-step summary left users either over-summarized or unable to go deeper; it became the pattern for every later document feature.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
-- Extended the reader into a document workspace — Smart Fill (form fields recognized and filled from the user's own documents, every value overridable), reusable signature, non-destructive markup and versioning: ten flows on one scaffold, designed in six weeks and handed off complete, plus the design system the team ships from.
+- Extended the reader into a document workspace — Smart Fill (form fields recognized and filled from the user's own documents, every value overridable), reusable signature, non-destructive markup and versioning: every tool on one scaffold, designed in six weeks and handed off complete, plus the design system the team ships from.
 
 Cases: [Read the MVP case](hooh.html), [Read the workspace case](hooh-fill.html)
 
@@ -68,7 +68,7 @@ Cases: [Read the case](itab.html)
 ### Product Designer — Freelance
 **Mar 2022 — Present**
 
-- **Syno.art** (2026 — Present) — art platform for Cyprus. Designed the artist side end to end — auth, profile and portfolio, the open-call flow and applications dashboard — 180+ screens across desktop and mobile, built on a design system of 296 components and 400 tokens in primitive, semantic and adaptive layers.
+- **Syno.art** (2026 — Present) — art platform for Cyprus. Designed the artist side end to end — auth, profile and portfolio, the open-call flow and applications dashboard — across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
 - **Cryptomi** (2023–2024) — interfaces for a crypto product; dense, data-heavy flows made approachable.
 - **Abramova School** (2023–2024) — UX/UI design alongside mentoring junior designers: critiques, portfolio reviews, feedback.
 
