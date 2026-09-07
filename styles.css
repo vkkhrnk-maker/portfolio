@@ -6249,10 +6249,13 @@ a, button, [role="button"], summary, label {
 /* Web screens get one monitor shell per plate, 76% wide on the same
    2064/1200 plate the phone boards use, so a web figure reads at the same
    height as the evidence board in itab.html. The catalogue and the profile
-   are long pages, so their shells show the top of each page as a still.
-   They held an autoplaying scroll capture until 2026-09-07; the captures
-   were rough, and a still says the same thing without the wobble. The mp4s
-   are still in assets/ if the recordings get redone. */
+   are long pages, so their shells hold a scroll capture (hydrated by
+   shimmer.js from data-src, poster = the top of the page) instead of a
+   still; the video takes the same bezel rules as the img, apart from the
+   display and backdrop it needs below. The captures used to flick back to
+   the top at the end of the loop, which read as a glitch — they now scroll
+   down and back up at the same speed, so the last frame is the first one
+   and the loop has no seam. */
 .case__itab-board--web-one {
   aspect-ratio: 2064 / 1200;
 }
@@ -6264,6 +6267,12 @@ a, button, [role="button"], summary, label {
 
 .case__itab-board--web-one + .case__itab-board--web-one {
   margin-top: 12px;
+}
+
+video.case__itab-board-desktop,
+.case__slider video.case__shot--desktop {
+  display: block;
+  background: #f3f3f3;
 }
 
 @media (max-width: 1199px) {
