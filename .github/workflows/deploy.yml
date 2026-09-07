@@ -53,9 +53,7 @@ jobs:
             hooh-editor-ru.html \
             hooh-fill-clouds.html \
             hooh-fill-ru.html \
-            itab-proto.html \
-            itab-specialists.html \
-            ru/itab-specialists.html
+            itab-proto.html
 
 
       # Cloudflare Web Analytics. The beacon is injected here rather than kept
