@@ -42,6 +42,9 @@ jobs:
       # The specialists case is held back the same way while it is still
       # being worked on — both language versions, or /ru/ would serve a page
       # the English site does not have.
+      # The Shell Ivory estimate is a client document rather than a case: it
+      # carries prices, nothing links to it, and it was only ever reachable by
+      # typing the URL. It has no place in the published site.
       - name: Exclude draft pages from the public artifact
         run: |
           rm -f \
@@ -53,7 +56,8 @@ jobs:
             hooh-editor-ru.html \
             hooh-fill-clouds.html \
             hooh-fill-ru.html \
-            itab-proto.html
+            itab-proto.html \
+            shell-ivory-scope.html
 
 
       # Cloudflare Web Analytics. The beacon is injected here rather than kept
