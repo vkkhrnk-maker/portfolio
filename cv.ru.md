@@ -23,7 +23,7 @@ Telegram: @Viktoria_UxUi
 Portfolio: https://victoriakukharenko.com/ru/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
 Focus: AI-интерфейсы, SaaS и e-commerce на iOS и в вебе — от исследования и CJM до релиза
-Headline: Продуктовый дизайнер. Проектирую в Figma, собираю в HTML, проверяю в браузере
+Headline: Продуктовый дизайнер. Проектирую в Figma, собираю в HTML, отдаю то, что уже работает
 
 ## Summary
 

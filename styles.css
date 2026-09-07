@@ -6079,13 +6079,15 @@ a, button, [role="button"], summary, label {
    1. --character-need: how far the figure has to come down for its top to
       clear the pills — 24px top inset + 40px pill + 24px of air = 88px.
    2. --character-allow: how far it MAY come down beside the headline, into
-      the rag to the right of the short opening lines. Two lines for the EN
-      copy ("I take products" / "from the first"), one for the RU copy
-      ("Проектирую"); a three-line headline (≥1600 EN, ≥1366 RU) opens with
-      a long line, so none. It stops 12px above the next line's box.
+      the rag to the right of its short opening lines. How many opening lines
+      are short is --character-rag, and the cover script sets it from the
+      laid-out text (it changed the day the headline did); without JS it is
+      0 and the figure only ever shrinks. It stops 12px above the next
+      line's box.
    3. Whatever need is left after the drop comes off the height, down to a
-      200px floor — below that (windows under ~600px tall) the head goes
-      under the pills again rather than the figure shrinking to a dot.
+      200px floor. Below that the cover script hides the figure (.is-tucked)
+      rather than let the head slide under the glass pill; without JS it
+      simply stays at the floor.
    `right`: between 1200 and 1290 the 12% inset would park the figure's
    baked plate on the tail of "products" (606px into the stage); keep the
    box 12px clear of it. On a window tall enough for the figure to fit,
@@ -6095,7 +6097,7 @@ a, button, [role="button"], summary, label {
     --character-w: clamp(150px, 10vw, 180px);
     --character-h: calc(var(--character-w) * 1012 / 480);
     --character-top-min: 88px;
-    --character-rag: 2;
+    --character-rag: 0;
     --character-need: max(0px, calc(var(--character-top-min) - (100dvh - 24px - 100% - 20px - var(--character-h))));
     --character-allow: clamp(0px, calc((100% - 3 * var(--lh-h1)) * 2), calc(var(--character-rag) * var(--lh-h1) - 12px));
     --character-drop: min(var(--character-need), var(--character-allow));
@@ -6105,8 +6107,8 @@ a, button, [role="button"], summary, label {
     height: max(200px, calc(var(--character-h) - (var(--character-need) - var(--character-drop))));
   }
 
-  html[lang="ru"] .profile-character {
-    --character-rag: 1;
+  .profile-character.is-tucked {
+    visibility: hidden;
   }
 }
 

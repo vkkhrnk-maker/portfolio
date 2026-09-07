@@ -33,7 +33,7 @@ Telegram: @Viktoria_UxUi
 Portfolio: https://victoriakukharenko.com/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
 Focus: AI interfaces, SaaS and e-commerce across iOS and web — from research and CJM through release
-Headline: Product designer taking products from the first flow to something engineers can ship
+Headline: Product designer. I design in Figma, build it in HTML, and hand off what already works
 
 ## Summary
 

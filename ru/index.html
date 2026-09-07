@@ -292,7 +292,7 @@
           <time class="experience-editorial__date">2025 / 2026</time>
           <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-1">
-            <p class="experience-editorial__description">В команде запустили MVP с загрузкой документов, AI-сводкой и чатом с ассистентом — на iOS и в вебе. Я отвечала за сценарии, интерфейс и компонентную систему, из которой команда собирает продукт.</p>
+            <p class="experience-editorial__description">Спроектировала MVP целиком: загрузка документов, AI-сводка, чат с ассистентом — на iOS и в вебе. Отвечала за сценарии, интерфейс и компонентную систему.</p>
           </div>
         </article>
 
@@ -348,7 +348,7 @@
           <time class="experience-editorial__date">2023 / 2024</time>
           <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-4">
-            <p class="experience-editorial__description">Проектировала UX/UI и менторила джунов — разбирала работы, давала обратную связь и помогала расти.</p>
+            <p class="experience-editorial__description">Проектировала UX/UI и менторила джунов: разборы работ, обратная связь.</p>
           </div>
         </article>
 
@@ -405,15 +405,15 @@
           <div class="experience-item__row">
             <p class="experience-item__role">Продуктовый дизайнер</p>
             <span class="experience-item__date">2025 — сейчас</span>
-            <p class="experience-item__company">Hooh. Mobile App (iOS), Web</p>
+            <p class="experience-item__company">Hooh. Мобильное приложение, веб</p>
           </div>
-          <div class="experience-item__detail"><p>В команде запустили MVP с загрузкой документов, AI-сводкой и чатом с ассистентом — на iOS и в вебе. Я отвечала за сценарии, интерфейс и компонентную систему, из которой команда собирает продукт.</p></div>
+          <div class="experience-item__detail"><p>Спроектировала MVP целиком: загрузка документов, AI-сводка, чат с ассистентом — на iOS и в вебе. Отвечала за сценарии, интерфейс и компонентную систему.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
             <p class="experience-item__role">Продуктовый дизайнер</p>
             <span class="experience-item__date">2024–2026</span>
-            <p class="experience-item__company">iTAB. Mobile App (Crossplatform), Web</p>
+            <p class="experience-item__company">iTAB. Мобильное приложение, веб</p>
           </div>
           <div class="experience-item__detail"><p>Спроектировала сервис консультаций специалистов целиком и переделала главную, каталог и карточку товара для веба и мобильного. Карточка снизила потери в категории, где всё решает доверие, и стала стандартом каталога.</p></div>
         </li>
@@ -421,7 +421,7 @@
           <div class="experience-item__row">
             <p class="experience-item__role">UI/UX-дизайнер</p>
             <span class="experience-item__date">2023–2024</span>
-            <p class="experience-item__company">Infomedia. Communication, UX/UI design</p>
+            <p class="experience-item__company">Infomedia. Коммуникационные продукты</p>
           </div>
           <div class="experience-item__detail"><p>Проектировала интерфейсы коммуникационных продуктов для РЖД и Росатома — переводила сложные требования в понятные сценарии. Детали под NDA.</p></div>
         </li>
@@ -429,9 +429,9 @@
           <div class="experience-item__row">
             <p class="experience-item__role">UI/UX-дизайнер, ментор</p>
             <span class="experience-item__date">2023–2024</span>
-            <p class="experience-item__company">Abramova School. UX/UI designer, mentor</p>
+            <p class="experience-item__company">Abramova School. Образование</p>
           </div>
-          <div class="experience-item__detail"><p>Проектировала UX/UI и менторила джунов — разбирала работы, давала обратную связь и помогала расти.</p></div>
+          <div class="experience-item__detail"><p>Проектировала UX/UI и менторила джунов: разборы работ, обратная связь.</p></div>
         </li>
         <li class="experience-item" tabindex="0">
           <div class="experience-item__row">
@@ -822,6 +822,53 @@
       if (!avatar) return;
       avatar.classList.add('is-pulsing');
       setTimeout(() => avatar.classList.remove('is-pulsing'), 3200);
+    })();
+
+    // Cover character: how many opening headline lines end left of the figure.
+    // The stylesheet lets the figure come down beside the headline's short
+    // opening lines on windows too low for it (--character-rag, see the
+    // .profile-character rule), but only the laid-out text knows which lines
+    // are short — it changed the day the headline did. Measure, hand the count
+    // to CSS. With rag forced high the box is at its full width, so the
+    // measurement is against the widest box the drop can produce.
+    (() => {
+      const h1 = document.querySelector('.intro__title');
+      const fig = document.querySelector('.profile-character');
+      if (!h1 || !fig) return;
+      const wide = window.matchMedia('(min-width: 1200px)');
+      const measure = () => {
+        if (!wide.matches) { fig.style.removeProperty('--character-rag'); fig.classList.remove('is-tucked'); return; }
+        fig.style.setProperty('--character-rag', '9');
+        const left = fig.getBoundingClientRect().left - 12;
+        const range = document.createRange();
+        range.selectNodeContents(h1);
+        const lines = [];
+        for (const r of range.getClientRects()) {
+          if (r.width <= 0) continue;
+          const line = lines.find((l) => Math.abs(l.top - r.top) < 4);
+          if (line) line.right = Math.max(line.right, r.right);
+          else lines.push({ top: r.top, right: r.right });
+        }
+        lines.sort((a, b) => a.top - b.top);
+        let clear = 0;
+        for (const l of lines) { if (l.right < left) clear += 1; else break; }
+        fig.style.setProperty('--character-rag', String(clear));
+        // Below its floor the figure cannot get out from under the corner
+        // controls on a window this low. Hidden beats a face blurred by the
+        // glass pill — her first complaint about this cover.
+        const pill = document.querySelector('.lang-switch') || document.querySelector('.profile-section__cta');
+        const limit = pill ? pill.getBoundingClientRect().bottom + 8 : 88;
+        fig.classList.toggle('is-tucked', fig.getBoundingClientRect().top < limit);
+      };
+      measure();
+      window.addEventListener('resize', measure);
+      window.addEventListener('load', measure);
+      // fonts.ready can resolve before the display face has even been
+      // requested, so listen for the load that re-flows the headline too.
+      if (document.fonts) {
+        document.fonts.ready.then(measure);
+        document.fonts.addEventListener('loadingdone', measure);
+      }
     })();
 
     // Decorative magenta cursor in the hero (mouse devices only)
