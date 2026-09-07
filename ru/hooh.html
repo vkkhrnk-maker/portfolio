@@ -18,13 +18,13 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Hooh — кейс · Victoria Kukharenko</title>
-  <meta name="description" content="Hooh — AI-ассистент, который переводит бюрократию на человеческий язык. Кейс Victoria Kukharenko: проблема, процесс, ключевые UX-решения и запущенный MVP на вебе и iOS.">
+  <meta name="description" content="Hooh — AI-ассистент, который переводит бюрократию на человеческий язык. Кейс о послойном чтении документов, проверяемых ответах и MVP для веба и iOS.">
   <meta name="theme-color" content="#d946ef">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Hooh — кейс · Victoria Kukharenko">
-  <meta property="og:description" content="AI-ассистент, который переводит бюрократию на человеческий язык. MVP запущен на вебе и iOS.">
+  <meta property="og:description" content="AI-ассистент, который переводит бюрократию на человеческий язык. Запущены веб-версия и приложение для iOS.">
   <meta property="og:url" content="https://victoriakukharenko.com/ru/hooh.html">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:locale:alternate" content="en_US">
@@ -85,7 +85,7 @@
         </div>
         <div class="case-meta__item">
           <dt>Моя роль</dt>
-          <dd>Продуктовый дизайнер. На мне UX-аналитика, UX/UI, прототипирование и дизайн-система MVP</dd>
+          <dd>Продуктовый дизайнер: UX-аналитика, UX/UI, прототипирование и дизайн-система MVP</dd>
         </div>
         <div class="case-meta__item">
           <dt>Год</dt>
@@ -131,11 +131,11 @@
     <article class="case">
       <header class="case__hero">
         <h1 class="case__title">Hooh — AI-ассистент, который переводит бюрократию на человеческий язык</h1>
-        <p class="case__intro">Мы запустили MVP Hooh на вебе и iOS: загрузить документ, прочитать его по слоям, спросить ассистента, держать файлы в порядке. Я спроектировала основной сценарий и дизайн-систему MVP. Progressive Disclosure стал общим паттерном: человек сам выбирает, насколько глубоко читать, и не теряет нить.</p>
+        <p class="case__intro">Мы запустили MVP Hooh для веба и iOS. Сервис помогает быстро разобраться в сложном документе: показывает главное, раскрывает подробности по запросу и отвечает на вопросы со ссылками на источник. Я спроектировала основной сценарий и дизайн-систему MVP.</p>
         <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
-          <div><dt>Запуск</dt><dd>Веб и iOS запущены</dd></div>
-          <div><dt>Проверка</dt><dd>Основной сценарий проходят без подсказок</dd></div>
-          <div><dt>Ключевой паттерн</dt><dd>Progressive Disclosure</dd></div>
+          <div><dt>Платформы</dt><dd>Веб и iOS</dd></div>
+          <div><dt>Проверка</dt><dd>Сценарий прошли без подсказок</dd></div>
+          <div><dt>Подход</dt><dd>Послойное чтение</dd></div>
         </dl>
         <dl class="case-meta case-meta--mobile">
           <div class="case-meta__item">
@@ -144,7 +144,7 @@
           </div>
           <div class="case-meta__item">
             <dt>Моя роль</dt>
-            <dd>Продуктовый дизайнер. На мне UX-аналитика, UX/UI, прототипирование и дизайн-система MVP</dd>
+            <dd>Продуктовый дизайнер: UX-аналитика, UX/UI, прототипирование и дизайн-система MVP</dd>
           </div>
           <div class="case-meta__item">
             <dt>Год</dt>
@@ -163,43 +163,43 @@
       <section class="case__grid">
         <div class="case__block">
           <h2 class="case__block-title">Проблема</h2>
-          <p class="case__block-body">Договоры, отчёты, страховые бумаги и юридические тексты вызывают тревогу. Дело даже не в объёме, а в неопределённости: непонятно, с чего начать, что здесь главное и не упущены ли скрытые риски, сроки или критичные пункты. Нужен спокойный способ понять суть документа до того, как решать, стоит ли углубляться.</p>
+          <p class="case__block-body">В договорах, отчётах и страховых документах трудно быстро найти главное: риски, сроки и важные условия могут быть спрятаны в длинном тексте. Пользователю нужен способ понять суть и решить, стоит ли читать дальше.</p>
         </div>
         <div class="case__block">
           <h2 class="case__block-title">Задача</h2>
-          <p class="case__block-body">Спроектировать MVP для веба и iOS, который помогает разобраться в сложных документах быстрее — с меньшим стрессом и без чтения от корки до корки.</p>
+          <p class="case__block-body">Спроектировать MVP для веба и iOS, который помогает быстрее разобраться в сложном документе и не требует читать его от начала до конца.</p>
         </div>
         <div class="case__block">
           <h2 class="case__block-title">Пользователи</h2>
-          <p class="case__block-body">Люди без юридического образования, у которых регулярно появляются сложные бумаги: экспаты, диджитал-номады, любой, кому пришёл договор или анкета. Через Hooh они разбирают договоры аренды, визовые требования, страховки и банковские документы — и видят, что там важно, не вычитывая каждую страницу.</p>
+          <p class="case__block-body">Люди без юридического образования, которым регулярно приходится разбираться в сложных документах: экспаты, диджитал-номады, арендаторы и заявители на визу. Hooh помогает им находить главное в договорах, страховках и банковских документах.</p>
         </div>
         <div class="case__block">
-          <h2 class="case__block-title">Что мы запустили</h2>
-          <p class="case__block-body">Мы спроектировали и запустили MVP на вебе и iOS и определили его основной сценарий: загрузить документ, прочитать его по слоям, задать вопросы в чате, разложить файлы по папкам.</p>
+          <h2 class="case__block-title">Результат</h2>
+          <p class="case__block-body">В MVP вошли веб-версия и приложение для iOS: загрузка документа, краткий вывод, подробный разбор, вопросы в чате и автоматическая сортировка файлов по категориям.</p>
         </div>
       </section>
 
       <section class="case__section">
         <h2 class="case__section-title">Процесс</h2>
-        <p class="case__section-body">Начала с анализа конкурентов: Genei, Notion AI, Microsoft Copilot для документов — все выдают полное саммари сразу, и это лишает выбора: нельзя решить, насколько глубоко читать. Первые прототипы делали то же самое — одношаговое саммари, — и на внутренних тестах люди разделились: одни чувствовали, что за них слишком много решили, другие хотели копнуть дальше. Так мы пришли к послойному чтению.</p>
+        <p class="case__section-body">Я изучила, как Genei, Notion AI и Microsoft Copilot работают с документами. В рассмотренных сценариях пользователь сразу получал полный разбор и не мог выбрать нужную глубину. Первые прототипы Hooh повторяли этот подход, но тесты показали разные потребности: одним участникам был нужен только быстрый вывод, другим — подробности и возможность задать вопрос. Поэтому мы разделили чтение на три уровня.</p>
       </section>
 
       <section class="case__section">
-        <h2 class="case__section-title">Ключевое UX-решение: Progressive Disclosure</h2>
-        <p class="case__section-body">Одношаговое саммари рискует упростить до бессмыслицы, полный документ оставляет человека наедине с завалом. Три слоя дают настроить глубину самому: пробежать снапшот, открыть саммари, если что-то выглядит важным, задать точечный вопрос, если беспокоит что-то конкретное. Каждый слой — маленькое решение: человек не тратит внимание, пока сам не решил, что документ того стоит.</p>
+        <h2 class="case__section-title">Ключевое UX-решение: информация раскрывается постепенно</h2>
+        <p class="case__section-body">Мы использовали принцип постепенного раскрытия информации — Progressive Disclosure. Короткий пересказ мог скрыть важные детали, а полный разбор сразу перегружал. Поэтому чтение разделено на три уровня: сначала краткий вывод, затем подробный разбор и, если остаётся конкретный вопрос, ответ ассистента по документу.</p>
 
         <div class="case__gap-grid">
           <div class="case__gap-card">
-            <h3 class="case__gap-card__title">1. Снапшот</h3>
-            <p class="case__gap-card__desc">Вердикт с одного взгляда — понять суть, не потратив ни минуты</p>
+            <h3 class="case__gap-card__title">1. Краткий вывод</h3>
+            <p class="case__gap-card__desc">Главное за несколько секунд: что это за документ и требует ли он внимания</p>
           </div>
           <div class="case__gap-card">
-            <h3 class="case__gap-card__title">2. Саммари</h3>
-            <p class="case__gap-card__desc">Структурированный разбор — углубиться, когда что-то выглядит важным</p>
+            <h3 class="case__gap-card__title">2. Подробный разбор</h3>
+            <p class="case__gap-card__desc">Структура, важные детали, риски и сроки</p>
           </div>
           <div class="case__gap-card">
-            <h3 class="case__gap-card__title">3. Q&amp;A</h3>
-            <p class="case__gap-card__desc">Чат по этому документу — точечный вопрос, когда беспокоит что-то конкретное</p>
+            <h3 class="case__gap-card__title">3. Вопрос по документу</h3>
+            <p class="case__gap-card__desc">Точечный ответ со ссылкой на источник</p>
           </div>
         </div>
 
@@ -212,11 +212,11 @@
             <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-uxA-s1.webp?v=6" alt="Стартовый экран iOS с предложением загрузить первый документ" loading="lazy" width="742" height="1615"></div>
             <div class="case__slide case__slide--gradient"><img class="case__shot case__shot--card" src="../assets/case-uxA-tags.webp?v=2" alt="Панель автокатегоризации: бизнес, медицина, финансы и другие категории" loading="lazy" width="443" height="1712"></div>
           </div>
-          <figcaption>Всё начинается с загрузки документа, а система сама раскладывает его по категориям.</figcaption>
+          <figcaption>После загрузки Hooh сам определяет категорию документа.</figcaption>
         </figure>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__hooh-board case__hooh-board--feed" role="group" aria-label="Лента саммари на iOS рядом с веб-дашбордом документов">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--feed" role="group" aria-label="Лента кратких выводов на iOS рядом с веб-панелью документов">
             <div class="case__hooh-plate">
               <div class="case__hooh-feed">
                 <img src="../assets/case-feed-1.webp?v=2" alt="Анализ крови Марии — документ требует внимания" loading="lazy" width="859" height="1084">
@@ -228,7 +228,7 @@
               <img class="case__hooh-board-window" src="../assets/case-uxB-s2.webp?v=7" alt="Веб-версия: папка документов с карточками по категориям" loading="lazy" width="1600" height="1062">
             </div>
           </div>
-          <div class="case__slider" role="group" aria-label="Пролистайте карточки саммари и дашборд документов">
+          <div class="case__slider" role="group" aria-label="Пролистайте карточки с краткими выводами и веб-панель документов">
             <div class="case__slide case__slide--feed">
               <div class="case__feed-track">
                 <img class="case__feed-card" src="../assets/case-feed-3.webp?v=2" alt="" aria-hidden="true" loading="lazy" width="861" height="1204">
@@ -241,25 +241,25 @@
             </div>
             <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-uxB-s2.webp?v=7" alt="Веб-версия: папка документов с карточками по категориям" loading="lazy" width="1600" height="1062"></div>
           </div>
-          <figcaption>Цвет кодирует только риск, а не тип документа. Человеку не нужно запоминать, что «жёлтый — медицина, красный — юристы»; ему нужно «жёлтый — требует внимания». Тип живёт в заголовке карточки, а не в цвете.</figcaption>
+          <figcaption>Цвет обозначает уровень риска, а не тип документа. Категория указана в заголовке карточки, поэтому цвет всегда отвечает на один вопрос: требует ли документ внимания.</figcaption>
         </figure>
 
         <figure class="case__figure">
-          <div class="case__figure-desktop case__hooh-board case__hooh-board--report" role="group" aria-label="Десктопный общий анализ крови рядом с экраном саммари на iOS">
-            <img class="case__hooh-board-window" src="../assets/case-uxC-s1.webp?v=7" alt="Десктопный общий анализ крови с выноской «в основном хорошо» и панелью Q&amp;A с ассистентом Hooh" loading="lazy" width="1600" height="1062">
-            <img class="case__hooh-board-phone" src="../assets/case-uxC-s2.webp?v=6" alt="Экран саммари на iOS с тем же общим анализом крови" loading="lazy" width="715" height="1618">
+          <div class="case__figure-desktop case__hooh-board case__hooh-board--report" role="group" aria-label="Десктопный общий анализ крови рядом с подробным разбором на iOS">
+            <img class="case__hooh-board-window" src="../assets/case-uxC-s1.webp?v=7" alt="Десктопный общий анализ крови с выноской «в основном хорошо» и панелью вопросов ассистенту Hooh" loading="lazy" width="1600" height="1062">
+            <img class="case__hooh-board-phone" src="../assets/case-uxC-s2.webp?v=6" alt="Экран подробного разбора на iOS с тем же общим анализом крови" loading="lazy" width="715" height="1618">
           </div>
-          <div class="case__slider" role="group" aria-label="Пролистайте десктопный отчёт и саммари на iOS">
-            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-uxC-s1.webp?v=7" alt="Десктопный общий анализ крови с выноской «в основном хорошо» и панелью Q&amp;A" loading="lazy" width="1600" height="1062"></div>
-            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-uxC-s2.webp?v=6" alt="Экран саммари на iOS с тем же общим анализом крови" loading="lazy" width="715" height="1618"></div>
+          <div class="case__slider" role="group" aria-label="Пролистайте десктопный отчёт и подробный разбор на iOS">
+            <div class="case__slide"><img class="case__shot case__shot--desktop" src="../assets/case-uxC-s1.webp?v=7" alt="Десктопный общий анализ крови с выноской «в основном хорошо» и панелью вопросов ассистенту" loading="lazy" width="1600" height="1062"></div>
+            <div class="case__slide"><img class="case__shot case__shot--phone" src="../assets/case-uxC-s2.webp?v=6" alt="Экран подробного разбора на iOS с тем же общим анализом крови" loading="lazy" width="715" height="1618"></div>
           </div>
-          <figcaption>От быстрого снапшота можно перейти к подробному саммари и к Q&amp;A в контексте — не вычитывая файл построчно.</figcaption>
+          <figcaption>От краткого вывода пользователь переходит к подробному разбору или задаёт вопрос по документу — читать весь файл не обязательно.</figcaption>
         </figure>
       </section>
 
       <section class="case__section">
-        <h2 class="case__section-title">Разговор как способ разобраться в документе</h2>
-        <p class="case__section-body">Ассистент держит загруженные документы как контекст: можно задавать уточняющие вопросы, ходить по категориям и доставать нужное, не пролистывая длинный текст вручную.</p>
+        <h2 class="case__section-title">Вопросы по документу — без поиска по страницам</h2>
+        <p class="case__section-body">Ассистент использует выбранные документы как источник и отвечает на уточняющие вопросы. Поиск можно ограничить категорией или конкретным файлом, чтобы получить нужную информацию без просмотра длинного текста.</p>
 
         <figure class="case__figure">
           <div class="case__figure-desktop case__hooh-board case__hooh-board--chat" role="group" aria-label="Три экрана ассистента Hooh на iOS рядом">
@@ -283,7 +283,7 @@
               </div>
             </div>
             <div class="case__split-pane case__split-pane--suggestions">
-              <img class="case__split-pane-image" src="../assets/case-chatB-suggestions.webp?v=1" alt="Подсказки для следующего вопроса на мягком градиенте: сделай саммари по категории, какой у меня последний гемоглобин, разбери все файлы в этой категории" width="1602" height="636">
+              <img class="case__split-pane-image" src="../assets/case-chatB-suggestions.webp?v=1" alt="Подсказки для следующего вопроса на мягком градиенте: сделай краткий разбор категории, какой у меня последний гемоглобин, разбери все файлы в этой категории" width="1602" height="636">
             </div>
           </div>
         </figure>
@@ -298,21 +298,21 @@
       </section>
 
       <section class="case__section">
-        <h2 class="case__section-title">Доверие встроено в интерфейс: ассистент может ошибаться</h2>
-        <p class="case__section-body">Ассистент, который читает ваши договоры и анализы, заслуживает доверия, только если может показать, откуда взял ответ. Через весь продукт проходят три правила: каждое утверждение ведёт к документу-источнику; видно и можно настроить, по каким документам ассистент отвечает; интерфейс прямо говорит, что Hooh может ошибаться, и держит оригинал в одном касании.</p>
+        <h2 class="case__section-title">Как интерфейс помогает проверять ответы ассистента</h2>
+        <p class="case__section-body">Для договоров и результатов анализов недостаточно просто получить ответ — важно понимать, откуда он взят. Поэтому утверждения связаны с документами-источниками, пользователь контролирует, какие файлы читает ассистент, а оригинал всегда доступен в одно касание. Интерфейс прямо напоминает, что Hooh может ошибаться.</p>
 
         <div class="case__gap-grid">
           <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Источник у каждого утверждения</h3>
-            <p class="case__gap-card__desc">Чипы-ссылки в ответе открывают тот самый документ, откуда взята цифра</p>
+            <h3 class="case__gap-card__title">Источник для каждого ответа</h3>
+            <p class="case__gap-card__desc">Ссылки в ответе открывают документ, из которого взята цифра</p>
           </div>
           <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Понятный контекст</h3>
-            <p class="case__gap-card__desc">Переключатель документов показывает — и ограничивает — что именно читает ассистент</p>
+            <h3 class="case__gap-card__title">Контекст под контролем</h3>
+            <p class="case__gap-card__desc">Переключатель показывает, какие документы читает ассистент, и позволяет ограничить список</p>
           </div>
           <div class="case__gap-card">
-            <h3 class="case__gap-card__title">Честная неуверенность</h3>
-            <p class="case__gap-card__desc">Постоянная пометка «Hooh может ошибаться» возвращает к оригиналу</p>
+            <h3 class="case__gap-card__title">Напоминание об ошибках</h3>
+            <p class="case__gap-card__desc">Пометка «Hooh может ошибаться» напоминает сверить ответ с оригиналом</p>
           </div>
         </div>
       </section>
@@ -320,10 +320,9 @@
       <section class="case__outcome">
         <h2 class="case__outcome-title">Итог</h2>
         <div class="case__outcome-body">
-          <p>MVP запущен на вебе и iOS. Аналитика после публичного релиза в этот контракт не входила — ниже то, что мы проверили до запуска.</p>
-          <p><strong>Запуск на двух платформах:</strong> MVP вышел на вебе и iOS — загрузка, послойное чтение, чат с ассистентом и порядок в файлах.</p>
-          <p><strong>Основной сценарий проходят без подсказок:</strong> на всех внутренних тестах участники доводили реальный документ от загрузки до понимания сами.</p>
-          <p><strong>Паттерны, которые прижились:</strong> Progressive Disclosure стал основой для всех документных фич, а быстрый снапшот — самым частым входом в файл.</p>
+          <p>MVP с загрузкой, послойным чтением, чатом и сортировкой файлов вышел в виде веб-версии и приложения для iOS. Аналитика после запуска не входила в контракт, поэтому здесь указаны только результаты предрелизных тестов.</p>
+          <p><strong>Сценарий без подсказок:</strong> на внутренних тестах участники самостоятельно загружали реальный документ, просматривали ключевые выводы и находили нужную информацию.</p>
+          <p><strong>Подход продолжили в продукте:</strong> послойное чтение стало основой для следующих функций, а на тестах участники начинали с краткого вывода и открывали подробности по необходимости.</p>
         </div>
       </section>
 
