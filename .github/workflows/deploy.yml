@@ -39,9 +39,8 @@ jobs:
       # Syno stays visible as a non-clickable "Coming soon" card on the
       # homepage. Keep its working file in the repository, but do not publish
       # the unfinished direct URL until the case and its assets are ready.
-      # The specialists case is held back the same way while it is still
-      # being worked on — both language versions, or /ru/ would serve a page
-      # the English site does not have.
+      # Anything held back this way goes in both languages, or /ru/ would
+      # serve a page the English site does not have.
       # The Shell Ivory estimate is a client document rather than a case: it
       # carries prices, nothing links to it, and it was only ever reachable by
       # typing the URL. It has no place in the published site.
@@ -60,25 +59,30 @@ jobs:
             shell-ivory-scope.html
 
 
-      # Cloudflare Web Analytics. The beacon is injected here rather than kept
-      # in the page sources, so every published page carries it without having
-      # to be listed anywhere, and so pages opened from disk while working do
-      # not report visits. The step runs after the draft removal above, which
-      # is what keeps unfinished pages out of the counter as well as the site.
-      - name: Add the analytics beacon to every published page
+      # Both analytics scripts are injected here rather than kept in the page
+      # sources, so every published page carries them without having to be
+      # listed anywhere, and so pages opened from disk while working report
+      # nothing. The step runs after the draft removal above, which is what
+      # keeps unfinished pages out of the counters as well as out of the site.
+      #
+      # Cloudflare is cookieless and runs for everyone. Clarity records the
+      # session, so it goes in behind consent.js and starts only if a visitor
+      # agrees. While CLARITY_ID is empty nothing of that ships at all: no
+      # consent plate, no recording, and the cookieless counter carries on
+      # alone. That is the switch — fill it in to turn the asking on.
+      - name: Add the analytics scripts to every published page
         env:
           CF_BEACON_TOKEN: a44507ecd2b34673965ce2891e24d42d
+          CLARITY_ID: ""
         run: |
           python3 - <<'PY'
           import os
           from pathlib import Path
 
-          beacon = (
-              "  <!-- Cloudflare Web Analytics --><script type='module' "
-              "src='https://static.cloudflareinsights.com/beacon.min.js' "
-              "data-cf-beacon='{\"token\": \"%s\"}'></script>\n"
-              % os.environ["CF_BEACON_TOKEN"]
-          )
+          token = os.environ["CF_BEACON_TOKEN"]
+          clarity = os.environ.get("CLARITY_ID", "").strip()
+          version = os.environ.get("GITHUB_SHA", "")[:7]
+
           for page in sorted(Path(".").rglob("*.html")):
               if page.parts[0] in {"tools", "tmp", "output"}:
                   continue
@@ -86,8 +90,24 @@ jobs:
               if "</body>" not in html:
                   print("No closing body tag, skipped %s" % page)
                   continue
-              page.write_text(html.replace("</body>", beacon + "</body>", 1), encoding="utf-8")
-              print("Beacon added to %s" % page)
+
+              block = (
+                  "  <!-- Cloudflare Web Analytics --><script type='module' "
+                  "src='https://static.cloudflareinsights.com/beacon.min.js' "
+                  "data-cf-beacon='{\"token\": \"%s\"}'></script>\n" % token
+              )
+              # The print sheet exists to come out of a printer; an ask about
+              # cookies on it would be furniture in the way.
+              if clarity and page.name != "cv-print.html":
+                  up = "../" * (len(page.parts) - 1)
+                  block += (
+                      '  <script>window.__clarityId = "%s";</script>\n'
+                      '  <script defer src="%sconsent.js?v=%s"></script>\n'
+                      % (clarity, up, version)
+                  )
+
+              page.write_text(html.replace("</body>", block + "</body>", 1), encoding="utf-8")
+              print("Scripts added to %s" % page)
           PY
 
       - uses: actions/configure-pages@v5
