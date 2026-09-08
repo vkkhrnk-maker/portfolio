@@ -6677,7 +6677,15 @@ video.case__itab-board-desktop,
   flex-direction: column;
   gap: var(--space-16);
   border-radius: 26px;
-  background: var(--surface-paper);
+  /* Same glass as the menu drawer, not the greeting bubble: the bubble's
+     0.55 tint carries two words, this carries a paragraph that has to stay
+     readable over a case page full of screenshots. The hairline is the
+     bubble's — a small floating object needs an edge, a full-width sheet
+     does not. */
+  background: var(--glass-drawer);
+  -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
+  backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
+  border: 1px solid var(--glass-bubble-border);
   box-shadow: var(--shadow-lift-strong);
   transform: translate(-50%, 0);
   /* Slides up rather than simply appearing, which reads as an error dialog.
@@ -6691,6 +6699,12 @@ video.case__itab-board-desktop,
 @keyframes consent-in {
   from {
     transform: translate(-50%, calc(100% + var(--space-16)));
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .consent {
+    background: var(--surface-paper);
   }
 }
 
