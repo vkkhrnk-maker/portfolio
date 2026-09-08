@@ -6032,9 +6032,9 @@ a, button, [role="button"], summary, label {
 }
 
 /* ===== Animated profile character =====
-   The portrait stays one continuous transparent image. A restrained idle
-   motion animates the complete figure, so there are no articulated seams,
-   overlapping raster frames, or theme-coloured plates. */
+   The static portrait is the no-motion/loading fallback. Once the rigged GLB
+   is ready, it replaces the fallback in one frame so two silhouettes can never
+   overlap. Both the WebGL canvas and fallback artwork use the page surface. */
 .profile-section {
   overflow: clip;
 }
@@ -6069,6 +6069,31 @@ a, button, [role="button"], summary, label {
 
 .profile-character picture {
   display: contents;
+}
+
+.profile-character__fallback .profile-character__figure {
+  opacity: 1;
+}
+
+.profile-character__fallback.is-hidden {
+  display: none;
+}
+
+.profile-character__model {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  --poster-color: transparent;
+  --progress-bar-color: transparent;
+}
+
+.profile-character.is-3d-ready .profile-character__model {
+  opacity: 1;
 }
 
 /* Desktop (≥1200): the EN/RU switch and "Book a call" are pinned to the
@@ -6128,6 +6153,10 @@ a, button, [role="button"], summary, label {
 @media (prefers-reduced-motion: reduce) {
   .profile-character__figure {
     animation: none;
+  }
+
+  .profile-character__model {
+    display: none;
   }
 }
 

@@ -57,7 +57,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.min.css?v=342">
+  <link rel="stylesheet" href="styles.min.css?v=344">
+  <script type="module" src="assets/vendor/model-viewer/model-viewer.min.js?v=4.3.1"></script>
+  <script src="profile-character.js?v=2" defer></script>
   <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=7" defer></script>
 </head>
@@ -114,7 +116,7 @@
         </div>
         <div class="intro__title-stage">
           <div class="profile-character" aria-hidden="true">
-            <picture>
+            <picture class="profile-character__fallback">
               <source media="(prefers-color-scheme: dark)"
                       srcset="assets/viktoria-profile-dark-v10.png?v=4">
               <img class="profile-character__figure"
@@ -122,6 +124,16 @@
                    width="480" height="1012" alt="" decoding="async" fetchpriority="high"
                    style="animation: none; will-change: auto">
             </picture>
+            <model-viewer class="profile-character__model"
+                          data-src="assets/3d/viktoria-avatar-v3.glb?v=3"
+                          alt="" loading="eager" reveal="auto"
+                          autoplay animation-name="FriendlyWave"
+                          camera-orbit="0deg 90deg auto"
+                          camera-target="0m 0.88m 0m"
+                          field-of-view="25deg"
+                          interaction-prompt="none"
+                          disable-pan disable-zoom
+                          tone-mapping="neutral" exposure="0.9"></model-viewer>
           </div>
           <h1 class="intro__title">I design in Figma, build it in HTML, and hand off what already&nbsp;works</h1>
         </div>
