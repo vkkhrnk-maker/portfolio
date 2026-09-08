@@ -24,13 +24,13 @@
      the moment it is read. */
   var TEXT = ru ? {
     body: 'Сайт может записывать, как читают страницы: прокрутку и ' +
-          'нажатия. Для этого нужны куки.',
+          'нажатия. Для этого нужны куки',
     yes: 'Разрешить',
     no: 'Не надо',
     link: 'Куки'
   } : {
     body: 'This site can record how pages are read — scrolling and ' +
-          'clicks. That needs cookies.',
+          'clicks. That needs cookies',
     yes: 'Allow',
     no: 'No thanks',
     link: 'Cookies'
