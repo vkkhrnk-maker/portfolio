@@ -6733,19 +6733,6 @@ video.case__itab-board-desktop,
   cursor: pointer;
 }
 
-/* Everywhere else the pale pill sits on the grey page and needs no edge.
-   Here it sits on --surface-paper, which is white, so without a ring it
-   dissolves into the plate. */
-.consent .btn--light {
-  box-shadow: inset 0 0 0 1px var(--stroke-primary);
-}
-
-/* .btn:hover's shadow would wipe that ring — restate it, the same way the
-   magenta pill restates its inner glow. */
-.consent .btn--light:hover {
-  box-shadow: inset 0 0 0 1px var(--stroke-primary), var(--shadow-lift);
-}
-
 .consent__sep {
   color: var(--text-secondary);
 }
