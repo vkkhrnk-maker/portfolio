@@ -66,14 +66,14 @@ jobs:
       # keeps unfinished pages out of the counters as well as out of the site.
       #
       # Cloudflare is cookieless and runs for everyone. Clarity records the
-      # session, so it goes in behind consent.js and starts only if a visitor
-      # agrees. While CLARITY_ID is empty nothing of that ships at all: no
-      # consent plate, no recording, and the cookieless counter carries on
-      # alone. That is the switch — fill it in to turn the asking on.
+      # session, so it goes in behind consent.js and starts only once a
+      # visitor agrees. CLARITY_ID is the switch for all of that: empty it
+      # and no consent plate ships, nothing is recorded, and the cookieless
+      # counter carries on alone.
       - name: Add the analytics scripts to every published page
         env:
           CF_BEACON_TOKEN: a44507ecd2b34673965ce2891e24d42d
-          CLARITY_ID: ""
+          CLARITY_ID: "yf30gyx3je"
         run: |
           python3 - <<'PY'
           import os
