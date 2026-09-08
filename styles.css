@@ -2290,14 +2290,13 @@ body.case-page--fill .case__outcome-body p {
 /* Evidence lines inside the outcome — kept as plain text (a lead-in per
    line, no card grid): the outcome often sits right after a gap-card
    grid, and a second three-up in a row read as too many columns. The
-   lead-in is set in the display serif (PP Editorial ships one weight —
-   no faux bold), sized up a notch so its smaller x-height reads
-   optically level with the Helvetica body around it. */
+   lead-in used to be set in the display serif a notch larger, to offset
+   that face's smaller x-height. Two typefaces inside one sentence read
+   as two sizes instead of one emphasis, so it is the body face now, same
+   size, weight and ink doing the work — the body stack is a system font
+   with a real bold, so nothing here is synthesised. */
 .case__outcome-body p strong {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 1.12em;
-  letter-spacing: -0.3px;
+  font-weight: 600;
   color: var(--outcome-ink);
 }
 
