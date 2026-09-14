@@ -105,14 +105,11 @@
         </div>
         <div class="intro__title-stage">
           <div class="profile-character" aria-hidden="true">
-            <picture>
-              <source media="(prefers-color-scheme: dark)"
-                      srcset="../assets/viktoria-profile-dark-v10.png?v=4">
-              <img class="profile-character__figure"
-                   src="../assets/viktoria-profile-light-v10.png?v=4"
-                   width="480" height="1012" alt="" decoding="async" fetchpriority="high"
-                   style="animation: none; will-change: auto">
-            </picture>
+            <!-- Keep the approved portrait intact; the display mask works in both themes. -->
+            <img class="profile-character__figure"
+                 src="../assets/viktoria-profile-v13.webp"
+                 width="887" height="1774" alt="" decoding="async" fetchpriority="high"
+                 style="animation: none; will-change: auto; -webkit-mask: url('../assets/viktoria-profile-mask-v13.svg') center / contain no-repeat; mask: url('../assets/viktoria-profile-mask-v13.svg') center / contain no-repeat">
           </div>
           <h1 class="intro__title">Проектирую в Figma, собираю в HTML, отдаю то, что уже&nbsp;работает</h1>
         </div>
