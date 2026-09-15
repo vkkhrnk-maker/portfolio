@@ -1,0 +1,16 @@
+.profile-character__wave {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+}
+
+.profile-character.is-waving .profile-character__wave {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-character__wave { display: none !important; }
+}
