@@ -6694,11 +6694,14 @@ video.case__itab-board-desktop,
    low and narrow so it reads as a footnote rather than a gate — though on
    a phone the cover fills the screen and the plate lands over the intro
    line until it is answered. That is the price of asking at all, and one
-   tap ends it. */
+   tap ends it.
+
+   It sits in the bottom-right corner rather than the middle: centred, it
+   lands on the headline of every page it opens over. */
 
 .consent {
   position: fixed;
-  left: 50%;
+  right: var(--space-16);
   bottom: var(--space-16);
   z-index: 95;
   box-sizing: border-box;
@@ -6718,7 +6721,6 @@ video.case__itab-board-desktop,
   backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
   border: 1px solid var(--glass-bubble-border);
   box-shadow: var(--shadow-lift-strong);
-  transform: translate(-50%, 0);
   /* Slides up rather than simply appearing, which reads as an error dialog.
      Deliberately an animation and not a JS-flipped class: the resting state
      is then the visible one, so a browser that never runs the entrance —
@@ -6729,7 +6731,7 @@ video.case__itab-board-desktop,
 
 @keyframes consent-in {
   from {
-    transform: translate(-50%, calc(100% + var(--space-16)));
+    transform: translateY(calc(100% + var(--space-16)));
   }
 }
 
@@ -6748,9 +6750,22 @@ video.case__itab-board-desktop,
   color: var(--text-primary);
 }
 
+/* Two equal pills read as a pair of options; left-aligned ones read as a
+   primary action with an afterthought next to it. */
 .consent__row {
   display: flex;
   gap: var(--space-8);
+}
+
+.consent__row .btn {
+  /* The equal padding is what makes them equal, not the flex:1 on its own.
+     These are border-box, and a flex-basis of 0 on a border-box item floors
+     at padding + border — so the dark pill's roomier 24px and the light
+     one's 16px came out as a 16px difference in a pair meant to read as
+     two equal options. min-width:0 for the same reason on the text side. */
+  flex: 1;
+  min-width: 0;
+  padding-inline: var(--space-24);
 }
 
 /* .btn was written for links, so it never had to cancel anything: an <a>
@@ -6794,12 +6809,6 @@ video.case__itab-board-desktop,
   .consent {
     /* Clear of the iOS home indicator, which otherwise sits on the plate. */
     bottom: calc(var(--space-16) + env(safe-area-inset-bottom));
-  }
-
-  /* Two equal pills read as a pair of options; left-aligned ones read as a
-     primary action with an afterthought next to it. */
-  .consent__row .btn {
-    flex: 1;
   }
 }
 
