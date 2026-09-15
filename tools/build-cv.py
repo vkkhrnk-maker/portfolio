@@ -19,6 +19,7 @@ import os
 import re
 import subprocess
 import sys
+from urllib.parse import urljoin
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "cv.md")
@@ -267,8 +268,21 @@ def print_body(doc):
         a(f'      <div class="role-title">{inline(r["title"])}</div>')
         a(f'      <div class="role-dates">{inline(r["dates"])}</div>')
         a('    </div>')
-        if r["meta"]:
-            a(f'    <div class="role-meta">{inline(sentence_case(r["meta"]))}</div>')
+        # The case links ride on the meta line rather than a line of their own:
+        # the sheet is tuned to fill one page exactly, and two extra block lines
+        # spill it. Hrefs are absolute — a relative one in a PDF that has been
+        # mailed on resolves against nothing — while the visible text stays a
+        # short path, the domain being right there in the header.
+        meta = inline(sentence_case(r["meta"])) if r["meta"] else ""
+        if r["cases"]:
+            links = ", ".join(
+                f'<a href="{html.escape(urljoin(m["Portfolio"], c["href"]))}">'
+                f'{html.escape("/" + c["href"])}</a>'
+                for c in r["cases"])
+            links = f'<span class="cases">Case{"s" if len(r["cases"]) > 1 else ""}: {links}</span>'
+            meta = f'{meta} <span class="sep">·</span> {links}' if meta else links
+        if meta:
+            a(f'    <div class="role-meta">{meta}</div>')
         if r["bullets"]:
             a('    <ul>')
             for b in r["bullets"]:

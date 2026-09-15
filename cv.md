@@ -32,45 +32,43 @@ Email: vkkhrnk@gmail.com
 Telegram: @Viktoria_UxUi
 Portfolio: https://victoriakukharenko.com/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
-Focus: AI interfaces, SaaS and e-commerce across iOS and web — from research and CJM through release
-Headline: Product designer. I design in Figma, build it in HTML, and hand off what already works
+Focus: AI interfaces, SaaS and e-commerce across iOS and web
+Headline: Product designer, end to end on iOS and web
 
 ## Summary
 
-Product designer working end to end across iOS and web. Shipped an AI document assistant MVP on two platforms, redesigned an e-commerce product card that became the catalog-wide standard, and built the design systems those products ship from.
+Four years in product design — research and CJM through release. Owned product design at an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
 
 ## Experience
+
+### Product Designer — Freelance
+**Mar 2022 — Present · remote · art platform, crypto product, design mentoring**
+
+- **Syno.art** (2026 — Present) — art platform based in Cyprus. Designed the artist side end to end — auth, profile and portfolio, the open-call flow and applications dashboard — across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
+- **Cryptomi** (2023–2024) — interfaces for a crypto product; dense, data-heavy flows made approachable.
+- **Abramova School** (2023–2024) — UX/UI design alongside mentoring junior designers: critiques, portfolio reviews, feedback.
 
 ### Product Designer — Hooh
 **Jan 2025 — Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup — the only product designer, with a PM, product owner, art director and two engineers**
 
-- Designed and shipped the MVP on web and iOS — upload, layered AI summaries, assistant chat and file organization. In internal testing every participant took a real document from upload to understanding unaided.
-- Introduced reading in layers (snapshot, summary, Q&A) after testing showed a single-step summary left users either over-summarized or unable to go deeper; it became the pattern for every later document feature.
+- Designed and shipped the MVP on web and iOS — upload, layered AI summaries, assistant chat and file organization.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
-- Extended the reader into a document workspace — Smart Fill (form fields recognized and filled from the user's own documents, every value overridable), reusable signature, non-destructive markup and versioning: every tool on one scaffold, designed in six weeks and handed off complete, plus the design system the team ships from.
+- Extended the reader into a document workspace — Smart Fill (form fields recognized and filled from the user's own documents, every value overridable), reusable signature, non-destructive markup and versioning: every tool on one scaffold, handed off complete with the design system the team ships from.
 
 Cases: [Read the MVP case](hooh.html), [Read the workspace case](hooh-fill.html)
 
 ### Product Designer — iTAB
 **May 2024 — Apr 2026 · part-time, remote · health and wellness e-commerce · web and mobile app**
 
-- Designed the specialist-consultations service end to end — specialist listing, specialist card and the user-side booking flow — alongside redesigns of the homepage and the product catalog, and sections throughout the app and the site.
-- Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. After launch drop-off fell and add-to-cart rose on every step redesigned, and the card system rolled out across the entire catalog as the new standard; figures under NDA.
-- Defined purchase states: the CTA becomes a quantity control with immediate feedback, and unavailable products offer restock and alternatives instead of a dead end.
+- Designed the specialist-consultations service end to end — specialist listing, specialist card and the user-side booking flow — alongside the homepage, the product catalog and sections across the app and the site.
+- Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.
 
 Cases: [Read the case](itab.html)
 
 ### UX/UI Designer — Infomedia
-**May 2023 — Feb 2025 · full-time, remote · communication products**
+**May 2023 — Dec 2024 · full-time, remote · communication products**
 
-- Worked on products for Russian Railways (RZD) and Rosatom, turning complex requirements into clear user flows and interfaces. Project details under NDA.
-
-### Product Designer — Freelance
-**Mar 2022 — Present**
-
-- **Syno.art** (2026 — Present) — art platform for Cyprus. Designed the artist side end to end — auth, profile and portfolio, the open-call flow and applications dashboard — across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
-- **Cryptomi** (2023–2024) — interfaces for a crypto product; dense, data-heavy flows made approachable.
-- **Abramova School** (2023–2024) — UX/UI design alongside mentoring junior designers: critiques, portfolio reviews, feedback.
+- Designed client-facing web and mobile products for Russian Railways (RZD) and Rosatom — turning requirements written for engineers into flows their users could follow. Project details under NDA.
 
 ## Skills
 
@@ -82,13 +80,14 @@ Cases: [Read the case](itab.html)
 
 ## Education
 
+**2025** — **Pragmatica** — Bolshaya Praktika
 **2022 — 2024** — **Uprock School** — Certificate, product / UX-UI design
 **2019 — 2021** — **Syktyvkar State University** — Master's degree, Ecology
 **2012 — 2016** — **Ukhta State Technical University** — Bachelor's degree, Geodesy for Land Management and Cadastre
 
 ## Languages
 
-Russian — native · English — B1–B2, working proficiency
+Russian — native · English — B2, working proficiency
 
 ## Closing
 
