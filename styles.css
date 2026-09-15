@@ -6169,12 +6169,43 @@ a, button, [role="button"], summary, label {
   }
 }
 
+/* Phones: the same trap as the desktop rule above, with the topbar's
+   progressive blur in place of the glass pills. .mobile-topbar__blur is a
+   120px strip whose last layer dies at 88% of it (~106px), and the cover
+   comment two screens up — "on top of the flat hero background the blur is
+   simply invisible" — stopped being true the day the figure was hung off
+   the headline's top edge. The figure's top is whatever is left of the
+   screen after the bar, the headline and the 40px gap, so it is the Russian
+   page that falls in: its H1 wraps to six lines on a phone (three in
+   English), which pushes the head 60-105px up into the ramp and smears the
+   face. Same three moves as the desktop rule:
+   1. --character-need: how far it must come down for its top to clear the
+      ramp. Not the ramp's full 106px: its last two layers are 2.8px and
+      1.5px, and stopping at 96 costs 12px less height for a softness on the
+      crown of the hair that does not read at all. The face, which is what
+      she saw smeared, clears the strip by 50px either way.
+   2. It may come down 40px, no further: that parks the box bottom exactly on
+      the headline's top edge, with the shoes just under the greeting's line.
+      Below that it would stand on the H1's first line.
+   3. Whatever need is left after the drop comes off the height, down to a
+      150px floor. English needs none of this at any phone size and is
+      untouched; Russian goes 134px wide -> 129 at 393x704 and -> 108 at
+      393x659, which is that phone with Safari's URL bar showing. The floor
+      only binds at 320 wide, where the headline wraps to six lines in both
+      languages and nothing fits: the figure ends up 71px wide with the top
+      of its hair back in the soft end of the ramp. */
 @media (max-width: 640px) {
   .profile-character {
+    --character-w: clamp(124px, 34vw, 140px);
+    --character-h: calc(var(--character-w) * 1012 / 480);
+    --character-top-min: 96px;
+    --character-need: max(0px, calc(var(--character-top-min) - (100dvh - var(--page-x) - 100% - 40px - var(--character-h))));
+    --character-drop: min(var(--character-need), 40px);
     left: auto;
     right: 0;
-    bottom: calc(100% + 40px);
-    width: clamp(124px, 34vw, 140px);
+    bottom: calc(100% + 40px - var(--character-drop));
+    width: auto;
+    height: max(150px, calc(var(--character-h) - (var(--character-need) - var(--character-drop))));
     transform: none;
   }
 }
