@@ -44,7 +44,9 @@ jobs:
       # The Shell Ivory estimate is a client document rather than a case: it
       # carries prices, nothing links to it, and it was only ever reachable by
       # typing the URL. It has no place in the published site.
-      - name: Exclude draft pages from the public artifact
+      # The user rejected both portrait wave prototypes. The homepage must
+      # use the approved static portrait; keep the prototypes out of hosting.
+      - name: Exclude drafts and rejected portrait animations from the public artifact
         run: |
           rm -f \
             syno.html \
@@ -56,7 +58,12 @@ jobs:
             hooh-fill-clouds.html \
             hooh-fill-ru.html \
             itab-proto.html \
-            shell-ivory-scope.html
+            shell-ivory-scope.html \
+            portrait-wave-v15.js \
+            portrait-wave-v16.js \
+            portrait-wave-v15.css \
+            assets/viktoria-profile-wave-body-mask-v15.svg \
+            assets/viktoria-profile-wave-body-mask-v16.svg
 
 
       # Both analytics scripts are injected here rather than kept in the page
