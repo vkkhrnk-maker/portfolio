@@ -63,7 +63,7 @@ Cases: [Read the MVP case](hooh.html), [Read the workspace case](hooh-fill.html)
 - Designed the specialist-consultations service end to end — specialist listing, specialist card and the user-side booking flow — alongside the homepage, the product catalog and sections across the app and the site.
 - Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.
 
-Cases: [Read the case](itab.html)
+Cases: [Read the consultations case](itab-specialists.html), [Read the product card case](itab.html)
 
 ### UX/UI Designer — Infomedia
 **May 2023 — Dec 2024 · full-time, remote · communication products**
