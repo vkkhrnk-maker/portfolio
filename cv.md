@@ -76,7 +76,7 @@ Cases: [Read the consultations case](itab-specialists.html), [Read the product c
 **Design** — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · iOS and web
 **Design systems** — Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA
 **Research and delivery** — Usability testing · user interviews · UX audit · competitor analysis · developer handoff and specs · mentoring
-**Tools** — Figma (variables, components, auto-layout, Plugin API) · FigJam · HTML / CSS / JavaScript · AI coding agents (Claude Code, Codex) — working prototypes and custom Figma plugins for bulk token audits and migrations
+**Tools** — Figma (variables, components, auto-layout, Plugin API) · FigJam · AI coding agents (Claude Code, Codex) — working prototypes in HTML and Xcode, plus custom Figma plugins for bulk token audits and migrations
 
 ## Education
 
