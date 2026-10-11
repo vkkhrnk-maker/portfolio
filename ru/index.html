@@ -18,7 +18,7 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Victoria Kukharenko — продуктовый дизайнер</title>
-  <meta name="description" content="Victoria Kukharenko — продуктовый дизайнер. Проектирую в Figma и собираю работающие интерфейсы в HTML. Избранные работы, опыт и несколько заметок о том, как я работаю.">
+  <meta name="description" content="Victoria Kukharenko — продуктовый дизайнер. Проектирую в Figma и собираю работающие интерфейсы в HTML. Избранные работы и опыт.">
   <meta name="author" content="Victoria Kukharenko">
   <meta name="theme-color" content="#d946ef">
   <meta name="color-scheme" content="light dark">
@@ -65,7 +65,6 @@
       <nav class="menu">
         <a class="menu__item is-active" href="#top">Привет</a>
         <a class="menu__item" href="#works">Работы</a>
-        <a class="menu__item" href="#about">Подход</a>
         <a class="menu__item" href="#experience">Опыт</a>
       </nav>
     </div>
@@ -212,64 +211,6 @@
             </div>
           </div>
         </article>
-      </div>
-    </section>
-
-    <section class="about" id="about">
-      <h2 class="about__title">Как я работаю</h2>
-      <div class="about__cards">
-        <div class="about-card about-card--1">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">01</span>
-              <p class="about-card__title">Проектирую под реальные ограничения</p>
-              <p class="about-card__description">До первых макетов уточняю сроки, технические ограничения и устройства. Рисую то, что в них помещается.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">01</span>
-              <p class="about-card__back-text">До первых макетов уточняю сроки, технические ограничения и устройства. Рисую то, что в них помещается.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about-card about-card--2">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__title">Распутываю сложный UX</p>
-              <p class="about-card__description">Большие объёмы данных, многошаговые сценарии, неясные требования. Выстраиваю путь, на котором понятен следующий шаг.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__back-text">Большие объёмы данных, многошаговые сценарии, неясные требования. Выстраиваю путь, на котором понятен следующий шаг.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about-card about-card--3">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__title">Собираю системы, а не отдельные экраны</p>
-              <p class="about-card__description">Логику продукта раскладываю на сценарии, компоненты и правила. Веб и мобильная версия не расходятся в разработке.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__back-text">Логику продукта раскладываю на сценарии, компоненты и правила. Веб и мобильная версия не расходятся в разработке.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about-card about-card--4">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">04</span>
-              <p class="about-card__title">Менторю дизайнеров</p>
-              <p class="about-card__description">Обратная связь по работам, разборы портфолио, советы по карьере.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">04</span>
-              <p class="about-card__back-text">Обратная связь по работам, разборы портфолио, советы по карьере.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -486,7 +427,6 @@
     <nav class="menu-drawer__nav">
       <a class="menu-drawer__item" href="#top">Привет</a>
       <a class="menu-drawer__item" href="#works">Работы</a>
-      <a class="menu-drawer__item" href="#about">Подход</a>
       <a class="menu-drawer__item" href="#experience">Опыт</a>
     </nav>
     <div class="menu-drawer__contacts">
@@ -649,7 +589,7 @@
     // Scroll-spy: highlight active sidebar/drawer menu item based on visible section
     (() => {
       const navLinks = document.querySelectorAll('.menu__item, .menu-drawer__item');
-      const sectionIds = ['top', 'works', 'about', 'experience'];
+      const sectionIds = ['top', 'works', 'experience'];
       const sections = sectionIds
         .map((id) => document.getElementById(id))
         .filter(Boolean);

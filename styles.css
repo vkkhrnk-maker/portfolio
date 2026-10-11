@@ -98,7 +98,7 @@
   --fs-h1: 106px;          --lh-h1: 108px;     /* cover headline */
   --fs-h2: 80px;           --lh-h2: 88px;      /* section titles (About/Experience/Testimonials) */
   --fs-h3: 40px;           --lh-h3: 40px;      /* project/experience role, intro greeting */
-  --fs-h4: 32px;           --lh-h4: 32px;      /* about-card title (mobile experience role) */
+  --fs-h4: 32px;           --lh-h4: 32px;      /* mobile project title and experience role */
   --fs-h5: 28px;           --lh-h5: 36px;      /* sidebar name */
   --fs-h6: 24px;           --lh-h6: 24px;      /* sidebar menu items */
   --fs-body: 17px;         --lh-body: 24px;    /* body text, buttons, subtitles */
@@ -3273,150 +3273,6 @@ html {
   height: 16px;
 }
 
-/* ===== About section ===== */
-
-.about {
-  padding: 0 var(--page-x);
-  display: flex;
-  flex-direction: column;
-  gap: var(--group-gap);
-}
-
-.about__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--fs-h2);
-  line-height: var(--lh-h2);
-  letter-spacing: var(--ls-heading-lg);
-  color: var(--text-primary);
-  max-width: 628px;
-}
-
-.about__cards {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-}
-
-.about-card {
-  flex: 1;
-  min-width: 0;
-  aspect-ratio: 235 / 380;
-  perspective: 1200px;
-  cursor: pointer;
-}
-
-.about-card--1 { transform: rotate(-3deg); }
-.about-card--2 { transform: rotate(2deg); }
-.about-card--3 { transform: rotate(-1deg); }
-.about-card--4 { transform: rotate(4deg); }
-
-.about-card__inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease;
-}
-
-.about-card:hover .about-card__inner {
-  transform: rotateY(180deg);
-}
-
-.about-card__face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(20px, 1.8vw, var(--card-x));
-  box-sizing: border-box;
-  overflow: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.about-card__face--front {
-  background-color: var(--bg-card);
-}
-
-.about-card--2 .about-card__face--front,
-.about-card--4 .about-card__face--front {
-  background-color: var(--brand-pink-500);
-}
-
-.about-card__face--back {
-  background-color: var(--button-primary);
-  transform: rotateY(180deg);
-  justify-content: space-between;
-}
-
-.about-card__face--back .about-card__number {
-  color: var(--white);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-card__inner {
-    transition: none;
-  }
-}
-
-.about-card__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--fs-h3);
-  line-height: var(--lh-h3);
-  letter-spacing: var(--ls-heading-lg);
-  color: var(--text-primary);
-  /* These titles live in very narrow portrait cards. Balancing every line
-     would turn each semantic word group into its own row; `pretty` keeps the
-     natural fill and only prevents a weak last line. */
-  text-wrap: pretty;
-}
-
-/* Four cards share one desktop row. A fixed 40px title at 1200–1600px left
-   room for only one word per line; the type now grows with the available
-   card width and reaches the full H3 token on wide screens. */
-@media (min-width: 1200px) {
-  .about-card__title {
-    font-size: clamp(21px, calc(2.5vw - 9px), var(--fs-h3));
-    line-height: 1;
-  }
-}
-
-.about-card__back-text {
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: -1px;
-  color: var(--white);
-}
-
-.about-card__description {
-  display: none;
-  margin: 0;
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: -1px;
-  color: var(--text-primary);
-}
-
-/* Small label-style number in the top corner — no longer a display number */
-.about-card__number {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  letter-spacing: -0.3px;
-  color: var(--text-primary);
-}
-
 /* ===== Responsive: hide sidebar below 1200px ===== */
 
 @media (max-width: 1199px) {
@@ -3471,7 +3327,7 @@ html {
     align-items: center;
   }
 
-  /* Title H4 (32/32) — same size as about-card title on mobile */
+  /* Title H4 (32/32) — same size as the experience role on mobile */
   .project-card__title {
     grid-column: 1;
     grid-row: 1;
@@ -3647,93 +3503,6 @@ html {
   .project-card__phone-video {
     width: 129px;
     aspect-ratio: 588 / 1280;
-  }
-}
-
-/* ===== About cards — mobile/tablet (≤1199px): static cards with numbers (per Figma 527:28167) ===== */
-
-@media (max-width: 1199px) {
-  .about__cards {
-    flex-direction: column;
-    align-items: stretch;
-    height: auto;
-    gap: 20px;
-  }
-
-  .about-card {
-    flex: none;
-    width: 100%;
-    aspect-ratio: auto;
-    /* 320, not 400: tall enough for the deck-stacking peeks, short enough
-       that the number-top / text-bottom layout doesn't read as an empty
-       middle on phones and tablets. */
-    height: 320px;
-    min-height: 320px;
-    position: sticky;
-    transform: none;
-    perspective: none;
-    cursor: default;
-  }
-
-  /* Deck-of-cards stacking: each card sticks 20px lower than the one
-     above it, so as the viewer scrolls past, every previous card's top
-     20-px strip stays visible above the current top-most card —
-     reading as a shuffled deck rather than each new card simply hiding
-     the previous one. The alternating bg-card / pink background already
-     makes adjacent peeks visually distinct. */
-  .about-card--1 { top: 24px; }
-  .about-card--2 { top: 44px; }
-  .about-card--3 { top: 64px; }
-  .about-card--4 { top: 84px; }
-
-  .about-card--1,
-  .about-card--2,
-  .about-card--3,
-  .about-card--4 {
-    transform: none;
-  }
-
-  /* No flip on mobile */
-  .about-card:hover .about-card__inner {
-    transform: none;
-  }
-
-  .about-card__inner {
-    height: 320px;
-    transform: none;
-    transition: none;
-  }
-
-  /* Hide back face entirely on mobile */
-  .about-card__face--back {
-    display: none;
-  }
-
-  /* Front face: number top, title + description bottom — fills inner */
-  .about-card__face--front {
-    background-color: var(--bg-card);
-    padding: var(--card-x);
-    justify-content: space-between;
-    align-items: stretch;
-  }
-
-  /* Every second card — pink, alternating with bg-card */
-  .about-card--2 .about-card__face--front,
-  .about-card--4 .about-card__face--front {
-    background-color: var(--brand-pink-500);
-  }
-
-  /* Title pushed to bottom via margin-top: auto, description follows naturally */
-  .about-card__title {
-    margin-top: auto;
-    font-size: var(--fs-h4);
-    line-height: var(--lh-h4);
-  }
-
-  .about-card__description {
-    display: block;
-    margin-top: 12px;
-    color: var(--text-secondary);
   }
 }
 
@@ -4264,7 +4033,7 @@ html {
 
   .experience-editorial__role {
     order: 1;
-    /* The same H4 the project and about card titles use — at H3 (44/48) the
+    /* The same H4 the project card titles use — at H3 (44/48) the
        role was the loudest thing on the page after the cover headline. */
     font-size: var(--fs-h4);
     line-height: var(--lh-h4);
@@ -4984,12 +4753,6 @@ html {
     margin-left: 0;
   }
 
-  /* About card title — mobile H4 (32/32) — same as Experience role for consistency */
-  .about-card__title {
-    font-size: var(--fs-h4);
-    line-height: var(--lh-h4);
-  }
-
   /* Experience — mobile structure per Figma 527:28193:
      role + company stacked in left column, date pill on right */
   .experience-item {
@@ -5035,7 +4798,6 @@ html {
    on the cover. */
 @media (max-width: 1199px) {
   .projects,
-  .about,
   .experience,
   .contact,
   .footer {
@@ -5593,15 +5355,8 @@ html {
     padding-inline: 0;
   }
 
-  .about__cards {
-    width: auto;
-    margin-inline: calc(-1 * var(--page-x));
-  }
-
   .project-card__inner,
-  .project-card__inner--itab,
-  .about-card__face,
-  .about-card__face--front {
+  .project-card__inner--itab {
     padding-inline: var(--page-x);
   }
 

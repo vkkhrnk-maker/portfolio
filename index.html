@@ -27,7 +27,7 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Victoria Kukharenko — Product Designer</title>
-  <meta name="description" content="Victoria Kukharenko — product designer. I design in Figma and build working interfaces in HTML. Selected work, experience and a few notes on the way I work.">
+  <meta name="description" content="Victoria Kukharenko — product designer. I design in Figma and build working interfaces in HTML. Selected work and experience.">
   <meta name="author" content="Victoria Kukharenko">
   <meta name="theme-color" content="#d946ef">
   <meta name="color-scheme" content="light dark">
@@ -74,7 +74,6 @@
       <nav class="menu">
         <a class="menu__item is-active" href="#top">Hello</a>
         <a class="menu__item" href="#works">Works</a>
-        <a class="menu__item" href="#about">About</a>
         <a class="menu__item" href="#experience">Experience</a>
       </nav>
     </div>
@@ -221,64 +220,6 @@
             </div>
           </div>
         </article>
-      </div>
-    </section>
-
-    <section class="about" id="about">
-      <h2 class="about__title">How I work</h2>
-      <div class="about__cards">
-        <div class="about-card about-card--1">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">01</span>
-              <p class="about-card__title">I design for real product constraints</p>
-              <p class="about-card__description">Time, code, devices — I ask about all three before the first screen, then design what fits inside them.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">01</span>
-              <p class="about-card__back-text">Time, code, devices — I ask about all three before the first screen, then design what fits inside them.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about-card about-card--2">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__title">I untangle complex UX</p>
-              <p class="about-card__description">Dense data, multi-step flows, vague briefs. I turn them into a path people follow without thinking.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">02</span>
-              <p class="about-card__back-text">Dense data, multi-step flows, vague briefs. I turn them into a path people follow without thinking.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about-card about-card--3">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__title">I build systems, not one-off screens</p>
-              <p class="about-card__description">I break product logic into patterns, components and specs. Web and mobile stay in step through handoff.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">03</span>
-              <p class="about-card__back-text">I break product logic into patterns, components and specs. Web and mobile stay in step through handoff.</p>
-            </div>
-          </div>
-        </div>
-        <div class="about-card about-card--4">
-          <div class="about-card__inner">
-            <div class="about-card__face about-card__face--front">
-              <span class="about-card__number" aria-hidden="true">04</span>
-              <p class="about-card__title">I mentor designers</p>
-              <p class="about-card__description">Feedback on their work, portfolio reviews, career advice.</p>
-            </div>
-            <div class="about-card__face about-card__face--back">
-              <span class="about-card__number" aria-hidden="true">04</span>
-              <p class="about-card__back-text">Feedback on their work, portfolio reviews, career advice.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -495,7 +436,6 @@
     <nav class="menu-drawer__nav">
       <a class="menu-drawer__item" href="#top">Hello</a>
       <a class="menu-drawer__item" href="#works">Works</a>
-      <a class="menu-drawer__item" href="#about">About</a>
       <a class="menu-drawer__item" href="#experience">Experience</a>
     </nav>
     <div class="menu-drawer__contacts">
@@ -658,7 +598,7 @@
     // Scroll-spy: highlight active sidebar/drawer menu item based on visible section
     (() => {
       const navLinks = document.querySelectorAll('.menu__item, .menu-drawer__item');
-      const sectionIds = ['top', 'works', 'about', 'experience'];
+      const sectionIds = ['top', 'works', 'experience'];
       const sections = sectionIds
         .map((id) => document.getElementById(id))
         .filter(Boolean);
