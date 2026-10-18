@@ -3840,12 +3840,15 @@ html {
   min-width: 0;
 }
 
+/* Company and scope run as one line of text that wraps, so a long scope
+   ("Мобильное приложение, веб · частичная занятость") continues on the next
+   line instead of being cut to an ellipsis. It was a nowrap flex row: on a
+   phone five of the six Russian rows lost their ending, and at 1280 three. */
 .experience-editorial__meta {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+  display: block;
   min-width: 0;
   margin-bottom: 12px;
+  text-wrap: pretty;
 }
 
 .experience-editorial__company,
@@ -3856,7 +3859,7 @@ html {
 }
 
 .experience-editorial__company {
-  flex: 0 0 auto;
+  display: inline;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
@@ -3864,9 +3867,11 @@ html {
   color: var(--text-secondary);
 }
 
+/* 8px either side of the slash, as the old flex gap had it: the source
+   whitespace between the two elements adds about 5px, the margin the rest. */
 .experience-editorial__company::after {
   content: '/';
-  margin-left: 8px;
+  margin: 0 3px 0 8px;
 }
 
 .experience-editorial__role {
@@ -3879,15 +3884,12 @@ html {
 }
 
 .experience-editorial__scope {
-  min-width: 0;
-  overflow: hidden;
+  display: inline;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .experience-editorial__date {
