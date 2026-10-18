@@ -9,6 +9,10 @@
   const hydrate = (video) => {
     const src = video.dataset.src;
     if (!src) return;
+    /* The autoplay attribute starts playback on its own once a source is
+       attached, so skipping play() alone did nothing for reduced motion:
+       drop the attribute first and the video stays on its poster. */
+    if (reducedMotion) video.removeAttribute('autoplay');
     video.src = src;
     video.removeAttribute('data-src');
     video.load();
@@ -30,6 +34,35 @@
       observer.unobserve(entry.target);
     });
   }, { rootMargin: '160px 0px', threshold: 0.01 });
+
+  videos.forEach((video) => observer.observe(video));
+})();
+
+/* Posters wait as well. A poster attribute is fetched on page load wherever
+   the video sits, and hooh-fill carries eleven of them, about 720 KB. Videos
+   below the first screen keep theirs in data-poster until they are within a
+   couple of screens of the viewport, well before their source is attached. */
+(() => {
+  const videos = Array.from(document.querySelectorAll('video[data-poster]'));
+  if (!videos.length) return;
+
+  const show = (video) => {
+    video.poster = video.dataset.poster;
+    video.removeAttribute('data-poster');
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    videos.forEach(show);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      show(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '1600px 0px' });
 
   videos.forEach((video) => observer.observe(video));
 })();
