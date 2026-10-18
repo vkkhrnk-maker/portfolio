@@ -65,6 +65,17 @@ jobs:
             assets/viktoria-profile-wave-body-mask-v15.svg \
             assets/viktoria-profile-wave-body-mask-v16.svg
 
+      # Sources and working files stay in the repository but not on the site:
+      # the CV is built from cv.md / cv.ru.md by tools/, cv-print.html is only
+      # the sheet the PDF is rendered from, pages load styles.min.css rather
+      # than styles.css, and the fonts are served as woff2/woff — the desktop
+      # .otf/.ttf/.eot files have no business being downloadable.
+      - name: Keep sources and working files out of the public artifact
+        run: |
+          rm -rf tools
+          rm -f cv.md cv.ru.md cv-print.html CARDS.md styles.css \
+                fonts/*.otf fonts/*.ttf fonts/*.eot
+
 
       # Both analytics scripts are injected here rather than kept in the page
       # sources, so every published page carries them without having to be
