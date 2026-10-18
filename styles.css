@@ -913,6 +913,8 @@ img {
 .menu-drawer__header .lang-switch--compact {
   flex: 0 0 auto;
   margin-left: auto;
+  /* centred on the 40px ✕ beside it: (40 − 32) / 2 */
+  margin-top: 4px;
 }
 
 /* The current language is a label, not a link — it carries the thumb. */
@@ -4297,7 +4299,9 @@ html {
   background-color: var(--glass-drawer);
   -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
   backdrop-filter: blur(28px) saturate(160%) brightness(1.03);
-  padding: 12px var(--page-x);
+  /* 4px on top, like the topbar row, so the open menu's name and ✕ land
+     exactly where the bar's name and burger were. */
+  padding: 4px var(--page-x) 12px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -4312,10 +4316,12 @@ html {
   transition-delay: 0s;
 }
 
-/* The bar carries on: the name keeps its place, the burger has become an ✕. */
+/* The bar carries on: the name keeps its place, the burger has become an ✕.
+   Top-aligned, not centred: the drawer adds the role under the name, and
+   centring on both lines dropped the ✕ 19px below where the burger was. */
 .menu-drawer__header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
   width: 100%;
@@ -4464,7 +4470,7 @@ html {
 
 @media (min-width: 600px) and (max-width: 1199px) {
   .menu-drawer {
-    padding: 12px var(--page-x);
+    padding: 4px var(--page-x) 12px;
   }
 }
 
