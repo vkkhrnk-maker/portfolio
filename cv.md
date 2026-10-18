@@ -45,11 +45,12 @@ Product designer, from research and customer journey mapping to release. Owned p
 ## Experience
 
 ### Product Designer — Freelance
-**Mar 2022 – Present · remote · art platform, crypto product, design mentoring**
+**Mar 2022 – Present · remote · art platform, crypto product, marketing sites, design mentoring**
 
 - **Syno.art** (2026–Present): art platform based in Cyprus. Designed the artist side end to end (auth, profile and portfolio, the open-call flow and applications dashboard) across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
 - **Cryptomi** (2023–2024): interfaces for a crypto product; dense, data-heavy flows made approachable.
 - **Abramova School** (2023–2024): UX/UI design alongside mentoring junior designers through critiques, portfolio reviews and feedback.
+- **Prokachka Studio** (2022–2023): marketing sites and landing pages, from visual design and layout to responsive behavior and developer handoff.
 
 ### Product Designer — Hooh
 **Jan 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · the only product designer, with a PM, product owner, art director and two engineers**
