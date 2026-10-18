@@ -2817,6 +2817,13 @@ html {
     height: 100%;
     width: auto;
   }
+  /* In the pair the group is twice as wide as the phone it holds, and the
+     blur-up placeholder (shimmer.js) fills the whole group — so on every load
+     it painted a blurred, stretched copy of the product page across the card
+     behind the phone until it faded. The phone fades in on its own here. */
+  .project-pair .project-card__itab-group .bu-lqip {
+    display: none;
+  }
 }
 
 @media (max-width: 1199px) {
@@ -5794,6 +5801,7 @@ a, button, [role="button"], summary, label {
   .case__cta,
   .case__back,
   .cv__actions,
+  .contact,
   .footer {
     display: none !important;
   }

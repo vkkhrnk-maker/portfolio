@@ -39,17 +39,15 @@ RU_SRC = os.path.join(ROOT, "cv.ru.md")
 RU_PAGE_OUT = os.path.join(ROOT, "ru", "cv.html")
 RU_PAGE_TPL = os.path.join(ROOT, "tools", "cv-page.ru.template.html")
 
-KNOWN_SECTIONS = {"Summary", "Experience", "Skills", "Education", "Languages", "Closing"}
+KNOWN_SECTIONS = {"Summary", "Experience", "Skills", "Education", "Languages"}
 
 # Section names in the source are structure, not display text. These are what
 # the reader actually sees.
 LABELS = {
     "en": {"experience": "Experience", "skills": "Skills", "education": "Education",
-           "closing": "Get in touch", "download": "Download PDF",
-           "call": "Book a call", "prefix": ""},
+           "download": "Download PDF", "prefix": ""},
     "ru": {"experience": "Опыт", "skills": "Навыки", "education": "Образование",
-           "closing": "Связаться", "download": "Скачать PDF — на английском",
-           "call": "Созвониться", "prefix": "../"},
+           "download": "Скачать PDF — на английском", "prefix": "../"},
 }
 
 
@@ -71,7 +69,7 @@ def parse(text):
     """cv.md -> a dict of plain data. No HTML here; renderers do that."""
     doc = {"name": "", "role": "", "meta": {}, "summary": "",
            "experience": [], "skills": [], "education": [],
-           "languages": "", "closing": ""}
+           "languages": ""}
     section = None
     role = None
     # Strip the leading HTML comment block that documents the format.
@@ -110,8 +108,6 @@ def parse(text):
             doc["summary"] = line.strip()
         elif section == "Languages":
             doc["languages"] = line.strip()
-        elif section == "Closing":
-            doc["closing"] = line.strip()
         elif section == "Experience":
             if role is None:
                 fail(lineno, line, "content before the first ### role heading")
@@ -193,7 +189,7 @@ def page_body(doc, lang="en"):
     a('        <p class="cv__eyebrow">CV</p>')
     # The headline is the one line written for the page rather than the sheet.
     headline = doc["meta"].get("Headline", doc["role"])
-    a(f'        <h1 class="cv__title">{nbsp_last(inline(headline))}</h1>')
+    a(f'        <h1 class="cv__title">{nbsp_last(text(headline))}</h1>')
     a(f'        <p class="cv__summary">{text(doc["summary"])}</p>')
     a('        <div class="cv__actions">')
     a('          <!-- ?v= is bumped whenever the PDF is re-rendered from cv-print.html,')
@@ -246,16 +242,10 @@ def page_body(doc, lang="en"):
         a('        </dl>')
         a('      </section>')
 
-    a('')
-    a('      <section class="cv__section cv__section--closing">')
-    a(f'        <h2 class="cv__section-title">{L["closing"]}</h2>')
-    a(f'        <p class="cv__summary">{text(doc["closing"])}</p>')
-    a('        <div class="cv__actions">')
-    a(f'          <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">{L["call"]}</a>')
-    a(f'          <a class="btn btn--light" href="mailto:{doc["meta"]["Email"]}">{doc["meta"]["Email"]}</a>')
-    a(f'          <a class="btn btn--light" href="{telegram_url(doc["meta"]["Telegram"])}" target="_blank" rel="noopener">Telegram</a>')
-    a('        </div>')
-    a('      </section>')
+    # No closing block of its own: the page ends on the site's big contact
+    # button, which lives in the templates exactly as on the case pages. The
+    # old "Get in touch" line and its three pills repeated the email in the
+    # hero and the Telegram link in the sidebar.
     return "\n".join(p)
 
 

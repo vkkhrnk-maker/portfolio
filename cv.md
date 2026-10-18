@@ -14,7 +14,7 @@
      does not fit. The rules:
 
        ## Section          one of: Summary, Experience, Skills, Education,
-                           Languages, Closing — in any order
+                           Languages — in any order
        ### Role — Company  starts a job inside Experience
        **dates · meta**    the bold line under a role. Everything before the
                            first "·" is the date; the rest is the meta line.
@@ -35,8 +35,8 @@ Email: vkkhrnk@gmail.com
 Telegram: @Victoria_UxUi
 Portfolio: https://victoriakukharenko.com/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
-Focus: AI interfaces, SaaS and e-commerce across iOS and web
-Headline: Product designer, end to end on iOS and web
+Focus: AI interfaces, SaaS and e-commerce for mobile and web
+Headline: Product designer, end to end on mobile and web
 
 ## Summary
 
@@ -78,7 +78,7 @@ Cases: [Read the consultations case](itab-specialists.html "Specialist consultat
 ## Skills
 
 **AI products** — LLM assistants and conversational UI · progressive disclosure of model output · source citations and provenance · scoped context control · uncertainty and failure states · human-in-the-loop override
-**Design** — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · iOS and web
+**Design** — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · cross-platform mobile and web
 **Design systems** — Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA
 **Research and delivery** — Usability testing · user interviews · UX audit · competitor analysis · developer handoff and specs · mentoring
 **Tools** — Figma (variables, components, auto-layout, Plugin API) · FigJam · AI coding agents (Claude Code, Codex) to build working prototypes in HTML and Xcode and custom Figma plugins for bulk token audits and migrations
@@ -93,7 +93,3 @@ Cases: [Read the consultations case](itab-specialists.html "Specialist consultat
 ## Languages
 
 Russian: native · English: B2, working proficiency
-
-## Closing
-
-The fastest way is a call. Or email and Telegram, if you would rather write first.
