@@ -10,6 +10,15 @@
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Screen-reader labels this script writes, in the page's language: the
+     Russian cases used to announce "Enlarge", "Close" and the rest in English. */
+  const ru = (document.documentElement.lang || '').toLowerCase().startsWith('ru');
+  const t = ru
+    ? { dot: 'Перейти к экрану ', dialog: 'Увеличенный экран', close: 'Закрыть',
+        recording: 'Увеличенная запись экрана', enlarge: 'Увеличить: ', screen: 'экран' }
+    : { dot: 'Go to screen ', dialog: 'Enlarged screen', close: 'Close',
+        recording: 'Enlarged screen recording', enlarge: 'Enlarge: ', screen: 'screen' };
+
   /* ---- Scroll-reveal --------------------------------------------------- */
   (() => {
     if (reducedMotion) return;
@@ -70,7 +79,7 @@
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'case__dot' + (i === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', 'Go to screen ' + (i + 1));
+        dot.setAttribute('aria-label', t.dot + (i + 1));
         dot.addEventListener('click', () => {
           const left = slide.offsetLeft - (slider.clientWidth - slide.clientWidth) / 2;
           slider.scrollTo({ left, behavior: 'smooth' });
@@ -223,7 +232,7 @@
       box.className = 'lightbox';
       box.setAttribute('role', 'dialog');
       box.setAttribute('aria-modal', 'true');
-      box.setAttribute('aria-label', 'Enlarged screen');
+      box.setAttribute('aria-label', t.dialog);
       box.setAttribute('aria-hidden', 'true');
 
       imgEl = document.createElement('img');
@@ -240,7 +249,7 @@
       closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'lightbox__close';
-      closeBtn.setAttribute('aria-label', 'Close');
+      closeBtn.setAttribute('aria-label', t.close);
       closeBtn.innerHTML = '&times;';
 
       box.appendChild(imgEl);
@@ -271,7 +280,7 @@
         const p = videoEl.play();
         if (p && typeof p.catch === 'function') p.catch(() => {});
         videoEl.setAttribute('aria-label',
-          el.getAttribute('aria-label') || 'Enlarged screen recording');
+          el.getAttribute('aria-label') || t.recording);
       } else {
         imgEl.src = el.currentSrc || el.src;
         imgEl.alt = el.alt || '';
@@ -327,7 +336,7 @@
       el.setAttribute('tabindex', '0');
       el.setAttribute('role', 'button');
       el.setAttribute('aria-label',
-        'Enlarge: ' + (el.alt || el.getAttribute('aria-label') || 'screen'));
+        t.enlarge + (el.alt || el.getAttribute('aria-label') || t.screen));
       el.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       });

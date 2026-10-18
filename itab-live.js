@@ -52,7 +52,10 @@
   var phone = document.createElement('div');
   phone.className = host.className.replace(/\bbu-in\b/g, '') + ' itab-live';
   phone.setAttribute('role', 'group');
-  phone.setAttribute('aria-label', 'Live specialist card: tap an avatar in the strip to switch the specialist');
+  var ru = (document.documentElement.lang || '').toLowerCase().indexOf('ru') === 0;
+  phone.setAttribute('aria-label', ru
+    ? 'Живая карточка специалиста: нажмите на аватар в ленте, чтобы сменить специалиста'
+    : 'Live specialist card: tap an avatar in the strip to switch the specialist');
 
   var avatars = PEOPLE.map(function (p, i) {
     return '<button type="button" class="il-avatar" data-i="' + i + '" aria-label="' + esc(p.name) + ', ' + esc(p.spec) + '" aria-pressed="' + (i === START) + '">' +
