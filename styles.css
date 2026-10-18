@@ -42,9 +42,16 @@
   --bg-card: #e2e4e7;                    /* Bg/Card — project cards */
   --text-primary: #2d3036;               /* Text/Primary, Grey 1000 */
   --text-secondary: rgba(0, 0, 0, 0.62); /* Text/Secondary — WCAG AA contrast on bg-primary/card */
-  --text-tertiary: #7f7f82;              /* Text/Tertiary — inactive menu items */
+  /* Text/Tertiary — inactive menu items, the role under the name, strip labels.
+     #7f7f82 read 3.5:1 on the page and 3.1:1 on the card grey of the language
+     switch; #636366 is 5.3:1 and 4.7:1, still a step lighter than secondary. */
+  --text-tertiary: #636366;
   --text-accent: #d946ef;                /* Text/Primary_Accent (now magenta, was blue) */
   --button-primary: #bb35d0;             /* Button/Surface/Primary */
+  /* Keyboard focus ring. Not --text-accent: the iTAB and hooh-fill pages turn
+     that green and orange, which drew the ring at 2.0 and 2.8:1. The brand
+     magenta clears 3:1 on every light background, the iTAB grey included. */
+  --focus-ring: #bb35d0;
   --button-secondary: #ffffff;           /* Button/Surface/Secondary */
   --brand-pink-500: #fcc9ff;             /* Brand/Pink 500 (now light pink, was light blue) */
   --stroke-primary: #d4d2d2;             /* Stroke/Primary — dividers */
@@ -82,6 +89,7 @@
      values and the body rules follow. */
   --itab-accent: #59ad3b;
   --itab-bg: #d9dbda;
+  --itab-text-tertiary: #5e5e61;  /* 4.65:1 on --itab-bg; the page tertiary is 4.3 there */
   --fill-accent: #d97706;
 
   /* Backwards-compat aliases */
@@ -189,6 +197,7 @@
     --text-tertiary: #9a9aa2;
     --text-accent: #e879f9;
     --button-primary: #a72cc0;
+    --focus-ring: #e879f9;
     --button-secondary: #2e2e35;
     --brand-pink-500: #2e2e35;
     --stroke-primary: #2e2e34;
@@ -215,6 +224,7 @@
     --dot-active: rgba(255, 255, 255, 0.88);
     --itab-accent: #6cc24a;
     --itab-bg: #141716;
+    --itab-text-tertiary: #9a9aa2;
     --fill-accent: #f59e0b;
   }
 }
@@ -230,6 +240,7 @@
   --text-tertiary: #9a9aa2;
   --text-accent: #e879f9;
   --button-primary: #a72cc0;
+  --focus-ring: #e879f9;
   --button-secondary: #2e2e35;
   --brand-pink-500: #2e2e35;
   --stroke-primary: #2e2e34;
@@ -256,6 +267,7 @@
   --dot-active: rgba(255, 255, 255, 0.88);
   --itab-accent: #6cc24a;
   --itab-bg: #141716;
+  --itab-text-tertiary: #9a9aa2;
   --fill-accent: #f59e0b;
 }
 
@@ -546,7 +558,7 @@ img {
 .menu-drawer__name:focus-visible,
 .sidebar__name-link:focus-visible,
 .mobile-topbar__link:focus-visible {
-  outline: 2px solid var(--text-accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
 
@@ -754,7 +766,7 @@ img {
 }
 
 .intro__avatar:focus-visible {
-  outline: 2px solid var(--text-accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 4px;
 }
 
@@ -1274,6 +1286,7 @@ img {
 body.case-page--itab {
   --text-accent: var(--itab-accent);
   --bg-primary: var(--itab-bg);
+  --text-tertiary: var(--itab-text-tertiary);
 }
 
 /* The existing section spacing is enough separation for iTAB; the shared
@@ -4609,7 +4622,7 @@ html {
 .mobile-topbar__menu-btn:hover { opacity: 0.85; }
 .mobile-topbar__menu-btn:active { transform: scale(0.96); }
 .mobile-topbar__menu-btn:focus-visible {
-  outline: 2px solid var(--text-accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
 .mobile-topbar__menu-btn svg {
@@ -6669,7 +6682,7 @@ video.case__itab-board-desktop,
 }
 
 .consent__link:focus-visible {
-  outline: 2px solid var(--text-accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
 }
 
