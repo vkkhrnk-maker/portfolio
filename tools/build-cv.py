@@ -125,8 +125,12 @@ def parse(text):
             elif line.startswith("- "):
                 role["bullets"].append(line[2:].strip())
             elif line.startswith("Cases:"):
-                for label, href in re.findall(r"\[([^\]]+)\]\(([^)]+)\)", line):
-                    role["cases"].append({"label": label, "href": href})
+                # [page label](href "sheet label") — the optional quoted title is
+                # what the print sheet shows; the page keeps its button label.
+                for label, href, short in re.findall(
+                        r'\[([^\]]+)\]\(([^)\s]+)(?:\s+"([^"]+)")?\)', line):
+                    role["cases"].append({"label": label, "href": href,
+                                          "short": short or label})
                 if not role["cases"]:
                     fail(lineno, line, "a Cases: line needs at least one [label](url)")
             else:
@@ -234,7 +238,7 @@ def page_body(doc, lang="en"):
     a('        <div class="cv__actions">')
     a(f'          <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">{L["call"]}</a>')
     a(f'          <a class="btn btn--light" href="mailto:{doc["meta"]["Email"]}">{doc["meta"]["Email"]}</a>')
-    a('          <a class="btn btn--light" href="https://t.me/Viktoria_UxUi" target="_blank" rel="noopener">Telegram</a>')
+    a(f'          <a class="btn btn--light" href="{telegram_url(doc["meta"]["Telegram"])}" target="_blank" rel="noopener">Telegram</a>')
     a('        </div>')
     a('      </section>')
     return "\n".join(p)
@@ -248,12 +252,14 @@ def print_body(doc):
     a('  <header>')
     a(f'    <h1 class="name">{inline(doc["name"])}</h1>')
     a(f'    <p class="role">{inline(doc["role"])}</p>')
+    # Every contact is a live link: the PDF is read on screen far more often
+    # than on paper, and the portfolio is the one link a designer's CV exists for.
     a('    <p class="contacts">')
     a(f'      <span>{inline(m["Based"])}</span><span class="sep">|</span>'
-      f'<span>{inline(m["Email"])}</span><span class="sep">|</span>'
-      f'<span>Telegram {inline(m["Telegram"])}</span><br>')
-    a(f'      <span>{inline(strip_scheme(m["Portfolio"]))}</span><span class="sep">|</span>'
-      f'<span>{inline(strip_scheme(m["LinkedIn"]))}</span>')
+      f'<span>{link("mailto:" + m["Email"], inline(m["Email"]))}</span><span class="sep">|</span>'
+      f'<span>{link(telegram_url(m["Telegram"]), "Telegram " + inline(m["Telegram"]))}</span><br>')
+    a(f'      <span>{link(m["Portfolio"], inline(strip_scheme(m["Portfolio"])))}</span><span class="sep">|</span>'
+      f'<span>{link(m["LinkedIn"], inline(strip_scheme(m["LinkedIn"])))}</span>')
     a('    </p>')
     a('  </header>')
     a('')
@@ -271,13 +277,12 @@ def print_body(doc):
         # The case links ride on the meta line rather than a line of their own:
         # the sheet is tuned to fill one page exactly, and two extra block lines
         # spill it. Hrefs are absolute — a relative one in a PDF that has been
-        # mailed on resolves against nothing — while the visible text stays a
-        # short path, the domain being right there in the header.
+        # mailed on resolves against nothing. The visible text is the case's
+        # short name from cv.md; a file path meant nothing on paper or to a parser.
         meta = inline(sentence_case(r["meta"])) if r["meta"] else ""
         if r["cases"]:
             links = ", ".join(
-                f'<a href="{html.escape(urljoin(m["Portfolio"], c["href"]))}">'
-                f'{html.escape("/" + c["href"])}</a>'
+                link(urljoin(m["Portfolio"], c["href"]), inline(c["short"]))
                 for c in r["cases"])
             links = f'<span class="cases">Case{"s" if len(r["cases"]) > 1 else ""}: {links}</span>'
             meta = f'{meta} <span class="sep">·</span> {links}' if meta else links
@@ -293,7 +298,7 @@ def print_body(doc):
     a('  <h2>Skills</h2>')
     a('  <div class="skills">')
     for row in doc["skills"]:
-        a(f'    <p><b>{inline(row["label"])}</b> — {inline(row["body"])}</p>')
+        a(f'    <p><b>{inline(row["label"])}:</b> {inline(row["body"])}</p>')
     a('  </div>')
     a('')
     a('  <h2>Education</h2>')
@@ -314,8 +319,18 @@ def sentence_case(text):
 
 
 def strip_scheme(url):
-    """Printed URLs carry no scheme or www — they are read, not clicked."""
+    """Printed URLs carry no scheme or www; the href keeps the full address."""
     return re.sub(r"^https?://(www\.)?|/$", "", url)
+
+
+def link(href, text):
+    """An <a> around already-rendered text."""
+    return f'<a href="{html.escape(href)}">{text}</a>'
+
+
+def telegram_url(handle):
+    """'@Name' in cv.md -> https://t.me/Name, so the handle lives in one place."""
+    return "https://t.me/" + handle.strip().lstrip("@")
 
 
 def nbsp_last(escaped):
@@ -372,15 +387,51 @@ def render(template_path, body, out_path):
     return out_path
 
 
-def render_pdf():
+def render_pdf(author):
     if not os.path.exists(CHROME):
         raise SourceError(f"Chrome not found at {CHROME} — cannot render the PDF")
     subprocess.run([CHROME, "--headless", "--disable-gpu", "--no-pdf-header-footer",
                     "--virtual-time-budget=3000", f"--print-to-pdf={PDF_OUT}",
                     "file://" + PRINT_OUT],
                    check=True, capture_output=True)
+    set_pdf_author(PDF_OUT, author)
     pages = len(re.findall(rb"/Type\s*/Page[^s]", open(PDF_OUT, "rb").read()))
     return pages
+
+
+def set_pdf_author(path, author):
+    """Write /Author into the PDF's Info dictionary.
+
+    Chrome copies the page <title> into the PDF but has no way to set an
+    author, so the file had none and macOS showed Chrome's user-agent string
+    (the Creator) in its place. Rather than rewrite Chrome's output, this
+    appends a standard PDF incremental update: a new copy of the Info object,
+    a one-entry xref section, and a trailer whose /Prev points at the original.
+    """
+    data = open(path, "rb").read()
+    at = data.rfind(b"trailer")
+    tail = re.match(rb"trailer\s*<<(.*?)>>\s*startxref\s*(\d+)\s*%%EOF\s*$",
+                    data[at:], re.S) if at >= 0 else None
+    if not tail:
+        raise SourceError("the PDF has no classic trailer — Chrome's output changed?")
+    trailer, prev = tail.group(1).strip(), int(tail.group(2))
+    ref = re.search(rb"/Info\s+(\d+)\s+(\d+)\s+R", trailer)
+    if not ref:
+        raise SourceError("the PDF trailer names no /Info dictionary")
+    num, gen = int(ref.group(1)), int(ref.group(2))
+    obj = re.search(rb"(?<![0-9])%d %d obj\s*<<(.*?)>>\s*endobj" % (num, gen), data, re.S)
+    if not obj:
+        raise SourceError(f"the PDF's Info object {num} {gen} R is missing")
+    name = author.encode("latin-1")
+    name = name.replace(b"\\", b"\\\\").replace(b"(", b"\\(").replace(b")", b"\\)")
+    info = re.sub(rb"\s*/Author\s*\((?:\\.|[^\\)])*\)", b"", obj.group(1)).rstrip()
+    if not data.endswith(b"\n"):
+        data += b"\n"
+    update = b"%d %d obj\n<<%s\n/Author (%s)>>\nendobj\n" % (num, gen, info, name)
+    xref_at = len(data) + len(update)
+    update += b"xref\n%d 1\n%010d %05d n \n" % (num, len(data), gen)
+    update += b"trailer\n<<%s\n/Prev %d>>\nstartxref\n%d\n%%%%EOF\n" % (trailer, prev, xref_at)
+    open(path, "wb").write(data + update)
 
 
 def main():
@@ -412,7 +463,7 @@ def main():
 
     if args.pdf:
         try:
-            pages = render_pdf()
+            pages = render_pdf(doc["name"])
         except (SourceError, subprocess.CalledProcessError) as e:
             print(f"build-cv: PDF render failed: {e}", file=sys.stderr)
             return 1

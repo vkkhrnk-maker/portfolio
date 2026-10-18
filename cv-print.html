@@ -21,6 +21,11 @@
     line-height: 1.3;
     color: #1a1a1a;
     -webkit-font-smoothing: antialiased;
+    /* Helvetica Neue joins "ff" into one ligature glyph, and Chrome writes that
+       glyph into the PDF's text layer as U+FB00, not two letters — so
+       "handoff" or "drop-off" could not be found in the file, by a search or
+       by an ATS that does not normalise ligatures. */
+    font-variant-ligatures: none;
   }
 
   a { color: inherit; text-decoration: none; }
@@ -90,7 +95,14 @@
   /* The sheet is the copy that gets forwarded, so the case links travel with
      it — on the meta line, which costs no vertical space. */
   .role-meta .sep { color: #c4c4c4; }
-  .role-meta .cases a { color: #4a4a4a; text-decoration: none; }
+  /* Case names are words, not URLs, so a hairline underline says they open. */
+  .role-meta .cases a {
+    color: #4a4a4a;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5pt;
+    text-decoration-color: #b0b0b0;
+    text-underline-offset: 1.5pt;
+  }
 
   ul { margin: 1mm 0 0; padding-left: 3.8mm; }
   li { margin-bottom: 0.45mm; }
@@ -111,50 +123,50 @@
     <h1 class="name">Victoria Kukharenko</h1>
     <p class="role">Product Designer</p>
     <p class="contacts">
-      <span>Remote · UTC+2</span><span class="sep">|</span><span>vkkhrnk@gmail.com</span><span class="sep">|</span><span>Telegram @Viktoria_UxUi</span><br>
-      <span>victoriakukharenko.com</span><span class="sep">|</span><span>linkedin.com/in/viktoria-kukharenko</span>
+      <span>Remote · UTC+2</span><span class="sep">|</span><span><a href="mailto:vkkhrnk@gmail.com">vkkhrnk@gmail.com</a></span><span class="sep">|</span><span><a href="https://t.me/Victoria_UxUi">Telegram @Victoria_UxUi</a></span><br>
+      <span><a href="https://victoriakukharenko.com/">victoriakukharenko.com</a></span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/viktoria-kukharenko">linkedin.com/in/viktoria-kukharenko</a></span>
     </p>
   </header>
 
   <h2>Summary</h2>
-  <p>Four years in product design — research and CJM through release. Owned product design at an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.</p>
+  <p>Four years in product design, from research and customer journey mapping to release. Owned product design at an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.</p>
 
   <h2>Experience</h2>
 
   <div class="role-block">
     <div class="role-head">
       <div class="role-title">Product Designer — Freelance</div>
-      <div class="role-dates">Mar 2022 — Present</div>
+      <div class="role-dates">Mar 2022 – Present</div>
     </div>
     <div class="role-meta">Remote · art platform, crypto product, design mentoring</div>
     <ul>
-      <li><b>Syno.art</b> (2026 — Present) — art platform based in Cyprus. Designed the artist side end to end — auth, profile and portfolio, the open-call flow and applications dashboard — across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.</li>
-      <li><b>Cryptomi</b> (2023–2024) — interfaces for a crypto product; dense, data-heavy flows made approachable.</li>
-      <li><b>Abramova School</b> (2023–2024) — UX/UI design alongside mentoring junior designers: critiques, portfolio reviews, feedback.</li>
+      <li><b>Syno.art</b> (2026–Present): art platform based in Cyprus. Designed the artist side end to end (auth, profile and portfolio, the open-call flow and applications dashboard) across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.</li>
+      <li><b>Cryptomi</b> (2023–2024): interfaces for a crypto product; dense, data-heavy flows made approachable.</li>
+      <li><b>Abramova School</b> (2023–2024): UX/UI design alongside mentoring junior designers through critiques, portfolio reviews and feedback.</li>
     </ul>
   </div>
 
   <div class="role-block">
     <div class="role-head">
       <div class="role-title">Product Designer — Hooh</div>
-      <div class="role-dates">Jan 2025 — Mar 2026</div>
+      <div class="role-dates">Jan 2025 – Mar 2026</div>
     </div>
-    <div class="role-meta">Full-time, remote · AI document assistant, iOS and web · startup — the only product designer, with a PM, product owner, art director and two engineers <span class="sep">·</span> <span class="cases">Cases: <a href="https://victoriakukharenko.com/hooh.html">/hooh.html</a>, <a href="https://victoriakukharenko.com/hooh-fill.html">/hooh-fill.html</a></span></div>
+    <div class="role-meta">Full-time, remote · AI document assistant, iOS and web · startup · the only product designer, with a PM, product owner, art director and two engineers <span class="sep">·</span> <span class="cases">Cases: <a href="https://victoriakukharenko.com/hooh.html">AI assistant MVP</a>, <a href="https://victoriakukharenko.com/hooh-fill.html">Document workspace</a></span></div>
     <ul>
-      <li>Designed and shipped the MVP on web and iOS — upload, layered AI summaries, assistant chat and file organization.</li>
+      <li>Designed and shipped the MVP on web and iOS: upload, layered AI summaries, assistant chat and file organization.</li>
       <li>Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.</li>
-      <li>Extended the reader into a document workspace — Smart Fill (form fields recognized and filled from the user’s own documents, every value overridable), reusable signature, non-destructive markup and versioning: every tool on one scaffold, handed off complete with the design system the team ships from.</li>
+      <li>Extended the reader into a document workspace: Smart Fill (form fields recognized and filled from the user’s own documents, every value overridable), reusable signature, non-destructive markup and versioning. All tools share one scaffold and were handed off complete, together with the design system the team ships from.</li>
     </ul>
   </div>
 
   <div class="role-block">
     <div class="role-head">
       <div class="role-title">Product Designer — iTAB</div>
-      <div class="role-dates">May 2024 — Apr 2026</div>
+      <div class="role-dates">May 2024 – Apr 2026</div>
     </div>
-    <div class="role-meta">Part-time, remote · health and wellness e-commerce · web and mobile app <span class="sep">·</span> <span class="cases">Cases: <a href="https://victoriakukharenko.com/itab-specialists.html">/itab-specialists.html</a>, <a href="https://victoriakukharenko.com/itab.html">/itab.html</a></span></div>
+    <div class="role-meta">Part-time, remote · health and wellness e-commerce · web and mobile app <span class="sep">·</span> <span class="cases">Cases: <a href="https://victoriakukharenko.com/itab-specialists.html">Specialist consultations</a>, <a href="https://victoriakukharenko.com/itab.html">Product card</a></span></div>
     <ul>
-      <li>Designed the specialist-consultations service end to end — specialist listing, specialist card and the user-side booking flow — alongside the homepage, the product catalog and sections across the app and the site.</li>
+      <li>Designed the specialist-consultations service end to end (specialist listing, specialist card and the user-side booking flow), alongside the homepage, the product catalog and sections across the app and the site.</li>
       <li>Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.</li>
     </ul>
   </div>
@@ -162,33 +174,33 @@
   <div class="role-block">
     <div class="role-head">
       <div class="role-title">UX/UI Designer — Infomedia</div>
-      <div class="role-dates">May 2023 — Dec 2024</div>
+      <div class="role-dates">May 2023 – Dec 2024</div>
     </div>
     <div class="role-meta">Full-time, remote · communication products</div>
     <ul>
-      <li>Designed client-facing web and mobile products for Russian Railways (RZD) and Rosatom — turning requirements written for engineers into flows their users could follow. Project details under NDA.</li>
+      <li>Designed client-facing web and mobile products for Russian Railways (RZD) and Rosatom, turning requirements written for engineers into flows their users could follow. Project details under NDA.</li>
     </ul>
   </div>
 
   <h2>Skills</h2>
   <div class="skills">
-    <p><b>AI products</b> — LLM assistants and conversational UI · progressive disclosure of model output · source citations and provenance · scoped context control · uncertainty and failure states · human-in-the-loop override</p>
-    <p><b>Design</b> — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · iOS and web</p>
-    <p><b>Design systems</b> — Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA</p>
-    <p><b>Research and delivery</b> — Usability testing · user interviews · UX audit · competitor analysis · developer handoff and specs · mentoring</p>
-    <p><b>Tools</b> — Figma (variables, components, auto-layout, Plugin API) · FigJam · AI coding agents (Claude Code, Codex) — working prototypes in HTML and Xcode, plus custom Figma plugins for bulk token audits and migrations</p>
+    <p><b>AI products:</b> LLM assistants and conversational UI · progressive disclosure of model output · source citations and provenance · scoped context control · uncertainty and failure states · human-in-the-loop override</p>
+    <p><b>Design:</b> Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · iOS and web</p>
+    <p><b>Design systems:</b> Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA</p>
+    <p><b>Research and delivery:</b> Usability testing · user interviews · UX audit · competitor analysis · developer handoff and specs · mentoring</p>
+    <p><b>Tools:</b> Figma (variables, components, auto-layout, Plugin API) · FigJam · AI coding agents (Claude Code, Codex) to build working prototypes in HTML and Xcode and custom Figma plugins for bulk token audits and migrations</p>
   </div>
 
   <h2>Education</h2>
   <div class="edu">
-    <p><b>Pragmatica</b> — Bolshaya Praktika. 2025.</p>
-    <p><b>Uprock School</b> — Certificate, product / UX-UI design. 2022 — 2024.</p>
-    <p><b>Syktyvkar State University</b> — Master’s degree, Ecology. 2019 — 2021.</p>
-    <p><b>Ukhta State Technical University</b> — Bachelor’s degree, Geodesy for Land Management and Cadastre. 2012 — 2016.</p>
+    <p><b>Pragmatica</b>, “Big Practice” product design program. 2025.</p>
+    <p><b>Uprock School</b>, certificate in product and UX/UI design. 2022–2024.</p>
+    <p><b>Syktyvkar State University</b>, Master’s degree in Ecology. 2019–2021.</p>
+    <p><b>Ukhta State Technical University</b>, Bachelor’s degree in Geodesy for Land Management and Cadastre. 2012–2016.</p>
   </div>
 
   <h2>Languages</h2>
-  <p>Russian — native · English — B2, working proficiency</p>
+  <p>Russian: native · English: B2, working proficiency</p>
 
 </body>
 </html>

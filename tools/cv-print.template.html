@@ -21,6 +21,11 @@
     line-height: 1.3;
     color: #1a1a1a;
     -webkit-font-smoothing: antialiased;
+    /* Helvetica Neue joins "ff" into one ligature glyph, and Chrome writes that
+       glyph into the PDF's text layer as U+FB00, not two letters — so
+       "handoff" or "drop-off" could not be found in the file, by a search or
+       by an ATS that does not normalise ligatures. */
+    font-variant-ligatures: none;
   }
 
   a { color: inherit; text-decoration: none; }
@@ -90,7 +95,14 @@
   /* The sheet is the copy that gets forwarded, so the case links travel with
      it — on the meta line, which costs no vertical space. */
   .role-meta .sep { color: #c4c4c4; }
-  .role-meta .cases a { color: #4a4a4a; text-decoration: none; }
+  /* Case names are words, not URLs, so a hairline underline says they open. */
+  .role-meta .cases a {
+    color: #4a4a4a;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5pt;
+    text-decoration-color: #b0b0b0;
+    text-underline-offset: 1.5pt;
+  }
 
   ul { margin: 1mm 0 0; padding-left: 3.8mm; }
   li { margin-bottom: 0.45mm; }

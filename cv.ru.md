@@ -19,7 +19,7 @@
 
 Based: Удалённо · UTC+2
 Email: vkkhrnk@gmail.com
-Telegram: @Viktoria_UxUi
+Telegram: @Victoria_UxUi
 Portfolio: https://victoriakukharenko.com/ru/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
 Focus: AI-интерфейсы, SaaS и e-commerce на iOS и в вебе
@@ -70,7 +70,7 @@ Cases: [Кейс про консультации](itab-specialists.html), [Ке�
 
 ## Education
 
-**2025** — **Прагматика** — Большая практика
+**2025** — **Прагматика** — «Большая практика», программа по продуктовому дизайну
 **2022 — 2024** — **Школа Uprock** — сертификат, продуктовый / UX-UI дизайн
 **2019 — 2021** — **Сыктывкарский государственный университет** — магистратура, экология
 **2012 — 2016** — **Ухтинский государственный технический университет** — бакалавриат, геодезия для землеустройства и кадастра
