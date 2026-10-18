@@ -54,7 +54,7 @@ Product designer, from research and customer journey mapping to release. At an A
 - **Prokachka Studio** (2022–2023): marketing sites and landing pages, from visual design to responsive layout and handoff.
 
 ### Product Designer — Hooh
-**Jan 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
+**Feb 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
 
 - Designed and shipped the MVP on web and iOS: upload, layered AI summaries, assistant chat and file organization.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
@@ -81,7 +81,7 @@ Cases: [Read the consultations case](itab-specialists.html "Specialist consultat
 **Design** — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · cross-platform mobile and web
 **Design systems** — Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA
 **Research and delivery** — Usability testing · user interviews · UX audit · competitor analysis · developer handoff and specs · mentoring
-**Tools** — Figma (variables, components, auto-layout, Plugin API) · FigJam · AI coding agents (Claude Code, Codex) to build working prototypes in HTML and Xcode and custom Figma plugins for bulk token audits and migrations
+**Tools** — Figma (variables, components, auto-layout) · FigJam · AI coding agents (Claude Code, Codex) to build working prototypes in HTML and Xcode and custom Figma plugins for bulk token audits and migrations
 
 ## Education
 

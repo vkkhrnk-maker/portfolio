@@ -24,7 +24,7 @@
     { id: 'stas', name: 'Stas Bokcharev', spec: 'GP • Preventive medicine',
       chips: ['Top category', '12 yrs', 'Adults', 'Children'], date: 'October 6, 2026',
       slots: ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30'], addr: '64 Belorusskaya St',
-      about: 'A highly qualified GP with over 12 years of experience. Specialises in diagnosing and treating internal diseases, including cardiovascular and respiratory conditions.' },
+      about: 'A highly qualified GP with over 12 years of experience. Specializes in diagnosing and treating internal diseases, including cardiovascular and respiratory conditions.' },
     { id: 'pavel', name: 'Pavel Ilyin', spec: 'Gastroenterologist • Gut health',
       chips: ['12 yrs', 'Adults', 'Children'], date: 'October 6, 2026',
       slots: ['11:00', '11:30', '12:00', '12:30', '17:00', '17:30'], addr: '7 Sadovaya St',

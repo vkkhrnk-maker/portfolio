@@ -5609,14 +5609,14 @@ a, button, [role="button"], summary, label {
   color: var(--text-primary);
 }
 
-/* Inside a role, on the --space scale: title to meta 16, meta to bullets 12,
-   bullets 8 apart, bullets to the case pills 16. The title used to sit 10px
-   from the meta line — the same distance as meta to bullets — so the heading
-   read as one more line of the description instead of its title. */
+/* Inside a role everything below the title sits 16px apart on the --space
+   scale: title, meta, each point, the case pills (20, with their own 4). The
+   title used to sit 10px from the meta, so it read as one more line of the
+   description rather than its heading. */
 .cv__role {
   display: flex;
   flex-direction: column;
-  gap: var(--space-12);
+  gap: var(--space-16);
 }
 
 /* Roles were 32px apart — the same distance the section title sits from the
@@ -5660,7 +5660,7 @@ a, button, [role="button"], summary, label {
 }
 
 .cv__role-meta {
-  margin: var(--space-4) 0 0;
+  margin: 0;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
@@ -5670,12 +5670,16 @@ a, button, [role="button"], summary, label {
   text-wrap: pretty;
 }
 
+/* No markers: each point is a short paragraph of its own, set apart by
+   space. Grey dots in front of grey text read as noise (owner's call, 18 Oct
+   2026). The print sheet keeps its bullets — that is the ATS copy. */
 .cv__list {
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
+  list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-16);
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
@@ -5683,11 +5687,6 @@ a, button, [role="button"], summary, label {
   color: var(--text-secondary);
   max-width: 780px;
   text-wrap: pretty;
-}
-
-.cv__list ::marker,
-.cv__list li::marker {
-  color: var(--stroke-subtle);
 }
 
 /* Company and school names lift out of the grey by colour alone, same as the
@@ -5771,10 +5770,12 @@ a, button, [role="button"], summary, label {
      either squeezed the title into a two-word column or pushed the row wider
      than the screen. column-reverse puts the date above the role, where it
      reads as the block's label instead of a stranded right-hand column. */
+  /* 12px under the dates: at 4 the label sat on the 28px title's caps and
+     read as stuck to it. */
   .cv__role-head {
     flex-direction: column-reverse;
     align-items: flex-start;
-    gap: 4px;
+    gap: var(--space-12);
   }
 
   .cv__role-title {
