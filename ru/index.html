@@ -54,6 +54,7 @@
   <script src="../shimmer.js?v=7" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
   <aside class="sidebar">
     <div class="sidebar__top">
       <div class="sidebar__identity">
@@ -62,7 +63,7 @@
         </a>
         <p class="sidebar__role">Продуктовый дизайнер</p>
       </div>
-      <nav class="menu">
+      <nav class="menu" aria-label="Основное">
         <a class="menu__item is-active" href="#top">Привет</a>
         <a class="menu__item" href="#works">Работы</a>
         <a class="menu__item" href="#experience">Опыт</a>
@@ -76,21 +77,23 @@
   </aside>
 
 
-  <main class="content">
+  <div class="content">
     <div class="mobile-topbar mobile-topbar--case mobile-topbar--home">
       <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <a class="mobile-topbar__link mobile-topbar__name" href="#top" aria-label="Victoria Kukharenko — наверх страницы">Victoria Kukharenko</a>
       <div class="mobile-topbar__actions">
         <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Связаться</a>
-        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Открыть меню">
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Открыть меню">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
           </svg>
         </button>
       </div>
     </div>
+
+    <main class="content__main" id="main" tabindex="-1">
     <section class="profile-section" id="top" tabindex="-1">
-      <button class="menu-toggle" type="button" data-menu-open aria-label="Открыть меню">
+      <button class="menu-toggle" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Открыть меню">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
         </svg>
@@ -234,7 +237,7 @@
             <h3 class="experience-editorial__role">Продуктовый дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2026 / сейчас</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-syno" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-syno" aria-label="Показать, чем я занималась в Syno.art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-syno">
             <p class="experience-editorial__description">Спроектировала всё, что видит художник: вход, профиль и портфолио, подачу на опен-колл и дашборд заявок. Для десктопа и мобильного, на собственной дизайн-системе</p>
           </div>
@@ -253,7 +256,7 @@
             <h3 class="experience-editorial__role">Продуктовый дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2025 / 2026</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Показать, чем я занималась в Hooh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-1">
             <p class="experience-editorial__description">Спроектировала MVP целиком: загрузка документов, AI-сводки, чат с ассистентом. Потом — рабочую среду для документов. Отвечала за сценарии, интерфейс и систему компонентов, из которой команда собирает продукт</p>
           </div>
@@ -271,7 +274,7 @@
             <h3 class="experience-editorial__role">Продуктовый дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2024 / 2026</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Показать, чем я занималась в iTAB"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-2">
             <p class="experience-editorial__description">Спроектировала сервис консультаций специалистов целиком и переделала главную, каталог и карточку товара. После редизайна пользователи реже уходили со страницы товара, чаще добавляли товар в корзину, а карточку внедрили во всём каталоге</p>
           </div>
@@ -289,7 +292,7 @@
             <h3 class="experience-editorial__role">UX/UI-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-3" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-3" aria-label="Показать, чем я занималась в Infomedia"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-3">
             <p class="experience-editorial__description">Проектировала интерфейсы для РЖД и Росатома: требования были написаны языком разработки, а пользоваться результатом предстояло обычному человеку. Детали под NDA</p>
           </div>
@@ -309,7 +312,7 @@
             <h3 class="experience-editorial__role">UX/UI-дизайнер, ментор</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Показать, чем я занималась в Abramova School"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-4">
             <p class="experience-editorial__description">Проектировала UX/UI и менторила начинающих дизайнеров: разборы работ, обратная связь</p>
           </div>
@@ -330,7 +333,7 @@
             <h3 class="experience-editorial__role">UX/UI-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-5" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-5" aria-label="Показать, чем я занималась в Cryptomi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-5">
             <p class="experience-editorial__description">Довела MVP от сценариев до готового интерфейса и сделала понятными экраны, где много данных</p>
           </div>
@@ -350,7 +353,7 @@
             <h3 class="experience-editorial__role">Веб-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2022 / 2023</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-ebda" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-ebda" aria-label="Показать, чем я занималась в Ebda Agency"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-ebda">
             <p class="experience-editorial__description">Проектировала страницы для сайта самого Webflow (webflow.com) и для партнёров агентства в их дизайн-системах</p>
           </div>
@@ -369,7 +372,7 @@
             <h3 class="experience-editorial__role">Веб-дизайнер</h3>
           </div>
           <time class="experience-editorial__date">2022 / 2023</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-6" aria-label="Показать, чем я там занималась"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-6" aria-label="Показать, чем я занималась в Prokachka Studio"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-6">
             <p class="experience-editorial__description">Делала промосайты и лендинги — визуал, макеты и адаптив от концепции до передачи в разработку</p>
           </div>
@@ -441,15 +444,17 @@
       </a>
     </section>
 
+    </main>
+
     <footer class="footer">
       <div class="footer__row">
         <p class="footer__copyright">© <span data-year>2026</span></p>
         <p class="footer__credit">Дизайн и сборка — Victoria Kukharenko</p>
       </div>
     </footer>
-  </main>
+  </div>
 
-  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Меню">
     <div class="menu-drawer__header">
       <div class="menu-drawer__identity">
         <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
@@ -462,7 +467,7 @@
         </svg>
       </button>
     </div>
-    <nav class="menu-drawer__nav">
+    <nav class="menu-drawer__nav" aria-label="Основное">
       <a class="menu-drawer__item" href="#top">Привет</a>
       <a class="menu-drawer__item" href="#works">Работы</a>
       <a class="menu-drawer__item" href="#experience">Опыт</a>
@@ -515,6 +520,7 @@
           .filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
         drawer.classList.add('is-open');
         drawer.setAttribute('aria-hidden', 'false');
+        openBtns.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
         setBackgroundInert(true);
         document.body.style.overflow = 'hidden';
         requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
@@ -524,6 +530,7 @@
         if (!drawer.classList.contains('is-open')) return;
         drawer.classList.remove('is-open');
         drawer.setAttribute('aria-hidden', 'true');
+        openBtns.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
         setBackgroundInert(false);
         document.body.style.overflow = '';
         if (restoreFocus && opener && document.contains(opener)) {

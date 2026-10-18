@@ -18,13 +18,13 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Hooh Document Workspace — кейс · Victoria Kukharenko</title>
-  <meta name="description" content="Hooh Document Workspace — кейс о рабочей среде для документов. Smart Fill подставляет данные в формы, пользователь проверяет поля, добавляет подпись и сохраняет результат. Десять сценариев работают на общем каркасе.">
+  <meta name="description" content="Smart Fill в Hooh заполняет формы данными из сохранённых документов. Пользователь проверяет каждое поле, потом подписывает, правит и хранит версии там же.">
   <meta name="theme-color" content="#d97706">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Hooh Document Workspace — кейс · Victoria Kukharenko">
-  <meta property="og:description" content="Hooh помогает не только понять документ, но и заполнить, подписать, отредактировать и сохранить его — с контролем на каждом шаге.">
+  <meta property="og:description" content="Smart Fill в Hooh заполняет формы данными из сохранённых документов. Пользователь проверяет каждое поле, потом подписывает, правит и хранит версии там же.">
   <meta property="og:url" content="https://victoriakukharenko.com/ru/hooh-fill.html">
   <meta property="og:locale" content="ru_RU">
   <meta property="og:locale:alternate" content="en_US">
@@ -34,7 +34,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hooh Document Workspace — кейс · Victoria Kukharenko">
-  <meta name="twitter:description" content="Hooh помогает не только понять документ, но и заполнить, подписать, отредактировать и сохранить его — с контролем на каждом шаге.">
+  <meta name="twitter:description" content="Smart Fill в Hooh заполняет формы данными из сохранённых документов. Пользователь проверяет каждое поле, потом подписывает, правит и хранит версии там же.">
   <meta name="twitter:image" content="https://victoriakukharenko.com/assets/case-hooh-fill-og.jpg">
 
   <link rel="canonical" href="https://victoriakukharenko.com/ru/hooh-fill.html">
@@ -52,6 +52,7 @@
   <script src="../shimmer.js?v=7" defer></script>
 </head>
 <body class="case-page--fill">
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
@@ -84,13 +85,13 @@
     <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Связаться</a>
   </div>
 
-  <main class="content content--case">
+  <div class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
       <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
       <div class="mobile-topbar__actions">
         <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Связаться</a>
-        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Открыть меню">
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Открыть меню">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
           </svg>
@@ -98,6 +99,7 @@
       </div>
     </div>
 
+    <main class="content__main" id="main" tabindex="-1">
     <a class="case__back" href="index.html#works">
       <span class="case__back-icon" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
@@ -336,7 +338,7 @@
         </div>
       </section>
 
-      <nav class="case__pager">
+      <nav class="case__pager" aria-label="Другие кейсы">
         <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <line x1="19" y1="12" x2="5" y2="12"/>
@@ -360,15 +362,17 @@
       </a>
     </section>
 
+    </main>
+
     <footer class="footer">
       <div class="footer__row">
         <p class="footer__copyright">© <span data-year>2026</span></p>
         <p class="footer__credit">Дизайн и сборка — Victoria Kukharenko</p>
       </div>
     </footer>
-  </main>
+  </div>
 
-  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Меню">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
       <nav class="lang-switch lang-switch--compact" aria-label="Язык"><a class="lang-switch__opt" href="/hooh-fill.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
@@ -378,7 +382,7 @@
         </svg>
       </button>
     </div>
-    <nav class="menu-drawer__nav">
+    <nav class="menu-drawer__nav" aria-label="Основное">
       <a class="menu-drawer__item" href="index.html#works">Работы</a>
       <a class="menu-drawer__item" href="index.html#experience">Опыт</a>
     </nav>
@@ -412,6 +416,7 @@
         background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
         drawer.classList.add('is-open');
         drawer.setAttribute('aria-hidden', 'false');
+        openBtns.forEach((b) => b.setAttribute('aria-expanded', 'true'));
         setBackgroundInert(true);
         document.body.style.overflow = 'hidden';
         requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
@@ -420,6 +425,7 @@
         if (!drawer.classList.contains('is-open')) return;
         drawer.classList.remove('is-open');
         drawer.setAttribute('aria-hidden', 'true');
+        openBtns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
         setBackgroundInert(false);
         document.body.style.overflow = '';
         if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });

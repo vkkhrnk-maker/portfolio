@@ -571,6 +571,68 @@ img {
   outline: none;
 }
 
+/* <main> is the skip link's landing point, not a control either: the same
+   tabindex="-1", so the next Tab starts inside the content, and the same
+   reason to drop the ring around the whole column. */
+.content__main:focus {
+  outline: none;
+}
+
+/* Skip link: the first Tab on every page, Enter lands in <main> past the
+   sidebar and the top bar. Out of view until focused, and fixed, so it never
+   joins the body's flex row. Above the bar's blur (60, 80 on desktop) and the
+   pinned CTA (90, 100 on tablets). It covers nothing: on phones and tablets it
+   opens just under the bar (whose bottom edge is at most 72px down, on a
+   tablet case page), on the name's rail; on desktop it is centred over the
+   content column, clear of the sidebar, the Back button and the CTA. */
+.skip-link {
+  position: fixed;
+  top: -200px;
+  left: var(--page-x);
+  z-index: 300;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: var(--radius-button);
+  background-color: var(--button-secondary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-float);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+.skip-link:focus {
+  top: 80px;
+}
+
+.skip-link:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* The column's centre: half of what is left after the 320px sidebar, 360px
+   from 1920. Same top as the pinned CTA. */
+@media (min-width: 1200px) {
+  .skip-link {
+    left: calc(50% + 160px);
+    transform: translateX(-50%);
+  }
+
+  .skip-link:focus {
+    top: 24px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .skip-link {
+    left: calc(50% + 180px);
+  }
+}
+
 /* CTA button — magenta with inner shadow (Telegram, contact CTA) */
 .btn--dark {
   background-color: var(--button-primary);
@@ -608,6 +670,21 @@ img {
   display: flex;
   flex-direction: column;
   gap: var(--section-y);
+}
+
+/* The column holds the top bar, <main> and the footer, so the bar and the
+   footer stay outside the main landmark. <main> repeats the column's gap for
+   the sections inside it, and the footer's negative top margin still cancels
+   the gap above it, so the rhythm is the one the column had before.
+   The scroll margin is taller than anything above <main> (16–24px padding,
+   the 48px bar, the gap), so the skip link's jump lands on the page top
+   instead of sliding the first section under the sticky bar. */
+.content__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-y);
+  min-width: 0;
+  scroll-margin-top: 200px;
 }
 
 /* Cap content width so project cards don't get absurdly tall on huge viewports;
@@ -810,7 +887,7 @@ img {
     gap: 199px;
   }
 
-  .content--case > .case {
+  .content--case .content__main > .case {
     margin-top: -40px;
   }
 }
@@ -5543,9 +5620,9 @@ a, button, [role="button"], summary, label {
    article at 24 (padding) + 56 (Back) + 24 + --section-y. The difference is
    --lh-body + 119 − --section-y: −17px at 24px lines, −9px at 1920+, where
    body text grows to 23/32. Case pages make the same kind of correction for
-   their title (.content--case > .case). */
+   their title (.content--case .content__main > .case). */
 @media (min-width: 1200px) {
-  .content--case > .cv {
+  .content--case .content__main > .cv {
     margin-top: calc(var(--lh-body) + 119px - var(--section-y));
   }
 }
@@ -5819,6 +5896,7 @@ a, button, [role="button"], summary, label {
    hand the paper to the text. The tuned one-page layout still lives in
    cv-print.html — this is for whoever hits Cmd-P on the page itself. */
 @media print {
+  .skip-link,
   .sidebar,
   .mobile-topbar,
   .menu-drawer,

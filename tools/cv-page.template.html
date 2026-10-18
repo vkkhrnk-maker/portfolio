@@ -28,13 +28,13 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>CV — Victoria Kukharenko, Product Designer</title>
-  <meta name="description" content="CV of Victoria Kukharenko, product designer — AI interfaces, SaaS and e-commerce for mobile and web. Experience, skills, education, and a one-page PDF to download.">
+  <meta name="description" content="CV of Victoria Kukharenko, product designer: AI interfaces, SaaS and e-commerce for mobile and web. Experience, skills, education and a one-page PDF.">
   <meta name="theme-color" content="#d946ef">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="profile">
   <meta property="og:title" content="CV — Victoria Kukharenko, Product Designer">
-  <meta property="og:description" content="Product designer working end to end on mobile and web. Experience, skills and a one-page PDF.">
+  <meta property="og:description" content="CV of Victoria Kukharenko, product designer: AI interfaces, SaaS and e-commerce for mobile and web. Experience, skills, education and a one-page PDF.">
   <meta property="og:url" content="https://victoriakukharenko.com/cv.html">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="ru_RU">
@@ -42,7 +42,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CV — Victoria Kukharenko, Product Designer">
-  <meta name="twitter:description" content="Product designer working end to end on mobile and web. Experience, skills and a one-page PDF.">
+  <meta name="twitter:description" content="CV of Victoria Kukharenko, product designer: AI interfaces, SaaS and e-commerce for mobile and web. Experience, skills, education and a one-page PDF.">
   <meta name="twitter:image" content="https://victoriakukharenko.com/assets/og-cover.jpg">
 
   <link rel="canonical" href="https://victoriakukharenko.com/cv.html">
@@ -59,6 +59,7 @@
   <script src="{{TYPOGRAPHER}}" defer></script>
 </head>
 <body class="cv-page">
+  <a class="skip-link" href="#main">Skip to content</a>
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
       <a class="sidebar__name-link" href="index.html">
@@ -90,13 +91,13 @@
     <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
   </div>
 
-  <main class="content content--case">
+  <div class="content content--case">
     <div class="mobile-topbar mobile-topbar--case">
       <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <a class="mobile-topbar__link mobile-topbar__name" href="index.html">Victoria Kukharenko</a>
       <div class="mobile-topbar__actions">
         <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
-        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Open menu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
           </svg>
@@ -104,6 +105,7 @@
       </div>
     </div>
 
+    <main class="content__main" id="main" tabindex="-1">
     <a class="case__back" href="index.html">
       <span class="case__back-icon" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
@@ -123,15 +125,17 @@
       </a>
     </section>
 
+    </main>
+
     <footer class="footer">
       <div class="footer__row">
         <p class="footer__copyright">© <span data-year>2026</span></p>
         <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
       </div>
     </footer>
-  </main>
+  </div>
 
-  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Menu">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
       <nav class="lang-switch lang-switch--compact" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/cv.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
@@ -141,7 +145,7 @@
         </svg>
       </button>
     </div>
-    <nav class="menu-drawer__nav">
+    <nav class="menu-drawer__nav" aria-label="Main">
       <a class="menu-drawer__item" href="index.html#works">Works</a>
       <a class="menu-drawer__item" href="index.html#experience">Experience</a>
     </nav>
@@ -174,6 +178,7 @@
         background = Array.from(document.body.children).filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
         drawer.classList.add('is-open');
         drawer.setAttribute('aria-hidden', 'false');
+        openBtns.forEach((b) => b.setAttribute('aria-expanded', 'true'));
         setBackgroundInert(true);
         document.body.style.overflow = 'hidden';
         requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
@@ -182,6 +187,7 @@
         if (!drawer.classList.contains('is-open')) return;
         drawer.classList.remove('is-open');
         drawer.setAttribute('aria-hidden', 'true');
+        openBtns.forEach((b) => b.setAttribute('aria-expanded', 'false'));
         setBackgroundInert(false);
         document.body.style.overflow = '';
         if (restoreFocus && opener && document.contains(opener)) opener.focus({ preventScroll: true });

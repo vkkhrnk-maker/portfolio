@@ -63,6 +63,7 @@
   <script src="shimmer.js?v=7" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <aside class="sidebar">
     <div class="sidebar__top">
       <div class="sidebar__identity">
@@ -71,7 +72,7 @@
         </a>
         <p class="sidebar__role">Product designer</p>
       </div>
-      <nav class="menu">
+      <nav class="menu" aria-label="Main">
         <a class="menu__item is-active" href="#top">Hello</a>
         <a class="menu__item" href="#works">Works</a>
         <a class="menu__item" href="#experience">Experience</a>
@@ -85,21 +86,23 @@
   </aside>
 
 
-  <main class="content">
+  <div class="content">
     <div class="mobile-topbar mobile-topbar--case mobile-topbar--home">
       <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <a class="mobile-topbar__link mobile-topbar__name" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">Victoria Kukharenko</a>
       <div class="mobile-topbar__actions">
         <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
-        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-label="Open menu">
+        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Open menu">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
             <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
           </svg>
         </button>
       </div>
     </div>
+
+    <main class="content__main" id="main" tabindex="-1">
     <section class="profile-section" id="top" tabindex="-1">
-      <button class="menu-toggle" type="button" data-menu-open aria-label="Open menu">
+      <button class="menu-toggle" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Open menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
         </svg>
@@ -243,7 +246,7 @@
             <h3 class="experience-editorial__role">Product designer</h3>
           </div>
           <time class="experience-editorial__date">2026 / now</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-syno" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-syno" aria-label="Show what I did at Syno.art"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-syno">
             <p class="experience-editorial__description">Designed everything the artist sees: sign-in, profile and portfolio, applying to open calls and the applications dashboard. Desktop and mobile, on a design system of its own</p>
           </div>
@@ -262,7 +265,7 @@
             <h3 class="experience-editorial__role">Product designer</h3>
           </div>
           <time class="experience-editorial__date">2025 / 2026</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-1" aria-label="Show what I did at Hooh"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-1">
             <p class="experience-editorial__description">Designed the MVP end to end: document uploads, AI summaries and an assistant chat. Then a document workspace on top of it. Owned the flows, UI and the component system the team ships from</p>
           </div>
@@ -280,7 +283,7 @@
             <h3 class="experience-editorial__role">Product designer</h3>
           </div>
           <time class="experience-editorial__date">2024 / 2026</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-2" aria-label="Show what I did at iTAB"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-2">
             <p class="experience-editorial__description">Designed a specialist-consultations service end to end and redesigned the homepage, catalog and product card. After the redesign, people left the product page less often, added it to cart more often, and the card rolled out across the whole catalog</p>
           </div>
@@ -298,7 +301,7 @@
             <h3 class="experience-editorial__role">UX/UI designer</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-3" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-3" aria-label="Show what I did at Infomedia"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-3">
             <p class="experience-editorial__description">Designed interfaces for Russian Railways and Rosatom. The requirements were written in engineering language, but ordinary people had to use the result. Details under NDA</p>
           </div>
@@ -318,7 +321,7 @@
             <h3 class="experience-editorial__role">UX/UI designer, mentor</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-4" aria-label="Show what I did at Abramova School"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-4">
             <p class="experience-editorial__description">Designed UX/UI and mentored junior designers: work reviews and feedback</p>
           </div>
@@ -339,7 +342,7 @@
             <h3 class="experience-editorial__role">UX/UI designer</h3>
           </div>
           <time class="experience-editorial__date">2023 / 2024</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-5" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-5" aria-label="Show what I did at Cryptomi"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-5">
             <p class="experience-editorial__description">Took the MVP from user flows to final UI, keeping data-heavy screens clear</p>
           </div>
@@ -359,7 +362,7 @@
             <h3 class="experience-editorial__role">Web designer</h3>
           </div>
           <time class="experience-editorial__date">2022 / 2023</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-ebda" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-ebda" aria-label="Show what I did at Ebda Agency"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-ebda">
             <p class="experience-editorial__description">Designed pages for Webflow’s own site, webflow.com, and for the agency’s partners within their design systems</p>
           </div>
@@ -378,7 +381,7 @@
             <h3 class="experience-editorial__role">Web designer</h3>
           </div>
           <time class="experience-editorial__date">2022 / 2023</time>
-          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-6" aria-label="Show what I did there"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
+          <button class="experience-editorial__toggle" type="button" aria-expanded="false" aria-controls="exp-detail-6" aria-label="Show what I did at Prokachka Studio"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg></button>
           <div class="experience-editorial__detail" id="exp-detail-6">
             <p class="experience-editorial__description">Designed marketing sites and landing pages — visual design, layout and responsive behavior from concept through to developer handoff</p>
           </div>
@@ -450,15 +453,17 @@
       </a>
     </section>
 
+    </main>
+
     <footer class="footer">
       <div class="footer__row">
         <p class="footer__copyright">© <span data-year>2026</span></p>
         <p class="footer__credit">Designed &amp; built by Victoria Kukharenko</p>
       </div>
     </footer>
-  </main>
+  </div>
 
-  <div class="menu-drawer" id="menu-drawer" aria-hidden="true">
+  <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Menu">
     <div class="menu-drawer__header">
       <div class="menu-drawer__identity">
         <a class="menu-drawer__name" href="#top">Victoria Kukharenko</a>
@@ -471,7 +476,7 @@
         </svg>
       </button>
     </div>
-    <nav class="menu-drawer__nav">
+    <nav class="menu-drawer__nav" aria-label="Main">
       <a class="menu-drawer__item" href="#top">Hello</a>
       <a class="menu-drawer__item" href="#works">Works</a>
       <a class="menu-drawer__item" href="#experience">Experience</a>
@@ -524,6 +529,7 @@
           .filter((el) => el !== drawer && el.tagName !== 'SCRIPT');
         drawer.classList.add('is-open');
         drawer.setAttribute('aria-hidden', 'false');
+        openBtns.forEach((btn) => btn.setAttribute('aria-expanded', 'true'));
         setBackgroundInert(true);
         document.body.style.overflow = 'hidden';
         requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
@@ -533,6 +539,7 @@
         if (!drawer.classList.contains('is-open')) return;
         drawer.classList.remove('is-open');
         drawer.setAttribute('aria-hidden', 'true');
+        openBtns.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
         setBackgroundInert(false);
         document.body.style.overflow = '';
         if (restoreFocus && opener && document.contains(opener)) {
