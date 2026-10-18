@@ -40,7 +40,7 @@ Headline: Product designer, end to end on iOS and web
 
 ## Summary
 
-Four years in product design, from research and customer journey mapping to release. Owned product design at an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
+Product designer, from research and customer journey mapping to release. Owned product design at an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
 
 ## Experience
 
