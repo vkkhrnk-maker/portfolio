@@ -48,7 +48,7 @@ End to end, from research and customer journey mapping to release. At an AI star
 **Mar 2022 – Present · remote · art platform, crypto product, marketing sites, design mentoring**
 
 - **Syno.art** (2026–Present): art platform based in Cyprus. Designed the artist side end to end (auth, profile and portfolio, the open-call flow and applications dashboard) across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
-- **Cryptomi** (2023–2024): interfaces for a crypto product; dense, data-heavy flows made approachable.
+- **Cryptomi** (2023–2024): crypto startup. Designed the MVP from user flows to final UI, keeping data-heavy screens clear.
 - **Abramova School** (2023–2024): UX/UI design and mentoring junior designers through critiques and portfolio reviews.
 - **Ebda Agency** (2022–2023): Canadian Webflow agency. Designed pages for Webflow's own site, webflow.com, and pages for the agency's partners within their design systems.
 - **Prokachka Studio** (2022–2023): marketing sites and landing pages, from visual design to responsive layout and handoff.
