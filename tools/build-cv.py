@@ -169,17 +169,32 @@ def inline(text):
     return out
 
 
+def bind_dashes(escaped):
+    """Keep a spaced dash on the line of the word before it.
+
+    A line that opens with "—" reads as a broken sentence, and Russian
+    typography rules it out. The site pages get no typographer.js pass, so the
+    page text binds its dashes here. The print sheet is left alone: its text
+    layer is what an ATS reads.
+    """
+    return escaped.replace(" — ", "&nbsp;— ")
+
+
 def page_body(doc, lang="en"):
     """The site page: .cv__* classes, styled by the CV block in styles.css."""
     L = LABELS[lang]
     p = []
     a = p.append
+
+    def text(s):
+        return bind_dashes(inline(s))
+
     a('      <header class="cv__hero">')
     a('        <p class="cv__eyebrow">CV</p>')
     # The headline is the one line written for the page rather than the sheet.
     headline = doc["meta"].get("Headline", doc["role"])
     a(f'        <h1 class="cv__title">{nbsp_last(inline(headline))}</h1>')
-    a(f'        <p class="cv__summary">{inline(doc["summary"])}</p>')
+    a(f'        <p class="cv__summary">{text(doc["summary"])}</p>')
     a('        <div class="cv__actions">')
     a('          <!-- ?v= is bumped whenever the PDF is re-rendered from cv-print.html,')
     a('               since it is replaced in place and would otherwise stay cached. -->')
@@ -199,15 +214,15 @@ def page_body(doc, lang="en"):
         a('')
         a('        <div class="cv__role">')
         a('          <div class="cv__role-head">')
-        a(f'            <h3 class="cv__role-title">{inline(r["title"])}</h3>')
+        a(f'            <h3 class="cv__role-title">{text(r["title"])}</h3>')
         a(f'            <p class="cv__role-dates">{inline(r["dates"])}</p>')
         a('          </div>')
         if r["meta"]:
-            a(f'          <p class="cv__role-meta">{inline(sentence_case(r["meta"]))}</p>')
+            a(f'          <p class="cv__role-meta">{text(sentence_case(r["meta"]))}</p>')
         if r["bullets"]:
             a('          <ul class="cv__list">')
             for b in r["bullets"]:
-                a(f'            <li>{inline(b)}</li>')
+                a(f'            <li>{text(b)}</li>')
             a('          </ul>')
         if r["cases"]:
             a('          <p class="cv__role-links">')
@@ -225,8 +240,8 @@ def page_body(doc, lang="en"):
         a('        <dl class="cv__defs">')
         for row in doc[key]:
             a('          <div class="cv__def">')
-            a(f'            <dt>{inline(row["label"])}</dt>')
-            a(f'            <dd>{inline(row["body"])}</dd>')
+            a(f'            <dt>{text(row["label"])}</dt>')
+            a(f'            <dd>{text(row["body"])}</dd>')
             a('          </div>')
         a('        </dl>')
         a('      </section>')
@@ -234,7 +249,7 @@ def page_body(doc, lang="en"):
     a('')
     a('      <section class="cv__section cv__section--closing">')
     a(f'        <h2 class="cv__section-title">{L["closing"]}</h2>')
-    a(f'        <p class="cv__summary">{inline(doc["closing"])}</p>')
+    a(f'        <p class="cv__summary">{text(doc["closing"])}</p>')
     a('        <div class="cv__actions">')
     a(f'          <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">{L["call"]}</a>')
     a(f'          <a class="btn btn--light" href="mailto:{doc["meta"]["Email"]}">{doc["meta"]["Email"]}</a>')

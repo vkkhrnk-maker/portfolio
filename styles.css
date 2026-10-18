@@ -5507,6 +5507,19 @@ a, button, [role="button"], summary, label {
   padding: 0 var(--page-x);
 }
 
+/* The "CV" eyebrow and the sidebar's first label (Based / Локация) are the same
+   body line, so their tops should meet. They missed: the sidebar reaches its
+   meta at 24 (padding) + the name's line + 199 (gap), the column reaches the
+   article at 24 (padding) + 56 (Back) + 24 + --section-y. The difference is
+   --lh-body + 119 − --section-y: −17px at 24px lines, −9px at 1920+, where
+   body text grows to 23/32. Case pages make the same kind of correction for
+   their title (.content--case > .case). */
+@media (min-width: 1200px) {
+  .content--case > .cv {
+    margin-top: calc(var(--lh-body) + 119px - var(--section-y));
+  }
+}
+
 .cv__hero {
   display: flex;
   flex-direction: column;
@@ -5543,7 +5556,11 @@ a, button, [role="button"], summary, label {
   line-height: var(--lh-body);
   letter-spacing: -1px;
   color: var(--text-secondary);
-  max-width: 720px;
+  /* One reading measure for every run of prose on the page — the summary, the
+     role meta, the bullets and the Skills/Education values — and the same 780
+     as .case__intro. The summary was 720 and the meta line had no cap at all,
+     so it ran the full column, a third longer than the bullets under it. */
+  max-width: 780px;
   text-wrap: pretty;
 }
 
@@ -5583,19 +5600,22 @@ a, button, [role="button"], summary, label {
   color: var(--text-primary);
 }
 
+/* Inside a role, on the --space scale: title to meta 16, meta to bullets 12,
+   bullets 8 apart, bullets to the case pills 16. The title used to sit 10px
+   from the meta line — the same distance as meta to bullets — so the heading
+   read as one more line of the description instead of its title. */
 .cv__role {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-12);
 }
 
 /* Roles were 32px apart — the same distance the section title sits from the
-   first one, and only three times the 10px inside a role, so a "Read the case"
-   pill sat about as close to the next job as to its own bullets. 56px puts
-   them between the section title's 32 and the 72 between sections, which is
-   where they belong in the hierarchy. */
+   first one, so a "Read the case" pill sat about as close to the next job as
+   to its own bullets. 56px puts them between the section title's 32 and the
+   72 between sections, which is where they belong in the hierarchy. */
 .cv__role + .cv__role {
-  margin-top: 24px;
+  margin-top: var(--space-24);
 }
 
 /* Title and dates share a baseline; the dates hold their own column so the
@@ -5631,12 +5651,13 @@ a, button, [role="button"], summary, label {
 }
 
 .cv__role-meta {
-  margin: 0;
+  margin: var(--space-4) 0 0;
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
+  max-width: 780px;
   text-wrap: pretty;
 }
 
@@ -5676,7 +5697,7 @@ a, button, [role="button"], summary, label {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 6px 0 0;
+  margin: var(--space-4) 0 0;
 }
 
 /* Label-and-body rows for Skills and Education. The label column is fixed so
@@ -5716,6 +5737,7 @@ a, button, [role="button"], summary, label {
   line-height: var(--lh-body);
   letter-spacing: -1px;
   color: var(--text-secondary);
+  max-width: 780px;
   text-wrap: pretty;
 }
 
