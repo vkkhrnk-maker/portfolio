@@ -45,6 +45,10 @@
      judgement call, it stays whatever the measurements say. */
   const boundPairPattern =
     /([^\s\u00a0]+)\u00a0([^\s\u00a0]+)([\t\n\f\r \u00a0]*)$/u;
+  /* A spaced dash keeps to the line of the word before it: a line that opens
+     with "—" reads as a broken sentence. Ranges such as 2023–2024 carry no
+     spaces and are left alone. */
+  const spacedDashPattern = /[\t\n\f\r ]+([—–])(?=[\t\n\f\r ])/g;
   const serviceWordSet = new Set(serviceWords);
   const excludedAncestor = [
     'script', 'style', 'noscript', 'template', 'textarea', 'pre', 'code',
@@ -109,6 +113,7 @@
       previous = typed;
       typed = typed.replace(serviceWordPattern, '$1$2\u00a0');
     } while (typed !== previous);
+    typed = typed.replace(spacedDashPattern, '\u00a0$1');
 
     if (typed !== textNode.nodeValue) {
       writeTextNode(textNode, typed);
