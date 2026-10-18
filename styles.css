@@ -114,9 +114,9 @@
   --fs-body-tight: 18px;   --lh-body-tight: 22px; /* desktop date pill */
 
   /* Letter spacing */
-  --ls-heading-lg: -0.025em;
-  --ls-heading-sm: -0.02em;
-  --ls-heading-body: -0.01em;
+  --ls-heading-lg: -0.03em;
+  --ls-heading-sm: -0.022em;
+  --ls-heading-body: -0.015em;
 
   /* ===== Spacing scale (raw values) ===== */
   --space-0: 0;
@@ -152,15 +152,13 @@
    and the brand names sit in the same typeface as the Russian around them.
    Editorial New is deliberately absent here; see the @font-face note above.
 
-   The tracking is looser too. Latin's -2.2px is too tight for Cyrillic: "и",
-   "ш", "щ", "м", "п" are built from repeated verticals and close up into a
-   picket fence at that value on a 106px cover. Loosening the tokens fixes
-   every display heading at once, because they all read --ls-heading-*. Tracking is proportional to the shared type scale. */
+   Each language uses proportional tracking tuned to its display face.
+   Cyrillic stays slightly more open than Editorial New at large sizes. */
 :root[lang="ru"] {
   --font-display: 'Noto Serif Display Cond', Georgia, serif;
-  --ls-heading-lg: -0.018em;
-  --ls-heading-sm: -0.015em;
-  --ls-heading-body: -0.01em;
+  --ls-heading-lg: -0.026em;
+  --ls-heading-sm: -0.02em;
+  --ls-heading-body: -0.02em;
 }
 
 /* ===== Dark theme =====
@@ -2365,17 +2363,11 @@ body.case-page--fill .case__outcome-body p {
   color: var(--text-secondary);
 }
 
-/* Evidence lines inside the outcome — kept as plain text (a lead-in per
-   line, no card grid): the outcome often sits right after a gap-card
-   grid, and a second three-up in a row read as too many columns. The
-   lead-in used to be set in the display serif a notch larger, to offset
-   that face's smaller x-height. Two typefaces inside one sentence read
-   as two sizes instead of one emphasis, so it is the body face now, same
-   size, weight and ink doing the work — the body stack is a system font
-   with a real bold, so nothing here is synthesised. */
+/* Outcome lead-ins retain their semantic emphasis without introducing
+   a separate visual weight or colour into the portfolio's body style. */
 .case__outcome-body p strong {
-  font-weight: 600;
-  color: var(--outcome-ink);
+  font-weight: inherit;
+  color: inherit;
 }
 
 .case__pager {
