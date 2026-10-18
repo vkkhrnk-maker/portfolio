@@ -2817,12 +2817,15 @@ html {
   container-type: inline-size;
 }
 
-/* The two Hooh cases are one product story — pair them on one row, but only
-   on desktop: both visuals are phone verticals, so a half-width card still
-   fits them with air to spare. Type keeps its full size — only the long
-   header lines are allowed to wrap. On mobile the pair dissolves
-   (display:contents) and the cards stack full-width in the normal flow. */
-@media (min-width: 1200px) {
+/* The two Hooh cases are one product story — pair them on one row from
+   760px up: both visuals are phone verticals, so a half-width card still
+   fits them with air to spare. Only the long header lines are allowed to
+   wrap. Between 760 and 1199px the cards keep their tablet type and the
+   page keeps its tablet chrome — only the pairs go side by side; a single
+   full-width card there was a wide grey plate with a small phone in the
+   middle. Below 760px the pair dissolves (display:contents) and the cards
+   stack full-width in the normal flow. */
+@media (min-width: 760px) {
   .project-pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2849,6 +2852,10 @@ html {
   .project-pair .project-card__inner {
     aspect-ratio: 1040 / 1418;
     height: calc(100cqw * 693 / 1040);
+    /* The tablet card is a padded flex column; in the pair the header and
+       the phone keep their own margins instead. */
+    padding: 0;
+    gap: 0;
     display: grid;
     /* All four paired cards reserve the same header row, so their phones
        come out the same size. The row is as tall as the tallest header of
@@ -2891,13 +2898,6 @@ html {
     width: auto;
     height: 100%;
   }
-  /* The hover zoom carries the centring transform on the full-width cards;
-     here the grid does the centring, so the zoom is only a zoom. */
-  .project-pair .project-card:hover .project-card__phones,
-  .project-pair .project-card:hover .project-card__itab-group {
-    transform: scale(1.04);
-  }
-
   /* The iTAB pair. At half width the card's box turns portrait, and the
      desktop-plus-phone composition stops fitting: the landscape screen is
      cropped to a vertical slice of itself and the phone runs off the card
@@ -2909,16 +2909,39 @@ html {
      shell as the other three. It used to be the group's second image with
      a 5px bezel and a fixed 39px corner: a different frame, no island, and
      a size of its own. The desktop image is hidden by itself as well, so
-     shimmer.js finds no image to put a placeholder under. */
-  .project-pair .project-card__itab-group,
-  .project-pair .project-card__itab-desktop {
+     shimmer.js finds no image to put a placeholder under. The extra
+     .project-card--itab outranks the tablet rules further down, which show
+     the group and hide this phone for the stacked card. */
+  .project-pair .project-card--itab .project-card__itab-group,
+  .project-pair .project-card--itab .project-card__itab-desktop {
     display: none;
+  }
+  .project-pair .project-card--itab .project-card__phones--itab {
+    display: flex;
   }
 }
 
-@media (max-width: 1199px) {
+/* The hover zoom carries the centring transform on the full-width cards;
+   in the pair the grid does the centring, so the zoom is only a zoom. Desktop
+   only, like the transition it rides on. */
+@media (hover: hover) and (min-width: 1200px) {
+  .project-pair .project-card:hover .project-card__phones {
+    transform: scale(1.04);
+  }
+}
+
+@media (max-width: 759px) {
   .project-pair {
     display: contents;
+  }
+}
+
+/* Tablet pair: the type is a size down and the header runs one or two lines,
+   so the desktop floor (154px, a two-line header at desktop size) left an
+   empty band under the subtitle. Here the row follows the tallest header. */
+@media (min-width: 760px) and (max-width: 1199px) {
+  .project-pair .project-card__inner {
+    grid-template-rows: minmax(calc(var(--pair-header, 0px) + 28px), auto) 1fr;
   }
 }
 
