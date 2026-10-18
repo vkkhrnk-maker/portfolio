@@ -3036,6 +3036,7 @@
   .preview-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; font-size: var(--fs-body-m); line-height: 1.3; }
   .preview-row:last-child { margin-bottom: 0; }
   .preview-row .pk { color: var(--text-secondary); width: 120px; flex-shrink: 0; font-family: 'Schengen Mono', monospace; }
+  .preview-row > :last-child { min-width: 0; overflow-wrap: anywhere; }
   /* Review — actual question → answer */
   .preview-qa { padding: 9px 0; border-bottom: 1px solid var(--stroke-primary); }
   .preview-qa:first-child { padding-top: 0; }
@@ -10226,7 +10227,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   .syno-location-marker img {width:100%;height:100%;object-fit:cover;}
   .syno-location-map .leaflet-control {box-shadow:none;}
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=0e03de6367dc">
+<link rel="stylesheet" href="assets/promo/case.css?v=0ad85052ed49">
 </head>
 <body class="demo-empty-portfolio">
 
@@ -13478,7 +13479,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
 </div>
 
 <script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=086c4c9aef38"></script>
+<script src="assets/promo/case.js?v=d9bef361bbaf"></script>
 <script>
   /* ============================================================
      AI_ENABLED — единственный выключатель AI-функционала.
@@ -13731,7 +13732,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         { id: 'intro', label: 'Not started — invitation' },
         { id: 'empty', label: 'Empty (new artist · 0 of 3)' },
         { id: 'draft', label: 'Draft — building (1 of 3)' },
-        { id: 'published', label: 'Published' }
+        { id: 'published', label: 'Published' },
+        ...(window.SynoPromo ? [{ id: 'unpublished', label: 'Unpublished — case preview' }] : [])
       ],
       // The tab is permanent, the draft is not: whoever never pressed Start
       // lands on the invitation; an artist lands on their page.
@@ -13759,7 +13761,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
             mypAvatar = { img: null, zoom: 130, bx: 50, by: 50 };
             document.body.classList.add('demo-empty-portfolio');
             const emptyLabel = document.querySelector('#wf-emptyport b'); if (emptyLabel) emptyLabel.textContent = 'empty';
-          } else if (st === 'published') {
+          } else if (st === 'published' || st === 'unpublished') {
             mypFormats = ['Photography', 'Installation', 'Sound'];
             mypBio = 'My practice moves between photography and installation, drawn to the Cypriot coastline as a living archive — of migration, trade and the tides that both divide and connect the island.';
             mypCvFile = 'Elena Andreou — CV.pdf'; mypCvDraft = mypCvFile;
@@ -13777,10 +13779,27 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
             mypMain.website = 'elenaandreou.cy';
             mypMain.instagram = '@elena.andreou';
             mypAvatar = { img: './photos/portrait-elena.png', zoom: 130, bx: 50, by: 50 };
+            if (window.SynoPromo) {
+              mypFormats = ['Installation', 'Sculpture'];
+              mypBio = window.SynoPromo.data.practice;
+              mypCvFile = 'Mira Soleni — CV.pdf'; mypCvDraft = mypCvFile;
+              mypCvMeta = {
+                educationYear:'2014', education:'MA Contemporary Art — London',
+                soloYear:'2026', solo:'Echoes of Silence', soloPlace:'Aster Project Space, Nicosia',
+                groupYear:'2026', group:'Common Ground', groupPlace:'Harbour Room, Larnaca',
+                awardYear:'2023', award:'Field Notes — Studio Residency, Paphos',
+                talksYear:'2025', talks:'Shared Rooms — Nicosia', coll:'',
+                press:'SYNO — Thread, memory and connection, 2026'
+              };
+              mypMain.website = ''; mypMain.instagram = '';
+              mypAvatar.img = window.SynoPromo.data.images.portrait;
+              mypCoverImg = window.SynoPromo.data.images['shiota-journey-cover'];
+              setMypCover(mypCoverImg, true);
+            }
             document.body.classList.remove('demo-empty-portfolio');
             const fullLabel = document.querySelector('#wf-emptyport b'); if (fullLabel) fullLabel.textContent = 'full';
           } else {
-            mypFormats = ['Photography', 'Installation'];
+            mypFormats = window.SynoPromo ? ['Installation', 'Sculpture'] : ['Photography', 'Installation'];
             mypBio = '';
             mypCvFile = null; mypCvDraft = null;
             mypCvMeta = { educationYear:'', education:'', soloYear:'', solo:'', soloPlace:'', groupYear:'', group:'', groupPlace:'', awardYear:'', award:'', talksYear:'', talks:'', coll:'', press:'' };
@@ -13794,7 +13813,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         }
         // Switching the demo persona is a different account, not the same one taken down —
         // reset the "was live" memory so draft/empty show the gate, not the taken-down line.
-        mypEverPublished = (st === 'published');
+        mypEverPublished = (st === 'published' || st === 'unpublished');
         setMypPublished(st === 'published'); renderMypFormats(); renderMypBio(); renderMypMain();
       },
       breadcrumb: [
@@ -15378,6 +15397,11 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   // Имя аккаунта — это имя человека, а не имя художника (они разные по модели).
   // Необязательное: Welcome несёт Skip for now, и пустое имя — валидное состояние.
   let accountName = 'Elena Andreou';
+  if (window.SynoPromo) {
+    Object.assign(mypMain, { name: window.SynoPromo.data.artists[0].name, birthYear: '1989', bornIn: 'Limassol, Cyprus', city: 'Nicosia, Cyprus' });
+    accountName = mypMain.name;
+    accountEmail = 'mira.soleni@example.com';
+  }
   function mypDrawerRail(active) {
     const items = [
       { key: 'main', label: 'Main info', section: 'main' },
@@ -15808,6 +15832,10 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   });
 
   function mypSeedWorks() {
+    if (window.SynoPromo) return window.SynoPromo.data.profileWorks.map(work => ({
+      title: work.title, year: String(work.year).split('/')[0], medium: work.medium,
+      description: '', images: [work.img], cover: 0
+    }));
     return [
       { title: 'Comely Cad',     year: '2026', medium: 'Painting', materials: "Oil on linen in artist's frame", description: 'A portrait study about performance, memory and the roles we inherit.', images: ['./photos/pwork-portrait.jpg'],  cover: 0 },
       { title: 'Harbour Studies', year: '2024', medium: 'Photography', description: 'Long-exposure photographs tracing movement and waiting along the harbour edge.', images: ['./photos/pwork-waterfall.jpg'], cover: 0 },
@@ -17295,7 +17323,19 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     syncApplyFromProfile();
   }
 
+  let promoApplicationSeeded = false;
   function applyApplicationState(state) {
+    if (window.SynoPromo && !promoApplicationSeeded) {
+      promoApplicationSeeded = true;
+      document.body.classList.remove('demo-empty-portfolio');
+      hasArtistProfile = true; accountType = 'artist';
+      mypWorks = mypSeedWorks();
+      mypBio = window.SynoPromo.data.practice;
+      mypFormats = ['Installation', 'Sculpture'];
+      document.querySelectorAll('#works-grid .work-card').forEach((card, i) => card.classList.toggle('selected', [0,2,4].includes(i)));
+      setMypPublished(true);
+      updateWorksCounter();
+    }
     const idx = APPLY_STEPS.indexOf(state);
     const submitted = (state === 'submitted');
     if (submitted) applyStatementInline = null;
@@ -17480,8 +17520,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   // with the demo drafts instead of rendering an error state on review.
   function seedReviewDemoState() {
     const seeds = {
-      'ai-cyprus': 'Born in Nicosia; based between Cyprus and Berlin. The island’s coastline has been the centre of my work since 2022.',
-      'ai-works': AI_DRAFTS['ai-works']
+      'ai-cyprus': window.SynoPromo ? 'Born in Limassol and based in Nicosia. My work draws on domestic spaces and the changing landscapes of Cyprus.' : 'Born in Nicosia; based between Cyprus and Berlin. The island’s coastline has been the centre of my work since 2022.',
+      'ai-works': window.SynoPromo ? 'The selected installations explore memory through thread, found objects and domestic spaces. Each work offers a different way to encounter the places and objects we leave behind.' : AI_DRAFTS['ai-works']
     };
     Object.keys(seeds).forEach(id => {
       const f = document.getElementById(id);
@@ -29448,6 +29488,15 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !layer.hidden) close(); });
   })();
+</script>
+<script>
+  // Direct links for the case reuse the actual profile editors.
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!window.SynoPromo) return;
+    const panel = new URLSearchParams(location.search).get('case-panel');
+    if (panel === 'work') openMypWorkModal();
+    if (panel === 'statement') openMypBioModal();
+  });
 </script>
 </body>
 </html>

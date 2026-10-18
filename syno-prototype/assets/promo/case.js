@@ -18,6 +18,8 @@
     return u.pathname.split('/').pop() + u.search + u.hash;
   };
   const names = {
+    'elena.andreou@example.com':'mira.soleni@example.com',
+    'Elena_Andreou_CV.pdf':'Mira_Soleni_CV.pdf',
     'Elena Andreou':'Mira Soleni', 'Rea Charalambidou':'Nora Veli',
     'Marcos Aristidou':'Leon Arven', 'Sofia Tanner':'Theo Maveli',
     'Andreas Savva':'Theo Maveli', 'Yiannis Costa':'Theo Maveli',
@@ -161,6 +163,12 @@
     $('#pf-connections .oc-sec-body').innerHTML = `<div class="ap-conn"><div class="ap-conn-group"><div class="ap-conn-label">Exhibited at</div><ul class="ap-conn-list">${connection(image('shiota-journey-cover'),'Aster Project Space','Nicosia')}${connection(image('shiota-silence'),'Linea Studio','Limassol')}</ul></div><div class="ap-conn-group"><div class="ap-conn-label">Featured in Stories</div><ul class="ap-conn-list">${[1,3].map(i=>connection(d.stories[i].cover,d.stories[i].title,d.stories[i].format,`data-site-href="proto-stories.html#/story/${d.stories[i].slug}"`)).join('')}</ul></div></div>`;
     $('#pf-stories').hidden = true;
     profile.querySelector('.pf-details-name').hidden = true;
+    const applicationWorks = $('#works-grid');
+    if (applicationWorks) applicationWorks.innerHTML = d.profileWorks.map((work, i) =>
+      `<div class="work-card${[0,2,4].includes(i)?' selected':''}"><div class="work-check"><span class="material-icons">check</span></div><img class="work-thumb" src="${esc(work.img)}" alt="${esc(work.title)}"${imageAttrs(work.img)}><div class="work-info"><div class="work-title">${esc(work.title)}</div><div class="work-meta">${esc(work.year)} · ${esc(work.medium)}</div></div></div>`
+    ).join('');
+    const applicationStatement = $('#ai-app-statement');
+    if (applicationStatement) applicationStatement.value = d.practice;
   }
   function artistCard(a) {
     return `<a class="card-cell" href="proto-registry.html?case=promo&artist=${a.id}#profile"><div class="card-media"><button class="card-follow" type="button" data-follow="${esc(a.name)}">Follow</button>${a.works.slice(0,3).map((w,i)=>`<img src="${esc(w.img)}" alt="${esc(w.title)}" class="${i?'':'is-on'}" loading="lazy">`).join('')}</div>${a.works.length>1?`<div class="work-dots">${a.works.slice(0,3).map((_,i)=>`<button class="work-dot ${i?'':'is-on'}" aria-label="Work ${i+1} of ${a.works.length} works"></button>`).join('')}</div>`:''}<div><div class="card-name">${esc(a.name)}</div><div class="card-mono">${esc(a.bio)}</div></div><div class="card-sub">${esc(a.practice)}</div></a>`;

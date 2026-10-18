@@ -1,4 +1,5 @@
 /* Portfolio case overrides of the existing Syno components, measured at 1280. */
+html.promo-case #works-grid .work-thumb { width:100%; height:auto; aspect-ratio:auto; object-fit:contain; }
 html.promo-case :is(.sec-title,.hero-title,.info-title) { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
 /* Keep the headline and its supporting line distinct, including wrapped slides. */
 html.promo-case .band-hero .hero-copy { gap:20px; }

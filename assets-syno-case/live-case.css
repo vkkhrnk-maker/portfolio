@@ -14,9 +14,15 @@
 .syno-native-demo .syno-scroll-controls .btn { min-width:100px; min-height:40px; }
 .syno-native-demo--map .syno-scroll-controls { justify-content:flex-start; }
 .case-page--syno-proto .syno-native-demo .syno-scroll-controls span { color:var(--text-secondary); }
+.case-page--syno-proto .syno-recording { display:flex; justify-content:flex-start; border:0; padding:0; margin:0; }
+.case-page--syno-proto .syno-recording .btn { align-self:flex-start; }
+/* Present the closed-call state itself, without the legacy account header. */
+.syno-closed-state { width:100%; aspect-ratio:1920/900; overflow:hidden; }
+.syno-closed-state img { display:block; width:100%; height:auto; transform:translateY(-10.7%); }
 @media(max-width:640px) {
   .case-page--syno-proto .case__hero-image { padding:12px; }
   .case-page--syno-proto .case__hero-image .syno-native-window { aspect-ratio:375/600; }
+  .case-page--syno-proto .syno-state-panel .syno-native-window { aspect-ratio:375/600; }
   .case-page--syno-proto .case__slide > .syno-native-demo { height:100%; width:auto; max-width:100%; display:flex; flex-direction:column; align-items:center; }
   .case-page--syno-proto .case__slide .syno-native-window { height:calc(100% - 50px); width:auto; max-width:100%; flex:none; aspect-ratio:375/812; }
   .case-page--syno-proto .case__slide .syno-scroll-controls { width:100%; flex:0 0 40px; }
