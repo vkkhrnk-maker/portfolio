@@ -35,12 +35,12 @@ Email: vkkhrnk@gmail.com
 Telegram: @Victoria_UxUi
 Portfolio: https://victoriakukharenko.com/
 LinkedIn: https://www.linkedin.com/in/viktoria-kukharenko
-Focus: AI interfaces, SaaS and e-commerce for mobile and web
-Headline: Product designer, end to end on mobile and web
+Focus: AI interfaces, SaaS and e-commerce
+Headline: Product designer for mobile and web
 
 ## Summary
 
-Product designer, from research and customer journey mapping to release. At an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
+End to end, from research and customer journey mapping to release. At an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
 
 ## Experience
 
@@ -56,7 +56,7 @@ Product designer, from research and customer journey mapping to release. At an A
 ### Product Designer — Hooh
 **Feb 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
 
-- Designed and shipped the MVP on web and iOS: upload, layered AI summaries, assistant chat and file organization.
+- Designed and shipped the MVP: upload, layered AI summaries, assistant chat and file organization.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
 - Extended the reader into a document workspace: Smart Fill (form fields recognized and filled from the user's own documents, every value overridable), reusable signature, non-destructive markup and versioning. All tools share one scaffold and were handed off complete, together with the design system the team ships from.
 
@@ -66,7 +66,7 @@ Cases: [Read the MVP case](hooh.html "AI assistant MVP"), [Read the workspace ca
 **May 2024 – Apr 2026 · part-time, remote · health and wellness e-commerce · web and mobile app**
 
 - Designed the specialist-consultations service end to end (specialist listing, specialist card and the user-side booking flow), alongside the homepage, the product catalog and sections across the app and the site.
-- Redesigned the supplement product card across web and mobile to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.
+- Redesigned the supplement product card to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.
 
 Cases: [Read the consultations case](itab-specialists.html "Specialist consultations"), [Read the product card case](itab.html "Product card")
 
