@@ -38,8 +38,8 @@
 
   var saved = read();
   if (saved === 'granted') startClarity();
-  if (saved) addFooterLink();
-  else showBanner();
+  addFooterLink();
+  if (!saved) showBanner();
 
   /* localStorage throws outright in some privacy modes, so every touch is
      wrapped. A visitor whose browser refuses to remember the answer is
@@ -89,6 +89,7 @@
     box.appendChild(text);
     box.appendChild(row);
     document.body.appendChild(box);
+    return box;
 
     function button(label, className, choice) {
       var el = document.createElement('button');
@@ -115,7 +116,6 @@
       return;
     }
     if (choice === 'granted') startClarity();
-    addFooterLink();
   }
 
   /* Clarity writes _clck/_clsk on the parent domain (.victoriakukharenko.com),
@@ -135,26 +135,27 @@
     }
   }
 
-  /* The answer has to be changeable, or it is not consent. The control
-     rides inside the copyright line rather than as a third item in the
-     footer row, which is a two-end layout on purpose. */
+  /* The answer has to be changeable, or it is not consent. The control is
+     the footer's right end, the year its left one: a two-end row on purpose.
+     It is there before the first answer too, so the corner is never empty;
+     with the plate already open, it moves focus to the plate. */
   function addFooterLink() {
-    var host = document.querySelector('.footer__copyright');
-    if (!host || host.querySelector('.consent__link')) return;
+    var row = document.querySelector('.footer__row');
+    if (!row || row.querySelector('.consent__link')) return;
 
-    var sep = document.createElement('span');
-    sep.className = 'consent__sep';
-    sep.textContent = ' · ';
+    var cell = document.createElement('p');
+    cell.className = 'footer__cookies';
 
     var link = document.createElement('button');
     link.type = 'button';
     link.className = 'consent__link';
     link.textContent = TEXT.link;
     link.addEventListener('click', function () {
-      if (!document.querySelector('.consent')) showBanner();
+      var box = document.querySelector('.consent') || showBanner();
+      box.querySelector('button').focus();
     });
 
-    host.appendChild(sep);
-    host.appendChild(link);
+    cell.appendChild(link);
+    row.appendChild(cell);
   }
 })();

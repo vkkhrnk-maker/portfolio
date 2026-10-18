@@ -4290,8 +4290,12 @@ html {
   flex-direction: column;
 }
 
-/* The year holds the left edge and the credit the right one — the footer's two
-   ends, the same rail the page stands on. It used to be a three-track grid
+/* The year holds the left edge and the Cookies link the right one — the
+   footer's two ends, the same rail the page stands on. The © and the credit
+   line went (18 Oct 2026): neither is required, and the link has to stay,
+   since it is how a visitor changes the cookie answer (consent.js adds it).
+   .footer__copyright and .footer__credit stay styled for the drafts that
+   still use them. It used to be a three-track grid
    with the year pinned to the middle track, left over from when LinkedIn and
    Telegram sat on the left; once those went (they duplicated the sidebar's
    pills) the year was centred over an empty column and read as adrift.
@@ -4322,7 +4326,9 @@ html {
 
 .footer__social a,
 .footer__copyright,
-.footer__credit {
+.footer__credit,
+.footer__year,
+.footer__cookies {
   margin: 0;
   font-family: var(--font-body);
   font-weight: 400;
@@ -4335,11 +4341,13 @@ html {
   text-decoration: none;
 }
 
-.footer__copyright {
+.footer__copyright,
+.footer__year {
   color: var(--text-primary);
 }
 
-.footer__credit {
+.footer__credit,
+.footer__cookies {
   color: var(--text-secondary);
   text-align: right;
 }
@@ -5114,7 +5122,9 @@ html {
   /* 10byrs-style 12px micro-strip — phones only; it fits 375 as one line. */
   .footer__social a,
   .footer__copyright,
-  .footer__credit {
+  .footer__credit,
+  .footer__year,
+  .footer__cookies {
     font-size: 12px;
     line-height: 16px;
   }
@@ -6715,11 +6725,7 @@ video.case__itab-board-desktop,
   cursor: pointer;
 }
 
-.consent__sep {
-  color: var(--text-secondary);
-}
-
-/* Reads as part of the copyright line until hovered. A <button> and not a
+/* Reads as the footer's quiet right end until hovered. A <button> and not a
    link, because it does something on the page rather than going anywhere. */
 .consent__link {
   padding: 0;
