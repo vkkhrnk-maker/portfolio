@@ -49,8 +49,9 @@ Product designer, from research and customer journey mapping to release. At an A
 
 - **Syno.art** (2026–Present): art platform based in Cyprus. Designed the artist side end to end (auth, profile and portfolio, the open-call flow and applications dashboard) across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
 - **Cryptomi** (2023–2024): interfaces for a crypto product; dense, data-heavy flows made approachable.
-- **Abramova School** (2023–2024): UX/UI design alongside mentoring junior designers through critiques, portfolio reviews and feedback.
-- **Prokachka Studio** (2022–2023): marketing sites and landing pages, from visual design and layout to responsive behavior and developer handoff.
+- **Abramova School** (2023–2024): UX/UI design and mentoring junior designers through critiques and portfolio reviews.
+- **Ebda Agency** (2022–2023): Canadian Webflow agency. Designed pages for Webflow's own site, webflow.com, and pages for the agency's partners within their design systems.
+- **Prokachka Studio** (2022–2023): marketing sites and landing pages, from visual design to responsive layout and handoff.
 
 ### Product Designer — Hooh
 **Jan 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
