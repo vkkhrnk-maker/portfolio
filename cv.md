@@ -83,7 +83,7 @@ Cases: [Read the consultations case](itab-specialists.html "Specialist consultat
 
 ## Education
 
-**2025** — **Pragmatica**, “Big Practice” product design program
+**2025** — **Pragmatica**, “Big Practice” UI design program
 **2022–2024** — **Uprock School**, certificate in product and UX/UI design
 **2019–2021** — **Syktyvkar State University**, Master's degree in Ecology
 **2012–2016** — **Ukhta State Technical University**, Bachelor's degree in Geodesy for Land Management and Cadastre
