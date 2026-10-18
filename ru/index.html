@@ -817,8 +817,23 @@
       const fig = document.querySelector('.profile-character');
       if (!h1 || !fig) return;
       const wide = window.matchMedia('(min-width: 1200px)');
+      const tablet = window.matchMedia('(min-width: 641px)');
+      // Where the figure stands with the cover in view. The client rect is
+      // relative to the window, so a resize or a reload while scrolled down
+      // to the cases read its top as negative and hid it for good.
+      const figTop = () => fig.getBoundingClientRect().top + window.scrollY;
       const measure = () => {
-        if (!wide.matches) { fig.style.removeProperty('--character-rag'); fig.classList.remove('is-tucked'); return; }
+        if (!wide.matches) {
+          fig.style.removeProperty('--character-rag');
+          // Tablets and phones turned sideways: no rag to come down into,
+          // the stylesheet can only shrink it. Where even its floor leaves the
+          // head in the topbar's blur, hide it, the same call as on desktop.
+          // Phones keep theirs as signed off.
+          const bar = document.querySelector('.mobile-topbar');
+          const barLimit = bar ? bar.getBoundingClientRect().bottom + 24 : 72;
+          fig.classList.toggle('is-tucked', tablet.matches && figTop() < barLimit);
+          return;
+        }
         fig.style.setProperty('--character-rag', '9');
         const left = fig.getBoundingClientRect().left - 12;
         const range = document.createRange();
@@ -856,7 +871,7 @@
         // glass pill — her first complaint about this cover.
         const pill = document.querySelector('.lang-switch') || document.querySelector('.profile-section__cta');
         const limit = pill ? pill.getBoundingClientRect().bottom + 8 : 88;
-        fig.classList.toggle('is-tucked', fig.getBoundingClientRect().top < limit || lands());
+        fig.classList.toggle('is-tucked', figTop() < limit || lands());
       };
       measure();
       window.addEventListener('resize', measure);

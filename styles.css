@@ -2703,12 +2703,14 @@ html {
   color: var(--text-primary);
 }
 
+/* --cover-fs / --cover-lh: from 641px up the size follows the column, see
+   .intro__title-stage below. Phones fall back to the H1 token. */
 .intro__title {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--fs-h1);
-  line-height: var(--lh-h1);
+  font-size: var(--cover-fs, var(--fs-h1));
+  line-height: var(--cover-lh, var(--lh-h1));
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
@@ -5835,6 +5837,39 @@ a, button, [role="button"], summary, label {
 .intro__title-stage {
   position: relative;
   width: 100%;
+  /* The headline and the figure measure their cqw off this box. */
+  container-type: inline-size;
+}
+
+/* Cover headline: from tablet up the column sets the size, not the
+   breakpoint. The H1 token steps 62 -> 106px at 1200, exactly where the
+   sidebar takes ~400px out of the column, so the narrowest desktop got the
+   biggest type in the least room (Russian ran six lines at 1200), while a
+   970px tablet still got the 62px tablet size.
+   9.5% of the column holds both languages to three lines: the longest line
+   of the three, "и собираю работающие", needs about 10.2% in Chrome, and the
+   rest is margin for other engines' metrics. Desktop tops out at the H1
+   token, so from ~1530 up (and the 1920 / 2400 steps, and the short-window
+   86px below) nothing changes. Tablets top out at 86px, the short-window
+   desktop size, so crossing 1200 reads as 86 -> 75px instead of 62 -> 106.
+   Phones keep the 50px token. The leading keeps the token's own offset over
+   the size (+2px; +4px from 2400). The figure rule reads --cover-lh too.
+   The tablet range also takes in phones turned sideways (667-932 wide,
+   360-430 tall), where three lines of 75px leave the figure nowhere to
+   stand, so the size there is held to 13% of the screen height too — it only
+   binds under ~660px tall, and svh keeps it still while Safari's bar folds. */
+@media (min-width: 641px) and (max-width: 1199px) {
+  .intro__title-stage {
+    --cover-fs: clamp(50px, min(9.5cqw, 13svh), 86px);
+    --cover-lh: calc(var(--cover-fs) + 2px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .intro__title-stage {
+    --cover-fs: min(var(--fs-h1), 9.5cqw);
+    --cover-lh: calc(var(--cover-fs) + var(--lh-h1) - var(--fs-h1));
+  }
 }
 
 .profile-character {
@@ -5924,17 +5959,18 @@ a, button, [role="button"], summary, label {
     --character-top-min: 88px;
     --character-rag: 0;
     --character-need: max(0px, calc(var(--character-top-min) - (100dvh - 24px - 100% - 20px - var(--character-h))));
-    --character-allow: clamp(0px, calc((100% - 3 * var(--lh-h1)) * 2), calc(var(--character-rag) * var(--lh-h1) - 12px));
+    --character-allow: clamp(0px, calc((100% - 3 * var(--cover-lh)) * 2), calc(var(--character-rag) * var(--cover-lh) - 12px));
     --character-drop: min(var(--character-need), var(--character-allow));
     right: min(12%, calc(100% - 768px));
     bottom: calc(100% + 20px - var(--character-drop));
     width: auto;
     height: max(200px, calc(var(--character-h) - (var(--character-need) - var(--character-drop))));
   }
+}
 
-  .profile-character.is-tucked {
-    visibility: hidden;
-  }
+/* Set by the cover script from 641px up, where nothing fits; see there. */
+.profile-character.is-tucked {
+  visibility: hidden;
 }
 
 /* Short desktop windows. The cover headline at its full 106px runs three to
@@ -5950,7 +5986,9 @@ a, button, [role="button"], summary, label {
    Russian, and no headline line ever meets the figure. Scoped to
    .profile-section so the case pages keep the full token, and capped at
    780px tall so 1440x810 and up — where the cover already works — see none
-   of it. */
+   of it. Since the headline follows its column (.intro__title-stage), this
+   86px is only a ceiling: below ~1320px wide the column size is already
+   smaller and wins. */
 @media (min-width: 1200px) and (max-height: 780px) {
   .profile-section {
     --fs-h1: 86px;
@@ -5974,13 +6012,28 @@ a, button, [role="button"], summary, label {
   }
 }
 
+/* Tablets (641-1199): the figure stands at the right end of the column, as
+   it does on phones and from 1200. It used to be centred here — the one
+   range where it left the right-hand side, so it hopped to the middle at
+   641 and back at 1200, and on a tall tablet it floated mid-screen. The
+   width runs 140 -> 160px, the phone figure's size at 641 and the desktop
+   one's at 1200. Same three moves as the phone rule below, against the same
+   96px of topbar blur: come down at most the 20px gap (box bottom on the
+   headline's top edge), then shrink, to the phone's 150px floor. Where even
+   that leaves the head in the blur (a phone on its side, ~375px tall) the
+   cover script hides it, as on desktop. The tallest tablet headline is three
+   lines, so on portrait tablets need stays 0. */
 @media (max-width: 1199px) {
   .profile-character {
-    left: 50%;
-    right: auto;
-    bottom: calc(100% + 20px);
-    width: clamp(126px, 18vw, 156px);
-    transform: translateX(-50%);
+    --character-w: clamp(140px, 18vw, 160px);
+    --character-h: calc(var(--character-w) * 1012 / 480);
+    --character-top-min: 96px;
+    --character-need: max(0px, calc(var(--character-top-min) - (100dvh - var(--page-x) - 100% - 20px - var(--character-h))));
+    --character-drop: min(var(--character-need), 20px);
+    right: 0;
+    bottom: calc(100% + 20px - var(--character-drop));
+    width: auto;
+    height: max(150px, calc(var(--character-h) - (var(--character-need) - var(--character-drop))));
   }
 }
 
