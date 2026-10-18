@@ -2850,11 +2850,14 @@ html {
     aspect-ratio: 1040 / 1418;
     height: calc(100cqw * 693 / 1040);
     display: grid;
-    /* 154px is the old fixed geometry: 28px inset + a two-line header, so a
-       short header still puts the visual at exactly 178px and the two cards
-       of a pair keep phones of the same height. A header that needs more
-       than that pushes the visual down instead of being run over. */
-    grid-template-rows: minmax(154px, auto) 1fr;
+    /* All four paired cards reserve the same header row, so their phones
+       come out the same size. The row is as tall as the tallest header of
+       the four (--pair-header, set by a script on the homepage): when one
+       title or subtitle wrapped to an extra line, only that card's phone
+       used to move down and shrink. 154px is the old floor (28px inset + a
+       two-line header). Without the script each row still grows to fit its
+       own header instead of being run over. */
+    grid-template-rows: minmax(max(154px, calc(var(--pair-header, 0px) + 28px)), auto) 1fr;
   }
   .project-pair .project-card__header {
     position: static;
@@ -2901,21 +2904,14 @@ html {
      edge. So the pair shows the phone alone, standing whole in the same
      zone as the card beside it — the same trade the ≤1199px rules make,
      resolved the other way round because there the card is wide and here
-     it is tall. The desktop shot returns below 1200px. */
+     it is tall. The desktop shot returns below 1200px.
+     The phone is its own block (.project-card__phones--itab) in the same
+     shell as the other three. It used to be the group's second image with
+     a 5px bezel and a fixed 39px corner: a different frame, no island, and
+     a size of its own. The desktop image is hidden by itself as well, so
+     shimmer.js finds no image to put a placeholder under. */
+  .project-pair .project-card__itab-group,
   .project-pair .project-card__itab-desktop {
-    display: none;
-  }
-  .project-pair .project-card__itab-mobile {
-    position: static;
-    box-sizing: border-box;
-    height: 100%;
-    width: auto;
-  }
-  /* In the pair the group is twice as wide as the phone it holds, and the
-     blur-up placeholder (shimmer.js) fills the whole group — so on every load
-     it painted a blurred, stretched copy of the product page across the card
-     behind the phone until it faded. The phone fades in on its own here. */
-  .project-pair .project-card__itab-group .bu-lqip {
     display: none;
   }
 }
@@ -3225,27 +3221,6 @@ html {
     linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
     linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
   border-radius: clamp(12px, 1.3cqw, 22px);
-}
-
-/* The same 5px titanium bezel used by the case sliders. Height, rather than
-   width, controls the phone so its top and bottom clear space stays equal. */
-.project-card__itab-mobile {
-  position: absolute;
-  z-index: 2;
-  right: 1%;
-  top: 0;
-  box-sizing: content-box;
-  width: auto;
-  height: calc(100% - 34px);
-  aspect-ratio: 504 / 1088;
-  object-fit: cover;
-  object-position: top center;
-  padding: 5px;
-  --itab-screen-corner-fill: #fff;
-  background:
-    linear-gradient(var(--itab-screen-corner-fill), var(--itab-screen-corner-fill)) content-box,
-    linear-gradient(145deg, #4a4a4f 0%, #2a2a2d 22%, #1a1a1c 50%, #313135 78%, #4a4a4f 100%) border-box;
-  border-radius: 39px;
 }
 
 /* ===== Syno card (coming soon) ===== */
@@ -3569,7 +3544,9 @@ html {
     transform: scale(1.0382);
   }
 
-  .project-card--itab .project-card__itab-mobile {
+  /* The iTAB phone is for the desktop pair only: here the card shows the
+     desktop shot by itself. */
+  .project-card--itab .project-card__phones--itab {
     display: none;
   }
 

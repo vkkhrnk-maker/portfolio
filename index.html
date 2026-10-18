@@ -140,7 +140,7 @@
         <div class="project-card__inner">
           <header class="project-card__header">
             <h2 class="project-card__title">Hooh — Document Workspace</h2>
-            <p class="project-card__subtitle">Fills forms with data from saved documents, then handles signing, editing and versions in the same app</p>
+            <p class="project-card__subtitle">Fills forms, handles signing and keeps versions</p>
             <a class="arrow-btn" href="hooh-fill.html" aria-label="Open Hooh Document Workspace case">
               <img src="assets/arrow.svg" alt="">
             </a>
@@ -160,7 +160,7 @@
         <div class="project-card__inner">
           <header class="project-card__header">
             <h2 class="project-card__title">Hooh — Document Assistant</h2>
-            <p class="project-card__subtitle">Explains contracts and forms in plain language — on web and iOS</p>
+            <p class="project-card__subtitle">Explains contracts and forms in plain language</p>
             <a class="arrow-btn" href="hooh.html" aria-label="Open Hooh Document Assistant case">
               <img src="assets/arrow.svg" alt="">
             </a>
@@ -195,14 +195,18 @@
           <div class="project-card__inner project-card__inner--itab">
             <header class="project-card__header project-card__header--itab">
               <h2 class="project-card__title">iTAB — Product Card Redesign</h2>
-              <p class="project-card__subtitle">Makes health products easier to understand, trust and buy</p>
+              <p class="project-card__subtitle">Makes health products easier to trust and buy</p>
               <a class="arrow-btn" href="itab.html" aria-label="Open iTAB Product Card Redesign case">
                 <img src="assets/arrow.svg" alt="">
               </a>
             </header>
             <div class="project-card__itab-group" data-shimmer>
               <img class="project-card__itab-desktop" src="assets/itab-desktop.webp?v=1" alt="iTAB product page — desktop view" loading="lazy" width="1370" height="1144">
-              <img class="project-card__itab-mobile" src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy" width="504" height="1088">
+            </div>
+            <div class="project-card__phones project-card__phones--single project-card__phones--itab">
+              <div class="project-card__phone-video">
+                <img src="assets/itab-mobile.webp?v=1" alt="iTAB product card — mobile view" loading="lazy" width="504" height="1088">
+              </div>
             </div>
           </div>
         </article>
@@ -211,7 +215,7 @@
           <div class="project-card__inner">
             <header class="project-card__header">
               <h2 class="project-card__title">iTAB — Specialist<wbr> Consultations</h2>
-              <p class="project-card__subtitle">Connects clients with specialists inside the store — from discovery to payment</p>
+              <p class="project-card__subtitle">Lets clients find, book and pay a specialist in the store</p>
               <a class="arrow-btn" href="itab-specialists.html" aria-label="Open iTAB Specialist Consultations case">
                 <img src="assets/arrow.svg" alt="">
               </a>
@@ -957,6 +961,29 @@
        card enters the viewport, when the tab becomes visible, and on the
        first user gesture. play() returns a promise — swallow the
        rejection so we don't pollute the console. */
+    // Paired cards: one phone size for all four. CSS gives every paired
+    // card a header row as tall as the tallest header (--pair-header), so a
+    // title or subtitle that wraps to an extra line no longer shrinks only
+    // its own card's phone. Fonts, resizes and the language all change the
+    // wrapping, hence an observer rather than one measurement.
+    (() => {
+      const pairs = Array.from(document.querySelectorAll('.project-pair'));
+      const headers = Array.from(document.querySelectorAll('.project-pair .project-card__header'));
+      if (!headers.length || !('ResizeObserver' in window)) return;
+      let queued = false;
+      const sync = () => {
+        queued = false;
+        const tallest = Math.max(...headers.map((header) => header.offsetHeight));
+        pairs.forEach((pair) => pair.style.setProperty('--pair-header', tallest + 'px'));
+      };
+      const observer = new ResizeObserver(() => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(sync);
+      });
+      headers.forEach((header) => observer.observe(header));
+    })();
+
     (() => {
       const videos = Array.from(document.querySelectorAll('.project-card__phone-video video'));
       if (!videos.length) return;

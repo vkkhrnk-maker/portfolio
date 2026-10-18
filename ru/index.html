@@ -151,7 +151,7 @@
         <div class="project-card__inner">
           <header class="project-card__header">
             <h2 class="project-card__title">Hooh — AI-ассистент для документов</h2>
-            <p class="project-card__subtitle">Объясняет договоры и анкеты простым языком — в веб-версии и приложении для iOS</p>
+            <p class="project-card__subtitle">Объясняет договоры и анкеты простым языком</p>
             <a class="arrow-btn" href="hooh.html" aria-label="Открыть кейс Hooh — AI-ассистент для документов">
               <img src="../assets/arrow.svg" alt="">
             </a>
@@ -186,14 +186,18 @@
           <div class="project-card__inner project-card__inner--itab">
             <header class="project-card__header project-card__header--itab">
               <h2 class="project-card__title">iTAB — редизайн карточки товара</h2>
-              <p class="project-card__subtitle">Собирает всё для решения о покупке — от характеристик и отзывов до цены и наличия</p>
+              <p class="project-card__subtitle">Помогает понять товар и решиться на покупку</p>
               <a class="arrow-btn" href="itab.html" aria-label="Открыть кейс iTAB — редизайн карточки товара">
                 <img src="../assets/arrow.svg" alt="">
               </a>
             </header>
             <div class="project-card__itab-group" data-shimmer>
               <img class="project-card__itab-desktop" src="../assets/itab-desktop.webp?v=1" alt="Карточка товара iTAB — десктоп" loading="lazy" width="1370" height="1144">
-              <img class="project-card__itab-mobile" src="../assets/itab-mobile.webp?v=1" alt="Карточка товара iTAB — мобильная версия" loading="lazy" width="504" height="1088">
+            </div>
+            <div class="project-card__phones project-card__phones--single project-card__phones--itab">
+              <div class="project-card__phone-video">
+                <img src="../assets/itab-mobile.webp?v=1" alt="Карточка товара iTAB — мобильная версия" loading="lazy" width="504" height="1088">
+              </div>
             </div>
           </div>
         </article>
@@ -202,7 +206,7 @@
           <div class="project-card__inner">
             <header class="project-card__header">
               <h2 class="project-card__title">iTAB — консультации<wbr> специалистов</h2>
-              <p class="project-card__subtitle">Соединяет клиентов со специалистами внутри магазина — от выбора до оплаты</p>
+              <p class="project-card__subtitle">Ведёт клиента от выбора специалиста до оплаты</p>
               <a class="arrow-btn" href="itab-specialists.html" aria-label="Открыть кейс iTAB — консультации специалистов">
                 <img src="../assets/arrow.svg" alt="">
               </a>
@@ -948,6 +952,29 @@
        card enters the viewport, when the tab becomes visible, and on the
        first user gesture. play() returns a promise — swallow the
        rejection so we don't pollute the console. */
+    // Paired cards: one phone size for all four. CSS gives every paired
+    // card a header row as tall as the tallest header (--pair-header), so a
+    // title or subtitle that wraps to an extra line no longer shrinks only
+    // its own card's phone. Fonts, resizes and the language all change the
+    // wrapping, hence an observer rather than one measurement.
+    (() => {
+      const pairs = Array.from(document.querySelectorAll('.project-pair'));
+      const headers = Array.from(document.querySelectorAll('.project-pair .project-card__header'));
+      if (!headers.length || !('ResizeObserver' in window)) return;
+      let queued = false;
+      const sync = () => {
+        queued = false;
+        const tallest = Math.max(...headers.map((header) => header.offsetHeight));
+        pairs.forEach((pair) => pair.style.setProperty('--pair-header', tallest + 'px'));
+      };
+      const observer = new ResizeObserver(() => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(sync);
+      });
+      headers.forEach((header) => observer.observe(header));
+    })();
+
     (() => {
       const videos = Array.from(document.querySelectorAll('.project-card__phone-video video'));
       if (!videos.length) return;
