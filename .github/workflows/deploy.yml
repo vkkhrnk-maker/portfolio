@@ -50,6 +50,7 @@ jobs:
         run: |
           rm -f \
             syno.html \
+            syno-case-proto.html \
             syno-cover-proto.html \
             hooh-trust-proto.html \
             hooh-color-proto.html \
@@ -64,6 +65,7 @@ jobs:
             portrait-wave-v15.css \
             assets/viktoria-profile-wave-body-mask-v15.svg \
             assets/viktoria-profile-wave-body-mask-v16.svg
+          rm -rf assets-syno-case assets-syno-figma syno-prototype
 
       # Sources and working files stay in the repository but not on the site:
       # the CV is built from cv.md / cv.ru.md by tools/, cv-print.html is only

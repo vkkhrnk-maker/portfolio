@@ -64,6 +64,7 @@
      (an inverted token is not the same thing as the right dark value) */
   --bg-card-hover: #d6d9dd;              /* clickable card, mouse over */
   --bg-card-active: #ced2d7;             /* clickable card, pressed */
+  --surface-media: #ffffff;              /* case media backing, distinct from product surfaces */
   --surface-paper: #ffffff;              /* gap cards — white sheets on the grey page */
   --btn-glow: rgba(255, 255, 255, 0.5);  /* inner glow of the magenta pills */
   --hairline: rgba(0, 0, 0, 0.05);       /* dividers between case blocks */
@@ -103,19 +104,19 @@
   --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   /* ===== Type scale (Desktop values; mobile overrides below) ===== */
-  --fs-h1: 106px;          --lh-h1: 108px;     /* cover headline */
-  --fs-h2: 80px;           --lh-h2: 88px;      /* section titles (About/Experience/Testimonials) */
-  --fs-h3: 40px;           --lh-h3: 40px;      /* project/experience role, intro greeting */
-  --fs-h4: 32px;           --lh-h4: 32px;      /* mobile project title and experience role */
-  --fs-h5: 28px;           --lh-h5: 36px;      /* sidebar name */
-  --fs-h6: 24px;           --lh-h6: 24px;      /* sidebar menu items */
-  --fs-body: 17px;         --lh-body: 24px;    /* body text, buttons, subtitles */
-  --fs-body-tight: 22px;   --lh-body-tight: 22px; /* desktop date pill */
+  --fs-h1: 92px; --lh-h1: 98px;     /* cover headline */
+  --fs-h2: 64px; --lh-h2: 72px;      /* section titles (About/Experience/Testimonials) */
+  --fs-h3: 34px; --lh-h3: 40px;      /* project/experience role, intro greeting */
+  --fs-h4: 28px; --lh-h4: 34px;      /* mobile project title and experience role */
+  --fs-h5: 26px; --lh-h5: 32px;      /* sidebar name */
+  --fs-h6: 22px; --lh-h6: 28px;      /* sidebar menu items */
+  --fs-body: 16px;         --lh-body: 24px;    /* body text, buttons, subtitles */
+  --fs-body-tight: 18px;   --lh-body-tight: 22px; /* desktop date pill */
 
   /* Letter spacing */
-  --ls-heading-lg: -2.2px;
-  --ls-heading-sm: -1.2px;
-  --ls-heading-body: -1px;
+  --ls-heading-lg: -0.025em;
+  --ls-heading-sm: -0.02em;
+  --ls-heading-body: -0.01em;
 
   /* ===== Spacing scale (raw values) ===== */
   --space-0: 0;
@@ -154,13 +155,12 @@
    The tracking is looser too. Latin's -2.2px is too tight for Cyrillic: "и",
    "ш", "щ", "м", "п" are built from repeated verticals and close up into a
    picket fence at that value on a 106px cover. Loosening the tokens fixes
-   every display heading at once, because they all read --ls-heading-*. The
-   type scale and the layout are untouched. */
+   every display heading at once, because they all read --ls-heading-*. Tracking is proportional to the shared type scale. */
 :root[lang="ru"] {
   --font-display: 'Noto Serif Display Cond', Georgia, serif;
-  --ls-heading-lg: -1.5px;
-  --ls-heading-sm: -0.9px;
-  --ls-heading-body: -0.7px;
+  --ls-heading-lg: -0.018em;
+  --ls-heading-sm: -0.015em;
+  --ls-heading-body: -0.01em;
 }
 
 /* ===== Dark theme =====
@@ -204,6 +204,7 @@
     --stroke-subtle: #4a4a52;
     --rule: #4a4a52;
     --media-dim: brightness(0.9);
+    --surface-media: #232328;
     --surface-paper: #1b1b1f;
     --btn-glow: rgba(255, 255, 255, 0.14);
     --hairline: rgba(255, 255, 255, 0.06);
@@ -247,7 +248,8 @@
   --stroke-subtle: #4a4a52;
   --rule: #4a4a52;
   --media-dim: brightness(0.9);
-  --surface-paper: #1b1b1f;
+  --surface-media: #232328;
+    --surface-paper: #1b1b1f;
   --btn-glow: rgba(255, 255, 255, 0.14);
   --hairline: rgba(255, 255, 255, 0.06);
   --hairline-strong: rgba(255, 255, 255, 0.12);
@@ -274,12 +276,12 @@
 /* ===== Mobile/tablet token overrides (≤1199px) ===== */
 @media (max-width: 1199px) {
   :root {
-    --fs-h1: 62px;          --lh-h1: 64px;
-    --fs-h2: 60px;          --lh-h2: 60px;
-    --fs-h3: 44px;          --lh-h3: 48px;
+    --fs-h1: 56px; --lh-h1: 62px;
+    --fs-h2: 48px; --lh-h2: 54px;
+    --fs-h3: 32px; --lh-h3: 38px;
     /* H4–H6 unchanged */
-    --fs-body-tight: 17px;  --lh-body-tight: 20px; /* mobile date pill: 17/20 */
-    --lh-body: 25.5px;      /* mobile body 17/25.5 */
+    --fs-body-tight: 16px;  --lh-body-tight: 20px;
+    --lh-body: 24px;
 
     /* Semantic spacing (mobile values per Figma 527:28139) */
     --page-x: 32px;
@@ -290,47 +292,40 @@
   }
 }
 
-/* Phone-only (≤640px): H1 lands at 50/54 — golden middle between the
-   shouty 62/64 (which overflowed past the viewport bottom) and the
-   too-quiet 42/46. Same value drives both the cover hero and the
-   case headlines so they read at one size on phone. */
+/* Phones retain a distinct cover headline above the section scale. */
 @media (max-width: 640px) {
   :root {
-    --fs-h1: 50px;          --lh-h1: 54px;
-    /* Section titles come down to meet it. At the tablet values (60/60) the
-       H2s were bigger than the cover headline itself — the page's loudest
-       line has to be the H1, or the hierarchy is inverted. */
-    --fs-h2: 50px;          --lh-h2: 54px;
+    --fs-h1: 44px; --lh-h1: 50px;
+    --fs-h2: 40px; --lh-h2: 46px;
+    --fs-h3: 30px; --lh-h3: 36px;
+    --fs-h4: 26px; --lh-h4: 32px;
+    --fs-h5: 24px; --lh-h5: 30px;
   }
 }
 
-/* Optional: bump all type +6px on extra-large screens */
+/* Wide screens: a modest second step; body remains 18/28 from 1920px up. */
 @media (min-width: 1920px) {
   :root {
-    --fs-h1: 112px;        --lh-h1: 114px;
-    --fs-h2: 86px;         --lh-h2: 94px;
-    --fs-h3: 46px;         --lh-h3: 56px;
-    --fs-h4: 38px;         --lh-h4: 44px;
-    --fs-h5: 34px;         --lh-h5: 42px;
-    --fs-h6: 30px;         --lh-h6: 36px;
-    --fs-body: 23px;       --lh-body: 32px;        /* 23/32, ratio 1.39 */
-    --fs-body-tight: 28px; --lh-body-tight: 28px;
+    --fs-h1: 100px; --lh-h1: 108px;
+    --fs-h2: 72px; --lh-h2: 80px;
+    --fs-h3: 38px; --lh-h3: 46px;
+    --fs-h4: 32px; --lh-h4: 38px;
+    --fs-h5: 28px; --lh-h5: 36px;
+    --fs-h6: 24px; --lh-h6: 30px;
+    --fs-body: 18px;       --lh-body: 28px;
+    --fs-body-tight: 20px; --lh-body-tight: 24px;
   }
 }
 
-/* One more step for 2560-class monitors. The 1920 scale was set against a
-   1440px content column; past 2400 that column is 1900+ wide and the same
-   headings start reading like captions on a billboard — the page grows but
-   its voice doesn't. Headings only: body stays at 23/32, which is already
-   generous, so the step also widens the gap between a title and its text. */
+/* Extra-wide screens grow display headings only. */
 @media (min-width: 2400px) {
   :root {
-    --fs-h1: 124px;        --lh-h1: 128px;
-    --fs-h2: 96px;         --lh-h2: 104px;
-    --fs-h3: 52px;         --lh-h3: 62px;
-    --fs-h4: 42px;         --lh-h4: 48px;
-    --fs-h5: 38px;         --lh-h5: 46px;
-    --fs-h6: 32px;         --lh-h6: 38px;          /* sidebar menu */
+    --fs-h1: 108px; --lh-h1: 116px;
+    --fs-h2: 80px; --lh-h2: 88px;
+    --fs-h3: 42px; --lh-h3: 50px;
+    --fs-h4: 34px; --lh-h4: 40px;
+    --fs-h5: 30px; --lh-h5: 38px;
+    --fs-h6: 26px; --lh-h6: 32px;          /* sidebar menu */
   }
 }
 
@@ -529,7 +524,7 @@ img {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   white-space: nowrap;
   /* Hover speaks the same language as the pager buttons and the Back
      circle: a small lift + soft shadow (the old opacity dim was the odd
@@ -601,7 +596,7 @@ img {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   white-space: nowrap;
 }
 
@@ -1063,7 +1058,7 @@ img {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
 }
 
@@ -1307,9 +1302,9 @@ img {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 780px;
+  max-width: 68ch;
 }
 
 /* Concise evidence near the top keeps the result visible before the full
@@ -1542,9 +1537,8 @@ body.case-page--fill .case__outcome-body p {
   margin: 0 0 16px;
   font-family: var(--font-display);
   font-weight: 400;
-  /* Figma H3: 44/48 */
-  font-size: 44px;
-  line-height: 48px;
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
 }
@@ -1554,7 +1548,7 @@ body.case-page--fill .case__outcome-body p {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
   max-width: 540px;
 }
@@ -1577,9 +1571,8 @@ body.case-page--fill .case__outcome-body p {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  /* Figma H3: 44/48 — same level as block titles */
-  font-size: 44px;
-  line-height: 48px;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
   max-width: 900px;
@@ -1590,9 +1583,9 @@ body.case-page--fill .case__outcome-body p {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 780px;
+  max-width: 68ch;
 }
 
 /* Phones: body copy steps down to 16/24. Placed after the base body
@@ -1604,13 +1597,6 @@ body.case-page--fill .case__outcome-body p {
   .case__outcome-body p {
     font-size: 16px;
     line-height: 24px;
-  }
-  /* Section / block titles step down 44 → 32 so they don't crowd the
-     H1 and read better at phone width */
-  .case__block-title,
-  .case__section-title {
-    font-size: 32px;
-    line-height: 36px;
   }
   /* Tighter title→body gap in the intro blocks (16 → 12) */
   .case__block-title {
@@ -1639,7 +1625,7 @@ body.case-page--fill .case__outcome-body p {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
 }
 
@@ -2326,9 +2312,9 @@ body.case-page--fill .case__outcome-body p {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 780px;
+  max-width: 68ch;
 }
 
 /* Outcome — 2-column card (Figma node 1414:105260): light blue-grey
@@ -2353,8 +2339,8 @@ body.case-page--fill .case__outcome-body p {
   min-width: 0;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 44px;
-  line-height: 48px;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
   letter-spacing: var(--ls-heading-lg);
   color: var(--outcome-ink);
   max-width: 840px;
@@ -2375,7 +2361,7 @@ body.case-page--fill .case__outcome-body p {
   /* Same Body style as section copy (was 24/30 primary) */
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
 }
 
@@ -2461,39 +2447,9 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* On 1920+ bump block / section titles to keep visual hierarchy with
-   the larger body text (23/32). 44/48 → 56/64. */
+/* Keep wide-screen hit areas while labels follow the shared body size. */
 @media (min-width: 1920px) {
-  .case__block-title,
-  .case__section-title {
-    font-size: 56px;
-    line-height: 64px;
-  }
-  /* Buttons + nav links bump by ~+4px on big screens — they pick up
-     --fs-body which jumps from 17→23, but that's too big for compact
-     UI elements. Hold them at 21/28 instead. */
-  .btn,
-  .case__back-label,
-  .mobile-topbar__link,
-  .case__pager-btn {
-    font-size: 21px;
-    line-height: 28px;
-  }
-  .btn {
-    height: 48px;
-    padding: 10px 20px;
-  }
-}
-
-/* …and one step further at 2400+, in line with the heading tokens. The case
-   pages carry these titles instead of the H2, so they have to move with it
-   or the case reads a size quieter than the home page. */
-@media (min-width: 2400px) {
-  .case__block-title,
-  .case__section-title {
-    font-size: 62px;
-    line-height: 70px;
-  }
+  .btn { height: 48px; padding: 10px 20px; }
 }
 
 /* Case page — mobile overrides */
@@ -2612,9 +2568,7 @@ body.case-page--fill .case__outcome-body p {
   }
 }
 
-/* Phones: case H1 inherits from --fs-h1 via the base .case__title rule;
-   the ≤640 :root override sets --fs-h1 to 42/46, matching the cover
-   H1 size. (No explicit case-only override needed.) */
+/* Phone proof strip and outcome body. Case headings use the shared tokens. */
 @media (max-width: 640px) {
   .case__proof-strip {
     grid-auto-flow: row;
@@ -3092,7 +3046,7 @@ html {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
   white-space: nowrap;
 }
@@ -3689,7 +3643,7 @@ html {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
   text-align: right;
 }
@@ -5659,8 +5613,8 @@ a, button, [role="button"], summary, label {
   font-weight: 400;
   /* One step below the case headline: this page opens with a statement, not a
      cover, and the sections below need to stay the louder signal. */
-  font-size: 64px;
-  line-height: 66px;
+  font-size: 56px;
+  line-height: 64px;
   letter-spacing: var(--ls-heading-lg);
   color: var(--text-primary);
   text-wrap: balance;
@@ -5671,13 +5625,13 @@ a, button, [role="button"], summary, label {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
   /* One reading measure for every run of prose on the page — the summary, the
-     role meta, the bullets and the Skills/Education values — and the same 780
+     role meta, the bullets and the Skills/Education values — and the same 68ch
      as .case__intro. The summary was 720 and the meta line had no cap at all,
      so it ran the full column, a third longer than the bullets under it. */
-  max-width: 780px;
+  max-width: 68ch;
   text-wrap: pretty;
 }
 
@@ -5774,7 +5728,7 @@ a, button, [role="button"], summary, label {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 780px;
+  max-width: 68ch;
   text-wrap: pretty;
 }
 
@@ -5791,9 +5745,9 @@ a, button, [role="button"], summary, label {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 780px;
+  max-width: 68ch;
   text-wrap: pretty;
 }
 
@@ -5851,9 +5805,9 @@ a, button, [role="button"], summary, label {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
-  letter-spacing: -1px;
+  letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 780px;
+  max-width: 68ch;
   text-wrap: pretty;
 }
 
@@ -5869,7 +5823,7 @@ a, button, [role="button"], summary, label {
   }
 
   .cv__title {
-    font-size: 40px;
+    font-size: 36px;
     line-height: 42px;
     letter-spacing: var(--ls-heading-sm);
   }
@@ -5886,10 +5840,6 @@ a, button, [role="button"], summary, label {
     gap: var(--space-12);
   }
 
-  .cv__role-title {
-    font-size: 28px;
-    line-height: 30px;
-  }
 
   .cv__role-dates {
     font-family: var(--font-body);

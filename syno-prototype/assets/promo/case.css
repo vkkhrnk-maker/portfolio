@@ -1,0 +1,426 @@
+/* Portfolio case overrides of the existing Syno components, measured at 1280. */
+html.promo-case :is(.sec-title,.hero-title,.info-title) { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+/* Keep the headline and its supporting line distinct, including wrapped slides. */
+html.promo-case .band-hero .hero-copy { gap:20px; }
+html.promo-case .band-hero .hero-badges { margin-top:0; }
+html.promo-case #page-toolbar { min-height:56px; }
+html.promo-case #screen-profile #pf-cv .pf-row { gap:20px; min-height:45px; }
+html.promo-case #screen-profile #pf-cv .oc-sec-body { padding-top:2px; }
+html.promo-case #screen-profile .ap-conn-item { height:104px; border:0; box-shadow:inset 0 -1px var(--stroke-primary); }
+html.promo-case #screen-profile .ap-conn-item:last-child { box-shadow:none; }
+html.promo-case #screen-profile .ap-conn-item:not([data-site-href]) { cursor:default; }
+html.promo-case #screen-profile #pf-connections { padding-bottom:0; }
+html.promo-case #screen-profile .sf-meta { padding:12px; font-size:12px; }
+html.promo-case #screen-profile .sf-meta-right { gap:12px; }
+html.promo-case #screen-profile .promo-profile-footer { display:none; }
+html.promo-case #screen-eventpage .orgp-head h1 { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+html.promo-case #screen-eventpage .orgp-sub { line-height:1.3; }
+html.promo-case #screen-eventpage .evp-line + .evp-line { margin-top:16px; }
+html.promo-case #screen-eventpage .orgp-about { max-width:none; line-height:1.3; }
+html.promo-case #screen-eventpage .orgp-hero { border-radius:8px; }
+html.promo-case #screen-eventpage .orgp-hours { font-family:'Schengen A',sans-serif; }
+/* The existing Registry artist card, including its work pagination. */
+html.promo-case #screen-eventpage .evp-artists { gap:0; margin-inline:-12px; margin-bottom:-1px; border-top:1px solid var(--stroke-primary); }
+/* The final card and footer share one rule, with no empty strip between them. */
+html.promo-case #screen-eventpage .orgp-main:has(> #evp-artists-sec:last-child:not([hidden])) { padding-bottom:0; }
+html.promo-case #screen-eventpage .evp-artist { padding:12px; border-right:1px solid var(--stroke-primary); border-bottom:1px solid var(--stroke-primary); }
+html.promo-case #screen-eventpage .evp-artist-name { margin-top:12px; }
+html.promo-case #screen-eventpage .evp-artist .work-dots { display:flex; gap:8px; justify-content:center; margin-top:4px; padding:7px 0; }
+html.promo-case #screen-eventpage .evp-artist .work-dot { position:relative; width:8px; height:8px; border:0; padding:0; border-radius:var(--radius-pill); background:var(--stroke-primary); cursor:pointer; }
+html.promo-case #screen-eventpage .evp-artist .work-dot::after { content:''; position:absolute; inset:-8px; border-radius:var(--radius-pill); }
+html.promo-case #screen-eventpage .evp-artist .work-dot.is-on { background:var(--text-primary); }
+html.promo-case #screen-eventpage .evp-artist .work-dot:focus-visible { outline:2px solid var(--text-primary); outline-offset:4px; }
+@media(min-width:1024px) {
+  html.promo-case .band-hero .hero-tab { height:80px; gap:8px; }
+  html.promo-case .band-hero .hero-copy { width:900px; max-width:100%; padding-top:20px; }
+  html.promo-case .band-orgs { display:none; }
+  html.promo-case .band-footer .footer-bottom { padding-block:12px; }
+  html.promo-case #screen-registry .page { padding-bottom:0; }
+  html.promo-case #screen-registry .promo-footer { width:calc(100% + 36px); margin-inline:-18px; }
+  html.promo-case #screen-registry .registry-results-head { height:56px; }
+  html.promo-case #screen-opencall .oc-title-right { display:block; }
+  html.promo-case #screen-opencall .oc-title-right > p { display:inline; }
+  html.promo-case #screen-opencall .oc-title-right .oc-phase { display:table; }
+  html.promo-case :is(#screen-opencall,#screen-eventpage) .promo-footer { width:calc(100% + 12px); margin-inline:-6px; }
+  html.promo-case :is(#screen-registry,#screen-opencall) .promo-footer .footer-cols { padding-bottom:12px; }
+  html.promo-case body:has(.band-media) .band-footer .footer-cols { padding-bottom:12px; }
+}
+@media(max-width:1023px) {
+  html.promo-case .promo-desktop-break { display:none; }
+  html.promo-case #screen-eventpage { --content-block-gap:28px; }
+  html.promo-case #screen-eventpage .orgp-sub { font-size:14px; line-height:1.2; margin-top:12px; }
+  html.promo-case #screen-eventpage .evp-line + .evp-line { margin-top:0; }
+  html.promo-case #screen-profile .site-footer { display:none; }
+  html.promo-case #screen-profile .promo-profile-footer { display:block; }
+  html.promo-case #screen-profile #pf-connections { display:none; }
+}
+html.promo-case .wireframe-bar { display:none !important; }
+html.promo-case .site-header { top:var(--promo-header-top); }
+/* Registry screens use the same framed header and full-width rules as Band. */
+html.promo-case .site-header:not(.band),
+html.promo-case #page-toolbar {
+  box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary);
+}
+/* Paint the frame's top inset while sticky content passes behind the header. */
+html.promo-case .site-header:not(.band) {
+  box-shadow:0 calc(-1 * var(--promo-header-top)) 0 var(--bg-primary),inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary);
+}
+html.promo-case .site-header:not(.band)::before,
+html.promo-case .site-header:not(.band)::after,
+html.promo-case #page-toolbar::after {
+  content:''; position:absolute; left:-6px; right:-6px; width:auto; height:1px;
+  background:var(--stroke-primary); z-index:3; pointer-events:none;
+}
+html.promo-case .site-header:not(.band)::before { top:0; bottom:auto; }
+html.promo-case .site-header:not(.band)::after,
+html.promo-case #page-toolbar::after { top:auto; bottom:-1px; }
+html.promo-case #screen-profile .oc-section { position:relative; }
+html.promo-case #screen-profile .oc-section::after {
+  content:''; position:absolute; left:-6px; right:-6px; bottom:-1px; height:1px;
+  background:var(--stroke-primary); pointer-events:none; z-index:3;
+}
+html.promo-case .ap-cover-sticky { top:60px; }
+html.promo-case { --card-padding:12px; }
+html.promo-case .app:not(:has(> .band)) { border:0; box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary); }
+html.promo-case .pf-jumpnav { display:none; }
+html.promo-case #screen-profile .oc-section {
+  grid-template-columns:379px minmax(0,1fr); padding:12px 0 12px 12px;
+}
+html.promo-case #screen-profile .oc-sec-title {
+  font-family:'Schengen Core',sans-serif; font-size:20px; line-height:20px; text-transform:uppercase;
+}
+html.promo-case #screen-profile #pf-works { padding-block:0; }
+html.promo-case #pf-works .oc-sec-label { padding-top:12px; }
+html.promo-case #screen-profile .ap-works {
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); column-gap:0;
+}
+html.promo-case .promo-work-column { min-width:0; box-shadow:inset 1px 0 var(--stroke-primary); }
+html.promo-case #screen-profile .ap-work {
+  padding:12px; margin:0; box-shadow:inset 0 -1px var(--stroke-primary);
+}
+html.promo-case #screen-profile .ap-work img {
+  width:100%; height:auto; aspect-ratio:auto; object-fit:contain;
+}
+html.promo-case #screen-profile .ap-work-t { margin-top:8px; line-height:21px; }
+html.promo-case #screen-profile .ap-work-m { margin-top:8px; line-height:14px; font-size:14px; }
+html.promo-case #screen-profile .ap-works-more-row { margin:0; padding:12px; }
+html.promo-case #screen-profile .ap-works-more-row { display:none !important; }
+html.promo-case #screen-work .wd-morecard-img { height:auto; aspect-ratio:auto; }
+html.promo-case #screen-work .wd-morecard-img img { width:100%; height:auto; aspect-ratio:auto; object-fit:contain; }
+html.promo-case #screen-profile .ap-meta { font-family:'Schengen A',sans-serif; font-size:14px; letter-spacing:0; }
+html.promo-case #screen-profile .ap-name { font-size:84px; letter-spacing:0; }
+html.promo-case #screen-profile .ap-cover { height:auto; aspect-ratio:1228 / 558.7203; }
+html.promo-case #screen-profile .ap-cover-sticky::before { display:none; }
+html.promo-case #screen-profile .ap-cover::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.59) 8%,rgba(0,0,0,.52) 16%,rgba(0,0,0,.42) 24%,rgba(0,0,0,.31) 32%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.1) 48%,rgba(0,0,0,.03) 56%,transparent 64%);
+}
+html.promo-case #screen-profile .ap-name { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+html.promo-case body:has(#screen-profile.active) .site-header .ctx-switch { display:inline-flex; }
+html.promo-case body:has(#screen-profile.active) .site-header .btn-login { display:none; }
+html.promo-case .ctx-avatar { background-image:url('images/mira-soleni-portrait.png'); background-size:cover; background-position:center; }
+html.promo-case #screen-profile .pf-details-grid { padding-inline:12px 3px; }
+html.promo-case #screen-profile .pf-details-rows .pf-row-value { font-family:'Schengen A',sans-serif; }
+html.promo-case #screen-profile .pf-row { padding:12px 0; }
+html.promo-case #screen-profile .ap-cv-group { margin-bottom:20px; }
+html.promo-case #screen-profile .ap-cv-group:last-child { margin-bottom:0; }
+html.promo-case #screen-profile .ap-cv-group h3 { font-size:14px; text-transform:uppercase; }
+html.promo-case #screen-profile #pf-cv .oc-sec-body,
+html.promo-case #screen-profile #pf-statement .oc-sec-body,
+html.promo-case #screen-profile #pf-connections .oc-sec-body { padding-inline:12px; }
+html.promo-case #screen-profile .ap-conn { display:block; }
+html.promo-case #screen-profile .ap-conn-group + .ap-conn-group { margin-top:12px; }
+html.promo-case #screen-profile .ap-conn-label { font-size:14px; text-transform:uppercase; }
+html.promo-case #screen-profile .ap-conn-item { min-height:104px; padding:12px 0; }
+html.promo-case #screen-profile .ap-conn-thumb { width:80px; height:80px; border-radius:8px; }
+html.promo-case #screen-profile .site-footer .sf-main,
+html.promo-case #screen-profile #pf-stories { display:none !important; }
+html.promo-case :is(#screen-registry,#screen-search) .artist-card { border-radius:0; }
+html.promo-case :is(#screen-registry,#screen-search) .artist-card-name { line-height:34px; }
+html.promo-case :is(#screen-registry,#screen-search) .card-save { position:absolute; top:117px; left:12px; right:auto; width:max-content; margin-top:0; }
+html.promo-case #registry-rail .card-media { height:auto; aspect-ratio:auto; }
+html.promo-case #registry-rail .card-media img { width:100%; height:auto; aspect-ratio:auto; object-fit:contain; }
+html.promo-case #registry-rail .card-cell { width:283px; flex:0 0 283px; padding:12px; gap:8px; border-left:0; box-shadow:inset 1px 0 var(--stroke-primary); }
+html.promo-case #registry-rail .card-mono { font-size:14px; line-height:17px; }
+html.promo-case #registry-rail .card-name { font-size:20px; line-height:24px; }
+html.promo-case #registry-rail .card-sub { font-size:12px; line-height:14px; }
+html.promo-case #places-rail .card-media img { height:180px; aspect-ratio:auto; object-fit:cover; }
+html.promo-case #places-rail .card-name { -webkit-line-clamp:1; }
+@media(max-width:1023px) {
+  html.promo-case #places-rail .card-cell { flex-basis:292px; }
+  html.promo-case #places-rail .card-media img { height:180px; aspect-ratio:auto; }
+  html.promo-case .stories-row > .story-card { flex-basis:286px; }
+}
+html.promo-case .artist-card-thumb,
+html.promo-case .artist-work-thumb { width:100%; height:auto; aspect-ratio:auto; }
+html.promo-case body :is(#screen-registry,#screen-search) .artist-work-thumb { height:auto; aspect-ratio:auto; object-fit:contain; }
+html.promo-case #screen-eventpage .evp-artist-media { aspect-ratio:auto; height:auto; border-radius:0; }
+html.promo-case #screen-eventpage .evp-artist-media img { width:100%; height:auto; object-fit:contain; }
+html.promo-case .hero-slide:not(.is-active) { pointer-events:none; }
+html.promo-case #screen-registry .artist-card { border:0; box-shadow:inset 0 -1px var(--stroke-primary); }
+html.promo-case #screen-registry .artist-work-cell { border:0; box-shadow:inset 1px 0 var(--stroke-primary); }
+html.promo-case #screen-opencall .oc-title-lead { font-size:16px; line-height:1.3; color:var(--text-secondary); }
+html.promo-case #screen-opencall .oc-title-right { gap:0; }
+html.promo-case #screen-opencall .oc-title-right .oc-phase { margin-top:20px; }
+html.promo-case #screen-opencall .oc-brush { height:288px; }
+html.promo-case #screen-opencall .oc-brush img { object-position:center 41%; }
+html.promo-case #screen-opencall .oc-head:has(+ .oc-datesband),
+html.promo-case #screen-opencall .oc-ctaband { display:none; }
+html.promo-case #screen-opencall .oc-title { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+html.promo-case #screen-opencall .oc-tl-item .k { font-family:'Schengen A',sans-serif; }
+html.promo-case #screen-opencall .oc-tl-item .k { line-height:1.3; }
+html.promo-case #screen-opencall .oc-awards-right { gap:12px; }
+html.promo-case #screen-opencall .oc-faq-row > summary { line-height:1.3; }
+html.promo-case .band-media .band-in { height:auto; aspect-ratio:1228/272; overflow:hidden; }
+html.promo-case .band-media img { width:151.14%; max-width:none; height:100%; aspect-ratio:1856/272; object-fit:cover; }
+html.promo-case .band#contact:not(:target) { display:none; }
+html.promo-case .promo-footer { width:calc(100% + 12px); margin-inline:-6px; padding-inline:6px; border-top:1px solid var(--stroke-primary); }
+html.promo-case .promo-footer > .band-in { padding:20px 0 0; box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary); }
+html.promo-case .promo-footer .footer-cols { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); padding-bottom:20px; }
+html.promo-case .promo-footer .footer-cols > * { min-width:0; padding:0 12px; }
+html.promo-case .promo-footer .footer-nav h4 { font:400 14px/1.2 'Schengen A',sans-serif; text-transform:uppercase; margin:0 0 12px; }
+html.promo-case .promo-footer .footer-nav ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+html.promo-case .promo-footer .footer-nav a { font:400 16px/1.3 'Schengen A',sans-serif; text-decoration:none; }
+html.promo-case .promo-footer .footer-nav a:hover { text-decoration:underline; }
+html.promo-case .promo-footer .footer-right h3 { font:400 28px/1.2 'Schengen A',sans-serif; margin-bottom:12px; }
+html.promo-case .promo-footer .footer-right p { font:400 16px/1.3 'Schengen A',sans-serif; color:var(--text-secondary); margin-bottom:24px; }
+html.promo-case .promo-footer .subscribe-field { display:flex; height:40px; padding:2px; border:1px solid var(--stroke-primary); border-radius:8px; }
+html.promo-case .promo-footer .subscribe-field input { flex:1; min-width:0; width:0; padding:0 10px; border:0; background:transparent; font:400 16px 'Schengen A',sans-serif; outline:none; }
+html.promo-case .promo-footer .subscribe-field button { width:34px; border:0; border-radius:6px; background:var(--button-tab-active-fill); color:white; }
+html.promo-case .promo-footer .nl-consent { display:flex; align-items:flex-start; gap:12px; margin-top:12px; color:var(--text-secondary); font:400 12px/1.2 'Schengen A',sans-serif; }
+html.promo-case .promo-footer .nl-consent input { margin-top:2px; }
+html.promo-case .promo-footer .footer-bottom { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:12px; border-top:1px solid var(--stroke-primary); }
+html.promo-case .promo-footer .footer-meta { display:flex; align-items:center; gap:12px; }
+html.promo-case .promo-footer .fb-logo svg { display:block; width:143px; height:34px; }
+html.promo-case .promo-footer .fb-copy,html.promo-case .promo-footer .fb-links { display:flex; align-items:center; gap:8px; font:400 12px/1.2 'Schengen A',sans-serif; }
+html.promo-case .promo-footer .fb-links a { text-decoration:none; }
+html.promo-case .promo-footer .nl-error { font-size:12px; line-height:1.2; margin-top:8px; color:var(--text-error,#ae342b); }
+html.promo-case .promo-footer .nl-done { font-size:12px; line-height:1.2; margin-top:8px; }
+html.promo-case .promo-footer .subscribe-mark { display:grid; place-items:center; width:34px; background:var(--text-success,#46865c); color:white; border-radius:6px; }
+@media(min-width:1024px) {
+  html.promo-case body.promo-map { --wf-h:0px; }
+  html.promo-case body.promo-map .site-footer { display:none; }
+}
+
+/* Case presentation uses the current shared header and one rule per band.
+   An outline paints above opaque child bands, so the frame stays continuous. */
+html.promo-case { --promo-header-top:20px; --promo-header-height:59px; }
+html.promo-case .app:not(:has(> .band)) {
+  outline:1px solid var(--stroke-primary); outline-offset:-1px; box-shadow:none;
+}
+html.promo-case .app:not(:has(> .band))::after {
+  content:''; position:absolute; inset:0; width:auto; height:auto; background:none;
+  box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary);
+  z-index:120; pointer-events:none;
+}
+html.promo-case .site-header:not(.band) { border-bottom:0; }
+html.promo-case .site-header:not(.band)::after { bottom:0; }
+html.promo-case #page-toolbar { border-bottom:0; top:calc(var(--promo-header-top) + var(--promo-header-height)); }
+html.promo-case #page-toolbar::after { bottom:0; }
+html.promo-case :is(#screen-eventpage,#screen-orgpublic) .orgp-grid { border-top:0; }
+html.promo-case :is(#screen-eventpage,#screen-orgpublic) .orgp-side-inner {
+  top:calc(var(--promo-header-top) + var(--promo-header-height) + 56px + 12px);
+}
+html.promo-case #screen-registry .artist-card:last-child { box-shadow:none; }
+html.promo-case #screen-registry .registry-results::before,
+html.promo-case #screen-registry .registry-results::after { display:none; }
+@media(min-width:1920px) { html.promo-case { --promo-header-height:65px; } }
+@media(max-width:1023px) {
+  html.promo-case { --promo-header-top:12px; --promo-header-height:57px; }
+  html.promo-case :is(#screen-eventpage,#screen-orgpublic) .orgp-side-inner { position:static; }
+}
+html.promo-case body.promo-map .filter-bar { display:block; }
+html.promo-case body.promo-map .filter-bar .filters-row-wrapper { padding:12px; }
+html.promo-case body.promo-map .list-panel > .list-header { min-height:41px; height:41px; position:sticky; top:0; z-index:4; padding:0 12px; background:var(--bg-primary); }
+html.promo-case body.promo-map #map { padding-top:53px; }
+html.promo-case body.promo-map #leaflet-bg { top:53px; }
+html.promo-case body.promo-map .card-meta-info { font-family:'Schengen A',sans-serif; }
+html.promo-case body.promo-map .list-panel .card-title { -webkit-line-clamp:1; }
+html.promo-case body.promo-map:not(.view-list) .list-panel .card-thumb { min-height:180px; border-radius:8px; }
+html.promo-case body.promo-map .cm-hours::before { content:none; }
+html.promo-case body.promo-map .leaflet-tile-pane { filter:saturate(.3); }
+@media(max-width:767px) {
+  html.promo-case #screen-profile .ap-name { font-size:56px; }
+  html.promo-case .promo-footer .footer-cols { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:24px; }
+  html.promo-case .promo-footer .footer-right { grid-column:1/-1; }
+  html.promo-case .promo-footer .footer-bottom,html.promo-case .promo-footer .footer-meta { flex-wrap:wrap; }
+  html.promo-case #screen-opencall .oc-brush img { display:block; }
+  html.promo-case #screen-opencall .oc-brush::before,html.promo-case #screen-opencall .oc-brush::after { display:none; }
+  html.promo-case .band-media .band-in { aspect-ratio:339/120; }
+  html.promo-case body.promo-map #map { padding-top:12px; }
+  html.promo-case body.promo-map #leaflet-bg { top:12px; }
+}
+/* Profile / Mobile 375 / Visitor — Syno 4990:70154. */
+html.promo-case body.mobile-mode:has(#screen-profile.active) .app { margin-top:20px; }
+html.promo-case body.mobile-mode:has(#screen-profile.active) { --promo-header-top:20px; --promo-header-height:58px; }
+html.promo-case body.mobile-mode:has(#screen-profile.active) .site-header { min-height:58px; }
+html.promo-case body.mobile-mode:has(#screen-profile.active) #page-toolbar { padding:12px; min-height:56px; }
+html.promo-case body.mobile-mode:has(#screen-profile.active) .breadcrumbs { font-size:14px; min-height:32px; }
+html.promo-case body.mobile-mode #screen-profile .ap-cover::after { display:none; }
+html.promo-case body.mobile-mode #screen-profile .ap-cover { aspect-ratio:auto; }
+html.promo-case body.mobile-mode #screen-profile .ap-cover::before {
+  content:''; position:absolute; left:-6px; right:-6px; bottom:0; height:1px;
+  background:var(--stroke-primary); z-index:3; pointer-events:none;
+}
+html.promo-case body.mobile-mode #screen-profile .ap-name { font-size:56px; line-height:.9; }
+html.promo-case body.mobile-mode #screen-profile .ap-meta { font-size:14px; line-height:1.2; }
+html.promo-case body.mobile-mode #screen-profile .ap-badges .badge { height:24px; font-size:12px; }
+html.promo-case body.mobile-mode #screen-profile .oc-section { display:block; padding:0; }
+html.promo-case body.mobile-mode #screen-profile .oc-sec-label { padding:12px; border-bottom:1px solid var(--stroke-primary); }
+html.promo-case body.mobile-mode #screen-profile .oc-sec-label { position:relative; }
+html.promo-case body.mobile-mode #screen-profile .oc-sec-label::after {
+  content:''; position:absolute; left:-6px; right:-6px; bottom:-1px; height:1px;
+  background:var(--stroke-primary); z-index:3; pointer-events:none;
+}
+html.promo-case body.mobile-mode #screen-profile .oc-sec-title { font-size:18px; line-height:18px; letter-spacing:.09px; }
+html.promo-case body.mobile-mode #screen-profile .oc-sec-body { padding:12px; }
+html.promo-case body.mobile-mode #screen-profile #pf-works .oc-sec-body { padding:0; }
+html.promo-case body.mobile-mode #screen-profile .ap-works { display:flex; flex-direction:column; columns:auto; gap:0; }
+html.promo-case body.mobile-mode #screen-profile .promo-work-column { display:contents; box-shadow:none; }
+html.promo-case body.mobile-mode #screen-profile .ap-work { display:block; order:var(--promo-order,0); width:100%; padding:12px; }
+html.promo-case body.mobile-mode #screen-profile .ap-work-t { font-size:16px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+html.promo-case body.mobile-mode #screen-profile .ap-works.is-collapsed .promo-work-more { display:none; }
+html.promo-case body.mobile-mode #screen-profile #pf-works:has(.ap-works.is-collapsed .promo-work-more) .ap-works-more-row { display:block !important; padding:12px; }
+html.promo-case body.mobile-mode #screen-profile #ap-works-more { width:100%; height:40px; }
+html.promo-case body.mobile-mode #screen-profile .pf-details-grid { display:flex; flex-direction:column; gap:20px; padding:0; }
+html.promo-case body.mobile-mode #screen-profile .pf-details-main { width:100%; }
+html.promo-case body.mobile-mode #screen-profile .pf-portrait-wrap { order:-1; width:100%; max-width:none; height:280px; aspect-ratio:auto; }
+html.promo-case body.mobile-mode #screen-profile .pf-details-rows .pf-row { flex-direction:row; gap:16px; }
+html.promo-case body.mobile-mode #screen-profile .pf-details-rows .pf-row-label { width:150px; }
+
+@media(max-width:1023px) {
+html.promo-case body:has(#screen-profile.active) .app { margin-top:20px; }
+html.promo-case body:has(#screen-profile.active) { --promo-header-top:20px; --promo-header-height:58px; }
+html.promo-case body:has(#screen-profile.active) .site-header { min-height:58px; }
+html.promo-case body:has(#screen-profile.active) #page-toolbar { padding:12px; min-height:56px; }
+html.promo-case body:has(#screen-profile.active) .breadcrumbs { font-size:14px; min-height:32px; }
+html.promo-case body #screen-profile .ap-cover::after { display:none; }
+html.promo-case body #screen-profile .ap-cover { aspect-ratio:auto; }
+html.promo-case body #screen-profile .ap-cover { display:flex; flex-direction:column; overflow:visible; background:transparent; }
+html.promo-case body #screen-profile .ap-cover > img { position:relative; inset:auto; order:1; width:100%; height:auto; aspect-ratio:16/9; }
+html.promo-case body #screen-profile .ap-badges { position:static; order:3; padding:12px 12px 0; }
+html.promo-case body #screen-profile .ap-badges .badge { background:var(--badge-surface-beige,#dddcd9); }
+html.promo-case body #screen-profile .ap-cover-sticky { position:static; order:4; height:auto; display:flex; flex-direction:column; gap:0; padding:12px 12px 0; }
+html.promo-case body #screen-profile .ap-hero { position:static; order:1; padding-top:0; color:var(--text-primary); }
+html.promo-case body #screen-profile .ap-hero .ap-meta { margin-top:12px; color:var(--text-secondary); }
+html.promo-case body #screen-profile .ap-cover-actions { position:static; order:2; gap:8px; margin:12px -12px 0; padding:12px; border-top:1px solid var(--stroke-primary); }
+html.promo-case body #screen-profile .ap-cover-actions .btn { height:32px; min-height:32px; }
+html.promo-case body #screen-profile .ap-cover-actions .ap-follow-btn { background:var(--bg-tab-primary); border-color:transparent; color:var(--text-primary); }
+html.promo-case body #screen-profile .ap-cover-actions .ap-share-btn { background:transparent; border-color:var(--stroke-primary); color:var(--text-primary); }
+html.promo-case body #screen-profile .ap-cover::before {
+  content:''; position:absolute; left:-6px; right:-6px; bottom:0; height:1px;
+  background:var(--stroke-primary); z-index:3; pointer-events:none;
+}
+html.promo-case body #screen-profile .ap-name { font-size:56px; line-height:.9; }
+html.promo-case body #screen-profile .ap-meta { font-size:14px; line-height:1.2; }
+html.promo-case body #screen-profile .ap-badges .badge { height:24px; font-size:12px; }
+html.promo-case body #screen-profile .oc-section { display:block; padding:0; }
+html.promo-case body #screen-profile .oc-sec-label { padding:12px; border-bottom:1px solid var(--stroke-primary); }
+html.promo-case body #screen-profile .oc-sec-label { position:relative; }
+html.promo-case body #screen-profile .oc-sec-label::after {
+  content:''; position:absolute; left:-6px; right:-6px; bottom:-1px; height:1px;
+  background:var(--stroke-primary); z-index:3; pointer-events:none;
+}
+html.promo-case body #screen-profile .oc-sec-title { font-size:18px; line-height:18px; letter-spacing:.09px; }
+html.promo-case body #screen-profile .oc-sec-body { padding:12px; }
+html.promo-case body #screen-profile #pf-works .oc-sec-body { padding:0; }
+html.promo-case body #screen-profile .ap-works { display:flex; flex-direction:column; columns:auto; gap:0; }
+html.promo-case body #screen-profile .promo-work-column { display:contents; box-shadow:none; }
+html.promo-case body #screen-profile .ap-work { display:block; order:var(--promo-order,0); width:100%; padding:12px; }
+html.promo-case body #screen-profile .ap-work-t { font-size:16px; line-height:1.3; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+html.promo-case body #screen-profile .ap-works.is-collapsed .promo-work-more { display:none; }
+html.promo-case body #screen-profile #pf-works:has(.ap-works.is-collapsed .promo-work-more) .ap-works-more-row { display:block !important; padding:12px; }
+html.promo-case body #screen-profile #ap-works-more { width:100%; height:40px; }
+html.promo-case body #screen-profile .pf-details-grid { display:flex; flex-direction:column; gap:20px; padding:0; }
+html.promo-case body #screen-profile .pf-details-main { width:100%; }
+html.promo-case body #screen-profile .pf-portrait-wrap { order:-1; width:100%; max-width:none; height:280px; aspect-ratio:auto; }
+html.promo-case body #screen-profile .pf-details-rows .pf-row { flex-direction:row; gap:16px; }
+html.promo-case body #screen-profile .pf-details-rows .pf-row-label { width:150px; }
+html.promo-case body #screen-profile #pf-cv .oc-sec-body { padding:0; }
+html.promo-case body #screen-profile .ap-cv-group { margin-bottom:12px; }
+html.promo-case body #screen-profile .ap-cv-group h3 { margin:0; padding-inline:12px; line-height:1.2; }
+html.promo-case body #screen-profile .ap-cv-group:first-child h3 { padding-top:12px; }
+html.promo-case body #screen-profile #pf-cv .pf-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; padding:12px; border-bottom:1px solid var(--stroke-primary); align-items:center; }
+html.promo-case body #screen-profile #pf-cv .pf-row-label { width:auto; }
+html.promo-case body #screen-profile #pf-cv .ap-cv-group:last-child .pf-row:last-child { border-bottom:0; }
+}
+
+/* Artists / Mobile 375 — Syno 2956:39247. */
+html.promo-case body.mobile-mode #screen-registry .page { padding:0; }
+html.promo-case body.mobile-mode #screen-registry .registry-head { padding:12px; }
+html.promo-case body.mobile-mode #screen-registry .registry-title { font-size:56px; }
+html.promo-case body.mobile-mode #screen-registry .registry-results { margin:0; }
+html.promo-case body.mobile-mode #screen-registry .registry-facets { order:-1; padding:12px; border-bottom:1px solid var(--stroke-primary); }
+html.promo-case body.mobile-mode #screen-registry .registry-results-head { height:56px; padding:12px; }
+html.promo-case body.mobile-mode #registry-grid { margin:0; }
+html.promo-case body.mobile-mode #registry-grid .artist-card { container-type:inline-size; }
+html.promo-case body.mobile-mode #registry-grid .artist-card-works { height:calc((100cqw - 24px) / var(--promo-cover-ratio)); min-height:0; }
+html.promo-case body.mobile-mode #registry-grid .artist-work-cell { height:100%; min-height:0; box-shadow:none; }
+html.promo-case body.mobile-mode #registry-grid .artist-work { height:100%; align-self:stretch; align-items:center; }
+html.promo-case body.mobile-mode #registry-grid .artist-work-thumb { height:100%; aspect-ratio:auto; object-fit:contain; }
+html.promo-case body.mobile-mode #registry-grid .artist-card-name { font-size:20px; line-height:24px; }
+html.promo-case body.mobile-mode #registry-grid .card-save { top:24px; right:24px; left:auto; opacity:1; }
+
+@media(max-width:1023px) {
+html.promo-case body #screen-registry .page { padding:0; }
+html.promo-case body #screen-registry .registry-head { padding:12px; }
+html.promo-case body #screen-registry .registry-title { font-size:56px; }
+html.promo-case body #screen-registry .registry-results { margin:0; }
+html.promo-case body #screen-registry .registry-facets { order:-1; padding:12px; border-bottom:1px solid var(--stroke-primary); }
+html.promo-case body #screen-registry .registry-results-head { height:56px; padding:12px; }
+html.promo-case body #registry-grid { margin:0; }
+html.promo-case body #registry-grid .artist-card { container-type:inline-size; }
+html.promo-case body #registry-grid .artist-card-works { height:calc((100cqw - 24px) / var(--promo-cover-ratio)); min-height:0; }
+html.promo-case body #registry-grid .artist-work-cell { height:100%; min-height:0; box-shadow:none; }
+html.promo-case body #registry-grid .artist-work { height:100%; align-self:stretch; align-items:center; }
+html.promo-case body #registry-grid .artist-work-thumb { height:100%; aspect-ratio:auto; object-fit:contain; }
+html.promo-case body #registry-grid .artist-card-name { font-size:20px; line-height:24px; }
+html.promo-case body #registry-grid .artist-card-dots { grid-row:2; justify-self:stretch; align-self:auto; justify-content:center; margin:0; padding-bottom:12px; gap:12px; }
+html.promo-case body #registry-grid .artist-card-info { grid-row:3; }
+html.promo-case body #registry-grid .card-save { top:24px; right:24px; left:auto; opacity:1; }
+}
+
+/* Home and Open Call / Mobile 375 — 3893:42450 and 4491:10342. */
+html.promo-case body.mobile-mode #registry-rail .card-cell { width:277px; flex-basis:277px; }
+html.promo-case body.mobile-mode #screen-opencall .oc-title-right { gap:12px; }
+html.promo-case body.mobile-mode #screen-opencall .oc-title-right .oc-phase { order:-1; margin:0 0 8px; align-self:flex-start; }
+html.promo-case body.mobile-mode #screen-opencall .oc-title-lead { font-size:24px; line-height:1.2; color:var(--text-primary); }
+html.promo-case body.mobile-mode #screen-opencall .oc-brush { height:auto; aspect-ratio:339/382; }
+html.promo-case body.mobile-mode #screen-opencall .oc-brush img { display:none; }
+html.promo-case body.mobile-mode #screen-opencall .oc-brush::before,
+html.promo-case body.mobile-mode #screen-opencall .oc-brush::after { display:block; background-image:url('images/open-call-cover.png'); }
+html.promo-case body.mobile-mode #screen-opencall .oc-head:has(+ .oc-datesband),
+html.promo-case body.mobile-mode #screen-opencall .oc-ctaband:not([hidden]) { display:block; }
+
+@media(max-width:1023px) {
+html.promo-case body #registry-rail .card-cell { width:277px; flex-basis:277px; }
+html.promo-case body #screen-opencall .oc-title-right { gap:12px; }
+html.promo-case body #screen-opencall .oc-title-right .oc-phase { order:-1; margin:0 0 8px; align-self:flex-start; }
+html.promo-case body #screen-opencall .oc-title-lead { font-size:24px; line-height:1.2; color:var(--text-primary); }
+html.promo-case body #screen-opencall .oc-brush { height:auto; aspect-ratio:339/382; }
+html.promo-case body #screen-opencall .oc-brush img { display:none; }
+html.promo-case body #screen-opencall .oc-brush::before,
+html.promo-case body #screen-opencall .oc-brush::after { display:block; background-image:url('images/open-call-cover.png'); }
+html.promo-case body #screen-opencall .oc-head:has(+ .oc-datesband),
+html.promo-case body #screen-opencall .oc-ctaband:not([hidden]) { display:block; }
+}
+
+html.promo-case body.mobile-mode .promo-footer .footer-right h3 { font-size:24px; }
+html.promo-case body.mobile-mode .promo-footer .fb-logo svg { width:auto; height:24px; }
+html.promo-case body.mobile-mode.promo-map .header { padding-inline:18px; }
+html.promo-case body.mobile-mode.promo-map .filter-bar .filters-row-wrapper { padding:12px 0; }
+html.promo-case body.mobile-mode.promo-map .filters-row { padding-inline:16px; }
+html.promo-case body.mobile-mode.promo-map:not(.gm-none) .type-mode-chip:not(.active) { display:none; }
+html.promo-case body.mobile-mode.promo-map #map { padding-top:0; }
+html.promo-case body.mobile-mode.promo-map #leaflet-bg { top:0; }
+
+@media(max-width:1023px) {
+html.promo-case body .promo-footer .footer-right h3 { font-size:24px; }
+html.promo-case body .promo-footer .fb-logo svg { width:auto; height:24px; }
+html.promo-case body.promo-map .header { padding-inline:18px; }
+html.promo-case body.promo-map .filter-bar .filters-row-wrapper { padding:12px 0; }
+html.promo-case body.promo-map .filters-row { padding-inline:16px; }
+html.promo-case body.promo-map:not(.gm-none) .type-mode-chip:not(.active) { display:none; }
+html.promo-case body.promo-map #map { padding-top:0; }
+html.promo-case body.promo-map #leaflet-bg { top:0; }
+}

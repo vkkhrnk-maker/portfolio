@@ -1,0 +1,24 @@
+/* Keep the presentation backing distinct from the native Syno UI surface. */
+.case-page--syno-proto .case__hero-image,
+.case-page--syno-proto .case__figure-desktop,
+.case-page--syno-proto .case__slide,
+.case-page--syno-proto .syno-live-prototype { background:var(--surface-media); }
+.case-page--syno-proto .case__hero-image { aspect-ratio:auto; padding:24px; overflow:visible; }
+#case-live-map { scroll-margin-top:90px; }
+.syno-native-demo { width:100%; min-width:0; }
+.syno-native-window { position:relative; width:100%; aspect-ratio:1280/800; overflow:hidden; background:#e4e3e1; }
+.syno-native-window iframe { position:absolute; inset:0 auto auto 0; border:0; display:block; max-width:none; transform-origin:top left; }
+.syno-native-phone { width:100%; max-width:280px; margin-inline:auto; }
+.syno-native-phone .syno-native-window { aspect-ratio:375/812; }
+.syno-native-demo .syno-scroll-controls { min-height:40px; margin-top:10px; }
+.syno-native-demo .syno-scroll-controls .btn { min-width:100px; min-height:40px; }
+.syno-native-demo--map .syno-scroll-controls { justify-content:flex-start; }
+.case-page--syno-proto .syno-native-demo .syno-scroll-controls span { color:var(--text-secondary); }
+@media(max-width:640px) {
+  .case-page--syno-proto .case__hero-image { padding:12px; }
+  .case-page--syno-proto .case__hero-image .syno-native-window { aspect-ratio:375/600; }
+  .case-page--syno-proto .case__slide > .syno-native-demo { height:100%; width:auto; max-width:100%; display:flex; flex-direction:column; align-items:center; }
+  .case-page--syno-proto .case__slide .syno-native-window { height:calc(100% - 50px); width:auto; max-width:100%; flex:none; aspect-ratio:375/812; }
+  .case-page--syno-proto .case__slide .syno-scroll-controls { width:100%; flex:0 0 40px; }
+  .syno-native-demo .syno-scroll-controls span { font-size:11px; }
+}

@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYNO · Privacy Policy — Prototype</title>
+<script>
+// Preserve existing Contact URLs and signed-in state; Privacy Policy keeps its URL.
+if (new URLSearchParams(location.search).get('page') !== 'privacy') {
+  const destination = new URL('proto-about.html', location.href);
+  destination.search = location.search;
+  destination.searchParams.delete('page');
+  destination.hash = 'contact';
+  location.replace(destination.href);
+}
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+  /* ============================================================
+     Syno · Privacy Policy; legacy Contact URLs redirect to About
+     на каркасе статьи Stories: полоса заголовка, рейл с оглавлением и колонка
+     текста по мере чтения. Шапка, слой разделов, меню аккаунта и футер — те
+     же, что в proto-about и proto-home (кит Navigation/Header, Menu Layer ·
+     Mobile, Account Sheet · Mobile, Footer). Файл когда-то склонировали с
+     главной; её стили (афиша, рельсы, Art Map, Stories, колл, офферы) и
+     Leaflet сняты 4 октября 2026 — здесь их нечему показывать.
+     ============================================================ */
+
+  /* --- Fonts: ABC Schengen (local woff2) --- */
+  @font-face { font-family: 'Schengen A'; src: url('./fonts/schengen/A-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schengen A'; src: url('./fonts/schengen/A-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schengen A'; src: url('./fonts/schengen/A-Semibold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schengen A'; src: url('./fonts/schengen/A-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schengen Mono'; src: url('./fonts/schengen/AMono-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schengen Core'; src: url('./fonts/schengen/Core-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Schengen Core'; src: url('./fonts/schengen/Core-Bold.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+
+  :root {
+    /* Шкала кегля — 375 / 1280 / 1920 (14 сентября 2026).
+       Роль несёт переменную, число руками не ставится: иначе на 1920 мета и body
+       не растут, а заголовки растут, и лестница разъезжается. Пары кегль/межстрочный
+       и полная таблица — typography-handoff-sep2026.md. */
+    --fs-h1: 84px;
+    --fs-h2: 68px;
+    --fs-h3: 48px;
+    --fs-subtitle: 28px;
+    --fs-heading-h5: 20px;
+    --fs-read-body: 20px;
+    --fs-body-m: 16px;
+    --fs-caption-m: 14px;
+    --fs-caption-s: 12px;
+    --fs-caption-s-upper: 12px;
+    --fs-button-lg: 18px;
+    --bg-primary: #e5e4e2;
+    --bg-card: #ffffff;
+    --bg-tab-primary: #c7e0f2;
+    --bg-tab-hover: #b8d3e8;
+    --bg-hover: #dcdbd9;
+    --bg-beige: #dcdbd9;
+    --text-primary: #1c1c1c;
+    --text-secondary: #525252;
+    --text-muted: #aeadaa;
+    --text-link: #1f6290;
+    --stroke-primary: #aeadaa;
+    --stroke-on-tint: rgba(255,255,255,0.45);
+    --button-tab-active-fill: #3378a9;
+    --radius-4: 4px;
+    --radius-6: 8px;   /* малый радиус контрола один — 8 (31 авг 2026) */
+    --radius-8: 8px;
+    --radius-12: 12px;
+    --radius-16: 16px;
+    --radius-control-lg: 12px; /* крупная кнопка 108 и плашка оффера — 14 сен 2026 */
+    --radius-24: 24px;
+    --radius-pill: 9999px;
+    /* Зазор «текст → кнопка под ним» — кит-роль space/content-button-gap.
+       Значение одно на всю страницу: About, полоса колла, claim. На 375
+       ступень вниз (24) — воздух масштабируется вместе с колонкой. */
+    --gap-content-button: 24px;
+    /* Поле ввода узнаётся по границе ≥ 3:1, плейсхолдер — текст ≥ 4,5:1
+       (кит Input/Stroke/Default → Grey/600 и Input/Text/Placeholder → black-64,
+       ПРАВКА 35, 3 октября 2026). Обводки кнопок и разделители не темнеют. */
+    --input-stroke: var(--stroke-primary); /* = Stroke/Primary; Grey/600 по ПРАВКЕ 35 отменён 5 октября */
+    --input-placeholder: rgba(0, 0, 0, 0.64);
+    /* Лицо человека несёт линию 1 px внутрь — с фото и без (кит Avatar/Ring, 29 сентября 2026). */
+    --avatar-ring: rgba(0, 0, 0, 0.12);
+    /* Состояния Input with Action — Error и Success, цвета сняты с кита (1480:580). */
+    --field-error: #dc2626;
+    --field-error-text: #b91c1c;
+    --field-error-bg: #fcebeb;
+    --field-success: #2f9e44;
+    --field-success-text: #2e8f3e;
+    --field-success-bg: #eefceb;
+  }
+  [hidden] { display: none !important; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body {
+    font-family: 'Schengen A', -apple-system, sans-serif;
+    background: var(--bg-primary); color: var(--text-primary);
+    font-size: var(--fs-body-m); line-height: 1.5;
+  }
+  img { display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+  :is(button, a, input):focus-visible { outline: 2px solid var(--button-tab-active-fill); outline-offset: 2px; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  .page { width: 100%; padding: 20px; }
+  .app { width: 100%; position: relative; }
+
+  /* Полоса каркаса: линия шире вертикальных обводок на 6 с каждой стороны —
+     endcap-«хвостики» кита Divider. */
+  .band { border-bottom: 1px solid var(--stroke-primary); padding: 0 6px; }
+  .band-in { border-left: 1px solid var(--stroke-primary); border-right: 1px solid var(--stroke-primary); }
+  .band:first-of-type { border-top: 1px solid var(--stroke-primary); }
+
+  /* ============ Wireframe bar (не часть продукта) ============ */
+  .wireframe-bar {
+    position: sticky; top: 0; z-index: 600; height: 40px;
+    background: #1c1c1c; color: #cfcfcf;
+    display: flex; align-items: center; gap: 20px; padding: 0 16px;
+    font-size: 11px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+  }
+  .wireframe-bar > * { flex-shrink: 0; }
+  .wireframe-bar::-webkit-scrollbar { display: none; }
+  .wf-label { text-transform: uppercase; letter-spacing: 0.6px; color: #888; font-size: 10px; }
+  .wf-spacer { flex: 1; }
+  .wf-toggle { cursor: pointer; color: #cfcfcf; user-select: none; }
+  .wf-toggle b { color: #fff; }
+  .wf-toggle:hover { color: #fff; }
+  .wf-links { display: flex; gap: 12px; }
+  .wf-links a { color: #888; }
+  .wf-links a:hover { color: #fff; }
+
+  /* ============ Header ============ */
+  .site-header .band-in { position: relative; display: flex; align-items: center; gap: 16px; height: 58px; padding: 0 12px; }
+  .logo { display: inline-flex; align-items: center; line-height: 0; cursor: pointer; color: var(--text-primary); flex: 0 0 auto; }
+  .logo svg { height: 34px; width: auto; display: block; }
+  /* Поле поиска — кит Search: резиновое от 240 без потолка (потолок 640 снят
+     17 сентября 2026), граница поля Input/Stroke/Default, фокус — синяя обводка
+     2 внутрь. Сам поиск — отдельная волна, здесь поле — заглушка. */
+  .hdr-search {
+    flex: 1 1 auto; min-width: 240px;
+    display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 12px;
+    border: 1px solid var(--input-stroke); border-radius: var(--radius-6);
+    background: var(--bg-primary); color: var(--text-secondary);
+  }
+  .hdr-search:focus-within { border-color: var(--button-tab-active-fill); outline: 1px solid var(--button-tab-active-fill); outline-offset: -2px; }
+  .hdr-search .material-icons { font-size: 16px; color: var(--text-secondary); }
+  .hdr-search input { border: none; outline: none; background: transparent; width: 100%; font-family: inherit; font-size: var(--fs-caption-m); color: var(--text-primary); }
+  .hdr-search input::placeholder { color: var(--input-placeholder); }
+  .hdr-nav { display: flex; align-items: center; gap: 16px; margin-left: auto; }
+  .hdr-nav a { position: relative; display: inline-flex; align-items: center; font-size: var(--fs-caption-m); color: var(--text-secondary); line-height: 32px; white-space: nowrap; }
+  .hdr-nav a::after, .btn-login::after, .ctx-switch::after { content: ''; position: absolute; inset: -4px 0; }
+  .hdr-nav a:hover, .hdr-nav a:focus-visible { color: var(--text-primary); box-shadow: inset 0 -1px 0 var(--text-primary); }
+  /* Log in — кит Button · Primary · Small: 32, поля 12 */
+  .btn-login { position: relative; height: 32px; padding: 0 12px; border: none; border-radius: var(--radius-6); background: var(--button-tab-active-fill); color: #fff; font-size: var(--fs-caption-m); }
+  .btn-login:hover { filter: brightness(0.94); }
+  .btn-login:active { scale: 0.96; }
+
+  /* ============ Мобильная шапка ============
+     На 375 в шапке — лупа · чип (у вошедшего) · бургер, именно в этом
+     порядке, бургер последним; Log in в шапке нет — гостю вход крупной
+     кнопкой в тёмном слое разделов (кит Navigation/Header · 375). */
+  .hdr-icon { display: none; width: 32px; height: 32px; align-items: center; justify-content: center;
+    border: 1px solid var(--stroke-primary); border-radius: var(--radius-6);
+    background: var(--bg-primary); color: var(--text-primary); }
+  .hdr-icon .material-icons { font-size: 16px; }
+  .hdr-icon:hover { background: rgba(0,0,0,0.04); }
+
+  /* ============ Чип контекста и меню аккаунта (вошедший) ============
+     Кит Navigation/Context Switcher: вместо Log in — чип «лицо 20 · имя ·
+     шеврон» (Outline, высота ряда 32), на 375 — лицо и шеврон. Меню под
+     чипом — кит Menu 272 с полями 8: шапка Avatar/Label (лицо 40, имя,
+     почта), My Syno и Favourites, ниже действия. На 375 то же содержимое
+     уходит в лист снизу (кит Mobile Sheet): ручка, шапка с крестиком,
+     строки 40. Лицо — круг с линией 1 px внутрь. Как в proto-about. */
+  .ctx-switch { display: none; position: relative; align-items: center; gap: 6px; height: 32px; padding: 0 11px 0 5px;
+    border: 1px solid var(--stroke-primary); border-radius: var(--radius-8);
+    background: var(--bg-primary); color: var(--text-primary); font-size: var(--fs-caption-m); white-space: nowrap; }
+  .ctx-switch:hover { background: rgba(0,0,0,0.04); }
+  .ctx-name { max-width: 240px; overflow: hidden; text-overflow: ellipsis; }
+  .ctx-chev { font-size: 16px; }
+  .ctx-avatar { display: block; flex: 0 0 auto; width: 20px; height: 20px; border-radius: var(--radius-pill);
+    outline: 1px solid var(--avatar-ring); outline-offset: -1px; }
+  .ctx-avatar.lg { width: 40px; height: 40px; }
+  body.auth-in .btn-login { display: none; }
+  body.auth-in .ctx-switch { display: inline-flex; }
+
+  .ctx-menu { position: absolute; z-index: 500; width: 272px; padding: 8px;
+    background: var(--bg-primary); border: 1px solid var(--stroke-primary); border-radius: var(--radius-8); }
+  .ctx-handle, .ctx-close { display: none; }
+  .ctx-identity { display: flex; align-items: center; gap: 12px; padding: 8px; }
+  .ctx-id { display: flex; flex-direction: column; min-width: 0; }
+  .ctx-id-name { font-size: var(--fs-body-m); line-height: 1.3; }
+  .ctx-mail { font-size: var(--fs-caption-m); line-height: 1.2; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ctx-item { display: flex; align-items: center; width: 100%; height: 32px; padding: 0 8px;
+    border: 0; border-radius: var(--radius-8); background: transparent;
+    font-size: var(--fs-caption-m); line-height: 1.2; color: var(--text-primary); text-align: left; }
+  .ctx-item:hover { background: var(--bg-hover); }
+  /* Линия делит поверхность: во всю ширину меню и 8 сверху и снизу. */
+  .ctx-sep { height: 1px; margin: 8px -8px; background: var(--stroke-primary); }
+  .ctx-scrim { position: fixed; inset: 0; z-index: 900; background: rgba(0, 0, 0, 0.7); }
+  body.sheet-open, body.mlayer-open { overflow: hidden; }
+
+  /* ============ Слой разделов на 375 ============
+     Кит Navigation/Menu Layer · Mobile (как в proto-registry): тёмный экран
+     на каркасе страницы — рамка 12, жёлоб 6, линии с хвостиками; своя шапка
+     поверх шапки страницы (марка, лупа, чип у вошедшего, крестик); разделы
+     Core 48 светло-голубым по центру; у гостя — крупная кнопка Log in с
+     подписью; внизу Privacy Policy и Cookies. Единственная тёмная поверхность. */
+  .mlayer {
+    --mlayer-line: rgba(255, 255, 255, 0.24);
+    position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column;
+    padding: 12px; background: #1c1c1c; color: #fff; overflow-y: auto;
+  }
+  .mlayer-frame { flex: 1 1 auto; display: flex; flex-direction: column; margin: 0 6px;
+    border-left: 1px solid var(--mlayer-line); border-right: 1px solid var(--mlayer-line); }
+  .mlayer-head, .mlayer-cta, .mlayer-foot { margin: 0 -7px; padding-left: 19px; padding-right: 19px; }
+  .mlayer-head { display: flex; align-items: center; gap: 8px; min-height: 58px;
+    border-top: 1px solid var(--mlayer-line); border-bottom: 1px solid var(--mlayer-line); }
+  .mlayer-logo { display: inline-flex; line-height: 0; color: #fff; margin-right: auto; }
+  .mlayer-logo svg { height: 24px; width: auto; display: block; }
+  .mlayer-icon, .mlayer-close, .mlayer-chip {
+    display: inline-flex; height: 32px; align-items: center; justify-content: center;
+    background: transparent; color: #fff; border: 1px solid transparent; border-radius: var(--radius-8);
+  }
+  .mlayer-icon, .mlayer-close { width: 32px; }
+  .mlayer-close, .mlayer-chip { border-color: var(--mlayer-line); }
+  .mlayer-icon .material-icons, .mlayer-close .material-icons, .mlayer-chip .material-icons { font-size: 16px; }
+  .mlayer-chip { display: none; gap: 6px; padding: 0 11px 0 5px; }
+  body.auth-in .mlayer-chip { display: inline-flex; }
+  .mlayer .ctx-avatar { outline-color: rgba(255, 255, 255, 0.12); } /* линия лица на тёмном — белая 12 % */
+  .mlayer-nav { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 40px 12px; }
+  .mlayer-item { font-family: 'Schengen Core', sans-serif; font-weight: 500; font-size: 48px; line-height: 1.15;
+    color: #b0d2ea; text-align: center; }
+  .mlayer-item:hover, .mlayer-item:focus-visible { color: #fff; }
+  .mlayer-cta { border-top: 1px solid var(--mlayer-line); padding-top: 12px; padding-bottom: 12px; }
+  body.auth-in .mlayer-cta { display: none; }
+  .mlayer-foot { display: flex; justify-content: center; gap: 24px; border-top: 1px solid var(--mlayer-line); padding-top: 12px; padding-bottom: 12px; }
+  .mlayer-foot-link { font-size: 14px; line-height: 1.2; color: #989592; }
+  .mlayer-foot-link:hover { color: #fff; }
+  /* Крупная кнопка — кит Button · Size=Display: 80, радиус 12, лейбл 16
+     обычным регистром, подпись 12 второй строкой — подпись есть всегда. */
+  .btn-xl {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; min-height: 80px; padding: 20px 48px; border: none; border-radius: var(--radius-12);
+    background: var(--button-tab-active-fill); color: #fff; font-size: 16px; line-height: 1;
+  }
+  .btn-xl:hover { background: #2a6489; }
+  .btn-xl-sub { font-size: 12px; line-height: 1.2; color: rgba(255, 255, 255, 0.82); }
+
+  /* ============ Footer — кит Footer (4610:152), как в proto-about ============
+     Гостю — полный: четыре колонки на сетке страницы (1228 / 4 = 307 встык,
+     поля 12 внутри колонки) — Explore · Take part · Syno (соцсети словами
+     здесь) · подписка; ниже служебная строка: марка SYNO 143×34 (101×24 на 375),
+     © 2026, город, справа правовые ссылки. Вошедшему — компактный: только
+     служебная строка без марки, к правовым ссылкам добавляется Contact
+     (колонки Syno у него нет). Отступы ПРАВКИ 22: имя колонки → ссылки 12,
+     заголовок подписки → текст 12, текст → поле 24 (на 1920 — 16 / 16 / 24).
+     Заливки нет — футер на фоне страницы, вход 20 (была белая заливка и 40).
+     Низ страницы закрывает линия полосы — `Divider · page bottom` каркаса. */
+  .band-footer .band-in { padding: 20px 0 0; }
+  .footer-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-bottom: 20px; }
+  .footer-cols > * { min-width: 0; padding: 0 12px; }
+  /* Имя колонки стоит на 8 ниже заголовка подписки — так в ките на десктопе. */
+  .footer-nav { padding-top: 8px; }
+  /* Имя колонки — Label/Group: 14 капсом, трекинг 0,5 % */
+  .footer-h { font-size: var(--fs-caption-m); line-height: 1.2; font-weight: 400; letter-spacing: .005em; text-transform: uppercase; color: var(--text-primary); margin: 0 0 12px; }
+  .footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .footer-nav a { font-size: var(--fs-body-m); line-height: 1.3; }
+  .footer-nav a:hover, .footer-nav a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+  .footer-sub-title { font-size: var(--fs-subtitle); line-height: 1.2; font-weight: 400; margin: 0 0 12px; }
+  .footer-sub-text { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-secondary); margin: 0 0 24px; }
+  /* Поле подписки — кит Input with Action: 40 / 40 / 48, кнопка внутри — ступень
+     ниже (32, на 1920 — 40), поле минус кнопка = 4 со всех сторон; текст с 12. */
+  .subscribe-field { display: flex; align-items: center; height: 40px; padding-right: 4px;
+    border: 1px solid var(--input-stroke); border-radius: var(--radius-8); background: var(--bg-primary); }
+  .subscribe-field:hover { border-color: var(--button-tab-active-fill); }
+  .subscribe-field:focus-within { border-color: var(--button-tab-active-fill); outline: 1px solid var(--button-tab-active-fill); outline-offset: -2px; }
+  .subscribe-field input { flex: 1; min-width: 0; height: 100%; border: none; outline: none; background: transparent; padding: 0 12px; font-family: inherit; font-size: var(--fs-body-m); color: var(--text-primary); }
+  .subscribe-field input::placeholder { color: var(--input-placeholder); }
+  /* Кнопка внутри поля всегда живая — disabled в системе означает только
+     loading, пустой адрес ловит валидация на нажатии. */
+  .subscribe-field button { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex: 0 0 auto;
+    border: none; border-radius: var(--radius-4); background: var(--button-tab-active-fill); color: #fff; }
+  .subscribe-field button .material-icons { font-size: 16px; }
+  .subscribe-field button:hover { filter: brightness(0.94); }
+  /* Подписка подтверждается на месте, а не тостом (15 сентября 2026): поле
+     в состоянии Success кита — зелёное, с введённой почтой и галочкой, под ним
+     строка подтверждения, согласие уходит. Ошибка ввода — состояние Error. */
+  .subscribe-field.is-error, .subscribe-field.is-error:hover, .subscribe-field.is-error:focus-within { border-color: var(--field-error); outline-color: var(--field-error); background: var(--field-error-bg); }
+  .subscribe-field.is-error input { color: var(--field-error-text); }
+  .subscribe-field.is-error button { background: var(--field-error); }
+  .subscribe-field.is-done, .subscribe-field.is-done:hover, .subscribe-field.is-done:focus-within { border-color: var(--field-success); outline: 0; background: var(--field-success-bg); }
+  .subscribe-field.is-done input { color: var(--field-success-text); }
+  .subscribe-field.is-done button { background: var(--field-success); pointer-events: none; }
+  .nl-msg { margin: 8px 0 0; font-size: var(--fs-caption-m); line-height: 1.2; }
+  .nl-msg.is-error { color: var(--field-error-text); }
+  .nl-msg.is-done { color: var(--field-success-text); }
+  .nl-consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; font-size: var(--fs-caption-s); line-height: 1.2; color: var(--text-secondary); }
+  .nl-consent input { flex: 0 0 auto; width: 16px; height: 16px; margin: 0; accent-color: var(--button-tab-active-fill); }
+  .nl-consent a { color: var(--text-primary); text-decoration: underline; text-underline-offset: 2px; }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 12px;
+    border-top: 1px solid var(--stroke-primary); font-size: var(--fs-caption-s); line-height: 1.2; }
+  .footer-meta { display: flex; align-items: center; gap: 20px; }
+  .fb-logo { display: inline-flex; line-height: 0; color: var(--text-primary); }
+  .fb-logo svg { height: 34px; width: auto; display: block; }
+  .fb-copy { display: flex; gap: 8px; color: var(--text-secondary); }
+  .fb-links { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fb-links a:hover, .fb-links a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+  .fb-contact { display: none; }
+  body.auth-in .band-footer .band-in { padding-top: 0; }
+  body.auth-in .footer-cols, body.auth-in .fb-logo { display: none; }
+  body.auth-in .footer-bottom { border-top: 0; }
+  body.auth-in .fb-contact { display: inline; }
+
+  /* ============ Toast ============ */
+  .app-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--text-primary); color: var(--bg-primary);
+    padding: 12px 20px; border-radius: var(--radius-6);
+    font-size: var(--fs-caption-m); z-index: 1000; opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none; max-width: 90vw; text-align: center;
+  }
+  .app-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Шапка, рамка страницы и меню аккаунта — ступенями по трём макетам
+     (16 сентября 2026): до 1023 — 375, 1024–1919 — 1280, с 1920 — 1920.
+     Порог шапки 1100 и рамка 12 только до 700 сняты: на 1024 поле поиска
+     (от 240), пять пунктов и вход помещаются в ряд, а на 768 шапка уже
+     мобильная — промежуточной раскладки нет. */
+  @media (max-width: 1023px) {
+    .page { padding: 12px; }
+    /* Шапка 375: полоса 56 (12 + контрол 32 + 12), марка 101×24 */
+    .site-header .band-in { height: 56px; }
+    .logo svg { height: 24px; }
+    .hdr-search { display: none; }
+    .hdr-nav a { display: none; }
+    .hdr-icon { display: inline-flex; }
+    .hdr-nav { gap: 8px; }
+    /* В мобильной шапке кнопки Log in нет: вход живёт крупной кнопкой
+       внизу тёмного слоя разделов — одна дверь, а не две. */
+    .btn-login { display: none; }
+    .ctx-name { display: none; }
+    /* Меню аккаунта — лист снизу (кит Navigation/Account Sheet · Mobile):
+       углы прямые, линия сверху, ручка 36×4, шапка «лицо 40 · имя и почта ·
+       крестик Outline 32», строки Menu Item 40 с текстом 16 от поля 12. */
+    .ctx-menu { position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 1000;
+      width: auto; max-height: calc(100vh - 56px); overflow-y: auto; padding: 0 4px 8px;
+      border: 0; border-top: 1px solid var(--stroke-primary); border-radius: 0; }
+    .ctx-handle { display: block; width: 36px; height: 4px; margin: 8px auto 0; border-radius: var(--radius-pill); background: var(--stroke-primary); }
+    .ctx-identity { padding: 8px 8px 20px; }
+    .ctx-close { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 32px; height: 32px; margin-left: auto;
+      border: 1px solid var(--stroke-primary); border-radius: var(--radius-8); background: var(--bg-primary); color: var(--text-primary); }
+    .ctx-close .material-icons { font-size: 16px; }
+    .ctx-sep { display: none; }
+    .ctx-item { height: 40px; font-size: 16px; }
+  }
+  /* Футер 375 (кит Footer · Mobile): Explore и Take part парой через 20,
+     Syno под ними, подписка последней (было первой); группы через 32.
+     Служебная строка — марка слева, © и город справа, правовые ссылки по
+     центру строкой ниже; у компактного обе строки по центру. */
+  @media (max-width: 1023px) {
+    .footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 20px; row-gap: 32px; }
+    .footer-nav { padding-top: 0; }
+    .nav-org, .footer-right { grid-column: 1 / -1; }
+    .footer-bottom { flex-direction: column; align-items: stretch; gap: 20px; padding: 20px 12px; }
+    .footer-meta { justify-content: space-between; }
+    .fb-logo svg { height: 24px; }
+    .fb-copy { gap: 12px; }
+    .fb-links { justify-content: center; gap: 8px 24px; }
+    body.auth-in .footer-bottom { padding: 12px; }
+    body.auth-in .footer-meta { justify-content: center; }
+  }
+  /* Футер на 1920 — значения макета About · Desktop 1920 (кегли растут токенами) */
+  @media (min-width: 1920px) {
+    .footer-h { margin-bottom: 16px; }
+    .footer-nav ul { gap: 12px; }
+    .footer-sub-title { margin-bottom: 16px; }
+    .subscribe-field { height: 48px; border-radius: var(--radius-12); }
+    .subscribe-field button { width: 40px; height: 40px; border-radius: var(--radius-8); }
+    .subscribe-field button .material-icons { font-size: 20px; }
+    .nl-consent { gap: 16px; margin-top: 16px; }
+  }
+  /* Шапка и меню на 1920: полоса 64, контролы 40, лицо в чипе 24
+     (size/avatar-control), радиус контрола 12; меню растёт по почте. */
+  @media (min-width: 1920px) {
+    .site-header .band-in { height: 64px; }
+    .hdr-search { height: 40px; border-radius: var(--radius-12); }
+    .hdr-search .material-icons { font-size: 18px; }
+    .hdr-nav a { line-height: 40px; }
+    .btn-login { height: 40px; padding: 0 16px; border-radius: var(--radius-12); }
+    .ctx-switch { height: 40px; gap: 8px; padding: 0 15px 0 7px; border-radius: var(--radius-12); }
+    .ctx-avatar { width: 24px; height: 24px; }
+    .ctx-avatar.lg { width: 40px; height: 40px; }
+    .ctx-chev { font-size: 20px; }
+    .ctx-menu { width: max-content; min-width: 272px; border-radius: var(--radius-12); }
+    .ctx-item { height: 40px; border-radius: var(--radius-12); }
+  }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* ============ Privacy Policy ============
+     Каркас взят с дев-сборки stageweb.org/privacy-policy/ и сведён с нашей
+     статьёй: слева рейл с оглавлением, справа колонка текста. Сетка та же,
+     что в Stories: 25% + линия + остаток. Ритм — те же роли, что в статье
+     (сверено с Syno 25 сентября 2026): вход и низ колонки и шаг между
+     разделами — space/content-block-gap 40 / 48 / 28, абзац к абзацу —
+     space/paragraph-gap 24 / 24 / 16, мера чтения — size/read-measure 760 / 912,
+     брейкпоинты — ступенями ≤1023 / 1024–1919 / ≥1920. */
+  :root { --blk: 40px; --par: 24px; --read-measure: 760px; --tlead: 20px; --ccg: 20px; --stack: 8px; --rowx: 12px; --ctl: 40px; --key: 120px; }
+  @media (min-width: 1920px) { :root { --blk: 48px; --read-measure: 912px; --tlead: 24px; --ccg: 24px; --stack: 12px; --rowx: 16px; --ctl: 48px; --key: 150px; } }
+  @media (max-width: 1023px) { :root { --blk: 28px; --par: 16px; --read-measure: 100%; } }
+  .band-page .band-in { padding: 0; display: block; }
+  .pg-grid { display: grid; grid-template-columns: 25% 1px minmax(0, 1fr); }
+  .pg-rule { background: var(--stroke-primary); }
+  /* Рейл — кит Editorial / Rail · Block (сверено со статьёй Syno 4011:139527,
+     30 сентября 2026): вход сверху — шаг блоков, поля 12; подпись блока
+     Label/Section, сразу под ней кит Navigation / Scroll-spy со своим входом 8. */
+  .pg-rail { padding: var(--blk) 12px 12px; position: sticky; top: 0; align-self: start; }
+  .pg-rail-label {
+    font-family: 'Schengen Core', sans-serif; font-weight: 500;
+    font-size: var(--fs-heading-h5); line-height: 1; letter-spacing: .005em; text-transform: uppercase;
+  }
+  /* Текст колонки стоит по мере чтения по центру колонки, как в статье: мера
+     760 / 912 при колонке 919 / 1400 даёт поле 80 / 244 с обеих сторон. */
+  .pg-main { padding: var(--blk) 12px; }
+  /* Заголовок страницы — кит Page Header (как полоса заголовка листинга Stories
+     в Syno): вход 24 / 28, на 1920 — 28 / 28, на 375 — 20 / 20; заголовок Core
+     с обрезкой по прописной, как в макетах. */
+  .band-pagehead .band-in { padding: 24px 12px 28px; }
+  @media (min-width: 1920px) { .band-pagehead .band-in { padding-top: 28px; } }
+  .pg-h1 {
+    font-family: 'Schengen Core', sans-serif; font-weight: 500;
+    font-size: var(--fs-h1); line-height: .9; letter-spacing: 0;
+    text-box: trim-both cap alphabetic;
+  }
+  /* Подпись под дисплейным заголовком 84 — space/text-title-lead-gap 20 / 24. */
+  .band-pagehead .pg-updated { margin: var(--tlead) 0 0; }
+  /* Оглавление — кит Navigation / Scroll-spy, как в статье: вход 8, пункты
+     через 4, пункт 40 / 48 с полями 8 и space/row/padding-x 12 / 16. */
+  .pg-spy {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 8px 12px 8px 2px; border-left: 1px solid var(--stroke-primary);
+  }
+  .pg-spy a {
+    position: relative; display: flex; align-items: center; min-height: var(--ctl);
+    padding: 8px var(--rowx); color: var(--text-secondary);
+    font-size: var(--fs-caption-m); line-height: 1.2;
+  }
+  .pg-spy a:hover, .pg-spy a:focus-visible { color: var(--text-link); }
+  .pg-spy a.is-current { color: var(--text-primary); }
+  .pg-spy a.is-current::before {
+    content: ''; position: absolute; top: 0; bottom: 0; left: -3px;
+    width: 2px; background: var(--text-primary);
+  }
+  /* Мера чтения держат сами тексты, а не обёртка: строки «подпись → значение»
+     идут во всю ширину колонки, иначе их линии обрываются посреди полосы. */
+  .pg-measure, .pg-sec > p, .pg-sec > ul, .pg-sec > h2, .pg-lead, .pg-main > .pg-updated {
+    max-width: var(--read-measure); margin-left: auto; margin-right: auto;
+  }
+  .pg-updated { font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-m); letter-spacing: -.02em; color: var(--text-secondary); margin-bottom: var(--par); }
+  .pg-lead p + p { margin-top: var(--par); }
+  .pg-lead p, .pg-sec p, .pg-measure > p { font-size: var(--fs-read-body); line-height: 1.3; }
+  .pg-measure > p + p { margin-top: var(--par); }
+  .pg-sec { margin-top: var(--blk); }
+  /* Заголовок раздела — Heading/H3 48 / 56 / 32 (как раздел статьи), до текста — абзац. */
+  .pg-sec h2 {
+    font-family: 'Schengen Core', sans-serif; font-weight: 500;
+    font-size: var(--fs-h3); line-height: .9; margin-bottom: var(--par);
+  }
+  .pg-sec p + p, .pg-sec ul + p, .pg-sec p + ul { margin-top: var(--par); }
+  .pg-sec ul { list-style: none; }
+  .pg-sec li { font-size: var(--fs-read-body); line-height: 1.3; padding-left: 20px; position: relative; }
+  .pg-sec li + li { margin-top: 12px; }
+  .pg-sec li::before { content: '·'; position: absolute; left: 6px; color: var(--text-secondary); }
+  /* Строка «подпись → значение» — кит Detail Row (как Visit на странице
+     организации): по вертикали 12, подпись 120 Body/M/Mono серым, зазор
+     space/content-columns-gap 20 / 24, значение — моно-ссылка (канон контактов
+     11 сентября). Линия строки — во всю колонку, содержимое — по мере текста. */
+  .pg-rows { margin: var(--par) -12px 0; }
+  .pg-row {
+    display: grid; grid-template-columns: var(--key) minmax(0, 1fr); column-gap: var(--ccg);
+    padding: 12px max(12px, calc((100% - var(--read-measure)) / 2));
+    border-top: 1px solid var(--stroke-primary);
+  }
+  .pg-row:last-child { border-bottom: 1px solid var(--stroke-primary); }
+  .pg-row-k, .pg-row-v { font-family: 'Schengen Mono', monospace; font-size: var(--fs-body-m); line-height: 1.3; letter-spacing: -.02em; }
+  .pg-row-k { color: var(--text-secondary); }
+  a.pg-row-v { text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: currentColor; text-underline-offset: 3px; }
+  a.pg-row-v:hover, a.pg-row-v:focus-visible { color: var(--text-link); }
+  .pg-note { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-secondary); margin-top: 12px; }
+  .pg-hide { display: none !important; }
+
+  /* Оглавления на мобильной странице нет — то же правило, что у статьи
+     (13 сентября 2026). На 375 текст стоит в полях 12, шаг — 28. */
+  @media (max-width: 1023px) {
+    .pg-grid { grid-template-columns: 1fr; }
+    .pg-rule { display: none; }
+    .pg-rail { display: none; }
+    .band-pagehead .band-in { padding: 20px 12px; }
+    /* На 375 подпись встаёт над значением — моно в колонке 120 оставляло бы
+       значению меньше 180; строки в стопке — 8 (space/text-title-caption-gap). */
+    .pg-row { grid-template-columns: 1fr; row-gap: var(--stack); padding: 12px; }
+  }
+
+/* Шкала кегля на 375: растут только заголовки и наборный текст, мета и body те же */
+@media (max-width: 1023px) {
+  :root {
+    --fs-h1: 56px;
+    --fs-h2: 48px;
+    --fs-h3: 32px;
+    --fs-subtitle: 24px;
+    --fs-heading-h5: 18px;
+    --fs-read-body: 16px;
+  }
+}
+
+/* Шкала кегля на 1920: мелкое прибавляет больше крупного (14→18 это +29 %, 84→96 это +14 %) */
+@media (min-width: 1920px) {
+  :root {
+    --fs-h1: 96px;
+    --fs-h2: 80px;
+    --fs-h3: 56px;
+    --fs-subtitle: 32px;
+    --fs-heading-h5: 24px;
+    --fs-read-body: 24px;
+    --fs-body-m: 20px;
+    --fs-caption-m: 18px;
+    --fs-caption-s: 16px;
+    --fs-caption-s-upper: 16px;
+  }
+}
+
+  /* Заглушка лица человека — градиент, не буква (22 сентября 2026, заказчица по
+     Cosmos). Имя аккаунта необязательно (Welcome несёт Skip for now) — инициалы там,
+     где имени нет, врали. Градиент детерминирован по аккаунту, палитра — бренд-рампа:
+     пятно не вводит цвета, которого нет в системе. У страницы организации заглушка
+     своя — знак здания. Блок стоит последним: у носителей лица свой background. */
+  /* Заглушка лица — фрагмент кисти Syno, один из восьми (23 сентября 2026, выбор заказчицы;
+     сменил плоский голубой и градиенты). Номер выводится из аккаунта — почта или имя, —
+     поэтому лицо одно на всех поверхностях. Под картинкой — тон бумаги, пока она грузится.
+     Кит: стили Avatar/Placeholder 1…8. */
+  .av-g1 { background: #e1dbcf url('./photos/avatar-placeholder-1.jpg') center / cover no-repeat; }
+  .av-g2 { background: #e1dbcf url('./photos/avatar-placeholder-2.jpg') center / cover no-repeat; }
+  .av-g3 { background: #e1dbcf url('./photos/avatar-placeholder-3.jpg') center / cover no-repeat; }
+  .av-g4 { background: #e1dbcf url('./photos/avatar-placeholder-4.jpg') center / cover no-repeat; }
+  .av-g5 { background: #e1dbcf url('./photos/avatar-placeholder-5.jpg') center / cover no-repeat; }
+  .av-g6 { background: #e1dbcf url('./photos/avatar-placeholder-6.jpg') center / cover no-repeat; }
+  .av-g7 { background: #e1dbcf url('./photos/avatar-placeholder-7.jpg') center / cover no-repeat; }
+  .av-g8 { background: #e1dbcf url('./photos/avatar-placeholder-8.jpg') center / cover no-repeat; }
+  /* Линия лица — тонкая чёрная 12 % внутрь, с фото и без (кит Avatar/Ring, 29 сентября 2026;
+     белое кольцо снято — оно читалось «выбрано»). Задана у .ctx-avatar в блоке шапки. */
+</style>
+</head>
+<body>
+
+<div class="wireframe-bar">
+  <span class="wf-label">SYNO · Служебные страницы</span>
+  <span id="wf-page">Page: <b>Privacy Policy</b></span>
+  <span class="wf-toggle" id="wf-auth">Auth: <b>guest</b></span>
+  <div class="wf-spacer"></div>
+  <div class="wf-links">
+    <a href="proto-home.html">Home</a>
+    <a href="proto-v2.html">Art Map</a>
+    <a href="proto-registry.html">Registry</a>
+    <a href="proto-stories.html">Stories</a>
+    <a href="proto-about.html">About</a>
+  </div>
+</div>
+
+<div class="page">
+  <div class="app">
+
+    <!-- ============ Header ============ -->
+    <div class="band site-header">
+      <div class="band-in">
+        <a class="logo" href="proto-home.html" aria-label="SYNO"><svg width="143" height="34" viewBox="0 0 143 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+          <path d="M116.656 34C114.942 34 113.513 33.7571 112.37 33.2714C111.227 32.7857 110.37 32.0571 109.799 31.0857C109.227 30.1143 108.941 28.9 108.941 27.4429V6.55715C108.941 5.1 109.227 3.88572 109.799 2.91429C110.37 1.94286 111.227 1.21429 112.37 0.728571C113.513 0.242857 114.942 0 116.656 0H135.285C137 0 138.428 0.242857 139.571 0.728571C140.752 1.21429 141.61 1.94286 142.143 2.91429C142.714 3.88572 143 5.1 143 6.55715V27.4429C143 28.9 142.714 30.1143 142.143 31.0857C141.61 32.0571 140.752 32.7857 139.571 33.2714C138.428 33.7571 137 34 135.285 34H116.656ZM125.971 27.6857C126.428 27.6857 126.809 27.6048 127.114 27.4429C127.457 27.2486 127.704 26.9733 127.857 26.6171C128.047 26.2286 128.142 25.759 128.142 25.2086V8.69429C128.142 8.20857 128.047 7.78762 127.857 7.43143C127.704 7.04286 127.457 6.76762 127.114 6.60572C126.809 6.41143 126.428 6.31429 125.971 6.31429C125.514 6.31429 125.114 6.41143 124.771 6.60572C124.466 6.76762 124.218 7.04286 124.028 7.43143C123.875 7.78762 123.799 8.20857 123.799 8.69429V25.2086C123.799 25.759 123.875 26.2286 124.028 26.6171C124.218 26.9733 124.466 27.2486 124.771 27.4429C125.114 27.6048 125.514 27.6857 125.971 27.6857Z" fill="currentColor"/>
+          <path d="M68.2666 0H90.1533L94.6678 24.0429V0H106.383V34H85.2388L79.9243 8.88857V34H68.2666V0Z" fill="currentColor"/>
+          <path d="M42.564 23.6543L32.4492 0H46.9642L50.2645 11.7543L53.6502 0H67.5936L57.136 23.3629V34H42.564V23.6543Z" fill="currentColor"/>
+          <path d="M7.65748 34C5.94312 34 4.51449 33.7571 3.37158 33.2714C2.22867 32.7857 1.37149 32.0571 0.800035 31.0857C0.266678 30.1143 0 28.8838 0 27.3943V22.2943H13.7149V25.0629C13.7149 25.6457 13.7911 26.1476 13.9435 26.5686C14.0959 26.9571 14.3435 27.2486 14.6864 27.4429C15.0292 27.6371 15.4483 27.7343 15.9436 27.7343C16.3626 27.7343 16.7246 27.6695 17.0293 27.54C17.3341 27.3781 17.5627 27.1514 17.7151 26.86C17.8675 26.5362 17.9437 26.1638 17.9437 25.7429C17.9437 25.0952 17.7722 24.5286 17.4293 24.0429C17.0865 23.5571 16.4388 23.0552 15.4864 22.5371L6.8003 18.0686C4.93355 17.1619 3.54301 16.3038 2.62869 15.4943C1.71436 14.6524 1.06671 13.7457 0.685745 12.7743C0.304775 11.8029 0.114291 10.5886 0.114291 9.13143V6.55715C0.114291 5.06762 0.400018 3.83714 0.971472 2.86571C1.54293 1.89429 2.38106 1.18191 3.48587 0.728571C4.62878 0.242857 6.07646 0 7.82892 0H24.9725C26.725 0 28.1727 0.242857 29.3156 0.728571C30.4585 1.18191 31.3157 1.89429 31.8871 2.86571C32.4586 3.83714 32.7443 5.06762 32.7443 6.55715V10.7343H18.9723V8.74286C18.9723 8.19238 18.8961 7.72286 18.7437 7.33429C18.5913 6.94571 18.3437 6.67048 18.0008 6.50857C17.6579 6.34667 17.2579 6.26571 16.8007 6.26571C16.3817 6.26571 16.0198 6.33048 15.715 6.46C15.4102 6.58952 15.1816 6.8 15.0292 7.09143C14.8769 7.35048 14.8007 7.6581 14.8007 8.01429C14.8007 8.59714 14.9911 9.09905 15.3721 9.52C15.7531 9.90857 16.4388 10.3619 17.4293 10.88L26.1726 15.0086C28.1536 15.9476 29.6585 16.8219 30.6871 17.6314C31.7157 18.441 32.4395 19.3476 32.8586 20.3514C33.3158 21.3229 33.5443 22.5533 33.5443 24.0429V27.3943C33.5443 28.8838 33.2586 30.1143 32.6872 31.0857C32.1538 32.0571 31.3157 32.7857 30.1728 33.2714C29.0299 33.7571 27.5822 34 25.8297 34H7.65748Z" fill="currentColor"/>
+        </svg></a>
+        <div class="hdr-search">
+          <span class="material-icons">search</span>
+          <input type="text" placeholder="Artists, events, places, open calls" aria-label="Search">
+        </div>
+        <nav class="hdr-nav" aria-label="Sections">
+          <a href="proto-registry.html#opencalls">Open Calls</a>
+          <a href="proto-registry.html#registry">Artists</a>
+          <a href="proto-v2.html">Art Map</a>
+          <a href="proto-stories.html">Stories</a>
+          <a href="proto-about.html">About</a>
+          <button class="hdr-icon" id="m-search" type="button" data-mock="Search" aria-label="Search"><span class="material-icons">search</span></button>
+          <button class="btn-login" type="button" data-href="proto-registry.html#auth:login">Log in</button>
+          <!-- Вошедшему — чип контекста: лицо, имя, шеврон; на 375 — лицо и шеврон -->
+          <button class="ctx-switch" id="ctx-switch" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="ctx-menu" aria-label="Account: Elena Andreou">
+            <span class="ctx-avatar av-g4" aria-hidden="true"></span>
+            <span class="ctx-name">Elena Andreou</span>
+            <span class="material-icons ctx-chev" aria-hidden="true">expand_more</span>
+          </button>
+          <button class="hdr-icon" id="m-burger" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="mlayer" aria-expanded="false"><span class="material-icons">menu</span></button>
+        </nav>
+        <!-- Меню аккаунта: на десктопе — кит Menu 272 под чипом, на 375 — лист снизу -->
+        <div class="ctx-menu" id="ctx-menu" role="menu" aria-label="Account" hidden>
+          <div class="ctx-handle" aria-hidden="true"></div>
+          <div class="ctx-identity">
+            <span class="ctx-avatar lg av-g4" aria-hidden="true"></span>
+            <span class="ctx-id"><span class="ctx-id-name">Elena Andreou</span><span class="ctx-mail">elena.andreou@example.com</span></span>
+            <button class="ctx-close" type="button" data-ctx-close aria-label="Close"><span class="material-icons">close</span></button>
+          </div>
+          <div class="ctx-sep" role="separator"></div>
+          <a class="ctx-item" role="menuitem" href="proto-registry.html#home">My SYNO</a>
+          <a class="ctx-item" role="menuitem" href="proto-registry.html?fav=1#home">Favourites</a>
+          <div class="ctx-sep" role="separator"></div>
+          <a class="ctx-item" role="menuitem" href="proto-registry.html#addevent">Add event</a>
+          <a class="ctx-item" role="menuitem" href="proto-registry.html?addorg=1#home">Add an organisation</a>
+          <a class="ctx-item" role="menuitem" href="proto-registry.html#settings">Settings</a>
+          <button class="ctx-item" role="menuitem" type="button" data-logout>Log out</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Манифест-строкой под шапкой снят: он отодвигал обложку — единственный
+         настоящий повод — ради декларации, и дублировал полосу About.
+         Приём ArtRabbit работает там, где обложки нет; у нас она есть.
+         Заголовок первого уровня остаётся, невидимым. -->
+    <h1 class="sr-only" id="sr-title">Privacy Policy</h1>
+
+    <!-- ============ Служебная страница ============ -->
+    <div class="band band-pagehead pg-hide" data-page="privacy">
+      <div class="band-in">
+        <div class="pg-h1">Privacy Policy</div>
+        <div class="pg-updated">Last updated 13 May 2026</div>
+      </div>
+    </div>
+    <div class="band band-page pg-hide" data-page="privacy">
+      <div class="band-in">
+      <div class="pg-grid">
+        <div class="pg-rail">
+          <div class="pg-rail-label">On this page</div>
+          <nav class="pg-spy" id="pg-spy" aria-label="On this page">
+            <a href="#sec-1-what-personal-data-we-collect">1. What personal data we collect</a>
+            <a href="#sec-2-how-we-use-personal-data">2. How we use personal data</a>
+            <a href="#sec-3-legal-basis-for-processing">3. Legal basis for processing</a>
+            <a href="#sec-4-email-updates">4. Email updates</a>
+            <a href="#sec-5-cookies-and-analytics">5. Cookies and analytics</a>
+            <a href="#sec-6-service-providers">6. Service providers</a>
+            <a href="#sec-7-international-transfers">7. International transfers</a>
+            <a href="#sec-8-how-long-we-keep-your-data">8. How long we keep your data</a>
+            <a href="#sec-9-third-party-websites">9. Third-party websites</a>
+            <a href="#sec-10-your-rights">10. Your rights</a>
+            <a href="#sec-11-complaints">11. Complaints</a>
+            <a href="#sec-12-children">12. Children</a>
+            <a href="#sec-13-changes-to-this-privacy-policy">13. Changes to this Privacy Policy</a>
+          </nav>
+        </div>
+        <div class="pg-rule"></div>
+        <div class="pg-main">
+          <div class="pg-measure">
+            <p>This Privacy Policy explains how SYNO collects, uses and protects personal data when you visit our website, subscribe to our updates or interact with us online.</p>
+            <p>SYNO is a contemporary art institution based in Limassol, Cyprus, dedicated to humanism, pluralism and non-extractive cultural collaboration.</p>
+            <p>Launching through a year-long soft launch in 2026, SYNO will introduce its core platforms, including the Cyprus Contemporary Art Map, the Curated Cyprus Artist Registry and the Yearbook.</p>
+            <p>At this stage, the website and communications of SYNO are administered by the SYNO project team.</p>
+            <p>If you have any questions about this Privacy Policy or how we use personal data, you can contact us through: info@syno.art</p>
+            <div class="pg-sec" id="sec-1-what-personal-data-we-collect"><h2>1. What personal data we collect</h2>
+            <p>We may collect the following personal data:</p>
+            <ul>
+            <li>your email address, if you subscribe to SYNO updates;</li>
+            <li>subscription-related information, such as the date and time of subscription, consent status and unsubscribe status, where this information is technically available;</li>
+            <li>basic technical and website usage information, where you have consented to analytics;</li>
+            <li>any information you voluntarily provide when contacting us.</li>
+            </ul>
+            <p>We do not intentionally collect special categories of personal data through this website.</p>
+            </div>
+            <div class="pg-sec" id="sec-2-how-we-use-personal-data"><h2>2. How we use personal data</h2>
+            <p>We may use personal data for the following purposes:</p>
+            <ul>
+            <li>to add you to the SYNO mailing list or waiting list;</li>
+            <li>to send occasional updates about SYNO and its platforms;</li>
+            <li>to share information about the Cyprus Contemporary Art Map, the Curated Cyprus Artist Registry, the Yearbook, public initiatives, the soft launch, exhibitions, open calls, artist opportunities and related cultural announcements;</li>
+            <li>to manage subscriptions and unsubscribe requests;</li>
+            <li>to understand how visitors use the website and improve it, where you have consented to analytics;</li>
+            <li>to respond to messages or requests;</li>
+            <li>to keep basic records of consent, subscription and unsubscribe requests;</li>
+            <li>to comply with applicable legal obligations.</li>
+            </ul>
+            <p>We do not sell or rent your personal data.</p>
+            </div>
+            <div class="pg-sec" id="sec-3-legal-basis-for-processing"><h2>3. Legal basis for processing</h2>
+            <p>We process your email address for SYNO updates based on your consent.</p>
+            <p>You can withdraw your consent at any time by using the unsubscribe link in our emails, where available, or by contacting us through the contact details provided in this Privacy Policy.</p>
+            <p>We may process certain technical, administrative and security-related data based on our legitimate interests, including operating the website, maintaining security and keeping basic records of consent and unsubscribe requests.</p>
+            <p>Where we use Google Analytics or other optional analytics technologies, we ask for your consent before using them.</p>
+            </div>
+            <div class="pg-sec" id="sec-4-email-updates"><h2>4. Email updates</h2>
+            <p>If you subscribe to SYNO updates, we may send you occasional emails related to SYNO and its platforms.</p>
+            <p>These emails may include project news, soft-launch updates, information about the Cyprus Contemporary Art Map, updates related to the Curated Cyprus Artist Registry, Yearbook news, public initiatives, exhibitions, open calls, artist opportunities and similar cultural announcements.</p>
+            <p>You can unsubscribe from updates at any time. After you unsubscribe, we will stop sending you such communications.</p>
+            <p>At this stage, SYNO may use a simple subscriber database or a third-party email subscription provider. Once an email service provider is selected, this Privacy Policy may be updated accordingly.</p>
+            </div>
+            <div class="pg-sec" id="sec-5-cookies-and-analytics"><h2>5. Cookies and analytics</h2>
+            <p>Our website may use cookies and similar technologies.</p>
+            <p>Some cookies are necessary for the website to function properly.</p>
+            <p>With your consent, we may use Google Analytics to understand how visitors use the website, including how many people visit the website and how they interact with its pages. This information helps us improve the website and SYNO’s online presence.</p>
+            <p>We may also use Google Tag Manager to manage website tags. Google Tag Manager may help load other tools, such as Google Analytics, depending on the technical settings of the website.</p>
+            <p>At this stage, the website uses a simple analytics consent banner. Google Analytics is used only if you click “Accept analytics”. If you do not wish to consent to analytics, you can continue using the website without clicking this button.</p>
+            <p>For more information, please see our Cookie Notice .</p>
+            </div>
+            <div class="pg-sec" id="sec-6-service-providers"><h2>6. Service providers</h2>
+            <p>We may use trusted third-party service providers to operate the website, manage subscriptions, send communications, analyse website performance or provide technical support.</p>
+            <p>These providers may include:</p>
+            <ul>
+            <li>website hosting providers;</li>
+            <li>Google Analytics and Google Tag Manager;</li>
+            <li>an email subscription or mailing list provider, once selected;</li>
+            <li>technical service providers that help us maintain and secure the website.</li>
+            </ul>
+            <p>These providers process personal data only as necessary to provide their services to us.</p>
+            </div>
+            <div class="pg-sec" id="sec-7-international-transfers"><h2>7. International transfers</h2>
+            <p>Some of our service providers may process personal data outside the European Economic Area.</p>
+            <p>Where this happens, we rely on appropriate safeguards required by applicable data protection laws, such as adequacy decisions, standard contractual clauses or other lawful transfer mechanisms, where applicable.</p>
+            </div>
+            <div class="pg-sec" id="sec-8-how-long-we-keep-your-data"><h2>8. How long we keep your data</h2>
+            <p>We keep your email address for as long as you remain subscribed to SYNO updates.</p>
+            <p>If you unsubscribe, we will stop sending you update communications. We may keep a limited record of your unsubscribe request where necessary to ensure that we do not contact you again.</p>
+            <p>Analytics and cookie-related data may be stored for different periods depending on the type of cookie or service used.</p>
+            </div>
+            <div class="pg-sec" id="sec-9-third-party-websites"><h2>9. Third-party websites</h2>
+            <p>Our website may contain links to third-party websites, including websites of artists, galleries, cultural institutions, events, partners or other external resources.</p>
+            <p>We are not responsible for the privacy practices or content of third-party websites. We encourage you to read the privacy policies of any external websites you visit.</p>
+            </div>
+            <div class="pg-sec" id="sec-10-your-rights"><h2>10. Your rights</h2>
+            <p>Under applicable data protection laws, you may have the right to:</p>
+            <ul>
+            <li>request access to your personal data;</li>
+            <li>request correction of inaccurate or incomplete personal data;</li>
+            <li>request deletion of your personal data;</li>
+            <li>withdraw your consent at any time;</li>
+            <li>object to certain types of processing;</li>
+            <li>request restriction of processing;</li>
+            <li>request a copy of your personal data in a portable format;</li>
+            <li>lodge a complaint with a data protection authority.</li>
+            </ul>
+            <p>To exercise your rights, please contact us through the contact details provided in this Privacy Policy.</p>
+            <p>We may need to verify your identity before responding to certain requests.</p>
+            </div>
+            <div class="pg-sec" id="sec-11-complaints"><h2>11. Complaints</h2>
+            <p>If you are located in the European Union, you have the right to lodge a complaint with your local data protection authority.</p>
+            <p>In Cyprus, the competent authority is the Office of the Commissioner for Personal Data Protection.</p>
+            <p>We would appreciate the opportunity to address your concerns first, so you are welcome to contact us directly.</p>
+            </div>
+            <div class="pg-sec" id="sec-12-children"><h2>12. Children</h2>
+            <p>This website is not intended for children, and we do not knowingly collect personal data from children.</p>
+            </div>
+            <div class="pg-sec" id="sec-13-changes-to-this-privacy-policy"><h2>13. Changes to this Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time.</p>
+            <p>The latest version will always be available on this website. The date at the top of this page shows when this Privacy Policy was last updated.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ============ Footer ============
+         Кит Footer: гостю — Viewer=Guest, вошедшему — Viewer=Logged in
+         (только служебная строка; переключает body.auth-in). -->
+    <footer class="band band-footer">
+      <div class="band-in">
+        <div class="footer-cols">
+          <nav class="footer-nav nav-explore" aria-label="Explore">
+            <h2 class="footer-h">Explore</h2>
+            <ul>
+              <li><a href="proto-registry.html#opencalls">Open Calls</a></li>
+              <li><a href="proto-registry.html#registry">Artists</a></li>
+              <li><a href="proto-v2.html">Art Map</a></li>
+              <li><a href="proto-stories.html">Stories</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-nav nav-take" aria-label="Take part">
+            <h2 class="footer-h">Take part</h2>
+            <ul>
+              <li><a href="proto-registry.html?register=artist#auth:signup">Register as an artist</a></li>
+              <li><a href="proto-registry.html#addevent">Add an event</a></li>
+              <li><a href="#" data-mock="For organisations">For organisations</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-nav nav-org" aria-label="SYNO">
+            <h2 class="footer-h">SYNO</h2>
+            <ul>
+              <li><a href="proto-about.html">About</a></li>
+              <li><a href="proto-about.html#contact">Contact</a></li>
+              <li><a href="https://www.instagram.com/syno.art/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="#" data-mock="Facebook">Facebook</a></li>
+            </ul>
+          </nav>
+          <div class="footer-right">
+            <h2 class="footer-sub-title">Subscribe to&nbsp;our&nbsp;newsletter</h2>
+            <p class="footer-sub-text">Get updates on open calls, artist opportunities, Art&nbsp;Map launches, exhibitions and editorial releases across Cyprus and beyond</p>
+            <form class="subscribe" novalidate>
+              <div class="subscribe-field">
+                <input type="email" name="email" placeholder="Email address" aria-label="Email address" autocomplete="email">
+                <button type="submit" aria-label="Subscribe"><span class="material-icons" aria-hidden="true">arrow_forward</span></button>
+              </div>
+              <p class="nl-msg" role="status" hidden></p>
+              <label class="nl-consent"><input type="checkbox"> <span>By subscribing, you agree to receive our newsletter. You can unsubscribe at any time. See our <a href="proto-pages.html?page=privacy">Privacy policy</a></span></label>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-meta">
+            <span class="fb-logo" aria-hidden="true"><svg width="143" height="34" viewBox="0 0 143 34" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+              <path d="M116.656 34C114.942 34 113.513 33.7571 112.37 33.2714C111.227 32.7857 110.37 32.0571 109.799 31.0857C109.227 30.1143 108.941 28.9 108.941 27.4429V6.55715C108.941 5.1 109.227 3.88572 109.799 2.91429C110.37 1.94286 111.227 1.21429 112.37 0.728571C113.513 0.242857 114.942 0 116.656 0H135.285C137 0 138.428 0.242857 139.571 0.728571C140.752 1.21429 141.61 1.94286 142.143 2.91429C142.714 3.88572 143 5.1 143 6.55715V27.4429C143 28.9 142.714 30.1143 142.143 31.0857C141.61 32.0571 140.752 32.7857 139.571 33.2714C138.428 33.7571 137 34 135.285 34H116.656ZM125.971 27.6857C126.428 27.6857 126.809 27.6048 127.114 27.4429C127.457 27.2486 127.704 26.9733 127.857 26.6171C128.047 26.2286 128.142 25.759 128.142 25.2086V8.69429C128.142 8.20857 128.047 7.78762 127.857 7.43143C127.704 7.04286 127.457 6.76762 127.114 6.60572C126.809 6.41143 126.428 6.31429 125.971 6.31429C125.514 6.31429 125.114 6.41143 124.771 6.60572C124.466 6.76762 124.218 7.04286 124.028 7.43143C123.875 7.78762 123.799 8.20857 123.799 8.69429V25.2086C123.799 25.759 123.875 26.2286 124.028 26.6171C124.218 26.9733 124.466 27.2486 124.771 27.4429C125.114 27.6048 125.514 27.6857 125.971 27.6857Z" fill="currentColor"/>
+              <path d="M68.2666 0H90.1533L94.6678 24.0429V0H106.383V34H85.2388L79.9243 8.88857V34H68.2666V0Z" fill="currentColor"/>
+              <path d="M42.564 23.6543L32.4492 0H46.9642L50.2645 11.7543L53.6502 0H67.5936L57.136 23.3629V34H42.564V23.6543Z" fill="currentColor"/>
+              <path d="M7.65748 34C5.94312 34 4.51449 33.7571 3.37158 33.2714C2.22867 32.7857 1.37149 32.0571 0.800035 31.0857C0.266678 30.1143 0 28.8838 0 27.3943V22.2943H13.7149V25.0629C13.7149 25.6457 13.7911 26.1476 13.9435 26.5686C14.0959 26.9571 14.3435 27.2486 14.6864 27.4429C15.0292 27.6371 15.4483 27.7343 15.9436 27.7343C16.3626 27.7343 16.7246 27.6695 17.0293 27.54C17.3341 27.3781 17.5627 27.1514 17.7151 26.86C17.8675 26.5362 17.9437 26.1638 17.9437 25.7429C17.9437 25.0952 17.7722 24.5286 17.4293 24.0429C17.0865 23.5571 16.4388 23.0552 15.4864 22.5371L6.8003 18.0686C4.93355 17.1619 3.54301 16.3038 2.62869 15.4943C1.71436 14.6524 1.06671 13.7457 0.685745 12.7743C0.304775 11.8029 0.114291 10.5886 0.114291 9.13143V6.55715C0.114291 5.06762 0.400018 3.83714 0.971472 2.86571C1.54293 1.89429 2.38106 1.18191 3.48587 0.728571C4.62878 0.242857 6.07646 0 7.82892 0H24.9725C26.725 0 28.1727 0.242857 29.3156 0.728571C30.4585 1.18191 31.3157 1.89429 31.8871 2.86571C32.4586 3.83714 32.7443 5.06762 32.7443 6.55715V10.7343H18.9723V8.74286C18.9723 8.19238 18.8961 7.72286 18.7437 7.33429C18.5913 6.94571 18.3437 6.67048 18.0008 6.50857C17.6579 6.34667 17.2579 6.26571 16.8007 6.26571C16.3817 6.26571 16.0198 6.33048 15.715 6.46C15.4102 6.58952 15.1816 6.8 15.0292 7.09143C14.8769 7.35048 14.8007 7.6581 14.8007 8.01429C14.8007 8.59714 14.9911 9.09905 15.3721 9.52C15.7531 9.90857 16.4388 10.3619 17.4293 10.88L26.1726 15.0086C28.1536 15.9476 29.6585 16.8219 30.6871 17.6314C31.7157 18.441 32.4395 19.3476 32.8586 20.3514C33.3158 21.3229 33.5443 22.5533 33.5443 24.0429V27.3943C33.5443 28.8838 33.2586 30.1143 32.6872 31.0857C32.1538 32.0571 31.3157 32.7857 30.1728 33.2714C29.0299 33.7571 27.5822 34 25.8297 34H7.65748Z" fill="currentColor"/>
+            </svg></span>
+            <span class="fb-copy"><span>© 2026</span><span>Limassol, Cyprus</span></span>
+          </div>
+          <!-- Contact виден только в компактном футере: у гостя он стоит в колонке Syno -->
+          <nav class="fb-links" aria-label="Legal">
+            <a class="fb-contact" href="proto-about.html#contact">Contact</a>
+            <a href="proto-pages.html?page=privacy">Privacy Policy</a>
+            <a href="#" data-mock="Cookies">Cookies</a>
+            <a href="#" data-mock="Terms of use">Terms of use</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<!-- Слой разделов на 375 — кит Navigation/Menu Layer · Mobile (как в proto-registry):
+     своя шапка поверх шапки страницы, разделы Core 48, у гостя — крупная кнопка
+     Log in с подписью, у вошедшего в шапке слоя — его чип; внизу правовые ссылки. -->
+<div class="mlayer" id="mlayer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mlayer-frame">
+    <div class="mlayer-head">
+      <a class="mlayer-logo" href="proto-home.html" aria-label="SYNO"></a>
+      <button class="mlayer-icon" type="button" data-mock="Search" aria-label="Search"><span class="material-icons">search</span></button>
+      <button class="mlayer-chip" type="button" data-acct-open aria-label="Account: Elena Andreou"><span class="ctx-avatar av-g4" aria-hidden="true"></span><span class="material-icons" aria-hidden="true">expand_more</span></button>
+      <button class="mlayer-close" type="button" data-mlayer-close aria-label="Close menu"><span class="material-icons">close</span></button>
+    </div>
+    <nav class="mlayer-nav" aria-label="Sections">
+      <a class="mlayer-item" href="proto-registry.html#opencalls">Open Calls</a>
+      <a class="mlayer-item" href="proto-registry.html#registry">Artists</a>
+      <a class="mlayer-item" href="proto-v2.html">Art Map</a>
+      <a class="mlayer-item" href="proto-stories.html">Stories</a>
+      <a class="mlayer-item" href="proto-about.html">About</a>
+    </nav>
+    <div class="mlayer-cta">
+      <button class="btn-xl" type="button" data-href="proto-registry.html#auth:login"><span>Log in</span><span class="btn-xl-sub">or create an account</span></button>
+    </div>
+    <div class="mlayer-foot">
+      <a class="mlayer-foot-link" href="proto-pages.html?page=privacy">Privacy Policy</a>
+      <a class="mlayer-foot-link" href="#" data-mock="Cookies">Cookies</a>
+    </div>
+  </div>
+</div>
+<!-- Затемнение под листом аккаунта на 375 -->
+<div class="ctx-scrim" id="ctx-scrim" hidden></div>
+
+<div class="app-toast" id="toast" role="status"></div>
+
+<script>
+/* ============================================================
+   Служебные страницы: переключатель и scroll-spy
+   ============================================================ */
+let toastTimer = null;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+const narrow = window.matchMedia('(max-width: 1023px)');
+const ctxBtn = document.getElementById('ctx-switch');
+const ctxMenu = document.getElementById('ctx-menu');
+const ctxScrim = document.getElementById('ctx-scrim');
+const burger = document.getElementById('m-burger');
+const mlayer = document.getElementById('mlayer');
+const authToggle = document.getElementById('wf-auth');
+
+/* --- вход между файлами (20 сентября 2026) ---
+   Общего стора у прототипов нет — состояние входа несёт адрес: ?auth=in, а из
+   registry и Art Map приходит ?signed=1. Вошедшему ссылки в соседние файлы
+   дописывают флаг: registry ждёт ?signed=1, остальные — ?auth=in, иначе переход
+   молча разлогинивал бы. Шапка (чип вместо Log in), слой разделов и футер
+   (компактный) идут за body.auth-in. Как в proto-home и proto-about. */
+function synoLink(href) {
+  if (!/^proto-/.test(href) || !document.body.classList.contains('auth-in')) return href;
+  const [path, hash] = href.split('#');
+  const [file, query] = path.split('?');
+  const flag = file === 'proto-registry.html' ? 'signed=1' : 'auth=in';
+  const key = flag.split('=')[0];
+  if ((query || '').split('&').some(kv => kv.split('=')[0] === key)) return href;
+  return file + '?' + (query ? query + '&' : '') + flag + (hash ? '#' + hash : '');
+}
+const protoLinks = [...document.querySelectorAll('a[href^="proto-"]')];
+protoLinks.forEach(a => { a.dataset.baseHref = a.getAttribute('href'); });
+function setAuth(inn, push) {
+  document.body.classList.toggle('auth-in', inn);
+  authToggle.querySelector('b').textContent = inn ? 'signed in' : 'guest';
+  protoLinks.forEach(a => a.setAttribute('href', synoLink(a.dataset.baseHref)));
+  if (!inn) closeAcct();
+  if (push) {
+    const url = new URL(location.href);
+    url.searchParams.delete('signed');
+    inn ? url.searchParams.set('auth', 'in') : url.searchParams.delete('auth');
+    history.replaceState(null, '', url);
+  }
+}
+authToggle.addEventListener('click', () => setAuth(!document.body.classList.contains('auth-in'), true));
+
+document.body.addEventListener('click', e => {
+  /* Сшивка прототипов (20 сентября 2026): кнопка-не-ссылка уходит по data-href —
+     вход и кабинет живут в proto-registry, а не здесь. */
+  const jump = e.target.closest('[data-href]');
+  if (jump) { e.preventDefault(); location.href = synoLink(jump.dataset.href); return; }
+  const m = e.target.closest('[data-mock]');
+  if (m) { e.preventDefault(); showToast('"' + m.dataset.mock + '" — wired in Phase 1 (mock)'); return; }
+  if (e.target.closest('[data-logout]')) { e.preventDefault(); setAuth(false, true); showToast('Logged out'); }
+});
+
+/* --- меню аккаунта: на десктопе — выпадашка под чипом (правый край по чипу,
+   6 под ним), на 375 — лист снизу с затемнением; один слой за раз --- */
+function openAcct() {
+  setLayer(false);
+  ctxMenu.hidden = false;
+  ctxBtn.setAttribute('aria-expanded', 'true');
+  if (narrow.matches) {
+    ctxMenu.style.top = ctxMenu.style.right = '';
+    ctxScrim.hidden = false;
+    document.body.classList.add('sheet-open');
+    ctxMenu.querySelector('[data-ctx-close]').focus();
+  } else {
+    const host = ctxMenu.offsetParent;
+    ctxMenu.style.top = (ctxBtn.offsetTop + ctxBtn.offsetHeight + 6) + 'px';
+    ctxMenu.style.right = (host.clientWidth - ctxBtn.offsetLeft - ctxBtn.offsetWidth) + 'px';
+  }
+}
+function closeAcct() {
+  if (ctxMenu.hidden) return;
+  ctxMenu.hidden = true;
+  ctxScrim.hidden = true;
+  document.body.classList.remove('sheet-open');
+  ctxBtn.setAttribute('aria-expanded', 'false');
+}
+ctxBtn.addEventListener('click', (e) => { e.stopPropagation(); ctxMenu.hidden ? openAcct() : closeAcct(); });
+ctxScrim.addEventListener('click', closeAcct);
+document.addEventListener('click', (e) => {
+  if (ctxMenu.hidden || e.target.closest('[data-acct-open]')) return;
+  if (!ctxMenu.contains(e.target) || e.target.closest('a, [data-ctx-close]')) closeAcct();
+});
+
+/* --- слой разделов (бургер на 375); марка в шапке слоя — та же, что в шапке --- */
+const mlayerLogo = mlayer.querySelector('.mlayer-logo');
+const pageLogo = document.querySelector('.site-header .logo svg');
+if (mlayerLogo && pageLogo) mlayerLogo.appendChild(pageLogo.cloneNode(true));
+function setLayer(open) {
+  if (mlayer.hidden === !open) return;
+  if (open) closeAcct();
+  mlayer.hidden = !open;
+  document.body.classList.toggle('mlayer-open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  if (open) mlayer.querySelector('[data-mlayer-close]').focus();
+}
+burger.addEventListener('click', () => setLayer(true));
+mlayer.addEventListener('click', (e) => {
+  if (e.target.closest('[data-mlayer-close]')) { setLayer(false); burger.focus(); return; }
+  if (e.target.closest('[data-acct-open]')) { setLayer(false); openAcct(); return; }
+  if (e.target.closest('a[href], [data-href], [data-mock]')) setTimeout(() => setLayer(false), 0);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Escape') return;
+  if (!ctxMenu.hidden) { closeAcct(); ctxBtn.focus(); return; }
+  if (!mlayer.hidden) { setLayer(false); burger.focus(); }
+});
+narrow.addEventListener('change', () => { closeAcct(); setLayer(false); });
+
+/* --- подписка подтверждается на месте, а не тостом (15 сентября 2026):
+   Success кита — поле с почтой и галочкой, строка под ним, согласие уходит;
+   пустой или неверный адрес — Error кита со строкой под полем --- */
+document.querySelectorAll('form.subscribe').forEach((form) => {
+  const field = form.querySelector('.subscribe-field');
+  const input = form.querySelector('input[type="email"]');
+  const button = form.querySelector('button[type="submit"]');
+  const msg = form.querySelector('.nl-msg');
+  const consent = form.querySelector('.nl-consent');
+  const say = (text, kind) => { msg.textContent = text; msg.className = 'nl-msg is-' + kind; msg.hidden = false; };
+  input.addEventListener('input', () => {
+    if (!field.classList.contains('is-error')) return;
+    field.classList.remove('is-error');
+    msg.hidden = true;
+  });
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (field.classList.contains('is-done')) return;
+    const value = input.value.trim();
+    if (!value || !input.checkValidity()) {
+      field.classList.add('is-error');
+      say(value ? 'Enter a valid email address' : 'Enter an email address', 'error');
+      input.focus();
+      return;
+    }
+    field.classList.remove('is-error');
+    field.classList.add('is-done');
+    input.readOnly = true;
+    button.querySelector('.material-icons').textContent = 'check';
+    button.setAttribute('aria-label', 'Subscribed');
+    say('Thanks — check your inbox to confirm', 'done');
+    if (consent) consent.hidden = true;
+  });
+});
+
+/* --- какая страница показана --- */
+const PAGES = [
+  { key: 'privacy', label: 'Privacy Policy', title: 'Privacy Policy' }
+];
+let pageIx = Math.max(0, PAGES.findIndex(p => p.key === new URLSearchParams(location.search).get('page')));
+function setPage(ix) {
+  pageIx = ix;
+  PAGES.forEach((p, i) => document.querySelectorAll('[data-page="' + p.key + '"]')
+    .forEach(n => n.classList.toggle('pg-hide', i !== ix)));
+  document.querySelector('#wf-page b').textContent = PAGES[ix].label;
+  document.getElementById('sr-title').textContent = PAGES[ix].title;
+  window.scrollTo(0, 0);
+  updateSpy();
+}
+
+/* --- scroll-spy: канон 9 сентября 2026 ---
+   активен последний раздел, чей верх прошёл порог «низ липкой шапки + 24»;
+   клик отступает тот же порог; на время плавного скролла spy молчит. */
+function activeSpy() {
+  return [...document.querySelectorAll('.pg-spy')]
+    .find(n => !n.closest('.pg-hide')) || null;
+}
+let spyMuted = 0;
+function spyOffset() {
+  const h = document.querySelector('.site-header');
+  const sticky = h && getComputedStyle(h).position === 'sticky';
+  return (sticky ? h.getBoundingClientRect().height : 0) + 24;
+}
+function updateSpy() {
+  const spy = activeSpy();
+  if (!spy || Date.now() < spyMuted) return;
+  const links = [...spy.querySelectorAll('a')];
+  const off = spyOffset();
+  let cur = links[0];
+  for (const a of links) {
+    const sec = document.getElementById(a.getAttribute('href').slice(1));
+    if (sec && sec.getBoundingClientRect().top - off <= 1) cur = a;
+  }
+  links.forEach(a => {
+    const on = a === cur;
+    a.classList.toggle('is-current', on);
+    if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+  });
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('.pg-spy a'); if (!a) return;
+  {
+    e.preventDefault();
+    const sec = document.getElementById(a.getAttribute('href').slice(1));
+    if (!sec) return;
+    window.scrollTo({ top: window.scrollY + sec.getBoundingClientRect().top - spyOffset(), behavior: 'smooth' });
+    a.closest('.pg-spy').querySelectorAll('a').forEach(x => x.classList.toggle('is-current', x === a));
+    spyMuted = Date.now() + 900;
+  }
+});
+window.addEventListener('scroll', updateSpy, { passive: true });
+window.addEventListener('resize', updateSpy);
+setPage(pageIx);
+const authParams = new URLSearchParams(location.search);
+setAuth(authParams.get('auth') === 'in' || authParams.get('signed') === '1', authParams.has('signed'));
+</script>
+<script>
+/* Log in возвращает туда, откуда пришли (5 октября 2026). Вход один на весь продукт и живёт
+   в registry: туда уходит next — этот файл со всем адресом, — и после входа registry отдаёт
+   его обратно с signed=1 (тем же путём, что гейт Save / Follow). */
+window.addEventListener('click', function (e) {
+  var b = e.target.closest && e.target.closest('[data-href^="proto-registry.html#auth:"]');
+  if (!b) return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  var u = new URL(location.href);
+  ['auth', 'signed', 'do'].forEach(function (k) { u.searchParams.delete(k); });
+  var q = u.searchParams.toString();
+  var next = 'proto-pages.html' + (q ? '?' + q : '') + u.hash;
+  var href = b.getAttribute('data-href');
+  location.href = 'proto-registry.html?next=' + encodeURIComponent(next) + href.slice(href.indexOf('#'));
+}, true);
+</script>
+<script>
+/* Add an organisation открывается поверх этой страницы, а не кабинета: registry берёт её
+   адрес в from, показывает фоном и по Cancel / × возвращает сюда (6 октября 2026). */
+window.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href^="proto-registry.html?addorg="]');
+  if (!a) return;
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  var u = new URL(location.href);
+  ['auth', 'signed', 'do'].forEach(function (k) { u.searchParams.delete(k); });
+  var q = u.searchParams.toString();
+  var from = 'proto-pages.html' + (q ? '?' + q : '') + u.hash;
+  var href = a.getAttribute('href');
+  if (document.body.classList.contains('auth-in') && !/[?&]signed=/.test(href)) href = href.replace(/^([^#]*)/, '$1&signed=1');
+  var hashAt = href.indexOf('#');
+  var base = hashAt >= 0 ? href.slice(0, hashAt) : href;
+  location.href = base + '&from=' + encodeURIComponent(from) + (hashAt >= 0 ? href.slice(hashAt) : '');
+}, true);
+</script>
+</body>
+</html>
