@@ -1,14 +1,8 @@
 # The site is served from its own domain, so this file sits at the domain
-# root and crawlers actually read it. The dev pages below also carry
-# <meta name="robots" content="noindex"> as a second line of defence.
+# root and crawlers actually read it. Draft pages are not published at all
+# (deploy.yml removes them from the artifact), so there is nothing to
+# disallow here; the sitemap lists the twelve public pages.
 User-agent: *
 Allow: /
-Disallow: /hooh-editor.html
-Disallow: /hooh-editor-ru.html
-Disallow: /hooh-fill-ru.html
-Disallow: /hooh-fill-clouds.html
-Disallow: /hooh-color-proto.html
-Disallow: /itab-proto.html
-Disallow: /syno-cover-proto.html
 
 Sitemap: https://victoriakukharenko.com/sitemap.xml

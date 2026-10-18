@@ -53,7 +53,14 @@
     try { localStorage.setItem(KEY, value); } catch (e) {}
   }
 
+  /* Once per page: answering "yes" again from the footer link used to load
+     the tag a second time. The consent call tells Clarity the visitor said
+     yes to analytics storage, so it keeps its cookies rather than running
+     as if no answer had been given. */
+  var clarityStarted = false;
   function startClarity() {
+    if (clarityStarted) return;
+    clarityStarted = true;
     (function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
       t = l.createElement(r); t.async = 1;
@@ -61,6 +68,7 @@
       y = l.getElementsByTagName(r)[0];
       y.parentNode.insertBefore(t, y);
     })(window, document, 'clarity', 'script', id);
+    window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'granted' });
   }
 
   function showBanner() {
@@ -110,12 +118,20 @@
     addFooterLink();
   }
 
+  /* Clarity writes _clck/_clsk on the parent domain (.victoriakukharenko.com),
+     and a cookie only goes when it is expired with the domain it was set
+     with. Expiring host-only, as this used to, left them in place after a
+     "no". So each name is expired every way it can have been written. */
   function forgetClarityCookies() {
+    var host = location.hostname.replace(/^www\./, '');
+    var scopes = ['', '; domain=' + host, '; domain=.' + host];
     var names = document.cookie.split(';');
     for (var i = 0; i < names.length; i++) {
       var name = names[i].split('=')[0].trim();
       if (name.indexOf('_cl') !== 0) continue;
-      document.cookie = name + '=; max-age=0; path=/';
+      for (var j = 0; j < scopes.length; j++) {
+        document.cookie = name + '=; max-age=0; path=/' + scopes[j];
+      }
     }
   }
 
