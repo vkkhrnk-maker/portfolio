@@ -40,7 +40,7 @@ Headline: Product designer, end to end on iOS and web
 
 ## Summary
 
-Product designer, from research and customer journey mapping to release. Owned product design at an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
+Product designer, from research and customer journey mapping to release. At an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
 
 ## Experience
 
@@ -53,7 +53,7 @@ Product designer, from research and customer journey mapping to release. Owned p
 - **Prokachka Studio** (2022–2023): marketing sites and landing pages, from visual design and layout to responsive behavior and developer handoff.
 
 ### Product Designer — Hooh
-**Jan 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · the only product designer, with a PM, product owner, art director and two engineers**
+**Jan 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
 
 - Designed and shipped the MVP on web and iOS: upload, layered AI summaries, assistant chat and file organization.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
