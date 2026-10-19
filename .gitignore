@@ -15,3 +15,7 @@ upwork-proposals.md
 
 # Python bytecode from the build scripts in tools/
 __pycache__/
+
+# Copy review for the owner: a working document, not a page. Kept out of the
+# public repository.
+review-copy-*.md
