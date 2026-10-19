@@ -1,0 +1,81 @@
+/* Syno Lightbox (Images): the existing Media / Control and Divider patterns.
+   Desktop: image and 280 px information rail. Mobile: caption below the image. */
+.syno-viewer {
+  position:fixed; inset:0; z-index:9999; background:#121212; padding:20px 26px;
+  align-items:stretch; justify-content:stretch; color:#fff;
+}
+.syno-viewer.open, .syno-viewer:not([hidden]).wd-lightbox { display:flex; }
+.syno-viewer[hidden] { display:none; }
+.syno-viewer .syno-viewer-shell {
+  width:100%; min-width:0; min-height:0; display:grid;
+  grid-template-columns:minmax(0,1fr) 280px;
+  border:1px solid var(--stroke-primary); position:relative;
+}
+.syno-viewer-shell::before, .syno-viewer-shell::after {
+  content:''; position:absolute; left:-7px; right:-7px; height:1px;
+  background:var(--stroke-primary); pointer-events:none;
+}
+.syno-viewer-shell::before { top:-1px; }
+.syno-viewer-shell::after { bottom:-1px; }
+.syno-viewer .syno-viewer-stage {
+  min-width:0; min-height:0; display:flex; justify-content:center; align-items:center;
+  background:transparent; padding:12px;
+}
+.syno-viewer .syno-viewer-photo {
+  display:block; width:auto; height:auto; max-width:100%; max-height:100%;
+  object-fit:contain; user-select:none; -webkit-user-drag:none;
+}
+.syno-viewer .syno-viewer-info {
+  min-width:0; position:relative; border-left:1px solid var(--stroke-primary);
+  padding:12px; display:flex; flex-direction:column; justify-content:center;
+}
+.syno-viewer .syno-viewer-caption { text-align:center; overflow-wrap:anywhere; }
+.syno-viewer .syno-viewer-title {
+  margin:0; font-family:'Schengen A',sans-serif; font-size:28px; line-height:1.2;
+  font-weight:400; color:#fff;
+}
+.syno-viewer .syno-viewer-meta {
+  margin-top:12px; font-size:12px; line-height:1.2; color:#7e7d7a; white-space:pre-line;
+}
+.syno-viewer .syno-viewer-count {
+  display:block; position:static; transform:none; margin-top:12px;
+  background:none; padding:0; border-radius:0; color:rgba(255,255,255,.85);
+  font-size:14px; line-height:1.2;
+}
+.syno-viewer .syno-viewer-actions {
+  position:absolute; bottom:12px; left:0; right:0;
+  display:flex; justify-content:center; gap:12px;
+}
+.syno-viewer .syno-viewer-control {
+  position:static; width:40px; height:40px; min-height:40px; flex:0 0 40px;
+  display:grid; place-items:center; padding:0; border:0; border-radius:50%;
+  transform:none; cursor:pointer; background:transparent;
+}
+.syno-viewer .syno-viewer-control img { display:block; max-height:none; }
+.syno-viewer .syno-viewer-control[hidden] { display:none; }
+.syno-viewer .syno-viewer-control:hover { background:rgba(255,255,255,.08); }
+.syno-viewer .syno-viewer-control:focus-visible { outline:2px solid #fff; outline-offset:2px; }
+.syno-viewer .syno-viewer-close { position:absolute; top:12px; right:12px; }
+@media(max-width:760px) {
+  .syno-viewer { padding:0; }
+  .syno-viewer .syno-viewer-shell {
+    border:0; grid-template-columns:minmax(0,1fr); align-content:center;
+    padding:80px 16px 110px; gap:20px;
+  }
+  .syno-viewer-shell::before, .syno-viewer-shell::after { display:none; }
+  .syno-viewer .syno-viewer-stage { padding:0; }
+  .syno-viewer .syno-viewer-photo { max-height:calc(100dvh - 360px); }
+  .syno-viewer .syno-viewer-info { display:contents; }
+  .syno-viewer .syno-viewer-meta { margin-top:8px; }
+  .syno-viewer .syno-viewer-close { top:12px; right:8px; }
+  .syno-viewer .syno-viewer-actions { bottom:12px; }
+}
+body.mobile-mode .syno-viewer { padding:0; }
+body.mobile-mode .syno-viewer .syno-viewer-shell { border:0; grid-template-columns:minmax(0,1fr); align-content:center; padding:80px 16px 110px; gap:20px; }
+body.mobile-mode .syno-viewer-shell::before, body.mobile-mode .syno-viewer-shell::after { display:none; }
+body.mobile-mode .syno-viewer .syno-viewer-stage { padding:0; }
+body.mobile-mode .syno-viewer .syno-viewer-photo { max-height:calc(100dvh - 360px); }
+body.mobile-mode .syno-viewer .syno-viewer-info { display:contents; }
+body.mobile-mode .syno-viewer .syno-viewer-meta { margin-top:8px; }
+body.mobile-mode .syno-viewer .syno-viewer-close { top:12px; right:8px; }
+body.mobile-mode .syno-viewer .syno-viewer-actions { bottom:12px; }

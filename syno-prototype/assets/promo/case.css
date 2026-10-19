@@ -218,6 +218,13 @@ html.promo-case .site-header:not(.band) { border-bottom:0; }
 html.promo-case .site-header:not(.band)::after { bottom:0; }
 html.promo-case #page-toolbar { border-bottom:0; top:calc(var(--promo-header-top) + var(--promo-header-height)); }
 html.promo-case #page-toolbar::after { bottom:0; }
+/* Cabinet pages define 8 px endcaps in the source prototype. Keep one full-width
+   divider here, as in the Band below MySyno / Tabs, instead of shrinking it to a tail. */
+html.promo-case .app #page-toolbar:has(.cabinet-tabs)::before { display:none; }
+html.promo-case .app #page-toolbar:has(.cabinet-tabs)::after {
+  content:''; display:block; position:absolute; left:-6px; right:-6px;
+  top:auto; bottom:0; width:auto; height:1px; background:var(--stroke-primary);
+}
 html.promo-case :is(#screen-eventpage,#screen-orgpublic) .orgp-grid { border-top:0; }
 html.promo-case :is(#screen-eventpage,#screen-orgpublic) .orgp-side-inner {
   top:calc(var(--promo-header-top) + var(--promo-header-height) + 56px + 12px);

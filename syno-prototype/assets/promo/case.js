@@ -118,14 +118,6 @@
     const a=d.artists.find(a=>a.id===card.dataset.promoArtist || a.name===replaceNames(card.dataset.name||''));
     if(a)selectedArtist=a.id;
   },true);
-  document.addEventListener('click',e=>{
-    if(e.target.closest('button,.card-save'))return;
-    if(e.target.closest('.list-card[data-pin="3"]')){
-      e.preventDefault();e.stopImmediatePropagation();
-      location.href=caseLink('proto-registry.html#eventpage:visitor');
-    }
-  },true);
-
   function prepareRegistry() {
     const grid = $('#registry-grid');
     if (!grid) return;
@@ -312,13 +304,15 @@
     for(const pin of [1,15,22])for(const node of $$(`.list-card[data-pin="${pin}"],.pin[data-pin="${pin}"]`))node.remove();
     const thumbs={3:'shiota-journey-cover',16:'vima-hall',2:'vima-installation',6:'shiota-silence',4:'11',5:'shiota-inside-outside',14:'watermill-centre',13:'shiota-silence'};
     for(const [pin,key]of Object.entries(thumbs)){const t=$(`.list-card[data-pin="${pin}"] .card-thumb`);if(t)t.style.backgroundImage=`url('${image(key)}')`;}
+    const galleries={3:['shiota-journey-cover','shiota-journey','shiota-body','shiota-inside-outside'],16:['vima-hall','vima-installation'],2:['vima-installation','vima-hall'],6:['shiota-silence'],4:['11'],5:['shiota-inside-outside'],14:['watermill-centre'],13:['shiota-silence']};
+    for(const [pin,keys]of Object.entries(galleries))Object.assign(events[pin],{gallery:keys.map(image),photos:keys.length});
     $$('.list-card:not([data-segment="events"])').forEach((c,i)=>{$('.card-thumb',c).style.backgroundImage=`url('${image(['vima-installation','shiota-inside-outside','watermill-centre','nomad-maison-jaune','nomad-yellow-apartment'][i%5])}')`;});
     const header=$('.filter-bar > .list-header'),panel=$('.list-panel');
     if(header&&panel)panel.prepend(header);
   }
   function applyMapArtists(artists) {
     const original=artists.slice(),map=Object.fromEntries(original.map((a,i)=>[a.id,d.artists[i%d.artists.length].id]));
-    artists.splice(0,artists.length,...d.artists.map(a=>({id:a.id,name:a.name,meta:a.practice.split(' · ')[0]+' · '+a.city[0].toUpperCase()+a.city.slice(1),work:a.works[0].img,works:a.works.length})));
+    artists.splice(0,artists.length,...d.artists.map(a=>({id:a.id,name:a.name,bio:a.bio,practice:a.practice,meta:a.practice.split(' · ')[0]+' · '+a.city[0].toUpperCase()+a.city.slice(1),work:a.works[0].img,works:a.works.length})));
     for(const n of $$('[data-artists]'))n.dataset.artists=n.dataset.artists.split(',').map(id=>map[id]||id).join(',');
   }
   function subscribe(btn) {

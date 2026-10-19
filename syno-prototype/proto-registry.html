@@ -8097,7 +8097,7 @@
   .myp-photo-public { margin: 0 0 16px; }
   .myp-f-avatar {
     position: relative; width: 104px; height: 104px; border-radius: 0;
-    background: var(--bg-card); border: 1px solid var(--stroke-primary);
+    background: var(--bg-card); border: 0;
     background-repeat: no-repeat; display: grid; place-items: center; cursor: pointer;
     font-family: 'Schengen Core', sans-serif; font-size: 30px; color: var(--button-tab-active-fill);
   }
@@ -8487,7 +8487,7 @@
   }
   .home-account-face {
     position: relative; width: 104px; height: 104px; flex: 0 0 104px; border-radius: 0;
-    border: 1px solid var(--stroke-on-tint); background-size: cover; background-position: 50% 50%;
+    border: 0; background-size: cover; background-position: 50% 50%;
     padding: 0; cursor: pointer; overflow: hidden;
   }
   .home-account-cam {
@@ -10227,7 +10227,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   .syno-location-marker img {width:100%;height:100%;object-fit:cover;}
   .syno-location-map .leaflet-control {box-shadow:none;}
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=0ad85052ed49">
+<link rel="stylesheet" href="assets/promo/case.css?v=30cc2e1f986a">
+<link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="demo-empty-portfolio">
 
@@ -13479,7 +13480,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
 </div>
 
 <script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=d9bef361bbaf"></script>
+<script src="assets/promo/case.js?v=ac551bb2f14e"></script>
 <script>
   /* ============================================================
      AI_ENABLED — единственный выключатель AI-функционала.
@@ -28602,16 +28603,18 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     if (!lb) {
       lb = document.createElement('div');
       lb.id = 'wd-lightbox';
-      lb.className = 'wd-lightbox';
+      lb.className = 'wd-lightbox syno-viewer';
+      lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label','Work gallery');
       lb.hidden = true;
-      lb.innerHTML = '<div class="wd-lb-stage">' +
-        '<div class="wd-lb-mat"><img alt=""></div>' +
-        '<div class="wd-lb-cap"><div class="wd-lb-cap-title"></div><div class="wd-lb-cap-meta"></div></div>' +
-        '</div>' +
-        '<button class="wd-lb-btn wd-lb-close" type="button" aria-label="Close"><span class="material-icons">close</span></button>' +
-        '<button class="wd-lb-btn wd-lb-prev" type="button" aria-label="Previous image"><span class="material-icons">chevron_left</span></button>' +
-        '<button class="wd-lb-btn wd-lb-next" type="button" aria-label="Next image"><span class="material-icons">chevron_right</span></button>' +
-        '<span class="wd-lb-count"></span>';
+      lb.innerHTML = '<div class="syno-viewer-shell">' +
+        '<div class="wd-lb-mat syno-viewer-stage"><img class="syno-viewer-photo" alt=""></div>' +
+        '<aside class="syno-viewer-info">' +
+        '<button class="wd-lb-btn wd-lb-close syno-viewer-control syno-viewer-close" type="button" aria-label="Close"><img src="assets/promo/icons/media-control-close.svg" width="40" height="40" alt=""></button>' +
+        '<div class="wd-lb-cap syno-viewer-caption"><div class="wd-lb-cap-title syno-viewer-title"></div><div class="wd-lb-cap-meta syno-viewer-meta"></div><span class="wd-lb-count syno-viewer-count"></span></div>' +
+        '<div class="syno-viewer-actions">' +
+        '<button class="wd-lb-btn wd-lb-prev syno-viewer-control" type="button" aria-label="Previous image"><img src="assets/promo/icons/media-control-prev.svg" width="40" height="40" alt=""></button>' +
+        '<button class="wd-lb-btn wd-lb-next syno-viewer-control" type="button" aria-label="Next image"><img src="assets/promo/icons/media-control-next.svg" width="40" height="40" alt=""></button>' +
+        '</div></aside></div>';
       document.body.appendChild(lb);
     }
     return lb;
@@ -28619,7 +28622,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   function wdLbShow(i) {
     const lb = wdLbEl();
     wdLbIdx = (i + wdLbImgs.length) % wdLbImgs.length;
-    lb.querySelector('img').src = wdLbImgs[wdLbIdx];
+    lb.querySelector('.syno-viewer-photo').src = wdLbImgs[wdLbIdx];
+    lb.querySelector('.syno-viewer-photo').alt = 'Photo ' + (wdLbIdx + 1) + ' of ' + wdLbImgs.length;
     // Caption mirrors the open work; the counter reads "still N / M" per the canon
     lb.querySelector('.wd-lb-cap-title').textContent = (document.querySelector('#screen-work .wd-title') || {}).textContent || '';
     lb.querySelector('.wd-lb-cap-meta').textContent = (document.querySelector('#screen-work .wd-subtitle') || {}).textContent || '';
@@ -28647,7 +28651,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       if (e.target.closest('.wd-lb-close')) { lb.hidden = true; return; }
       if (e.target.closest('.wd-lb-prev')) { wdLbShow(wdLbIdx - 1); return; }
       if (e.target.closest('.wd-lb-next')) { wdLbShow(wdLbIdx + 1); return; }
-      if (!e.target.closest('.wd-lb-mat, .wd-lb-cap')) { lb.hidden = true; return; } // scrim click closes
+      if (!e.target.closest('.syno-viewer-shell')) { lb.hidden = true; return; } // scrim click closes
     }
   });
   // Портрет на профиле увеличивается тем же лайтбоксом, подпись — имя художника

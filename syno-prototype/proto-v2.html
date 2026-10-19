@@ -4122,13 +4122,19 @@
   .dp-action-btn.vd-directions { height: 32px; padding: 0 12px; border-radius: var(--radius-8); font-size: var(--fs-caption-m); line-height: 1; }
   /* Exhibiting artists — карточки художника (кит Registry/Artist Card): кадр работы,
      Follow белой плашкой на кадре, имя, практика · город, число работ. Ведут в registry. */
-  .vd-artist-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-16) var(--space-12); }
+  .vd-artist-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:0; margin-inline:calc(-1 * var(--space-12)); border-block:1px solid var(--stroke-primary); }
   body.mobile-mode .vd-artist-grid { grid-template-columns: 1fr; }
-  .vd-artist-card { display: flex; flex-direction: column; gap: var(--space-8); cursor: pointer; min-width: 0; }
-  .vd-artist-thumb { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius-12); background: var(--bg-hover) center / cover no-repeat; overflow: hidden; margin-bottom: var(--space-4); }
+  .vd-artist-card { display: flex; flex-direction: column; gap: var(--space-12); cursor: pointer; min-width: 0; padding:var(--space-12); border:0; border-inline-end:1px solid var(--stroke-primary); border-radius:0; }
+  .vd-artist-card:only-child { grid-column:1 / -1; border-inline-end:0; }
+  .vd-artist-card:nth-child(2n) { border-inline-end:0; }
+  .vd-artist-card:nth-child(n+3) { border-block-start:1px solid var(--stroke-primary); }
+  body.mobile-mode .vd-artist-card { border-inline-end:0; }
+  body.mobile-mode .vd-artist-card + .vd-artist-card { border-block-start:1px solid var(--stroke-primary); }
+  .vd-artist-thumb { position: relative; border-radius:0; background: var(--bg-hover) center / contain no-repeat; overflow:hidden; margin:0; }
+  .vd-artist-thumb > img { display:block; width:100%; height:auto; border-radius:0; }
   .vd-artist-card:hover .card-save, .vd-artist-card:focus-within .card-save { opacity: 1; }
   .vd-artist-name { font-size: var(--fs-heading-h5); line-height: 1.2; color: var(--text-primary); }
-  .vd-artist-card:hover .vd-artist-name { color: var(--text-link); }
+  .vd-artist-card:hover { background:var(--bg-hover); }
   .vd-artist-facts { font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-m); line-height: 1.2; letter-spacing: -0.02em; color: var(--text-secondary); }
   .vd-artist-works { font-size: var(--fs-caption-s); line-height: 1.2; color: var(--text-secondary); }
   /* Программа места: статус на кадре (как у карточки выдачи), мета — «когда» моно 14 */
@@ -6224,11 +6230,12 @@
   html.is-embedded .app { margin: 0; border: 0; height: 100vh; height: 100dvh; }
   html.is-embedded .app::before, html.is-embedded .app::after { display: none; }
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=0ad85052ed49">
+<link rel="stylesheet" href="assets/promo/case.css?v=30cc2e1f986a">
+<link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="arch-gmaps-drawer">
 <script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=d9bef361bbaf"></script>
+<script src="assets/promo/case.js?v=ac551bb2f14e"></script>
 <script>
 /* Встроенная карта (5 октября 2026): registry показывает Art Map своим экраном #artmap — шапка,
    вход и Favourites общие. Во встроенном режиме своих шапки и стендовой полосы нет, рамку держит
@@ -7147,18 +7154,18 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
 </div>
 
 <!-- Photo lightbox — fullscreen image viewer с навигацией ←/→. Click на hero/card-thumb открывает. -->
-<div class="photo-lightbox" id="photo-lightbox" role="dialog" aria-label="Photo gallery" aria-modal="true">
-  <button class="lightbox-close" id="lightbox-close" aria-label="Close gallery">
-    <span class="material-icons">close</span>
-  </button>
-  <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Previous photo">
-    <span class="material-icons">chevron_left</span>
-  </button>
-  <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next photo">
-    <span class="material-icons">chevron_right</span>
-  </button>
-  <img class="lightbox-image" id="lightbox-image" alt="" />
-  <div class="lightbox-counter" id="lightbox-counter">1 / 8</div>
+<div class="photo-lightbox syno-viewer" id="photo-lightbox" role="dialog" aria-label="Photo gallery" aria-modal="true">
+  <div class="syno-viewer-shell">
+    <div class="syno-viewer-stage"><img class="lightbox-image syno-viewer-photo" id="lightbox-image" alt=""></div>
+    <aside class="syno-viewer-info">
+      <button class="lightbox-close syno-viewer-control syno-viewer-close" id="lightbox-close" aria-label="Close gallery"><img src="assets/promo/icons/media-control-close.svg" width="40" height="40" alt=""></button>
+      <div class="syno-viewer-caption"><p class="syno-viewer-title" id="lightbox-title"></p><div class="syno-viewer-meta" id="lightbox-meta"></div><div class="lightbox-counter syno-viewer-count" id="lightbox-counter"></div></div>
+      <div class="syno-viewer-actions">
+        <button class="lightbox-nav lightbox-prev syno-viewer-control" id="lightbox-prev" aria-label="Previous photo"><img src="assets/promo/icons/media-control-prev.svg" width="40" height="40" alt=""></button>
+        <button class="lightbox-nav lightbox-next syno-viewer-control" id="lightbox-next" aria-label="Next photo"><img src="assets/promo/icons/media-control-next.svg" width="40" height="40" alt=""></button>
+      </div>
+    </aside>
+  </div>
 </div>
 
 <!-- Old slim quick-view drawer удалён.
@@ -8260,38 +8267,48 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
   }
 
   // === Photo lightbox === fullscreen image viewer на click hero/thumb.
-  // 8 mock photos (наша pool). Открывает с current image, swipe-able ←/→.
+  // The viewer uses the selected object's gallery and starts on its current slide.
   const LIGHTBOX_PHOTOS = ['card-1.png', 'card-2.png', 'p3.png', 'p4.png', 'p5.png', 'p6.png', 'p7.png', 'p8.png'];
+  let lightboxPhotos = LIGHTBOX_PHOTOS.map(src => './photos/' + src);
   let lightboxIndex = 0;
-  function openLightbox(startSrc) {
+  let lightboxReturnFocus = null;
+  function openLightbox(startSrc, photos) {
     const lb = document.getElementById('photo-lightbox');
     const img = document.getElementById('lightbox-image');
     if (!lb || !img) return;
-    // Try find startSrc in pool, else start 0
-    const found = LIGHTBOX_PHOTOS.findIndex(p => startSrc && startSrc.includes(p));
+    lightboxPhotos = photos && photos.length ? photos : LIGHTBOX_PHOTOS.map(src => './photos/' + src);
+    const found = lightboxPhotos.findIndex(src => startSrc && new URL(src, location.href).href === new URL(startSrc, location.href).href);
     lightboxIndex = found >= 0 ? found : 0;
     updateLightboxImage();
+    const detail = document.querySelector('.detail-page-' + getCurrentDetailType());
+    document.getElementById('lightbox-title').textContent = detail?.querySelector('h1')?.textContent || 'Photo gallery';
+    document.getElementById('lightbox-meta').textContent = detail?.querySelector('.vd-subtitle')?.innerText || '';
+    lightboxReturnFocus = document.activeElement;
     lb.classList.add('open');
+    document.getElementById('lightbox-close').focus({preventScroll:true});
     document.documentElement.style.overflow = 'hidden';
   }
   function updateLightboxImage() {
     const img = document.getElementById('lightbox-image');
     const counter = document.getElementById('lightbox-counter');
-    if (img) img.src = './photos/' + LIGHTBOX_PHOTOS[lightboxIndex];
-    if (counter) counter.textContent = `${lightboxIndex + 1} / ${LIGHTBOX_PHOTOS.length}`;
+    if (img) { img.src = lightboxPhotos[lightboxIndex]; img.alt = 'Photo ' + (lightboxIndex + 1) + ' of ' + lightboxPhotos.length; }
+    document.getElementById('lightbox-prev').hidden = lightboxPhotos.length < 2;
+    document.getElementById('lightbox-next').hidden = lightboxPhotos.length < 2;
+    if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
   }
   function closeLightbox() {
     const lb = document.getElementById('photo-lightbox');
     if (lb) lb.classList.remove('open');
-    document.documentElement.style.overflow = '';
+    lightboxReturnFocus?.focus({preventScroll:true});
+    document.documentElement.style.overflow = document.body.classList.contains('detail-open') ? 'hidden' : '';
   }
   document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
   document.getElementById('lightbox-prev')?.addEventListener('click', () => {
-    lightboxIndex = (lightboxIndex - 1 + LIGHTBOX_PHOTOS.length) % LIGHTBOX_PHOTOS.length;
+    lightboxIndex = (lightboxIndex - 1 + lightboxPhotos.length) % lightboxPhotos.length;
     updateLightboxImage();
   });
   document.getElementById('lightbox-next')?.addEventListener('click', () => {
-    lightboxIndex = (lightboxIndex + 1) % LIGHTBOX_PHOTOS.length;
+    lightboxIndex = (lightboxIndex + 1) % lightboxPhotos.length;
     updateLightboxImage();
   });
   // Click outside image (на dark overlay) → close
@@ -8312,9 +8329,8 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     if (!hero) return;
     // Skip click на pagination dots (внутри hero)
     if (e.target.closest('.dp-hero-pagination')) return;
-    const bgImg = getComputedStyle(hero).backgroundImage;
-    const match = bgImg.match(/photos\/([^'")]+)/);
-    openLightbox(match ? match[1] : null);
+    const photos = heroPhotoSet(hero);
+    openLightbox(photos[Number(hero.dataset.heroIdx || 0)], photos);
   });
 
   // === Filter persistence ===
@@ -8642,6 +8658,8 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
       const ic = btn.querySelector('.material-icons');
       if (act === 'Save') {
         if (txt) txt.textContent = on ? 'Saved' : 'Save';
+        if (ic) ic.textContent = on ? 'favorite' : 'favorite_border';
+        btn.setAttribute('aria-pressed', String(on));
       } else {
         if (txt) txt.textContent = on ? 'Following' : 'Follow';
         if (ic) ic.style.display = on ? 'none' : '';
@@ -11612,11 +11630,12 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     if (!a) return '';
     return '<div class="vd-artist-card" role="link" tabindex="0" data-artist-id="' + a.id + '" data-artist-name="' + escHtml(a.name) + '">'
       + '<div class="vd-artist-thumb" style="background-image:url(\'' + a.work + '\')">'
+      + '<img src="' + escHtml(a.work) + '" alt="Work by ' + escHtml(a.name) + '">'
       + '<button class="card-save card-follow-pill" type="button" aria-label="Follow"><span>Follow</span></button>'
       + '</div>'
       + '<div class="vd-artist-name">' + escHtml(a.name) + '</div>'
-      + '<div class="vd-artist-facts">' + escHtml(a.meta) + '</div>'
-      + '<div class="vd-artist-works">' + plural(a.works, 'work', 'works') + '</div>'
+      + '<div class="vd-artist-facts">' + escHtml(a.bio || a.meta) + '</div>'
+      + '<div class="vd-artist-works">' + escHtml(a.practice || plural(a.works, 'work', 'works')) + '</div>'
       + '</div>';
   }
 
@@ -12041,14 +12060,19 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
   function heroPhotoSet(hero) {
     const pinId = parseInt((hero && hero.dataset.heroPin) || (document.querySelector('.list-card.active') || {}).dataset?.pin || '1', 10) || 1;
     const count = parseInt((hero && hero.dataset.heroCount) || '4', 10) || 4;
+    const gallery = (EVENT_INFO[pinId] || PLACE_INFO[pinId] || {}).gallery;
+    if (gallery && gallery.length) return gallery;
     const start = (pinId - 1) % HERO_POOL.length;
     const pool = Array.from({ length: HERO_POOL.length }, (_, i) => './photos/' + HERO_POOL[(start + i) % HERO_POOL.length] + '.png');
     // Первый кадр — то же фото, что на карточке объекта
     const thumb = document.querySelector('.list-card[data-pin="' + pinId + '"] .card-thumb');
     const m = thumb ? /url\(["']?(.*?)["']?\)/.exec(getComputedStyle(thumb).backgroundImage || '') : null;
-    const own = m ? './photos/' + m[1].split('/photos/').pop() : '';
+    const own = m ? m[1] : '';
     const set = own ? [own].concat(pool.filter(u => u !== own)) : pool;
-    return Array.from({ length: count }, (_, i) => set[i % set.length]);
+    return Array.from({ length: count }, (_, i) => {
+      const src = set[i % set.length];
+      return window.SynoPromo ? window.SynoPromo.asset(src) : src;
+    });
   }
   /* Строка и полоса миниатюр строятся из тех же точек: сколько точек —
      столько кадров. Собираются на каждый объект, живут под кадром. */
