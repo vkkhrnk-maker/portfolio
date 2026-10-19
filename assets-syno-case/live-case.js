@@ -3,6 +3,21 @@
 (() => {
   'use strict';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('[data-syno-video]').forEach(video => {
+    let visible=false, userPaused=false;
+    video.muted=true;
+    function sync() {
+      if (!visible || document.hidden || reduced.matches) video.pause();
+      else if (!userPaused) video.play().catch(()=>{});
+    }
+    video.addEventListener('pause',()=>{
+      if (visible && !document.hidden && !reduced.matches) userPaused=true;
+    });
+    video.addEventListener('play',()=>{ userPaused=false; });
+    new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.15}).observe(video);
+    document.addEventListener('visibilitychange',sync);
+    reduced.addEventListener('change',sync);
+  });
   function motion(demo, viewport, title, getTarget, initialDelay = 1600) {
     const button = demo.querySelector('.syno-scroll-controls button');
     if (!button) return {refresh() {}};

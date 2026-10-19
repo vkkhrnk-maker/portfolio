@@ -6235,7 +6235,7 @@
 </head>
 <body class="arch-gmaps-drawer">
 <script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=ac551bb2f14e"></script>
+<script src="assets/promo/case.js?v=44e7f503807d"></script>
 <script>
 /* Встроенная карта (5 октября 2026): registry показывает Art Map своим экраном #artmap — шапка,
    вход и Favourites общие. Во встроенном режиме своих шапки и стендовой полосы нет, рамку держит
@@ -9055,8 +9055,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
   });
   window.addEventListener('resize', gateSyncWidth);
 
-  // Mock-CTA delegation — все .dp-action-btn / .dp-icon-btn / .vd-btn (Save/Share/etc) ещё не wired
-  // в Phase 1, но не должны выглядеть «сломанными» на демо. Toast feedback по labels кнопки.
+  // Shared actions; legacy CTAs below still show prototype feedback.
   // Исключения: dp-close, dp-back, dp-expand-inline, dp-close-inline — у них свои handlers.
   document.body.addEventListener('click', e => {
     const btn = e.target.closest('.dp-action-btn, .dp-icon-btn, .vd-btn');
@@ -9075,6 +9074,19 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
       // дозавершается за него после возврата (resumeAfterAuth).
       if (!signedIn) { openGate(btn, act); return; }
       applySaveFollow(btn, act);
+      return;
+    }
+    if (act === 'Share') {
+      const link = new URL(location.href);
+      ['signed', 'auth', 'do'].forEach(key => link.searchParams.delete(key));
+      if (!navigator.clipboard?.writeText) {
+        showToast('Copy the address from your browser to share this event.');
+        return;
+      }
+      navigator.clipboard.writeText(link.href).then(
+        () => showToast('Link copied', { success: true }),
+        () => showToast('Couldn’t copy the link. Copy the address from your browser.')
+      );
       return;
     }
     // Получаем label из title или text content
@@ -9823,6 +9835,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     '20': { lat: 34.7755, lng: 32.4250, name: 'Paphos Stage Lab' },
     '21': { lat: 35.1700, lng: 33.3580, name: 'Old Town Workshop, Nicosia' }
   };
+  if (window.SynoPromo) Object.assign(pinCoordinates, window.SynoPromo.mapCoordinates);
 
   try {
     leafletMap = L.map('leaflet-bg', {
@@ -11562,7 +11575,13 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
   function vdChips(list) { return list.map(t => '<span class="badge">' + escHtml(t) + '</span>').join(''); }
   function vdMockLink(text, mock) { return '<a class="vd-link" href="#" data-mock="' + escHtml(mock) + '">' + escHtml(text) + '</a>'; }
   // Профиль художника живёт в Artist Registry (словарь адресов: #profile); вход переносит ?signed=1
-  function registryProfileHref() { return 'proto-registry.html' + (signedIn ? '?signed=1' : '') + '#profile'; }
+  function registryProfileHref(artistId) {
+    const href = 'proto-registry.html' + (signedIn ? '?signed=1' : '') + '#profile';
+    if (!window.SynoPromo) return href;
+    const url = new URL(window.SynoPromo.caseLink(href), location.href);
+    if (artistId) url.searchParams.set('artist', artistId);
+    return url.pathname.split('/').pop() + url.search + url.hash;
+  }
 
   function fillDetail(type, card) {
     const root = document.querySelector('.detail-page-' + type);
@@ -11967,7 +11986,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     // Художник — не дравер карты (artmap.md): карточка и строка ведут на профиль в Artist Registry
     const artistCard = e.target.closest('.vd-artist-card');
     if (artistCard && !e.target.closest('.card-save')) {
-      synoGo(registryProfileHref());
+      synoGo(registryProfileHref(artistCard.dataset.artistId));
       return;
     }
     const artistLink = e.target.closest('a[data-artist-link]');

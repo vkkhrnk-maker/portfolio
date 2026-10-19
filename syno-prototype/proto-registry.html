@@ -13480,7 +13480,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
 </div>
 
 <script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=ac551bb2f14e"></script>
+<script src="assets/promo/case.js?v=44e7f503807d"></script>
 <script>
   /* ============================================================
      AI_ENABLED — единственный выключатель AI-функционала.
@@ -28598,6 +28598,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
 
   /* Work-detail lightbox — click any media image to view it large; ← → / Esc keyboard */
   let wdLbImgs = [], wdLbIdx = 0;
+  let wdLbReturnFocus = null, wdLbPreviousOverflow = '';
   function wdLbEl() {
     let lb = document.getElementById('wd-lightbox');
     if (!lb) {
@@ -28621,6 +28622,11 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   }
   function wdLbShow(i) {
     const lb = wdLbEl();
+    const opening = lb.hidden;
+    if (opening) {
+      wdLbReturnFocus = document.activeElement;
+      wdLbPreviousOverflow = document.documentElement.style.overflow;
+    }
     wdLbIdx = (i + wdLbImgs.length) % wdLbImgs.length;
     lb.querySelector('.syno-viewer-photo').src = wdLbImgs[wdLbIdx];
     lb.querySelector('.syno-viewer-photo').alt = 'Photo ' + (wdLbIdx + 1) + ' of ' + wdLbImgs.length;
@@ -28632,6 +28638,15 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     lb.querySelector('.wd-lb-prev').hidden = !nav;
     lb.querySelector('.wd-lb-next').hidden = !nav;
     lb.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    if (opening) lb.querySelector('.wd-lb-close').focus({preventScroll:true});
+  }
+  function wdLbClose() {
+    const lb = document.getElementById('wd-lightbox');
+    if (!lb || lb.hidden) return;
+    lb.hidden = true;
+    document.documentElement.style.overflow = wdLbPreviousOverflow;
+    wdLbReturnFocus?.focus({preventScroll:true});
   }
   document.addEventListener('click', function (e) {
     const th = e.target.closest('#screen-work .wd-thumb');
@@ -28648,10 +28663,10 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     }
     const lb = document.getElementById('wd-lightbox');
     if (lb && !lb.hidden) {
-      if (e.target.closest('.wd-lb-close')) { lb.hidden = true; return; }
+      if (e.target.closest('.wd-lb-close')) { wdLbClose(); return; }
       if (e.target.closest('.wd-lb-prev')) { wdLbShow(wdLbIdx - 1); return; }
       if (e.target.closest('.wd-lb-next')) { wdLbShow(wdLbIdx + 1); return; }
-      if (!e.target.closest('.syno-viewer-shell')) { lb.hidden = true; return; } // scrim click closes
+      if (!e.target.closest('.syno-viewer-shell')) { wdLbClose(); return; } // scrim click closes
     }
   });
   // Портрет на профиле увеличивается тем же лайтбоксом, подпись — имя художника
@@ -28670,7 +28685,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   document.addEventListener('keydown', function (e) {
     const lb = document.getElementById('wd-lightbox');
     if (!lb || lb.hidden) return;
-    if (e.key === 'Escape') lb.hidden = true;
+    if (e.key === 'Escape') wdLbClose();
     else if (e.key === 'ArrowLeft') wdLbShow(wdLbIdx - 1);
     else if (e.key === 'ArrowRight') wdLbShow(wdLbIdx + 1);
   });
