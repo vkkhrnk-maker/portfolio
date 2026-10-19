@@ -65,7 +65,7 @@ Cases: [Read the MVP case](hooh.html "AI assistant MVP"), [Read the workspace ca
 ### Product Designer — iTAB
 **May 2024 – Apr 2026 · part-time, remote · health and wellness e-commerce · web and mobile app**
 
-- Designed the specialist-consultations service end to end: the specialist's application, dashboard and schedule, the client's catalog, booking and payment, for the mobile app and the web version that shipped. Alongside it, the homepage, the product catalog and sections across the app and the site.
+- Designed the specialist-consultations service end to end: the specialist's application, dashboard and schedule, the client's catalog, booking and payment, for the mobile app and the shipped web version. Alongside it, the homepage, the catalog and sections across the app and the site.
 - Redesigned the supplement product card to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.
 
 Cases: [Read the consultations case](itab-specialists.html "Specialist consultations"), [Read the product card case](itab.html "Product card")
@@ -80,7 +80,7 @@ Cases: [Read the consultations case](itab-specialists.html "Specialist consultat
 **AI products** — LLM assistants and conversational UI · progressive disclosure of model output · source citations and provenance · scoped context control · uncertainty and failure states · human-in-the-loop override
 **Design** — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · cross-platform mobile and web
 **Design systems** — Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA
-**Research and delivery** — UX audit · competitor analysis · developer handoff and specs · mentoring
+**Research and delivery** — UX audit · competitor analysis · user interviews · usability testing · developer handoff and specs · mentoring
 **Tools** — Figma (variables, components, auto-layout) · FigJam · AI coding agents (Claude Code, Codex) to build working prototypes in HTML and Xcode and custom Figma plugins for bulk token audits and migrations
 
 ## Education

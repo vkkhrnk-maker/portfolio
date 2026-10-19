@@ -10,7 +10,7 @@
   /* Print-first CV. Single column, real text, no icons, no layout tables —
      everything an ATS parser needs to extract cleanly, with the typography
      doing the work instead of graphics. Content is sized to one A4 page. */
-  @page { size: A4; margin: 11mm 13mm; }
+  @page { size: A4; margin: 10mm 13mm; }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -62,7 +62,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    margin: 2.2mm 0 0;
+    margin: 1.8mm 0 0;
     padding-bottom: 0.6mm;
     border-bottom: 0.6pt solid #c9c9c9;
   }
@@ -71,7 +71,7 @@
   p { margin: 0; }
 
   /* ---- roles ---- */
-  .role-block { margin-top: 1.8mm; page-break-inside: avoid; }
+  .role-block { margin-top: 1.5mm; page-break-inside: avoid; }
   .role-block:first-of-type { margin-top: 0; }
 
   .role-head {
