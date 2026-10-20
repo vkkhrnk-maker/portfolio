@@ -50,7 +50,7 @@ End to end, from research and customer journey mapping to release. At an AI star
 - **Syno.art** (2026–Present): art platform based in Cyprus. Designed the artist side end to end (auth, profile and portfolio, the open-call flow and applications dashboard) across desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
 - **Cryptomi** (2023–2024): crypto startup. Designed the MVP from user flows to final UI, keeping data-heavy screens clear.
 - **Abramova School** (2023–2024): UX/UI design and mentoring junior designers through critiques and portfolio reviews.
-- **Ebda Agency** (2022–2023): Canadian agency. Designed pages for webflow.com and other client sites, within each client's design system.
+- **Ebda Agency** (2022–2023): Canadian agency. Designed pages for webflow.com and sites for other clients of the agency.
 
 ### Product Designer — Hooh
 **Feb 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
