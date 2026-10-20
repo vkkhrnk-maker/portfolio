@@ -2028,7 +2028,7 @@
   .card-badges {
     display: flex;
     gap: var(--space-8);
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
   }
   /* Бейджи и действие лежат ПОВЕРХ кадра (канон Card/ArtMap): бейджи слева снизу,
@@ -2038,7 +2038,7 @@
   .card-thumb > .card-badges {
     position: absolute;
     left: var(--space-12);
-    right: 52px;
+    right: var(--space-12);
     bottom: var(--space-12);
   }
   .card-save {
@@ -5237,8 +5237,8 @@
   .date-cal-day.range-start,
   .date-cal-day.range-end,
   .date-cal-day.single {
-    background: var(--button-tab-active-fill) !important;
-    color: white;
+    background: var(--bg-tab-primary) !important;
+    color: var(--text-primary);
     font-weight: 500;
   }
   .date-cal-day.range-start { border-radius: 50% 0 0 50%; }
@@ -6230,7 +6230,7 @@
   html.is-embedded .app { margin: 0; border: 0; height: 100vh; height: 100dvh; }
   html.is-embedded .app::before, html.is-embedded .app::after { display: none; }
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=30cc2e1f986a">
+<link rel="stylesheet" href="assets/promo/case.css?v=8af7eeaa96c0">
 <link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="arch-gmaps-drawer">
@@ -7185,7 +7185,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
   // Категория на карточке (16 сентября 2026): meta — первым словом подписи (по умолчанию),
   // kicker — строкой над названием, badge — как отдано, бейджем на кадре.
   window.CARD_TYPE_MODE = ['kicker', 'badge'].includes(new URLSearchParams(location.search).get('cardtype'))
-    ? new URLSearchParams(location.search).get('cardtype') : window.SynoPromo ? 'badge' : 'meta';
+    ? new URLSearchParams(location.search).get('cardtype') : 'meta';
   window.CARD_TYPE_AS_BADGE = window.CARD_TYPE_MODE === 'badge';
   document.body.classList.toggle('cardtype-badge', window.CARD_TYPE_AS_BADGE);
   document.querySelectorAll('#cardtype-switcher .auth-btn').forEach(btn => {
@@ -9349,7 +9349,9 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
 
     // Map auto-fit к visible pins — карта реагирует на фильтры/поиск.
     // Debounce 300ms чтобы не дёргаться при каждом keystroke в search input.
-    if (typeof leafletMap !== 'undefined' && leafletMap && typeof leafletMarkers !== 'undefined') {
+    const mapFitKey = Array.from(visibleCardIds).sort().join(',');
+    if (typeof leafletMap !== 'undefined' && leafletMap && typeof leafletMarkers !== 'undefined' && state.mapFitKey !== mapFitKey) {
+      state.mapFitKey = mapFitKey;
       clearTimeout(window._mapFitTimer);
       window._mapFitTimer = setTimeout(() => {
         const visibleMarkers = [];
@@ -10257,7 +10259,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
       }
       // list-header обратно первым ребёнком строки фильтров — над колонкой списка (карточка 67)
       const filterBar = document.querySelector('.filter-bar');
-      const headerParent = window.SynoPromo ? listPanel : filterBar;
+      const headerParent = filterBar;
       if (listHeader && headerParent && listHeader.parentElement !== headerParent) {
         headerParent.insertBefore(listHeader, headerParent.firstChild);
       }
@@ -10874,6 +10876,9 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
   document.querySelectorAll('.view-mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const view = btn.dataset.view;
+      if (view === 'list' && typeof leafletMap !== 'undefined' && leafletMap) {
+        state.mapViewCamera = {center: leafletMap.getCenter(), zoom: leafletMap.getZoom()};
+      }
       document.querySelectorAll('.view-mode-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
@@ -10883,7 +10888,13 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
       if (typeof positionListDrawer === 'function') positionListDrawer();
       // Leaflet требует invalidateSize() после изменения размера контейнера
       if (typeof leafletMap !== 'undefined' && leafletMap && view !== 'list') {
-        setTimeout(() => leafletMap.invalidateSize(), 50);
+        requestAnimationFrame(() => {
+          leafletMap.invalidateSize({pan:false});
+          if (state.mapViewCamera) {
+            leafletMap.setView(state.mapViewCamera.center, state.mapViewCamera.zoom, {animate:false});
+            state.mapViewCamera = null;
+          }
+        });
       }
     });
   });

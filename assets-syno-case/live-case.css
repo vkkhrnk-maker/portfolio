@@ -8,7 +8,6 @@
 .syno-native-demo { width:100%; min-width:0; }
 .syno-film-demo { width:100%; min-width:0; }
 .syno-walkthrough-video { display:block; width:100%; height:auto; aspect-ratio:8/5; object-fit:contain; background:var(--surface-media); }
-.syno-film-actions { display:flex; justify-content:flex-end; margin-top:12px; }
 .syno-native-window { position:relative; width:100%; aspect-ratio:1280/800; overflow:hidden; background:#e4e3e1; }
 .syno-native-window iframe { position:absolute; inset:0 auto auto 0; border:0; display:block; max-width:none; transform-origin:top left; }
 .syno-native-phone { width:100%; max-width:280px; margin-inline:auto; }

@@ -237,11 +237,7 @@ html.promo-case #screen-registry .registry-results::after { display:none; }
   html.promo-case { --promo-header-top:12px; --promo-header-height:57px; }
   html.promo-case :is(#screen-eventpage,#screen-orgpublic) .orgp-side-inner { position:static; }
 }
-html.promo-case body.promo-map .filter-bar { display:block; }
-html.promo-case body.promo-map .filter-bar .filters-row-wrapper { padding:12px; }
-html.promo-case body.promo-map .list-panel > .list-header { min-height:41px; height:41px; position:sticky; top:0; z-index:4; padding:0 12px; background:var(--bg-primary); }
-html.promo-case body.promo-map #map { padding-top:53px; }
-html.promo-case body.promo-map #leaflet-bg { top:53px; }
+/* Art Map uses the shared count/sort + filters row from Syno 2550:131163. */
 html.promo-case body.promo-map .card-meta-info { font-family:'Schengen A',sans-serif; }
 html.promo-case body.promo-map .list-panel .card-title { -webkit-line-clamp:1; }
 html.promo-case body.promo-map:not(.view-list) .list-panel .card-thumb { min-height:180px; border-radius:8px; }
