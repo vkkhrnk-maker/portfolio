@@ -297,7 +297,10 @@
     const additions=[
       {pin:23,title:'Shared Rooms',who:'Nora Veli',start:'2026-10-16',end:'2026-11-08',venue:'Linea Project Room',type:'exhibition',theme:'memory',medium:'painting,mixed',artists:'nora-veli',image:'5',popular:true,opening:{date:'2026-10-16',time:'19:00'},about:'Paintings and mixed-media works exploring the rooms we share and the objects we leave behind.'},
       {pin:24,title:'Material Dialogues',who:'Theo Maveli',start:'2026-10-17',end:'2026-10-31',venue:'Aster Project Space',type:'exhibition',theme:'architecture',medium:'sculpture',artists:'theo-maveli',image:'8',popular:false,about:'A small exhibition of sculptures in stone and found materials, arranged as a conversation between weight, surface and space.'},
-      {pin:25,title:'Inside the Studio — artist conversation',who:'Mira Soleni and Nora Veli',start:'2026-10-18',end:'2026-10-18',time:'14:00–16:00',venue:'Aster Studio',type:'talk',theme:'memory',medium:'installation,mixed',artists:'mira-soleni,nora-veli',image:'nomad-yellow-apartment',popular:true,about:'Mira Soleni and Nora Veli discuss their current work in an open studio conversation, with time for questions.'}
+      {pin:25,title:'Inside the Studio — artist conversation',who:'Mira Soleni and Nora Veli',start:'2026-10-18',end:'2026-10-18',time:'14:00–16:00',venue:'Aster Studio',type:'talk',theme:'memory',medium:'installation,mixed',artists:'mira-soleni,nora-veli',image:'nomad-yellow-apartment',popular:true,about:'Mira Soleni and Nora Veli discuss their current work in an open studio conversation, with time for questions.'},
+      {pin:26,title:'Night Studies',who:'Dani Orien',start:'2026-10-21',end:'2026-11-15',venue:'Side Room Gallery',type:'exhibition',theme:'memory',medium:'photography',artists:'dani-orien',image:'12',popular:false,about:'A photographic study of familiar rooms after dark, tracing the quiet details that remain when everyday activity stops.'},
+      {pin:27,title:'Light Between Rooms',who:'Mira Soleni',start:'2026-10-22',end:'2026-11-12',venue:'Linea Project Room',type:'exhibition',theme:'architecture',medium:'installation',artists:'mira-soleni',image:'shiota-memories',popular:true,about:'An installation of thread and found objects connecting separate rooms through light, shadow and memory.'},
+      {pin:28,title:'The Shape of Memory',who:'Nora Veli',start:'2026-10-24',end:'2026-11-21',venue:'Aster Project Space',type:'exhibition',theme:'memory',medium:'painting,mixed',artists:'nora-veli',image:'9',popular:false,about:'Paintings and mixed-media works considering how places change in recollection.'}
     ];
     for(const ev of additions){
       events[ev.pin]={...ev,city:'Nicosia',address:'Old Town, Nicosia, Cyprus',entry:'Free',accessible:true,gallery:[image(ev.image)],photos:1};
@@ -331,7 +334,7 @@
   function applyMapArtists(artists) {
     const original=artists.slice(),map=Object.fromEntries(original.map((a,i)=>[a.id,d.artists[i%d.artists.length].id]));
     artists.splice(0,artists.length,...d.artists.map(a=>({id:a.id,name:a.name,bio:a.bio,practice:a.practice,meta:a.practice.split(' · ')[0]+' · '+a.city[0].toUpperCase()+a.city.slice(1),work:a.works[0].img,works:a.works.length})));
-    const eventArtists={3:'mira-soleni',4:'iris-varen',5:'',6:'nora-veli,theo-maveli',13:'dani-orien',14:'',16:'iris-varen,leon-arven',23:'nora-veli',24:'theo-maveli',25:'mira-soleni,nora-veli'};
+    const eventArtists={3:'mira-soleni',4:'iris-varen',5:'',6:'nora-veli,theo-maveli',13:'dani-orien',14:'',16:'iris-varen,leon-arven',23:'nora-veli',24:'theo-maveli',25:'mira-soleni,nora-veli',26:'dani-orien',27:'mira-soleni',28:'nora-veli'};
     for(const n of $$('[data-artists]'))n.dataset.artists=n.dataset.segment==='events' && Object.hasOwn(eventArtists,n.dataset.pin)
       ? eventArtists[n.dataset.pin] : n.dataset.artists.split(',').map(id=>map[id]||id).join(',');
   }
@@ -377,5 +380,5 @@
     document.addEventListener('click',()=>setTimeout(()=>decorate(document),0));
   }
   window.SynoPromo={data:d,asset,caseLink,applyStories,applyEditorial,applyEventData,eventArtistCard,applyMapData,applyMapArtists,applyPlaces,applyProfile,applyWork,
-    mapCoordinates:{23:{lat:35.1693,lng:33.3608,name:'Linea Project Room, Nicosia'},24:{lat:35.1733,lng:33.3654,name:'Aster Project Space, Nicosia'},25:{lat:35.1708,lng:33.3674,name:'Aster Studio, Nicosia'}}};
+    mapCoordinates:{23:{lat:35.1693,lng:33.3608,name:'Linea Project Room, Nicosia'},24:{lat:35.1733,lng:33.3654,name:'Aster Project Space, Nicosia'},25:{lat:35.1708,lng:33.3674,name:'Aster Studio, Nicosia'},26:{lat:35.1712,lng:33.3604,name:'Side Room Gallery, Nicosia'},27:{lat:35.1693,lng:33.3608,name:'Linea Project Room, Nicosia'},28:{lat:35.1733,lng:33.3654,name:'Aster Project Space, Nicosia'}}};
 })();
