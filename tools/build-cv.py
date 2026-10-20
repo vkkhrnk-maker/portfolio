@@ -255,16 +255,20 @@ def print_body(doc):
     a = p.append
     m = doc["meta"]
     a('  <header>')
-    a(f'    <h1 class="name">{inline(doc["name"])}</h1>')
-    a(f'    <p class="role">{inline(doc["role"])}</p>')
+    a('    <div class="ident">')
+    a(f'      <h1 class="name">{inline(doc["name"])}</h1>')
+    a(f'      <p class="role">{inline(doc["role"])}</p>')
+    a(f'      <p class="based">{inline(m["Based"])}</p>')
+    a('    </div>')
     # Every contact is a live link: the PDF is read on screen far more often
     # than on paper, and the portfolio is the one link a designer's CV exists for.
+    # One per line, right-aligned beside the name: the portfolio first, the
+    # email last; the time zone sits under the role on the left. Telegram is
+    # left off the English sheet (her call, 20 Oct 2026): it stays on the site. Still plain text in reading order, so ATS parsing is unchanged.
     a('    <p class="contacts">')
-    a(f'      <span>{inline(m["Based"])}</span><span class="sep">|</span>'
-      f'<span>{link("mailto:" + m["Email"], inline(m["Email"]))}</span><span class="sep">|</span>'
-      f'<span>{link(telegram_url(m["Telegram"]), "Telegram " + inline(m["Telegram"]))}</span><br>')
-    a(f'      <span>{link(m["Portfolio"], inline(strip_scheme(m["Portfolio"])))}</span><span class="sep">|</span>'
-      f'<span>{link(m["LinkedIn"], inline(strip_scheme(m["LinkedIn"])))}</span>')
+    a(f'      <span>{link(m["Portfolio"], inline(strip_scheme(m["Portfolio"])))}</span><br>')
+    a(f'      <span>{link(m["LinkedIn"], inline(strip_scheme(m["LinkedIn"])))}</span><br>')
+    a(f'      <span>{link("mailto:" + m["Email"], inline(m["Email"]))}</span>')
     a('    </p>')
     a('  </header>')
     a('')

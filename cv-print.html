@@ -10,7 +10,7 @@
   /* Print-first CV. Single column, real text, no icons, no layout tables —
      everything an ATS parser needs to extract cleanly, with the typography
      doing the work instead of graphics. Content is sized to one A4 page. */
-  @page { size: A4; margin: 10mm 13mm; }
+  @page { size: A4; margin: 11mm 13mm; }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -43,11 +43,23 @@
     color: #b4137f;
     margin: 1mm 0 0;
   }
-  .contacts {
-    margin: 1.8mm 0 0;
+  .based {
+    margin: 1.2mm 0 0;
     color: #4a4a4a;
     font-size: 8.6pt;
-    line-height: 1.35;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8mm;
+  }
+  .contacts {
+    margin: 0.6mm 0 0;
+    color: #4a4a4a;
+    font-size: 8.6pt;
+    line-height: 1.4;
+    text-align: right;
   }
   .contacts span { white-space: nowrap; }
   .sep { color: #b0b0b0; padding: 0 1.5mm; }
@@ -62,16 +74,14 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    margin: 1.8mm 0 0;
-    padding-bottom: 0.6mm;
-    border-bottom: 0.6pt solid #c9c9c9;
+    margin: 3.5mm 0 0;
   }
-  h2 + * { margin-top: 1.3mm; }
+  h2 + * { margin-top: 1.5mm; }
 
   p { margin: 0; }
 
   /* ---- roles ---- */
-  .role-block { margin-top: 1.5mm; page-break-inside: avoid; }
+  .role-block { margin-top: 2mm; page-break-inside: avoid; }
   .role-block:first-of-type { margin-top: 0; }
 
   .role-head {
@@ -120,11 +130,15 @@
 <body>
 
   <header>
-    <h1 class="name">Victoria Kukharenko</h1>
-    <p class="role">Product Designer</p>
+    <div class="ident">
+      <h1 class="name">Victoria Kukharenko</h1>
+      <p class="role">Product Designer</p>
+      <p class="based">Remote · UTC+2</p>
+    </div>
     <p class="contacts">
-      <span>Remote · UTC+2</span><span class="sep">|</span><span><a href="mailto:vkkhrnk@gmail.com">vkkhrnk@gmail.com</a></span><span class="sep">|</span><span><a href="https://t.me/Victoria_UxUi">Telegram @Victoria_UxUi</a></span><br>
-      <span><a href="https://victoriakukharenko.com/">victoriakukharenko.com</a></span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/viktoria-kukharenko">linkedin.com/in/viktoria-kukharenko</a></span>
+      <span><a href="https://victoriakukharenko.com/">victoriakukharenko.com</a></span><br>
+      <span><a href="https://www.linkedin.com/in/viktoria-kukharenko">linkedin.com/in/viktoria-kukharenko</a></span><br>
+      <span><a href="mailto:vkkhrnk@gmail.com">vkkhrnk@gmail.com</a></span>
     </p>
   </header>
 
