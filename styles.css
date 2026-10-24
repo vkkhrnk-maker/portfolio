@@ -6909,7 +6909,9 @@ video.case__itab-board-desktop,
   html:root[lang] .portrait-cover__note { left: 20px; bottom: calc(var(--cover-row) + 0.084 * min(22px, 5.87vw) - 0.35px); max-width: none; }
   html:root[lang="ru"] .portrait-cover__note { bottom: calc(var(--cover-row) + 0.084 * min(22px, 5.87vw) - 2.35px); }
   .portrait-cover__eyebrow { display: none; }
-  .portrait-cover__note p { font-family: var(--font-body); font-size: 14px; line-height: 18px; letter-spacing: var(--ls-heading-body); }
+  /* the <br> sets the lines; Safari shrinks this box to its narrowest
+     word and wraps it into four otherwise */
+  .portrait-cover__note p { font-family: var(--font-body); font-size: 14px; line-height: 18px; letter-spacing: var(--ls-heading-body); white-space: nowrap; }
   .portrait-cover__name { bottom: 13%; padding-inline: 20px; text-align: left; font-size: 16.5vw; }
   .portrait-cover__name span { display: block; }
   .portrait-cover__scroll,
