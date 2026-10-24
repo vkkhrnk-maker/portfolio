@@ -6931,3 +6931,77 @@ video.case__itab-board-desktop,
 .cover-nav__links a { gap: 5px; }
 .cover-nav__links .icon-arrow { width: 16px; height: 16px; }
 .cover-nav__cta .icon-arrow { width: 13px; height: 13px; }
+/* Case pages: the top bar reads like the homepage's — CV / LinkedIn /
+   Telegram as display-face text links with drawn arrows, the white EN/RU
+   pill, the magenta CTA — and, like it, scrolls away with the page instead
+   of floating over the case (bare text over content would not read).
+   Phones keep the contacts in the menu drawer. */
+.topbar-links { display: none; }
+@media (min-width: 1200px) {
+  .topbar-right { position: absolute; gap: 12px; }
+  .topbar-links { display: flex; align-items: center; gap: 32px; margin-right: 20px; }
+  .topbar-links a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 44px;
+    font-family: var(--font-display);
+    font-size: var(--fs-h6);
+    line-height: var(--lh-h6);
+    letter-spacing: var(--ls-heading-sm);
+    color: var(--text-primary);
+  }
+  .topbar-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 180ms ease;
+  }
+  .topbar-links a:hover::after { transform: scaleX(1); }
+  .topbar-links .icon-arrow { width: 16px; height: 16px; }
+  .topbar-right .lang-switch { background: var(--button-secondary); }
+  .topbar-right .lang-switch__opt.is-active { background: var(--bg-card); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar-links a::after { transition: none; }
+}
+.btn .icon-arrow { width: 13px; height: 13px; }
+.case__cta,
+.mobile-topbar__actions .btn--dark { gap: 6px; }
+.mobile-topbar__actions .icon-arrow { width: 12px; height: 12px; }
+/* Header links are utility navigation, so they take the body face like
+   "Back" and the CTA label — on the homepage cover and on the case pages. */
+.cover-nav__links a,
+.topbar-links a {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
+}
+.cover-nav__links a::after,
+.topbar-links a::after { bottom: 9px; }
+.cover-nav__links .icon-arrow,
+.topbar-links .icon-arrow { width: 13px; height: 13px; }
+.cover-nav__links a,
+.topbar-links a { gap: 6px; }
+/* Case pages: EN/RU in the top-left corner, as on the homepage (it replaces
+   the sidebar name; "Back" is the way home). The whole bar scrolls with the
+   page and its pills sit on the centre line of the 56px Back circle. */
+.topbar-left { display: none; }
+@media (min-width: 1200px) {
+  .topbar-left { display: block; position: absolute; top: 32px; left: var(--page-x); z-index: 90; }
+  .topbar-left .lang-switch { background: var(--button-secondary); }
+  .topbar-left .lang-switch__opt.is-active { background: var(--bg-card); }
+  .topbar-right { top: 32px; }
+}
+@media (min-width: 1200px) {
+  .topbar-right { top: 30px; }                          /* 44px links: centre 52 */
+  .sidebar--case .sidebar__top { padding-top: 222px; }  /* meta keeps its old height */
+}
