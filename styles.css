@@ -6926,3 +6926,8 @@ video.case__itab-board-desktop,
 @media (max-width: 700px) {
   .home-photo .experience-editorial__item { margin-inline: -20px; padding-inline: 20px; }
 }
+/* Arrows are drawn, not typed: iOS renders ↗ and ↓ as emoji. */
+.icon-arrow { display: inline-block; flex: none; width: 14px; height: 14px; }
+.cover-nav__links a { gap: 5px; }
+.cover-nav__links .icon-arrow { width: 16px; height: 16px; }
+.cover-nav__cta .icon-arrow { width: 13px; height: 13px; }
