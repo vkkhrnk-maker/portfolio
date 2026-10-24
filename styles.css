@@ -6724,3 +6724,205 @@ video.case__itab-board-desktop,
     animation: none;
   }
 }
+
+/* ===== Home: photo cover (24 Oct 2026) =====
+   Replaces the sidebar + headline cover on the homepage (both languages,
+   body.home-photo). The photo is relit for the grey backdrop and cut out
+   with its own alpha; the grey runs edge to edge in both themes. One 40px
+   inset on every side (24 on tablets, 20 on phones). The name is the site's
+   body face and grows with the width only; the role and the note ride on
+   top of it, so a wide, short window can't push them into each other. */
+.home-photo { display: block; }
+.home-photo .content { width: 100%; max-width: none; padding: 0; margin: 0; }
+.home-photo .content__main { gap: 120px; }
+.home-photo .projects,
+.home-photo .experience,
+.home-photo .contact,
+.home-photo .footer { width: 100%; max-width: none; margin-inline: auto; padding-inline: 40px; }
+
+.portrait-cover {
+  --cover-name-fs: 11.95vw;            /* the name spans 1360 of 1440 */
+  --cover-rise: calc(11% + 0.86 * var(--cover-name-fs) + 54px);
+  position: relative;
+  isolation: isolate;
+  height: 100svh;
+  min-height: 620px;
+  max-height: 1200px;
+  overflow: clip;
+  background: #9ba0a0;
+  color: #fff;
+  font-family: var(--font-body);
+}
+.portrait-cover__image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: -1;
+  width: auto;
+  height: 190%;
+  max-width: none;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transform: translateX(-63%);
+}
+.portrait-cover a:focus-visible,
+.portrait-cover button:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+
+.cover-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 38px 40px 24px;              /* 38 + (44 - 40) / 2: pills at 40 */
+}
+.cover-nav__lang { display: inline-flex; margin-right: auto; background: var(--button-secondary); }
+.cover-nav__lang .lang-switch__opt.is-active { background: var(--bg-card); }
+.cover-nav__links { display: flex; align-items: center; gap: 32px; }
+.cover-nav__links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-size: var(--fs-h6);
+  line-height: var(--lh-h6);
+  letter-spacing: var(--ls-heading-sm);
+}
+.cover-nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+.cover-nav__links a:hover::after { transform: scaleX(1); }
+.cover-nav__cta { gap: 12px; }
+.cover-nav__menu { display: none; }
+
+.portrait-cover__note {
+  position: absolute;
+  left: 40px;
+  /* last baselines level with the role's: 17.5px (.2734em of the H2) under
+     the role's box, 9px under the note's 28/34 box */
+  bottom: calc(var(--cover-rise) + 0.2734 * var(--fs-h2) - 9px);
+  max-width: 320px;
+}
+.portrait-cover__eyebrow {
+  display: block;
+  margin-bottom: 16px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
+}
+.portrait-cover__note p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  line-height: var(--lh-h4);
+  letter-spacing: var(--ls-heading-lg);
+}
+.portrait-cover__role { position: absolute; right: 40px; bottom: var(--cover-rise); }
+.portrait-cover__role svg { display: block; width: 28px; height: 28px; margin-bottom: 20px; }
+.portrait-cover__role p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-heading-lg);
+}
+.portrait-cover__name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 11%;
+  margin: 0;
+  text-align: center;
+  color: inherit;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--cover-name-fs);
+  line-height: .86;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+.portrait-cover__scroll,
+.portrait-cover__edition {
+  position: absolute;
+  bottom: 40px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-heading-body);
+}
+.portrait-cover__scroll { left: 40px; display: flex; align-items: center; gap: 6px; }
+.portrait-cover__edition { right: 40px; }
+
+/* Work cards on the full-width column: pairs half the row width tall (680
+   at 1440), Syno 16:10 with the monitor at 74% under its two-line title. */
+@media (min-width: 1200px) {
+  .home-photo .project-pair .project-card__inner { height: calc(100cqw * 0.5); }
+  .home-photo .project-card--syno .project-card__inner { aspect-ratio: 16 / 10; }
+  .home-photo .project-card__syno-shot { top: 152px; width: 74%; }
+}
+@media (max-width: 1000px) {
+  .cover-nav { padding: 22px 24px 24px; }
+  .cover-nav__links { gap: 24px; }
+  .portrait-cover__note { left: 24px; }
+  .portrait-cover__role { right: 24px; }
+  .portrait-cover__scroll,
+  .portrait-cover__edition { bottom: 24px; }
+  .portrait-cover__scroll { left: 24px; }
+  .portrait-cover__edition { right: 24px; }
+  .home-photo .projects,
+  .home-photo .experience,
+  .home-photo .contact,
+  .home-photo .footer { padding-inline: 24px; }
+}
+@media (max-width: 700px) {
+  .portrait-cover { min-height: 650px; max-height: 1000px; }
+  .cover-nav { padding: 20px; }
+  .cover-nav__links { display: none; }
+  /* "Let's talk" and the menu are one group at the right, 8px apart */
+  .cover-nav__menu { display: inline-flex; margin-left: -24px; }
+  .cover-nav__lang,
+  .cover-nav__cta,
+  .cover-nav__menu { height: 40px; min-height: 40px; }
+  .portrait-cover__image { top: 54px; height: 144.5%; }
+  .portrait-cover__note,
+  .portrait-cover__role svg { display: none; }
+  .portrait-cover__role { right: 20px; bottom: 32%; }
+  .portrait-cover__role p { font-size: 22px; line-height: 1.1; letter-spacing: var(--ls-heading-sm); }
+  .portrait-cover__name { bottom: 13%; padding-inline: 20px; text-align: left; font-size: 16.5vw; }
+  .portrait-cover__name span { display: block; }
+  .portrait-cover__scroll,
+  .portrait-cover__edition { bottom: 20px; font-size: 14px; }
+  .portrait-cover__scroll { left: 20px; }
+  .portrait-cover__edition { right: 20px; }
+  .home-photo .content__main { gap: 72px; }
+  .home-photo .projects,
+  .home-photo .experience,
+  .home-photo .contact,
+  .home-photo .footer { padding-inline: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cover-nav__links a::after { transition: none; }
+}
+/* Russian display face (Noto Serif Display): the role's last baseline sits
+   .1719em above its box, the note's 6.5px above its own. */
+:root[lang="ru"] .portrait-cover__note { bottom: calc(var(--cover-rise) + 0.1719 * var(--fs-h2) - 6.5px); }
+/* Experience rows reach both page edges below 1200 by bleeding over the
+   section padding; on this page that padding is 40 / 24 / 20, not --page-x. */
+@media (max-width: 1199px) {
+  .home-photo .experience-editorial__item { margin-inline: -40px; padding-inline: 40px; }
+}
+@media (max-width: 1000px) {
+  .home-photo .experience-editorial__item { margin-inline: -24px; padding-inline: 24px; }
+}
+@media (max-width: 700px) {
+  .home-photo .experience-editorial__item { margin-inline: -20px; padding-inline: 20px; }
+}

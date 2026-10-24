@@ -58,81 +58,43 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.min.css?v=346">
-  <script src="portrait-theme-v14.js" defer></script>
   <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=7" defer></script>
 </head>
-<body>
+<body class="home-photo">
   <a class="skip-link" href="#main">Skip to content</a>
-  <aside class="sidebar">
-    <div class="sidebar__top">
-      <div class="sidebar__identity">
-        <a class="sidebar__name-link" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">
-          <span class="sidebar__name">Victoria Kukharenko</span>
-        </a>
-        <p class="sidebar__role">Product designer</p>
-      </div>
-      <nav class="menu" aria-label="Main">
-        <a class="menu__item is-active" href="#top">Hello</a>
-        <a class="menu__item" href="#works">Works</a>
-        <a class="menu__item" href="#experience">Experience</a>
-      </nav>
-    </div>
-    <div class="sidebar__buttons">
-      <a class="btn btn--light" href="cv.html">CV</a>
-      <a class="btn btn--light" href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn--light" href="https://t.me/Victoria_UxUi" target="_blank" rel="noopener">Telegram</a>
-    </div>
-  </aside>
-
-
   <div class="content">
-    <div class="mobile-topbar mobile-topbar--case mobile-topbar--home">
-      <div class="mobile-topbar__blur" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <a class="mobile-topbar__link mobile-topbar__name" href="#top" aria-label="Victoria Kukharenko — back to the top of the page">Victoria Kukharenko</a>
-      <div class="mobile-topbar__actions">
-        <a class="btn btn--dark" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
-        <button class="mobile-topbar__menu-btn" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-            <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
     <main class="content__main" id="main" tabindex="-1">
-    <section class="profile-section" id="top" tabindex="-1">
-      <button class="menu-toggle" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
-          <path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-        </svg>
-      </button>
-      <div class="topbar-right">
-        <nav class="lang-switch" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
-        <a class="btn btn--dark profile-section__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Book a call</a>
+    <section class="portrait-cover" id="top" tabindex="-1" aria-labelledby="cover-name">
+      <img class="portrait-cover__image" src="assets/home-cover-2048.webp"
+           srcset="assets/home-cover-2048.webp 2048w, assets/home-cover-3072.webp 3072w, assets/home-cover-4096.webp 4096w"
+           sizes="(max-width: 700px) 144.5svh, min(190svh, 2280px)"
+           width="4096" height="4096" alt="Victoria Kukharenko"
+           fetchpriority="high" decoding="async">
+      <header class="cover-nav">
+        <nav class="lang-switch cover-nav__lang" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
+        <nav class="cover-nav__links" aria-label="Contacts">
+          <a href="cv.html">CV ↗</a>
+          <a href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://t.me/Victoria_UxUi" target="_blank" rel="noopener">Telegram ↗</a>
+        </nav>
+        <a class="btn btn--dark cover-nav__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Let’s talk <span aria-hidden="true">↗</span></a>
+        <button class="mobile-topbar__menu-btn cover-nav__menu" type="button" data-menu-open aria-controls="menu-drawer" aria-expanded="false" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+        </button>
+      </header>
+      <div class="portrait-cover__note">
+        <span class="portrait-cover__eyebrow">From idea to prototype</span>
+        <p>I design in Figma<br>and build in HTML.</p>
       </div>
-      <div class="intro">
-        <div class="intro__header">
-          <p class="intro__greeting" data-greeting>Hello there</p>
-        </div>
-        <div class="intro__title-stage">
-          <div class="profile-character" aria-hidden="true">
-            <!-- Keep this portrait static. Wave prototypes were rejected; do not reconnect them. -->
-            <!-- The dark portrait has soft frontal light and no pale edge spill. -->
-            <picture>
-              <source data-portrait-dark media="(prefers-color-scheme: dark)"
-                      srcset="assets/viktoria-profile-dark-v14.webp?v=2">
-              <img class="profile-character__figure"
-                 src="assets/viktoria-profile-v13.webp?v=2"
-                 width="887" height="1774" alt="" decoding="async" fetchpriority="high"
-                 style="animation: none; will-change: auto; -webkit-mask: url('assets/viktoria-profile-mask-v13.svg') center / contain no-repeat; mask: url('assets/viktoria-profile-mask-v13.svg') center / contain no-repeat">
-            </picture>
-          </div>
-          <h1 class="intro__title">I design in Figma and build working prototypes in&nbsp;HTML</h1>
-        </div>
+      <div class="portrait-cover__role">
+        <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 9 37 37M14 37h23V14" stroke="currentColor" stroke-width="1.5"/></svg>
+        <p>Product<br>designer</p>
       </div>
+      <h1 class="portrait-cover__name" id="cover-name"><span>Victoria</span> <span>Kukharenko</span></h1>
+      <a class="portrait-cover__scroll" href="#works"><span>Selected work</span><span aria-hidden="true">↓</span></a>
+      <span class="portrait-cover__edition" aria-hidden="true">Portfolio / 2026</span>
     </section>
-
     <section class="projects" id="works">
       <div class="project-pair">
       <article class="project-card project-card--fill">
