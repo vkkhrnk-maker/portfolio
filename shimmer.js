@@ -6,6 +6,14 @@
   if (!videos.length) return;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* A poster is the video's first frame, often a blank or loading screen.
+     Under reduced motion it is all the visitor gets, so a video may name a
+     finished screen to stand in its place. */
+  if (reducedMotion) {
+    videos.forEach((video) => {
+      if (video.dataset.still) video.poster = video.dataset.still;
+    });
+  }
   const hydrate = (video) => {
     const src = video.dataset.src;
     if (!src) return;
