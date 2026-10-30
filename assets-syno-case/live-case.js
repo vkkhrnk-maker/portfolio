@@ -8,12 +8,30 @@
     video.muted=true;
     function sync() {
       if (!visible || document.hidden || reduced.matches) video.pause();
-      else if (!userPaused) video.play().catch(()=>{});
+      else if (!userPaused && !video.ended) video.play().catch(()=>{});
     }
     video.addEventListener('pause',()=>{
-      if (visible && !document.hidden && !reduced.matches) userPaused=true;
+      if (visible && !document.hidden && !reduced.matches && !video.ended) userPaused=true;
     });
     video.addEventListener('play',()=>{ userPaused=false; });
+    video.addEventListener('ended',()=>{ userPaused=true; });
+    // The cover plays without native controls; one quiet toggle keeps it stoppable.
+    const toggle=video.parentElement.querySelector('[data-syno-video-toggle]');
+    if (toggle) {
+      const label=()=>{
+        toggle.setAttribute('aria-pressed',String(video.paused));
+        toggle.setAttribute('aria-label',video.ended?'Повторить видео':video.paused?'Воспроизвести видео':'Остановить видео');
+      };
+      toggle.addEventListener('click',()=>{
+        if (video.ended) video.currentTime=0;
+        if (video.paused) video.play().catch(()=>{});
+        else video.pause();
+      });
+      video.addEventListener('play',label);
+      video.addEventListener('pause',label);
+      video.addEventListener('ended',label);
+      label();
+    }
     new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.15}).observe(video);
     document.addEventListener('visibilitychange',sync);
     reduced.addEventListener('change',sync);

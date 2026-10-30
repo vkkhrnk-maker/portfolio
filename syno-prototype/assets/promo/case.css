@@ -1,11 +1,12 @@
 /* Portfolio case overrides of the existing Syno components, measured at 1280. */
-html.promo-case #works-grid .work-thumb { width:100%; height:auto; aspect-ratio:auto; object-fit:contain; }
+html.promo-case #works-grid .work-thumb { width:calc(100% - 24px); height:auto; aspect-ratio:auto; object-fit:contain; }
 html.promo-case :is(.sec-title,.hero-title,.info-title) { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
 /* Keep the headline and its supporting line distinct, including wrapped slides. */
 html.promo-case .band-hero .hero-copy { gap:20px; }
 html.promo-case .band-hero .hero-badges { margin-top:0; }
 html.promo-case #page-toolbar { min-height:56px; }
-html.promo-case #screen-profile #pf-cv .pf-row { gap:20px; min-height:45px; }
+html.promo-case #screen-profile #pf-cv .pf-row { gap:20px; min-height:45px; border-bottom:1px solid var(--stroke-primary); }
+html.promo-case #screen-profile #pf-cv .ap-cv-group .pf-row:last-child { border-bottom:0; }
 html.promo-case #screen-profile #pf-cv .oc-sec-body { padding-top:2px; }
 html.promo-case #screen-profile .ap-conn-item { height:104px; border:0; box-shadow:inset 0 -1px var(--stroke-primary); }
 html.promo-case #screen-profile .ap-conn-item:last-child { box-shadow:none; }
@@ -54,6 +55,17 @@ html.promo-case #screen-eventpage .evp-artist .work-dot:focus-visible { outline:
   html.promo-case #screen-profile .site-footer { display:none; }
   html.promo-case #screen-profile .promo-profile-footer { display:block; }
   html.promo-case #screen-profile #pf-connections { display:none; }
+  /* Футер демо-экранов на 375 — как кит Footer · Mobile и футер главной: две колонки через 20,
+     внизу марка слева и © справа, ссылки по центру под ними; Contact уже стоит в колонке Syno. */
+  html.promo-case .promo-footer .footer-cols { grid-template-columns:1fr 1fr; gap:32px 20px; }
+  html.promo-case .promo-footer .footer-right { grid-column:1 / -1; }
+  html.promo-case .promo-footer .footer-right h3 { font-size:24px; }
+  html.promo-case .promo-footer .footer-bottom { flex-direction:column; align-items:stretch; gap:20px; padding:20px 12px; }
+  html.promo-case .promo-footer .footer-meta { justify-content:space-between; }
+  html.promo-case .promo-footer .fb-logo svg { width:auto; height:24px; }
+  html.promo-case .promo-footer .fb-copy { gap:12px; color:var(--text-secondary); }
+  html.promo-case .promo-footer .fb-links { flex-wrap:wrap; justify-content:center; gap:8px 24px; }
+  html.promo-case .promo-footer .fb-links .fb-contact { display:none; }
 }
 html.promo-case .wireframe-bar { display:none !important; }
 html.promo-case .site-header { top:var(--promo-header-top); }
@@ -112,7 +124,7 @@ html.promo-case #screen-profile .ap-meta { font-family:'Schengen A',sans-serif; 
 html.promo-case #screen-profile .ap-name { font-size:84px; letter-spacing:0; }
 html.promo-case #screen-profile .ap-cover { height:auto; aspect-ratio:1228 / 558.7203; }
 html.promo-case #screen-profile .ap-cover-sticky::before { display:none; }
-html.promo-case #screen-profile .ap-cover::after {
+html.promo-case #screen-profile .ap-cover:not(.tone-light)::after {
   content:''; position:absolute; inset:0; pointer-events:none;
   background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.59) 8%,rgba(0,0,0,.52) 16%,rgba(0,0,0,.42) 24%,rgba(0,0,0,.31) 32%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.1) 48%,rgba(0,0,0,.03) 56%,transparent 64%);
 }
@@ -134,7 +146,6 @@ html.promo-case #screen-profile .ap-conn-group + .ap-conn-group { margin-top:12p
 html.promo-case #screen-profile .ap-conn-label { font-size:14px; text-transform:uppercase; }
 html.promo-case #screen-profile .ap-conn-item { min-height:104px; padding:12px 0; }
 html.promo-case #screen-profile .ap-conn-thumb { width:80px; height:80px; border-radius:8px; }
-html.promo-case #screen-profile .site-footer .sf-main,
 html.promo-case #screen-profile #pf-stories { display:none !important; }
 html.promo-case :is(#screen-registry,#screen-search) .artist-card { border-radius:0; }
 html.promo-case :is(#screen-registry,#screen-search) .artist-card-name { line-height:34px; }
@@ -164,7 +175,9 @@ html.promo-case #screen-opencall .oc-title-lead { font-size:16px; line-height:1.
 html.promo-case #screen-opencall .oc-title-right { gap:0; }
 html.promo-case #screen-opencall .oc-title-right .oc-phase { margin-top:20px; }
 html.promo-case #screen-opencall .oc-brush { height:288px; }
-html.promo-case #screen-opencall .oc-brush img { object-position:center 41%; }
+html.promo-case #screen-opencall .oc-brush { overflow:hidden; }
+/* Буквы OPEN CALL крупнее кадра и срезаны сверху и снизу, как в Syno 4216:101947 */
+html.promo-case #screen-opencall .oc-brush img { object-position:center 41%; transform:scale(1.14); transform-origin:50% 52%; }
 html.promo-case #screen-opencall .oc-head:has(+ .oc-datesband),
 html.promo-case #screen-opencall .oc-ctaband { display:none; }
 html.promo-case #screen-opencall .oc-title { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
@@ -211,8 +224,17 @@ html.promo-case .app:not(:has(> .band)) {
 }
 html.promo-case .app:not(:has(> .band))::after {
   content:''; position:absolute; inset:0; width:auto; height:auto; background:none;
-  box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary);
+  box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary),inset 0 1px var(--stroke-primary),inset 0 -1px var(--stroke-primary);
   z-index:120; pointer-events:none;
+}
+html.promo-case .app:not(:has(> .band))::before {
+  content:''; position:absolute; inset:0 -7px; width:auto; height:auto;
+  background:
+    linear-gradient(var(--stroke-primary),var(--stroke-primary)) left top / 7px 1px no-repeat,
+    linear-gradient(var(--stroke-primary),var(--stroke-primary)) right top / 7px 1px no-repeat,
+    linear-gradient(var(--stroke-primary),var(--stroke-primary)) left bottom / 7px 1px no-repeat,
+    linear-gradient(var(--stroke-primary),var(--stroke-primary)) right bottom / 7px 1px no-repeat;
+  z-index:121; pointer-events:none;
 }
 html.promo-case .site-header:not(.band) { border-bottom:0; }
 html.promo-case .site-header:not(.band)::after { bottom:0; }
@@ -242,7 +264,7 @@ html.promo-case body.promo-map .card-meta-info { font-family:'Schengen A',sans-s
 html.promo-case body.promo-map .list-panel .card-title { -webkit-line-clamp:1; }
 html.promo-case body.promo-map:not(.view-list) .list-panel .card-thumb { min-height:180px; border-radius:8px; }
 html.promo-case body.promo-map .cm-hours::before { content:none; }
-html.promo-case body.promo-map .leaflet-tile-pane { filter:saturate(.3); }
+html.promo-case body.promo-map .leaflet-tile-pane { filter:saturate(.55) brightness(1.03); }
 @media(max-width:767px) {
   html.promo-case #screen-profile .ap-name { font-size:56px; }
   html.promo-case .promo-footer .footer-cols { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:24px; }
@@ -335,6 +357,14 @@ html.promo-case body #screen-profile .ap-work-t { font-size:16px; line-height:1.
 html.promo-case body #screen-profile .ap-works.is-collapsed .promo-work-more { display:none; }
 html.promo-case body #screen-profile #pf-works:has(.ap-works.is-collapsed .promo-work-more) .ap-works-more-row { display:block !important; padding:12px; }
 html.promo-case body #screen-profile #ap-works-more { width:100%; height:40px; }
+/* Show more — своя полоса под Divider с хвостиками; линия ложится на нижнюю линию последней
+   работы, а футер — на нижнюю линию последней секции: одна линия вместо двух. */
+html.promo-case body #screen-profile .ap-works-more-row { position:relative; margin-top:-1px; }
+html.promo-case body #screen-profile .ap-works-more-row::before {
+  content:''; position:absolute; left:-6px; right:-6px; top:-1px; height:1px; pointer-events:none;
+  background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+}
+html.promo-case body #screen-profile .promo-profile-footer { margin-top:-1px; position:relative; }
 html.promo-case body #screen-profile .pf-details-grid { display:flex; flex-direction:column; gap:20px; padding:0; }
 html.promo-case body #screen-profile .pf-details-main { width:100%; }
 html.promo-case body #screen-profile .pf-portrait-wrap { order:-1; width:100%; max-width:none; height:280px; aspect-ratio:auto; }
@@ -346,6 +376,10 @@ html.promo-case body #screen-profile .ap-cv-group h3 { margin:0; padding-inline:
 html.promo-case body #screen-profile .ap-cv-group:first-child h3 { padding-top:12px; }
 html.promo-case body #screen-profile #pf-cv .pf-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; padding:12px; border-bottom:1px solid var(--stroke-primary); align-items:center; }
 html.promo-case body #screen-profile #pf-cv .pf-row-label { width:auto; }
+html.promo-case body #screen-profile #pf-cv .pf-row { gap:0; }
+html.promo-case body #screen-profile #pf-cv .ap-cv-group { margin-bottom:0; }
+/* Detail Row · 375 (Syno 4990:70154): линия у каждой строки, без неё — только последняя строка CV. */
+html.promo-case body #screen-profile #pf-cv .ap-cv-group .pf-row:last-child { border-bottom:1px solid var(--stroke-primary); }
 html.promo-case body #screen-profile #pf-cv .ap-cv-group:last-child .pf-row:last-child { border-bottom:0; }
 }
 
@@ -379,9 +413,25 @@ html.promo-case body #registry-grid .artist-work-cell { height:100%; min-height:
 html.promo-case body #registry-grid .artist-work { height:100%; align-self:stretch; align-items:center; }
 html.promo-case body #registry-grid .artist-work-thumb { height:100%; aspect-ratio:auto; object-fit:contain; }
 html.promo-case body #registry-grid .artist-card-name { font-size:20px; line-height:24px; }
-html.promo-case body #registry-grid .artist-card-dots { grid-row:2; justify-self:stretch; align-self:auto; justify-content:center; margin:0; padding-bottom:12px; gap:12px; }
-html.promo-case body #registry-grid .artist-card-info { grid-row:3; }
+html.promo-case body #registry-grid .artist-card-dots { grid-row:2; justify-self:stretch; align-self:auto; justify-content:center; margin:0; padding:8px 0 12px; gap:12px; }
+html.promo-case body #registry-grid .artist-card-info { grid-row:3; padding-top:0; }
+/* Точки — 6, от них до имени 12 (Card/Artist Works · 375). */
+html.promo-case body #registry-grid .artist-card-dots > * { width:6px; height:6px; }
 html.promo-case body #registry-grid .card-save { top:24px; right:24px; left:auto; opacity:1; }
+/* Каждая линия выдачи — Divider с хвостиками 6 (Syno 2956:39247): строки рисуют линию сами,
+   хвостики — полоской за бортами блока; под «N artists» линия одна. */
+html.promo-case body #screen-registry .registry-results-head { border-bottom:0; }
+html.promo-case body #screen-registry :is(.registry-results, .registry-results-head, #registry-grid .artist-card) { position:relative; overflow:visible; }
+html.promo-case body #screen-registry .registry-results::before, html.promo-case body #screen-registry .registry-results::after,
+html.promo-case body #screen-registry .registry-results-head::before, html.promo-case body #registry-grid .artist-card::after {
+  content:''; display:block; position:absolute; left:-6px; right:-6px; width:auto; height:1px; pointer-events:none; z-index:3;
+  background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+}
+html.promo-case body #screen-registry .registry-results::before { top:-1px; bottom:auto; }
+html.promo-case body #screen-registry .registry-results::after { top:auto; bottom:-1px; }
+html.promo-case body #screen-registry .registry-results-head::before { top:-1px; }
+html.promo-case body #registry-grid .artist-card::after { bottom:0; }
+html.promo-case body #registry-grid .artist-card:last-child::after { display:none; }
 }
 
 /* Home and Open Call / Mobile 375 — 3893:42450 and 4491:10342. */
@@ -427,4 +477,107 @@ html.promo-case body.promo-map .filters-row { padding-inline:16px; }
 html.promo-case body.promo-map:not(.gm-none) .type-mode-chip:not(.active) { display:none; }
 html.promo-case body.promo-map #map { padding-top:0; }
 html.promo-case body.promo-map #leaflet-bg { top:0; }
+}
+
+/* Хвостики линий — 6 за бортом блока, как endcap кита Divider (жёлоб 6 у рамки 20 / 12).
+   В прототипе их рисуют десятки правил по 8 px; рамка экрана обрезает всё, что дальше 6. */
+@supports (overflow-clip-margin: 6px) {
+  html.promo-case body .app { overflow: clip; overflow-clip-margin: 6px; }
+}
+/* Колл: под FAQ линию держит футер — своя нижняя у последней полосы давала 2 px. */
+html.promo-case #screen-opencall .oc-faqband:has(+ .promo-footer) { border-bottom:0; }
+html.promo-case #screen-opencall .oc-faqband:has(+ .promo-footer)::before,
+html.promo-case #screen-opencall .oc-faqband:has(+ .promo-footer)::after { display:none; }
+
+/* Кабинет, организация, Applications · 375 (Syno 4990:64310, 4990:64944, 4990:140853):
+   линия под шапкой полосы — Divider с хвостиками 6; первая строка списка под ней своей
+   верхней линии не несёт, под табами кабинета линию держит тулбар. */
+@media(max-width:1023px) {
+  html.promo-case body #screen-home .home-account-band { border-top:0; }
+  html.promo-case body #home-events-list > .org-call-row:first-child { border-top:0; }
+  html.promo-case body :is(#screen-home .home-events-labelrow, #screen-home .home-col-tabrow, .dash-section-head) { position:relative; }
+  html.promo-case body #screen-home .home-events-labelrow::after,
+  html.promo-case body #screen-home .home-col-tabrow::after,
+  html.promo-case body #screen-orgdashboard .dash-section-head::after {
+    content:''; position:absolute; left:-6px; right:-6px; bottom:-1px; width:auto; height:1px; pointer-events:none; z-index:3;
+    background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+  }
+  /* «···» строки — иконка 32, зазор 12: название события помещается в строку, как в макете. */
+  html.promo-case body #home-events-list > .org-call-row { gap:12px; }
+  html.promo-case body #home-events-list .org-person-more { width:32px; min-width:32px; padding:0; justify-content:center; }
+}
+@media(max-width:1023px) {
+  /* Applications: шапки и карточки во всю ширину блока, без своей рамки внутри рамки. */
+  html.promo-case body #screen-applications .home-canon-section { padding:0; }
+  html.promo-case body #screen-applications :is(.home-section-label, .appl-card) { border-left:0; border-right:0; }
+  html.promo-case body #screen-applications :is(#apps-live-sec, #apps-past-sec, .home-canon-section) .home-section-label { border-top:0; position:relative; }
+  html.promo-case body #screen-applications .home-section-label::after {
+    content:''; position:absolute; left:-6px; right:-6px; bottom:-1px; width:auto; height:1px; pointer-events:none; z-index:3;
+    background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+  }
+  html.promo-case body #screen-applications #apps-past-sec .appl-card:last-child { border-bottom:0; }
+  /* Компактный футер: верхняя и нижняя линии — с хвостиками, как Divider. */
+  html.promo-case body .site-footer .sf-meta { position:relative; }
+  html.promo-case body .site-footer .sf-meta::before,
+  html.promo-case body .site-footer .sf-meta::after {
+    content:''; position:absolute; left:-6px; right:-6px; width:auto; height:1px; pointer-events:none; z-index:3;
+    background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+  }
+  html.promo-case body .site-footer .sf-meta::before { top:-1px; }
+  html.promo-case body .site-footer .sf-meta::after { bottom:-1px; }
+}
+@media(max-width:1023px) {
+  /* Дашборд организации · 375 (Syno 4990:140853): шапка — визитка без пустого ряда кнопок,
+     табы событий по содержимому, под ними линия; перед PEOPLE линия одна. */
+  html.promo-case body #screen-orgdashboard .org-dashboard-hero-actions { display:none; }
+  html.promo-case body #screen-orgdashboard .org-events-controls { border-bottom:1px solid var(--stroke-primary); }
+  html.promo-case body #screen-orgdashboard .org-events-controls .seg-control { width:fit-content; max-width:100%; align-self:flex-start; }
+  html.promo-case body #screen-orgdashboard #org-people-block { margin-top:-1px; position:relative; }
+}
+@media(max-width:1023px) {
+  /* Линия под шапкой дашборда — тоже Divider с хвостиками. */
+  html.promo-case body #screen-orgdashboard #org-events-block { position:relative; }
+  html.promo-case body #screen-orgdashboard #org-events-block::before {
+    content:''; position:absolute; left:-6px; right:-6px; top:-1px; width:auto; height:1px; pointer-events:none; z-index:3;
+    background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+  }
+}
+@media(max-width:1023px) {
+  /* Профиль владельца: низ сетки работ держит линия полосы — у плитки «Add another» своей нет. */
+  html.promo-case body #screen-myprofile #myp-works-body .myp-addwork-tile { border-bottom:0; }
+}
+/* Detail Row: моно — только лейбл, значение — текст (как на публичном профиле). */
+html.promo-case #screen-myprofile .pf-row-value { font-family:'Schengen A',sans-serif; }
+@media(max-width:1023px) {
+  /* Черновик профиля · 375 (Syno 4990:68415): после прогресса линии нет — пункты начинаются сами;
+     DETAILS — шапка полосы с линией и хвостиками, содержимое под ней. */
+  html.promo-case body #screen-myprofile #myp-visibility .myp-tasks { border-top:0; }
+  html.promo-case body #screen-myprofile #myp-visibility .myp-tasks::before,
+  html.promo-case body #screen-myprofile #myp-visibility .myp-tasks::after { display:none; }
+  html.promo-case body #screen-myprofile #myp-details-row { padding:0; gap:0; }
+  html.promo-case body #screen-myprofile #myp-details-row .myp-row-head { position:relative; padding:12px; border-bottom:1px solid var(--stroke-primary); }
+  html.promo-case body #screen-myprofile #myp-details-row .myp-row-head::after {
+    content:''; position:absolute; left:-6px; right:-6px; bottom:-1px; width:auto; height:1px; pointer-events:none; z-index:3;
+    background:linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px));
+  }
+  html.promo-case body #screen-myprofile #myp-details-row .myp-row-body { padding:12px; }
+}
+@media(max-width:1023px) {
+  /* Add a work · 375 (Syno 4990:72318): шапка дравера 56 — крестик в 12 от краёв; раздел Works уже
+     выбран в табах, ссылки «← Works» нет; лид в 12 под заголовком; Title широкое, Year узкое. */
+  html.promo-case body #modal-card .modal-head { padding:12px; }
+  html.promo-case body #modal-card .myp-wform-back { display:none; }
+  html.promo-case body #modal-card .myp-drawer-content:has(.myp-wform-back) { padding-top:28px; }
+  html.promo-case body #modal-card .myp-drawer-sub { margin-top:12px; }
+  html.promo-case body #modal-card .field-grid:has(#myp-w-year) { grid-template-columns:minmax(0,1fr) 110px; }
+}
+@media(max-width:1023px) {
+  /* Форма события · 375 (Syno 4990:115163): линия между секциями встык к бортам блока 339, поля 12
+     внутри секции; все поля 40. */
+  html.promo-case body #screen-addevent #addevent-main .apply-step { margin-left:-12px; margin-right:-12px; padding-left:12px !important; padding-right:12px !important; }
+  html.promo-case body #screen-addevent :is(input.input, .dropdown-trigger) { height:40px; min-height:40px; box-sizing:border-box; padding-top:0; padding-bottom:0; }
+}
+@media(max-width:1023px) {
+  /* Страница события · 375: в рельсе только карта, а на телефоне она скрыта — пустой полосы нет. */
+  html.promo-case body #screen-eventpage .orgp-side { display:none; }
 }

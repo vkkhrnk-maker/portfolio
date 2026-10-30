@@ -1,15 +1,29 @@
-/* Keep the presentation backing distinct from the native Syno UI surface. */
-.case-page--syno-proto .case__hero-image,
-.case-page--syno-proto .case__figure-desktop,
-.case-page--syno-proto .case__slide,
-.case-page--syno-proto .syno-live-prototype { background:var(--surface-media); }
-.case-page--syno-proto .case__hero-image { aspect-ratio:auto; padding:24px; overflow:visible; }
+/* Экраны без подложки (25 октября 2026): экран сам держит форму, по краю тонкая линия,
+   чтобы серый интерфейс Syno не сливался со страницей кейса. */
+.case-page--syno-proto :is(.case__hero-image, .case__figure-desktop, .case__slide, .syno-live-prototype) { background:transparent; padding:0; }
+.case-page--syno-proto .case__hero-image { aspect-ratio:auto; overflow:visible; }
+.case-page--syno-proto :is(.syno-native-window, .syno-walkthrough-video) { outline:1px solid rgba(0,0,0,.12); outline-offset:-1px; }
 #case-live-map { scroll-margin-top:90px; }
 .syno-native-demo { width:100%; min-width:0; }
-.syno-film-demo { width:100%; min-width:0; }
-.syno-walkthrough-video { display:block; width:100%; height:auto; aspect-ratio:8/5; object-fit:contain; background:var(--surface-media); }
+.syno-film-demo { position:relative; width:100%; min-width:0; }
+.syno-film-toggle { position:absolute; right:12px; bottom:12px; display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; background:rgba(255,255,255,.86); color:#1c1c1c; cursor:pointer; opacity:.72; transition:opacity .2s; }
+.syno-film-toggle:hover, .syno-film-toggle:focus-visible { opacity:1; }
+.syno-film-toggle:focus-visible { outline:2px solid #1c1c1c; outline-offset:2px; }
+.syno-film-toggle__play, .syno-film-toggle[aria-pressed="true"] .syno-film-toggle__pause { display:none; }
+.syno-film-toggle[aria-pressed="true"] .syno-film-toggle__play { display:block; }
+/* One hint is enough: later demos keep only their pause control. */
+.case__figure-desktop .syno-scroll-controls:empty, .case__hero-image .syno-scroll-controls:empty, .syno-state-panel .syno-scroll-controls:empty { display:none; }
+/* Secondary screens are stills of the same demo bundle, not live frames. */
+.syno-still .syno-native-window img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+.syno-walkthrough-video { display:block; width:100%; height:auto; aspect-ratio:8/5; object-fit:contain; }
 .syno-native-window { position:relative; width:100%; aspect-ratio:1280/800; overflow:hidden; background:#e4e3e1; }
 .syno-native-window iframe { position:absolute; inset:0 auto auto 0; border:0; display:block; max-width:none; transform-origin:top left; }
+/* The Art Map explains itself on hover or keyboard focus without a permanent label below it. */
+@media (hover:hover) {
+  .syno-native-demo--map .syno-native-window::after { content:"Листайте и нажимайте"; position:absolute; right:14px; bottom:14px; z-index:1; padding:8px 11px; background:rgba(255,255,255,.94); color:#1c1c1c; font:12px/18px var(--font-body); pointer-events:none; opacity:0; transform:translateY(4px); transition:opacity .18s, transform .18s; }
+  .syno-native-demo--map .syno-native-window:hover::after,
+  .syno-native-demo--map .syno-native-window:focus-within::after { opacity:1; transform:none; }
+}
 .syno-native-phone { width:100%; max-width:280px; margin-inline:auto; }
 .syno-native-phone .syno-native-window { aspect-ratio:375/812; }
 .syno-native-demo .syno-scroll-controls { min-height:40px; margin-top:10px; }
@@ -22,11 +36,44 @@
 .syno-closed-state { width:100%; aspect-ratio:1920/900; overflow:hidden; }
 .syno-closed-state img { display:block; width:100%; height:auto; transform:translateY(-10.7%); }
 @media(max-width:640px) {
-  .case-page--syno-proto .case__hero-image { padding:12px; }
   .case-page--syno-proto .case__hero-image .syno-native-window { aspect-ratio:375/600; }
   .case-page--syno-proto .syno-state-panel .syno-native-window { aspect-ratio:375/600; }
   .case-page--syno-proto .case__slide > .syno-native-demo { height:100%; width:auto; max-width:100%; display:flex; flex-direction:column; align-items:center; }
-  .case-page--syno-proto .case__slide .syno-native-window { height:calc(100% - 50px); width:auto; max-width:100%; flex:none; aspect-ratio:375/812; }
-  .case-page--syno-proto .case__slide .syno-scroll-controls { width:100%; flex:0 0 40px; }
-  .syno-native-demo .syno-scroll-controls span { font-size:11px; }
+  .case-page--syno-proto .case__slide .syno-native-window { height:100%; width:auto; max-width:100%; flex:none; aspect-ratio:375/812; }
+}
+/* Walkthrough loops of real prototype states in place of secondary live frames.
+   Пауза — под кадром справа, а не поверх интерфейса в ролике. */
+.syno-flow-film { padding:0 0 44px; }
+.syno-flow-film .syno-walkthrough-video { aspect-ratio:8/5; }
+.syno-flow-film .syno-film-toggle { right:0; bottom:4px; width:32px; height:32px; }
+.syno-apply-mobile { display:none; }
+@media (max-width:640px) {
+  .syno-apply-desktop { display:none; }
+  .syno-apply-mobile { display:block; }
+  .syno-apply-mobile .syno-walkthrough-video { aspect-ratio:375/812; }
+}
+/* Web screens sit directly on the case background, including mobile views. */
+.case-page--syno-proto .case__figure-desktop:has(.syno-phone-board) { background:transparent; padding:0; }
+.case-page--syno-proto .case__figure .case__slider .case__slide { background:transparent; padding:0; }
+.case-page--syno-proto :is(.case__slide, .syno-phone-board) .syno-native-window { outline:0; }
+.syno-editor-mobile { display:none; }
+@media (max-width:640px) {
+  .syno-editor-mobile { display:block; max-width:280px; margin-inline:auto; }
+  .syno-editor-mobile img { display:block; width:100%; height:auto; }
+}
+/* Прокрутка страниц на телефоне — видео в рамке телефона на тёмной подложке, пауза под кадром. */
+.syno-phone-film { position:relative; width:100%; max-width:280px; margin-inline:auto; padding:0 0 44px; }
+.syno-phone-film .syno-walkthrough-video { aspect-ratio:375/812; object-fit:cover; outline:0; }
+.syno-profile-phone-film .syno-walkthrough-video { aspect-ratio:402/812; object-fit:contain; }
+.syno-phone-film .syno-film-toggle { right:0; bottom:4px; width:32px; height:32px; }
+@media(max-width:640px) {
+  .case-page--syno-proto .case__slide > .syno-phone-film { height:100%; width:auto; max-width:100%; display:flex; flex-direction:column; align-items:center; }
+  .case-page--syno-proto .case__slide > .syno-phone-film .syno-walkthrough-video { height:100%; width:auto; max-width:100%; }
+  /* One phone walkthrough needs room to read dates, venue and artist details. */
+  .case-page--syno-proto #case-art-map .case__slider .case__slide { height:auto; padding:0; overflow:visible; }
+  .case-page--syno-proto #case-art-map .case__slide > .syno-phone-film { width:min(100%,335px); height:auto; max-width:335px; padding-bottom:42px; }
+  .case-page--syno-proto #case-art-map .syno-phone-film .syno-walkthrough-video { width:100%; height:auto; aspect-ratio:375/812; }
+  .case-page--syno-proto #case-public-profile .case__slider .case__slide { height:auto; padding:0; overflow:visible; }
+  .case-page--syno-proto #case-public-profile .case__slide > .syno-profile-phone-film { width:min(100%,335px); height:auto; max-width:335px; padding-bottom:42px; }
+  .case-page--syno-proto #case-public-profile .syno-profile-phone-film .syno-walkthrough-video { width:100%; height:auto; aspect-ratio:402/812; }
 }

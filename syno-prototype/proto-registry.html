@@ -295,20 +295,20 @@
   }
   .nav-item:hover { background: var(--bg-hover); }
   .nav-item.active { background: var(--bg-tab-primary); font-weight: 500; }
-  .site-nav { gap: 24px; }
+  .site-nav { gap: 16px; }
   .site-nav .nav-item {
     text-transform: none; font-size: var(--fs-caption-m); padding: 0; border-radius: 0;
-    background: none; color: var(--text-primary);
-    display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+    background: none; color: var(--text-secondary); position: relative;
+    display: inline-flex; flex-direction: column; align-items: center;
   }
   .site-nav .nav-item::after {
-    content: ''; display: block; align-self: stretch; height: 1px;
+    content: ''; display: block; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px;
     background: transparent; transition: background 0.15s;
   }
   .site-nav .nav-item:hover { background: none; }
   .site-nav .nav-item:hover, .site-nav .nav-item:focus-visible { color: var(--text-primary); }
   .site-nav .nav-item:hover::after, .site-nav .nav-item:focus-visible::after { background: var(--text-primary); }
-  .site-nav .nav-item.active { background: none; font-weight: 400; }
+  .site-nav .nav-item.active { background: none; font-weight: 400; color: var(--text-primary); }
   .site-nav .nav-item.active::after { background: var(--text-primary); }
   .header-right { margin-left: 0; display: flex; align-items: center; gap: 12px; }
   #header-right .nav-item { display: none; }
@@ -710,6 +710,7 @@
   }
   .btn:disabled:hover, .btn.is-disabled:hover { background: var(--bg-primary); }
   .btn-primary:disabled:hover, .btn-primary.is-disabled:hover { background: var(--button-tab-active-fill); }
+  #myp-pub-btn:disabled { opacity: 1; background: rgba(0,0,0,.08); border-color: transparent; color: rgba(0,0,0,.3); }
 
   /* Badge system */
   .badge {
@@ -753,11 +754,11 @@
     margin-bottom: 8px;
     color: var(--text-primary);
   }
-  .field-label .opt { color: var(--text-muted); font-weight: 400; }
+  .field-label .opt { color: var(--text-primary); font-weight: 400; }
   /* Kit Input: grey surface on white panels, radius 8, body-m 16 */
   .input {
     width: 100%;
-    padding: 12px;
+    padding: 9px 12px;
     border: 1px solid var(--input-stroke);
     border-radius: var(--radius-8);
     background: var(--input-surface);
@@ -767,6 +768,8 @@
     line-height: 1.3;
     transition: border-color 0.15s;
   }
+  /* Kit Default controls are 40px in forms. Keep textarea's own content height. */
+  .input:not(textarea) { height: 40px; padding-block: 0; }
   .input::placeholder { color: var(--input-placeholder); }
   .input:focus { outline: none; border-color: var(--button-tab-active-fill); }
   /* Поле с неизменяемым префиксом (instagram.com/): рамку несёт обёртка, ввод — голый инпут внутри.
@@ -776,7 +779,7 @@
   .input-prefix-text { color: var(--text-secondary); white-space: nowrap; font-size: var(--fs-body-m); }
   .input-prefix .input-bare { flex: 1; min-width: 0; border: 0; background: transparent; padding: 12px 12px 12px 1px; font: inherit; color: var(--text-primary); outline: none; }
   textarea.input { resize: vertical; min-height: 112px; height: auto; field-sizing: fixed; }
-  .field-helper { font-size: var(--fs-caption-s); color: var(--text-secondary); margin-top: 6px; }
+  .field-helper { font-size: var(--fs-caption-m); color: var(--text-secondary); margin-top: 6px; }
   .field-error { font-size: var(--fs-caption-s); color: var(--danger); margin-top: 6px; display: none; }
   .field.has-error .input { border-color: var(--danger); }
   .field.has-error .field-error { display: block; }
@@ -936,7 +939,7 @@
     border-radius: var(--radius-6, 6px);
     font-size: var(--fs-caption-m); cursor: pointer;
   }
-  .ctx-menu-row:hover { background: rgba(0,0,0,.04); }
+  .ctx-menu-row:hover { background: var(--bg-hover); }
   /* Текущий контекст — заливка кит Menu Item · Selected (#D5D4D1, как в Draft 6002:1646 и листе
      10654:67743), а не голубой: голубой в меню читался кнопкой-делом. */
   .ctx-menu-row.active { background: #d5d4d1; }
@@ -1079,6 +1082,7 @@
     max-height: 88vh;
     overflow-y: auto;
   }
+  #modal-card:focus, .org-discard-card:focus { outline: none; }
   .modal-overlay.is-cover-picker .modal-card {
     position: fixed; left: var(--cover-picker-left, 50%); top: var(--cover-picker-top, 96px);
     width: var(--cover-picker-width, 380px); max-width: calc(100vw - 32px);
@@ -1162,9 +1166,11 @@
   /* The edit drawer starts where the profile cover starts, so the site header and
      the Profile / Applications / Settings tabs stay visible behind it. --drawer-top
      is measured from the cover on open (see setProfileDrawerTop). */
+  /* 12 октября 2026 (заказчица, Syno 4990:72235): дравер профиля — от верхнего края окна,
+     страница под затемнением 70 %, как у организации. */
   .modal-overlay.is-profile-drawer {
-    background: transparent;
-    top: var(--drawer-top, 0px);
+    background: rgba(0, 0, 0, .7);
+    top: 0;
   }
   /* Дравер правки страницы организации — как у профиля в макетах Syno (12 октября 2026,
      заказчица): от верхнего края окна, страница под затемнением 70 % не прокручивается
@@ -1174,7 +1180,7 @@
     width: 640px; max-width: 640px; background: var(--bg-primary);
     height: 100%; max-height: 100%;
     border-left: 1px solid var(--stroke-primary);
-    border-top: var(--drawer-top-border, 0) solid var(--stroke-primary); border-bottom: 0;
+    border-top: 0; border-bottom: 0;
   }
   .modal-overlay.is-profile-drawer .modal-head {
     flex: 0 0 auto;
@@ -1195,7 +1201,7 @@
   }
   .myp-drawer-rail-item {
     min-height: 33px; display: flex; align-items: center; padding: 8px 10px;
-    border-radius: var(--radius-8); color: var(--text-muted); font-size: var(--fs-caption-m); cursor: pointer;
+    border-radius: var(--radius-8); color: var(--text-secondary); font-size: var(--fs-caption-m); cursor: pointer;
     border: 0; background: transparent; font-family: inherit; text-align: left; width: 100%; appearance: none;
   }
   .myp-drawer-rail-item.active { background: var(--bg-tab-primary); color: var(--text-primary); cursor: default; }
@@ -1203,9 +1209,21 @@
      divider, not through a colour change. */
   .myp-drawer-content {
     flex: 1; min-width: 0; overflow-y: auto; background: var(--bg-primary);
-    border-left: 1px solid var(--stroke-primary);
     padding: 20px 20px 20px 24px;
   }
+  /* Форма работы на 375 (Syno 4990:72318): в футере Cancel · Save work, кнопки 40 */
+  @media (max-width: 760px) {
+    .modal-overlay.is-profile-drawer #myp-work-save-another { display: none; }
+    .modal-overlay.is-profile-drawer .modal-foot .btn { min-height: 40px; }
+  }
+  body.mobile-mode .modal-overlay.is-profile-drawer #myp-work-save-another { display: none; }
+  body.mobile-mode .modal-overlay.is-profile-drawer .modal-foot .btn { min-height: 40px; }
+  /* Форма работы (Syno 4990:72235): «← Works · N» над заголовком, Add a work — H2 68 с лидом */
+  .myp-drawer-content:has(.myp-wform) { position: relative; padding-top: 56px; }
+  .myp-drawer-content:has(.myp-wform) .myp-wform-back { position: absolute; top: 20px; left: 24px; margin: 0; }
+  .myp-drawer-content:has(.myp-wform) .myp-drawer-title { font-size: 68px; }
+  @media (max-width: 760px) { .myp-drawer-content:has(.myp-wform) .myp-drawer-title { font-size: 48px; } }
+  body.mobile-mode .myp-drawer-content:has(.myp-wform) .myp-drawer-title { font-size: 48px; }
   /* Дравер одной работы (Edit work со страницы работы, решение 7 сентября 2026): без рельсы
      профиля и списка Works — та же форма, что Add a work в подаче, футер Cancel · Save changes */
   .modal-overlay.is-profile-drawer.is-work-solo .modal-card { width: 480px; max-width: 480px; }
@@ -1335,6 +1353,8 @@
   .myp-wform-title { font-size: var(--fs-heading-h5); line-height: 24px; margin: 0; }
   .myp-wform-foot { display: flex; align-items: center; gap: 8px; margin-top: 24px; }
   .myp-work-drawer-form .field-grid { gap: 14px 12px; }
+  /* На 375 пары формы работы остаются в строку — Title | Year, Dimensions | Duration (Syno 4990:72318) */
+  body .modal-overlay .myp-work-drawer-form .field-grid { grid-template-columns: 1fr 1fr; }
   .myp-work-drawer-form textarea.input { min-height: 88px; }
   .myp-empty-collage {
     width: 80px; height: 80px; display: block; overflow: hidden;
@@ -2242,9 +2262,9 @@
   }
   /* Мета футера несёт обе линии: верхняя отделяет её от блока подписки,
      нижняя закрывает низ страницы (`Divider · page bottom` каркаса). */
-  .sf-meta { border-top: 1px solid var(--stroke-primary); border-bottom: 1px solid var(--stroke-primary); background: var(--bg-primary); display: flex; justify-content: space-between; gap: 16px; padding: var(--space-20) var(--page-padding-x); font-size: var(--fs-caption-m); line-height: 1.2; }
+  .sf-meta { border-top: 1px solid var(--stroke-primary); border-bottom: 1px solid var(--stroke-primary); background: var(--bg-primary); display: flex; justify-content: space-between; gap: 16px; padding: var(--space-12) var(--page-padding-x); font-size: var(--fs-caption-s); line-height: 1.2; }
   .sf-meta-left { display: flex; gap: 16px; color: var(--text-secondary); }
-  .sf-meta-right { display: flex; gap: 40px; color: var(--text-primary); }
+  .sf-meta-right { display: flex; gap: 12px; color: var(--text-primary); }
   .sf-meta-right span { cursor: pointer; }
   /* Служебная строка компактного футера: Contact · Privacy Policy · Cookies · Terms of use (CLAUDE.md → Footer). Ховер — подчёркивание, цвет тот же. */
   .sf-meta-right a { color: inherit; text-decoration: none; }
@@ -2320,7 +2340,7 @@
   .ae-author-body > .ae-author-intro { display: none; }
   .ae-author-options { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; min-height: 0; }
   .ae-author-option { appearance: none; border: 0; background: transparent; color: var(--text-primary); font: inherit; font-size: var(--fs-caption-m); text-align: left; width: 100%; flex: 0 0 auto; height: auto; min-height: 32px; padding: 4px 8px; border-radius: var(--radius-8); }
-  .ae-author-option:focus-visible { outline: 2px solid var(--text-primary); outline-offset: -2px; }
+  .ae-author-option:focus-visible { outline: 2px solid var(--text-primary); outline-offset: 2px; }
   .ae-author-option .ctx-menu-col { flex: 1; overflow-wrap: anywhere; }
   .ae-author-option .ctx-menu-sub { overflow-wrap: anywhere; }
   /* Лицо — круг, страница — скруглённый квадрат 4 со знаком здания, как в Switch to (канон меток) */
@@ -2813,7 +2833,7 @@
   #apply-main > * { min-width: 0; } /* grid items must shrink below content width (long email etc.) */
   .apply-rail { position: sticky; top: 24px; }
   .step-dot { cursor: pointer; }
-  .step-dot.locked { opacity: 0.45; cursor: not-allowed; }
+  .step-dot.locked { cursor: not-allowed; }
 
   /* Call title moved to the breadcrumb (kit) — rail is stepper-only */
   .apply-head { display: none; }
@@ -2831,7 +2851,7 @@
     display: flex; align-items: center; justify-content: center;
     font-size: var(--fs-caption-s); font-weight: 400; color: var(--text-muted);
   }
-  .step-label { font-size: var(--fs-caption-m); color: var(--text-muted); line-height: 1.2; text-align: left; }
+  .step-label { font-size: var(--fs-caption-m); color: var(--text-secondary); line-height: 1.2; text-align: left; }
   .step-dot.done .step-num { background: var(--bg-tab-primary); font-size: 0; }
   .step-dot.done .step-num::after { content: 'check'; font-family: 'Material Icons'; font-size: var(--fs-caption-m); line-height: 1; color: var(--text-primary); }
   .step-dot.done .step-label { color: var(--text-secondary); }
@@ -2858,13 +2878,73 @@
   body.mobile-mode #apply-main .apply-steps {
     width: 100%; flex-direction: row; flex-wrap: nowrap; gap: 4px;
   }
+  /* 375 (Syno 963:21093): four progress segments and one mono line «STEP 1 OF 4 · PROFILE» */
+  body.mobile-mode #apply-main .apply-steps { position: relative; gap: 4px; padding-bottom: 26px; counter-reset: apply-step; }
   body.mobile-mode #apply-main .step-dot {
-    min-width: 40px; min-height: 40px; padding: 8px; justify-content: center; gap: 8px;
+    counter-increment: apply-step; flex: 1 1 0; min-width: 0; min-height: 4px; height: 4px; padding: 0; gap: 0;
+    border-radius: 0; background: var(--stroke-primary);
   }
-  body.mobile-mode #apply-main .step-dot:not(.current) { width: 40px; flex: 0 0 40px; }
-  body.mobile-mode #apply-main .step-dot.current { flex: 1 1 auto; min-width: 0; justify-content: flex-start; }
+  body.mobile-mode #apply-main .step-dot:hover { background: var(--stroke-primary); }
+  body.mobile-mode #apply-main .step-dot.done, body.mobile-mode #apply-main .step-dot.current { background: var(--button-tab-active-fill); }
+  body.mobile-mode #apply-main .step-dot .step-num, body.mobile-mode #apply-main .step-dot .step-label { display: none; }
   body.mobile-mode #apply-main .step-dot.current .step-label {
-    min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--fs-caption-s);
+    display: block; position: absolute; left: 0; right: 0; top: 14px;
+    font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-s); text-transform: uppercase; letter-spacing: 0.02em;
+    color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  body.mobile-mode #apply-main .step-dot.current .step-label::before { content: 'Step ' counter(apply-step) ' of 4 · '; }
+  body.mobile-mode .app:has(#screen-apply.active), body.mobile-mode #apply-main { background: var(--bg-primary); }
+  body.mobile-mode .apply-summary { border: 1px solid var(--stroke-primary); }
+  body.mobile-mode .apply-sum-row + .apply-sum-row { border-top: 1px solid var(--stroke-primary); }
+  body.mobile-mode .apply-sum-row .k { width: 96px; }
+  /* Review на 375 (Syno 963:21192): разделы от линии до линии без скругления, правка — словом с карандашом,
+     как на десктопе (25 октября 2026, заказчица: иконка без слова непонятна; в макете — только иконка), полоса шагов чёрная, в крошках имя колла */
+  body.mobile-mode #screen-apply #apply-main .step-dot.done, body.mobile-mode #screen-apply #apply-main .step-dot.current { background: var(--text-primary); }
+  body.mobile-mode #screen-apply .preview-block { margin: 0 calc(-1 * var(--page-padding-x)) -1px; border-radius: 0; border-left: 0; border-right: 0; }
+  @media (max-width: 760px) {
+    #screen-apply #apply-main .step-dot.done, #screen-apply #apply-main .step-dot.current { background: var(--text-primary); }
+    #screen-apply .preview-block { margin: 0 calc(-1 * var(--page-padding-x)) -1px; border-radius: 0; border-left: 0; border-right: 0; }
+  }
+  /* Шаги заявки на 375 (Syno 963:21192): своя полоса под крошками с линией снизу, сегменты 8 со
+     скруглением, подпись серая; «Save & close» в крошках серым */
+  body.mobile-mode #screen-apply #apply-main { padding-top: 12px; }
+  body.mobile-mode #screen-apply #apply-main .apply-rail { margin: 0 calc(-1 * var(--page-padding-x)); padding: 0 var(--page-padding-x) 12px; border-bottom: 1px solid var(--stroke-primary); }
+  body.mobile-mode #screen-apply #apply-main .step-dot { height: 8px; min-height: 8px; border-radius: 2px; }
+  body.mobile-mode #screen-apply #apply-main .step-dot.current .step-label { top: 18px; color: var(--text-secondary); }
+  body.mobile-mode #screen-apply #apply-main .apply-steps { padding-bottom: 30px; }
+  body.mobile-mode #toolbar-saveclose { color: var(--text-secondary); }
+  @media (max-width: 760px) {
+    body #screen-apply #apply-main { padding-top: 12px; }
+    body #screen-apply #apply-main .apply-rail { margin: 0 calc(-1 * var(--page-padding-x)); padding: 0 var(--page-padding-x) 12px; border-bottom: 1px solid var(--stroke-primary); }
+    body #screen-apply #apply-main .step-dot { height: 8px; min-height: 8px; border-radius: 2px; }
+    body #screen-apply #apply-main .step-dot.current .step-label { top: 18px; color: var(--text-secondary); }
+    body #screen-apply #apply-main .apply-steps { padding-bottom: 30px; }
+    body #toolbar-saveclose { color: var(--text-secondary); }
+  }
+  /* The same 375 rules for a real narrow window (the case embeds the prototype at 375). */
+  @media (max-width: 760px) {
+    /* 375 (Syno 963:21093): four progress segments and one mono line «STEP 1 OF 4 · PROFILE» */
+    #apply-main .apply-steps { position: relative; gap: 4px; padding-bottom: 26px; counter-reset: apply-step; }
+    #apply-main .step-dot {
+      counter-increment: apply-step; flex: 1 1 0; min-width: 0; min-height: 4px; height: 4px; padding: 0; gap: 0;
+      border-radius: 0; background: var(--stroke-primary);
+    }
+    #apply-main .step-dot:hover { background: var(--stroke-primary); }
+    #apply-main .step-dot.done, #apply-main .step-dot.current { background: var(--button-tab-active-fill); }
+    #apply-main .step-dot .step-num, #apply-main .step-dot .step-label { display: none; }
+    #apply-main .step-dot.current .step-label {
+      display: block; position: absolute; left: 0; right: 0; top: 14px;
+      font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-s); text-transform: uppercase; letter-spacing: 0.02em;
+      color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #apply-main .step-dot.current .step-label::before { content: 'Step ' counter(apply-step) ' of 4 · '; }
+    .app:has(#screen-apply.active), #apply-main { background: var(--bg-primary); }
+    .apply-summary { border: 1px solid var(--stroke-primary); }
+    .apply-sum-row + .apply-sum-row { border-top: 1px solid var(--stroke-primary); }
+    .apply-sum-row .k { width: 96px; }
+    body #apply-footer { background: var(--bg-primary); }
+    body #apply-footer .btn { min-height: 40px; }
+    .works-grid { columns: 1; }
   }
 
   /* Step heading per Figma: display title (Schengen Core 84/0.9) + 14px sub, then 24 to content.
@@ -2905,7 +2985,7 @@
   .apply-edit .material-icons { display: none; }
   .apply-summary-grid { padding: 0; }
   .apply-sum-row { display: flex; align-items: center; gap: 16px; padding: 12px; }
-  .apply-sum-row .k { width: 120px; flex-shrink: 0; color: var(--text-secondary); font-family: 'Schengen Mono', monospace; font-size: var(--fs-body-m); line-height: 1.3; }
+  .apply-sum-row .k { width: 120px; flex-shrink: 0; color: var(--text-secondary); font-size: var(--fs-caption-m); line-height: 1.3; }
   .apply-sum-row .v { color: var(--text-primary); font-size: var(--fs-body-m); line-height: 1.3; min-width: 0; overflow-wrap: anywhere; }
   .apply-sum-statement { padding: 12px; font-size: var(--fs-body-m); line-height: 1.5; color: var(--text-primary); margin: 0; white-space: pre-line; }
   .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
@@ -2938,6 +3018,7 @@
     transition: background 0.15s; break-inside: avoid; margin: 0 0 -1px -1px;
   }
   .work-card.selected { background: var(--bg-tab-primary); }
+  .work-card:hover { background: var(--bg-hover); }
   .work-thumb { display: block; width: calc(100% - 24px); height: auto; margin: 12px 12px 0; background: var(--bg-hover); }
   /* mock: the aspect set mirrors what artists actually upload (in prod the work's
      own ratio drives this) — portrait 3:4 (canvas/scan), landscape 3:2 (camera),
@@ -2974,20 +3055,20 @@
   .file-drop .material-icons { font-size: 24px; display: block; margin: 0 auto 6px; }
 
   .consent-box {
-    border: 1px solid var(--stroke-primary); border-radius: var(--radius-12);
-    padding: var(--card-padding); background: var(--bg-card); transition: background 0.15s, border-color 0.15s;
+    border: 0; border-radius: 0;
+    padding: 8px 0 0; background: transparent;
   }
-  .consent-box.checked { border-color: var(--button-tab-active-fill); background: var(--bg-tab-primary); }
+  .consent-box.checked { background: transparent; }
   .consent-box.has-error { border-color: var(--danger-stroke); background: var(--danger-bg); }
   .consent-row { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
   .consent-box .checkbox { width: 22px; height: 22px; }
-  .consent-text strong { font-size: var(--fs-body-m); display: block; margin-bottom: 6px; line-height: 1.4; }
+  .consent-text strong { font-size: var(--fs-body-m); font-weight: 400; display: block; margin-bottom: 6px; line-height: 1.4; }
   .consent-text span { font-size: var(--fs-caption-m); color: var(--text-secondary); line-height: 1.55; }
-  .consent-why { font-size: var(--fs-caption-s); color: var(--text-secondary); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--stroke-primary); display: flex; gap: 6px; }
+  .consent-why { display: none !important; font-size: var(--fs-caption-s); color: var(--text-secondary); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--stroke-primary); display: flex; gap: 6px; }
   .consent-box.checked .consent-why, .consent-box.has-error .consent-why { border-top-color: var(--stroke-on-tint); }
   .consent-why .material-icons { font-size: 15px; flex-shrink: 0; }
 
-  .preview-block { border: 1px solid var(--stroke-primary); border-radius: var(--radius-8); margin-bottom: 14px; overflow: hidden; }
+  .preview-block { border: 1px solid var(--stroke-primary); border-radius: var(--radius-8); margin-bottom: 16px; overflow: hidden; background: var(--input-surface); }
   .preview-practice-note { margin: 8px 0 0; font-size: var(--fs-caption-s); color: var(--text-secondary); }
   /* The promo card is the one dark surface here — both lines live on it, so they take
      white and a muted white, not the page text tokens. */
@@ -2996,19 +3077,19 @@
   #preview-practice-body:empty::after { content: 'No medium yet — set one on your works'; font-size: var(--fs-caption-m); color: var(--text-muted); }
   .preview-block-head {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 14px; background: var(--bg-card); border-bottom: 1px solid var(--stroke-primary);
+    padding: 12px; background: transparent; border-bottom: 1px solid var(--stroke-primary);
   }
-  .preview-block-head h4 { font-size: var(--fs-caption-m); display: inline-flex; align-items: center; gap: 10px; }
+  .preview-block-head h4 { font-size: var(--fs-body-m); font-weight: 400; display: inline-flex; align-items: center; gap: 12px; }
   .preview-block-head h4::before {
     content: "check";
     font-family: 'Material Icons';
     font-style: normal; font-weight: normal;
     font-feature-settings: 'liga';
     font-size: var(--fs-caption-m);
-    width: 22px; height: 22px;
+    width: 20px; height: 20px;
     border-radius: 50%;
-    background: var(--button-tab-active-fill);
-    color: #fff;
+    background: var(--bg-tab-primary);
+    color: var(--text-link);
     display: inline-flex; align-items: center; justify-content: center;
     flex-shrink: 0;
     text-rendering: optimizeLegibility;
@@ -3023,11 +3104,11 @@
   .preview-pending-text { color: var(--danger); }
   .preview-pending-text .preview-edit { color: var(--danger); font-weight: 400; text-decoration: underline; }
   /* Edit на шаге Review — Ghost: лейбл тёмный, ховер — подложка; поле ховера не сдвигает строку */
-  .preview-edit { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-caption-s); color: var(--text-primary); cursor: pointer;
+  .preview-edit { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-body-m); color: var(--text-link); cursor: pointer;
     padding: 4px 8px; margin: -4px -8px; border-radius: var(--radius-6); transition: background .15s; }
-  .preview-edit .material-icons { font-size: 14px; }
+  .preview-edit .material-icons { font-size: 16px; }
   .preview-edit:hover { background: var(--bg-hover); }
-  .preview-block-body { padding: 14px; font-size: var(--fs-caption-m); line-height: 1.6; }
+  .preview-block-body { padding: 12px; font-size: var(--fs-body-m); line-height: 1.5; }
   .preview-block-body.muted { color: var(--text-secondary); }
   /* Statement is plain text: paragraphs are the only structure it carries, so the
      blank line the artist typed has to survive every read-only surface. */
@@ -3035,18 +3116,26 @@
   /* Review "Your details" rows mirror the step-1 Detail Row: mono label 120 + value */
   .preview-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; font-size: var(--fs-body-m); line-height: 1.3; }
   .preview-row:last-child { margin-bottom: 0; }
-  .preview-row .pk { color: var(--text-secondary); width: 120px; flex-shrink: 0; font-family: 'Schengen Mono', monospace; }
+  .preview-row .pk { color: var(--text-secondary); width: 120px; flex-shrink: 0; font-size: var(--fs-caption-m); }
   .preview-row > :last-child { min-width: 0; overflow-wrap: anywhere; }
   /* Review — actual question → answer */
-  .preview-qa { padding: 9px 0; border-bottom: 1px solid var(--stroke-primary); }
-  .preview-qa:first-child { padding-top: 0; }
-  .preview-qa:last-child { border-bottom: none; padding-bottom: 0; }
-  .preview-qa-q { font-size: var(--fs-caption-s); color: var(--text-secondary); margin-bottom: 4px; }
+  #preview-questions-body { padding: 0; }
+  .preview-qa { border-bottom: 1px solid var(--stroke-primary); }
+  .preview-qa:last-child { border-bottom: none; }
+  .preview-qa-q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px; font-size: var(--fs-body-m); color: var(--text-primary); cursor: pointer; list-style: none; }
+  .preview-qa-q::-webkit-details-marker { display: none; }
+  .preview-qa-q::after { content: 'expand_more'; font-family: 'Material Icons'; font-size: 16px; line-height: 1; font-feature-settings: 'liga'; }
+  .preview-qa[open] .preview-qa-q::after { content: 'expand_less'; }
+  .preview-qa > .preview-qa-a { padding: 0 12px 12px; }
   .preview-qa-req { color: var(--text-muted); }
   .preview-qa-a { font-size: var(--fs-caption-m); color: var(--text-primary); line-height: 1.55; white-space: pre-wrap; }
-  .preview-qa-a.empty { color: var(--text-muted); font-style: italic; white-space: normal; }
-  .preview-works { display: flex; gap: 8px; flex-wrap: wrap; }
-  .preview-works img { width: 64px; height: 64px; object-fit: cover; border-radius: var(--radius-6); border: 1px solid var(--stroke-primary); }
+  .preview-qa-a.empty { color: var(--text-secondary); white-space: normal; }
+  .preview-works { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: thin; scrollbar-color: var(--text-primary) var(--stroke-primary); }
+  .preview-work { flex: 0 0 205px; margin: 0; }
+  .preview-work img { display: block; width: 100%; height: 154px; object-fit: cover; }
+  .preview-work figcaption { padding-top: 12px; }
+  .preview-work-t { display: block; font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-primary); }
+  .preview-work-m { display: block; margin-top: 4px; font-size: var(--fs-caption-m); color: var(--text-secondary); }
 
   .apply-footer {
     /* FIXED to the viewport bottom (within the .app frame): sticky only pins while
@@ -3059,7 +3148,6 @@
     left: 50%; right: auto; width: min(402px, calc(100vw - 32px));
     transform: translateX(-50%);
   }
-  @media (max-width: 480px) { .apply-footer { left: 0; right: 0; } }
   /* Content never hides under the fixed bar */
   #screen-apply .page, #screen-editprofile .ep-body, #screen-createcall .page { padding-bottom: 92px; }
   .apply-footer-inner {
@@ -3071,15 +3159,19 @@
   #apply-footer .apply-footer-inner { max-width: none; margin: 0; padding-left: var(--page-padding-x); padding-right: var(--page-padding-x); }
   /* Application Back / Next bar uses the shared page surface, including its inner row. */
   #apply-footer {
-    background: var(--bg-primary);
+    background: var(--bg-card);
     border: 1px solid var(--stroke-primary);
   }
+  #apply-footer .apply-footer-inner { background: transparent; }
+  #apply-back { background: transparent; }
+  body.mobile-mode #apply-footer { background: var(--bg-primary); }
+  body.mobile-mode #apply-footer .btn { min-height: 40px; }
 
   /* Submitted interstitial — Figma 2482:65391: white bordered sheet, blue art
      panel (masked brush check) + centered column with notice and promo card */
   .apply-submitted {
     display: flex; gap: 20px; align-items: stretch;
-    background: var(--bg-card);
+    background: var(--bg-primary);
     margin: 0; padding: 0 12px 20px 0; /* full-bleed to the frame lines */
     min-height: calc(100dvh - 180px);
   }
@@ -3095,8 +3187,21 @@
   .subm-inner { display: flex; flex-direction: column; gap: 20px; width: 100%; }
   .subm-title {
     font-family: 'Schengen Core', 'Schengen A', sans-serif; font-weight: 500;
-    font-size: clamp(48px, 6.6vw, 84px); line-height: 0.9; text-align: center;
+    font-size: 68px; line-height: 0.9; text-align: center;
   }
+  /* Syno 963:19935 / 963:19954: the result date is a centred line under the title; the
+     notice surface returns on 375 only. A live profile gets two buttons, not a card. */
+  .apply-submitted .subm-inner { max-width: 520px; margin: 0 auto; }
+  .apply-submitted .subm-title { max-width: 360px; margin: 0 auto; }
+  /* Компактный футер под экраном отправки (Syno 963:19935) — только вместе с ним */
+  #screen-apply .subm-footer { display: none; }
+  #screen-apply #apply-submitted:not([hidden]) + .subm-footer { display: block; }
+  .app:has(#apply-submitted:not([hidden])) { background: var(--bg-primary); }
+  .apply-submitted .inline-notice { background: transparent; padding: 0; text-align: center; }
+  .apply-submitted .inline-notice .in-title { font-size: var(--fs-body-m); }
+  .apply-submitted .promo-card { text-align: center; }
+  .apply-submitted .promo-title { font-family: 'Schengen Core', 'Schengen A', sans-serif; font-weight: 500; font-size: var(--fs-heading-h5); text-transform: uppercase; }
+  .apply-submitted .promo-card.is-actions { background: transparent; padding: 0; flex-direction: row; justify-content: center; gap: 8px; }
   .subm-stack { display: flex; flex-direction: column; gap: 12px; }
   .inline-notice { background: var(--bg-tab-primary); border-radius: var(--radius-8); padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
   .inline-notice .in-title { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-primary); }
@@ -3113,17 +3218,33 @@
     color: #fff; font-family: inherit; font-size: var(--fs-caption-m); cursor: pointer; transition: background .15s;
   }
   .promo-ghost:hover { background: rgba(255,255,255,0.08); }
-  body.mobile-mode .apply-submitted { flex-direction: column; padding: 0 12px 20px; }
-  body.mobile-mode .subm-art { min-height: 220px; flex: none; }
+  body.mobile-mode .apply-submitted { flex-direction: column; padding: 0 0 20px; gap: 0; }
+  body.mobile-mode .subm-art { min-height: 281px; flex: none; }
+  body.mobile-mode .subm-body { padding: 28px 12px 0; align-items: flex-start; }
+  body.mobile-mode .subm-title { font-size: 56px; }
+  body.mobile-mode .apply-submitted .inline-notice { background: var(--bg-tab-primary); padding: 12px; text-align: left; }
+  body.mobile-mode .apply-submitted .promo-card.is-actions { flex-direction: column; }
+  /* Отправлено · 375 (Syno 963:21267): кадр 281 целиком, заголовок 56 в 28 под ним, плашка в две ступени. */
+  .apply-submitted .subm-mob { display: none; }
+  body.mobile-mode .apply-submitted .subm-desk { display: none; }
+  body.mobile-mode .apply-submitted .subm-mob { display: block; }
   @media (max-width: 760px) {
-    .apply-submitted { flex-direction: column; padding: 0 12px 20px; }
-    .subm-art { min-height: 220px; flex: none; }
+    .apply-submitted .subm-desk { display: none; }
+    .apply-submitted .subm-mob { display: block; }
+  }
+  @media (max-width: 760px) {
+    .apply-submitted { flex-direction: column; padding: 0 0 20px; gap: 0; }
+    .subm-art { min-height: 281px; flex: none; }
+    .subm-body { padding: 28px 12px 0; align-items: flex-start; }
+    .subm-title { font-size: 56px; }
+    .apply-submitted .inline-notice { background: var(--bg-tab-primary); padding: 12px; text-align: left; }
+    .apply-submitted .promo-card.is-actions { flex-direction: column; }
   }
   .settings-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
   body.mobile-mode .field-grid, body.mobile-mode .ae-when-grid { grid-template-columns: 1fr; }
 
-  body.mobile-mode .works-grid { columns: 2; }
+  body.mobile-mode .works-grid { columns: 1; }
   /* Step dots collapse to circles, but the CURRENT step keeps its label —
      otherwise the user can't tell what stage they're on */
   body.mobile-mode .step-label { display: none; }
@@ -3136,11 +3257,37 @@
   body.mobile-mode .hub-card-profile .hub-card-chev { display: none; }
   @media (max-width: 560px) {
     .field-grid { grid-template-columns: 1fr; }
-    .works-grid { columns: 2; }
+    .works-grid { columns: 1; }
     .step-label { display: none; }
     .step-dot.current .step-label { display: block; }
     .oc-days-pill:not(.closed) { display: none; }
     .hub-card-profile .hub-card-chev { display: none; }
+  }
+  /* Заявка на 375 (Syno 963:21093, 963:21128, 963:21192): полоса «Applying to: Open Call 2026» — 38,
+     Save & close у края контента; работы одной колонкой во всю ширину блока, выбранная заливается целиком,
+     между карточками одна линия; счётчик — моно капсом; Add new work — 32; полоса Back / Next —
+     во всю ширину экрана с одной верхней линией (25 октября 2026, сверка кейса). */
+  body.mobile-mode:has(#screen-apply.active) #page-toolbar { padding-top: 12px; padding-bottom: 12px; min-height: 0; height: auto; }
+  body.mobile-mode #toolbar-saveclose { padding: 0; min-height: 0; height: auto; background: none; }
+  body.mobile-mode #screen-apply .works-grid { margin: 0 calc(-1 * var(--page-padding-x)); padding-left: 0; }
+  body.mobile-mode #screen-apply .work-card { border-left: 0; border-right: 0; margin: 0 0 -1px; }
+  body.mobile-mode #screen-apply .works-counter { font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-s); text-transform: uppercase; letter-spacing: 0.02em; }
+  body.mobile-mode #screen-apply [data-add-work="apply"] { min-height: 32px; height: 32px; padding: 0 12px; font-size: var(--fs-caption-m); }
+  body.mobile-mode #apply-footer { left: 0; right: 0; width: auto; transform: none; border: 0; border-top: 1px solid var(--stroke-primary); z-index: 130; }
+  body.mobile-mode #apply-footer .apply-footer-inner { padding-left: 20px; padding-right: 20px; }
+  body.mobile-mode #screen-apply :is(.preview-row .pk, .apply-sum-row .k, .apply-sum-row > :first-child) { width: 88px; flex: none; }
+  body.mobile-mode #screen-apply .preview-row { min-height: 36px; align-items: center; }
+  @media (max-width: 760px) {
+    body:has(#screen-apply.active) #page-toolbar { padding-top: 12px; padding-bottom: 12px; min-height: 0; height: auto; }
+    #toolbar-saveclose { padding: 0; min-height: 0; height: auto; background: none; }
+    #screen-apply .works-grid { margin: 0 calc(-1 * var(--page-padding-x)); padding-left: 0; }
+    #screen-apply .work-card { border-left: 0; border-right: 0; margin: 0 0 -1px; }
+    #screen-apply .works-counter { font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-s); text-transform: uppercase; letter-spacing: 0.02em; }
+    #screen-apply [data-add-work="apply"] { min-height: 32px; height: 32px; padding: 0 12px; font-size: var(--fs-caption-m); }
+    body #apply-footer { left: 0; right: 0; width: auto; transform: none; border: 0; border-top: 1px solid var(--stroke-primary); z-index: 130; }
+    body #apply-footer .apply-footer-inner { padding-left: 20px; padding-right: 20px; }
+    #screen-apply :is(.preview-row .pk, .apply-sum-row .k, .apply-sum-row > :first-child) { width: 88px; flex: none; }
+    #screen-apply .preview-row { min-height: 36px; align-items: center; }
   }
 
   /* ============================================================
@@ -3259,7 +3406,7 @@
   .appl-card-media {
     flex-shrink: 0; width: 130px; height: 145px;
     border-radius: var(--radius-8); overflow: hidden;
-    border: 1px solid var(--image-outline, rgba(0,0,0,0.1));
+    border: 0;
   }
   .appl-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
   /* A page under review, an invitation, a request — none of them has a photo
@@ -4347,7 +4494,7 @@
     background: var(--bg-primary); padding: 3px; margin-top: 6px;
   }
   .seg-btn {
-    padding: 6px 14px; border: none; background: transparent;
+    padding: 6px 12px; border: none; background: transparent;
     border-radius: var(--radius-4); font-size: var(--fs-caption-m); cursor: pointer;
     color: var(--text-secondary); font-family: inherit;
     transition-property: background-color, color, transform;
@@ -4356,13 +4503,13 @@
   }
   .seg-btn:hover { color: var(--text-primary); }
   .seg-btn:active { transform: scale(0.96); }
-  .seg-btn.active { background: var(--bg-tab-primary); color: var(--text-primary); font-weight: 500; }
+  .seg-btn.active { background: var(--bg-tab-primary); color: var(--text-primary); font-weight: 400; }
 
   /* Custom dropdown — Syno popover pattern (Figma 485-3219) */
   .dropdown { position: relative; }
   .dropdown-trigger {
     display: flex; align-items: center; justify-content: space-between;
-    width: 100%; padding: 12px;
+    width: 100%; height: 40px; padding: 0 12px;
     border: 1px solid var(--input-stroke); border-radius: var(--radius-8);
     background: var(--input-surface); font-family: inherit; font-size: var(--fs-body-m);
     color: var(--text-primary); cursor: pointer; text-align: left;
@@ -4671,7 +4818,7 @@
   .ap-cover.is-empty-cover .ap-cover-sticky::before { display: none; }
   .ap-hero { position: absolute; left: 12px; right: 12px; top: 12px; color: #fff; z-index: 2; }
   body.mobile-mode.hero-overlay .ap-hero { padding-top: 44px; } /* keep the name clear of the absolute Share button */
-  .ap-cover.tone-light .ap-hero { color: var(--text-primary); }
+  .ap-cover.tone-light.is-empty-cover .ap-hero { color: var(--text-primary); }
   /* Trust/award chips sit at the BOTTOM-left of the cover (Figma 3368:16032) — solid chips, so no
      tone-adaptive flip needed; hero name/meta live top-left, these anchor the opposite corner. */
   .ap-badges { position: absolute; left: 12px; bottom: 12px; z-index: 2; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
@@ -4684,8 +4831,7 @@
      уплотнения строка «цветёт». Кит: Body/M/Mono 16 / 130 % / −2 %. */
   .ap-meta { font-family: 'Schengen Mono', monospace; font-size: var(--fs-body-m); letter-spacing: -0.02em;
     color: rgba(255,255,255,.9); margin-top: 10px; max-width: 560px; line-height: 1.3; }
-  .ap-cover.tone-light .ap-meta { color: var(--text-primary); }
-  .ap-cover.tone-light .ap-actions .btn, .ap-cover.tone-light .ap-share-btn, .ap-cover.tone-light .ap-follow-btn, .ap-cover.tone-light .ap-edit-btn { border-color: var(--stroke-primary); }
+  .ap-cover.tone-light.is-empty-cover .ap-meta { color: var(--text-primary); }
   .ap-formats { display: flex; gap: 6px; flex-wrap: wrap; }
   .ap-actions { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
   .ap-actions .btn { background: #fff; border-color: #fff; color: var(--text-primary); }
@@ -4700,13 +4846,8 @@
   /* Following = state reached. Tinted fill, same signal as the Following block. */
   .ap-follow-btn.is-following { background: var(--bg-tab-primary); border-color: var(--bg-tab-primary); }
   .ap-follow-btn.is-following:hover { background: var(--bg-tab-hover); }
-  /* Светлая обложка — кнопки в теме страницы, как везде (26 сентября 2026, registry-profile.md):
-     Follow — Secondary, Share — Outline. Edit profile владельца остаётся белой, как в
-     переданном 3007:85844 (ревью 3 октября, «оставлено как передано»). */
-  .ap-cover.tone-light .ap-follow-btn { background: var(--bg-tab-primary); border-color: transparent; }
-  .ap-cover.tone-light .ap-follow-btn:hover { background: var(--bg-tab-hover); }
-  .ap-cover.tone-light .ap-share-btn { background: transparent; border-color: var(--stroke-primary); }
-  .ap-cover.tone-light .ap-share-btn:hover { background: var(--bg-hover); }
+  /* На обложке кнопки белые при любом тоне — фото это или цвет (25 октября 2026, заказчица; как в
+     переданном Syno: 4990:69966, 4990:67548, светлая 3007:85844). Голубая — только Following. */
 
   /* 3-column masonry INSIDE the content column (not full-bleed) — keeps the page's label-left spine,
      same columns:3 recipe as the Art Map / Registry artist grid (not a new masonry engine). Each
@@ -4761,14 +4902,17 @@
      адрес или ник рвётся посреди слова. CV на .pf-row не трогаем — там год и текст. */
   .pf-details-rows .pf-row-value, .myp-details-rows .pf-row-value { font-family: 'Schengen Mono', monospace; letter-spacing: -0.02em; overflow-wrap: anywhere; }
   .pf-details-rows .badge, .myp-details-rows .badge { font-family: 'Schengen A', sans-serif; letter-spacing: normal; }
-  body.mobile-mode .pf-details-rows .pf-row, body.mobile-mode .myp-details-rows .pf-row { flex-direction: column; gap: 12px; }
-  body.mobile-mode .pf-details-rows .pf-row-label, body.mobile-mode .myp-details-rows .pf-row-label { width: auto; }
+  /* 375 (Syno 4990:68415): лейбл и значение в строку, лейбл 120 */
+  body.mobile-mode .pf-details-rows .pf-row, body.mobile-mode .myp-details-rows .pf-row { flex-direction: row; gap: 12px; }
+  body.mobile-mode .pf-details-rows .pf-row-label, body.mobile-mode .myp-details-rows .pf-row-label { width: 120px; flex-shrink: 0; }
+  body.mobile-mode .myp-details-name { display: none; }
   /* Общая мобильная добавка к тач-зоне даёт ссылке 4px по бокам, и значение-ссылка
      съезжает с вертикали соседних значений; тач-зону держим только по высоте. */
   body.mobile-mode .pf-row-value .link { padding-left: 0; padding-right: 0; }
   @media (max-width: 700px) {
-    .pf-details-rows .pf-row, .myp-details-rows .pf-row { flex-direction: column; gap: 12px; }
-    .pf-details-rows .pf-row-label, .myp-details-rows .pf-row-label { width: auto; }
+    .pf-details-rows .pf-row, .myp-details-rows .pf-row { flex-direction: row; gap: 12px; }
+    .pf-details-rows .pf-row-label, .myp-details-rows .pf-row-label { width: 120px; flex-shrink: 0; }
+    .myp-details-name { display: none; }
   }
   .oc-sec-body.wide { max-width: none; }
   .pf-statement-text { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-secondary); max-width: 826px; white-space: pre-line; }
@@ -4853,17 +4997,17 @@
     color: var(--text-secondary); margin: 0 0 12px;
   }
   .ap-conn-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; }
-  .ap-conn-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; background: transparent; border: none; border-bottom: 1px solid var(--stroke-primary); cursor: pointer; transition: background 0.15s; }
+  /* Строка-дверь — встык к линиям колонки, линия сверху и снизу — граница строки; ховер — заливка
+     Grey/125 на всю строку (правило ховера блока, 16 сентября 2026). Приведено 26 октября 2026 по
+     замечанию заказчицы на проморолике: строка стояла внутри полей 12 с ховером 3 % и без линии снизу. */
+  .ap-conn-item { display: flex; align-items: center; gap: 12px; padding: 12px; margin-inline: -12px; background: transparent; border: none; border-bottom: 1px solid var(--stroke-primary); cursor: pointer; transition: background 0.15s; }
   .ap-conn-item:first-child { border-top: 1px solid var(--stroke-primary); }
-  /* Dividers sit BETWEEN cards only — no trailing rule under the last card of a group,
-     which otherwise doubles up with the section's own full-width bottom border. */
-  .ap-conn-item:last-child { border-bottom: none; }
-  .ap-conn-item:hover { background: rgba(0,0,0,0.03); }
-  .ap-conn-thumb { width: 79px; height: 79px; border-radius: 4px; object-fit: cover; flex-shrink: 0; background: var(--bg-hover); }
+  .ap-conn-item:hover { background: var(--bg-hover); }
+  .ap-conn-thumb { width: 80px; height: 80px; border-radius: var(--radius-8); object-fit: cover; flex-shrink: 0; background: var(--bg-hover); }
   .ap-conn-text { min-width: 0; flex: 1; }
   .ap-conn-name { font-size: var(--fs-body-m); color: var(--text-primary); line-height: 1.3; }
   .ap-conn-meta { font-size: var(--fs-caption-s); color: var(--text-secondary); line-height: 1.2; margin-top: 4px; }
-  .ap-conn-live { flex-shrink: 0; margin-left: 16px; font-size: var(--fs-caption-m); color: var(--button-tab-active-fill); }
+  .ap-conn-live { display: none; } /* «On view now» синим без действия снято 26 октября 2026: заголовок Exhibited at уже говорит, что работа выставлена; синий — только нажимаемому */
 
   .editorial-section { margin-top: 40px; }
   .editorial-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 18px; gap: 16px; }
@@ -4997,17 +5141,20 @@
     flex: 0 0 25%; min-width: 200px; box-sizing: border-box;
     display: flex; align-items: center; justify-content: space-between; gap: 8px;
     height: 52px; padding: 0 var(--page-padding-x);
-    border-right: 1px solid var(--stroke-primary);
   }
-  /* Sort is a plain trigger inside the row, not a bordered control — the row edges
-     already frame it (Art Map .sort-trigger). */
+  /* Шов колонок — левый борт правой части: так же стоит вертикаль в строке выдачи (border-left первой
+     ячейки работ), иначе линии расходились на 1 px (26 октября 2026, заказчица: «углы не метчатся»). */
+  .registry-results-head + .registry-facets { border-left: 1px solid var(--stroke-primary); }
+  /* Sort — kit Filter Chip with its stroke, 32 high (Syno Artists 2581:42763 / 375 2956:39247) */
   .registry-results-head .reg-sort .dropdown-trigger {
-    height: auto; padding: 4px 8px; gap: 4px;
-    border: 0; border-radius: var(--radius-4); background: transparent;
+    height: 32px; padding: 0 12px; gap: 4px;
+    border: 1px solid var(--stroke-primary); border-radius: var(--radius-8); background: transparent;
     font-size: var(--fs-caption-m); font-weight: 400; color: var(--text-primary);
   }
   .registry-results-head .reg-sort .dropdown-trigger:hover { background: var(--bg-hover); }
-  .registry-results-head .reg-sort.is-open .dropdown-trigger { background: var(--bg-hover); border: 0; }
+  .registry-results-head .reg-sort.is-open .dropdown-trigger { background: var(--bg-hover); }
+  @media (max-width: 760px) { .facet-divider { display: none; } }
+  body.mobile-mode .facet-divider { display: none; }
   .registry-results-head .reg-sort .dropdown-popover { left: auto; right: 0; min-width: 200px; }
   /* Facet band — sits in the results row where the search used to be. Controls are on
      the 32 step, like every other band in the product. */
@@ -5744,6 +5891,8 @@
     margin: 0;
     padding: 48px 12px 104px;
   }
+  /* Форма события начинается через 12 под линией крошек, как в Syno 4990:114617 (было 48) */
+  #screen-addevent #addevent-main { padding-top: 12px; }
   #screen-addevent #addevent-main > .cc-content,
   #screen-orgonboarding .org-form-content {
     grid-column: 2;
@@ -5874,6 +6023,14 @@
   }
   #screen-addevent #addevent-main .field { margin-bottom: 0; }
   #screen-addevent #addevent-main .field-grid { gap: 24px 20px; }
+  /* Form controls share the 40 px kit height, including custom selects. */
+  #screen-addevent #addevent-main input.input,
+  #screen-addevent #addevent-main select.input,
+  #screen-addevent #addevent-main .dropdown-trigger {
+    height: 40px;
+    min-height: 40px;
+    padding-block: 0;
+  }
   /* Entry без цены стоит во всю ширину — Price приходит только с Paid */
   #screen-addevent #addevent-main .ae-entry-grid:not(.has-price) { grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1920px) {
@@ -6016,7 +6173,8 @@
   /* Шапка-визитка: вход 20 сверху и снизу, факты под именем 84 — через text-title-lead-gap.
      На 375 визитка по центру: имя 56, факты через 12 (плитки лого нет с 6 октября 2026). */
   #screen-orgdashboard .page > .ep-edit-head { min-height: 0; padding-top: 20px; padding-bottom: 20px; }
-  #screen-orgdashboard .page > .ep-edit-head .org-dashboard-facts { margin-top: var(--text-title-lead-gap); }
+  #screen-orgdashboard .page > .ep-edit-head .org-dashboard-facts { margin-top: var(--text-title-lead-gap); color: var(--text-primary); }
+  #screen-orgdashboard .page > .ep-edit-head .org-dashboard-facts > span { color: inherit; }
   body.mobile-mode #screen-orgdashboard .page > .ep-edit-head { align-items: center; text-align: center; gap: 16px; padding: 20px 12px; }
   body.mobile-mode #screen-orgdashboard .page > .ep-edit-head h1 { font-size: 56px; }
   body.mobile-mode #screen-orgdashboard .page > .ep-edit-head .org-dashboard-facts { justify-content: center; margin-top: 12px; }
@@ -6040,6 +6198,7 @@
     #screen-orgdashboard :is(#org-events-list, #org-people-list, #org-foreign-events) > .org-call-row { padding-left: 12px; padding-right: 12px; }
   }
   #screen-orgdashboard .org-dashboard-title { flex: 1 1 auto; min-width: 0; }
+  #screen-orgdashboard .org-dashboard-facts { color: var(--text-primary); }
   /* Факты одной строкой через «·», как в макете: «Art centre · Nicosia · 34 followers»
      (23 сентября 2026) — подписчики идут в строке фактов, точку ставит ::before ниже. */
   #screen-orgdashboard .org-dashboard-facts {
@@ -6789,14 +6948,16 @@
   body.mobile-mode #screen-orgdashboard .org-dashboard-footer .sf-meta,
   body.mobile-mode :is(#screen-orgpublic, #screen-eventpage) .org-public-footer .sf-meta {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: var(--fs-caption-m);
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    font-size: var(--fs-caption-s);
   }
   body.mobile-mode #screen-orgdashboard .org-dashboard-footer :is(.sf-meta-left, .sf-meta-right),
   body.mobile-mode :is(#screen-orgpublic, #screen-eventpage) .org-public-footer :is(.sf-meta-left, .sf-meta-right) {
     flex-wrap: wrap;
-    gap: 8px 16px;
+    justify-content: center;
+    gap: 8px 12px;
   }
 
   @media (max-width: 760px) {
@@ -6847,9 +7008,9 @@
     :is(#addevent-done, #org-onb-done) .dash-empty p { font-size: var(--fs-body-m); line-height: 1.35; text-wrap: pretty; }
     :is(#addevent-done, #org-onb-done) .dash-empty .btn { width: 100%; min-height: 40px; }
     #screen-orgdashboard .org-dashboard-footer .sf-meta,
-    :is(#screen-orgpublic, #screen-eventpage) .org-public-footer .sf-meta { flex-direction: column; align-items: flex-start; gap: 12px; font-size: var(--fs-caption-m); }
+    :is(#screen-orgpublic, #screen-eventpage) .org-public-footer .sf-meta { flex-direction: column; align-items: center; text-align: center; gap: 8px; font-size: var(--fs-caption-s); }
     #screen-orgdashboard .org-dashboard-footer :is(.sf-meta-left, .sf-meta-right),
-    :is(#screen-orgpublic, #screen-eventpage) .org-public-footer :is(.sf-meta-left, .sf-meta-right) { flex-wrap: wrap; gap: 8px 16px; }
+    :is(#screen-orgpublic, #screen-eventpage) .org-public-footer :is(.sf-meta-left, .sf-meta-right) { flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
   }
   .ep-autosave { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-caption-m); color: var(--text-muted); }
   .ep-autosave .material-icons { font-size: 16px; }
@@ -7269,20 +7430,18 @@
   .wd-detail-label { font-size: var(--fs-caption-m); color: var(--text-secondary); margin-bottom: 4px; }
   /* The work page does not need a second rule between the Exhibited at label and
      its single connection card. Other connection lists keep their dividers. */
-  #screen-work .wd-block .ap-conn-item:first-child { border-top: none; }
-  /* Keep the venue title and its live-status action on one optical top line.
-     The shared connection cards remain vertically centred everywhere else. */
-  #screen-work .wd-block .ap-conn-item { align-items: flex-start; }
-  #screen-work .wd-block .ap-conn-text,
-  #screen-work .wd-block .ap-conn-live { margin-top: 10px; }
+  /* Линия сверху у первой строки остаётся: линия — граница строки, и на странице работы тоже
+     (26 октября 2026, заказчица: «нету сверху линии под Exhibited над строкой»). Выравнивание по верху
+     держалось ради `On view now` — он снят, строка центрируется, как все списки связей. */
   /* Media stack — natural-height images, first one can carry a video play overlay */
   .wd-media {
     border-left: 1px solid var(--stroke-primary); background: transparent;
-    padding: 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; min-width: 0;
+    padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 20px; min-width: 0;
   }
-  /* Images sit centred on the shared page surface and stay capped in width (Figma
-     ~431px), so the stack does not balloon to the full column width. */
-  .wd-media-item { position: relative; width: 460px; max-width: 100%; }
+  /* The work fills the column inside the 12 px edge, its height follows the file (26 October 2026,
+     the client; kit rule «работа во всю ширину ячейки внутри полей 12»). Was capped at ~431 px as in
+     the handed 4990:67721. */
+  .wd-media-item { position: relative; width: 100%; }
   .wd-media-item img { width: 100%; height: auto; display: block; }
   /* Supporting shots crop to a steady frame; the hero keeps its natural height so a
      framed painting is never clipped. */
@@ -7570,7 +7729,7 @@
   }
   body.mobile-mode .myp-hero-inner { width: 100%; max-width: none; padding-top: 44px; }
   body.mobile-mode .myp-name { font-size: clamp(36px, 12vw, 64px); white-space: normal; text-wrap: balance; }
-  .myp-tagline { font-size: var(--fs-heading-h5); line-height: 24px; color: #fff; margin: 12px 0 0; }
+  .myp-tagline { font-size: var(--fs-caption-m); line-height: 1.2; color: #fff; margin: 12px 0 0; }
   .myp-hero-edit { width: 28px; height: 28px; border: 1px solid var(--stroke-primary); background: var(--bg-card); border-radius: var(--radius-6); cursor: pointer; display: inline-grid; place-items: center; color: var(--text-secondary); flex-shrink: 0; }
   .myp-hero-edit:hover { background: var(--bg-hover); color: var(--text-primary); }
   .myp-hero-edit .material-icons { font-size: 15px; }
@@ -7581,7 +7740,7 @@
   .myp-link:hover { color: #fff; }
   /* Dark cover → light hero text (per canon owner-home macet) */
   .myp-cover .myp-name { color: #fff; }
-  .myp-cover .myp-tagline { color: rgba(255,255,255,0.82); }
+  .myp-cover .myp-tagline { color: #fff; }
   /* Light cover (colour luminance > 0.2 or a light photo) → dark text; the white utility buttons get a border
      so they do not sink into the background. Every text on the cover takes Text/Primary — name, tagline,
      photo caption: Text/Secondary #525252 only clears 4.5:1 above L 0.55, so on a mid-tone cover the
@@ -7599,12 +7758,13 @@
     display: flex; flex-direction: column; overflow: visible; margin: 0 0 -1px; position: relative;
   }
   .myp-pub-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0; padding: 12px 12px 0; min-height: 40px; }
-  .myp-pub-headl { display: inline-flex; align-items: baseline; gap: 12px; }
+  /* Заголовок полосы, счётчик и подпись — по центру строки, как кнопка справа (по базовой линии подпись 14 садилась на 2,5 px ниже) */
+  .myp-pub-headl { display: inline-flex; align-items: center; gap: 12px; }
   /* "READY TO PUBLISH?" / "YOU'RE LIVE" read as a section label, same face as WORKS
      and DETAILS below (canon owner-home) — the counter beside it stays sentence case. */
   .myp-pub-title {
     font-family: 'Schengen Core', sans-serif; font-weight: 500;
-    font-size: 18px; line-height: 1; text-transform: uppercase;
+    font-size: 20px; line-height: 1; text-transform: uppercase;
   }
   .myp-pub-actions { display: inline-flex; align-items: center; gap: 8px; }
   /* Счётчик не нажимается — Text/Primary, как у полосы организации (Draft 2.3–2.4, ревью R20,
@@ -7691,8 +7851,8 @@
   .ae-ev-sheet-body .work-menu-item { min-height: 40px; }
   .ae-ev-sheet-body .work-menu-sep { height: 1px; margin: 8px -8px; background: var(--stroke-primary); }
   .modal-body .ae-cancel-reason { margin: 20px 0 0; }
-  .myp-pub-bar { height: 8px; border-radius: var(--radius-12); background: var(--stroke-primary); overflow: hidden; margin: 20px 12px 12px; }
-  .myp-pub-fill { height: 100%; background: var(--text-primary); border-radius: var(--radius-8) 0 0 var(--radius-8); }
+  .myp-pub-bar { height: 8px; border-radius: 0; background: var(--stroke-primary); overflow: hidden; margin: 20px 12px 12px; }
+  .myp-pub-fill { height: 100%; background: var(--text-primary); border-radius: 0; }
   /* Published: header collapses to "You're live" + View/Unpublish — progress and checklist drop away.
      Unpublished (was live, checklist still complete) collapses the same way with the opposite
      meaning: a status line and the way back. Three ticked rows would say nothing to someone who
@@ -7717,18 +7877,13 @@
   /* Живая полоса — одна строка и на 375 (карточка 63): «You're live · N followers» слева,
      одно действие Ghost справа — View public profile на 1280, Copy link на 375. */
   .myp-pubrow-copy { display: none; }
-  body.mobile-mode #myp-visibility .myp-pubrow-view { display: none; }
-  body.mobile-mode #myp-visibility .myp-pubrow-copy { display: inline-flex; }
   @media (max-width: 480px) {
     #myp-visibility.is-hidden .myp-pub-head { flex-wrap: wrap; padding-bottom: 12px; }
     #myp-visibility.is-hidden .myp-pub-headl { flex: 1 1 100%; flex-wrap: wrap; row-gap: 4px; }
     #myp-visibility.is-hidden .myp-pub-actions { width: 100%; }
     #myp-visibility.is-hidden .myp-pub-actions .btn { flex: 1; }
   }
-  @media (max-width: 760px) {
-    #myp-visibility .myp-pubrow-view { display: none; }
-    #myp-visibility .myp-pubrow-copy { display: inline-flex; }
-  }
+
   /* Черновик на 375 (Draft 2.3 · 375): «Ready to publish?» и счётчик одной строкой по краям,
      полоса прогресса, пункты строками, Publish — во всю колонку 40 последней строкой
      полосы (контрол во всю ширину закрывает полосу на 12). */
@@ -7765,9 +7920,8 @@
   .myp-task.done .myp-status { background: var(--bg-tab-primary); border-color: var(--bg-tab-primary); }
   .myp-task.done .myp-status .material-icons { font-size: 13px; color: var(--button-tab-active-fill); }
   .myp-task-label { flex: 1; min-width: 0; font-size: var(--fs-caption-m); line-height: 1.2; color: var(--text-primary); }
-  .myp-task.done .myp-task-label { color: var(--text-secondary); }
+  .myp-task.done .myp-task-label { color: var(--text-primary); }
   .myp-task .myp-chev { font-size: var(--fs-heading-h5); color: var(--text-secondary); }
-  .myp-task.done .myp-chev { display: none; }
   .myp-task.done { cursor: default; }
 
   .myp-block { padding: 0; border-top: 0; }
@@ -7845,6 +7999,23 @@
      and a control that only exists on hover is not an affordance. Empty sections are
      hidden entirely. */
   .myp-edit-profile-btn { display: inline-flex; }
+  .myp-cover:not(.tone-light) .myp-cover-actions .btn { background: #fff; border-color: #fff; color: var(--text-primary); }
+  /* Профиль владельца на 375 (Syno 4990:68990, 4990:68415): действия под обложкой — своя полоса с линией
+     сверху, Edit profile — Secondary, «···» — Outline; у работы меню нет, между работами зазор без линии. */
+  body.mobile-mode:not(.hero-overlay) .myp-cover .myp-cover-actions { position: relative; top: auto; right: auto; margin-top: 12px; padding: 12px; border-top: 1px solid var(--stroke-primary); }
+  body.mobile-mode:not(.hero-overlay) .myp-cover .myp-cover-actions::before { content: ''; position: absolute; left: -6px; right: -6px; top: -1px; height: 1px; pointer-events: none; background: linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px)); }
+  body.mobile-mode:not(.hero-overlay) .myp-cover:not(.tone-light) .myp-cover-actions .btn.myp-edit-profile-btn, .myp-cover.tone-light .myp-cover-actions .btn.myp-edit-profile-btn { background: #fff; border-color: #fff; color: var(--text-primary); }
+  body.mobile-mode:not(.hero-overlay) #myp-visibility.is-hidden .myp-pub-headl { row-gap: 8px; }
+  body.mobile-mode:not(.hero-overlay) #screen-myprofile #myp-works-body .myp-work { border-bottom: 0; }
+  body.mobile-mode:not(.hero-overlay) #screen-myprofile .myp-work-menu-btn { display: none; }
+  @media (max-width: 700px) {
+    body:not(.hero-overlay) .myp-cover .myp-cover-actions { position: relative; top: auto; right: auto; margin-top: 12px; padding: 12px; border-top: 1px solid var(--stroke-primary); }
+    body:not(.hero-overlay) .myp-cover .myp-cover-actions::before { content: ''; position: absolute; left: -6px; right: -6px; top: -1px; height: 1px; pointer-events: none; background: linear-gradient(to right, var(--stroke-primary) 6px, transparent 6px, transparent calc(100% - 6px), var(--stroke-primary) calc(100% - 6px)); }
+    body:not(.hero-overlay) .myp-cover:not(.tone-light) .myp-cover-actions .btn.myp-edit-profile-btn, .myp-cover.tone-light .myp-cover-actions .btn.myp-edit-profile-btn { background: #fff; border-color: #fff; color: var(--text-primary); }
+    body:not(.hero-overlay) #myp-visibility.is-hidden .myp-pub-headl { row-gap: 8px; }
+    body:not(.hero-overlay) #screen-myprofile #myp-works-body .myp-work { border-bottom: 0; }
+    body:not(.hero-overlay) #screen-myprofile .myp-work-menu-btn { display: none; }
+  }
   body.owner-variant-b #myp-more-menu [data-mm="edit"] { display: none; }
   body.owner-variant-b #screen-myprofile .myp-block.is-empty { display: none; }
   .myp-bio-filled { cursor: pointer; border-radius: var(--radius-8); }
@@ -7872,12 +8043,12 @@
   .cabinet-tab.active { background: var(--bg-tab-primary); color: var(--text-primary); font-weight: 400; }
   /* Works — cockpit-rail two-column (label │ cards), per canon owner-home macet */
   #myp-works {
-    min-height: 342px; display: grid; grid-template-columns: 384px minmax(0, 1fr); column-gap: 20px; align-items: stretch;
+    min-height: 342px; display: grid; grid-template-columns: 392px minmax(0, 1fr); column-gap: 0; align-items: stretch;
     border: 1px solid var(--stroke-primary); border-top: 0; background: var(--bg-primary); overflow: visible; margin: 0 0 -1px;
-    padding: 12px; box-sizing: border-box;
+    padding: 0; box-sizing: border-box;
     position: relative;
   }
-  #myp-works .myp-block-h { padding: 0 12px 0 0; }
+  #myp-works .myp-block-h { padding: 12px; }
   #myp-works-body {
     min-width: 0; min-height: 316px; background: transparent;
     display: flex; align-items: center; justify-content: center;
@@ -7892,7 +8063,7 @@
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0;
     /* Cells draw their own right/bottom hairline, so a half-filled last row leaves
        an open edge instead of a stray filled block. */
-    border: 1px solid var(--stroke-primary); border-right: 0; border-bottom: 0;
+    border: 0; border-left: 1px solid var(--stroke-primary);
   }
   #myp-works-body .myp-work,
   #myp-works-body .myp-addwork-tile {
@@ -7948,19 +8119,25 @@
   #screen-myprofile .myp-footer::before { left: -8px; }
   #screen-myprofile .myp-footer::after { right: -8px; }
   @media (max-width: 920px){
-    #myp-works { min-height: 342px; grid-template-columns: 1fr; gap: 16px; padding: 16px; }
-    #myp-works .myp-block-h { min-height: 24px; padding: 0; }
+    #myp-works { min-height: 342px; grid-template-columns: 1fr; gap: 0; padding: 0; }
+    #myp-works .myp-block-h { min-height: 24px; padding: 12px; }
     #myp-works-body { min-height: 286px; }
-    #myp-works-body .myp-works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #myp-works-body .myp-works-grid { grid-template-columns: minmax(0, 1fr); border-left: 0; border-top: 1px solid var(--stroke-primary); }
+    #myp-works-body .myp-work, #myp-works-body .myp-addwork-tile { border-right: 0; }
+    #myp-works-body .myp-work-thumb { aspect-ratio: auto; }
+    #myp-works-body .myp-work-thumb img { height: auto; object-fit: contain; }
   }
   body.mobile-mode #screen-myprofile #myp-works {
-    min-height: 342px; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 16px;
+    min-height: 342px; grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0;
   }
-  body.mobile-mode #screen-myprofile #myp-works .myp-block-h { min-height: 24px; padding: 0; }
+  body.mobile-mode #screen-myprofile #myp-works .myp-block-h { min-height: 24px; padding: 12px; }
   body.mobile-mode #screen-myprofile #myp-works-body { min-height: 286px; }
   body.mobile-mode #screen-myprofile #myp-works-body .myp-works-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr); border-left: 0; border-top: 1px solid var(--stroke-primary);
   }
+  body.mobile-mode #screen-myprofile #myp-works-body .myp-work { border-right: 0; }
+  body.mobile-mode #screen-myprofile .myp-work-thumb { aspect-ratio: auto; }
+  body.mobile-mode #screen-myprofile .myp-work-thumb img { height: auto; object-fit: contain; }
   body.mobile-mode #screen-myprofile .myp-tasks { grid-template-columns: minmax(0, 1fr); }
   body.mobile-mode #screen-myprofile .myp-task { border-right: 0; }
   body.mobile-mode #screen-myprofile .myp-task + .myp-task { border-top: 1px solid var(--stroke-primary); }
@@ -7972,12 +8149,12 @@
      live on the work page and in the lightbox, not here. */
   .myp-work-thumb { aspect-ratio: 382 / 202; border-radius: 0; overflow: hidden; background: var(--bg-tab-primary); }
   .myp-work-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .myp-work-t { font-size: var(--fs-body-m); margin-top: 8px; }
+  .myp-work-t { font-size: var(--fs-heading-h5); line-height: 1.2; margin-top: 12px; }
   .myp-work-m { font-size: var(--fs-caption-m); color: var(--text-secondary); margin-top: 2px; }
   .myp-work-actions {
     position: absolute; top: 8px; right: 8px; z-index: 2;
     display: flex; align-items: center;
-    opacity: 0; pointer-events: none;
+    opacity: 1; pointer-events: auto;
     transition: opacity 150ms cubic-bezier(.2,0,0,1);
   }
   .myp-work:hover .myp-work-actions,
@@ -7999,7 +8176,7 @@
   .myp-w-preview img { width: 64px; height: 64px; object-fit: cover; border-radius: var(--radius-6); border: 1px solid var(--stroke-primary); }
   .myp-w-prev-ok { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-caption-m); color: var(--button-tab-active-fill); }
   .myp-w-prev-ok .material-icons { font-size: 16px; }
-  .field-label .opt { color: var(--text-muted); font-weight: 400; }
+  .field-label .opt { color: var(--text-primary); font-weight: 400; }
   .myp-work-thumb { position: relative; }
   .myp-work-count { position: absolute; top: 6px; right: 6px; z-index: 1; display: inline-flex; align-items: center; gap: 3px; background: rgba(0,0,0,.55); color: #fff; font-size: var(--fs-caption-s); padding: 2px 6px; border-radius: var(--radius-pill); }
   .myp-work-count .material-icons { font-size: 13px; }
@@ -8282,7 +8459,8 @@
   /* Строка ссылок футера на узком экране переносится, а не тянет документ шире вьюпорта —
      то же, что починено в кит-Footer (layoutWrap = WRAP, 26 августа 2026). Без этого страница
      на 375 съезжает вбок на всех экранах с полным футером. */
-  body.mobile-mode .sf-meta-right { flex-wrap: wrap; gap: 8px 16px; }
+  body.mobile-mode .sf-meta { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+  body.mobile-mode .sf-meta-right { flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
   body.mobile-mode #screen-settings .sf-meta-right { align-items: flex-start; flex-direction: column; gap: 10px; }
   @media (max-width: 760px) {
     #screen-settings .settings-section { padding: 0; }
@@ -8294,7 +8472,8 @@
     #screen-settings .settings-footer::after { display: none; }
     #screen-settings .sf-meta,
     #screen-settings .sf-meta-left,
-    .sf-meta-right { flex-wrap: wrap; gap: 8px 16px; }
+    .sf-meta { flex-direction: column; align-items: center; text-align: center; gap: 8px; }
+    .sf-meta-right { flex-wrap: wrap; justify-content: center; gap: 8px 12px; }
     #screen-settings .sf-meta-right { align-items: flex-start; flex-direction: column; gap: 10px; }
   }
 
@@ -8322,11 +8501,7 @@
     flex-direction: column;
   }
   body.mobile-mode:has(#screen-home.active) .app { margin: 16px auto; }
-  body:has(#screen-home.active) .site-header {
-    min-height: 56px;
-    padding: 0 20px;
-    gap: 24px;
-  }
+  /* Шапка кабинета — та же, что на остальных экранах (своё поле 20 сдвигало лого на 8) */
 
   body:has(#screen-home.active) #header-right .nav-item { display: none; }
   /* Белая подложка — только у аватара с фото; заглушку-фрагмент кисти (.av-blank) она
@@ -8980,7 +9155,7 @@
     height: auto;
     aspect-ratio: 4 / 3;
     border-radius: 0;
-    border: 1px solid var(--image-outline, rgba(0,0,0,.1));
+    border: 0;
   }
   /* Кадр в рельсе — по природе объекта (21 сентября 2026, замечание заказчицы
      «у артистов высота должна быть разная»). Событие и место иллюстрируются
@@ -9036,11 +9211,31 @@
   }
   /* Мета «когда · место» — Caption/M/Mono 14 без капса, как Meta у Card/Media (27 сентября 2026;
      капс был местной находкой и с китом расходился). */
+  /* Даты формы события — британским форматом, как в макетах Events («10 October 2026»):
+     поле остаётся системным (логика читает yyyy-mm-dd), поверх — подпись; клик по полю
+     открывает календарь. Пустое время подсказывает HH:MM. */
+  #screen-addevent .field.has-face { position: relative; }
+  #screen-addevent input.has-face { position: relative; }
+  #screen-addevent input[type="date"].has-face::-webkit-datetime-edit,
+  #screen-addevent input[type="time"].has-face.is-empty::-webkit-datetime-edit { opacity: 0; }
+  #screen-addevent input[type="date"].has-face::-webkit-calendar-picker-indicator { position: absolute; inset: 0; width: auto; height: auto; opacity: 0; cursor: pointer; }
+  #screen-addevent .input-face { position: absolute; display: flex; align-items: center; padding: 0 12px; pointer-events: none; font-size: var(--fs-body-m); color: var(--text-primary); white-space: nowrap; overflow: hidden; }
+  #screen-addevent .input-face.is-empty { color: var(--input-placeholder); }
+  #screen-addevent .input-face[hidden] { display: none; }
+  /* Event page on 375 (Syno 4990:115459): no mini-map — the address and directions carry the place */
+  body.mobile-mode #screen-eventpage #evp-map { display: none; }
+  @media (max-width: 760px) { #screen-eventpage #evp-map { display: none; } }
+  /* Часы на 375 — подпись строкой, таблица дней под ней во всю ширину (Syno 4990:115459) */
+  body.mobile-mode #screen-eventpage .orgp-row.orgp-row--hours { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  @media (max-width: 760px) { #screen-eventpage .orgp-row.orgp-row--hours { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+  /* Applications (Syno 4990:63674): the card's action is Outline — no grey fill on the white card */
+  .appl-card-foot .btn { background: transparent; }
   #screen-home .saved-card-date {
     margin-top: 8px;
     font-family: 'Schengen Mono', monospace;
     font-size: var(--fs-caption-m);
     line-height: 1.2;
+    letter-spacing: -0.02em;
   }
   #screen-home .saved-card-city {
     margin-top: 8px;
@@ -9577,12 +9772,13 @@
     scroll-snap-align: start;
     border-top: 0;
     border-left: 1px solid var(--stroke-primary);
+    border-right: 0;
   }
   #home-collection-sec .home-col-rail > .saved-card:first-child { border-left: 0; }
   /* Дорожка прокрутки: тот же чёрный индикатор, что у рельсов главной. */
   #home-collection-sec .home-col-scroll {
     height: 8px;
-    background: var(--grey-125, #dcdbd9);
+    background: var(--stroke-primary);
     border-top: 1px solid var(--stroke-primary);
   }
   #home-collection-sec .home-col-scroll > span {
@@ -9839,11 +10035,12 @@
     scroll-snap-align: start;
     border-top: 0;
     border-left: 1px solid var(--stroke-primary);
+    border-right: 0;
   }
   #home-collection-sec .home-col-rail > .saved-card:first-child { border-left: 0; }
   #home-collection-sec .home-col-scroll {
     height: 8px;
-    background: var(--grey-125, #dcdbd9);
+    background: var(--stroke-primary);
     border-top: 1px solid var(--stroke-primary);
   }
   #home-collection-sec .home-col-scroll > span {
@@ -10135,7 +10332,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   #screen-eventpage .orgp-facts:empty + .evp-entry { margin-top: 0; }
   #screen-eventpage .evp-entry[hidden] { display: none; }
   /* Билеты — Outline 32, «↗» справа (направление, не действие), под бейджами и строкой входа через 12 */
-  #screen-eventpage .evp-tickets { margin: 12px 0 0; }
+  /* Need to know (Syno 4990:115382): от бейджей до Register — 24, как в теле блока макета. */
+  #screen-eventpage .evp-tickets { margin: 24px 0 0; }
   #screen-eventpage .orgp-facts:empty + .evp-entry[hidden] + .evp-tickets { margin-top: 0; }
   #screen-eventpage .evp-tickets[hidden] { display: none; }
   #screen-eventpage .evp-tickets-btn { gap: 4px; }
@@ -10179,7 +10377,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   .ae-review-note[hidden] { display: none; }
   .ae-review-note strong { display: block; font-size: var(--fs-caption-m); font-weight: 400; line-height: 1.2; color: var(--text-primary); }
   .ae-review-note p,
-  #screen-addevent .apply-head .ae-review-note p { margin: 4px 0 0; max-width: none; font-size: var(--fs-caption-s); line-height: 1.3; color: var(--text-primary); }
+  #screen-addevent .apply-head .ae-review-note p, #screen-addevent #addevent-main #ae-review-note p { margin: 4px 0 0; max-width: none; font-size: var(--fs-caption-s); line-height: 1.3; color: var(--text-primary); }
   @media (max-width: 760px) {
     #screen-orgdashboard :is(#org-events-list, #org-foreign-events) > .org-call-row,
     #screen-home #home-events-list > .org-call-row { grid-template-columns: 80px minmax(0, 1fr) auto; min-height: 104px; }
@@ -10227,7 +10425,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   .syno-location-marker img {width:100%;height:100%;object-fit:cover;}
   .syno-location-map .leaflet-control {box-shadow:none;}
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=8af7eeaa96c0">
+<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
 <link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="demo-empty-portfolio">
@@ -10782,7 +10980,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
             </div>
           </div>
           <div class="apply-summary" id="apply-summary">
-            <div class="apply-summary-head">Details from your profile
+            <div class="apply-summary-head">Profile details
               <button class="apply-edit" data-apply-edit-main type="button">Edit in profile</button>
             </div>
             <div class="apply-summary-grid">
@@ -10823,7 +11021,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
           <p class="apply-step-intro">Choose works from your portfolio for the jury to review. We recommend choosing at least 3 works</p>
           <div class="works-bar">
             <div class="works-counter" id="works-counter"><b>3</b> selected</div>
-            <button class="btn btn-secondary btn-sm" data-add-work="apply" type="button"><span class="material-icons">add</span> Add new work</button>
+            <button class="btn btn-secondary btn-lg" data-add-work="apply" type="button">Add new work</button>
           </div>
           <div class="works-grid" id="works-grid">
             <div class="work-card selected"><div class="work-check"><span class="material-icons">check</span></div><img class="work-thumb" src="./photos/p3.png" alt=""><div class="work-info"><div class="work-title">Salt Line</div><div class="work-meta">2024 · Photography</div></div></div>
@@ -10882,9 +11080,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         <!-- Step 4 — Review (consent folded in) -->
         <div class="apply-step" data-step="step6" hidden>
           <h2>Review your application</h2>
-          <p class="apply-step-intro">This is how the jury will see it. Check everything is right, then submit</p>
           <div class="preview-block" id="preview-block-details">
-            <div class="preview-block-head"><h4>Your details</h4><span class="preview-edit" data-apply-edit-main><span class="material-icons">edit</span> Edit in profile</span></div>
+            <div class="preview-block-head"><h4>Profile details</h4><span class="preview-edit" data-apply-edit-main><span class="material-icons">edit</span> Edit in profile</span></div>
             <div class="preview-block-body" id="preview-details-body">
               <div class="preview-row"><span class="pk">Name</span><span id="preview-d-name">Elena Andreou</span></div>
               <div class="preview-row"><span class="pk">Email</span><span id="preview-d-email">elena.andreou@example.com</span></div>
@@ -10920,7 +11117,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
           <div class="preview-block" id="preview-block-cv">
             <div class="preview-block-head"><h4>Artist statement</h4><span class="preview-edit" data-apply-edit-statement-review><span class="material-icons">edit</span> Edit</span></div>
             <div class="preview-block-body" id="preview-cv-body"></div>
-            <p class="field-helper" style="margin:8px 0 0">Sent as it is now — profile edits after submitting won’t change this application</p>
+            <p class="field-helper" style="margin:0;padding:0 12px 12px">Sent as it is now — profile edits after submitting won’t change this application</p>
           </div>
           <div class="consent-box" id="consent-box" style="margin-top:4px">
             <div class="consent-row" data-consent-toggle>
@@ -10939,7 +11136,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
 
       <div class="apply-footer" id="apply-footer">
         <div class="apply-footer-inner">
-          <button class="btn btn-secondary" id="apply-back">Back</button>
+          <button class="btn" id="apply-back">Back</button>
           <div class="spacer"></div>
           <button class="btn btn-primary" id="apply-next">Next</button>
         </div>
@@ -10953,8 +11150,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
             <h1 class="subm-title">Application submitted</h1>
             <div class="subm-stack">
               <div class="inline-notice">
-                <p class="in-title">Results will be announced by <span data-oc-results="full">31 October 2026</span></p>
-                <p class="in-sub">You'll be notified about results by email</p>
+                <p class="in-title">Results will be announced by <span data-oc-results="full">31 October 2026</span><span class="subm-desk">. You'll be notified about results by email</span></p>
+                <p class="in-sub subm-mob">You'll be notified about results by email</p>
               </div>
               <div class="promo-card" id="subm-promo">
                 <div class="promo-copy">
@@ -10970,6 +11167,12 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
           </div>
         </div>
       </div>
+        <footer class="site-footer myp-footer subm-footer">
+          <div class="sf-meta">
+            <div class="sf-meta-left"><span>&copy; 2026</span><span>Limassol, Cyprus</span></div>
+            <div class="sf-meta-right"><a href="proto-about.html#contact">Contact</a><a href="proto-pages.html?page=privacy">Privacy Policy</a><span data-mock="Cookies">Cookies</span><span data-mock="Terms of use">Terms of use</span></div>
+          </div>
+        </footer>
     </section>
 
     <!-- ============ Screen: My profile (owner home — cockpit rail · option a) ============ -->
@@ -11036,7 +11239,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
             <span class="myp-pub-actions">
               <!-- You're live — одно действие (карточка 63, Draft 2.7): View public profile на 1280,
                    Copy link на 375; Unpublish — в «···». Not published — только Publish (Draft 2.10). -->
-              <button class="btn btn-sm btn-ghost myp-pubrow-view" id="myp-pubrow-view" data-go="profile" data-profile-source="mine" type="button" hidden>View public profile</button>
+              <button class="btn btn-sm myp-pubrow-view" id="myp-pubrow-view" data-go="profile" data-profile-source="mine" type="button" hidden>View public profile</button>
               <button class="btn btn-sm btn-ghost myp-pubrow-copy" id="myp-pubrow-copy" type="button" hidden>Copy link</button>
               <button class="btn btn-primary btn-sm myp-pub-btn" id="myp-pub-btn" type="button">Publish to the Artist Registry</button>
             </span>
@@ -12513,8 +12716,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
           <!-- Обе кнопки справа, как в макетах Syno: новое — Save draft · Publish event / Submit for review,
                правка — Cancel · Resend for review / Save changes (Events: Edit event, личная правка). -->
           <div class="spacer"></div>
-          <button class="btn" id="ae-cancel" type="button" data-ae-cancel hidden>Cancel</button>
           <button class="btn ae-preview-btn" id="ae-preview" type="button" data-ae-preview aria-label="Preview"><span class="material-icons" aria-hidden="true">visibility</span><span class="ae-preview-label">Preview</span></button>
+          <button class="btn" id="ae-cancel" type="button" data-ae-cancel hidden>Cancel</button>
           <button class="btn" id="ae-draft" type="button" data-ae-save-draft>Save draft</button>
           <button class="btn btn-primary" id="ae-submit">Submit for review</button>
         </div>
@@ -13479,8 +13682,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   <div class="gs-scroll" id="gs-scroll"></div>
 </div>
 
-<script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=0597b4a4ee4c"></script>
+<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
+<script src="assets/promo/case.js?v=20261028a"></script>
 <script>
   /* ============================================================
      AI_ENABLED — единственный выключатель AI-функционала.
@@ -13790,11 +13993,11 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
                 groupYear:'2026', group:'Common Ground', groupPlace:'Harbour Room, Larnaca',
                 awardYear:'2023', award:'Field Notes — Studio Residency, Paphos',
                 talksYear:'2025', talks:'Shared Rooms — Nicosia', coll:'',
-                press:'SYNO — Thread, memory and connection, 2026'
+                press:'SYNO — Light, memory and landscape, 2026'
               };
               mypMain.website = ''; mypMain.instagram = '';
               mypAvatar.img = window.SynoPromo.data.images.portrait;
-              mypCoverImg = window.SynoPromo.data.images['shiota-journey-cover'];
+              mypCoverImg = window.SynoPromo.data.images['mira-cover'];
               setMypCover(mypCoverImg, true);
             }
             document.body.classList.remove('demo-empty-portfolio');
@@ -14200,7 +14403,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     eventpage: {
       label: 'Event page',
       header: 'public',
-      nav: null,
+      nav: 'art-map',
       states: [
         { id: 'visitor', label: 'Visitor — Save, Share, Report' },
         { id: 'owner', label: 'Owner view — Edit event in place of Save' },
@@ -14742,6 +14945,10 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       if (!isLast && c.url) return sep + '<a class="crumb" href="' + c.url + '">' + c.label + '</a>';
       return sep + '<span class="crumb' + (isLast ? ' current' : '') + '"' + attrs + '>' + c.label + '</span>';
     }).join(' ');
+    if (currentScreen === 'apply') {
+      if (currentState === 'submitted') { toolbar.hidden = true; return; }
+      crumbsEl.innerHTML = '<span class="crumb current"><span class="crumb-applying">Applying to: </span>' + ((crumbs[crumbs.length - 2] || {}).label || 'Open Call 2026') + '</span>';
+    }
     if (backBtn) backBtn.hidden = true;
     // Apply flow: Save & close sits in the toolbar, opposite the crumbs (Figma 3524:5472)
     if (scBtn) scBtn.hidden = !(currentScreen === 'apply' && currentState !== 'submitted');
@@ -14788,7 +14995,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
 
     nav.innerHTML = NAV.map(n => {
       return n.url
-        ? '<a class="nav-item" href="' + n.url + '">' + n.label + '</a>'
+        ? '<a class="nav-item' + (n.key === activeNav ? ' active' : '') + '" href="' + n.url + '">' + n.label + '</a>'
         : '<span class="nav-item' + (n.key === activeNav ? ' active' : '') + '" ' +
           (n.screen ? 'data-go="' + n.screen + '"' : 'data-mock') + '>' + n.label + '</span>';
     }).join('');
@@ -16064,7 +16271,6 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const count = dWorks().length;
     return '<div class="myp-wform">' +
       '<button class="myp-wform-back" type="button" data-work-back><span class="material-icons">arrow_back</span>Works · ' + count + '</button>' +
-      '<div class="myp-wform-head"><h4 class="myp-wform-title">' + (editing ? 'Edit work' : 'Add a work') + '</h4></div>' +
       (mypWorkJustSaved ? '<p class="myp-wform-saved"><span class="material-icons">check_circle</span>Saved — \u201c' + mypEsc(mypWorkJustSaved) + '\u201d is on your profile · ' + count + (count === 1 ? ' work' : ' works') + '</p>' : '') +
       workDrawerBodyHtml() +
       '</div>';
@@ -16083,8 +16289,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   function openMypWorkDrawer() {
     openMypProfileDrawer(
       'work',
-      'Works',
-      mypWorkFormOpen ? 'One work at a time — it is on your profile the moment you save it' : 'Each work is saved on its own and shows on your profile straight away',
+      mypWorkFormOpen ? (mypWorkFormIndex >= 0 ? 'Edit work' : 'Add a work') : 'Works',
+      mypWorkFormOpen ? 'Just the essentials — saved to your portfolio. Materials and dimensions are optional; a description can wait' : 'Each work is saved on its own and shows on your profile straight away',
       worksSectionHtml(),
       null,
       worksFooterHtml()
@@ -16252,6 +16458,20 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     if (e.target && e.target.id === 'myp-cover-pos' && mypCoverImg) showToast('Cover updated');
   });
   // Cover picker: contextual overlay on the cover, with upload as the primary path.
+  function mypImageTone(src, done) {
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const c = document.createElement('canvas'); c.width = 32; c.height = 32;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, img.naturalWidth * 0.65, img.naturalHeight * 0.55, 0, 0, 32, 32);
+        const d = ctx.getImageData(0, 0, 32, 32).data; let t = 0;
+        for (let i = 0; i < d.length; i += 4) t += 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+        done(t / (d.length / 4) > 150);
+      } catch (e) { /* чтение холста закрыто — остаётся тёмный тон */ }
+    };
+    img.src = src;
+  }
   function setMypCover(bg, isImg) {
     const prev = document.getElementById('myp-cover-prev');
     if (prev) {
@@ -16274,6 +16494,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       }
       // Tone follows the cover: light colour → dark text and bordered buttons, dark → white text.
       cover.classList.toggle('tone-light', !isImg && coverColorIsLight(bg));
+      // Фото — тон по яркости верхнего левого угла, где стоят имя и факты, как на публичной странице.
+      if (isImg) mypImageTone(bg, light => { if (mypCoverImg === bg) cover.classList.toggle('tone-light', light); });
     }
     if (typeof syncPublicProfile === 'function') syncPublicProfile();
     // Cover is decorative — it is NOT part of the publish gate (work / statement / formats).
@@ -17357,13 +17579,10 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     if (submitted) {
       const promo = document.getElementById('subm-promo');
       if (promo) {
+        promo.classList.toggle('is-actions', !!mypPublished);
         promo.innerHTML = mypPublished
-          ? '<div class="promo-copy">' +
-            '<p class="promo-title">You’re live in the Artist Registry</p>' +
-            '<p class="promo-sub">Your profile is already published — curators reviewing this call can see it. Track your application from your cabinet</p>' +
-            '</div><div class="promo-ctas">' +
-            '<button class="btn btn-primary promo-primary" data-go="application-detail" data-go-state="under-review" data-application-title="Open Call 2026">See your application</button>' +
-            '<button class="promo-ghost" data-go="opencalls" type="button">Back to Open Calls</button></div>'
+          ? '<button class="btn btn-secondary btn-lg" data-go="opencalls" type="button">Back to Open Calls</button>' +
+            '<button class="btn btn-lg" data-go="application-detail" data-go-state="under-review" data-application-title="Open Call 2026" type="button">View application status</button>'
           : '<div class="promo-copy">' +
             '<p class="promo-title">One step from the Artist Registry</p>' +
             '<p class="promo-sub" id="sub-intro">Your application already built your profile. One click left: publish it</p>' +
@@ -17522,7 +17741,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   function seedReviewDemoState() {
     const seeds = {
       'ai-cyprus': window.SynoPromo ? 'Born in Limassol and based in Nicosia. My work draws on domestic spaces and the changing landscapes of Cyprus.' : 'Born in Nicosia; based between Cyprus and Berlin. The island’s coastline has been the centre of my work since 2022.',
-      'ai-works': window.SynoPromo ? 'The selected installations explore memory through thread, found objects and domestic spaces. Each work offers a different way to encounter the places and objects we leave behind.' : AI_DRAFTS['ai-works']
+      'ai-works': window.SynoPromo ? 'The selected paintings explore light and memory through sunlit coastlines, pines and village domes. Each work offers a different way to return to a place and the light we remember.' : AI_DRAFTS['ai-works']
     };
     Object.keys(seeds).forEach(id => {
       const f = document.getElementById(id);
@@ -17641,7 +17860,11 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const wBody = document.getElementById('preview-works-body');
     if (wBody) {
       if (sel.length >= 1) {
-        const imgs = [...sel].slice(0, 8).map(c => { const i = c.querySelector('img'); return '<img src="' + (i ? i.getAttribute('src') : '') + '" alt="">'; }).join('');
+        const imgs = [...sel].map(c => {
+          const i = c.querySelector('img'), t = c.querySelector('.work-title'), m = c.querySelector('.work-meta');
+          return '<figure class="preview-work"><img src="' + (i ? i.getAttribute('src') : '') + '" alt="">' +
+            '<figcaption><span class="preview-work-t">' + (t ? t.textContent : '') + '</span><span class="preview-work-m">' + (m ? m.textContent : '') + '</span></figcaption></figure>';
+        }).join('');
         wBody.innerHTML = '<div class="preview-works">' + imgs + '</div>';
       } else {
         wBody.innerHTML = '<span class="preview-pending-text">No works selected yet — <span class="preview-edit" data-go="apply" data-go-state="step2">add at least one</span></span>';
@@ -17665,12 +17888,12 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         return { q, ans };
       }).filter(r => r.q);
       qBody.classList.remove('muted');
-      qBody.innerHTML = rows.map(r =>
-        '<div class="preview-qa"><div class="preview-qa-q">' + esc(r.q) + '</div>' +
+      qBody.innerHTML = rows.map((r, i) =>
+        '<details class="preview-qa"' + (i === 0 ? ' open' : '') + '><summary class="preview-qa-q">' + esc(r.q) + '</summary>' +
         (r.ans
           ? '<div class="preview-qa-a">' + esc(r.ans) + '</div>'
-          : '<div class="preview-qa-a empty">Not answered (optional)</div>') +
-        '</div>'
+          : '<div class="preview-qa-a empty">Not answered</div>') +
+        '</details>'
       ).join('');
     }
     setPending('preview-block-questions', false);
@@ -19737,7 +19960,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       history.replaceState(null, '', '#' + currentScreen + (currentState ? ':' + currentState : ''));
     }
     document.documentElement.classList.add('drawer-locked');
-    card.querySelector('[data-ae-author]').focus({ preventScroll: true });
+    card.tabIndex = -1;
+    card.focus({ preventScroll: true });
   }
   function aeHasUnsavedChanges() {
     return !!aeInitialForm && JSON.stringify(aeCollectForm()) !== aeInitialForm;
@@ -19764,7 +19988,9 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     openModal('<div class="modal-head"><h3>Discard your changes?</h3><button class="modal-close" type="button" data-ae-keep-editing aria-label="Close"><span class="material-icons">close</span></button></div>' +
       '<div class="modal-body"><p class="modal-text">Your unsaved event changes will be lost.</p></div>' +
       '<div class="modal-foot"><button class="btn" type="button" data-ae-keep-editing>Keep editing</button><button class="btn btn-danger" type="button" data-ae-discard>Discard changes</button></div>');
-    document.querySelector('[data-ae-keep-editing]').focus();
+    const dialog = document.getElementById('modal-card');
+    dialog.tabIndex = -1;
+    dialog.focus({ preventScroll: true });
     // A browser Back changes the URL before its route handler runs.
     if (routeSilent) history.replaceState(null, '', '#addevent:' + currentState);
   }
@@ -20279,7 +20505,11 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     byId('evp-line1').textContent = [who, when].filter(Boolean).join(' · ');
     byId('evp-line2').textContent = placeLine;
     byId('evp-line2').hidden = !placeLine;
+    const evpFirst = aeParseDate(d.start || ''), evpLast = aeParseDate(d.end || d.start || ''), evpToday = aeDayNum(aeCyprusToday());
+    const evpOnView = !evp.cancelled && sameDates && evpFirst && evpLast && aeDayNum(evpFirst) <= evpToday && evpToday <= aeDayNum(evpLast);
+    evp.onView = !!evpOnView;
     byId('evp-badges').innerHTML = '<span class="badge beige">' + orgEsc(d.type || 'Event') + '</span>' +
+      (evpOnView ? '<span class="badge beige">On view</span>' : '') +
       (evp.cancelled ? '<span class="badge primary">Cancelled</span>' : '');
     const reason = byId('evp-reason');
     reason.textContent = evp.cancelled ? evp.reason : '';
@@ -20329,7 +20559,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     let rows = row(evp.cancelled ? 'Original dates' : 'Dates', orgEsc(when || 'Date to be announced'));
     if (!evp.cancelled && sameDates && d.opening) {
       const op = aeParseDate(d.opening);
-      if (op) rows += row('Opening', aeFmtDay(op) + (d.openingTime ? ' · ' + String(d.openingTime).split(' – ')[0] : ''));
+      // Время диапазоном без пробелов у тире, как на карточке: 19:00–22:00.
+      if (op) rows += row('Opening', aeFmtDay(op) + (d.openingTime ? ' · ' + String(d.openingTime).replace(/\s*–\s*/, '–') : ''));
     }
     // Add to calendar — под строкой дат, у выставки под Opening (спецификация 3.11, 10 октября 2026)
     // Строка демо-кабинета несёт даты без времени («24 Oct») — данные формы те же, если даты совпадают
@@ -20338,7 +20569,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     if (evp.cal) rows += '<div class="orgp-row evp-cal-row"><span></span><span><button class="btn btn-sm evp-cal-btn" type="button" data-evp-cal>' +
       '<span class="material-icons" aria-hidden="true">calendar_today</span>' + evp.cal.label + '</button></span></div>';
     const eventHours=d.hoursDays ? hoursLineFromDays(d.hoursDays,{closedLabel:'Not scheduled'}) : extra.hours;
-    if (!evp.cancelled && eventHours) rows += row('Hours', hoursHtml(eventHours));
+    if (!evp.cancelled && eventHours) rows += row(d.hoursDays ? 'Hours' : 'Venue hours', hoursHtml(eventHours)).replace('class="orgp-row"', 'class="orgp-row orgp-row--hours"');
     if (place) {
       const venue = place.name === 'NiMAC'
         ? '<a class="orgp-link" role="link" tabindex="0" data-go="orgpublic" data-go-state="' + (evp.owner && evp.isOrg ? 'owner' : 'claimed') + '">' + orgEsc(place.name) + '</a>'
@@ -20412,10 +20643,13 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   function setEvpSaved(on) {
     if (on) {
       const d = evpEventData(evpId());
+      // Место и город — из строки под заголовком, как их видит посетитель («Aster Project Space, Nicosia»)
+      const line2 = ((document.getElementById('evp-line2') || {}).textContent || '').split(', ');
       favAdd('events', {
         title: evp.title, when: evp.when || evpWhenOf(d),
-        place: String(evp.place || '').split(',')[0] || d.venue || '',
-        city: String(evp.place || '').split(', ')[1] || (d.city || ''), img: byIdSrc(), coverCrop: evp.coverCrop
+        place: String(evp.place || '').split(',')[0] || d.venue || line2[0] || '',
+        city: String(evp.place || '').split(', ')[1] || (d.city || '') || line2[1] || '', img: byIdSrc(), coverCrop: evp.coverCrop,
+        status: evp.onView ? 'On view' : ''
       });
     } else favRemove('events', evp.title);
     evp.saved = on;
@@ -21196,8 +21430,16 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         const c = document.createElement('canvas');
         c.width = 32; c.height = 32;
         const ctx = c.getContext('2d');
-        // sample the upper-left area of the image — the name and subtitle sit top-left (hero-on-cover canon)
-        ctx.drawImage(img, 0, 0, sw * 0.65, sh * 0.55, 0, 0, 32, 32);
+        // sample the upper-left area of the VISIBLE crop — the name and subtitle sit top-left (hero-on-cover
+        // canon), and the crop follows object-fit: cover + object-position (the Position axis of the cover
+        // picker), so a frame shifted down is judged by what actually lies under the text (26 October 2026)
+        const cw = cover.clientWidth || sw, chh = cover.clientHeight || sh;
+        const scale = Math.max(cw / sw, chh / sh);
+        const vw = cw / scale, vh = chh / scale;
+        const pos = (getComputedStyle(img).objectPosition || '50% 50%').split(/\s+/).map(v => parseFloat(v) / 100);
+        const px = isNaN(pos[0]) ? 0.5 : pos[0], py = isNaN(pos[1]) ? 0.5 : pos[1];
+        const x0 = (sw - vw) * px, y0 = (sh - vh) * py;
+        ctx.drawImage(img, x0, y0, vw * 0.65, vh * 0.55, 0, 0, 32, 32);
         const data = ctx.getImageData(0, 0, 32, 32).data;
         let total = 0, n = 0;
         for (let i = 0; i < data.length; i += 4) { total += 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]; n++; }
@@ -21373,6 +21615,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const card = tpl.cloneNode(true);
     card.classList.remove('is-removing');
     const status = card.querySelector('.saved-card-status'); if (status) status.remove();
+    if (item.status) { const box = card.querySelector('.saved-card-mediabox'); if (box) box.insertAdjacentHTML('beforeend', '<span class="badge saved-card-status">' + item.status + '</span>'); }
     const set = function (sel, v) { const n = card.querySelector(sel); if (n) n.textContent = v || ''; };
     set('.saved-card-title', item.title);
     set('.saved-card-date', [item.when, item.place].filter(Boolean).join(' · '));
@@ -22269,8 +22512,9 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         '<button class="btn org-discard-go" type="button" data-org-discard-go>Discard changes</button></div>' +
       '</div>';
     document.body.appendChild(el);
-    const keep = el.querySelector('.modal-foot [data-org-discard-keep]');
-    if (keep) keep.focus();
+    const dialog = el.querySelector('.org-discard-card');
+    dialog.tabIndex = -1;
+    dialog.focus({ preventScroll: true });
   }
   function closeOrgDrawerNow() {
     closeOrgDiscard();
@@ -28606,6 +28850,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       lb.id = 'wd-lightbox';
       lb.className = 'wd-lightbox syno-viewer';
       lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label','Work gallery');
+      lb.tabIndex = -1;
       lb.hidden = true;
       lb.innerHTML = '<div class="syno-viewer-shell">' +
         '<div class="wd-lb-mat syno-viewer-stage"><img class="syno-viewer-photo" alt=""></div>' +
@@ -28639,7 +28884,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     lb.querySelector('.wd-lb-next').hidden = !nav;
     lb.hidden = false;
     document.documentElement.style.overflow = 'hidden';
-    if (opening) lb.querySelector('.wd-lb-close').focus({preventScroll:true});
+    if (opening) lb.focus({preventScroll:true});
   }
   function wdLbClose() {
     const lb = document.getElementById('wd-lightbox');
@@ -29509,12 +29754,42 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   })();
 </script>
 <script>
-  // Direct links for the case reuse the actual profile editors.
+  // Даты формы события британским форматом поверх системного поля (см. стили .input-face).
+  (function () {
+    const FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const HINT = { 'ae-end': 'e.g. 22 November 2026' };
+    function fmt(v) { const p = String(v || '').split('-'); return p.length === 3 && p[0] ? (+p[2]) + ' ' + FULL[+p[1] - 1] + ' ' + p[0] : ''; }
+    function paint(inp) {
+      if (!inp.offsetParent) return;
+      let face = inp.nextElementSibling;
+      if (!face || !face.classList.contains('input-face')) {
+        face = document.createElement('span'); face.className = 'input-face'; face.setAttribute('aria-hidden', 'true');
+        inp.after(face); inp.classList.add('has-face'); inp.parentElement.classList.add('has-face');
+      }
+      const isDate = inp.type === 'date';
+      const text = isDate ? fmt(inp.value) : '';
+      inp.classList.toggle('is-empty', !inp.value);
+      face.hidden = !isDate && !!inp.value;
+      face.textContent = isDate ? (text || HINT[inp.id] || 'e.g. 10 October 2026') : 'HH:MM';
+      face.classList.toggle('is-empty', !text);
+      face.style.top = inp.offsetTop + 'px'; face.style.left = inp.offsetLeft + 'px';
+      face.style.width = (inp.offsetWidth - (isDate ? 0 : 40)) + 'px'; face.style.height = inp.offsetHeight + 'px';
+    }
+    function paintAll() { document.querySelectorAll('#screen-addevent.active input[type="date"], #screen-addevent.active input[type="time"]').forEach(paint); }
+    ['input', 'change'].forEach(function (t) { document.addEventListener(t, function (e) { if (e.target.matches && e.target.matches('#screen-addevent input[type="date"], #screen-addevent input[type="time"]')) paint(e.target); }); });
+    // Значения форма ставит и сама (черновик, правка, демо) — подпись догоняет их
+    setInterval(paintAll, 400);
+    window.addEventListener('resize', paintAll);
+  })();
+</script>
+<script>
+  // Direct links for the case reuse the actual editors and event review flow.
   document.addEventListener('DOMContentLoaded', function () {
     if (!window.SynoPromo) return;
     const panel = new URLSearchParams(location.search).get('case-panel');
-    if (panel === 'work') openMypWorkModal();
+    if (panel === 'work') { openMypWorkModal(); document.getElementById('myp-work-add-open')?.click(); }
     if (panel === 'statement') openMypBioModal();
+    if (panel === 'event-review') document.querySelector('#home-events-list [data-ae-fix]')?.click();
   });
 </script>
 </body>

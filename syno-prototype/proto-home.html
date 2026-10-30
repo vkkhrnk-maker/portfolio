@@ -1069,7 +1069,10 @@
      но у брендовых знаков нет общего рисунка: Instagram контурный,
      Facebook залитый круг, и пара читалась разнобоем; слово одинаково
      при любом числе каналов. */
-  .footer-nav a { font-size: var(--fs-body-m); line-height: 1.3; }
+  /* Переносы титулов на 375 — как в макете главной (Syno 3893:42450) */
+  .sec-title .m-br { display: none; }
+  @media (max-width: 1023px) { .sec-title .m-br { display: inline; } }
+  .footer-nav a { display: block; font-size: var(--fs-body-m); line-height: 1.3; }
   .footer-nav a:hover, .footer-nav a:focus-visible { text-decoration: underline; text-underline-offset: 3px; } /* ховер ссылки футера — подчёркивание, как на сборке */
   /* Имя колонки — Label/Group (14 капсом, трекинг 0,5 %), как группы
      в CV и в Connected with: это группа ссылок внутри полосы, не её титул. */
@@ -1084,7 +1087,7 @@
   .footer-right h3 { font-size: var(--fs-subtitle); line-height: 1.2; font-weight: 400; margin-bottom: 12px; }
   .footer-right p { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-secondary); margin-bottom: 24px; }
   .footer-right .nl-consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; font-size: var(--fs-caption-s); line-height: 1.2; color: var(--text-secondary); }
-  .footer-right .nl-consent input { margin-top: 2px; accent-color: var(--button-tab-active-fill); }
+  .footer-right .nl-consent input { flex: 0 0 auto; width: 16px; height: 16px; margin: 0; accent-color: var(--button-tab-active-fill); }
   .footer-right .nl-consent a { text-decoration: underline; }
   /* Поле подписки — кит Input with Action: поле 40 (так стоит мастер
      кита и десктопный футер; 48 в мобильном варианте было устаревшим
@@ -1167,6 +1170,7 @@
   .gate-ov { position: fixed; inset: 0; z-index: 900; display: flex; align-items: center; justify-content: center;
     padding: 24px; background: rgba(28,28,28,0.4); }
   .gate-ov[hidden] { display: none; }
+  .gate:focus { outline: none; }
   .gate { display: flex; width: 680px; height: 340px; max-width: 100%;
     background: var(--bg-primary); border: 1px solid var(--stroke-primary); }
   .gate-art { flex: 0 0 340px; height: 100%; overflow: hidden; background: var(--bg-hover); }
@@ -1364,7 +1368,7 @@
        центрировала строку © над лево-выровненными ссылками. */
     /* Кит Footer · Breakpoint=Mobile: Explore и Take part — двумя колонками, Syno под ними,
        подписка последней во всю ширину; между группами 32 (space/content-block-gap). */
-    .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px 0; padding-bottom: 20px; }
+    .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px 20px; padding-bottom: 20px; }
     .footer-right { grid-column: 1 / -1; }
     /* Марка в футере — того же размера, что в шапке: 34 на десктопе, 24 на 375 (кит, 16 сентября 2026). */
     .logo svg, .footer-meta .fb-logo svg { height: 24px; }
@@ -1580,7 +1584,7 @@
   .ctx-avatar { outline: 1px solid rgba(0,0,0,0.12); outline-offset: -1px; }
 
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=8af7eeaa96c0">
+<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
 </head>
 <body>
 
@@ -1778,7 +1782,7 @@
       <div class="band-in">
         <div class="sec-head">
           <div class="map-head-copy">
-            <h2 class="sec-title">What's on in Cyprus?</h2>
+            <h2 class="sec-title">What's<br class="m-br"> on in Cyprus?</h2>
             <!-- Числа из мок-данных Art Map. Число не красим синим — синее в
                  системе значит «нажимается», а нажимается здесь кнопка. -->
             <p class="map-count has-content">6 events happening this weekend</p>
@@ -2071,7 +2075,7 @@
     <div class="band band-head">
       <div class="band-in">
         <div class="sec-head">
-          <h2 class="sec-title">Stories from the island</h2>
+          <h2 class="sec-title">Stories<br class="m-br"> from the island</h2>
           <div class="sec-tools has-content">
             <a class="btn btn-outline btn-md" href="proto-stories.html">See all stories</a>
           </div>
@@ -2147,7 +2151,7 @@
     <div class="band band-head">
       <div class="band-in">
         <div class="sec-head">
-          <h2 class="sec-title">Places on the Art Map</h2>
+          <h2 class="sec-title">Places<br class="m-br"> on the Art Map</h2>
           <div class="sec-tools has-content">
             <a class="btn btn-outline btn-md" href="proto-v2.html?segment=venues">See all places</a>
           </div>
@@ -2263,7 +2267,7 @@
           </nav>
           <div class="footer-right">
             <h3>Subscribe to our newsletter</h3>
-            <p>Get updates on open calls, artist opportunities, Art&nbsp;Map launches, exhibitions and editorial releases across Cyprus and beyond.</p>
+            <p>Get updates on open calls, artist opportunities, Art&nbsp;Map launches, exhibitions and editorial releases across Cyprus and beyond</p>
             <div class="subscribe-field">
               <input type="email" placeholder="Email address" aria-label="Email address">
               <button data-subscribe aria-label="Subscribe"><span class="material-icons">arrow_forward</span></button>
@@ -2288,7 +2292,7 @@
 
 <!-- Гейт Save / Follow у гостя: объясняет и ведёт на вход, сам не логинит (account-org.md) -->
 <div class="gate-ov" id="gate" hidden>
-  <div class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-text">
+  <div class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title" aria-describedby="gate-text" tabindex="-1">
     <div class="gate-art"><img id="gate-img" src="" alt=""></div>
     <div class="gate-col">
       <span class="gate-logo" aria-hidden="true"></span>
@@ -2305,8 +2309,8 @@
 <div class="sheet-scrim" id="ctx-scrim" hidden></div>
 <div class="app-toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=0597b4a4ee4c"></script>
+<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
+<script src="assets/promo/case.js?v=20261028a"></script>
 <script src="open-call-motion-legacy.js"></script>
 <script src="open-call-paint.js?v=20260914-core"></script>
 <script src="open-call-echo.js?v=20260919-span"></script>
@@ -2950,7 +2954,13 @@ const HOME_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 function homeEventItem(btn) {
   const row = btn.closest('.coming-row');
   const m = /^(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}:\d{2}))?/.exec(btn.dataset.starts || '');
-  const when = m ? (+m[3]) + ' ' + HOME_MONTHS[+m[2] - 1] + (m[4] ? ' · ' + m[4] : '') : '';
+  const end = /^(\d{4})-(\d{2})-(\d{2})/.exec(btn.dataset.ends || '');
+  let when = m ? (+m[3]) + ' ' + HOME_MONTHS[+m[2] - 1] + (m[4] ? ' · ' + m[4] : '') : '';
+  if (m && end && (m[1] !== end[1] || m[2] !== end[2] || m[3] !== end[3])) {
+    when = m[1] === end[1] && m[2] === end[2]
+      ? (+m[3]) + '–' + (+end[3]) + ' ' + HOME_MONTHS[+m[2] - 1]
+      : (+m[3]) + ' ' + HOME_MONTHS[+m[2] - 1] + ' – ' + (+end[3]) + ' ' + HOME_MONTHS[+end[2] - 1];
+  }
   const where = ((row && row.querySelector('.coming-where')) || {}).textContent || '';
   const pc = where.split(', ');
   const img = btn.dataset.img || (row && row.querySelector('img') ? row.querySelector('img').getAttribute('src') : '');
@@ -3033,7 +3043,7 @@ document.addEventListener('click', function (e) {
   setFollow(name, !btn.classList.contains('is-following'), true);
 });
 /* Гейт: окно 680 × 340 (на 375 — лист). Not now, крестик, Esc и клик по затемнению
-   закрывают; фокус встаёт на Continue и возвращается к кнопке, которая открыла гейт. */
+   закрывают; фокус встаёт на диалог и возвращается к кнопке, которая открыла гейт. */
 const gateEl = document.getElementById('gate');
 let gateState = null;
 gateEl.querySelector('.gate-logo').innerHTML = document.querySelector('.site-header .logo svg').outerHTML;
@@ -3053,7 +3063,7 @@ function openGate(opts) {
   closeCtxMenu(); if (document.body.classList.contains('m-menu-open')) setMenu(false);
   gateEl.hidden = false;
   document.body.classList.add('sheet-open');
-  document.getElementById('gate-continue').focus();
+  gateEl.querySelector('.gate').focus({ preventScroll: true });
 }
 function closeGate() {
   if (gateEl.hidden) return;
@@ -3105,7 +3115,7 @@ document.querySelectorAll('.artist-rail .card-cell').forEach(cell => {
   const el = document.getElementById('home-map');
   if (!el || typeof L === 'undefined') return;
   const map = L.map(el, {
-    center: [35.0, 33.35], zoom: 9,
+    center: [35.0, 33.35], zoom: 9, zoomSnap: 0.25,
     zoomControl: false, attributionControl: false,
     scrollWheelZoom: false, dragging: false, doubleClickZoom: false,
     touchZoom: false, keyboard: false, boxZoom: false
@@ -3144,7 +3154,8 @@ document.querySelectorAll('.artist-rail .card-cell').forEach(cell => {
       });
     bounds.push([p.lat, p.lng]);
   });
-  const fit = () => map.fitBounds(bounds, { padding: [32, 32], maxZoom: 10 });
+  // Остров во весь кадр, как в макете главной: дробный зум; поле 28 = половина пина 20 + 8
+  const fit = () => map.fitBounds(bounds, { padding: [28, 28], maxZoom: 10 });
   fit();
   // Полоса меняет высоту вместе с контентом слева — карта пересчитывается
   // и заново центрируется по пинам, иначе остров уезжает к верхнему краю.

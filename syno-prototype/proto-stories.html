@@ -116,7 +116,7 @@
      полосы, ниже в @media 1101+) — фиксировать ширину дважды не нужно. */
   .app { width: 100%; max-width: none; margin: 0; position: relative; flex: 1 1 auto; display: flex; flex-direction: column; }
   .app > #view { flex: 0 0 auto; }
-  .band-filler { flex: 1 1 auto; border-bottom: 0; min-height: 0; }
+  .app > .band.band-filler { flex: 1 1 auto; border-bottom: 0; min-height: 0; }
   /* Линия над футером принадлежит футеру. Отрицательное поле схлопывает её с линией
      последней полосы, когда добора нет, — иначе на длинной странице стояла бы двойная. */
   .band-footer { border-top: 1px solid var(--stroke-primary); margin-top: -1px; }
@@ -209,6 +209,7 @@
     padding: 12px; background: #1c1c1c; color: #fff; overflow-y: auto;
   }
   .m-menu[hidden] { display: none; }
+  .m-menu:focus { outline: none; }
   body.m-menu-open { overflow: hidden; }
   .mm-frame { flex: 1 1 auto; display: flex; flex-direction: column; margin: 0 6px; border-left: 1px solid var(--mm-line); border-right: 1px solid var(--mm-line); }
   .mm-head, .mm-cta, .mm-foot { margin: 0 -7px; padding-left: 19px; padding-right: 19px; }
@@ -409,9 +410,9 @@
   .story-card .sc-media img { width: 100%; height: 100%; object-fit: cover; }
   /* Название материала на карточке — до двух строк, дальше многоточие (27 сентября 2026,
      кит Card/Media · Title maxLines 2); заголовок целиком — на странице статьи. */
-  .sc-title { font-size: var(--fs-heading-h5); line-height: 24px; text-wrap: pretty;
+  .sc-title { font-size: var(--fs-heading-h5); line-height: 24px; text-wrap: wrap;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .sc-meta { font-family: 'Schengen Mono'; font-size: var(--fs-caption-m); line-height: 1.2; color: var(--text-secondary); margin-top: auto; font-variant-numeric: tabular-nums; }
+  .sc-meta { font-family: 'Schengen Mono'; font-size: var(--fs-caption-m); line-height: 1.2; color: var(--text-primary); margin-top: auto; font-variant-numeric: tabular-nums; }
 
   /* Skeleton state */
   .sk { background: var(--skeleton); border-radius: var(--radius-4); animation: skeleton-pulse 900ms ease-in-out infinite alternate; }
@@ -504,6 +505,9 @@
     font-family: 'Schengen Core'; font-weight: 500;
     font-size: var(--fs-h1); line-height: 0.9; letter-spacing: 0;
     margin: 0; text-wrap: balance;
+    /* Мера заголовка — как в макете `Editorial / Article header`: 947 на 1280 (79 % колонки), 1200 на 1920;
+       без неё заголовок шёл во всю колонку и вставал в одну строку (26 октября 2026, заказчица). */
+    max-width: 947px;
   }
   /* Рубрика — кит-Badge Outline: формат это тип материала, а тип на странице объекта
      всегда бейдж. Крошка «Stories › заголовок» — адрес, бейдж — метка самого материала. */
@@ -1142,7 +1146,7 @@
   .footer-meta .fb-logo { display: inline-flex; }
   .fb-copy { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); }
   .footer-meta .fb-logo svg { height: 34px; width: auto; display: block; }
-  .footer-nav a { font-size: var(--fs-body-m); line-height: 1.3; }
+  .footer-nav a { display: block; font-size: var(--fs-body-m); line-height: 1.3; }
   .footer-nav a:hover, .footer-nav a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
   /* Отступы футера — ПРАВКА 22 (25 сентября 2026): лейбл колонки → ссылки и заголовок подписки →
      текст на content-group-gap (12 / 16 / 12), текст → поле на content-button-gap (24). */
@@ -1152,7 +1156,7 @@
   .footer-right h3 { font-size: var(--fs-subtitle); line-height: 1.2; font-weight: 400; margin-bottom: var(--grp); }
   .footer-right p { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-secondary); margin-bottom: var(--cbtn); }
   .footer-right .nl-consent { display: flex; gap: 12px; align-items: flex-start; margin-top: 12px; font-size: var(--fs-caption-s); line-height: 1.2; color: var(--text-secondary); }
-  .footer-right .nl-consent input { margin-top: 2px; accent-color: var(--button-tab-active-fill); }
+  .footer-right .nl-consent input { flex: 0 0 auto; width: 16px; height: 16px; margin: 0; accent-color: var(--button-tab-active-fill); }
   .footer-right .nl-consent a { text-decoration: underline; }
   .subscribe-field { display: flex; align-items: center; height: 40px; padding-right: 4px; border: 1px solid var(--input-stroke); border-radius: var(--radius-8); overflow: hidden; background: var(--bg-primary); }
   .subscribe-field input { flex: 1; min-width: 0; border: none; outline: none; background: transparent; padding: 0 12px; font-family: inherit; font-size: var(--fs-body-m); color: var(--text-primary); }
@@ -1187,14 +1191,14 @@
     .footer-compact .fb-links { flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
   }
   @media (max-width: 1023px) {
-    .footer-cols { grid-template-columns: 1fr 1fr; gap: 28px 0; }
+    .footer-cols { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
     .footer-cols .nav-org { grid-column: 1; }
     .footer-cols .footer-right { grid-column: 1 / -1; }
     .footer-meta .fb-logo svg { height: 24px; }
     .footer-right h3 { font-size: var(--fs-subtitle); }
     .footer-bottom { flex-direction: column; align-items: stretch; gap: 20px; }
     .footer-meta { justify-content: space-between; }
-    .footer-bottom .fb-links { flex-wrap: wrap; gap: 8px 24px; }
+    .footer-bottom .fb-links { flex-wrap: wrap; justify-content: center; gap: 8px 24px; }
   }
   /* Футер на 1920 — по Syno (4011:140204): ссылки через 12, поле 48 с кнопкой 40, согласие через 16. */
   @media (min-width: 1920px) {
@@ -1647,11 +1651,11 @@
      Outline, а не тень: рисуется поверх снимка. */
   .avatar, .ctx-face, .acct-face { outline: 1px solid rgba(0,0,0,0.12); outline-offset: -1px; }
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=8af7eeaa96c0">
+<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
 </head>
 <body>
-<script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=0597b4a4ee4c"></script>
+<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
+<script src="assets/promo/case.js?v=20261028a"></script>
 <script>if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('is-embedded');</script>
 <script>if (/[?&]qa=mono/.test(location.search)) document.body.classList.add('qa-mono');</script>
 
@@ -1748,7 +1752,7 @@
           </nav>
           <div class="footer-right">
             <h3>Subscribe to our newsletter</h3>
-            <p>Get updates on open calls, artist opportunities, Art&nbsp;Map launches, exhibitions and editorial releases across Cyprus and beyond.</p>
+            <p>Get updates on open calls, artist opportunities, Art&nbsp;Map launches, exhibitions and editorial releases across Cyprus and beyond</p>
             <div class="subscribe-field">
               <input type="email" placeholder="Email address" aria-label="Email address">
               <button data-subscribe aria-label="Subscribe"><span class="material-icons">arrow_forward</span></button>
@@ -1777,7 +1781,7 @@
 </div>
 
 <!-- Слой разделов на 375 (кит Navigation/Menu Layer · Mobile). Марка приходит клоном из шапки. -->
-<div class="m-menu" id="m-menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+<div class="m-menu" id="m-menu" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
   <div class="mm-frame">
     <div class="mm-head">
       <a class="mm-logo" href="proto-home.html" aria-label="SYNO"></a>
@@ -3320,7 +3324,7 @@ function setMenu(open) {
   mMenu.hidden = !open;
   document.body.classList.toggle('m-menu-open', open);
   burger.setAttribute('aria-expanded', String(open));
-  if (open) mMenu.querySelector('[data-menu-close]').focus();
+  if (open) mMenu.focus({ preventScroll: true });
 }
 /* Выход — здесь же: шапка снова с Log in, футер гостевой, вход уходит из адреса. */
 function logOut() {

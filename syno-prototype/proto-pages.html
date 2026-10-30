@@ -190,6 +190,7 @@ if (new URLSearchParams(location.search).get('page') !== 'privacy') {
 
   .ctx-menu { position: absolute; z-index: 500; width: 272px; padding: 8px;
     background: var(--bg-primary); border: 1px solid var(--stroke-primary); border-radius: var(--radius-8); }
+  .ctx-menu:focus, .mlayer:focus { outline: none; }
   .ctx-handle, .ctx-close { display: none; }
   .ctx-identity { display: flex; align-items: center; gap: 12px; padding: 8px; }
   .ctx-id { display: flex; flex-direction: column; min-width: 0; }
@@ -269,7 +270,7 @@ if (new URLSearchParams(location.search).get('page') !== 'privacy') {
   /* Имя колонки — Label/Group: 14 капсом, трекинг 0,5 % */
   .footer-h { font-size: var(--fs-caption-m); line-height: 1.2; font-weight: 400; letter-spacing: .005em; text-transform: uppercase; color: var(--text-primary); margin: 0 0 12px; }
   .footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .footer-nav a { font-size: var(--fs-body-m); line-height: 1.3; }
+  .footer-nav a { display: block; font-size: var(--fs-body-m); line-height: 1.3; }
   .footer-nav a:hover, .footer-nav a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
   .footer-sub-title { font-size: var(--fs-subtitle); line-height: 1.2; font-weight: 400; margin: 0 0 12px; }
   .footer-sub-text { font-size: var(--fs-body-m); line-height: 1.3; color: var(--text-secondary); margin: 0 0 24px; }
@@ -605,7 +606,7 @@ if (new URLSearchParams(location.search).get('page') !== 'privacy') {
           <button class="hdr-icon" id="m-burger" type="button" aria-label="Menu" aria-haspopup="dialog" aria-controls="mlayer" aria-expanded="false"><span class="material-icons">menu</span></button>
         </nav>
         <!-- Меню аккаунта: на десктопе — кит Menu 272 под чипом, на 375 — лист снизу -->
-        <div class="ctx-menu" id="ctx-menu" role="menu" aria-label="Account" hidden>
+        <div class="ctx-menu" id="ctx-menu" role="menu" aria-label="Account" tabindex="-1" hidden>
           <div class="ctx-handle" aria-hidden="true"></div>
           <div class="ctx-identity">
             <span class="ctx-avatar lg av-g4" aria-hidden="true"></span>
@@ -839,7 +840,7 @@ if (new URLSearchParams(location.search).get('page') !== 'privacy') {
 <!-- Слой разделов на 375 — кит Navigation/Menu Layer · Mobile (как в proto-registry):
      своя шапка поверх шапки страницы, разделы Core 48, у гостя — крупная кнопка
      Log in с подписью, у вошедшего в шапке слоя — его чип; внизу правовые ссылки. -->
-<div class="mlayer" id="mlayer" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+<div class="mlayer" id="mlayer" role="dialog" aria-modal="true" aria-label="Menu" tabindex="-1" hidden>
   <div class="mlayer-frame">
     <div class="mlayer-head">
       <a class="mlayer-logo" href="proto-home.html" aria-label="SYNO"></a>
@@ -939,7 +940,7 @@ function openAcct() {
     ctxMenu.style.top = ctxMenu.style.right = '';
     ctxScrim.hidden = false;
     document.body.classList.add('sheet-open');
-    ctxMenu.querySelector('[data-ctx-close]').focus();
+    ctxMenu.focus({ preventScroll: true });
   } else {
     const host = ctxMenu.offsetParent;
     ctxMenu.style.top = (ctxBtn.offsetTop + ctxBtn.offsetHeight + 6) + 'px';
@@ -970,7 +971,7 @@ function setLayer(open) {
   mlayer.hidden = !open;
   document.body.classList.toggle('mlayer-open', open);
   burger.setAttribute('aria-expanded', String(open));
-  if (open) mlayer.querySelector('[data-mlayer-close]').focus();
+  if (open) mlayer.focus({ preventScroll: true });
 }
 burger.addEventListener('click', () => setLayer(true));
 mlayer.addEventListener('click', (e) => {

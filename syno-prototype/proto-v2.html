@@ -4073,10 +4073,13 @@
   /* From Stories — материалы редакции об этом месте или событии. Строка = Card/Media · Row
      (превью 88 · заголовок · «формат · дата · N min»). Секция появляется с первым материалом;
      при нуле её нет. Обратная дорога к решению «журнал внутри платформы» (3 сентября 2026). */
-  .vd-story-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--stroke-primary); color: inherit; text-decoration: none; }
+  /* Строка-дверь — от стенки до стенки дравера, как сетка артистов выше: линия — граница строки,
+     ховер — заливка Grey/125 на всю строку, заголовок не синеет (правило ховера блока, 16 сентября 2026;
+     поправлено 26 октября 2026 по замечанию заказчицы на проморолике). */
+  .vd-story-row { display: flex; gap: 12px; align-items: flex-start; padding: 12px; margin-inline: calc(-1 * var(--space-12)); border-bottom: 1px solid var(--stroke-primary); color: inherit; text-decoration: none; transition: background 0.15s; }
   .vd-story-row:first-of-type { border-top: 1px solid var(--stroke-primary); }
-  .vd-story-row:hover .vd-story-title, .vd-story-row:focus-visible .vd-story-title { color: var(--text-link); }
-  .vd-story-thumb { width: 88px; height: 88px; flex: 0 0 88px; object-fit: cover; border-radius: var(--radius-8); background: var(--bg-hover); }
+  .vd-story-row:hover, .vd-story-row:focus-visible { background: var(--bg-hover); }
+  .vd-story-thumb { width: 80px; height: 80px; flex: 0 0 80px; object-fit: cover; border-radius: var(--radius-8); background: var(--bg-hover); } /* превью 80, как у строк Connected with / Exhibited at (решение 3 сентября 2026) */
   .vd-story-title { font-size: var(--fs-body-m); line-height: 1.3; text-wrap: pretty; }
   .vd-story-meta { margin-top: 4px; font-family: 'Schengen Mono', monospace; font-size: var(--fs-caption-m); line-height: 1.2; color: var(--text-secondary); }
   .vd-claim { border-top: 1px solid var(--stroke-primary); padding-top: 16px; }
@@ -5549,6 +5552,10 @@
     max-width: none !important;
     border: 0;
   }
+  /* A full-screen mobile detail must cover the map header and filter chips. */
+  body.mobile-mode.arch-gmaps-drawer.detail-open .detail-page-overlay {
+    z-index: 700;
+  }
 
   /* Настоящее узкое окно (≤1023, телефон, планшет) — приложение на весь экран, без рамки:
      карта занимает экран целиком, футера нет (правовые ссылки — внизу слоя меню). */
@@ -5606,6 +5613,15 @@
   body.mobile-mode .ctx-switch { position: relative; gap: 4px; padding: 0 4px 0 6px; }
   body.mobile-mode .ctx-name { display: none; }
   body.mobile-mode .ctx-face { width: 20px; height: 20px; }
+
+  /* Карта на 375 во весь экран (Syno 611:8543): шапка и ряд чипов лежат поверх неё без
+     своей заливки; линия под шапкой остаётся. */
+  body.mobile-mode .app { position: relative; }
+  body.mobile-mode .header,
+  body.mobile-mode .filter-bar { position: absolute; left: 0; right: 0; z-index: 650; background: transparent; }
+  body.mobile-mode .header { top: 0; }
+  body.mobile-mode .filter-bar { top: var(--hdr-h); border-bottom: 0; }
+  body.mobile-mode .filter-bar .filters-row-wrapper { background: transparent; }
 
   /* Ряд чипов на 375 — полоса с краем 12; прокрутка вбок идёт от края до края экрана,
      содержимое стоит на 12 */
@@ -5912,8 +5928,8 @@
     border-radius: 2px;
   }
   .list-handle-label {
-    font-size: var(--fs-caption-s);
-    color: #666;
+    font-size: var(--fs-caption-m);
+    color: var(--text-secondary);
     margin-top: 2px;
   }
 
@@ -6230,12 +6246,12 @@
   html.is-embedded .app { margin: 0; border: 0; height: 100vh; height: 100dvh; }
   html.is-embedded .app::before, html.is-embedded .app::after { display: none; }
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=8af7eeaa96c0">
+<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
 <link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="arch-gmaps-drawer">
-<script src="assets/promo/case-data.js?v=f77394d96e"></script>
-<script src="assets/promo/case.js?v=0597b4a4ee4c"></script>
+<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
+<script src="assets/promo/case.js?v=20261028a"></script>
 <script>
 /* Встроенная карта (5 октября 2026): registry показывает Art Map своим экраном #artmap — шапка,
    вход и Favourites общие. Во встроенном режиме своих шапки и стендовой полосы нет, рамку держит
@@ -7154,7 +7170,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
 </div>
 
 <!-- Photo lightbox — fullscreen image viewer с навигацией ←/→. Click на hero/card-thumb открывает. -->
-<div class="photo-lightbox syno-viewer" id="photo-lightbox" role="dialog" aria-label="Photo gallery" aria-modal="true">
+<div class="photo-lightbox syno-viewer" id="photo-lightbox" role="dialog" aria-label="Photo gallery" aria-modal="true" tabindex="-1">
   <div class="syno-viewer-shell">
     <div class="syno-viewer-stage"><img class="lightbox-image syno-viewer-photo" id="lightbox-image" alt=""></div>
     <aside class="syno-viewer-info">
@@ -8285,7 +8301,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     document.getElementById('lightbox-meta').textContent = detail?.querySelector('.vd-subtitle')?.innerText || '';
     lightboxReturnFocus = document.activeElement;
     lb.classList.add('open');
-    document.getElementById('lightbox-close').focus({preventScroll:true});
+    lb.focus({preventScroll:true});
     document.documentElement.style.overflow = 'hidden';
   }
   function updateLightboxImage() {
