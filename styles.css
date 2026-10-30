@@ -3257,6 +3257,18 @@ html {
   transform: scale(1.0382);
   border-radius: 0;          /* the shell does the rounding now */
 }
+/* The Syno card plays the case film (26 October 2026) instead of the still.
+   The film is a clean 16:9 frame with no baked mat, so it fills the window as
+   is — no scale, and its own ratio; the shell stays the same bezel. */
+.project-card--syno .project-card__syno-shot video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 0;
+  background: #e5e4e2;
+}
 
 /* Diagonal 'Coming soon' ribbon across the top-right corner. The card
    already clips overflow, so the ends of the rotated strip are hidden. */
