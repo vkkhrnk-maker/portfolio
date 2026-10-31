@@ -284,5 +284,27 @@
     "bytes": 335719,
     "sha256": "14399efdbcba5237de388b689612bbf01d95426ffe2cc6d3a471486bd4a82deb",
     "figmaUrl": "https://www.figma.com/design/BJJWcWhQGQW14FJYAv6MKR/Syno?node-id=4990-63674"
+  },
+  {
+    "name": "apply-questions-desktop",
+    "file": "apply-questions-desktop.png",
+    "fileKey": "BJJWcWhQGQW14FJYAv6MKR",
+    "nodeId": "963:20110",
+    "width": 1280,
+    "height": 1007,
+    "bytes": 110932,
+    "sha256": "7bc281b89e5a4cf9b4729ca9d6a64cb4b175c7708517940cad3eb56e5d76863c",
+    "figmaUrl": "https://www.figma.com/design/BJJWcWhQGQW14FJYAv6MKR/Syno?node-id=963-20110"
+  },
+  {
+    "name": "apply-questions-mobile",
+    "file": "apply-questions-mobile.png",
+    "fileKey": "BJJWcWhQGQW14FJYAv6MKR",
+    "nodeId": "963:21171",
+    "width": 375,
+    "height": 1279,
+    "bytes": 91840,
+    "sha256": "3d0c026cf850e1f749e4a9142969fb0fcd024c81999fd4593768b08ea9eb1c54",
+    "figmaUrl": "https://www.figma.com/design/BJJWcWhQGQW14FJYAv6MKR/Syno?node-id=963-21171"
   }
 ]
