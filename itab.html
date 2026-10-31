@@ -54,6 +54,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{if(!sessionStorage.getItem('site-seen'))document.documentElement.classList.add('site-loading')}catch(e){}</script>
   <link rel="stylesheet" href="styles.min.css?v=346">
   <link rel="stylesheet" href="case-chain.css?v=12">
   <script src="typographer.js?v=6" defer></script>
@@ -74,8 +75,10 @@
       }
     } catch (e) {}
   </script>
+  <script src="site-loader.js?v=1" defer></script>
 </head>
 <body class="case-page--itab">
+  <div class="site-loader" aria-hidden="true"><div class="site-loader__dots"><i></i><i></i><i></i><i></i></div></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">

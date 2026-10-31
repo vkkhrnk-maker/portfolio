@@ -54,6 +54,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{if(!sessionStorage.getItem('site-seen'))document.documentElement.classList.add('site-loading')}catch(e){}</script>
   <link rel="stylesheet" href="styles.min.css?v=346">
   <link rel="stylesheet" href="case-chain.css?v=12">
   <script>
@@ -73,8 +74,10 @@
   </script>
   <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=7" defer></script>
+  <script src="site-loader.js?v=1" defer></script>
 </head>
 <body class="case-page--fill">
+  <div class="site-loader" aria-hidden="true"><div class="site-loader__dots"><i></i><i></i><i></i><i></i></div></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
@@ -196,13 +199,13 @@
         <figure class="case__figure">
           <div class="shots">
             <div class="shot">
-              <video data-src="assets/hooh-fill-cover.mp4?v=2" poster="assets/hooh-fill-cover-poster.jpg?v=3"
+              <video data-still="assets/hooh-fill-cover-still.jpg?v=1" data-src="assets/hooh-fill-cover.mp4?v=2" poster="assets/hooh-fill-cover-poster.jpg?v=3"
                      autoplay loop muted playsinline preload="none"
                      aria-label="The full Smart Fill flow — Hooh recognizes the form’s fields and fills them from the user’s stored documents, end to end"></video>
             </div>
             <div class="shot"><picture><source srcset="assets/fill-guidance.webp?v=6" type="image/webp"><img src="assets/fill-guidance.png?v=6" alt="The More guidance sheet — the form explains exactly what a field expects before the user types" loading="lazy" width="760" height="1652"></picture></div>
             <div class="shot">
-              <video data-src="assets/hooh-veto.mp4?v=4" data-poster="assets/hooh-veto-poster.jpg?v=5"
+              <video data-still="assets/hooh-veto-still.jpg?v=1" data-src="assets/hooh-veto.mp4?v=4" data-poster="assets/hooh-veto-poster.jpg?v=5"
                      autoplay loop muted playsinline preload="none"
                      aria-label="Smart Fill toggled off — the auto-filled form empties back to manual entry in one tap"></video>
             </div>
@@ -228,7 +231,7 @@
           <div class="shots shots--center">
             <div class="shot"><picture><source srcset="assets/fill-camera.webp?v=6" type="image/webp"><img src="assets/fill-camera.png?v=6" alt="Capturing an existing signature with the camera" loading="lazy" width="760" height="1652"></picture></div>
             <div class="shot shot--lead">
-              <video data-src="assets/hooh-sign.mp4?v=3" data-poster="assets/hooh-sign-poster.jpg?v=4"
+              <video data-still="assets/hooh-sign-still.jpg?v=1" data-src="assets/hooh-sign.mp4?v=3" data-poster="assets/hooh-sign-poster.jpg?v=4"
                      autoplay loop muted playsinline preload="none"
                      aria-label="A signature drawn on the canvas stroke by stroke, then saved to the signature library in one tap"></video>
             </div>
@@ -245,7 +248,7 @@
         <figure class="case__figure">
           <div class="shots">
             <div class="shot">
-              <video data-src="assets/hooh-markup.mp4?v=4" data-poster="assets/hooh-markup-poster.jpg?v=5"
+              <video data-still="assets/hooh-markup-still.jpg?v=1" data-src="assets/hooh-markup.mp4?v=4" data-poster="assets/hooh-markup-poster.jpg?v=5"
                      autoplay loop muted playsinline preload="none"
                      aria-label="A marker highlight and a note added over the W-4, then peeled off with two taps of undo — the original page underneath stays untouched"></video>
             </div>
@@ -261,7 +264,7 @@
         <figure class="case__figure">
           <div class="shots">
             <div class="shot">
-              <video data-src="assets/hooh-versions.mp4?v=4" data-poster="assets/hooh-versions-poster.jpg?v=5"
+              <video data-still="assets/hooh-versions-still.jpg?v=1" data-src="assets/hooh-versions.mp4?v=4" data-poster="assets/hooh-versions-poster.jpg?v=5"
                      autoplay loop muted playsinline preload="none"
                      aria-label="Switching between the original, filled and signed versions stored inside the document, then saving the pick as a new document"></video>
             </div>
@@ -278,7 +281,7 @@
           <figure class="case__figure tools-grid__wide">
             <div class="shots">
               <div class="shot">
-                <video data-src="assets/hooh-tools.mp4?v=3" data-poster="assets/hooh-tools-poster.jpg?v=4"
+                <video data-still="assets/hooh-tools-still.jpg?v=1" data-src="assets/hooh-tools.mp4?v=3" data-poster="assets/hooh-tools-poster.jpg?v=4"
                        autoplay loop muted playsinline preload="none"
                        aria-label="The document screen at rest — one tap on the grid summons the All-actions sheet: fill, sign, markup, convert, translate, merge and more"></video>
               </div>
@@ -289,7 +292,7 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video data-src="assets/hooh-translate.mp4?v=4" data-poster="assets/hooh-translate-poster.jpg?v=5"
+                <video data-still="assets/hooh-translate-still.jpg?v=1" data-src="assets/hooh-translate.mp4?v=4" data-poster="assets/hooh-translate-poster.jpg?v=5"
                        autoplay loop muted playsinline preload="none"
                        aria-label="One tap translates the whole W-4 — the result opens as full text and flips to translated key data, every field one tap to copy"></video>
               </div>
@@ -300,7 +303,7 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video data-src="assets/hooh-merge.mp4?v=3" data-poster="assets/hooh-merge-poster.jpg?v=4"
+                <video data-still="assets/hooh-merge-still.jpg?v=1" data-src="assets/hooh-merge.mp4?v=3" data-poster="assets/hooh-merge-poster.jpg?v=4"
                        autoplay loop muted playsinline preload="none"
                        aria-label="Two documents picked from the library and merged into the current one, with optional compression — saved as a new version"></video>
               </div>
@@ -311,7 +314,7 @@
           <figure class="case__figure tools-grid__wide">
             <div class="shots">
               <div class="shot">
-                <video data-src="assets/hooh-pages.mp4?v=5" data-poster="assets/hooh-pages-poster.jpg?v=6"
+                <video data-still="assets/hooh-pages-still.jpg?v=1" data-src="assets/hooh-pages.mp4?v=5" data-poster="assets/hooh-pages-poster.jpg?v=6"
                        autoplay loop muted playsinline preload="none"
                        aria-label="A sideways page slides to the front of the grid, then one tap of rotate straightens it"></video>
               </div>
@@ -322,7 +325,7 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video data-src="assets/hooh-convert.mp4?v=3" data-poster="assets/hooh-convert-poster.jpg?v=4"
+                <video data-still="assets/hooh-convert-still.jpg?v=1" data-src="assets/hooh-convert.mp4?v=3" data-poster="assets/hooh-convert-poster.jpg?v=4"
                        autoplay loop muted playsinline preload="none"
                        aria-label="Excel picked as the target format and the W-4 converted — saved as a new copy, the original untouched"></video>
               </div>
@@ -333,7 +336,7 @@
           <figure class="case__figure">
             <div class="shots">
               <div class="shot">
-                <video data-src="assets/hooh-compress.mp4?v=3" data-poster="assets/hooh-compress-poster.jpg?v=4"
+                <video data-still="assets/hooh-compress-still.jpg?v=1" data-src="assets/hooh-compress.mp4?v=3" data-poster="assets/hooh-compress-poster.jpg?v=4"
                        autoplay loop muted playsinline preload="none"
                        aria-label="Picking the Maximum preset and compressing — processing ends on a smaller file, saved as a new copy"></video>
               </div>

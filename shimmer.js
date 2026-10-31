@@ -11,7 +11,8 @@
      finished screen to stand in its place. */
   if (reducedMotion) {
     videos.forEach((video) => {
-      if (video.dataset.still) video.poster = video.dataset.still;
+      /* A video that waits for its poster picks the still up in show() below. */
+      if (video.dataset.still && !video.dataset.poster) video.poster = video.dataset.still;
     });
   }
   const hydrate = (video) => {
@@ -26,7 +27,11 @@
     video.load();
     if (video.autoplay && !reducedMotion) {
       const playback = video.play();
-      if (playback && typeof playback.catch === 'function') playback.catch(() => {});
+      /* Low Power Mode refuses autoplay without touching reduced motion, and the
+         visitor is left on the poster all the same. */
+      if (playback && typeof playback.catch === 'function') playback.catch((error) => {
+        if (error.name === 'NotAllowedError' && video.dataset.still) video.poster = video.dataset.still;
+      });
     }
   };
 
@@ -54,8 +59,9 @@
   const videos = Array.from(document.querySelectorAll('video[data-poster]'));
   if (!videos.length) return;
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const show = (video) => {
-    video.poster = video.dataset.poster;
+    video.poster = (reducedMotion && video.dataset.still) || video.dataset.poster;
     video.removeAttribute('data-poster');
   };
 
@@ -64,15 +70,19 @@
     return;
   }
 
+  /* A phone past the edge of a swipeable row is clipped, so it never intersects
+     until it is swiped to and would stay blank in the meantime. Such a video
+     waits for its row instead. */
+  const boxOf = (video) => video.closest('.case__slider, .shots') || video;
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      show(entry.target);
+      videos.filter((video) => boxOf(video) === entry.target).forEach(show);
       observer.unobserve(entry.target);
     });
   }, { rootMargin: '1600px 0px' });
 
-  videos.forEach((video) => observer.observe(video));
+  new Set(videos.map(boxOf)).forEach((box) => observer.observe(box));
 })();
 
 /* Media blur-up (the Syno profile-cover pattern): a tiny (~1KB, base64)

@@ -57,20 +57,23 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <script>try{if(!sessionStorage.getItem('site-seen'))document.documentElement.classList.add('site-loading')}catch(e){}</script>
   <link rel="stylesheet" href="styles.min.css?v=346">
   <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=7" defer></script>
+  <script src="site-loader.js?v=1" defer></script>
 </head>
 <body class="home-photo">
+  <div class="site-loader" aria-hidden="true"><div class="site-loader__dots"><i></i><i></i><i></i><i></i></div></div>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="content">
     <main class="content__main" id="main" tabindex="-1">
     <section class="portrait-cover" id="top" tabindex="-1" aria-labelledby="cover-name">
       <img class="portrait-cover__image" src="assets/home-cover-2048.webp"
            srcset="assets/home-cover-2048.webp 2048w, assets/home-cover-3072.webp 3072w, assets/home-cover-4096.webp 4096w"
-           sizes="(max-width: 700px) 144.5svh, min(190svh, 2280px)"
+           sizes="(max-width: 700px) 100svh, min(190svh, 2280px)"
            width="4096" height="4096" alt="Victoria Kukharenko"
-           fetchpriority="high" decoding="async">
+           fetchpriority="high" decoding="sync" onload="this.style.background=''" style="background:url(data:image/webp;base64,UklGRuAAAABXRUJQVlA4INQAAADwBgCdASo4ADgAPxF2tVMsJyUirBgKaYAiCWUAzrMuW4Fxrmfa2e2JdFs6H7LEmSJuJJQZ4sca40ap1ujhX6AAAP7etmDgZX4rIPI9z6kEHvG9M5KTfff7IkYBDnbjXFwnVsh5XBjKcEsehv5itQhCfgA+WDb/11hzLZnLIiRQmak5W2zFCJD5+DrtFF4JnGh+eYo3yR30Cnhl7Df1vSCwGlOgqRF4qewhr0IZ1+khGqK6QW/tkgi6bGZbPPJcuqSNrjI6gfmAyLGcEUq+e+yFML2AAA==) center/100% 100% no-repeat">
       <header class="cover-nav">
         <nav class="lang-switch cover-nav__lang" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
         <nav class="cover-nav__links" aria-label="Contacts">
@@ -149,7 +152,7 @@
             </a>
           </header>
           <div class="project-card__syno-shot">
-            <video data-src="assets/syno-cover.mp4?v=36e88ad5" poster="assets/syno-cover-poster.jpg?v=fb2e948f" data-still="assets/syno-cover-poster.jpg?v=fb2e948f"
+            <video data-src="assets/syno-cover.mp4?v=ba80368b" poster="assets/syno-cover-poster.jpg?v=fb2e948f" data-still="assets/syno-cover-poster.jpg?v=fb2e948f"
                    autoplay loop muted playsinline preload="none"
                    aria-label="Syno — the platform walkthrough: home, artists, a profile, the Art Map and Stories"></video>
           </div>
