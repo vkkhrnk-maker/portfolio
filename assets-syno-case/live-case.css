@@ -120,7 +120,7 @@
 /* В сценариях с формой пауза стоит над футером: в углу кадра лежат Save work, Next и Publish. */
 :is(#case-editor, #case-event-authoring) .syno-flow-film .syno-film-toggle, .syno-apply-desktop .syno-film-toggle { bottom:72px; }
 /* Безопасные зоны экрана: ролики сняты без статус-бара, и панели упирались в скругление рамки (31 октября 2026). */
-.syno-phone-film::before, .syno-phone-film::after { content:''; display:block; background:#e5e4e2; }
+.syno-phone-film::before, .syno-phone-film::after { content:''; display:block; background:#e5e4e2; filter:var(--media-dim, none); } /* В тёмной теме сайт приглушает видео: без этого полосы стояли ярче ролика. */
 .syno-phone-film::before { height:26px; border-radius:31px 31px 0 0; }
 .syno-phone-film::after { height:18px; border-radius:0 0 31px 31px; }
 .syno-phone-film .syno-walkthrough-video { border-radius:0; }
