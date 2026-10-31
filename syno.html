@@ -4,24 +4,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="robots" content="noindex, nofollow">
+  <script>
+    /* Hand a Russian-speaking visitor the Russian page instead of letting
+       Chrome machine-translate this one. Only a first visit consults the
+       browser, and only its top preference counts; the switcher's choice
+       wins from then on. */
+    (function () {
+      try {
+        var saved = localStorage.getItem('lang');
+        if (saved === 'ru') { location.replace('/ru/syno.html' + location.hash); return; }
+        if (saved) return;
+        var langs = navigator.languages || [navigator.language || ''];
+        for (var i = 0; i < langs.length; i++) {
+          var l = String(langs[i]).toLowerCase();
+          if (l.indexOf('en') === 0) return;
+          if (l.indexOf('ru') === 0) { location.replace('/ru/syno.html' + location.hash); return; }
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Syno: an art platform from scratch · Case study · Victoria Kukharenko</title>
   <meta name="description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Mockups in Figma, behavior in a code prototype.">
-  <meta name="theme-color" content="#59ad3b">
+  <meta name="theme-color" content="#3378a9">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Syno: an art platform from scratch · Case study · Victoria Kukharenko">
+  <meta property="og:description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Mockups in Figma, behavior in a code prototype.">
+  <meta property="og:url" content="https://victoriakukharenko.com/syno.html">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:image" content="https://victoriakukharenko.com/assets/case-syno-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syno: an art platform from scratch · Case study · Victoria Kukharenko">
+  <meta name="twitter:description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Mockups in Figma, behavior in a code prototype.">
+  <meta name="twitter:image" content="https://victoriakukharenko.com/assets/case-syno-og.jpg">
+
+  <link rel="canonical" href="https://victoriakukharenko.com/syno.html">
+  <!-- Tells Chrome a real Russian page exists, so it offers that instead of
+       its own translation of this one. -->
+  <link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/syno.html">
+  <link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/syno.html">
+  <link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/syno.html">
 
 
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=2">
-  <link rel="apple-touch-icon" href="assets/profile.jpg">
-  <link rel="stylesheet" href="styles.css?v=346">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.min.css?v=346">
+  <link rel="stylesheet" href="case-chain.css?v=12">
   <script src="typographer.js?v=6" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
+  <script>
+    /* Arrived through the hand-off from the case before: the first screen is
+       already on show, so it must not rise in again. */
+    try {
+      if (sessionStorage.getItem('chain-arrival')) {
+        sessionStorage.removeItem('chain-arrival');
+        document.documentElement.classList.add('chain-arrival');
+      }
+      if (sessionStorage.getItem('chain-return')) {
+        sessionStorage.removeItem('chain-return');
+        history.scrollRestoration = 'manual';
+        document.documentElement.classList.add('chain-return');
+      }
+    } catch (e) {}
+  </script>
 
 
-  <style>
+  <style data-chain-css>
     /* Desktop composition: one grey board per figure, every screen shown
        BIG — full column width, stacked. Same rule as everywhere else on
        the site: screens are never runts. */
@@ -106,7 +164,7 @@
     .todo { background: #ffe9a8; box-shadow: 0 0 0 2px #ffe9a8; }
   </style>
 
-  <style>
+  <style data-chain-css>
     .case-page--syno-proto .case__title { text-wrap: balance; max-width: 1100px; }
     .case-page--syno-proto .case__section-title { text-wrap: balance; }
     .case-page--syno-proto .case__intro, .case-page--syno-proto .case__section-body, .case-page--syno-proto .case__block-body { text-wrap: pretty; }
@@ -168,9 +226,9 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   </style>
-<style>.case-page--syno-proto .case__section{scroll-margin-top:100px}.case-page--syno-proto .case__proof-strip a{color:inherit;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:rgba(0,0,0,.22)}.case-page--syno-proto .case__proof-strip a:hover{text-decoration-color:currentColor}.syno-subheading{margin:32px 0 0;font:400 var(--fs-h4)/var(--lh-h4) var(--font-display);letter-spacing:var(--ls-heading-sm);color:var(--text-primary);text-wrap:balance}@media(max-width:640px){.syno-subheading{margin-top:24px}}</style><style>
+<style data-chain-css>.case-page--syno-proto .case__section{scroll-margin-top:100px}.case-page--syno-proto .case__proof-strip a{color:inherit;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:rgba(0,0,0,.22)}.case-page--syno-proto .case__proof-strip a:hover{text-decoration-color:currentColor}.syno-subheading{margin:32px 0 0;font:400 var(--fs-h4)/var(--lh-h4) var(--font-display);letter-spacing:var(--ls-heading-sm);color:var(--text-primary);text-wrap:balance}@media(max-width:640px){.syno-subheading{margin-top:24px}}</style><style data-chain-css>
  .case-page--syno-proto .syno-phone-board img{height:auto;object-fit:contain}
- </style><style>
+ </style><style data-chain-css>
 .case-page--syno-proto .syno-scroll-demo { min-width: 0; width: 100%; }
 .case-page--syno-proto .syno-scroll-viewport {
   width: 100%; aspect-ratio: 1280 / 800; max-height: min(70svh, 760px);
@@ -192,7 +250,7 @@
   .syno-scroll-controls .btn { min-width: 80px; height: 40px; padding-inline: 12px; }
 }
 </style>
-<style>
+<style data-chain-css>
 .case-page--syno-proto .case__hero-image,
 .case-page--syno-proto .case__figure-desktop,
 .case-page--syno-proto .case__slide { background: #fff; }
@@ -228,7 +286,7 @@
   .syno-state-tabs .btn { font-size: 12px; padding-inline: 12px; }
 }
 </style>
-<style id="syno-updated-main-layout">
+<style data-chain-css id="syno-updated-main-layout">
 .case-page--syno-proto .syno-main-figure .case__figure-desktop { display:flex; }
 .case-page--syno-proto .syno-main-figure .syno-scroll-demo { min-width:0; }
 .case-page--syno-proto .syno-scroll-demo--phone .syno-scroll-viewport { aspect-ratio:375/812; max-height:none; }
@@ -243,8 +301,8 @@
  .case-page--syno-proto .syno-main-figure .syno-phone-capture img { width:auto; height:100%; max-width:100%; object-fit:contain; }
 }
 </style>
-<link rel="stylesheet" href="assets-syno-case/live-case.css?v=20261031dots3">
-<style id="syno-senior-pass">
+<link rel="stylesheet" href="assets-syno-case/live-case.css?v=20261031dots3" data-chain-css>
+<style data-chain-css id="syno-senior-pass">
 .case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
 .case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a:hover { text-decoration-color:currentColor; }
 @media (min-width:1200px) {
@@ -308,7 +366,7 @@
 }
 </style>
 </head>
-<body class="case-page--syno case-page--syno-proto">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
@@ -335,7 +393,7 @@
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <div class="topbar-right">
-    <nav class="lang-switch" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="syno-case-proto.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
+    <nav class="lang-switch" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/syno.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
     <nav class="topbar-links" aria-label="Contacts"><a href="cv.html">CV<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a><a href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a><a href="https://t.me/Victoria_UxUi" target="_blank" rel="noopener">Telegram<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a></nav>
     <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Let’s talk<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a>
   </div>
@@ -354,7 +412,7 @@
       </div>
     </div>
 
-    <main class="content__main" id="main" tabindex="-1">
+    <main class="content__main case-page--syno case-page--syno-proto" id="main" tabindex="-1">
     <a class="case__back" href="index.html#works">
       <span class="case__back-icon" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
@@ -460,7 +518,7 @@
 <div class="syno-text-cols"><p class="case__section-body">The artist publishes the portfolio. Jury selection applies only to open call applications.</p>
           <p class="case__section-body">Publishing needs the mediums, a Statement and at least one work. The checklist shows what is missing before Publish is pressed. Unpublish hides the profile and keeps its content.</p></div>
 <h3 class="syno-subheading">Portfolio page and work editor</h3>
-<p class="case__section-body">Upload progress, errors and retries show directly on the file tile. The same uploader is used in the portfolio, the application, the event and the venue page.</p><figure class="case__figure syno-main-figure" id="case-editor" data-main-screens="editor"><div class="syno-duo syno-duo--solo"><div class="case__figure-desktop"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" poster="assets-syno-case/films/syno-flow-editor-poster.jpg?v=8" aria-label="Mira Soleni’s portfolio: ordering works, adding a work, the new work on the page, details and CV"><source src="assets-syno-case/films/syno-flow-editor.mp4?v=8" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div><div class="case__slider" role="group" aria-label="Syno pages on a phone"><div class="case__slide"><div class="syno-film-demo syno-phone-film syno-profile-phone-film"><video class="syno-walkthrough-video" data-syno-video muted loop playsinline preload="metadata" poster="assets-syno-case/films/syno-flow-profile-mobile-poster.jpg?v=1" aria-label="Mira Soleni’s portfolio on a phone: cover, works and details"><source src="assets-syno-case/films/syno-flow-profile-mobile.mp4?v=1" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div><div class="case__slide"><img class="syno-phone-still" src="assets-syno-case/stills/work-375.jpg?v=7" alt="Adding a work on a phone: three shots of one work" loading="lazy"></div>
+<p class="case__section-body">Upload progress, errors and retries show directly on the file tile. The same uploader is used in the portfolio, the application, the event and the venue page.</p><figure class="case__figure syno-main-figure" id="case-editor" data-main-screens="editor"><div class="syno-duo syno-duo--solo"><div class="case__figure-desktop"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" poster="assets-syno-case/films/syno-flow-editor-poster.jpg?v=8" aria-label="Mira Soleni’s portfolio: ordering works, adding a work, the new work on the page, details and CV"><source src="assets-syno-case/films/syno-flow-editor.mp4?v=8" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div><div class="case__slider" role="group" aria-label="Syno pages on a phone"><div class="case__slide"><div class="syno-film-demo syno-phone-film syno-profile-phone-film"><video class="syno-walkthrough-video" data-syno-video muted loop playsinline preload="metadata" poster="assets-syno-case/films/syno-flow-profile-mobile-poster.jpg?v=1" aria-label="Mira Soleni’s portfolio on a phone: cover, works and details"><source src="assets-syno-case/films/syno-flow-profile-mobile.mp4?v=1" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div><div class="case__slide"><img class="syno-phone-still" src="assets-syno-case/stills/work-375.jpg?v=7" width="750" height="1624" alt="Adding a work on a phone: three shots of one work" loading="lazy"></div>
 <div class="case__slide syno-slide-desktop"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" poster="assets-syno-case/films/syno-flow-editor-poster.jpg?v=8" aria-label="Mira Soleni’s portfolio: ordering works, adding a work, the new work on the page, details and CV"><source src="assets-syno-case/films/syno-flow-editor.mp4?v=8" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div>
 </div></div><figcaption>The editor opens over the page. In an early mockup a single crop cut landscape works, so I removed it: works now keep their proportions</figcaption></figure>
 </section>
@@ -500,10 +558,22 @@
 
 
 
-  <nav class="case__pager" aria-label="More case studies">
-    <a class="case__pager-btn case__pager-btn--prev" href="index.html#works"><span>Home</span></a>
-    <a class="case__pager-btn case__pager-btn--next" href="hooh.html"><span>Next case</span></a>
-  </nav>
+      <nav class="case__pager" aria-label="More case studies">
+        <a class="case__pager-btn case__pager-btn--prev" href="index.html#works">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a class="case__pager-btn case__pager-btn--next" href="itab.html">
+          <span>Next case</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </nav>
 </article>
 
     <section class="contact">
@@ -524,7 +594,7 @@
   <div class="menu-drawer" id="menu-drawer" aria-hidden="true" aria-label="Menu" tabindex="-1">
     <div class="menu-drawer__header">
       <a class="menu-drawer__name" href="index.html">Victoria Kukharenko</a>
-      <nav class="lang-switch lang-switch--compact" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="syno-case-proto.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
+      <nav class="lang-switch lang-switch--compact" aria-label="Language"><span class="lang-switch__opt is-active" aria-current="true">EN</span><a class="lang-switch__opt" href="/ru/syno.html" hreflang="ru" lang="ru" data-lang-switch="ru">RU</a></nav>
       <button class="menu-drawer__close" type="button" aria-label="Close menu">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -662,6 +732,7 @@
 </script>
   <script src="case.js?v=20" defer></script>
 <script src="assets-syno-case/live-case.js?v=20-video" defer></script>
+  <script src="case-chain.js?v=12" defer></script>
   <script>
     /* The switcher is a preference, not a one-off jump (same as the other cases). */
     (function () {

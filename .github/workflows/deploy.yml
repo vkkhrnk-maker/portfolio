@@ -25,22 +25,21 @@ jobs:
           SHA=$(git rev-parse --short HEAD)
           # ru/index.html sits one level down and reaches the assets through
           # ../, so the prefix is captured and put back rather than dropped.
-          for f in index.html cv.html hooh.html hooh-fill.html itab.html itab-specialists.html \
-                   ru/index.html ru/cv.html ru/hooh.html ru/hooh-fill.html ru/itab.html ru/itab-specialists.html; do
+          for f in index.html cv.html hooh.html hooh-fill.html syno.html itab.html itab-specialists.html \
+                   ru/index.html ru/cv.html ru/hooh.html ru/hooh-fill.html ru/syno.html ru/itab.html ru/itab-specialists.html; do
             if [ -f "$f" ]; then
               sed -i -E 's#(href|src)="(\.\./)?(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)(\?v=[^"]*)?"#\1="\2\3?v='"$SHA"'"#g' "$f"
               echo "Injected asset version $SHA into $f"
             fi
           done
           grep -h -E -o '(\.\./)?(styles\.min\.css|typographer\.js|shimmer\.js|case\.js)\?v=[^"]*' \
-            index.html cv.html hooh.html hooh-fill.html itab.html itab-specialists.html \
+            index.html cv.html hooh.html hooh-fill.html syno.html itab.html itab-specialists.html \
             ru/*.html | sort -u
 
-      # Syno stays visible as a non-clickable "Coming soon" card on the
-      # homepage. Keep its working file in the repository, but do not publish
-      # the unfinished direct URL until the case and its assets are ready.
-      # Anything held back this way goes in both languages, or /ru/ would
+      # Anything held back from the site goes in both languages, or /ru/ would
       # serve a page the English site does not have.
+      # The Syno case and its prototype are published; the raw frames its films
+      # were cut from and the old Figma exports stay in the repository only.
       # The Shell Ivory estimate is a client document rather than a case: it
       # carries prices, nothing links to it, and it was only ever reachable by
       # typing the URL. It has no place in the published site.
@@ -49,8 +48,6 @@ jobs:
       - name: Exclude drafts and rejected portrait animations from the public artifact
         run: |
           rm -f \
-            syno.html \
-            syno-case-proto.html \
             syno-cover-proto.html \
             hooh-trust-proto.html \
             hooh-color-proto.html \
@@ -65,7 +62,7 @@ jobs:
             portrait-wave-v15.css \
             assets/viktoria-profile-wave-body-mask-v15.svg \
             assets/viktoria-profile-wave-body-mask-v16.svg
-          rm -rf assets-syno-case assets-syno-figma syno-prototype
+          rm -rf assets-syno-figma assets-syno-case/films/source-*
 
       # Sources and working files stay in the repository but not on the site:
       # the CV is built from cv.md / cv.ru.md by tools/, cv-print.html is only
@@ -84,6 +81,8 @@ jobs:
       # listed anywhere, and so pages opened from disk while working report
       # nothing. The step runs after the draft removal above, which is what
       # keeps unfinished pages out of the counters as well as out of the site.
+      # The Syno prototype is skipped: it runs in the case's frames and links,
+      # and a consent plate has no place inside a demo.
       #
       # Cloudflare is cookieless and runs for everyone. Clarity records the
       # session, so it goes in behind consent.js and starts only once a
@@ -104,7 +103,7 @@ jobs:
           version = os.environ.get("GITHUB_SHA", "")[:7]
 
           for page in sorted(Path(".").rglob("*.html")):
-              if page.parts[0] in {"tools", "tmp", "output"}:
+              if page.parts[0] in {"tools", "tmp", "output", "syno-prototype"}:
                   continue
               html = page.read_text(encoding="utf-8")
               if "</body>" not in html:

@@ -85,4 +85,18 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/itab-specialists.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/itab-specialists.html"/>
   </url>
+  <url>
+    <loc>https://victoriakukharenko.com/syno.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/syno.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/syno.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/syno.html"/>
+  </url>
+  <url>
+    <loc>https://victoriakukharenko.com/ru/syno.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://victoriakukharenko.com/syno.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://victoriakukharenko.com/ru/syno.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://victoriakukharenko.com/syno.html"/>
+  </url>
 </urlset>

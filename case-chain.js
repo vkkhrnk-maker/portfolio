@@ -12,7 +12,7 @@
 
   /* Reading order. The last case hands off to nothing, so the chain ends on
      Book a call instead of circling; its button still closes the loop. */
-  const ORDER = ['hooh-fill', 'hooh', 'itab', 'itab-specialists'];
+  const ORDER = ['hooh-fill', 'hooh', 'syno', 'itab', 'itab-specialists'];
 
   const slug = location.pathname.split('/').pop().replace(/\.html$/, '');
   const index = ORDER.indexOf(slug);
@@ -128,9 +128,16 @@
     const nextLabel = pager.querySelector('.case__pager-btn--next span');
     if (!source || !nextLabel) throw new Error('no case to hand off to');
 
+    /* A case with styles of its own brings them along, or the copy reflows at
+       the moment of the hand-off. */
+    doc.head.querySelectorAll('[data-chain-css]').forEach((node) => {
+      document.head.append(document.importNode(node, true));
+    });
+
     frame = document.createElement('div');
-    /* The next page's body classes: some of its hero rules are scoped to them. */
-    frame.className = 'case-chain ' + doc.body.className;
+    /* The next page's classes: some of its hero rules are scoped to them. Syno
+       keeps its on <main>, so its own rules stop short of this copy. */
+    frame.className = ['case-chain', doc.body.className, doc.querySelector('.content__main').className.replace('content__main', '')].join(' ');
 
     /* The one control left at the end of the case, so keyboards, readers and
        anyone who would rather click have a way forward. */
