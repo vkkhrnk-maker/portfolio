@@ -187,9 +187,9 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
     --bg-primary: #131316;
-    --bg-card: #232328;
-    --bg-card-hover: #2a2a30;
-    --bg-card-active: #303037;
+    --bg-card: #1b1b1f;
+    --bg-card-hover: #222227;
+    --bg-card-active: #28282e;
     --text-primary: #ececee;
     --text-secondary: rgba(255, 255, 255, 0.66);
     --text-tertiary: #9a9aa2;
@@ -202,7 +202,7 @@
     --stroke-subtle: #4a4a52;
     --rule: #4a4a52;
     --media-dim: brightness(0.9);
-    --surface-media: #232328;
+    --surface-media: #1b1b1f;
     --surface-paper: #1b1b1f;
     --btn-glow: rgba(255, 255, 255, 0.14);
     --hairline: rgba(255, 255, 255, 0.06);
@@ -231,9 +231,9 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --bg-primary: #131316;
-  --bg-card: #232328;
-  --bg-card-hover: #2a2a30;
-  --bg-card-active: #303037;
+  --bg-card: #1b1b1f;
+  --bg-card-hover: #222227;
+  --bg-card-active: #28282e;
   --text-primary: #ececee;
   --text-secondary: rgba(255, 255, 255, 0.66);
   --text-tertiary: #9a9aa2;
@@ -246,7 +246,7 @@
   --stroke-subtle: #4a4a52;
   --rule: #4a4a52;
   --media-dim: brightness(0.9);
-  --surface-media: #232328;
+  --surface-media: #1b1b1f;
     --surface-paper: #1b1b1f;
   --btn-glow: rgba(255, 255, 255, 0.14);
   --hairline: rgba(255, 255, 255, 0.06);
@@ -3224,6 +3224,9 @@ html {
    beside it.
    The inner is also the query container the shell below measures itself
    against — the shot can't query itself. */
+/* The 389px limit is for half-width cards; this one spans the whole row. */
+.project-card--syno .project-card__title { max-width: none; }
+
 .project-card--syno .project-card__inner {
   aspect-ratio: 1040 / 753;
   container-type: inline-size;
@@ -6950,6 +6953,12 @@ video.case__itab-board-desktop,
 /* Russian display face (Noto Serif Display): the role's last baseline sits
    .1719em above its box, the note's 6.5px above its own. */
 :root[lang="ru"] .portrait-cover__note { bottom: calc(var(--cover-rise) + 0.1719 * var(--fs-h2) - 6.5px); }
+/* The description starts where the second card of a pair does: half the row
+   plus half the pair's 20px gap. */
+@media (min-width: 981px) {
+  .home-photo .experience-editorial__item { grid-template-columns: minmax(0, 1fr) 116px calc(50% - 10px); }
+  .home-photo .experience-editorial__description { padding-left: 0; }
+}
 /* Experience rows reach both page edges below 1200 by bleeding over the
    section padding; on this page that padding is 40 / 24 / 20, not --page-x. */
 @media (max-width: 1199px) {
