@@ -48,6 +48,7 @@
        display face carries Latin too, so there is nothing to preload it for. -->
   <link rel="preload" href="../fonts/NotoSerifDisplay-Cond.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.min.css?v=346">
+  <link rel="stylesheet" href="../case-chain.css?v=11">
   <script src="../typographer.js?v=6" defer></script>
   <script src="../shimmer.js?v=7" defer></script>
   <style>
@@ -73,11 +74,29 @@
     }
   </style>
   <script>document.documentElement.classList.add('has-js');</script>
+  <script>
+    /* Arrived through the hand-off from the case before: the first screen is
+       already on show, so it must not rise in again. */
+    try {
+      if (sessionStorage.getItem('chain-arrival')) {
+        sessionStorage.removeItem('chain-arrival');
+        document.documentElement.classList.add('chain-arrival');
+      }
+      if (sessionStorage.getItem('chain-return')) {
+        sessionStorage.removeItem('chain-return');
+        history.scrollRestoration = 'manual';
+        document.documentElement.classList.add('chain-return');
+      }
+    } catch (e) {}
+  </script>
 </head>
 <body class="case-page--hooh">
   <a class="skip-link" href="#main">Перейти к содержанию</a>
   <aside class="sidebar sidebar--case">
     <div class="sidebar__top">
+      <a class="sidebar__name-link" href="index.html">
+        <span class="sidebar__name">Victoria Kukharenko</span>
+      </a>
       <dl class="case-meta">
         <div class="case-meta__item">
           <dt>Команда</dt>
@@ -95,9 +114,8 @@
     </div>
   </aside>
 
-  <div class="topbar-left"><nav class="lang-switch" aria-label="Язык"><a class="lang-switch__opt" href="/hooh.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav></div>
-
   <div class="topbar-right">
+    <nav class="lang-switch" aria-label="Язык"><a class="lang-switch__opt" href="/hooh.html" hreflang="en" lang="en" data-lang-switch="en">EN</a><span class="lang-switch__opt is-active" aria-current="true">RU</span></nav>
     <nav class="topbar-links" aria-label="Контакты"><a href="cv.html">CV<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a><a href="https://www.linkedin.com/in/viktoria-kukharenko" target="_blank" rel="noopener">LinkedIn<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a><a href="https://t.me/Victoria_UxUi" target="_blank" rel="noopener">Telegram<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a></nav>
     <a class="btn btn--dark case__cta" href="https://cal.com/viktoria-kukharenko-yrnxb7/intro-call" target="_blank" rel="noopener">Связаться<svg class="icon-arrow" viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true"><path d="M3 13 13 3M4.5 3H13v8.5" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></a>
   </div>
@@ -527,6 +545,7 @@
 
   </script>
   <script src="../case.js?v=17" defer></script>
+  <script src="../case-chain.js?v=11" defer></script>
   <script>
     /* The switcher is a preference, not a one-off jump: remember it so the
        guard in <head> stops second-guessing the browser on the next visit. */
