@@ -297,7 +297,7 @@
  .case-page--syno-proto .syno-main-figure .syno-phone-capture img { width:auto; height:100%; max-width:100%; object-fit:contain; }
 }
 </style>
-<link rel="stylesheet" href="../assets-syno-case/live-case.css?v=20261031dots3" data-chain-css>
+<link rel="stylesheet" href="../assets-syno-case/live-case.css?v=20261031cols" data-chain-css>
 <style data-chain-css id="syno-senior-pass">
 /* 31 октября 2026: прототип виден, схема модели, телефон первым. */
 .case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
@@ -333,15 +333,10 @@
 .syno-map__kids li::before { content:''; position:absolute; left:-14px; top:50%; width:14px; height:1px; background:var(--map-line); }
 .syno-map__kids li::after { content:''; position:absolute; left:-14px; top:-12px; bottom:0; width:1px; background:var(--map-line); }
 .syno-map__kids li:last-child::after { bottom:50%; }
-.syno-map__label { margin:0 0 8px; font:12px/18px var(--font-body); letter-spacing:.04em; text-transform:uppercase; color:var(--text-tertiary); }
-.syno-map__out { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
-.syno-map__out li { display:grid; }
 @media (max-width:899px) {
   .syno-map__roles { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; gap:20px 16px; }
   .syno-map__col { display:block; grid-row:auto; }
   .syno-map__col::before { display:none; }
-  .syno-map__out { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .syno-map__out li:last-child { grid-column:1 / -1; }
 }
 @media (max-width:640px) {
   .syno-map { gap:20px; }
@@ -463,7 +458,6 @@
           <div class="syno-map__col"><div class="syno-map__plate syno-map__head"><b>Организация</b><span>тот же аккаунт, свой контекст</span></div><ul class="syno-map__kids"><li><div class="syno-map__plate"><b>Страница площадки</b><span>создаёт или заявляет</span></div></li><li><div class="syno-map__plate"><b>Команда</b><span>только по приглашению</span></div></li></ul></div>
           <div class="syno-map__col"><div class="syno-map__plate syno-map__head"><b>Событие</b><span>создаёт любой с аккаунтом</span></div><ul class="syno-map__kids"><li><div class="syno-map__plate"><b>От организации</b><span>публикуется сразу</span></div></li><li><div class="syno-map__plate"><b>Личное</b><span>проверяет Syno</span></div></li></ul></div>
         </div>
-        <div><p class="syno-map__label">Где это видно</p><ul class="syno-map__out"><li><div class="syno-map__plate"><b>Art Map</b><span>события и места</span></div></li><li><div class="syno-map__plate"><b>Artists</b><span>опубликованные профили</span></div></li><li><div class="syno-map__plate"><b>Open Call</b><span>заявки и жюри</span></div></li><li><div class="syno-map__plate"><b>Stories</b><span>связаны с художниками и выставками</span></div></li><li><div class="syno-map__plate"><b>My Syno</b><span>избранное, заявки, события</span></div></li></ul></div>
       </div>
     </figure>
   </section>

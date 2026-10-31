@@ -301,7 +301,7 @@
  .case-page--syno-proto .syno-main-figure .syno-phone-capture img { width:auto; height:100%; max-width:100%; object-fit:contain; }
 }
 </style>
-<link rel="stylesheet" href="assets-syno-case/live-case.css?v=20261031dots3" data-chain-css>
+<link rel="stylesheet" href="assets-syno-case/live-case.css?v=20261031cols" data-chain-css>
 <style data-chain-css id="syno-senior-pass">
 .case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
 .case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a:hover { text-decoration-color:currentColor; }
@@ -333,15 +333,10 @@
 .syno-map__kids li::before { content:''; position:absolute; left:-14px; top:50%; width:14px; height:1px; background:var(--map-line); }
 .syno-map__kids li::after { content:''; position:absolute; left:-14px; top:-12px; bottom:0; width:1px; background:var(--map-line); }
 .syno-map__kids li:last-child::after { bottom:50%; }
-.syno-map__label { margin:0 0 8px; font:12px/18px var(--font-body); letter-spacing:.04em; text-transform:uppercase; color:var(--text-tertiary); }
-.syno-map__out { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; }
-.syno-map__out li { display:grid; }
 @media (max-width:899px) {
   .syno-map__roles { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:none; gap:20px 16px; }
   .syno-map__col { display:block; grid-row:auto; }
   .syno-map__col::before { display:none; }
-  .syno-map__out { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .syno-map__out li:last-child { grid-column:1 / -1; }
 }
 @media (max-width:640px) {
   .syno-map { gap:20px; }
@@ -459,7 +454,6 @@
           <div class="syno-map__col"><div class="syno-map__plate syno-map__head"><b>Organization</b><span>same account, its own context</span></div><ul class="syno-map__kids"><li><div class="syno-map__plate"><b>Venue page</b><span>created or claimed</span></div></li><li><div class="syno-map__plate"><b>Team</b><span>by invitation only</span></div></li></ul></div>
           <div class="syno-map__col"><div class="syno-map__plate syno-map__head"><b>Event</b><span>anyone with an account</span></div><ul class="syno-map__kids"><li><div class="syno-map__plate"><b>From an organization</b><span>goes live at once</span></div></li><li><div class="syno-map__plate"><b>Personal</b><span>reviewed by Syno</span></div></li></ul></div>
         </div>
-        <div><p class="syno-map__label">Where it shows</p><ul class="syno-map__out"><li><div class="syno-map__plate"><b>Art Map</b><span>events and places</span></div></li><li><div class="syno-map__plate"><b>Artists</b><span>published profiles</span></div></li><li><div class="syno-map__plate"><b>Open Call</b><span>applications and the jury</span></div></li><li><div class="syno-map__plate"><b>Stories</b><span>linked to artists and exhibitions</span></div></li><li><div class="syno-map__plate"><b>My Syno</b><span>favourites, applications, events</span></div></li></ul></div>
       </div>
     </figure>
   </section>

@@ -110,8 +110,12 @@
 /* Абзацы подряд — в две колонки на широком экране: текст занимает ширину ролика под ним, строка остаётся удобной (31 октября 2026). */
 .syno-text-cols { display:contents; }
 @media(min-width:1024px) {
-  .syno-text-cols { display:block; width:100%; columns:2; column-gap:24px; }
-  .syno-text-cols .case__section-body { max-width:none; margin:0 0 16px; break-inside:avoid; }
+  /* Сетка, а не columns: Safari переносил нижний отступ абзаца на верх второй колонки, и текст стоял на 16 px ниже. */
+  .syno-text-cols { display:grid; width:100%; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 24px; align-items:start; }
+  .syno-text-cols:has(> :nth-child(3)) { grid-template-rows:auto 1fr; }
+  .syno-text-cols .case__section-body { grid-column:2; max-width:none; margin:0; }
+  .syno-text-cols .case__section-body:first-child { grid-column:1; }
+  .syno-text-cols .case__section-body:first-child:nth-last-child(3) { grid-row:1 / span 2; }
 }
 /* В сценариях с формой пауза стоит над футером: в углу кадра лежат Save work, Next и Publish. */
 :is(#case-editor, #case-event-authoring) .syno-flow-film .syno-film-toggle, .syno-apply-desktop .syno-film-toggle { bottom:72px; }
