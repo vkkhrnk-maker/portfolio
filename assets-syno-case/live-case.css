@@ -75,11 +75,12 @@
   /* Как в Hooh: десктоп занимает свою ячейку целиком, телефон стоит на отдельной плашке той же высоты. */
   .syno-duo { display:grid; grid-template-columns:minmax(0,3fr) minmax(0,1fr); gap:8px; align-items:stretch; }
   .syno-duo > .case__figure-desktop { min-width:0; margin:0; padding:0; }
-  .syno-duo > .case__slider { display:flex; align-items:center; justify-content:center; margin:0; padding:8px 16px; overflow:visible; background:#1c1c1c; }
-  .case-page--syno-proto .syno-duo .case__slider .case__slide { display:block; flex:0 1 auto; width:100%; max-width:210px; height:auto; padding:0; background:transparent; overflow:visible; }
-  .syno-duo .syno-phone-film { width:100%; max-width:210px; padding:4px; border-radius:30px; margin:0 auto; }
-  .syno-duo .syno-phone-film .syno-walkthrough-video { border-radius:26px; }
-  .syno-duo .syno-phone-film .syno-film-toggle { width:28px; height:28px; right:12px; bottom:12px; }
+  /* Телефон растёт вместе с плашкой: высоту ряда задаёт десктоп, размер телефона и рамки считается от неё (31 октября 2026, на большом мониторе он оставался 210 px). */
+  .syno-duo > .case__slider { display:flex; align-items:center; justify-content:center; margin:0; padding:0; overflow:visible; background:#1c1c1c; container-type:size; }
+  .case-page--syno-proto .syno-duo .case__slider .case__slide { display:flex; align-items:center; justify-content:center; flex:1 1 auto; width:100%; max-width:none; height:100%; padding:0; background:transparent; overflow:visible; }
+  .syno-duo .syno-phone-film { --bezel:max(4px,1cqh); --corner:6.3cqh; display:block; width:auto; max-width:none; height:94cqh; aspect-ratio:43/92; padding:var(--bezel); border-radius:var(--corner); margin:0; }
+  .syno-duo .syno-phone-film .syno-walkthrough-video { width:100%; height:100%; aspect-ratio:auto; object-fit:cover; object-position:top; border-radius:calc(var(--corner) - var(--bezel)); }
+  .syno-duo .syno-phone-film .syno-film-toggle { width:28px; height:28px; right:4cqh; bottom:4cqh; }
   /* Сценарии профиля, редактора и подачи остаются во всю ширину: телефонная версия показывается на телефоне. */
   .syno-duo--solo { display:block; }
   .syno-duo--solo > :is(.case__slider, .syno-editor-mobile, .syno-phone-plate) { display:none; }
@@ -111,7 +112,7 @@
 .syno-text-cols { display:contents; }
 @media(min-width:1024px) {
   /* Сетка, а не columns: Safari переносил нижний отступ абзаца на верх второй колонки, и текст стоял на 16 px ниже. */
-  .syno-text-cols { display:grid; width:100%; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 24px; align-items:start; }
+  .syno-text-cols { display:grid; width:100%; grid-template-columns:repeat(2,minmax(0,68ch)); justify-content:start; gap:16px 24px; align-items:start; }
   .syno-text-cols:has(> :nth-child(3)) { grid-template-rows:auto 1fr; }
   .syno-text-cols .case__section-body { grid-column:2; max-width:none; margin:0; }
   .syno-text-cols .case__section-body:first-child { grid-column:1; }
@@ -119,19 +120,6 @@
 }
 /* В сценариях с формой пауза стоит над футером: в углу кадра лежат Save work, Next и Publish. */
 :is(#case-editor, #case-event-authoring) .syno-flow-film .syno-film-toggle, .syno-apply-desktop .syno-film-toggle { bottom:72px; }
-/* Безопасные зоны экрана: ролики сняты без статус-бара, и панели упирались в скругление рамки (31 октября 2026). */
-.syno-phone-film::before, .syno-phone-film::after { content:''; display:block; background:#e5e4e2; filter:var(--media-dim, none); } /* В тёмной теме сайт приглушает видео: без этого полосы стояли ярче ролика. */
-.syno-phone-film::before { height:26px; border-radius:31px 31px 0 0; }
-.syno-phone-film::after { height:18px; border-radius:0 0 31px 31px; }
-.syno-phone-film .syno-walkthrough-video { border-radius:0; }
-.syno-phone-film .syno-film-toggle { right:17px; bottom:31px; }
-.syno-editor-mobile img { box-sizing:border-box; padding:26px 0 18px !important; border:5px solid #2a2a2d; background:#e5e4e2 !important; }
-@media(min-width:641px) {
-  .syno-duo .syno-phone-film::before { height:20px; border-radius:26px 26px 0 0; }
-  .syno-duo .syno-phone-film::after { height:14px; border-radius:0 0 26px 26px; }
-  .syno-duo .syno-phone-film .syno-walkthrough-video { border-radius:0; }
-  .syno-duo .syno-phone-film .syno-film-toggle { right:12px; bottom:24px; }
-}
 /* Телефон слева там, где нужен другой ритм рядов. */
 @media(min-width:641px) {
   .syno-duo--flip { grid-template-columns:minmax(0,1fr) minmax(0,3fr); }
@@ -152,13 +140,11 @@
   .case-page--syno-proto .case__figure .case__slider .case__slide { height:56vh; padding:12px; background:#1c1c1c; overflow:hidden; }
   .case-page--syno-proto .syno-slide-desktop > .syno-film-demo, .syno-slide-window { width:100%; }
   .syno-slide-window img { display:block; width:100%; height:auto; }
-  .case-page--syno-proto .case__slide > .syno-phone-film { display:flex; flex-direction:column; width:auto; max-width:100%; height:100%; aspect-ratio:43/100; margin:0; }
+  .case-page--syno-proto .case__slide > .syno-phone-film { display:flex; flex-direction:column; width:auto; max-width:100%; height:100%; aspect-ratio:43/92; margin:0; }
   .case-page--syno-proto .case__slide > .syno-phone-film .syno-walkthrough-video { flex:1 1 0; width:100%; height:0; min-height:0; aspect-ratio:auto; object-fit:cover; object-position:top; }
-  .case-page--syno-proto .case__slide > .syno-phone-film::before { height:18px; }
-  .case-page--syno-proto .case__slide > .syno-phone-film::after { height:12px; }
   .case-page--syno-proto .case__slide > .syno-phone-film .syno-film-toggle { width:28px; height:28px; right:12px; bottom:22px; }
   .case-page--syno-proto .case__slide > .syno-apply-phone .syno-film-toggle { bottom:64px; }
-  .syno-phone-still { box-sizing:border-box; display:block; height:100%; width:auto; max-width:100%; padding:18px 0 12px; border:5px solid #2a2a2d; border-radius:30px; background:#e5e4e2; object-fit:contain; }
+  .syno-phone-still { box-sizing:border-box; display:block; height:100%; width:auto; max-width:100%; padding:0; border:5px solid #2a2a2d; border-radius:30px; background:#e5e4e2; object-fit:contain; }
 }
 
 @media(max-width:640px) {
