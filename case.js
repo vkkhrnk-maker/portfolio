@@ -209,7 +209,7 @@
        zoomed video keeps looping in the lightbox, picked up from the
        exact frame the inline copy was on. */
     const zoomables = document.querySelectorAll(
-      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .shot img, .shot video'
+      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .case__figure-desktop .syno-walkthrough-video, .syno-duo .syno-phone-film .syno-walkthrough-video, .syno-primary-figure .syno-flow-film .syno-walkthrough-video, .shot img, .shot video'
     );
     if (!zoomables.length) return;
     /* Lets the stylesheet scope zoom affordances (cursor) to pages where
@@ -219,6 +219,7 @@
     let box, imgEl, videoEl, closeBtn, lastFocused;
     let background = [];
     let sourceVideo = null; // the inline video the open lightbox mirrors
+    let sourceWasPaused = false; // a film the viewer stopped stays stopped after closing
 
     const setBackgroundInert = (inert) => {
       background.forEach((el) => {
@@ -273,9 +274,10 @@
            one was showing, and the small one pauses so only one copy
            decodes at a time. */
         sourceVideo = el;
+        sourceWasPaused = el.paused;
         if (el.poster) videoEl.poster = el.poster;
         videoEl.src = el.currentSrc || el.src || el.dataset.src;
-        try { videoEl.currentTime = el.currentTime; } catch (err) {}
+        try { videoEl.currentTime = el.ended ? 0 : el.currentTime; } catch (err) {}
         el.pause();
         const p = videoEl.play();
         if (p && typeof p.catch === 'function') p.catch(() => {});
@@ -308,7 +310,7 @@
         videoEl.pause();
         videoEl.removeAttribute('src');
         videoEl.load();
-        const p = sourceVideo.play();
+        const p = sourceWasPaused ? null : sourceVideo.play();
         if (p && typeof p.catch === 'function') p.catch(() => {});
         sourceVideo = null;
       }
