@@ -52,8 +52,6 @@ End to end, from research and customer journey mapping to release. At an AI star
 - **Abramova School** (2023–2024): UX/UI design and mentoring junior designers through critiques and portfolio reviews.
 - **Ebda Agency** (2022–2023): Canadian agency. Designed pages for webflow.com and sites for other clients of the agency.
 
-Cases: [Read the Syno case](syno.html "Art platform")
-
 ### Product Designer — Hooh
 **Feb 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
 

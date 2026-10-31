@@ -12,7 +12,7 @@
 
   /* Reading order. The last case hands off to nothing, so the chain ends on
      Book a call instead of circling; its button still closes the loop. */
-  const ORDER = ['hooh-fill', 'hooh', 'syno', 'itab', 'itab-specialists'];
+  const ORDER = ['hooh-fill', 'hooh', 'itab', 'itab-specialists'];
 
   const slug = location.pathname.split('/').pop().replace(/\.html$/, '');
   const index = ORDER.indexOf(slug);

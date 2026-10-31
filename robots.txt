@@ -1,11 +1,8 @@
 # The site is served from its own domain, so this file sits at the domain
 # root and crawlers actually read it. Draft pages are not published at all
 # (deploy.yml removes them from the artifact), so there is nothing to
-# disallow here; the sitemap lists the fourteen public pages. The Syno prototype
-# is a demo reached from its case, with made-up profiles under the client's
-# brand, so it stays out of search results.
+# disallow here; the sitemap lists the twelve public pages.
 User-agent: *
-Disallow: /syno-prototype/
 Allow: /
 
 Sitemap: https://victoriakukharenko.com/sitemap.xml
