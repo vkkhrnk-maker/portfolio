@@ -56,25 +56,10 @@
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <script>try{if(!sessionStorage.getItem('site-seen'))document.documentElement.classList.add('site-loading')}catch(e){}</script>
   <link rel="stylesheet" href="styles.min.css?v=346">
-  <link rel="stylesheet" href="case-chain.css?v=12">
+  <link rel="stylesheet" href="case-chain.css?v=13">
   <script src="typographer.js?v=6" defer></script>
   <script src="shimmer.js?v=7" defer></script>
   <script>document.documentElement.classList.add('has-js');</script>
-  <script>
-    /* Arrived through the hand-off from the case before: the first screen is
-       already on show, so it must not rise in again. */
-    try {
-      if (sessionStorage.getItem('chain-arrival')) {
-        sessionStorage.removeItem('chain-arrival');
-        document.documentElement.classList.add('chain-arrival');
-      }
-      if (sessionStorage.getItem('chain-return')) {
-        sessionStorage.removeItem('chain-return');
-        history.scrollRestoration = 'manual';
-        document.documentElement.classList.add('chain-return');
-      }
-    } catch (e) {}
-  </script>
   <script src="site-loader.js?v=1" defer></script>
 </head>
 <body class="case-page--itab">
@@ -418,7 +403,6 @@
 
   </script>
   <script src="case.js?v=17" defer></script>
-  <script src="case-chain.js?v=13" defer></script>
   <script>
     /* The switcher is a preference, not a one-off jump: remember it so the
        guard in <head> stops second-guessing the browser on the next visit. */
