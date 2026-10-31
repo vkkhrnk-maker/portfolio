@@ -151,7 +151,8 @@
   </style>
 
   <style>
-    .case-page--syno-proto .case__title { text-wrap: balance; max-width: 1100px; }
+    .case-page--syno-proto .case__title { text-wrap: balance; }
+    .syno-nowrap { white-space: nowrap; }
     .case-page--syno-proto .case__section-title { text-wrap: balance; }
     .case-page--syno-proto .case__intro, .case-page--syno-proto .case__section-body, .case-page--syno-proto .case__block-body { text-wrap: pretty; }
     .case-page--syno-proto .case__hero { gap: 36px; }
@@ -287,21 +288,16 @@
  .case-page--syno-proto .syno-main-figure .syno-phone-capture img { width:auto; height:100%; max-width:100%; object-fit:contain; }
 }
 </style>
-<link rel="stylesheet" href="assets-syno-case/live-case.css?v=20261031phones">
+<link rel="stylesheet" href="assets-syno-case/live-case.css?v=20261101b">
 <style id="syno-senior-pass">
-.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
-.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a:hover { text-decoration-color:currentColor; }
+.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
+.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit) a:hover { text-decoration-color:currentColor; }
 @media (min-width:1200px) {
   .case-page--syno-proto .sidebar--case .sidebar__top { position:relative; }
   .case-page--syno-proto .sidebar--case .sidebar__name-link { position:absolute; top:16px; left:0; }
   .case-page--syno-proto .sidebar--case .sidebar__name { font-family:var(--font-body); }
   .case-page--syno-proto .topbar-right .lang-switch { margin-right:20px; }
 }
-.syno-proto-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; padding:18px 20px; background:var(--bg-card); }
-.syno-proto-bar p { margin:0; max-width:56ch; font:var(--fs-body)/var(--lh-body) var(--font-body); letter-spacing:var(--ls-heading-body); color:var(--text-secondary); text-wrap:pretty; }
-.syno-proto-bar strong { color:var(--text-primary); font-weight:500; }
-.syno-proto-bar p.syno-proto-bar__links { flex:0 0 auto; color:var(--text-primary); white-space:nowrap; }
-.syno-proto-bar__links a { display:inline-block; padding-block:8px; }
 .case-page--syno-proto .syno-model-figure { grid-column:1 / -1; margin-top:8px; }
 .syno-map { --map-line:color-mix(in srgb, var(--text-primary) 28%, transparent); display:grid; gap:24px; font-family:var(--font-body); }
 .syno-map :where(ul) { list-style:none; margin:0; padding:0; }
@@ -340,7 +336,6 @@
   .case-page--syno-proto .case__title { order:0; }
   .case-page--syno-proto .case__intro { order:1; }
   .case-page--syno-proto .case__hero-image { order:2; }
-  .case-page--syno-proto .syno-proto-bar { order:3; padding:16px; }
   .case-page--syno-proto .syno-team-credit { order:4; }
   .case-page--syno-proto .case__proof-strip { order:5; }
   .case-page--syno-proto .case-meta--mobile { order:6; }
@@ -426,7 +421,7 @@
   <section class="case__grid" aria-label="Project context">
   <div class="case__block"><h2 class="case__block-title">Task</h2><p class="case__block-body">The registry, the open call and the map were independent sections in the brief. The task was to connect them through shared data, roles and rules.</p></div>
   <div class="case__block"><h2 class="case__block-title">What I Did</h2><p class="case__block-body">Flows and product rules, responsive layouts, a component system built on the identity, specs and design reviews.</p></div>
-  <div class="case__block"><h2 class="case__block-title">How I Tested</h2><p class="case__block-body">I designed the screens in Figma and tested behavior in the code prototype, where sign-in, Save and the dashboard work as one continuous flow. The main problems sat at the joins between screens, not in the screens themselves. Each finding went back into the mockups and specs. I checked the finished build against the mockups in design reviews and logged the differences as “now / should be” cards.</p>
+  <div class="case__block"><h2 class="case__block-title">How I Tested</h2><p class="case__block-body">I designed the screens in Figma and tested behavior in the code prototype, where sign-in, Save and the dashboard work as one continuous flow. The main problems sat at the joins between screens, not in the screens themselves. Each finding went back into the mockups and specs. I checked the finished build against the mockups in design reviews and logged the differences as “now&nbsp;/&nbsp;should&nbsp;be” cards.</p>
         <p class="case__block-body">The timeline was tight, so we ran no interviews of our own: the client spoke with artists, and I relied on that data. We tested the prototypes within the team.</p></div>
   <div class="case__block"><h2 class="case__block-title">Scope</h2><p class="case__block-body">Home, the Art Map, the registry and artist profile, Stories, the open call and application, the My Syno dashboard, organization and event pages. Desktop and phone, a component library.</p></div>
 </section>
@@ -480,7 +475,7 @@
 <p class="case__section-body">A card shows one status, calculated in Cyprus time. The urgent “Today” and “Opening tonight” take priority over general ones. I dropped “Closes in 30 min”: that label goes stale while the page is open.</p>
 <h3 class="syno-subheading" id="save">Saving works before signing in</h3>
 <div class="syno-text-cols"><p class="case__section-body">Save applies to events and works, Follow to artists and venues. Save is a heart icon on the image, Follow a text button, as on Artsy, Ocula and ArtRabbit.</p>
-<p class="case__section-body">If someone taps Save without signing in, they return to the same item after sign-in, and it is already saved. Deleted items do not disappear from favourites without explanation: the card stays, marked “No longer on SYNO”.</p></div><figure class="case__figure syno-primary-figure"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" data-still="assets-syno-case/films/syno-flow-save-still.jpg?v=1" data-poster="assets-syno-case/films/syno-flow-save-poster.jpg?v=12" aria-label="Save from a card on the home page: sign-in, the saved event and Favourites"><source src="assets-syno-case/films/syno-flow-save.mp4?v=12" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
+<p class="case__section-body">If someone taps Save without signing in, they return to the same item after sign-in, and it is already saved. Deleted items do not disappear from favourites without explanation: the card stays, marked “No&nbsp;longer&nbsp;on&nbsp;SYNO”.</p></div><figure class="case__figure syno-primary-figure"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" data-still="assets-syno-case/films/syno-flow-save-still.jpg?v=1" data-poster="assets-syno-case/films/syno-flow-save-poster.jpg?v=12" aria-label="Save from a card on the home page: sign-in, the saved event and Favourites"><source src="assets-syno-case/films/syno-flow-save.mp4?v=12" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
 </section>
 
 
@@ -488,7 +483,7 @@
   <section class="case__section" id="organisation">
 <h2 class="case__section-title">2. Events: at once or after review</h2>
 <div class="syno-text-cols"><p class="case__section-body">Anyone with an account can create an event: an artist, an organization, a visitor. Only moderation depends on the author, so the author is chosen before the form is filled in. The venue is set separately: a personal event at NiMAC does not make the author part of the NiMAC team.</p>
-<p class="case__section-body">With the Changes requested status, the author returns to the filled form through Fix and resend. Weekdays were added after the event page review: a date range without them showed a Saturday studio as open on a Tuesday. A “Shown as …” line under the dates shows how the event will look on the card.</p>
+<p class="case__section-body">With the Changes&nbsp;requested status, the author returns to the filled form through Fix&nbsp;and&nbsp;resend. Weekdays were added after the event page review: a date range without them showed a Saturday studio as open on a Tuesday. A “Shown as …” line under the dates shows how the event will look on the card.</p>
 <p class="case__section-body">An event can be withdrawn in two ways: Cancel if it will not take place, Delete if it was created by mistake. A cancelled event leaves the map but stays available at its link and to those who saved it, as on Meetup.</p></div><figure class="case__figure syno-primary-figure" id="case-event-authoring"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" data-still="assets-syno-case/films/syno-flow-event-still.jpg?v=1" data-poster="assets-syno-case/films/syno-flow-event-poster.jpg?v=9" aria-label="Creating an event as an organization: the form, publishing and the event on the dashboard"><source src="assets-syno-case/films/syno-flow-event.mp4?v=9" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
 <h3 class="syno-subheading">Organization dashboard and team access</h3>
 <div class="syno-text-cols"><p class="case__section-body">For the organization dashboard, the client named ArtRabbit as the reference. I studied its flows on a live account, gathered the requirements and brought the key questions to discussion: who submits events, who gets reviewed, how to confirm the right to a page. These decisions determined the moderation load.</p>
@@ -514,7 +509,7 @@
 <h3 class="syno-subheading">A submitted application is its own copy</h3>
 <p class="case__section-body">On submission the application fixes copies of the Statement and the works, so later portfolio edits do not affect the jury materials. I dropped a second, synced Statement: after the first edit it would be unclear which version is current.</p>
 <h3 class="syno-subheading">A draft after the deadline</h3>
-<p class="case__section-body">If the call closed while the application was still a draft, it shows on opening that it can no longer be submitted.</p><figure class="case__figure syno-primary-figure"><div class="case__figure-desktop"><div class="syno-closed-state"><img width="1920" height="1103" src="assets-syno-case/stills/apply-closed-1280.jpg?v=3" alt="Applications are closed" loading="lazy" class=""></div><div class="syno-closed-state"><img width="1920" height="1103" src="assets-syno-case/stills/opencall-closed-1280.jpg?v=3" alt="The open call page after the deadline: Timeline and the status line" loading="lazy"></div></div></figure>
+<p class="case__section-body">If the call closed while the application was still a draft, it shows on opening that it can no longer be submitted.</p><figure class="case__figure syno-primary-figure"><div class="case__figure-desktop"><div class="syno-closed-state"><img width="1920" height="1103" src="assets-syno-case/stills/apply-closed-1280.jpg?v=3" alt="Applications are closed" loading="lazy" class=""></div><div class="syno-closed-state"><img width="1920" height="1103" src="assets-syno-case/stills/opencall-closed-1280.jpg?v=4" alt="The open call page after the deadline: dates with the Closed status and the jury" loading="lazy"></div></div></figure>
 </section>
 
   <section class="case__section" id="removed">

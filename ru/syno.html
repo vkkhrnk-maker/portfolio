@@ -147,7 +147,8 @@
   </style>
 
   <style>
-    .case-page--syno-proto .case__title { text-wrap: balance; max-width: 1100px; }
+    .case-page--syno-proto .case__title { text-wrap: balance; }
+    .syno-nowrap { white-space: nowrap; }
     .case-page--syno-proto .case__section-title { text-wrap: balance; }
     .case-page--syno-proto .case__intro, .case-page--syno-proto .case__section-body, .case-page--syno-proto .case__block-body { text-wrap: pretty; }
     .case-page--syno-proto .case__hero { gap: 36px; }
@@ -283,11 +284,11 @@
  .case-page--syno-proto .syno-main-figure .syno-phone-capture img { width:auto; height:100%; max-width:100%; object-fit:contain; }
 }
 </style>
-<link rel="stylesheet" href="../assets-syno-case/live-case.css?v=20261031phones">
+<link rel="stylesheet" href="../assets-syno-case/live-case.css?v=20261101b">
 <style id="syno-senior-pass">
 /* 31 октября 2026: прототип виден, схема модели, телефон первым. */
-.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
-.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit, .syno-proto-bar) a:hover { text-decoration-color:currentColor; }
+.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit) a { text-decoration-line:underline; text-decoration-thickness:1px; text-underline-offset:3px; text-decoration-color:color-mix(in srgb, currentColor 35%, transparent); }
+.case-page--syno-proto :is(.case__outcome-body, .case__proof-strip, .case__section-body, .case__block-body, .syno-team-credit) a:hover { text-decoration-color:currentColor; }
 /* Имя в липкой колонке и язык справа — как в прототипе на Hooh и iTAB. */
 @media (min-width:1200px) {
   .case-page--syno-proto .sidebar--case .sidebar__top { position:relative; }
@@ -295,12 +296,6 @@
   .case-page--syno-proto .sidebar--case .sidebar__name { font-family:var(--font-body); }
   .case-page--syno-proto .topbar-right .lang-switch { margin-right:20px; }
 }
-/* Прототип: плашка с кнопками под обложкой. */
-.syno-proto-bar { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; padding:18px 20px; background:var(--bg-card); }
-.syno-proto-bar p { margin:0; max-width:56ch; font:var(--fs-body)/var(--lh-body) var(--font-body); letter-spacing:var(--ls-heading-body); color:var(--text-secondary); text-wrap:pretty; }
-.syno-proto-bar strong { color:var(--text-primary); font-weight:500; }
-.syno-proto-bar p.syno-proto-bar__links { flex:0 0 auto; color:var(--text-primary); white-space:nowrap; }
-.syno-proto-bar__links a { display:inline-block; padding-block:8px; }
 /* Схема модели. */
 .case-page--syno-proto .syno-model-figure { grid-column:1 / -1; margin-top:8px; }
 .syno-map { --map-line:color-mix(in srgb, var(--text-primary) 28%, transparent); display:grid; gap:24px; font-family:var(--font-body); }
@@ -344,7 +339,6 @@
   .case-page--syno-proto .case__title { order:0; }
   .case-page--syno-proto .case__intro { order:1; }
   .case-page--syno-proto .case__hero-image { order:2; }
-  .case-page--syno-proto .syno-proto-bar { order:3; padding:16px; }
   .case-page--syno-proto .syno-team-credit { order:4; }
   .case-page--syno-proto .case__proof-strip { order:5; }
   .case-page--syno-proto .case-meta--mobile { order:6; }
@@ -411,7 +405,7 @@
 
     <article class="case">
   <header class="case__hero">
-    <h1 class="case__title">Syno: арт-платформа с нуля</h1>
+    <h1 class="case__title">Syno: <span class="syno-nowrap">арт-платформа</span> с нуля</h1>
     <p class="case__intro">Syno — арт-платформа Кипра, объединяющая события, портфолио художников и заявки на опенколы. В ТЗ эти разделы были описаны по отдельности. Я связала их в единую модель, спроектировала UX/UI всех разделов, собрала кодовый прототип и сопровождала разработку.</p>
     <p class="syno-team-credit">Айдентика и арт-дирекшн — <a href="https://vanyann.com/" target="_blank" rel="noopener">Vanya Annenkov</a>: логотип и визуальный язык легли в основу интерфейса, визуальные решения сверялись с ним.</p>
     <dl class="case__proof-strip" aria-label="Результаты проекта коротко">
@@ -430,7 +424,7 @@
   <section class="case__grid" aria-label="Контекст проекта">
   <div class="case__block"><h2 class="case__block-title">Задача</h2><p class="case__block-body">В ТЗ реестр, опенкол и карта были самостоятельными разделами. Нужно было объединить их общими данными, ролями и правилами.</p></div>
   <div class="case__block"><h2 class="case__block-title">Мой вклад</h2><p class="case__block-body">Сценарии и продуктовые правила, адаптив, система компонентов на основе айдентики, спецификации и дизайн-ревью.</p></div>
-  <div class="case__block"><h2 class="case__block-title">Как проверяла</h2><p class="case__block-body">Экраны проектировала в Figma, поведение проверяла в кодовом прототипе: вход, Save и кабинет работают в нём сквозным сценарием. Основные проблемы находились на стыках экранов, а не в самих экранах. Каждую находку возвращала в макеты и спецификации. Готовую сборку сверяла с макетами на дизайн-ревью и фиксировала расхождения карточками «сейчас / надо».</p>
+  <div class="case__block"><h2 class="case__block-title">Как проверяла</h2><p class="case__block-body">Экраны проектировала в Figma, поведение проверяла в кодовом прототипе: вход, Save и кабинет работают в нём сквозным сценарием. Основные проблемы находились на стыках экранов, а не в самих экранах. Каждую находку возвращала в макеты и спецификации. Готовую сборку сверяла с макетами на дизайн-ревью и фиксировала расхождения карточками «сейчас&nbsp;/&nbsp;надо».</p>
         <p class="case__block-body">Сроки были сжатые, поэтому собственных интервью мы не проводили: с художниками общался заказчик, и я опиралась на его данные. Прототипы тестировали внутри команды.</p></div>
   <div class="case__block"><h2 class="case__block-title">Что вошло</h2><p class="case__block-body">Главная, Art Map, реестр и профиль художника, Stories, опенкол и подача, кабинет My Syno, страницы организаций и событий. Десктоп и телефон, библиотека компонентов.</p></div>
 </section>
@@ -484,7 +478,7 @@
 <p class="case__section-body">На карточке показывается один статус, он рассчитывается по времени Кипра. Срочные «Today» и «Opening tonight» приоритетнее общих. От «Closes in 30 min» я отказалась: такая метка устаревает, пока страница открыта.</p>
 <h3 class="syno-subheading" id="save">Сохранить можно до входа</h3>
 <div class="syno-text-cols"><p class="case__section-body">Save относится к событиям и работам, Follow к художникам и площадкам. Save оформлен иконкой-сердцем на изображении, Follow текстовой кнопкой, как на Artsy, Ocula и ArtRabbit.</p>
-<p class="case__section-body">Если нажать Save без входа, после авторизации пользователь возвращается к тому же объекту, и он уже сохранён. Удалённые объекты не пропадают из избранного без объяснения: карточка остаётся с пометкой «No longer on SYNO».</p></div><figure class="case__figure syno-primary-figure"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" data-still="../assets-syno-case/films/syno-flow-save-still.jpg?v=1" data-poster="../assets-syno-case/films/syno-flow-save-poster.jpg?v=12" aria-label="Save с карточки на главной: вход, сохранённое событие и Favourites"><source src="../assets-syno-case/films/syno-flow-save.mp4?v=12" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Остановить видео"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
+<p class="case__section-body">Если нажать Save без входа, после авторизации пользователь возвращается к тому же объекту, и он уже сохранён. Удалённые объекты не пропадают из избранного без объяснения: карточка остаётся с пометкой «No&nbsp;longer&nbsp;on&nbsp;SYNO».</p></div><figure class="case__figure syno-primary-figure"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" data-still="../assets-syno-case/films/syno-flow-save-still.jpg?v=1" data-poster="../assets-syno-case/films/syno-flow-save-poster.jpg?v=12" aria-label="Save с карточки на главной: вход, сохранённое событие и Favourites"><source src="../assets-syno-case/films/syno-flow-save.mp4?v=12" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Остановить видео"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
 </section>
 
 
@@ -492,7 +486,7 @@
   <section class="case__section" id="organisation">
 <h2 class="case__section-title">2. События: сразу или через проверку</h2>
 <div class="syno-text-cols"><p class="case__section-body">Событие может создать любой пользователь с аккаунтом: художник, организация, зритель. От автора зависит только модерация, поэтому он выбирается до заполнения формы. Площадка указывается отдельно: личное событие в NiMAC не делает автора частью команды NiMAC.</p>
-<p class="case__section-body">При статусе Changes requested автор через Fix and resend возвращается к заполненной форме. Дни недели добавились после ревью страницы события: диапазон дат без них показывал субботнюю студию открытой во вторник. Строка «Shown as …» под датами показывает, как событие будет выглядеть на карточке.</p>
+<p class="case__section-body">При статусе Changes&nbsp;requested автор через Fix&nbsp;and&nbsp;resend возвращается к заполненной форме. Дни недели добавились после ревью страницы события: диапазон дат без них показывал субботнюю студию открытой во вторник. Строка «Shown as …» под датами показывает, как событие будет выглядеть на карточке.</p>
 <p class="case__section-body">Снять событие можно двумя способами: Cancel, если оно не состоится, и Delete, если оно создано по ошибке. Отменённое событие исчезает с карты, но остаётся доступным по ссылке и у тех, кто его сохранил, как на Meetup.</p></div><figure class="case__figure syno-primary-figure" id="case-event-authoring"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted playsinline preload="metadata" style="aspect-ratio:8/5" data-still="../assets-syno-case/films/syno-flow-event-still.jpg?v=1" data-poster="../assets-syno-case/films/syno-flow-event-poster.jpg?v=9" aria-label="Создание события от имени организации: форма, публикация и событие на дашборде"><source src="../assets-syno-case/films/syno-flow-event.mp4?v=9" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Остановить видео"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
 <h3 class="syno-subheading">Кабинет организации и доступ команды</h3>
 <div class="syno-text-cols"><p class="case__section-body">Для кабинета организаций заказчик назвал ориентиром ArtRabbit. Я изучила его сценарии на живом аккаунте, собрала требования и вынесла ключевые вопросы на обсуждение: кто подаёт события, кого проверять, как подтверждать право на страницу. От этих решений зависела нагрузка на модерацию.</p>
@@ -518,7 +512,7 @@
 <h3 class="syno-subheading">Отправленная заявка — отдельная копия</h3>
 <p class="case__section-body">При отправке в заявке фиксируются копии Statement и работ, поэтому дальнейшие правки портфолио не влияют на материалы для жюри. От второго, синхронизируемого Statement я отказалась: после первой правки было бы неясно, какая версия актуальна.</p>
 <h3 class="syno-subheading">Черновик после дедлайна</h3>
-<p class="case__section-body">Если приём закрылся, пока заявка оставалась черновиком, при открытии она показывает, что подать её уже нельзя.</p><figure class="case__figure syno-primary-figure"><div class="case__figure-desktop"><div class="syno-closed-state"><img width="1920" height="1103" src="../assets-syno-case/stills/apply-closed-1280.jpg?v=3" alt="Приём заявок завершён" loading="lazy" class=""></div><div class="syno-closed-state"><img width="1920" height="1103" src="../assets-syno-case/stills/opencall-closed-1280.jpg?v=3" alt="Страница опенкола после дедлайна: Timeline и строка статуса" loading="lazy"></div></div></figure>
+<p class="case__section-body">Если приём закрылся, пока заявка оставалась черновиком, при открытии она показывает, что подать её уже нельзя.</p><figure class="case__figure syno-primary-figure"><div class="case__figure-desktop"><div class="syno-closed-state"><img width="1920" height="1103" src="../assets-syno-case/stills/apply-closed-1280.jpg?v=3" alt="Приём заявок завершён" loading="lazy" class=""></div><div class="syno-closed-state"><img width="1920" height="1103" src="../assets-syno-case/stills/opencall-closed-1280.jpg?v=4" alt="Страница опенкола после дедлайна: сроки со статусом Closed и жюри" loading="lazy"></div></div></figure>
 </section>
 
   <section class="case__section" id="removed">
