@@ -2,6 +2,14 @@
    of a sticky layout. All documents are served from the same local bundle. */
 (() => {
   'use strict';
+  /* Labels this script writes, in the page's language (the English case used to
+     announce «Пауза» and «Остановить видео»). */
+  const ru = (document.documentElement.lang || '').toLowerCase().startsWith('ru');
+  const L = ru
+    ? { replay:'Повторить видео', play:'Воспроизвести видео', stop:'Остановить видео',
+        pause:'Пауза', auto:'Автоскролл', stopAuto:'Остановить автоскролл: ', startAuto:'Включить автоскролл: ' }
+    : { replay:'Replay the video', play:'Play the video', stop:'Pause the video',
+        pause:'Pause', auto:'Auto-scroll', stopAuto:'Stop auto-scroll: ', startAuto:'Start auto-scroll: ' };
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   document.querySelectorAll('[data-syno-video]').forEach(video => {
     let visible=false, userPaused=false;
@@ -20,7 +28,7 @@
     if (toggle) {
       const label=()=>{
         toggle.setAttribute('aria-pressed',String(video.paused));
-        toggle.setAttribute('aria-label',video.ended?'Повторить видео':video.paused?'Воспроизвести видео':'Остановить видео');
+        toggle.setAttribute('aria-label',video.ended?L.replay:video.paused?L.play:L.stop);
       };
       toggle.addEventListener('click',()=>{
         if (video.ended) video.currentTime=0;
@@ -42,8 +50,8 @@
     let playing = !reduced.matches, visible = false, frame = 0, last = 0;
     let direction = 1, hold = performance.now() + initialDelay;
     const label = () => {
-      button.textContent = playing ? 'Пауза' : 'Автоскролл';
-      button.setAttribute('aria-label', (playing ? 'Остановить автоскролл: ' : 'Включить автоскролл: ') + title);
+      button.textContent = playing ? L.pause : L.auto;
+      button.setAttribute('aria-label', (playing ? L.stopAuto : L.startAuto) + title);
       button.setAttribute('aria-pressed', String(playing));
     };
     function tick(now) {

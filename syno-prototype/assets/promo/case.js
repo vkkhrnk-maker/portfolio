@@ -184,7 +184,9 @@
     if (!rail) return;
     rail.innerHTML = [0,2,4,3,5].map(i=>{
       const a=d.artists[i];
-      return artistCard([2,3].includes(i)?{...a,works:[...a.works].reverse()}:a);
+      // Вертикальная работа первой: иначе низкий кадр Mira оставляет пустоту под карточкой рядом с высокими соседями
+      const works=i===0?[a.works[1],a.works[0],...a.works.slice(2)]:[2,3].includes(i)?[...a.works].reverse():a.works;
+      return artistCard({...a,works});
     }).join('');
     const slides = $$('.hero-slide:not(.is-call)');
     const keys = ['vima-hall','mira-cover','vima-installation','open-call-threshold.jpg'];

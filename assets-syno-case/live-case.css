@@ -2,7 +2,7 @@
    чтобы серый интерфейс Syno не сливался со страницей кейса. */
 .case-page--syno-proto :is(.case__hero-image, .case__figure-desktop, .case__slide, .syno-live-prototype) { background:transparent; padding:0; }
 .case-page--syno-proto .case__hero-image { aspect-ratio:auto; overflow:visible; }
-.case-page--syno-proto :is(.syno-native-window, .syno-walkthrough-video) { outline:1px solid rgba(0,0,0,.12); outline-offset:-1px; }
+/* Обводки у кадров нет: у экранов свои линии, поверх них она давала двойной край (31 октября 2026). */
 #case-live-map { scroll-margin-top:90px; }
 .syno-native-demo { width:100%; min-width:0; }
 .syno-film-demo { position:relative; width:100%; min-width:0; }
@@ -32,9 +32,8 @@
 .case-page--syno-proto .syno-native-demo .syno-scroll-controls span { color:var(--text-secondary); }
 .case-page--syno-proto .syno-recording { display:flex; justify-content:flex-start; border:0; padding:0; margin:0; }
 .case-page--syno-proto .syno-recording .btn { align-self:flex-start; }
-/* Present the closed-call state itself, without the legacy account header. */
-.syno-closed-state { width:100%; aspect-ratio:1920/900; overflow:hidden; }
-.syno-closed-state img { display:block; width:100%; height:auto; transform:translateY(-10.7%); }
+.syno-closed-state { width:100%; }
+.syno-closed-state img { display:block; width:100%; height:auto; }
 @media(max-width:640px) {
   .case-page--syno-proto .case__hero-image .syno-native-window { aspect-ratio:375/600; }
   .case-page--syno-proto .syno-state-panel .syno-native-window { aspect-ratio:375/600; }
@@ -42,10 +41,10 @@
   .case-page--syno-proto .case__slide .syno-native-window { height:100%; width:auto; max-width:100%; flex:none; aspect-ratio:375/812; }
 }
 /* Walkthrough loops of real prototype states in place of secondary live frames.
-   Пауза — под кадром справа, а не поверх интерфейса в ролике. */
-.syno-flow-film { padding:0 0 44px; }
+   Пауза — в правом нижнем углу кадра, как на обложке (31 октября 2026). */
+.syno-flow-film { padding:0; }
 .syno-flow-film .syno-walkthrough-video { aspect-ratio:8/5; }
-.syno-flow-film .syno-film-toggle { right:0; bottom:4px; width:32px; height:32px; }
+.syno-flow-film .syno-film-toggle { right:12px; bottom:12px; width:32px; height:32px; }
 .syno-apply-mobile { display:none; }
 @media (max-width:640px) {
   .syno-apply-desktop { display:none; }
@@ -61,19 +60,107 @@
   .syno-editor-mobile { display:block; max-width:280px; margin-inline:auto; }
   .syno-editor-mobile img { display:block; width:100%; height:auto; }
 }
-/* Прокрутка страниц на телефоне — видео в рамке телефона на тёмной подложке, пауза под кадром. */
-.syno-phone-film { position:relative; width:100%; max-width:280px; margin-inline:auto; padding:0 0 44px; }
+/* Прокрутка страниц на телефоне — видео в рамке телефона на тёмной подложке, пауза в углу кадра. */
+.syno-phone-film { position:relative; width:100%; max-width:280px; margin-inline:auto; padding:0; }
 .syno-phone-film .syno-walkthrough-video { aspect-ratio:375/812; object-fit:cover; outline:0; }
 .syno-profile-phone-film .syno-walkthrough-video { aspect-ratio:402/812; object-fit:contain; }
-.syno-phone-film .syno-film-toggle { right:0; bottom:4px; width:32px; height:32px; }
+.syno-phone-film .syno-film-toggle { right:12px; bottom:12px; width:32px; height:32px; }
 @media(max-width:640px) {
-  .case-page--syno-proto .case__slide > .syno-phone-film { height:100%; width:auto; max-width:100%; display:flex; flex-direction:column; align-items:center; }
-  .case-page--syno-proto .case__slide > .syno-phone-film .syno-walkthrough-video { height:100%; width:auto; max-width:100%; }
-  /* One phone walkthrough needs room to read dates, venue and artist details. */
-  .case-page--syno-proto #case-art-map .case__slider .case__slide { height:auto; padding:0; overflow:visible; }
-  .case-page--syno-proto #case-art-map .case__slide > .syno-phone-film { width:min(100%,335px); height:auto; max-width:335px; padding-bottom:42px; }
-  .case-page--syno-proto #case-art-map .syno-phone-film .syno-walkthrough-video { width:100%; height:auto; aspect-ratio:375/812; }
-  .case-page--syno-proto #case-public-profile .case__slider .case__slide { height:auto; padding:0; overflow:visible; }
-  .case-page--syno-proto #case-public-profile .case__slide > .syno-profile-phone-film { width:min(100%,335px); height:auto; max-width:335px; padding-bottom:42px; }
-  .case-page--syno-proto #case-public-profile .syno-profile-phone-film .syno-walkthrough-video { width:100%; height:auto; aspect-ratio:402/812; }
+}
+/* Видео открываются в лайтбокс тем же знаком, что и картинки: курсором-лупой. */
+.has-lightbox :is(.case__figure-desktop, .syno-primary-figure .syno-flow-film, .syno-duo .syno-phone-film) .syno-walkthrough-video { cursor:zoom-in; }
+/* Десктоп и телефон одного экрана стоят рядом на одной плашке (31 октября 2026, заказчица: «зачем они сейчас отдельно?»), на телефоне друг под другом. Лайтбокс открывает деталь. */
+.syno-duo { width:100%; }
+@media(min-width:641px) {
+  /* Как в Hooh: десктоп занимает свою ячейку целиком, телефон стоит на отдельной плашке той же высоты. */
+  .syno-duo { display:grid; grid-template-columns:minmax(0,3fr) minmax(0,1fr); gap:8px; align-items:stretch; }
+  .syno-duo > .case__figure-desktop { min-width:0; margin:0; padding:0; }
+  .syno-duo > .case__slider { display:flex; align-items:center; justify-content:center; margin:0; padding:8px 16px; overflow:visible; background:#1c1c1c; }
+  .case-page--syno-proto .syno-duo .case__slider .case__slide { display:block; flex:0 1 auto; width:100%; max-width:210px; height:auto; padding:0; background:transparent; overflow:visible; }
+  .syno-duo .syno-phone-film { width:100%; max-width:210px; padding:4px; border-radius:30px; margin:0 auto; }
+  .syno-duo .syno-phone-film .syno-walkthrough-video { border-radius:26px; }
+  .syno-duo .syno-phone-film .syno-film-toggle { width:28px; height:28px; right:12px; bottom:12px; }
+  /* Сценарии профиля, редактора и подачи остаются во всю ширину: телефонная версия показывается на телефоне. */
+  .syno-duo--solo { display:block; }
+  .syno-duo--solo > :is(.case__slider, .syno-editor-mobile, .syno-phone-plate) { display:none; }
+}
+/* Телефоны как в других кейсах: рамка 5 px на серой плашке (31 октября 2026). Ролики сняты без статус-бара, поэтому без чёлки. */
+.syno-phone-film {
+  box-sizing:border-box; padding:5px; border-radius:36px;
+  background:linear-gradient(145deg,#4a4a4f 0%,#2a2a2d 22%,#1a1a1c 50%,#313135 78%,#4a4a4f 100%);
+}
+.syno-phone-film .syno-walkthrough-video { display:block; width:100%; border-radius:31px; background:#e5e4e2; }
+.syno-phone-film .syno-film-toggle { right:17px; bottom:17px; }
+.case-page--syno-proto .syno-phone-board { background:var(--bg-card); padding:32px 24px; gap:24px; }
+.case-page--syno-proto #case-mobile-comparison .syno-phone-board { max-width:none; }
+.syno-phone-plate { background:#1c1c1c; padding:20px 12px; }
+.syno-phone-plate > .syno-phone-film { width:min(100%,300px); max-width:300px; margin-inline:auto; }
+@media(max-width:640px) {
+  /* Пауза в ролике подачи не должна закрывать Next. */
+  .syno-apply-mobile .syno-film-toggle { bottom:68px; }
+  .syno-editor-mobile { max-width:none; padding:20px 12px; background:#1c1c1c; }
+  .syno-editor-mobile img {
+    box-sizing:border-box; width:min(100%,300px); margin-inline:auto; padding:5px; border-radius:36px;
+    background:linear-gradient(#fff,#fff) content-box,linear-gradient(145deg,#4a4a4f 0%,#2a2a2d 22%,#1a1a1c 50%,#313135 78%,#4a4a4f 100%) border-box;
+  }
+}
+/* Карточки бенчмаркинга и пересмотра — цвета блока «Результат», чтобы акцентные блоки кейса говорили одним тоном (31 октября 2026). */
+.case-page--syno-proto .case__gap-card { background:var(--outcome-bg); box-shadow:inset 0 -24px 64px 0 var(--outcome-glow); }
+.case-page--syno-proto .case__gap-card__title { color:var(--outcome-ink); }
+/* Абзацы подряд — в две колонки на широком экране: текст занимает ширину ролика под ним, строка остаётся удобной (31 октября 2026). */
+.syno-text-cols { display:contents; }
+@media(min-width:1024px) {
+  .syno-text-cols { display:block; width:100%; columns:2; column-gap:24px; }
+  .syno-text-cols .case__section-body { max-width:none; margin:0 0 16px; break-inside:avoid; }
+}
+/* В сценариях с формой пауза стоит над футером: в углу кадра лежат Save work, Next и Publish. */
+:is(#case-editor, #case-event-authoring) .syno-flow-film .syno-film-toggle, .syno-apply-desktop .syno-film-toggle { bottom:72px; }
+/* Безопасные зоны экрана: ролики сняты без статус-бара, и панели упирались в скругление рамки (31 октября 2026). */
+.syno-phone-film::before, .syno-phone-film::after { content:''; display:block; background:#e5e4e2; }
+.syno-phone-film::before { height:26px; border-radius:31px 31px 0 0; }
+.syno-phone-film::after { height:18px; border-radius:0 0 31px 31px; }
+.syno-phone-film .syno-walkthrough-video { border-radius:0; }
+.syno-phone-film .syno-film-toggle { right:17px; bottom:31px; }
+.syno-editor-mobile img { box-sizing:border-box; padding:26px 0 18px !important; border:5px solid #2a2a2d; background:#e5e4e2 !important; }
+@media(min-width:641px) {
+  .syno-duo .syno-phone-film::before { height:20px; border-radius:26px 26px 0 0; }
+  .syno-duo .syno-phone-film::after { height:14px; border-radius:0 0 26px 26px; }
+  .syno-duo .syno-phone-film .syno-walkthrough-video { border-radius:0; }
+  .syno-duo .syno-phone-film .syno-film-toggle { right:12px; bottom:24px; }
+}
+/* Телефон слева там, где нужен другой ритм рядов. */
+@media(min-width:641px) {
+  .syno-duo--flip { grid-template-columns:minmax(0,1fr) minmax(0,3fr); }
+  .syno-duo--flip > .case__slider { order:-1; }
+}
+/* Закрытый приём: пара экранов вместо одного во всю ширину. */
+.case-page--syno-proto .case__figure-desktop:has(> .syno-closed-state + .syno-closed-state) { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:0; }
+.syno-closed-state { min-width:0; }
+.syno-closed-state img { display:block; width:100%; height:auto; }
+@media(max-width:640px) { .case-page--syno-proto .case__figure-desktop:has(> .syno-closed-state + .syno-closed-state) { grid-template-columns:minmax(0,1fr); } }
+/* На телефоне как в других кейсах: десктоп и мобильная версия листаются слайдами одной высоты с точками (31 октября 2026). */
+@media(min-width:641px) { .syno-slide-desktop { display:none !important; } }
+@media(max-width:640px) {
+  .case-page--syno-proto .syno-duo > .case__figure-desktop,
+  .case-page--syno-proto .syno-apply-desktop,
+  .case-page--syno-proto #case-artists-stories .case__figure-desktop { display:none; }
+  .case-page--syno-proto .case__figure .case__figure-desktop:has(.syno-closed-state) { display:grid; }
+  .case-page--syno-proto .case__figure .case__slider .case__slide { height:56vh; padding:12px; background:#1c1c1c; overflow:hidden; }
+  .case-page--syno-proto .syno-slide-desktop > .syno-film-demo, .syno-slide-window { width:100%; }
+  .syno-slide-window img { display:block; width:100%; height:auto; }
+  .case-page--syno-proto .case__slide > .syno-phone-film { display:flex; flex-direction:column; width:auto; max-width:100%; height:100%; aspect-ratio:43/100; margin:0; }
+  .case-page--syno-proto .case__slide > .syno-phone-film .syno-walkthrough-video { flex:1 1 0; width:100%; height:0; min-height:0; aspect-ratio:auto; object-fit:cover; object-position:top; }
+  .case-page--syno-proto .case__slide > .syno-phone-film::before { height:18px; }
+  .case-page--syno-proto .case__slide > .syno-phone-film::after { height:12px; }
+  .case-page--syno-proto .case__slide > .syno-phone-film .syno-film-toggle { width:28px; height:28px; right:12px; bottom:22px; }
+  .case-page--syno-proto .case__slide > .syno-apply-phone .syno-film-toggle { bottom:64px; }
+  .syno-phone-still { box-sizing:border-box; display:block; height:100%; width:auto; max-width:100%; padding:18px 0 12px; border:5px solid #2a2a2d; border-radius:30px; background:#e5e4e2; object-fit:contain; }
+}
+
+@media(max-width:640px) {
+  .case-page--syno-proto .case__figure .case__slide > img.syno-phone-still { height:100%; width:auto; max-width:none; aspect-ratio:auto; flex:none; border-radius:30px; overflow:hidden; }
+}
+@media(max-width:640px) {
+  /* Точки под плашкой: внутри пары у блока нет зазора фигуры, на который рассчитан общий отступ. */
+  .case-page--syno-proto .syno-duo .case__dots { margin:-6px 0 -10px; }
 }

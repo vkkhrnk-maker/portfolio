@@ -311,7 +311,7 @@
     cursor: pointer;
     transition: background 0.15s;
   }
-  .btn-login:hover { background: #2a6489; }
+  .btn-login:hover { background: #1f6290; }
   /* Вошедшему — кит Navigation/Context Switcher · Context=Personal: лицо 20 (24 на 1920),
      имя, шеврон; Outline. На 375 — без имени (Show label=false). */
   .ctx-switch {
@@ -503,7 +503,7 @@
     background: var(--button-tab-active-fill); color: #fff; cursor: pointer;
     font-family: 'Schengen A', sans-serif; font-size: var(--fs-body-m); line-height: 1;
   }
-  .btn-display:hover { background: #2a6489; }
+  .btn-display:hover { background: #1f6290; }
   .btn-display-sub { font-size: var(--fs-caption-s); line-height: 1.2; color: rgba(255, 255, 255, 0.82); }
 
   /* Футер — кит Footer · Viewer=Logged in (компактный): у экрана без прокрутки он компактный
@@ -2634,7 +2634,7 @@
     gap: 6px;
     transition: background 0.15s;
   }
-  .popup-cta:hover { background: #2a6489; }
+  .popup-cta:hover { background: #1f6290; }
   .popup-cta .material-icons { font-size: 16px !important; }
 
   /* All filters drawer */
@@ -2841,7 +2841,8 @@
     font-size: var(--fs-caption-m);
     font-weight: 600;
   }
-  .btn-primary:hover { background: #2a6489; opacity: 1; }
+  .btn-primary:hover { background: #1f6290; opacity: 1; }
+  .btn-primary:active:not(:disabled) { background: #1f6290; border-color: #1f6290; }   /* Button/Surface/Primary/Pressed, Brand/200 */
   .btn:hover { opacity: 0.85; }
 
   /* === Profile drawer / pd-* CSS выпилен === */
@@ -4274,7 +4275,7 @@
     color: white;
     border-color: var(--button-tab-active-fill);
   }
-  .dp-action-btn.primary:hover { background: #2a6489; }
+  .dp-action-btn.primary:hover { background: #1f6290; }
 
   /* Mini-map sidebar */
   .dp-minimap {
@@ -4885,7 +4886,7 @@
     font-weight: 500;
     cursor: pointer;
   }
-  .type-popover-apply:hover { background: #2a6489; }
+  .type-popover-apply:hover { background: #1f6290; }
 
   /* === Date pill === Date pill отображается в архитектурах с явным events-табом. */
   /* Date-pill visibility: positive-list (default = hidden, показываем только когда events на карте). */
@@ -5080,7 +5081,7 @@
     font-weight: 500;
     cursor: pointer;
   }
-  .artist-popover-apply:hover { background: #2a6489; }
+  .artist-popover-apply:hover { background: #1f6290; }
   /* Mobile bottom-sheet */
   body.mobile-mode .artist-popover {
     position: fixed;
@@ -5276,7 +5277,7 @@
     cursor: pointer;
     transition: background 0.12s, opacity 0.12s;
   }
-  .date-popover-apply:hover:not(:disabled) { background: #2a6489; }
+  .date-popover-apply:hover:not(:disabled) { background: #1f6290; }
   .date-popover-apply:disabled {
     background: #ccc;
     cursor: not-allowed;
@@ -5465,7 +5466,7 @@
     font-weight: 500;
     cursor: pointer;
   }
-  .city-popover-apply:hover { background: #2a6489; }
+  .city-popover-apply:hover { background: #1f6290; }
 
   /* Mobile mode wrapper — phone-mockup на широком viewport (десктопный preview мобилы).
      Fixed 800px height + 390 width = выглядит как телефон по центру десктопа. */
@@ -5856,60 +5857,10 @@
     display: flex !important;
   }
 
-  /* Mobile bottom-sheet: компактные горизонтальные карточки (88px thumb слева + текст) — как в Google Maps */
-  body.mobile-mode .list-card {
-    flex-direction: row;
-    align-items: stretch;
-    min-height: 88px;
-    margin: 0 12px 8px;
-    padding: 0;
-    border: 1px solid var(--stroke-primary);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  body.mobile-mode .card-thumb {
-    width: 88px;
-    height: auto;
-    aspect-ratio: auto;
-    flex-shrink: 0;
-    align-self: stretch;
-    font-size: var(--fs-caption-s);
-  }
-  body.mobile-mode .card-content {
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    flex: 1;
-    min-width: 0;
-  }
-  /* Компактная строка на 375: кадр 88 не держит контрол — действие встаёт в конец строки
-     кит-Button · Small · Outline 32 и видно всегда (на таче наведения нет; «сердце есть и у
-     строки списка», 27 сентября 2026). Сохранено / подписан — голубой Secondary. */
-  body.mobile-mode .list-card > .card-save {
-    position: static; align-self: center; flex: 0 0 auto; margin: 0 12px 0 0;
-    width: 32px; height: 32px; opacity: 1;
-    background: transparent; color: var(--text-primary);
-    border: 1px solid var(--stroke-on-tint); border-radius: var(--radius-8);
-  }
-  body.mobile-mode .list-card > .card-save.card-follow-pill { width: auto; padding: 0 12px; }
-  /* Строка места «район · часы» в узкой строке — подряд через точку, а не по краям:
-     иначе район срезался до «Old…» */
-  body.mobile-mode .card-meta-loc { justify-content: flex-start; flex-wrap: wrap; row-gap: 2px; column-gap: 4px; }
-  body.mobile-mode .card-meta-loc .cm-loc-left { flex: 0 1 auto; }
-  body.mobile-mode .card-meta-loc .cm-hours { flex: 0 1 auto; min-width: 0; }
-  body.mobile-mode .card-meta-loc .cm-hours::before { content: '· '; }
-  body.mobile-mode .list-card > .card-save:hover { background: var(--bg-hover); }
-  body.mobile-mode .list-card > .card-save.is-on,
-  body.mobile-mode .list-card > .card-save.is-on:hover { background: var(--bg-tab-primary); border-color: transparent; }
-  body.mobile-mode .card-type { font-size: var(--fs-caption-s); margin-bottom: 4px; }
-  body.mobile-mode .card-title { font-size: var(--fs-caption-m); margin-bottom: 2px; line-height: 1.3; }
-  body.mobile-mode .card-meta { font-size: var(--fs-caption-s); line-height: 1.4; }
-  body.mobile-mode .card-meta-info { font-size: var(--fs-caption-s); color: #888; }
-  /* На mobile уменьшаем cm-loc-left padding-right чтобы избежать визуальное слипание
-     "X km" + city при узкой ширине карточки (88px thumb + ~260px content). */
-  body.mobile-mode .card-meta-loc { gap: 12px; }
-  body.mobile-mode .card-meta-loc .cm-loc-left { padding-right: 4px; }
+  /* Mobile bottom-sheet: та же карточка Card/ArtMap, что на десктопе: кадр 16:9 сверху, текст под ним, карточки встык (Syno 611:8252, 1387:46658; 31 октября 2026, заказчица: «вообще не как в макете»; заменяет компактную строку с превью 88 по образцу Google Maps). Сердце на кадре, на таче видно всегда. */
+  body.mobile-mode .list-card { gap: var(--space-12); }
+  /* В развёрнутой шторке только ручка, как в макете; счётчик и «tap to view» — у свёрнутой. */
+  body.mobile-mode .list-panel.expanded .list-handle-label { display: none; }
   .list-handle {
     display: none;
     align-items: center;
@@ -6246,12 +6197,12 @@
   html.is-embedded .app { margin: 0; border: 0; height: 100vh; height: 100dvh; }
   html.is-embedded .app::before, html.is-embedded .app::after { display: none; }
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
+<link rel="stylesheet" href="assets/promo/case.css?v=20261031active">
 <link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="arch-gmaps-drawer">
-<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
-<script src="assets/promo/case.js?v=20261028a"></script>
+<script src="assets/promo/case-data.js?v=20261031foot"></script>
+<script src="assets/promo/case.js?v=20261031foot"></script>
 <script>
 /* Встроенная карта (5 октября 2026): registry показывает Art Map своим экраном #artmap — шапка,
    вход и Favourites общие. Во встроенном режиме своих шапки и стендовой полосы нет, рамку держит
@@ -8696,7 +8647,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     if (act === 'Save') {
       if (!on) { showToast('Removed from your Favourites'); return; }
       // «Saved to your Favourites»; вторая строка — только при запланированном письме
-      showToast('Saved to your Favourites', { success: true, sub: reminderLine(EVENT_INFO[key.split(':')[1]], key.split(':')[1]) });
+      showToast('Saved to your Favourites', { success: true });
       return;
     }
     const n = followNames(btn);
@@ -10644,23 +10595,15 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     syncCardOverlay();
   })();
 
-  // Бейджи и действие живут на кадре, но на мобильной компактной карточке кадр всего 88px —
-  // там бейджи возвращаются в текстовый блок, а действие встаёт в конец строки (см. CSS).
+  // Бейджи и действие живут на кадре на всех ширинах: карточка на телефоне та же Card/ArtMap, что на десктопе (31 октября 2026).
   function syncCardOverlay() {
-    const compact = document.body.classList.contains('mobile-mode');
     document.querySelectorAll('.list-card').forEach(card => {
       const badges = card.querySelector('.card-badges');
       const thumb = card.querySelector('.card-thumb');
-      const content = card.querySelector('.card-content');
       const act = card.querySelector('.card-save');
-      if (!thumb || !content) return;
-      if (compact) {
-        if (badges && badges.parentElement !== content) content.insertBefore(badges, content.firstChild);
-        if (act && act.parentElement !== card) card.appendChild(act);
-      } else {
-        if (badges && badges.parentElement !== thumb) thumb.appendChild(badges);
-        if (act && act.parentElement !== thumb) thumb.appendChild(act);
-      }
+      if (!thumb) return;
+      if (badges && badges.parentElement !== thumb) thumb.appendChild(badges);
+      if (act && act.parentElement !== thumb) thumb.appendChild(act);
     });
   }
 

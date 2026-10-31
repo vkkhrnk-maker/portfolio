@@ -339,7 +339,8 @@
   .btn-secondary { background: var(--bg-tab-primary); }
   .btn-secondary:hover { background: var(--bg-tab-hover); }
   .btn-primary { background: var(--button-tab-active-fill); color: #fff; }
-  .btn-primary:hover { filter: brightness(0.94); }
+  .btn-primary:hover { background: #1f6290; }
+  .btn-primary:active:not(:disabled) { background: #1f6290; border-color: #1f6290; }   /* Button/Surface/Primary/Pressed, Brand/200 */
   .btn-ghost:hover { background: rgba(0,0,0,0.04); }
   .btn.is-on { background: var(--bg-tab-primary); border-color: var(--stroke-primary); }
   .btn:active, .chip:active, .btn-login:active, .pg-item:active, .display-btn:active { scale: 0.96; }
@@ -1651,11 +1652,11 @@
      Outline, а не тень: рисуется поверх снимка. */
   .avatar, .ctx-face, .acct-face { outline: 1px solid rgba(0,0,0,0.12); outline-offset: -1px; }
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
+<link rel="stylesheet" href="assets/promo/case.css?v=20261031active">
 </head>
 <body>
-<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
-<script src="assets/promo/case.js?v=20261028a"></script>
+<script src="assets/promo/case-data.js?v=20261031foot"></script>
+<script src="assets/promo/case.js?v=20261031foot"></script>
 <script>if (new URLSearchParams(location.search).get('embed') === '1') document.body.classList.add('is-embedded');</script>
 <script>if (/[?&]qa=mono/.test(location.search)) document.body.classList.add('qa-mono');</script>
 

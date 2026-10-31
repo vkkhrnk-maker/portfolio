@@ -27,6 +27,8 @@ def load(name: str) -> Image.Image:
     # Restore the same one-pixel rule that now appears in the live prototype.
     draw = ImageDraw.Draw(image)
     draw.line((19, 20, 1260, 20), fill=(174, 173, 170), width=1)
+    # The same goes for the bottom rule: older captures end without it.
+    draw.line((19, 780, 1260, 780), fill=(174, 173, 170), width=1)
     return image.resize((WIDTH, HEIGHT), Image.Resampling.LANCZOS).filter(
         ImageFilter.UnsharpMask(radius=1, percent=85, threshold=2)
     )

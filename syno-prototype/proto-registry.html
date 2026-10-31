@@ -686,7 +686,8 @@
     color: #fff;
     border-color: var(--button-tab-active-fill);
   }
-  .btn-primary:hover { background: #2a6489; }
+  .btn-primary:hover { background: #1f6290; }
+  .btn-primary:active:not(:disabled) { background: #1f6290; border-color: #1f6290; }   /* Button/Surface/Primary/Pressed, Brand/200 */
   .btn-secondary {
     background: var(--bg-tab-primary);
     color: var(--text-primary);
@@ -772,6 +773,9 @@
   .input:not(textarea) { height: 40px; padding-block: 0; }
   .input::placeholder { color: var(--input-placeholder); }
   .input:focus { outline: none; border-color: var(--button-tab-active-fill); }
+  /* Ховер поля один: синяя обводка, заливка не меняется (kit.md, 17 сентября 2026). :where держит
+     вес низким, чтобы ошибка и фокус оставались сильнее. */
+  .input:where(:hover:not(:focus, :disabled, [readonly])) { border-color: var(--button-tab-active-fill); }
   /* Поле с неизменяемым префиксом (instagram.com/): рамку несёт обёртка, ввод — голый инпут внутри.
      Кит-долг: у Input нет текстового префикса, только слот иконки. */
   .input.input-prefix { display: flex; align-items: center; gap: 0; padding: 0 0 0 12px; cursor: text; }
@@ -1355,6 +1359,8 @@
   .myp-work-drawer-form .field-grid { gap: 14px 12px; }
   /* На 375 пары формы работы остаются в строку — Title | Year, Dimensions | Duration (Syno 4990:72318) */
   body .modal-overlay .myp-work-drawer-form .field-grid { grid-template-columns: 1fr 1fr; }
+  /* Год — четыре цифры, название до 80 знаков: Year 110 на всех ступенях, как в ките (ПРАВКА 42). */
+  body .modal-overlay .field-grid.aw-title-year { grid-template-columns: minmax(0, 1fr) 110px; }
   .myp-work-drawer-form textarea.input { min-height: 88px; }
   .myp-empty-collage {
     width: 80px; height: 80px; display: block; overflow: hidden;
@@ -2095,7 +2101,7 @@
     font-size: var(--fs-body-m); line-height: 1; letter-spacing: 0; text-transform: none;
     transition: background .15s;
   }
-  .btn-xl:hover { background: #2a6489; }
+  .btn-xl:hover { background: #1f6290; }
   .btn-xl-sub { font-size: var(--fs-caption-s); line-height: 1.2; color: rgba(255,255,255,0.82); }
   .btn-xl.btn-xl-secondary { background: var(--bg-tab-primary); color: var(--text-primary); }
   .btn-xl.btn-xl-secondary:hover { background: var(--bg-tab-hover); }
@@ -3477,10 +3483,11 @@
   #screen-home .appl-cards:not(.is-pair) .appl-card::before,
   #screen-home .appl-cards:not(.is-pair) .appl-card::after,
   #screen-home .appl-cards:not(.is-pair) .appl-card-foot::before,
-  #screen-home .appl-cards:not(.is-pair) .appl-card-foot::after,
-  #screen-home .myp-footer::before, #screen-home .myp-footer::after {
+  #screen-home .appl-cards:not(.is-pair) .appl-card-foot::after {
     top: -1px;
   }
+  /* Линию футера держит верхняя граница .sf-meta на его первом пикселе, хвосты встают на неё. */
+  #screen-home .myp-footer::before, #screen-home .myp-footer::after { top: 0; }
   #screen-home .appl-cards:not(.is-pair) .appl-card-foot,
   #screen-home .ep-onboard-banner,
   #screen-home .myp-footer { position: relative; }
@@ -4837,7 +4844,7 @@
   .ap-actions .btn { background: #fff; border-color: #fff; color: var(--text-primary); }
   .ap-actions .btn:hover { background: #eee; }
   .ap-actions .btn-primary { background: var(--button-tab-active-fill); border-color: var(--button-tab-active-fill); color: #fff; }
-  .ap-actions .btn-primary:hover { background: #2a6489; }
+  .ap-actions .btn-primary:hover { background: #1f6290; }
   .ap-cover-actions { position: absolute; top: 12px; right: 12px; z-index: 2; display: flex; gap: 8px; }
   /* White on the cover per the On Accent rule — the cover is a coloured surface,
      so the button takes the theme rather than a variant of its own. */
@@ -4978,7 +4985,7 @@
     cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 4px;
     transition: background .15s;
   }
-  .pf-jump-follow:hover { background: #2a6489; }
+  .pf-jump-follow:hover { background: #1f6290; }
   .pf-jump-follow.is-following { background: #fff; color: var(--button-tab-active-fill); }
   .pf-jump-follow.is-following:hover { background: var(--bg-tab-primary); }
   .pf-jump-follow .material-icons { font-size: 16px; }
@@ -7908,6 +7915,12 @@
   }
   /* Kit Checklist Task Row (Syno 1209:16781): padding 12/8/12/12, gap 8, no forced
      height — 12 above and below the tallest child is the whole rhythm. */
+  /* Линия под Works идёт во всю ширину: следующая полоса заезжает на неё на 1 px и закрывала левую часть (31 октября 2026). */
+  #screen-myprofile #myp-works { z-index: 1; }
+  /* Счётчик кадров слева: справа сверху стоит меню работы. */
+  #screen-myprofile .myp-work-count { left: 12px; right: auto; }
+  /* Нижняя граница строки чеклиста: под ней идёт полоса Details, линию держит сама строка (31 октября 2026). */
+  #myp-visibility .myp-tasks { border-bottom: 1px solid var(--stroke-primary); z-index: 1; }   /* полоса Details заезжает на 1 px и закрывала линию */
   .myp-task { display: flex; align-items: center; gap: 8px; padding: 12px 8px 12px 12px; border-right: 1px solid var(--stroke-primary); border-radius: 0; cursor: pointer; transition: background .15s; }
   .myp-task:last-child { border-right: 0; }
   .myp-task:hover { background: var(--bg-hover); }
@@ -8152,7 +8165,7 @@
   .myp-work-t { font-size: var(--fs-heading-h5); line-height: 1.2; margin-top: 12px; }
   .myp-work-m { font-size: var(--fs-caption-m); color: var(--text-secondary); margin-top: 2px; }
   .myp-work-actions {
-    position: absolute; top: 8px; right: 8px; z-index: 2;
+    position: absolute; top: 24px; right: 25px; z-index: 2; /* 12 от углов кадра: поле ячейки 12 + обводка */
     display: flex; align-items: center;
     opacity: 1; pointer-events: auto;
     transition: opacity 150ms cubic-bezier(.2,0,0,1);
@@ -8160,15 +8173,15 @@
   .myp-work:hover .myp-work-actions,
   .myp-work:focus-within .myp-work-actions { opacity: 1; pointer-events: auto; }
   .myp-work-menu-btn {
-    width: 40px; height: 40px; padding: 0; border-radius: 50%;
+    width: 32px; height: 32px; padding: 0; border-radius: var(--radius-8);
     display: inline-flex; align-items: center; justify-content: center;
-    border: 1px solid var(--stroke-primary); background: rgba(255,255,255,.94);
+    border: 0; background: var(--bg-primary);
     color: var(--text-primary); cursor: pointer;
     transition: background 150ms cubic-bezier(.2,0,0,1), border-color 150ms cubic-bezier(.2,0,0,1), transform 100ms cubic-bezier(.2,0,0,1);
   }
-  .myp-work-menu-btn:hover { background: #fff; border-color: var(--text-secondary); }
+  .myp-work-menu-btn:hover { background: var(--bg-hover); }
   .myp-work-menu-btn:active { transform: scale(.96); }
-  .myp-work-menu-btn .material-icons { font-size: 20px; }
+  .myp-work-menu-btn .material-icons { font-size: 16px; }
   .myp-work-options { position: absolute; top: 52px; right: 8px; z-index: 4; }
   .myp-addwork-tile { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 100%; padding: 12px; border: 0; border-radius: 0; background: var(--bg-primary); color: var(--text-secondary); font-size: var(--fs-caption-m); cursor: pointer; transition: background .15s, color .15s; }
   .myp-addwork-tile:hover { background: var(--bg-hover); color: var(--text-primary); }
@@ -8865,8 +8878,9 @@
   #screen-applications .appl-card-title { text-wrap: balance; font-size: var(--fs-heading-h5); line-height: 1.2; }
   /* Кикер — моно капсом, как дата документа (Caption/S/Uppercase · Mono) */
   #screen-applications .appl-card-ed { font-family: 'Schengen Mono', monospace; letter-spacing: 0; }
-  /* Текущая заявка — белая карточка в половину содержимого; правый край держит своя линия */
-  body:not(.mobile-mode) #screen-applications #apps-live-sec .appl-card { border-right: 1px solid var(--stroke-primary); }
+  /* Текущая заявка — белая карточка в половину содержимого; правый край держит своя линия.
+     Линия снаружи ячейки: рамка съедала пиксель, и карточка не стыковалась с парой Past ниже. */
+  body:not(.mobile-mode) #screen-applications #apps-live-sec .appl-card { box-shadow: 1px 0 0 var(--stroke-primary); }
   #screen-applications .appl-card-foot {
     padding: 12px 12px 0;
     border-top: 1px solid var(--stroke-primary);
@@ -10425,7 +10439,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   .syno-location-marker img {width:100%;height:100%;object-fit:cover;}
   .syno-location-map .leaflet-control {box-shadow:none;}
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
+<link rel="stylesheet" href="assets/promo/case.css?v=20261031active">
 <link rel="stylesheet" href="assets/promo/media-viewer.css?v=9f791e40f124">
 </head>
 <body class="demo-empty-portfolio">
@@ -11766,7 +11780,6 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
               </div>
               <div class="appl-card-foot">
                 <span class="appl-card-closes">Shortlist announced 31 October 2026</span>
-                <span class="btn btn-sm" aria-hidden="true">Check out the details</span>
               </div>
             </article>
             <!-- Черновик заявки (23 сентября 2026, Draft 11010:24605): дата подачи не пишется — её нет,
@@ -11822,7 +11835,6 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
               </div>
               <div class="appl-card-foot">
                 <span class="appl-card-closes">Closed 30 June 2025</span>
-                <span class="btn btn-sm" aria-hidden="true">Check out the details</span>
               </div>
             </article>
 
@@ -11842,7 +11854,6 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
               </div>
               <div class="appl-card-foot">
                 <span class="appl-card-closes">Closed 30 June 2024</span>
-                <span class="btn btn-sm" aria-hidden="true">Check out the details</span>
               </div>
             </article>
           </div>
@@ -13682,8 +13693,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
   <div class="gs-scroll" id="gs-scroll"></div>
 </div>
 
-<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
-<script src="assets/promo/case.js?v=20261028a"></script>
+<script src="assets/promo/case-data.js?v=20261031foot"></script>
+<script src="assets/promo/case.js?v=20261031foot"></script>
 <script>
   /* ============================================================
      AI_ENABLED — единственный выключатель AI-функционала.
@@ -15715,10 +15726,13 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const stripNew = w => { const c = Object.assign({}, w); delete c.isNew; return c; };
     const worksNow = mypDraft.works.map(stripNew);
     const worksWas = (mypWorks || []).map(stripNew);
+    // Имя и фамилия выводятся из name при открытии формы: сами по себе они не правка, порядок ключей тоже.
+    const mainKey = m => { const r = Object.assign({}, m); delete r.firstName; delete r.lastName; return Object.keys(r).sort().map(k => [k, r[k]]); };
+    const worksChanged = !same(worksNow, worksWas);
     return {
-      fields: !same(mypDraft.main, mypMain) || !same(mypDraft.formats, mypFormats) || mypDraft.bio !== mypBio,
-      worksAdded: mypDraft.works.filter(w => w.isNew).length,
-      worksChanged: !same(worksNow, worksWas)
+      fields: !same(mainKey(mypDraft.main), mainKey(mypMain)) || !same(mypDraft.formats, mypFormats) || mypDraft.bio !== mypBio,
+      worksAdded: worksChanged ? mypDraft.works.filter(w => w.isNew).length : 0,
+      worksChanged
     };
   }
   // Форма работы с несохранённым — незакрытое дело. Уход любым путём, кроме Cancel
@@ -16131,7 +16145,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       '<span class="material-icons">upload</span>' +
       '<div class="dnd-copy-slot">' +
         '<div class="dnd-default-copy"><div class="dnd-text"><span class="up-pointer"><strong>Drop media files</strong> <span class="auth-forgot">or click to browse</span></span><span class="up-touch"><strong>Add photos or video</strong><span class="up-sub">Tap to choose from library or camera</span></span></div>' +
-        '<div class="dnd-hint">Images up to 20 MB · video up to 500 MB<br>JPG, PNG, WebP or MP4 &nbsp;·&nbsp; min 1200px &nbsp;·&nbsp; up to 10 files</div></div>' +
+        '<div class="dnd-hint">Images up to 20 MB · video up to 500 MB<br>JPG, PNG, WebP or MP4 &nbsp;·&nbsp; longest side ≥ 1200 px &nbsp;·&nbsp; up to 10 files</div></div>' +
         '<span class="dnd-upl-status" aria-hidden="true"></span>' +
       '</div>' +
       '</div>' +
@@ -16172,7 +16186,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       workAiSlotHtml(d) +
       // Ряды повторяют то, куда поле попадает на публичной странице: Title+Year уходят в шапку,
       // Materials/Dimensions/Medium собирают этикетку под ней
-      '<div class="field-grid"><div class="field' + (aiF.title ? ' ai-filled' : '') + '" id="myp-w-title-field"><label class="field-label">Title</label><input class="input" id="myp-w-title" maxlength="80" placeholder="Work title" value="' + mypEsc(d.title) + '"><div class="field-error">A title is required</div></div>' +
+      '<div class="field-grid aw-title-year"><div class="field' + (aiF.title ? ' ai-filled' : '') + '" id="myp-w-title-field"><label class="field-label">Title</label><input class="input" id="myp-w-title" maxlength="80" placeholder="Work title" value="' + mypEsc(d.title) + '"><div class="field-error">A title is required</div></div>' +
       '<div class="field' + (aiF.year ? ' ai-filled' : '') + '"><label class="field-label">Year</label><input class="input" id="myp-w-year" inputmode="numeric" maxlength="4" placeholder="e.g. 2024" value="' + mypEsc(d.year) + '"><div class="field-error">Four digits, 1900–' + CUR_YEAR + '</div></div></div>' +
       // Materials — необязательное, подсказка идёт за Medium (ревью 41); Dimensions — подсказка тоже за Medium (ревью 40)
       '<div class="field' + (aiF.medium ? ' ai-filled' : '') + '"><label class="field-label">Medium</label>' +
@@ -16431,7 +16445,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
           '</div>' +
           '<div class="myp-work-t">' + mypEsc(w.title) + '</div><div class="myp-work-m">' + mypEsc([w.year, w.medium].filter(Boolean).join(' · ')) + '</div></div>';
       }).join('');
-      body.innerHTML = '<div class="myp-works-grid">' + cards + '<button class="myp-addwork-tile" data-edit-section="work"><span class="material-icons">add</span>Add another</button></div>';
+      body.innerHTML = '<div class="myp-works-grid">' + cards + '</div>';   // работы добавляются через Edit profile, плитки в сетке нет (Syno, 31 октября 2026)
     } else {
       body.innerHTML = mypEmptyWorkHtml();
     }
@@ -17944,7 +17958,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
           '<span class="material-icons">upload</span>' +
           '<div class="dnd-copy-slot">' +
             '<div class="dnd-default-copy"><div class="dnd-text"><span class="up-pointer"><strong>Drop media files</strong> <span class="auth-forgot">or click to browse</span></span><span class="up-touch"><strong>Add photos or video</strong><span class="up-sub">Tap to choose from library or camera</span></span></div>' +
-            '<div class="dnd-hint">Images up to 20 MB · video up to 500 MB<br>JPG, PNG, WebP or MP4 &nbsp;·&nbsp; min 1200px &nbsp;·&nbsp; up to 10 files</div></div>' +
+            '<div class="dnd-hint">Images up to 20 MB · video up to 500 MB<br>JPG, PNG, WebP or MP4 &nbsp;·&nbsp; longest side ≥ 1200 px &nbsp;·&nbsp; up to 10 files</div></div>' +
             '<span class="dnd-upl-status" aria-hidden="true"></span>' +
           '</div>' +
         '</div>' +
@@ -17952,7 +17966,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         '<div class="dnd-upload-list" hidden><div class="dnd-previews"></div></div>' +
       '</div>' +
       '<div class="aw-ai-row is-muted" id="aw-ai-banner"><div class="aw-ai-text"><div class="aw-ai-copy"><b>AI pre-fill</b><span>Add an image or a video link — AI reads it and pre-fills title, medium, year &amp; description</span></div></div><button class="ai-btn" id="aw-ai-suggest" disabled>Pre-fill</button></div>' +
-      '<div class="field-grid">' +
+      '<div class="field-grid aw-title-year">' +
         // название работы ≤ 80 знаков — то же правило, что в дравере профиля (ПРАВКА 25)
         '<div class="field"><label class="field-label">Title</label><input class="input" maxlength="80" placeholder="Work title"></div>' +
         '<div class="field"><label class="field-label">Year</label><input class="input aw-year" type="text" inputmode="numeric" maxlength="4" data-validate="year" placeholder="e.g. 2024"><div class="field-error"></div></div>' +
@@ -21637,6 +21651,9 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       applyCoverCrop(cover, item.coverCrop);
     }
     rail.insertBefore(card, rail.firstChild);
+    // Браузер удерживает прежнюю первую карточку на месте, и новая уезжала за левый край.
+    rail.style.overflowAnchor = 'none';
+    rail.scrollLeft = 0;
     syncCollection();
   }
   function favRail(kind) {
@@ -27436,9 +27453,22 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const mkCover = e.target.closest('.dnd-thumb-makecover');
     if (mkCover) {
       const tile = mkCover.closest('.dnd-thumb'); const prev = tile.closest('.dnd-previews');
+      const tiles = Array.from(prev.querySelectorAll('.dnd-thumb'));
+      const before = new Map(tiles.map(function (t) { return [t, t.getBoundingClientRect()]; }));
       prev.insertBefore(tile, prev.firstElementChild);
       refreshDndCover(prev);
       if (typeof updateAwPreview === 'function') updateAwPreview();
+      // Снимок перелетает на первое место, остальные сдвигаются (ПРАВКА 42); при reduced motion — сразу
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        tiles.forEach(function (t) {
+          const a = before.get(t), b = t.getBoundingClientRect();
+          const dx = a.left - b.left, dy = a.top - b.top;
+          if (!dx && !dy) return;
+          const anim = t.animate([{ transform: 'translate(' + dx + 'px, ' + dy + 'px)' }, { transform: 'none' }],
+            { duration: 400, easing: 'cubic-bezier(0.22, 0.8, 0.24, 1)' });
+          if (t === tile) { t.style.zIndex = '2'; anim.onfinish = anim.oncancel = function () { t.style.zIndex = ''; }; }
+        });
+      }
       return;
     }
     const dndAdd = e.target.closest('.dnd-zone');

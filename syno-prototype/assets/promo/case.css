@@ -236,6 +236,20 @@ html.promo-case .app:not(:has(> .band))::before {
     linear-gradient(var(--stroke-primary),var(--stroke-primary)) right bottom / 7px 1px no-repeat;
   z-index:121; pointer-events:none;
 }
+/* A fixed action bar stands on the bottom edge of the window, so the frame runs
+   to that edge too: its closing line lands on the bar's own border. Left 20px
+   short, the line crossed the bar through its buttons at the end of the scroll
+   and doubled the bar's top border on a short step. */
+html.promo-case body:has(.screen.active > .apply-footer) .app {
+  margin-bottom:0;
+  min-height:calc(100dvh - var(--frame-y));
+}
+html.promo-case .apply-footer { z-index:130; }
+html.promo-case body:not(.mobile-mode) .apply-footer { left:var(--frame-x,20px); right:var(--frame-x,20px); }
+/* The filler closes a short cabinet page with a rule of its own; when only a
+   few px are left over, that rule stood right above the footer's. */
+html.promo-case #screen-applications .cab-filler { display:none; }
+html.promo-case body:has(#screen-applications.active) .app { min-height:0; height:auto; }
 html.promo-case .site-header:not(.band) { border-bottom:0; }
 html.promo-case .site-header:not(.band)::after { bottom:0; }
 html.promo-case #page-toolbar { border-bottom:0; top:calc(var(--promo-header-top) + var(--promo-header-height)); }
@@ -262,7 +276,7 @@ html.promo-case #screen-registry .registry-results::after { display:none; }
 /* Art Map uses the shared count/sort + filters row from Syno 2550:131163. */
 html.promo-case body.promo-map .card-meta-info { font-family:'Schengen A',sans-serif; }
 html.promo-case body.promo-map .list-panel .card-title { -webkit-line-clamp:1; }
-html.promo-case body.promo-map:not(.view-list) .list-panel .card-thumb { min-height:180px; border-radius:8px; }
+@media(min-width:1024px) { html.promo-case body.promo-map:not(.view-list) .list-panel .card-thumb { min-height:180px; border-radius:8px; } }
 html.promo-case body.promo-map .cm-hours::before { content:none; }
 html.promo-case body.promo-map .leaflet-tile-pane { filter:saturate(.55) brightness(1.03); }
 @media(max-width:767px) {
@@ -581,3 +595,43 @@ html.promo-case #screen-myprofile .pf-row-value { font-family:'Schengen A',sans-
   /* Страница события · 375: в рельсе только карта, а на телефоне она скрыта — пустой полосы нет. */
   html.promo-case body #screen-eventpage .orgp-side { display:none; }
 }
+
+/* Загруженные снимки работы в демо стоят по сетке в три колонки. */
+html.promo-case .dnd-upload-list .dnd-previews { grid-template-columns:repeat(3,minmax(0,1fr)); }
+
+/* Страница владельца: тот же скрим и белый текст, что на публичной, кнопки белые без обводки, как в макете. */
+@media(min-width:1024px) {
+  html.promo-case #screen-myprofile .myp-cover::after { content:''; position:absolute; inset:0; pointer-events:none; background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.59) 8%,rgba(0,0,0,.52) 16%,rgba(0,0,0,.42) 24%,rgba(0,0,0,.31) 32%,rgba(0,0,0,.2) 40%,rgba(0,0,0,.1) 48%,rgba(0,0,0,.03) 56%,transparent 64%); }
+  html.promo-case #screen-myprofile .myp-hero-inner { position:relative; z-index:1; }
+  html.promo-case #screen-myprofile .myp-cover-actions { z-index:2; }
+  html.promo-case #screen-myprofile .myp-cover :is(.myp-name, .myp-tagline) { color:#fff; }
+  html.promo-case #screen-myprofile .myp-cover-actions :is(.btn, .myp-icon-btn) { background:#fff; border-color:transparent; }
+}
+/* Экран отправленной заявки держит рамку до низа окна, линию футера снизу даёт рамка. */
+html.promo-case .app:has(#apply-submitted:not([hidden])) { display:flex; flex-direction:column; min-height:calc(100dvh - 40px); }
+html.promo-case .app:has(#apply-submitted:not([hidden])) .screen-host { flex:1; display:flex; flex-direction:column; }
+html.promo-case .app:has(#apply-submitted:not([hidden])) #screen-apply.active { flex:1; display:flex; flex-direction:column; }
+html.promo-case .app:has(#apply-submitted:not([hidden])) #apply-submitted { flex:1; padding-bottom:0; }
+html.promo-case .app:has(#apply-submitted:not([hidden])) .subm-footer .sf-meta { border-bottom:0; }
+/* Отправленная заявка на 375: плашка по центру, картинка с отступом от шапки, как в макете. */
+@media(max-width:1023px) {
+  html.promo-case .apply-submitted .inline-notice { text-align:center; }
+  html.promo-case .apply-submitted .subm-art { margin-top:12px; }
+}
+
+/* Футер демо-экранов на 375: базовые правила стоят ниже мобильных и перебивали их — марка слева, © справа, ссылки по центру, как Footer · Mobile и футер главной. */
+@media(max-width:1023px) {
+html.promo-case body .promo-footer .footer-bottom { align-items:stretch; gap:20px; padding:20px 12px; }
+html.promo-case body .promo-footer .footer-meta { justify-content:space-between; }
+html.promo-case body .promo-footer .fb-copy { gap:12px; }
+html.promo-case body .promo-footer .fb-links { justify-content:center; gap:8px 24px; }
+html.promo-case body .promo-footer .footer-nav li { line-height:1.3; }
+}
+html.promo-case body.mobile-mode .promo-footer .footer-bottom { align-items:stretch; gap:20px; padding:20px 12px; }
+html.promo-case body.mobile-mode .promo-footer .footer-meta { justify-content:space-between; }
+html.promo-case body.mobile-mode .promo-footer .fb-copy { gap:12px; }
+html.promo-case body.mobile-mode .promo-footer .fb-links { justify-content:center; gap:8px 24px; }
+html.promo-case body.mobile-mode .promo-footer .footer-nav li { line-height:1.3; }
+/* Карточка карты на телефоне: название до двух строк, кадр без растяжения, как Card/ArtMap. */
+@media(max-width:1023px) { html.promo-case body.promo-map .list-panel .card-title { -webkit-line-clamp:2; } }
+html.promo-case body.mobile-mode.promo-map .list-panel .card-title { -webkit-line-clamp:2; }

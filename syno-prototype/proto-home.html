@@ -241,7 +241,7 @@
   .hdr-nav a::after, .btn-login::after { content: ''; position: absolute; inset: -4px 0; }
   .hdr-nav a:hover, .hdr-nav a:focus-visible { color: var(--text-primary); box-shadow: inset 0 -1px 0 var(--text-primary); } /* ховер = полоска, как у текущего раздела; так собрано (16 сен 2026) */
   .btn-login { position: relative; height: 32px; padding: 0 16px; border: none; border-radius: var(--radius-6); background: var(--button-tab-active-fill); color: #fff; font-size: var(--fs-caption-m); }
-  .btn-login:hover { filter: brightness(0.94); }
+  .btn-login:hover, .btn-login:active { background: #1f6290; }   /* Button/Surface/Primary/Hover и Pressed */
 
   /* ============ Мобильная шапка и меню ============
      На 375 в шапке — лупа · (чип аккаунта у вошедшего) · бургер, бургер
@@ -981,7 +981,8 @@
      Small · Outline 32 в конце строки по центру, не круг Media / Toggle; сохранено — Secondary с
      залитым сердцем; на десктопе приходит по наведению тем же движением, что сердце в Favourites,
      на таче видно всегда. Сам Card/Media · Row действий не несёт — кнопку ставит обёртка. */
-  .coming-save { width: 32px; height: 32px; padding: 0; justify-content: center;
+  /* Сердце в строке круглое, как на кадрах (31 октября 2026, заказчица); в макете пока радиус 8. */
+  .coming-save { width: 32px; height: 32px; padding: 0; justify-content: center; border-radius: 50%;
     background: transparent; border-color: rgba(0,0,0,0.2); color: var(--text-primary);
     transition: opacity 150ms cubic-bezier(.2,0,0,1), transform 150ms cubic-bezier(.2,0,0,1), filter 150ms cubic-bezier(.2,0,0,1), background-color 150ms ease-out, border-color 150ms ease-out; }
   .coming-save:hover { background: rgba(0,0,0,0.1); border-color: rgba(0,0,0,0.3); }
@@ -1191,7 +1192,8 @@
   .gate-actions { grid-area: actions; margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .gate-actions .btn { height: 40px; font-size: var(--fs-body-m); }
   .btn-primary { background: var(--button-tab-active-fill); color: #fff; }
-  .btn-primary:hover { filter: brightness(0.94); }
+  .btn-primary:hover { background: #1f6290; }
+  .btn-primary:active:not(:disabled) { background: #1f6290; border-color: #1f6290; }   /* Button/Surface/Primary/Pressed, Brand/200 */
 
   /* ============ Responsive ============
      Ступени по трём макетам (16 сентября 2026): до 1023 — 375, 1024–1919 — 1280,
@@ -1584,7 +1586,7 @@
   .ctx-avatar { outline: 1px solid rgba(0,0,0,0.12); outline-offset: -1px; }
 
 </style>
-<link rel="stylesheet" href="assets/promo/case.css?v=dd9f731275b9">
+<link rel="stylesheet" href="assets/promo/case.css?v=20261031active">
 </head>
 <body>
 
@@ -1711,7 +1713,7 @@
             <div class="hero-scrim"></div>
             <div class="hero-copy">
               <h2 class="hero-title">Voices in the Walls</h2>
-              <p class="hero-meta">Old Powerhouse, Nicosia · 20:00 · Free entry</p>
+              <p class="hero-meta">Old Powerhouse, Nicosia · 20:00 · Free&nbsp;entry</p>
             <div class="hero-badges">
                 <span class="badge badge-outline">Performance</span>
                 <span class="badge badge-primary">Opening tonight</span>
@@ -2272,7 +2274,7 @@
               <input type="email" placeholder="Email address" aria-label="Email address">
               <button data-subscribe aria-label="Subscribe"><span class="material-icons">arrow_forward</span></button>
             </div>
-            <label class="nl-consent"><input type="checkbox"> <span>By subscribing, you agree to receive our newsletter. You can unsubscribe at any time. See our <a href="proto-pages.html?page=privacy">Privacy policy</a></span></label>
+            <label class="nl-consent"><input type="checkbox"> <span>By subscribing, you agree to receive our newsletter. You can unsubscribe at any time. See our <a href="proto-pages.html?page=privacy">Privacy&nbsp;policy</a></span></label>
           </div>
         </div>
         <div class="footer-bottom">
@@ -2309,8 +2311,8 @@
 <div class="sheet-scrim" id="ctx-scrim" hidden></div>
 <div class="app-toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="assets/promo/case-data.js?v=ee69d67f27"></script>
-<script src="assets/promo/case.js?v=20261028a"></script>
+<script src="assets/promo/case-data.js?v=20261031foot"></script>
+<script src="assets/promo/case.js?v=20261031foot"></script>
 <script src="open-call-motion-legacy.js"></script>
 <script src="open-call-paint.js?v=20260914-core"></script>
 <script src="open-call-echo.js?v=20260919-span"></script>
@@ -2725,7 +2727,12 @@ function resumeAfterAuth() {
   m = /^save:title:(.+)$/.exec(intent);
   if (m) {
     const btn = [...document.querySelectorAll('.coming-save')].find(b => b.dataset.save === m[1]);
-    if (btn) setSaved(btn, true, true);
+    if (btn) {
+      setSaved(btn, true, true);
+      // Человек возвращается к карточке, на которой нажал Save, а не на верх страницы.
+      const reveal = () => btn.scrollIntoView({ block: 'center', behavior: 'instant' });
+      if (document.readyState === 'complete') reveal(); else addEventListener('load', reveal, { once: true });
+    }
   }
   // Намерение одноразовое: перезагрузка не должна повторять действие. Вход —
   // наоборот, остаётся в адресе, иначе обновление страницы разлогинивало бы.
@@ -2988,7 +2995,7 @@ function setSaved(btn, on, announce) {
   btn.querySelector('.material-icons').textContent = on ? 'favorite' : 'favorite_border';
   btn.setAttribute('aria-label', on ? 'Saved' : 'Save'); btn.setAttribute('aria-pressed', on ? 'true' : 'false');
   if (announce) showToast(on ? 'Saved to your Favourites' : 'Removed from your Favourites',
-    { type: 'success', desc: on ? reminderLine(btn) : '' });
+    { type: 'success' });
 }
 // Один источник может стоять на главной дважды (отобранный колла и реестр) — состояние общее
 function setFollow(name, on, announce) {
@@ -3077,8 +3084,10 @@ gateEl.addEventListener('click', (e) => {
 });
 document.getElementById('gate-continue').addEventListener('click', () => {
   if (!gateState) return;
+  // Режим показа кейса едет через вход, иначе на экране входа появляется служебная панель.
+  const caseMode = new URL(location.href).searchParams.get('case');
   location.href = 'proto-registry.html?next=' + encodeURIComponent(gateNext()) +
-    '&do=' + encodeURIComponent(gateState.doWhat) + '#auth:login';
+    '&do=' + encodeURIComponent(gateState.doWhat) + (caseMode ? '&case=' + encodeURIComponent(caseMode) : '') + '#auth:login';
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGate(); });
 initRail('places-rail');
