@@ -26,13 +26,13 @@
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
   <title>Syno: an art platform from scratch · Case study · Victoria Kukharenko</title>
-  <meta name="description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Mockups in Figma, behavior in a code prototype.">
+  <meta name="description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Much of it designed directly in a code prototype, with Figma mockups for development.">
   <meta name="theme-color" content="#3378a9">
   <meta name="color-scheme" content="light dark">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Syno: an art platform from scratch · Case study · Victoria Kukharenko">
-  <meta property="og:description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Mockups in Figma, behavior in a code prototype.">
+  <meta property="og:description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Much of it designed directly in a code prototype, with Figma mockups for development.">
   <meta property="og:url" content="https://victoriakukharenko.com/syno.html">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="ru_RU">
@@ -42,7 +42,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Syno: an art platform from scratch · Case study · Victoria Kukharenko">
-  <meta name="twitter:description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Mockups in Figma, behavior in a code prototype.">
+  <meta name="twitter:description" content="Syno, Cyprus’s art platform designed from scratch: one account for every role, one portfolio for the profile and the application, event publishing that depends on the author. Much of it designed directly in a code prototype, with Figma mockups for development.">
   <meta name="twitter:image" content="https://victoriakukharenko.com/assets/case-syno-og.jpg">
 
   <link rel="canonical" href="https://victoriakukharenko.com/syno.html">
@@ -427,8 +427,8 @@
 
   <section class="case__grid" aria-label="Project context">
   <div class="case__block"><h2 class="case__block-title">Task</h2><p class="case__block-body">Design an art platform from scratch: an artist registry, an open call and an event map, connected by shared data, roles and rules.</p></div>
-  <div class="case__block"><h2 class="case__block-title">What I Did</h2><p class="case__block-body">Flows and product rules, responsive layouts, a component system built on the identity, specs and design reviews.</p></div>
-  <div class="case__block"><h2 class="case__block-title">How I Tested</h2><p class="case__block-body">I designed the screens in Figma and tested behavior in the code prototype, where sign-in, Save and the dashboard work as one continuous flow. The main problems sat at the joins between screens. I checked the finished build against the mockups in design reviews.</p>
+  <div class="case__block"><h2 class="case__block-title">What I Did</h2><p class="case__block-body">Flows and product rules, responsive layouts, a design system, specs and design reviews.</p></div>
+  <div class="case__block"><h2 class="case__block-title">How I Worked</h2><p class="case__block-body">I designed much of it directly in the code prototype. The whole platform works there, so problems between screens show up right away. I built the mockups for development in Figma and checked the finished build against them in design reviews.</p>
         <p class="case__block-body">The timeline was tight, so I analyzed the client’s data from conversations with artists, and we tested the prototypes within the team.</p></div>
   <div class="case__block"><h2 class="case__block-title">Scope</h2><p class="case__block-body">Home, the Art Map, the registry and artist profile, Stories, the open call and application, the My Syno dashboard, organization and event pages. Desktop and phone.</p></div>
 </section>
@@ -451,9 +451,9 @@
 <section class="case__section" id="research">
 <h2 class="case__section-title">Benchmarking</h2>
 <div class="case__gap-grid">
-  <div class="case__gap-card"><h3 class="case__gap-card__title">CaFÉ: choosing instead of uploading</h3><p class="case__gap-card__desc">CaFÉ builds an application from works already uploaded. So Syno pulls the works and the Statement from the portfolio.</p></div>
-  <div class="case__gap-card"><h3 class="case__gap-card__title">ArtConnect: a threshold, not a scale</h3><p class="case__gap-card__desc">On ArtConnect a profile becomes visible once the required minimum is filled in. In Syno the publishing checklist does that job.</p></div>
-  <div class="case__gap-card"><h3 class="case__gap-card__title">Behance: likes against curation</h3><p class="case__gap-card__desc">Counters promote the popular, not the strong. So in Syno only the page owner sees the follower count.</p></div>
+  <div class="case__gap-card"><h3 class="case__gap-card__title">CaFÉ: applying without re-uploading</h3><p class="case__gap-card__desc">For every open call an artist gathers the same things: works and a Statement. On CaFÉ you upload works once and only pick them when applying. Applications in Syno rest on the portfolio too: the works and Statement come from it.</p></div>
+  <div class="case__gap-card"><h3 class="case__gap-card__title">Open calls: a draft instead of Save</h3><p class="case__gap-card__desc">Across 10 open call pages, no organizer offers saving. Only aggregators like ArtConnect do. Syno runs its own open call, so the draft application is what brings an artist back.</p></div>
+  <div class="case__gap-card"><h3 class="case__gap-card__title">Artsy and Ocula: follower counts</h3><p class="case__gap-card__desc">Artsy shows follower counts to everyone. Ocula and ArtRabbit show none. Cyprus’s art scene is small, so 3 next to 40 would read as a ranking of artists. In Syno only the people who manage a page see the count.</p></div>
 </div>
 </section>
 
@@ -478,7 +478,7 @@
 <figure class="case__figure syno-main-figure" id="case-event-page" data-main-screens="event"><div class="syno-duo syno-duo--flip"><div class="case__figure-desktop"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted loop playsinline preload="metadata" style="aspect-ratio:8/5" data-poster="assets-syno-case/films/syno-scroll-event-1280-poster.jpg?v=7" aria-label="Event page: header, visit details, artists"><source src="assets-syno-case/films/syno-scroll-event-1280.mp4?v=7" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div><div class="case__slider" role="group" aria-label="Event page on a phone"><div class="case__slide"><div class="syno-film-demo syno-phone-film"><video class="syno-walkthrough-video" data-syno-video muted loop playsinline preload="metadata" data-poster="assets-syno-case/films/syno-scroll-event-375-poster.jpg?v=7" aria-label="Event page on a phone"><source src="assets-syno-case/films/syno-scroll-event-375.mp4?v=7" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div>
 <div class="case__slide syno-slide-desktop"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted loop playsinline preload="metadata" style="aspect-ratio:8/5" data-poster="assets-syno-case/films/syno-scroll-event-1280-poster.jpg?v=7" aria-label="Event page: header, visit details, artists"><source src="assets-syno-case/films/syno-scroll-event-1280.mp4?v=7" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></div>
 </div></div></figure>
-<h3 class="syno-subheading" id="save">Saving works before signing in</h3>
+<h3 class="syno-subheading" id="save">Save survives sign-in</h3>
 <p class="case__section-body">If someone taps Save without signing in, they return to the same item after sign-in, and it is already saved. Deleted items do not disappear from favourites without explanation: the card stays, marked “No&nbsp;longer&nbsp;on&nbsp;SYNO”.</p><figure class="case__figure syno-primary-figure"><div class="syno-film-demo syno-flow-film"><video class="syno-walkthrough-video" data-syno-video muted loop playsinline preload="metadata" style="aspect-ratio:8/5" data-still="assets-syno-case/films/syno-flow-save-still.jpg?v=3" data-poster="assets-syno-case/films/syno-flow-save-poster.jpg?v=14" aria-label="Save from a card on the home page: sign-up, the saved event and Favourites"><source src="assets-syno-case/films/syno-flow-save.mp4?v=14" type="video/mp4"></video><button class="syno-film-toggle" type="button" data-syno-video-toggle aria-pressed="false" aria-label="Pause the video"><svg class="syno-film-toggle__pause" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg><svg class="syno-film-toggle__play" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l10.5-6.5z"/></svg></button></div></figure>
 </section>
 
