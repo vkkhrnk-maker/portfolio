@@ -8,6 +8,12 @@
 .syno-film-demo { position:relative; width:100%; min-width:0; }
 .syno-film-toggle { position:absolute; right:12px; bottom:12px; display:grid; place-items:center; width:40px; height:40px; padding:0; border:0; border-radius:50%; background:rgba(255,255,255,.86); color:#1c1c1c; cursor:pointer; opacity:.72; transition:opacity .2s; }
 .syno-film-toggle:hover, .syno-film-toggle:focus-visible { opacity:1; }
+/* Где есть мышь, кнопка появляется по наведению. На паузе она остаётся, иначе стоп выглядел бы поломкой. */
+@media (hover:hover) {
+  .syno-film-toggle { opacity:0; }
+  :hover > .syno-film-toggle, .syno-film-toggle[aria-pressed="true"] { opacity:.72; }
+  .syno-film-toggle:hover, .syno-film-toggle:focus-visible { opacity:1; }
+}
 .syno-film-toggle:focus-visible { outline:2px solid #1c1c1c; outline-offset:2px; }
 .syno-film-toggle__play, .syno-film-toggle[aria-pressed="true"] .syno-film-toggle__pause { display:none; }
 .syno-film-toggle[aria-pressed="true"] .syno-film-toggle__play { display:block; }

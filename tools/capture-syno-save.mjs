@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Снимает путь Save настоящими кликами в одной сессии браузера: главная -> гейт ->
-// вход -> возврат к той же карточке -> меню -> Favourites. Снимки 2x и координаты
+// регистрация -> имя -> возврат к той же карточке -> меню -> Favourites нового аккаунта. Снимки 2x и координаты
 // целей для курсора кладёт в assets-syno-case/films/source-save.
 // Нужен сервер на BASE (по умолчанию http://localhost:8791, корень Portfolio).
 import { createRequire } from 'node:module';
@@ -10,6 +10,7 @@ const puppeteer = require(process.env.PUPPETEER_CORE || '/Users/vikitoria/.npm/_
 const BASE = process.env.BASE || 'http://localhost:8791';
 const OUT = new URL('../assets-syno-case/films/source-save/', import.meta.url).pathname;
 const TITLE = 'Limassol Art Walk 2026';
+const NAME = ['Anna', 'Ioannou'];
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new', args: ['--hide-scrollbars'] });
 const page = await browser.newPage();
@@ -43,10 +44,26 @@ const c = await rect('continue', () => { const r = document.getElementById('gate
 await page.mouse.move(c.x, c.y, { steps: 6 }); await sleep(500); await shot('gate-hover');
 await Promise.all([page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }), page.mouse.click(c.x, c.y)]);
 await sleep(1000);
-await shot('login');
-const g = await rect('google', () => { const e = [...document.querySelectorAll('[data-signin="returning"]')].find(b => b.offsetParent); const r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
-await page.mouse.move(g.x, g.y, { steps: 6 }); await sleep(500); await shot('login-hover');
-await Promise.all([page.waitForNavigation({ waitUntil: 'load', timeout: 30000 }), page.mouse.click(g.x, g.y)]);
+// Гейт обещает бесплатный аккаунт, поэтому Continue открывает Create your account: человек новый
+// и видит в кабинете только то, что сохранил. Вход демо-персоны показывал чужие события и избранное.
+await shot('signup');
+const g = await rect('google', () => { const e = [...document.querySelectorAll('[data-signin]:not([data-signin="returning"])')].find(b => b.offsetParent); const r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+await page.mouse.move(g.x, g.y, { steps: 6 }); await sleep(500); await shot('signup-hover');
+await page.mouse.click(g.x, g.y); await sleep(1000);
+await page.addStyleTag({ content: 'input { caret-color: transparent; }' });
+await shot('welcome');
+const field = await rect('name', () => { const r = document.getElementById('onb-firstname').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+await page.mouse.move(field.x, field.y, { steps: 6 }); await sleep(300); await page.mouse.click(field.x, field.y); await sleep(250);
+await shot('name-00');
+let typed = 0;
+for (const part of NAME) {
+  for (const ch of part) { await page.keyboard.type(ch); await sleep(40); await shot('name-' + String(++typed).padStart(2, '0')); }
+  await page.keyboard.press('Tab'); await sleep(120);
+}
+coords.typed = typed;
+const w = await rect('welcome', () => { const e = [...document.querySelectorAll('#screen-welcome .btn')].find(b => b.offsetParent && /Continue/.test(b.textContent)); const r = e.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+await page.mouse.move(w.x, w.y, { steps: 6 }); await sleep(500); await shot('welcome-hover');
+await Promise.all([page.waitForNavigation({ waitUntil: 'load', timeout: 30000 }), page.mouse.click(w.x, w.y)]);
 const rest = { x: h.x - 70, y: h.y + 14 }; coords.rest = rest;
 await stopHero(); await page.mouse.move(rest.x, rest.y); await sleep(500);
 console.log('toast', await page.evaluate(() => document.getElementById('toast')?.textContent.trim().slice(0, 90)));

@@ -6,9 +6,9 @@
      announce «Пауза» and «Остановить видео»). */
   const ru = (document.documentElement.lang || '').toLowerCase().startsWith('ru');
   const L = ru
-    ? { replay:'Повторить видео', play:'Воспроизвести видео', stop:'Остановить видео',
+    ? { play:'Воспроизвести видео', stop:'Остановить видео',
         pause:'Пауза', auto:'Автоскролл', stopAuto:'Остановить автоскролл: ', startAuto:'Включить автоскролл: ' }
-    : { replay:'Replay the video', play:'Play the video', stop:'Pause the video',
+    : { play:'Play the video', stop:'Pause the video',
         pause:'Pause', auto:'Auto-scroll', stopAuto:'Stop auto-scroll: ', startAuto:'Start auto-scroll: ' };
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   /* Постеры ниже первого экрана ждут в data-poster: их около тридцати, и они
@@ -37,31 +37,25 @@
     video.muted=true;
     function sync() {
       if (!visible || document.hidden || reduced.matches) video.pause();
-      else if (!userPaused && !video.ended) video.play().catch(error=>{
+      else if (!userPaused) video.play().catch(error=>{
         // Экономия заряда запрещает автозапуск, не включая уменьшение движения.
         if (error.name==='NotAllowedError' && video.dataset.still) video.poster=video.dataset.still;
       });
     }
-    video.addEventListener('pause',()=>{
-      if (visible && !document.hidden && !reduced.matches && !video.ended) userPaused=true;
-    });
-    video.addEventListener('play',()=>{ userPaused=false; });
-    video.addEventListener('ended',()=>{ userPaused=true; });
     // The cover plays without native controls; one quiet toggle keeps it stoppable.
     const toggle=video.parentElement.querySelector('[data-syno-video-toggle]');
     if (toggle) {
       const label=()=>{
         toggle.setAttribute('aria-pressed',String(video.paused));
-        toggle.setAttribute('aria-label',video.ended?L.replay:video.paused?L.play:L.stop);
+        toggle.setAttribute('aria-label',video.paused?L.play:L.stop);
       };
       toggle.addEventListener('click',()=>{
-        if (video.ended) video.currentTime=0;
+        userPaused=!video.paused;
         if (video.paused) video.play().catch(()=>{});
         else video.pause();
       });
       video.addEventListener('play',label);
       video.addEventListener('pause',label);
-      video.addEventListener('ended',label);
       label();
     }
     new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.15}).observe(video);

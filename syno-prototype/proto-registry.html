@@ -13769,6 +13769,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       label: 'My SYNO (overview)',
       header: 'private',
       nav: null,
+      defaultState: function () { return newAccountRead() ? 'new' : 'artist'; },
       // The same page for every kind of account — blocks appear with content.
       states: [
         { id: 'artist', label: 'Artist (+ a place)' },
@@ -13840,7 +13841,10 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
         const collection = document.getElementById('home-collection-sec');
         show(collection, true);
         if (collection) {
-          collection.dataset.fresh = fresh ? 'true' : 'false';
+          // Первая сохранённая вещь приводит табы, и в кабинете только она.
+          const kept = fresh && newAccountRead() && favStoreHasItems();
+          if (kept) dropDemoFavourites();
+          collection.dataset.fresh = fresh && !kept ? 'true' : 'false';
           // Таб Favourites: свежее сохранённое — его тип, иначе последний выбранный (6 октября 2026)
           if (fresh) collection.dataset.coltab = 'events';
           else if (typeof favInitialTab === 'function') { collection.dataset.coltab = favInitialTab(); favTabWrite(collection.dataset.coltab); }
@@ -15621,6 +15625,26 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     accountName = mypMain.name;
     accountEmail = 'mira.soleni@example.com';
   }
+  // Новый аккаунт хранится в браузере, как Save и Follow: вход между файлами несёт адрес,
+  // а имя и то, что аккаунт пуст, адрес не несёт. Без этого после регистрации кабинет
+  // открывался демо-персоной с её событиями и избранным (1 ноября 2026).
+  const NEW_ACCOUNT_KEY = 'syno-new-account-v1';
+  const DEMO_EMAIL = accountEmail;
+  function newAccountRead() { try { return JSON.parse(localStorage.getItem(NEW_ACCOUNT_KEY) || 'null'); } catch (e) { return null; } }
+  function newAccountWrite() {
+    try { localStorage.setItem(NEW_ACCOUNT_KEY, JSON.stringify({ name: accountName, email: accountEmail, av: avGradClass(accountEmail) })); } catch (e) { /* без хранилища живёт до перезагрузки */ }
+    document.documentElement.classList.add('new-account');
+  }
+  function newAccountClear() {
+    try { localStorage.removeItem(NEW_ACCOUNT_KEY); } catch (e) {}
+    document.documentElement.classList.remove('new-account');
+  }
+  const storedNewAccount = newAccountRead();
+  if (storedNewAccount) {
+    accountName = storedNewAccount.name || accountName;
+    accountEmail = storedNewAccount.email || accountEmail;
+    document.documentElement.classList.add('new-account');
+  }
   function mypDrawerRail(active) {
     const items = [
       { key: 'main', label: 'Main info', section: 'main' },
@@ -17226,12 +17250,18 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     opts = opts || {};
     signedIn = true;
     const wfsi = document.querySelector('#wf-signedin b'); if (wfsi) wfsi.textContent = 'on';
+    if (opts.returning) newAccountClear();
     // Новый аккаунт сначала проходит Welcome: имя обязательно (23 сентября 2026),
     // и гейт Save / Follow его не пропускает — иначе имя неоткуда взять.
     // Возврат по next и отложенное действие выполняются после Continue.
     if (!opts.returning && !opts.named) {
       pendingWelcomeOpts = opts;
       accountName = '';
+      // Новый аккаунт начинается пустым: ни фото, ни чужого избранного.
+      mypAvatar = { img: null, zoom: 130, bx: 50, by: 50 };
+      try { localStorage.removeItem(SYNO_FAV_KEY); } catch (e) {}
+      newAccountWrite();
+      renderAccountFaces();
       ['onb-firstname', 'onb-lastname'].forEach(function (id) { const i = document.getElementById(id); if (i) { i.value = ''; const f = i.closest('.field'); if (f) f.classList.remove('has-error'); } });
       showScreen('welcome', 'setup', { pruneSetup: true });
       return;
@@ -17240,6 +17270,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     // намерением: Welcome и кабинет между намерением и результатом не встают.
     // Общий вход возвращает на исходную страницу только существующий аккаунт.
     // Новый аккаунт после Welcome открывает My Syno; next с действием сохраняется.
+    if (opts.named) newAccountWrite();
     if (registerArtist) { consumeRegisterIntent(); showScreen('myprofile', null, {pruneSetup:true}); return; }
     if (authReturn && (opts.returning || authReturn.doWhat)) {
       // Вход дописывается до хеша: у Stories адрес живёт в нём (#/story/…), и «?signed=1»
@@ -21568,7 +21599,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     if (e.key === 'Escape' && gateIsOpen()) gateClosed();
   }, true);
   document.addEventListener('click', function (e) {
-    if (e.target.closest && e.target.closest('[data-gate-auth]')) { gateOpener = null; closeModal(); showScreen('auth', 'login'); return; }
+    // Гейт обещает бесплатный аккаунт, поэтому гость видит Create your account (1 ноября 2026).
+    if (e.target.closest && e.target.closest('[data-gate-auth]')) { gateOpener = null; closeModal(); showScreen('auth', 'signup'); return; }
     const consent = e.target.closest && e.target.closest('.sf-consent');
     if (consent) consent.classList.toggle('checked');
   });
@@ -21618,13 +21650,35 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     } finally { favStoreMute = false; }
     if (currentScreen === 'eventpage' && typeof renderEventPage === 'function') renderEventPage();
   }
+  function favStoreHasItems() {
+    return Object.values(favStoreRead()).some(function (kind) { return Object.values(kind).some(function (it) { return it.on; }); });
+  }
+  // Демо-полка принадлежит демо-персоне: у нового аккаунта остаётся только сохранённое им.
+  // Новая карточка клонируется из соседней, поэтому образец каждого типа остаётся в запасе.
+  const favSpare = {};
+  function dropDemoFavourites() {
+    applyFavStore();
+    [['events', '.saved-card[data-savedkind="event"]'], ['works', '.saved-card[data-savedkind="work"]'], ['places', '.saved-card[data-followkind="place"]']].forEach(function (pair) {
+      const rail = favRail(pair[0]);
+      const card = rail && rail.querySelector(pair[1] + ':not(.is-gone)');
+      if (card && !favSpare[pair[0]]) favSpare[pair[0]] = card.cloneNode(true);
+    });
+    const own = new Set();
+    Object.values(favStoreRead()).forEach(function (kind) { Object.keys(kind).forEach(function (title) { if (kind[title].on) own.add(title); }); });
+    document.querySelectorAll('#home-collection-sec .saved-card').forEach(function (card) {
+      const title = card.querySelector('.saved-card-title');
+      if (!title || !own.has(title.textContent.trim())) card.remove();
+    });
+    savedArtists.forEach(function (item, name) { if (!own.has(name)) savedArtists.delete(name); });
+    renderSavedArtists();
+  }
   // Сохранили в другой вкладке или во встроенной карте — кабинет подтягивается сам
   window.addEventListener('storage', function (e) { if (e.key === SYNO_FAV_KEY) applyFavStore(); });
   // Событие в Favourites › Events — клон живой карточки: кадр, название, «когда · место», город
   function favAddEvent(item) {
     const rail = favRail('events');
     if (!rail || favCard('events', item.title)) return;
-    const tpl = rail.querySelector('.saved-card[data-savedkind="event"]:not(.is-gone)');
+    const tpl = rail.querySelector('.saved-card[data-savedkind="event"]:not(.is-gone)') || favSpare.events;
     if (!tpl) return;
     const card = tpl.cloneNode(true);
     card.classList.remove('is-removing');
@@ -21672,7 +21726,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const rail = favRail(kind);
     if (!rail || favCard(kind, item.title)) return;
     // Шаблон — живая карточка: у ушедшей («Hidden for now», «No longer on Syno») заглушка вместо кадра.
-    const tpl = rail.querySelector(kind === 'works' ? '.saved-card[data-savedkind="work"]:not(.is-gone)' : '.saved-card[data-followkind="place"]:not(.is-gone)');
+    const tpl = rail.querySelector(kind === 'works' ? '.saved-card[data-savedkind="work"]:not(.is-gone)' : '.saved-card[data-followkind="place"]:not(.is-gone)') || favSpare[kind];
     let card;
     if (tpl) {
       card = tpl.cloneNode(true);
@@ -24966,7 +25020,12 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     const note = document.getElementById('home-col-note');
     if (note) note.textContent = COL_NOTES[tab];
     const scroll = pane.querySelector('.home-col-scroll');
-    if (scroll) scroll.hidden = items.length === 0;
+    if (scroll) {
+      scroll.hidden = items.length === 0;
+      // Полоса только там, где есть что листать: под одной карточкой она обещала бы продолжение.
+      const shelf = pane.querySelector('.home-col-rail');
+      requestAnimationFrame(function () { if (shelf && shelf.clientWidth) scroll.hidden = shelf.scrollWidth <= shelf.clientWidth; });
+    }
     // Пустота называет тип, который пуст, и дверь у каждого типа своя.
     const empty = document.getElementById('home-col-empty');
     if (empty) {
@@ -26615,6 +26674,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       return;
     }
     if (e.target.closest('[data-logout-all-confirm]')) {
+      newAccountClear();
       closeModal();
       signedIn = false;
       showScreen('auth', 'login');
@@ -26671,6 +26731,7 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
     if (lo) { confirmLogout(lo); return; }
     if (e.target.closest('[data-logout-cancel]')) { closeLogoutPop(); return; }
     if (e.target.closest('[data-logout-confirm]')) {
+      newAccountClear();
       closeLogoutPop();
       signedIn = false; accountType = null; published = false; hasArtistProfile = false;
       onboardActive = false; hubOnboard = false; pendingApply = false; pendingSave = null;
@@ -26924,6 +26985,8 @@ body.mobile-mode #screen-orgdashboard .org-page-task-row .btn { justify-content:
       if (msg) msg.textContent = fn ? '' : 'Add your first name';
       if (!fn) { document.getElementById('onb-firstname').focus(); return; }
       accountName = (fn + ' ' + ln).trim();
+      // Кнопка Google адрес не спрашивает: почта демо-персоны у нового человека не остаётся.
+      if (accountEmail === DEMO_EMAIL) accountEmail = accountName.toLowerCase().replace(/\s+/g, '.') + '@example.com';
       renderAccountFaces();
       // Дальше — туда, куда человек шёл до регистрации (гейт Save / Follow, Apply,
       // новая организация), иначе в My Syno.

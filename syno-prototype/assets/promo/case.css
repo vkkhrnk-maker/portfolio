@@ -131,7 +131,7 @@ html.promo-case #screen-profile .ap-cover:not(.tone-light)::after {
 html.promo-case #screen-profile .ap-name { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
 html.promo-case body:has(#screen-profile.active) .site-header .ctx-switch { display:inline-flex; }
 html.promo-case body:has(#screen-profile.active) .site-header .btn-login { display:none; }
-html.promo-case .ctx-avatar { background-image:url('images/mira-soleni-portrait.png'); background-size:cover; background-position:center; }
+html.promo-case:not(.new-account) .ctx-avatar { background-image:url('images/mira-soleni-portrait.png'); background-size:cover; background-position:center; }
 html.promo-case #screen-profile .pf-details-grid { padding-inline:12px 3px; }
 html.promo-case #screen-profile .pf-details-rows .pf-row-value { font-family:'Schengen A',sans-serif; }
 html.promo-case #screen-profile .pf-row { padding:12px 0; }

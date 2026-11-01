@@ -2361,7 +2361,13 @@ function synoLink(href) {
 document.addEventListener('click', (e) => {
   // Log out — выход на месте: иначе сшивка адресов добавила бы ?auth=in и вход остался бы
   const out = e.target.closest('[data-logout]');
-  if (out) { e.preventDefault(); setAuth(false, true); return; }
+  if (out) {
+    e.preventDefault();
+    try { localStorage.removeItem('syno-new-account-v1'); } catch (err) {}
+    document.documentElement.classList.remove('new-account');
+    setAuth(false, true);
+    return;
+  }
   const jump = e.target.closest('[data-href]');
   if (jump) { e.preventDefault(); location.href = synoLink(jump.dataset.href); return; }
   const link = e.target.closest('a[href^="proto-"]');
@@ -2743,8 +2749,20 @@ function resumeAfterAuth() {
   history.replaceState(null, '', url);
 }
 
+/* Новый аккаунт: имя, почта и пустое лицо приходят из registry (syno-new-account-v1),
+   иначе после регистрации в шапке стояла бы демо-персона (1 ноября 2026). */
+function applyNewAccount() {
+  let account = null;
+  try { account = JSON.parse(localStorage.getItem('syno-new-account-v1') || 'null'); } catch (e) {}
+  document.documentElement.classList.toggle('new-account', !!account);
+  if (!account) return;
+  document.querySelectorAll('.ctx-name, .ctx-id-text b').forEach(el => { el.textContent = account.name; });
+  document.querySelectorAll('.ctx-mail').forEach(el => { el.textContent = account.email; });
+  document.querySelectorAll('.ctx-avatar').forEach(el => { el.className = el.className.replace(/\bav-blank av-g\d\b/, account.av); });
+}
 function setAuth(inn, push) {
   document.body.classList.toggle('auth-in', inn);
+  if (inn) applyNewAccount();
   if (inn && typeof applyFavStoreHome === 'function') setTimeout(applyFavStoreHome, 0);
   authToggle.querySelector('b').textContent = inn ? 'signed in' : 'guest';
   if (!inn) closeCtxMenu();
@@ -3087,7 +3105,7 @@ document.getElementById('gate-continue').addEventListener('click', () => {
   // Режим показа кейса едет через вход, иначе на экране входа появляется служебная панель.
   const caseMode = new URL(location.href).searchParams.get('case');
   location.href = 'proto-registry.html?next=' + encodeURIComponent(gateNext()) +
-    '&do=' + encodeURIComponent(gateState.doWhat) + (caseMode ? '&case=' + encodeURIComponent(caseMode) : '') + '#auth:login';
+    '&do=' + encodeURIComponent(gateState.doWhat) + (caseMode ? '&case=' + encodeURIComponent(caseMode) : '') + '#auth:signup';
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGate(); });
 initRail('places-rail');

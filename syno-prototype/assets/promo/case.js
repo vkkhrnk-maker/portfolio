@@ -402,6 +402,8 @@
   const setText=(n,v)=>{if(n&&n.textContent!==v)n.textContent=v;};
   const setSrc=(img,v)=>{if(img&&v&&img.getAttribute('src')!==v)img.setAttribute('src',v);};
   function fixCabinet(){
+    // Новый аккаунт пуст: ни портрета Mira, ни её избранного.
+    try { if (localStorage.getItem('syno-new-account-v1')) return; } catch (e) {}
     // У Mira Soleni есть портрет — лицо аккаунта в шапке и кабинете не заглушка-кисть
     try { if (typeof mypAvatar !== 'undefined' && mypAvatar && !mypAvatar.img) { mypAvatar.img = image('portrait'); if (typeof renderAccountFaces === 'function') renderAccountFaces(); } } catch (e) {}
     const home=$('#screen-home');

@@ -8909,7 +8909,7 @@ if (SYNO_EMBED) window.addEventListener('click', function (e) {
     // на деплое clean URLs отдают «/proto-v2» без .html, и registry такой next не принял бы.
     const next = 'proto-v2.html' + window.location.search;
     const url = 'proto-registry.html?next=' + encodeURIComponent(next) +
-      '&do=' + encodeURIComponent(gateIntent(p.btn, p.act)) + '#auth:login';
+      '&do=' + encodeURIComponent(gateIntent(p.btn, p.act)) + '#auth:signup';
     synoGo(url);
   }
 
