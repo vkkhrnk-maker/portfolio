@@ -37,10 +37,32 @@ jobs:
             ru/*.html | sort -u
 
       # Syno stays visible as a non-clickable "Coming soon" card on the
-      # homepage. Keep its working file in the repository, but do not publish
-      # the unfinished direct URL until the case and its assets are ready.
-      # Anything held back this way goes in both languages, or /ru/ would
-      # serve a page the English site does not have.
+      # homepage, and the case itself goes out unlisted: only someone given
+      # the link can open it. It is published under an unguessable name
+      # instead of /syno.html, carries noindex, is not in the sitemap, and
+      # the language switch and redirects point at the unlisted pair. Its
+      # folders ship with it, otherwise the page loads without its films.
+      - name: Publish the Syno case under an unlisted address
+        env:
+          SYNO_SLUG: syno-pmtl2mpv
+        run: |
+          mv syno.html "$SYNO_SLUG.html"
+          mv ru/syno.html "ru/$SYNO_SLUG.html"
+          for f in "$SYNO_SLUG.html" "ru/$SYNO_SLUG.html"; do
+            sed -i -E \
+              -e '/<link rel="(canonical|alternate)"/d' \
+              -e '/<meta property="og:url"/d' \
+              -e "s#([\"'])/(ru/)?syno\\.html#\\1/\\2$SYNO_SLUG.html#g" \
+              -e 's#<head>#<head>\n  <meta name="robots" content="noindex, nofollow">#' \
+              "$f"
+            grep -q 'name="robots"' "$f"
+            if grep -n 'syno\.html' "$f"; then echo "Old address left in $f"; exit 1; fi
+            echo "Unlisted: $f"
+          done
+          for f in $(find syno-prototype -name '*.html'); do
+            sed -i 's#<head>#<head>\n  <meta name="robots" content="noindex, nofollow">#' "$f"
+          done
+
       # The Shell Ivory estimate is a client document rather than a case: it
       # carries prices, nothing links to it, and it was only ever reachable by
       # typing the URL. It has no place in the published site.
@@ -49,8 +71,6 @@ jobs:
       - name: Exclude drafts and rejected portrait animations from the public artifact
         run: |
           rm -f \
-            syno.html \
-            ru/syno.html \
             syno-cover-proto.html \
             hooh-trust-proto.html \
             hooh-color-proto.html \
@@ -65,7 +85,6 @@ jobs:
             portrait-wave-v15.css \
             assets/viktoria-profile-wave-body-mask-v15.svg \
             assets/viktoria-profile-wave-body-mask-v16.svg
-          rm -rf assets-syno-case assets-syno-figma syno-prototype
 
       # Sources and working files stay in the repository but not on the site:
       # the CV is built from cv.md / cv.ru.md by tools/, cv-print.html is only

@@ -72,7 +72,7 @@ html.promo-case .site-header { top:var(--promo-header-top); }
 /* Registry screens use the same framed header and full-width rules as Band. */
 html.promo-case .site-header:not(.band),
 html.promo-case #page-toolbar {
-  box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary);
+  box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary),inset 0 1px var(--stroke-primary),inset 0 -1px var(--stroke-primary);
 }
 /* Paint the frame's top inset while sticky content passes behind the header. */
 html.promo-case .site-header:not(.band) {
@@ -94,7 +94,7 @@ html.promo-case #screen-profile .oc-section::after {
 }
 html.promo-case .ap-cover-sticky { top:60px; }
 html.promo-case { --card-padding:12px; }
-html.promo-case .app:not(:has(> .band)) { border:0; box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary); }
+html.promo-case .app:not(:has(> .band)) { border:0; box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary),inset 0 1px var(--stroke-primary),inset 0 -1px var(--stroke-primary); }
 html.promo-case .pf-jumpnav { display:none; }
 html.promo-case #screen-profile .oc-section {
   grid-template-columns:379px minmax(0,1fr); padding:12px 0 12px 12px;
@@ -189,7 +189,7 @@ html.promo-case .band-media .band-in { height:auto; aspect-ratio:1228/272; overf
 html.promo-case .band-media img { width:151.14%; max-width:none; height:100%; aspect-ratio:1856/272; object-fit:cover; }
 html.promo-case .band#contact:not(:target) { display:none; }
 html.promo-case .promo-footer { width:calc(100% + 12px); margin-inline:-6px; padding-inline:6px; border-top:1px solid var(--stroke-primary); }
-html.promo-case .promo-footer > .band-in { padding:20px 0 0; box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary); }
+html.promo-case .promo-footer > .band-in { padding:20px 0 0; box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary),inset 0 1px var(--stroke-primary),inset 0 -1px var(--stroke-primary); }
 html.promo-case .promo-footer .footer-cols { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); padding-bottom:20px; }
 html.promo-case .promo-footer .footer-cols > * { min-width:0; padding:0 12px; }
 html.promo-case .promo-footer .footer-nav h4 { font:400 14px/1.2 'Schengen A',sans-serif; text-transform:uppercase; margin:0 0 12px; }
@@ -226,15 +226,6 @@ html.promo-case .app:not(:has(> .band))::after {
   content:''; position:absolute; inset:0; width:auto; height:auto; background:none;
   box-shadow:inset 1px 0 var(--stroke-primary),inset -1px 0 var(--stroke-primary),inset 0 1px var(--stroke-primary),inset 0 -1px var(--stroke-primary);
   z-index:120; pointer-events:none;
-}
-html.promo-case .app:not(:has(> .band))::before {
-  content:''; position:absolute; inset:0 -7px; width:auto; height:auto;
-  background:
-    linear-gradient(var(--stroke-primary),var(--stroke-primary)) left top / 7px 1px no-repeat,
-    linear-gradient(var(--stroke-primary),var(--stroke-primary)) right top / 7px 1px no-repeat,
-    linear-gradient(var(--stroke-primary),var(--stroke-primary)) left bottom / 7px 1px no-repeat,
-    linear-gradient(var(--stroke-primary),var(--stroke-primary)) right bottom / 7px 1px no-repeat;
-  z-index:121; pointer-events:none;
 }
 /* A fixed action bar stands on the bottom edge of the window, so the frame runs
    to that edge too: its closing line lands on the bar's own border. Left 20px
@@ -278,6 +269,8 @@ html.promo-case body.promo-map .card-meta-info { font-family:'Schengen A',sans-s
 html.promo-case body.promo-map .list-panel .card-title { -webkit-line-clamp:1; }
 @media(min-width:1024px) { html.promo-case body.promo-map:not(.view-list) .list-panel .card-thumb { min-height:180px; border-radius:8px; } }
 html.promo-case body.promo-map .cm-hours::before { content:none; }
+/* The drawer stops one pixel short of the frame, so the frame's bottom line runs under it too. */
+@media(min-width:1024px) { html.promo-case body.promo-map .detail-page-overlay { bottom:calc(var(--frame-y) + 1px) !important; } }
 html.promo-case body.promo-map .leaflet-tile-pane { filter:saturate(.55) brightness(1.03); }
 @media(max-width:767px) {
   html.promo-case #screen-profile .ap-name { font-size:56px; }
