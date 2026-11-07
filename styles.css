@@ -2931,7 +2931,8 @@ html {
    events on itself — it has its own href and stays independently clickable. */
 .project-card__header,
 .project-card__phones,
-.project-card__itab-group {
+.project-card__itab-group,
+.project-card__syno-shot {
   z-index: 2;
   pointer-events: none;
 }
@@ -3195,18 +3196,15 @@ html {
   border-radius: clamp(12px, 1.3cqw, 22px);
 }
 
-/* ===== Syno card (coming soon) ===== */
+/* ===== Held-back cards (coming soon) ===== */
 /* The card is not clickable yet, so its surface stays stable on hover and
    press — but it sits on the same grey plate as the rest of the row. */
-.project-card--syno,
-.project-card--syno:active,
 .project-card--soon,
 .project-card--soon:active {
   background: var(--grey-200);
   transform: none;            /* not clickable — no press-in */
 }
 @media (hover: hover) {
-  .project-card--syno:hover,
   .project-card--soon:hover { background: var(--grey-200); }
 }
 
@@ -3541,8 +3539,6 @@ html {
      both lines of every held-back card so longer EN/RU titles wrap before the
      strip instead of disappearing underneath it. The reservation grows with
      phone width, then stops at the desktop value. */
-  .project-card--syno .project-card__title,
-  .project-card--syno .project-card__subtitle,
   .project-card--soon .project-card__title,
   .project-card--soon .project-card__subtitle {
     min-width: 0;
