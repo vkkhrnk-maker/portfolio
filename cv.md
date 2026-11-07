@@ -74,7 +74,7 @@ Cases: [Read the consultations case](itab-specialists.html "Specialist consultat
 ### UX/UI Designer — Infomedia
 **May 2023 – Dec 2024 · full-time, remote · communication products**
 
-- Designed client-facing web and mobile products for Russian Railways (RZD) and Rosatom, turning requirements written for engineers into flows their users could follow. Project details under NDA.
+- Designed interfaces for Russian Railways (RZD). Project details under NDA.
 
 ## Skills
 
