@@ -40,17 +40,17 @@ Headline: Product designer for mobile and web
 
 ## Summary
 
-End to end, from research and customer journey mapping to release. At an AI startup: a document assistant from zero to MVP on two platforms, then a ten-tool workspace in six weeks. Alongside it, e-commerce and enterprise products, and the design systems they ship from.
+End to end, from research and CJM to design review of the built code. At an AI startup, took an assistant from zero to launched MVP (web and iOS), then designed a ten-tool workspace. Portfolio also includes e-commerce (iTAB), an art platform (Syno), enterprise services for Russian Railways, and scalable design systems.
 
 ## Experience
 
 ### Product Designer — Freelance
-**Mar 2022 – Present · remote · art platform, crypto product, web design, design mentoring**
+**Mar 2022 – Present · remote · art platform, crypto product, web design, course curation**
 
 - **Syno.art** (2026–Present): art platform based in Cyprus. Designed UX/UI across the platform (Art Map, events, artist portfolio, open-call flow, organization accounts) for desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
-- **Cryptomi** (2023–2024): crypto startup. Designed the MVP from user flows to final UI, keeping data-heavy screens clear.
-- **Abramova School** (2023–2024): UX/UI design and mentoring junior designers through critiques and portfolio reviews.
-- **Ebda Agency** (2022–2023): Canadian agency. Designed pages for webflow.com and sites for other clients of the agency.
+- **Cryptomi** (2023–2024): crypto startup. Designed the MVP from flows to production UI: turned dense financial workflows into clear screens.
+- **Abramova School** (2023–2024): UX/UI design for the school and mobile app UX/UI course curation: student project reviews, portfolio guidance, and feedback.
+- **Ebda Agency** (2022–2023): Canadian agency. Designed landing pages for Webflow and client websites across the agency.
 
 Cases: [Read the Syno case](syno.html "Art platform")
 
