@@ -3799,7 +3799,7 @@ html {
   gap: 24px;
   min-height: 156px;
   padding: 24px 0;
-  border-top: 0;
+  border-top: 1px solid var(--hairline-strong);
 }
 
 /* No rule above the first row, so its top padding has nothing to sit off —
