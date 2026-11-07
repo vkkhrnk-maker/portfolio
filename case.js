@@ -209,7 +209,7 @@
        zoomed video keeps looping in the lightbox, picked up from the
        exact frame the inline copy was on. */
     const zoomables = document.querySelectorAll(
-      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .case__figure-desktop .syno-walkthrough-video, .syno-duo .syno-phone-film .syno-walkthrough-video, .syno-primary-figure .syno-flow-film .syno-walkthrough-video, .shot img, .shot video'
+      '.case__shot, .case__hero-plate img, .case__figure-desktop img, .case__figure-desktop .syno-walkthrough-video, .syno-phone-film .syno-walkthrough-video, .syno-flow-film .syno-walkthrough-video, .syno-phone-still, .shot img, .shot video'
     );
     if (!zoomables.length) return;
     /* Lets the stylesheet scope zoom affordances (cursor) to pages where
