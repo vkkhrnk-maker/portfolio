@@ -3799,10 +3799,7 @@ html {
   gap: 24px;
   min-height: 156px;
   padding: 24px 0;
-  /* --rule, not --text-primary: the rule is ink-black in the light theme, but
-     in the dark one a white 2px line between every row shouted — there it is
-     a muted grey, and the type stays the only white thing in the section. */
-  border-top: 2px solid var(--rule);
+  border-top: 0;
 }
 
 /* No rule above the first row, so its top padding has nothing to sit off —
@@ -4047,10 +4044,6 @@ html {
     margin: 0;
   }
 
-  .experience-editorial__list {
-    border-bottom-width: 1.5px;
-  }
-
   .experience-editorial__item {
     grid-template-columns: minmax(0, 1fr) auto;
     /* No row gap: the second row is the collapsible panel, and a track gap
@@ -4062,7 +4055,6 @@ html {
        figures, the row read even more top-tight than those numbers suggest.
        (The inline bleed comes from the ≤1199 rule further down.) */
     padding-block: 24px;
-    border-top-width: 1.5px;
   }
 
   .experience-editorial__logo {
