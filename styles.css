@@ -3302,6 +3302,7 @@ html {
   align-items: center;
   justify-content: center;
   background-color: var(--button-primary);
+  color: var(--white);
   border-radius: 40px;
   padding: 4px 24px;
   height: 40px;
@@ -3328,9 +3329,11 @@ html {
   transform: scale(0.96);
 }
 
+.arrow-btn .icon-arrow,
+.arrow-btn svg,
 .arrow-btn img {
   display: block;
-  width: 20px;
+  width: 16px;
   height: 16px;
 }
 
