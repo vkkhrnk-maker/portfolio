@@ -3912,7 +3912,10 @@ html {
   margin: 0;
 }
 
-.experience-editorial__company {
+/* The company is the row's heading and the role its caption (11 Nov 2026):
+   three rows in a row said "Product designer" in the display face, and the
+   one thing that tells them apart sat above in small grey. */
+.experience-editorial__role {
   display: inline;
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -3923,12 +3926,12 @@ html {
 
 /* 8px either side of the slash, as the old flex gap had it: the source
    whitespace between the two elements adds about 5px, the margin the rest. */
-.experience-editorial__company::after {
+.experience-editorial__role::after {
   content: '/';
   margin: 0 3px 0 8px;
 }
 
-.experience-editorial__role {
+.experience-editorial__company {
   font-family: var(--font-display);
   font-size: var(--fs-h3);
   line-height: var(--lh-h3);
@@ -3944,6 +3947,20 @@ html {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
+}
+
+/* Below the desktop grid the caption column is too narrow for "role / scope"
+   on one line, and the slash was left hanging at the end of the first. There
+   the two stand on lines of their own and the slash goes. */
+@media (max-width: 1199px) {
+  .experience-editorial__role,
+  .experience-editorial__scope {
+    display: block;
+  }
+
+  .experience-editorial__role::after {
+    content: none;
+  }
 }
 
 .experience-editorial__date {
@@ -4097,10 +4114,10 @@ html {
     flex-direction: column;
   }
 
-  .experience-editorial__role {
+  .experience-editorial__company {
     order: 1;
     /* The same H4 the project card titles use — at H3 (44/48) the
-       role was the loudest thing on the page after the cover headline. */
+       heading was the loudest thing on the page after the cover headline. */
     font-size: var(--fs-h4);
     line-height: var(--lh-h4);
   }
@@ -5640,7 +5657,7 @@ a, button, [role="button"], summary, label {
      role meta, the bullets and the Skills/Education values — and the same 68ch
      as .case__intro. The summary was 720 and the meta line had no cap at all,
      so it ran the full column, a third longer than the bullets under it. */
-  max-width: 68ch;
+  max-width: 760px;
   text-wrap: pretty;
 }
 
@@ -5737,7 +5754,7 @@ a, button, [role="button"], summary, label {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 68ch;
+  max-width: 760px;
   text-wrap: pretty;
 }
 
@@ -5756,7 +5773,7 @@ a, button, [role="button"], summary, label {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 68ch;
+  max-width: 760px;
   text-wrap: pretty;
 }
 
@@ -5816,7 +5833,7 @@ a, button, [role="button"], summary, label {
   line-height: var(--lh-body);
   letter-spacing: var(--ls-heading-body);
   color: var(--text-secondary);
-  max-width: 68ch;
+  max-width: 760px;
   text-wrap: pretty;
 }
 
