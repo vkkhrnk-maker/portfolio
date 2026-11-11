@@ -63,3 +63,25 @@
     reduced.addEventListener('change',sync);
   });
 })();
+
+/* Оглавление в левой колонке: подсвечивает главу, которая сейчас на экране. */
+(() => {
+  const links = [...document.querySelectorAll('.syno-toc a')];
+  if (!links.length || !('IntersectionObserver' in window)) return;
+  const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const mark = id => links.forEach(a => {
+    if (a === byId.get(id)) a.setAttribute('aria-current', 'true');
+    else a.removeAttribute('aria-current');
+  });
+  const seen = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) mark(entry.target.id); });
+  }, { rootMargin: '-25% 0px -70% 0px' });
+  byId.forEach((a, id) => { const el = document.getElementById(id); if (el) seen.observe(el); });
+})();
+
+/* Десктопный кадр на телефоне открывается повёрнутым: метка ставится до того, как общий скрипт покажет увеличение. */
+document.addEventListener('click', event => {
+  const film = event.target.closest && event.target.closest('.syno-walkthrough-video, .syno-phone-still');
+  if (!film) return;
+  document.documentElement.classList.toggle('syno-zoom-wide', !!film.closest('.syno-flow-film'));
+}, true);

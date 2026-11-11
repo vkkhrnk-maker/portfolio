@@ -165,3 +165,20 @@
 @media(max-width:640px) { .syno-film-toggle { display:none; } }
 /* Второй абзац в блоке: без отступа он сливался с первым. */
 .case-page--syno-proto .case__block-body + .case__block-body { margin-top:12px; }
+
+/* Оглавление кейса в левой колонке: стоит у нижнего края, пока хватает высоты окна (11 ноября 2026). */
+.syno-toc { display:none; }
+@media (min-width:1200px) and (min-height:760px) {
+  .syno-toc { display:flex; flex-direction:column; align-items:flex-start; gap:6px; font-family:var(--font-body); font-size:14px; line-height:20px; letter-spacing:-.2px; }
+  .syno-toc a { color:var(--text-secondary); text-decoration:none; opacity:.7; transition:opacity .2s, color .2s; }
+  .syno-toc a:hover, .syno-toc a:focus-visible, .syno-toc a[aria-current="true"] { color:var(--text-primary); opacity:1; }
+}
+.case-page--syno-proto .case__outcome { scroll-margin-top:100px; }
+
+/* Телефон: десктопный кадр мелкий, поэтому в углу стоит знак «развернуть», а по тапу кадр открывается повёрнутым во весь экран. */
+@media (max-width:640px) {
+  .case-page--syno-proto .syno-flow-film::after { content:""; position:absolute; right:8px; bottom:8px; width:28px; height:28px; border-radius:50%; background:rgba(255,255,255,.9) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231c1c1c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5'/%3E%3C/svg%3E") center/14px no-repeat; pointer-events:none; }
+}
+@media (max-width:640px) and (orientation:portrait) {
+  html.syno-zoom-wide .lightbox .lightbox__img:not([hidden]) { flex:none; width:min(calc(100dvh - 32px), calc((100vw - 32px) * 1.6)); max-width:none; height:auto; max-height:none; transform:rotate(90deg); }
+}
