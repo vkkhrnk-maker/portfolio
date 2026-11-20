@@ -6945,7 +6945,9 @@ video.case__itab-board-desktop,
   .home-photo .footer { padding-inline: 24px; }
 }
 @media (max-width: 700px) {
-  .portrait-cover { min-height: 650px; max-height: 1000px; }
+  /* 540: the name on the bottom inset stays on the first screen of an
+     iPhone SE or 13 mini in Safari (553 and 629 tall with the toolbars) */
+  .portrait-cover { min-height: 540px; max-height: 1000px; }
   .cover-nav { padding: 20px; }
   .cover-nav__links { display: none; }
   /* "Let's talk" and the menu are one group at the right, 8px apart */
@@ -6955,11 +6957,14 @@ video.case__itab-board-desktop,
   .cover-nav__menu { height: 40px; min-height: 40px; }
   .portrait-cover__image { top: 54px; height: 144.5%; }
   .portrait-cover__role svg { display: none; }
-  /* The role row stands as far above the name (last baseline to cap top)
-     as the name stands above the bottom labels; fitted at 320-430 wide,
-     the Noto role sits 2px higher. */
-  .portrait-cover { --cover-row: calc(26.2% + 27.1vw - 41px); }
-  :root[lang="ru"] .portrait-cover { --cover-row: calc(26.2% + 27.1vw - 39px); }
+  /* No bottom labels on phones (20 Nov 2026): the name's last baseline
+     sits on the 20px inset (the box ends .065em under it). The role row
+     stands half the name's size above its cap top, as on desktop (86 over
+     a 172 name at 1440), so row and name read as one group: 2.074 names
+     up from the name's baseline, less the role's .28em under its own.
+     The Noto role sits 2px higher. */
+  .portrait-cover { --cover-row: calc(20px + 34.2vw - 0.28 * min(22px, 5.87vw)); }
+  :root[lang="ru"] .portrait-cover { --cover-row: calc(22px + 34.2vw - 0.28 * min(22px, 5.87vw)); }
   .portrait-cover__role { right: 20px; bottom: var(--cover-row); }
   .portrait-cover__role p { font-size: min(22px, 5.87vw); line-height: 1.1; letter-spacing: var(--ls-heading-sm); }
   /* The note stays on phones, in the small body face of the labels below,
@@ -6972,18 +6977,28 @@ video.case__itab-board-desktop,
   .portrait-cover__eyebrow { display: none; }
   /* the <br> sets the lines; Safari shrinks this box to its narrowest
      word and wraps it into four otherwise */
-  .portrait-cover__note p { font-family: var(--font-body); font-size: 14px; line-height: 18px; letter-spacing: var(--ls-heading-body); white-space: nowrap; }
-  .portrait-cover__name { bottom: 13%; padding-inline: 20px; text-align: left; font-size: 16.5vw; }
+  /* body size, 14 only on the narrowest screens, where the Russian pair
+     would otherwise come within 24px of the role */
+  .portrait-cover__note p { font-family: var(--font-body); font-size: clamp(14px, 4.27vw, 16px); line-height: 1.25; letter-spacing: var(--ls-heading-body); white-space: nowrap; }
+  .portrait-cover__name { bottom: calc(20px - 1.07vw); padding-inline: 20px; text-align: left; font-size: 16.5vw; }
   .portrait-cover__name span { display: block; }
+  /* "Selected work" and "Portfolio / 2026" stay on wide screens only:
+     on a phone the page scrolls anyway */
   .portrait-cover__scroll,
-  .portrait-cover__edition { bottom: 20px; font-size: 14px; }
-  .portrait-cover__scroll { left: 20px; }
-  .portrait-cover__edition { right: 20px; }
+  .portrait-cover__edition { display: none; }
   .home-photo .content__main { gap: 72px; }
   .home-photo .projects,
   .home-photo .experience,
   .home-photo .contact,
   .home-photo .footer { padding-inline: 20px; }
+}
+/* Under 360 (an SE or a mini with Display Zoom is 320 wide) the pill, the
+   CTA and the menu need 341px in English and 355 in Russian, so the menu
+   ran past the edge: the CTA drops its arrow and the pill comes to 16px. */
+@media (max-width: 359px) {
+  .cover-nav { gap: 16px; }
+  .cover-nav__menu { margin-left: -8px; }
+  .cover-nav__cta .icon-arrow { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cover-nav__links a::after { transition: none; }
