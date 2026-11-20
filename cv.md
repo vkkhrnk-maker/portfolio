@@ -53,7 +53,7 @@ I take new products from zero to release on iOS and web: an AI document assistan
 ### Product Designer — Syno.art
 **May 2026 – Oct 2026 · contract, remote · art platform, Cyprus · desktop and mobile · public version on syno.art**
 
-- Turned the brief’s sections into one product model: one account for every role, one portfolio for profile and applications.
+- Brought the platform’s sections into one product model: one account for every role, one portfolio for profile and applications.
 - Scoped the launch: public sections first, then organization accounts with moderation rules agreed with the client.
 - Designed UX/UI from Art Map to organization accounts on a three-layer token system. Prototyped much of it in code.
 
