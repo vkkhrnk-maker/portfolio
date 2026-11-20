@@ -14,15 +14,22 @@
     (function () {
       try {
         var saved = localStorage.getItem('lang');
-        if (saved === 'ru') { location.replace('/ru/cv.html' + location.hash); return; }
+        if (saved === 'ru') { go('/ru/cv.html'); return; }
         if (saved) return;
         var langs = navigator.languages || [navigator.language || ''];
         for (var i = 0; i < langs.length; i++) {
           var l = String(langs[i]).toLowerCase();
           if (l.indexOf('en') === 0) return;
-          if (l.indexOf('ru') === 0) { location.replace('/ru/cv.html' + location.hash); return; }
+          if (l.indexOf('ru') === 0) { go('/ru/cv.html'); return; }
         }
       } catch (e) {}
+      /* The page landed on would tell the counters that the visit came
+         from here. So the referrer this page was opened with is left for
+         visit-source.js to put back, and the query (utm tags) goes along. */
+      function go(path) {
+        try { sessionStorage.setItem('referrer-before-redirect', document.referrer); } catch (e) {}
+        location.replace(path + location.search + location.hash);
+      }
     })();
   </script>
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->

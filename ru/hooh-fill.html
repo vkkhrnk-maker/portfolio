@@ -10,9 +10,16 @@
     (function () {
       try {
         if (localStorage.getItem("lang") === "en") {
-          location.replace("/hooh-fill.html" + location.hash);
+          go("/hooh-fill.html");
         }
       } catch (e) {}
+      /* The page landed on would tell the counters that the visit came
+         from here. So the referrer this page was opened with is left for
+         visit-source.js to put back, and the query (utm tags) goes along. */
+      function go(path) {
+        try { sessionStorage.setItem("referrer-before-redirect", document.referrer); } catch (e) {}
+        location.replace(path + location.search + location.hash);
+      }
     })();
   </script>
   <!-- Stop iOS Safari from linkifying dates like "2025 / Now" into blue underlined text -->

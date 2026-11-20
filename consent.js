@@ -69,6 +69,15 @@
       y.parentNode.insertBefore(t, y);
     })(window, document, 'clarity', 'script', id);
     window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'granted' });
+
+    /* Clarity takes its referrer from the page it starts on, often a page
+       or two into the visit, after the answer. visit-source.js keeps where
+       the visit began; it goes in as the "source" tag, which the dashboard
+       can filter by. */
+    try {
+      var source = sessionStorage.getItem('visit-source');
+      if (source) window.clarity('set', 'source', source);
+    } catch (e) {}
   }
 
   function showBanner() {

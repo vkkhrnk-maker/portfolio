@@ -95,6 +95,11 @@ jobs:
       # visitor agrees. CLARITY_ID is the switch for all of that: empty it
       # and no consent plate ships, nothing is recorded, and the cookieless
       # counter carries on alone.
+      #
+      # Ahead of both goes visit-source.js, inline and without its opening
+      # comment. A language redirect hands the landing page the wrong
+      # referrer; it puts the right one back before either counter reads
+      # it, so it has to run while the page is still being read.
       - name: Add the analytics scripts to every published page
         env:
           CF_BEACON_TOKEN: a44507ecd2b34673965ce2891e24d42d
@@ -102,11 +107,15 @@ jobs:
         run: |
           python3 - <<'PY'
           import os
+          import re
           from pathlib import Path
 
           token = os.environ["CF_BEACON_TOKEN"]
           clarity = os.environ.get("CLARITY_ID", "").strip()
           version = os.environ.get("GITHUB_SHA", "")[:7]
+          keeper = re.sub(r"\A/\*.*?\*/\s*", "",
+                          Path("visit-source.js").read_text(encoding="utf-8"),
+                          flags=re.S).strip()
 
           for page in sorted(Path(".").rglob("*.html")):
               if page.parts[0] in {"tools", "tmp", "output", "syno-prototype"}:
@@ -116,7 +125,8 @@ jobs:
                   print("No closing body tag, skipped %s" % page)
                   continue
 
-              block = (
+              block = "  <script>%s</script>\n" % keeper
+              block += (
                   "  <!-- Cloudflare Web Analytics --><script type='module' "
                   "src='https://static.cloudflareinsights.com/beacon.min.js' "
                   "data-cf-beacon='{\"token\": \"%s\"}'></script>\n" % token
