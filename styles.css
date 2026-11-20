@@ -7171,3 +7171,33 @@ video.case__itab-board-desktop,
   .site-loader__dots i:nth-child(3) { animation-delay: 0.3s; }
   .site-loader__dots i:nth-child(4) { animation-delay: 0.45s; }
 }
+
+/* ===== Open menu header = closed bar (20 Nov 2026, owner's call) =====
+   The sheet started 4px from the top while the bar's burger sits 28px down
+   on tablets and 20px on phones, so the whole header jumped up when the
+   menu opened (and on the homepage the ✕ also moved 8px right of the
+   burger). Now the ✕ lands exactly on the burger and the name on the bar's
+   name. The language switch leaves the menu: she wants the menu to be
+   navigation and contacts only. */
+@media (max-width: 1199px) {
+  .menu-drawer { padding-top: 28px; }
+  .menu-drawer .lang-switch { display: none; }
+}
+@media (max-width: 640px) {
+  .menu-drawer { padding-top: 20px; }
+  .home-photo .menu-drawer { padding-inline: 20px; }
+}
+/* On inner pages the sheet's name stands alone in the header; give it the
+   bar name's 40px row so its text sits on the same line as before. */
+.menu-drawer__header > .menu-drawer__name {
+  padding: 8px 4px;
+}
+
+/* ===== Quieter top bar (20 Nov 2026, owner's call) =====
+   Three arrows in a row (CV, LinkedIn, Telegram) read as noise. The text
+   links drop theirs; the call-to-action pill keeps its arrow, the same one
+   the project cards carry. */
+.topbar-links .icon-arrow,
+.cover-nav__links .icon-arrow {
+  display: none;
+}
