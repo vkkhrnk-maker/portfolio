@@ -5697,10 +5697,14 @@ a, button, [role="button"], summary, label {
   color: var(--text-primary);
 }
 
-/* Inside a role everything below the title sits 16px apart on the --space
-   scale: title, meta, each point, the case pills (20, with their own 4). The
-   title used to sit 10px from the meta, so it read as one more line of the
-   description rather than its heading. */
+/* Inside a role the items of one group sit 16px apart on the --space scale:
+   title and meta, each point. The groups themselves are 28 apart (16 + 12):
+   the head with its meta line, the points, the case pills. 28 is the hero's
+   gap between the summary and its buttons, so text-to-buttons reads the same
+   all down the page. Owner's call, 20 Nov 2026: at an even 16 the meta line
+   read as one more point, and the pills sat closer than the hero's buttons.
+   The title used to sit 10px from the meta, so it read as one more line of
+   the description rather than its heading — keep it at 16. */
 .cv__role {
   display: flex;
   flex-direction: column;
@@ -5777,6 +5781,13 @@ a, button, [role="button"], summary, label {
   text-wrap: pretty;
 }
 
+/* The points start a new group: 28 below the meta line, or below the head
+   when a role has no meta. */
+.cv__role-meta + .cv__list,
+.cv__role-head + .cv__list {
+  margin-top: var(--space-12);
+}
+
 /* Company and school names lift out of the grey by colour alone, same as the
    label column does. Nothing on this page is bold now. */
 .cv__list b {
@@ -5788,12 +5799,13 @@ a, button, [role="button"], summary, label {
    in the CV to the work behind it without hunting the homepage. They are the
    site's white pills, not text links: on a page whose only other magenta is
    the download CTA, a coloured run of text read as emphasis rather than as
-   something to press. 12px gap matches .cv__actions. */
+   something to press. 12px gap matches .cv__actions, and the 28 above them
+   (16 + 12) matches the hero's summary-to-buttons gap. */
 .cv__role-links {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin: var(--space-4) 0 0;
+  margin: var(--space-12) 0 0;
 }
 
 /* Label-and-body rows for Skills and Education. The label column is fixed so

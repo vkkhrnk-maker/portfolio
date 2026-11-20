@@ -201,6 +201,12 @@ def page_body(doc, lang="en"):
     a(f'            <span>{L["download"]}</span>')
     a('          </a>')
     a(f'          <a class="btn btn--light" href="mailto:{doc["meta"]["Email"]}">{doc["meta"]["Email"]}</a>')
+    # Telegram sits beside the email as the same white pill, the way the site's
+    # contact links do (owner's call, 20 Nov 2026). The print sheet leaves it
+    # out of the English PDF on purpose.
+    tg = doc["meta"].get("Telegram", "").lstrip("@")
+    if tg:
+        a(f'          <a class="btn btn--light" href="https://t.me/{html.escape(tg)}" target="_blank" rel="noopener">Telegram</a>')
     a('        </div>')
     a('      </header>')
     a('')

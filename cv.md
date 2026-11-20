@@ -40,57 +40,74 @@ Headline: Product designer for mobile and web
 
 ## Summary
 
-End to end, from research and CJM to design review of the built code. At an AI startup, took an assistant from zero to launched MVP (web and iOS), then designed a ten-tool workspace. Portfolio also includes e-commerce (iTAB), an art platform (Syno), enterprise services for Russian Railways, and scalable design systems.
+I take new products from zero to release on iOS and web: an AI document assistant’s MVP with its trust model, a two-sided booking and payment service. I prototype in code with AI coding agents.
 
 ## Experience
 
-### Product Designer — Freelance
-**Mar 2022 – Present · remote · art platform, crypto product, web design, course curation**
+### Senior Product Designer — WorthStop
+**Oct 2026 – Present · part-time, remote · US startup · fuel and EV stop planning · iOS and web**
 
-- **Syno.art** (2026–Present): art platform based in Cyprus. Designed UX/UI across the platform (Art Map, events, artist portfolio, open-call flow, organization accounts) for desktop and mobile, on a design system of its own with primitive, semantic and adaptive token layers.
-- **Cryptomi** (2023–2024): crypto startup. Designed the MVP from flows to production UI: turned dense financial workflows into clear screens.
-- **Abramova School** (2023–2024): UX/UI design for the school and mobile app UX/UI course curation: student project reviews, portfolio guidance, and feedback.
-- **Ebda Agency** (2022–2023): Canadian agency. Designed landing pages for Webflow and client websites across the agency.
+- Redesigned the product concept and its core flows: route planning, station choice and station details.
+- Built working prototypes, for iOS in Xcode and for the web, and handed them off to development.
+
+### Product Designer — Syno.art
+**May 2026 – Oct 2026 · contract, remote · art platform, Cyprus · desktop and mobile · public version on syno.art**
+
+- Turned the brief’s sections into one product model: one account for every role, one portfolio for profile and applications.
+- Scoped the launch: public sections first, then organization accounts with moderation rules agreed with the client.
+- Designed UX/UI from Art Map to organization accounts on a three-layer token system. Prototyped much of it in code.
 
 Cases: [Read the Syno case](syno.html "Art platform")
 
 ### Product Designer — Hooh
-**Feb 2025 – Mar 2026 · full-time, remote · AI document assistant, iOS and web · startup · product designer alongside a PM, product owner, art director and two engineers**
+**Feb 2025 – Mar 2026 · full-time, remote · iOS and web · with a PM, product owner, art director and two engineers**
 
-- Designed and shipped the MVP: upload, layered AI summaries, assistant chat and file organization.
+- Designed and shipped the MVP of an AI document assistant: upload, layered summaries, chat and file organization.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
-- Extended the reader into a document workspace: Smart Fill (form fields recognized and filled from the user's own documents, every value overridable), reusable signature, non-destructive markup and versioning. All tools share one scaffold and were handed off complete, together with the design system the team ships from.
+- In six weeks, extended it into a ten-tool document workspace: Smart Fill (forms filled from the user’s own documents), signature, markup and versions. Prototyped in Xcode, handed off with the design system.
 
-Cases: [Read the MVP case](hooh.html "AI assistant MVP"), [Read the workspace case](hooh-fill.html "Document workspace")
+Cases: [Read the MVP case](hooh.html "MVP"), [Read the workspace case](hooh-fill.html "Workspace")
 
 ### Product Designer — iTAB
-**May 2024 – Apr 2026 · part-time, remote · health and wellness e-commerce · web and mobile app**
+**May 2024 – Apr 2026 · part-time, remote · health e-commerce · mobile app and web**
 
-- Designed the specialist-consultations service end to end: the specialist's application, dashboard and schedule, the client's catalog, booking and payment, for the mobile app and the shipped web version. Alongside it, the homepage, the catalog and sections across the app and the site.
-- Redesigned the supplement product card to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose on every step redesigned, and the card became the catalog-wide standard; figures under NDA.
+- Product design across the app and the website: homepage redesign, catalog, checkout flows and product card.
+- Designed a two-sided consultations service end to end: application, dashboard and schedule for specialists; catalog, booking and payment for clients. The web version launched.
+- Redesigned the supplement product card to cut drop-off in a high-trust category. Drop-off fell and add-to-cart rose at every redesigned step; the card became the catalog standard. Figures under NDA.
 
 Cases: [Read the consultations case](itab-specialists.html "Specialist consultations"), [Read the product card case](itab.html "Product card")
 
 ### UX/UI Designer — Infomedia
-**May 2023 – Dec 2024 · full-time, remote · communication products**
+**May 2023 – Dec 2024 · full-time, remote · digital agency · communication products**
 
-- Designed interfaces for Russian Railways (RZD). Project details under NDA.
+- Designed web and mobile interfaces for a national rail operator (client under NDA).
+
+### UX/UI Designer and Course Curator — Abramova School
+**2023 – 2024 · part-time, remote · online design school**
+
+- Designed for the school and curated its mobile app design course: student project and portfolio reviews, feedback.
+
+### UX/UI Designer — Freelance
+**Mar 2022 – 2024**
+
+- **Cryptomi** (2023–2024): crypto startup. Designed the MVP, turning dense financial workflows into clear screens.
+- **Ebda Agency** (2022–2023): Canadian agency. Designed landing pages for Webflow and client websites across the agency.
 
 ## Skills
 
-**AI products** — LLM assistants and conversational UI · progressive disclosure of model output · source citations and provenance · scoped context control · uncertainty and failure states · human-in-the-loop override
-**Design** — Product and UX/UI design · interaction design · information architecture · user flows · interactive prototyping · responsive design · cross-platform mobile and web
-**Design systems** — Component libraries · design tokens · theming and dark mode · adaptive breakpoints · design QA
-**Research and delivery** — UX audit · competitor analysis · user interviews · usability testing · developer handoff and specs · mentoring
-**Tools** — Figma (variables, components, auto-layout) · FigJam · AI coding agents (Claude Code, Codex) to build working prototypes in HTML and Xcode and custom Figma plugins for bulk token audits and migrations
+**AI products** — LLM assistants and conversational UI · layered model output · citations and provenance · context control · uncertainty and error states · human-in-the-loop correction
+**Design** — 0→1 products and MVPs · two-sided services · e-commerce · interaction design · information architecture
+**Design systems** — Token layers · component libraries · theming and dark mode · design QA
+**Research and delivery** — UX audit · competitor analysis · user interviews · usability testing · developer handoff · mentoring
+**Tools** — Figma (variables, auto-layout) · Claude Code and Codex: HTML and Xcode prototypes, Figma plugins for token audits
 
 ## Education
 
 **2025** — **Pragmatica**, “Big Practice” UI design program
 **2022–2024** — **Uprock School**, certificate in product and UX/UI design
 **2019–2021** — **Syktyvkar State University**, Master's degree in Ecology
-**2012–2016** — **Ukhta State Technical University**, Bachelor's degree in Geodesy for Land Management and Cadastre
+**2012–2016** — **Ukhta State Technical University**, Bachelor's degree in Geodesy
 
 ## Languages
 
-Russian: native · English: B2, working proficiency
+Russian: native · English: B2 (professional working proficiency)
