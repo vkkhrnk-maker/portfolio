@@ -58,7 +58,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="fonts/PPEditorialNew-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <script>try{if(!sessionStorage.getItem('site-seen'))document.documentElement.classList.add('site-loading')}catch(e){}</script>
+  <script>try{if(!sessionStorage.getItem('site-seen')&&!matchMedia('(min-width: 1200px)').matches)document.documentElement.classList.add('site-loading')}catch(e){}</script>
   <link rel="stylesheet" href="styles.min.css?v=346">
   <link rel="stylesheet" href="case-chain.css?v=13">
   <script src="typographer.js?v=6" defer></script>
@@ -135,6 +135,13 @@
     }
     .case-page--syno-proto .case__gap-card { justify-content: flex-start; }
     .case-page--syno-proto #case-editor .syno-flow-film .syno-film-toggle { right: auto; left: 12px; bottom: 12px; }
+    /* From 641px the results strip sits under the cover film, so the film
+       starts where the other cases' covers do instead of a sliver at the
+       bottom of a laptop screen (owner's call, 20 Nov 2026). */
+    @media (min-width: 641px) {
+      .case-page--syno-proto .case__proof-strip { order: 2; }
+      .case-page--syno-proto .case-meta--mobile { order: 3; }
+    }
     @media (max-width: 640px) {
       .case-page--syno-proto .case__title { order: 0; }
       .case-page--syno-proto .case__intro { order: 1; }

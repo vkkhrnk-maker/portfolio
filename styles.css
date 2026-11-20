@@ -3391,12 +3391,14 @@ html {
     align-items: center;
   }
 
-  /* Title H4 (32/32) — same size as the experience role on mobile */
+  /* Title at H4, the same size as the company names in Where I've been.
+     It ran 2px under them, and side by side on a phone the cards read as
+     the smaller voice (owner's call, 20 Nov 2026). */
   .project-card__title {
     grid-column: 1;
     grid-row: 1;
-    font-size: calc(var(--fs-h4) - 2px);
-    line-height: calc(var(--lh-h4) - 2px);
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
     max-width: none;
     white-space: normal;
   }
@@ -3408,10 +3410,11 @@ html {
   .project-card__subtitle {
     grid-column: 1 / -1;
     grid-row: 2;
-    /* Two steps below the 17px body: as a caption under a 32px title the
-       body size read heavy on phones. */
-    font-size: 15px;
-    line-height: 21px;
+    /* Body size, the same as the role, scope and description lines in
+       Where I've been (owner's call, 20 Nov 2026: one text size for the
+       cards and the list; 16 over a separate 15px caption size). */
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
     max-width: none;
     white-space: normal;
   }
@@ -4112,6 +4115,17 @@ html {
     grid-row: 1;
     display: flex;
     flex-direction: column;
+  }
+
+  /* Short captions on phones take the cover tagline's 14/18: the card
+     subtitles and the role · terms lines here. The scale gap to the display
+     titles is what she liked (owner's call, 20 Nov 2026); paragraphs keep
+     the 16/24 body. */
+  .project-card__subtitle,
+  .experience-editorial__role,
+  .experience-editorial__scope {
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .experience-editorial__company {
@@ -5719,11 +5733,12 @@ a, button, [role="button"], summary, label {
   margin-top: var(--space-24);
 }
 
-/* Title and dates share a baseline; the dates hold their own column so the
-   years line up down the page. */
+/* The dates sit on the title's vertical centre (owner's call, 20 Nov 2026: on
+   a shared baseline the small dates read as dropped below the big title) and
+   hold their own column, so the years line up down the page. */
 .cv__role-head {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
 }

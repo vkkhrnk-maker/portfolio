@@ -60,7 +60,7 @@ I take new products from zero to release on iOS and web: an AI document assistan
 Cases: [Read the Syno case](syno.html "Art platform")
 
 ### Product Designer — Hooh
-**Feb 2025 – Mar 2026 · full-time, remote · iOS and web · with a PM, product owner, art director and two engineers**
+**Feb 2025 – Mar 2026 · full-time, remote · iOS and web · team: PM, product owner, art director, developers**
 
 - Designed and shipped the MVP of an AI document assistant: upload, layered summaries, chat and file organization.
 - Designed the trust model for an assistant that can be wrong: source citations on every claim, user-controlled document scope, stated uncertainty, the original always one tap away.
